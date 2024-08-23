@@ -1,8 +1,8 @@
-.btn {
-    $bg-color: var(--btn-bg-color);
-    $bg-secondary-color: var(--btn-bg-secondary-color);
-    $text-color: var(--btn-text-color);
+$bg-color: var(--btn-bg-color);
+$bg-secondary-color: var(--btn-bg-secondary-color);
+$text-color: var(--btn-text-color);
 
+.btn {
     display: flex;
     align-items: center;
     background-color: transparent;
@@ -23,28 +23,16 @@
         transform: translateY(4px);
     }
 
-    span {
-        color: $text-color;
-        font-size: 15px;
-        font:
-            700 12.5px din-ronud,
-            sans-serif;
-        letter-spacing: 0.8px;
-    }
-
     &.solid {
         background-color: $bg-color;
         color: $bg-secondary-color;
-
         box-shadow: 0 4px 0;
     }
 
     &.outline {
         background-color: transparent;
         color: $bg-color;
-
         border-color: $bg-color;
-
         box-shadow: 0 2px 0;
     }
 
@@ -87,111 +75,11 @@
     }
 }
 
-// .btn {
-//     $bg-color: var(--btn-bg-color);
-//     $bg-secondary-color: var(--btn-bg-secondary-color);
-//     $bg-hover-color: var(--btn-bg-hover-color);
-//     $text-color: var(--btn-text-color);
-
-//     display: flex;
-//     align-items: center;
-//     background-color: transparent;
-//     color: transparent;
-//     border-radius: 12px;
-//     border-color: transparent;
-//     height: 50px;
-//     transition: all 0.2s ease;
-//     cursor: pointer;
-
-//     &:hover {
-//         filter: brightness(1.125);
-//     }
-
-//     &.solid {
-//         background-color: $bg-color;
-
-//         border: solid;
-//         border-width: 2px 0px 4px 0px;
-//         border-color: transparent transparent $bg-secondary-color transparent;
-
-//         span {
-//             color: white;
-//             font-size: 15px;
-//             font:
-//                 700 12.5px din-ronud,
-//                 sans-serif;
-//             letter-spacing: 0.8px;
-//         }
-
-//         &:active {
-//             border-width: 0px 0px 0px 0px;
-//             transform: translateY(4px);
-//         }
-
-//         &.lg {
-//             padding: 3px 26px;
-//             @apply text-lg;
-//         }
-//     }
-
-//     &.outline {
-//         background-color: transparent;
-
-//         border: solid;
-//         border-width: 2px 2px 4px 2px;
-//         border-color: $bg-color;
-
-//         span {
-//             color: $text-color;
-//             font-size: 15px;
-//             font:
-//                 700 12.5px din-ronud,
-//                 sans-serif;
-//             letter-spacing: 0.8px;
-//         }
-
-//         &:active {
-//             border-width: 2px 2px 2px 2px;
-//             transform: translateY(4px);
-//         }
-
-//         &.lg {
-//             padding: 3px 24px;
-//             @apply text-lg;
-//         }
-//     }
-
-//     &.ghost {
-//         background-color: transparent;
-//         color: $bg-color;
-//     }
-
-//     &.sm {
-//         @apply px-2 py-1 text-sm;
-//     }
-
-//     &.md {
-//         @apply px-4 py-2 text-base;
-//     }
-
-//     &.loading {
-//         @apply cursor-not-allowed pointer-events-none;
-
-//         &::after {
-//             content: "";
-//             position: absolute;
-//             border: 2px solid var(--btn-text-color);
-//             border-top-color: transparent;
-//             border-radius: 50%;
-//             width: 1rem;
-//             height: 1rem;
-//             animation: spin 1s linear infinite;
-//         }
-//     }
-
-//     @keyframes spin {
-//         100% {
-//             transform: rotate(360deg);
-//         }
-//     }
-// }
+.btn-content {
+    color: $text-color;
+    font-size: 15px;
+    font:
+        700 12.5px din-ronud,
+        sans-serif;
+    letter-spacing: 0.8px;
+}

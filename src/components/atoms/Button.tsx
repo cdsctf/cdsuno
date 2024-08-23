@@ -19,10 +19,7 @@ export default function Button(
         color = "primary",
         size = "md",
         variant = "solid",
-        jusitify = "center",
-        align = "center",
         loading = false,
-        rounded = "lg",
         children,
         ...rest
     } = props;
@@ -33,16 +30,16 @@ export default function Button(
         "--btn-text-color": variant === "solid" ? "#fff" : getColor(color),
     } as React.CSSProperties;
 
-    const btnClasses = [
-        styles.btn,
-        styles[size],
-        styles[variant],
-        loading ? styles.loading : "",
-    ].join(" ");
-
     return (
-        <button className={btnClasses} style={variables} {...rest}>
-            <span>{children}</span>
+        <button
+            className={`${styles["btn"]} ${styles[size]} ${styles[variant]} ${loading ? styles["loading"] : ""}`}
+            style={variables}
+            flex=""
+            justify="center"
+            align-items={"center"}
+            {...rest}
+        >
+            <div className={styles["btn-content"]}>{children}</div>
         </button>
     );
 }

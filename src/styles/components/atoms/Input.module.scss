@@ -1,0 +1,17 @@
+$bg-color: var(--input-bg-color);
+$bg-secondary-color: var(--input-bg-secondary-color);
+$text-color: var(--input-text-color);
+
+.input {
+    border: none;
+    background: none;
+    border-radius: 12px;
+    outline: none;
+    box-sizing: border-box;
+
+    @apply ring-2 ring-[var(--input-bg-color)];
+
+    &:focus {
+        @apply ring-blue ring-2;
+    }
+}
