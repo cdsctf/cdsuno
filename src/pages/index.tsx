@@ -1,4 +1,5 @@
 import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
 import Input from "@/components/atoms/Input";
 import { useState } from "react";
 
@@ -11,13 +12,14 @@ export default function Page() {
     return (
         <>
             <input type="color" value={color} onChange={handleChange} />
-            <Button color={color} size="lg" variant="solid">
+            <Button color={color} size="lg" variant="solid" >
                 123
             </Button>
-            <Button color={"#1cb0f6"} size="lg" variant="outline">
+            <Card color={color}/>
+            <Button color={color} size="lg" variant="outline">
                 123
             </Button>
-            <Input color="#1cb0f6" />
+            <Input color="#ffffff" clearable />
         </>
     );
 }

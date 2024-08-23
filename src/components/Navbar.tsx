@@ -1,5 +1,5 @@
 import { useUnoStore } from "@/stores/uno";
-
+import '@/styles/main.scss'
 export default function Navbar() {
     return (
         <div
@@ -16,21 +16,21 @@ export default function Navbar() {
         >
             <div w="50%"></div>
             <div flex="inline shrink-0" gap="3">
-                {/* <button
-                    bg=""
+                <button
+                    bg="#6556d7"
                     p="x-5 y-3"
                     rounded="lg"
                     font="bold"
                     transition="all ease-in-out duration-300"
                 >
-                    题库
+                    题库|Training Club
                 </button>
-                <button bg="gray" p="x-5 y-3" rounded="lg">
-                    比赛
+                <button bg="primary-1" p="x-5 y-3" rounded="lg">
+                    比赛|Races
                 </button>
-                <button bg="gray" p="x-5 y-3" rounded="lg">
-                    团队
-                </button> */}
+                <button bg="#6556d7" p="x-5 y-3" rounded="lg">
+                    团队|Teams
+                </button>
             </div>
             <div w="50%" flex="inline" justify="end">
                 <button

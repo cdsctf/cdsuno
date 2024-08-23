@@ -1,17 +1,50 @@
-$bg-color: var(--input-bg-color);
-$bg-secondary-color: var(--input-bg-secondary-color);
-$text-color: var(--input-text-color);
+$color-default-bg: transparent;
+$color-default-border: rgb(55,70,79);
+$color-default-text: #333;
+$color-clear-button-hover: #3c9ae7;
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+    background-color: var(--input-bg-color, $color-default-bg);
+    border: 4px solid var(--input-bg-secondary-color, $color-default-border);
+    border-radius: 8px;
+    padding: 8px;
+    transition: border-color 0.2s ease;
+    &:focus-within{
+        border-color: rgb(73,192,248);
+    }
+    &:focus-within .clearButton{
+        opacity: 1;
+    }
+}
 
 .input {
+    flex: 1;
+    background: transparent;
     border: none;
-    background: none;
-    border-radius: 12px;
     outline: none;
-    box-sizing: border-box;
+    color: var(--input-text-color, $color-default-text);
+    font-size: 16px;
+}
+.clearButton {
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0 8px;
+    color: var(--input-text-color, $color-default-text);
 
-    @apply ring-2 ring-[var(--input-bg-color)];
+    &:hover {
+        color: $color-clear-button-hover;
+    }
 
-    &:focus {
-        @apply ring-blue ring-2;
+    svg {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
     }
 }
