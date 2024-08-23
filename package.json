@@ -1,0 +1,47 @@
+{
+    "name": "cdsuno",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "lint": "eslint .",
+        "preview": "vite preview",
+        "format": "prettier --write ."
+    },
+    "dependencies": {
+        "@unocss/reset": "^0.62.2",
+        "chroma-js": "^3.0.0",
+        "install": "^0.13.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-router-dom": "^6.26.1",
+        "sass": "^1.77.8",
+        "zustand": "^4.5.5"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.9.0",
+        "@iconify-json/solar": "^1.1.10",
+        "@types/chroma-js": "^2.4.4",
+        "@types/node": "^22.4.0",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@unocss/core": "^0.62.2",
+        "@unocss/preset-attributify": "^0.62.2",
+        "@unocss/preset-typography": "^0.62.2",
+        "@unocss/preset-uno": "^0.62.2",
+        "@unocss/transformer-directives": "^0.62.2",
+        "@unocss/transformer-variant-group": "^0.62.2",
+        "@vitejs/plugin-react-swc": "^3.5.0",
+        "eslint": "^9.9.0",
+        "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+        "eslint-plugin-react-refresh": "^0.4.9",
+        "globals": "^15.9.0",
+        "prettier": "^3.3.3",
+        "typescript": "^5.5.3",
+        "typescript-eslint": "^8.0.1",
+        "unocss": "^0.62.2",
+        "vite": "^5.4.1"
+    }
+}
