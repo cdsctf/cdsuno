@@ -1,5 +1,4 @@
 import Button from "@/components/atoms/Button";
-import Card from "@/components/atoms/Card";
 import Input from "@/components/atoms/Input";
 import { useState } from "react";
 
@@ -9,17 +8,27 @@ export default function Page() {
         setColor(e.target.value);
     };
 
+    const [value, setValue] = useState<string>("");
+
     return (
         <>
             <input type="color" value={color} onChange={handleChange} />
-            <Button color={color} size="lg" variant="solid" >
+            <Button color={color} size="lg" variant="solid">
                 123
             </Button>
-            <Card color={color}/>
+            {/* <Card color={color}/> */}
             <Button color={color} size="lg" variant="outline">
                 123
             </Button>
-            <Input color="#ffffff" clearable />
+            <Input
+                clearable
+                invalid
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                label={"用户名"}
+                helperText={"请输入用户名 helperText"}
+                errorText={"请输入用户名 errorText"}
+            />
         </>
     );
 }

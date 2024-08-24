@@ -1,50 +1,80 @@
 $color-default-bg: transparent;
-$color-default-border: rgb(55,70,79);
+$color-default-border: rgb(55, 70, 79, 0.5);
 $color-default-text: #333;
 $color-clear-button-hover: #3c9ae7;
 
-.inputContainer {
+.root {
     display: flex;
-    align-items: center;
-    background-color: var(--input-bg-color, $color-default-bg);
-    border: 4px solid var(--input-bg-secondary-color, $color-default-border);
-    border-radius: 8px;
-    padding: 8px;
-    transition: border-color 0.2s ease;
-    &:focus-within{
-        border-color: rgb(73,192,248);
-    }
-    &:focus-within .clearButton{
-        opacity: 1;
-    }
-}
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
 
-.input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--input-text-color, $color-default-text);
-    font-size: 16px;
-}
-.clearButton {
-    opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0 8px;
-    color: var(--input-text-color, $color-default-text);
-
-    &:hover {
-        color: $color-clear-button-hover;
+    .label {
+        margin: 0 4px;
+        font-size: 14px;
     }
 
-    svg {
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
+    .helper-text {
+        margin: 2px 4px;
+        font-size: 11px;
+    }
+
+    .error-text {
+        margin: 2px 4px;
+        color: var(--color-error-5);
+        font-size: 12px;
+    }
+
+    .input-wrapper {
+        display: flex;
+        align-items: center;
+        background-color: var($color-default-bg);
+        border: 2px solid $color-default-border;
+        border-radius: 12px;
+        padding: 8px 10px;
+        transition: border-color 0.2s ease;
+
+        &:focus-within {
+            border-color: var(--input-color, $color-default-bg);
+
+            .clear-button {
+                opacity: 0.5;
+            }
+        }
+
+        .input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--input-text-color, $color-default-text);
+            font-size: 16px;
+
+            &:disabled {
+                cursor: not-allowed;
+            }
+        }
+
+        .clear-button {
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--input-text-color, $color-default-text);
+
+            &:hover {
+                opacity: 1;
+                color: $color-clear-button-hover;
+            }
+
+            svg {
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+            }
+        }
     }
 }

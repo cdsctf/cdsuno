@@ -6,8 +6,12 @@ export function getColor(color: string) {
     const regex = /^[a-zA-Z]+-[0-9]+$/;
 
     if (!regex.test(color)) {
-        return `var(--color-${color}-5)`;
+        return getComputedStyle(document.documentElement)
+            .getPropertyValue(`--color-${color}-5`)
+            .trim();
     }
 
-    return `var(--color-${color})`;
+    return getComputedStyle(document.documentElement)
+        .getPropertyValue(`--color-${color}`)
+        .trim();
 }
