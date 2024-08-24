@@ -1,35 +1,29 @@
-import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import { useUnoStore } from "@/stores/uno";
+import { useThemeStore } from "@/stores/theme";
 import { RouterProvider } from "react-router-dom";
 import { router } from "@/routers";
+import { useEffect } from "react";
 
 function App() {
-    const unoStore = useUnoStore();
+    const themeStore = useThemeStore();
 
     useEffect(() => {
-        const htmlElement = document.documentElement;
-        if (unoStore.darkMode) {
-            htmlElement.classList.add("dark");
-        } else {
-            htmlElement.classList.remove("dark");
-        }
-    }, [unoStore.darkMode]);
+        document.documentElement.setAttribute(
+            "data-theme",
+            themeStore.darkMode ? "dark" : "light"
+        );
+    }, [themeStore.darkMode]);
 
     return (
         <>
             <main
-                bg="light-5 dark:gray-5"
-                h="screen"
-                transition="colors"
-                className="duration-300 ease-in-out"
+                style={{
+                    height: "100vh",
+                    transition: "all 0.3s ease-in-out",
+                }}
             >
                 <Navbar />
                 <div
-                    className="mx-16 p-4"
-                    flex="inline"
-                    gap="10"
-                    align="center"
                     style={{
                         position: "fixed",
                         top: "4rem",

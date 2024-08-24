@@ -32,10 +32,8 @@ export default function Button(
 
     return (
         <button
-            className={`${styles["btn"]} ${styles[size]} ${styles[variant]} ${loading ? styles["loading"] : ""}`}
+            className={`${styles["btn"]} ${styles[size]} ${styles[variant]} ${loading ? styles["loading"] : ""} ${rest.className}`}
             style={variables}
-            flex=""
-            justify="center"
             align-items={"center"}
             {...rest}
         >

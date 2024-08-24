@@ -1,55 +1,89 @@
-import { useUnoStore } from "@/stores/uno";
-import '@/styles/main.scss'
+import { useThemeStore } from "@/stores/theme";
+import Sun2BoldDuotone from "~icons/solar/sun-2-bold-duotone";
+import MoonBoldDuotone from "~icons/solar/moon-bold-duotone";
+
 export default function Navbar() {
+    const darkMode = useThemeStore.getState().darkMode;
+
     return (
         <div
-            h="4rem"
-            w="full"
-            z="2"
-            px="8"
-            bg="gray-7"
-            flex="inline"
-            shadow="lg"
-            items="center"
-            justify="between"
-            position="fixed"
+            style={{
+                height: "4rem",
+                width: "100%",
+                zIndex: 2,
+                padding: "0 2rem",
+                backgroundColor: "#f0f0f0",
+                display: "flex",
+                flexDirection: "row",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                alignItems: "center",
+                justifyContent: "space-between",
+                position: "fixed",
+            }}
         >
-            <div w="50%"></div>
-            <div flex="inline shrink-0" gap="3">
+            <div style={{ width: "50%" }}></div>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexShrink: 0,
+                    gap: "0.75rem",
+                }}
+            >
                 <button
-                    bg="#6556d7"
-                    p="x-5 y-3"
-                    rounded="lg"
-                    font="bold"
-                    transition="all ease-in-out duration-300"
+                    style={{
+                        backgroundColor: "#6556d7",
+                        padding: "0.75rem 1.25rem",
+                        borderRadius: "0.5rem",
+                        fontWeight: "bold",
+                        transition: "all ease-in-out 300ms",
+                    }}
                 >
                     题库|Training Club
                 </button>
-                <button bg="primary-1" p="x-5 y-3" rounded="lg">
+                <button
+                    style={{
+                        backgroundColor: "#007bff", // primary-1
+                        padding: "0.75rem 1.25rem",
+                        borderRadius: "0.5rem",
+                    }}
+                >
                     比赛|Races
                 </button>
-                <button bg="#6556d7" p="x-5 y-3" rounded="lg">
+                <button
+                    style={{
+                        backgroundColor: "#6556d7",
+                        padding: "0.75rem 1.25rem",
+                        borderRadius: "0.5rem",
+                    }}
+                >
                     团队|Teams
                 </button>
             </div>
-            <div w="50%" flex="inline" justify="end">
+            <div
+                style={{
+                    width: "50%",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                }}
+            >
                 <button
                     onClick={() => {
-                        useUnoStore
-                            .getState()
-                            .setDarkMode(!useUnoStore.getState().darkMode);
+                        useThemeStore.getState().setDarkMode(!darkMode);
                     }}
                 >
-                    {useUnoStore.getState().darkMode ? (
-                        <div
-                            text="2xl gray-2"
-                            className="i-solar-moon-bold-duotone"
-                        />
+                    {darkMode ? (
+                        <>
+                            <Sun2BoldDuotone style={{ color: "#333" }} />
+                        </>
                     ) : (
-                        <div
-                            text="2xl gray-2"
-                            className="i-solar-sun-2-bold-duotone"
-                        />
+                        <>
+                            <MoonBoldDuotone
+                                style={{
+                                    color: "#333",
+                                }}
+                            />
+                        </>
                     )}
                 </button>
             </div>

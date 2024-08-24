@@ -12,23 +12,36 @@ export default function Page() {
 
     return (
         <>
-            <input type="color" value={color} onChange={handleChange} />
-            <Button color={color} size="lg" variant="solid">
-                123
-            </Button>
-            {/* <Card color={color}/> */}
-            <Button color={color} size="lg" variant="outline">
-                123
-            </Button>
-            <Input
-                clearable
-                invalid
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                label={"用户名"}
-                helperText={"请输入用户名 helperText"}
-                errorText={"请输入用户名 errorText"}
-            />
+            <div
+                style={{
+                    padding: 20,
+                }}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        gap: 20,
+                    }}
+                >
+                    <input type="color" value={color} onChange={handleChange} />
+                    <Button color={color} size="lg" variant="solid">
+                        123
+                    </Button>
+                    {/* <Card color={color}/> */}
+                    <Button color={color} size="lg" variant="outline">
+                        123
+                    </Button>
+                </div>
+                <Input
+                    clearable
+                    invalid
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    label={"用户名"}
+                    helperText={"请输入用户名 helperText"}
+                    errorText={"请输入用户名 errorText"}
+                />
+            </div>
         </>
     );
 }
