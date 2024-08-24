@@ -1,4 +1,5 @@
 @use "@/styles/typography";
+@use "@/styles/mixins";
 
 $bg-color: var(--btn-bg-color);
 $bg-secondary-color: var(--btn-bg-secondary-color);
@@ -30,6 +31,11 @@ $text-color: var(--btn-text-color);
         background-color: $bg-color;
         color: $bg-secondary-color;
         box-shadow: 0 4px 0;
+
+        @include mixins.dark {
+            background-color: #0056b3;
+            color: #ddd;
+        }
     }
 
     &.outline {
