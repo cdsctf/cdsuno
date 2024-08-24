@@ -80,7 +80,7 @@ export default function Navbar() {
                         <>
                             <MoonBoldDuotone
                                 style={{
-                                    color: "#333",
+                                    color: "#339af0",
                                 }}
                             />
                         </>

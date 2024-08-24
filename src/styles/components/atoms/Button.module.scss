@@ -33,8 +33,8 @@ $text-color: var(--btn-text-color);
         box-shadow: 0 4px 0;
 
         @include mixins.dark {
-            background-color: #0056b3;
-            color: #ddd;
+            background-color: #0056b3; // $bg-color-dark;
+            color: #ddd; // $bg-secondary-color-dark;
         }
     }
 
