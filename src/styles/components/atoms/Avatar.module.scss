@@ -1,0 +1,33 @@
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px dashed var(--color-primary);
+
+    .fallback {
+        overflow: hidden;
+        color: var(--color-primary);
+    }
+
+    .img {
+        width: 95%;
+        height: 95%;
+        border-radius: 50%;
+    }
+
+    &.sm {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    &.md {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    &.lg {
+        width: 4rem;
+        height: 4rem;
+    }
+}

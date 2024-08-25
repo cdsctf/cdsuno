@@ -1,5 +1,5 @@
 import useThemeColor from "@/hooks/useThemeColor";
-import styles from "@/styles/components/atoms/Input.module.scss";
+import styles from "@/styles/components/atoms/TextInput.module.scss";
 import { Field } from "@ark-ui/react";
 
 export interface InputProps extends Field.RootProps {
@@ -12,6 +12,7 @@ export interface InputProps extends Field.RootProps {
     helperText?: string;
     errorText?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    style?: React.CSSProperties;
 }
 
 export default function Input(props: InputProps) {
@@ -25,6 +26,7 @@ export default function Input(props: InputProps) {
         placeholder = "",
         helperText = "",
         errorText = "",
+        style,
         ...rest
     } = props;
 
@@ -56,6 +58,7 @@ export default function Input(props: InputProps) {
                     value={value}
                     onChange={onChange}
                     placeholder={placeholder}
+                    style={style}
                 />
                 {clearable && (
                     <button

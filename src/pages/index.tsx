@@ -1,5 +1,6 @@
+import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
-import Input from "@/components/atoms/Input";
+import TextInput from "@/components/atoms/TextInput";
 import { useState } from "react";
 
 export default function Page() {
@@ -35,7 +36,7 @@ export default function Page() {
                         123
                     </Button>
                 </div>
-                <Input
+                <TextInput
                     clearable
                     invalid
                     value={value}
@@ -43,6 +44,10 @@ export default function Page() {
                     label={"用户名"}
                     helperText={"请输入用户名 helperText"}
                     errorText={"请输入用户名 errorText"}
+                />
+                <Avatar
+                    src={"https://e23.dev/Ella_Avatar.png"}
+                    fallback={<>E</>}
                 />
             </div>
         </>
