@@ -22,7 +22,7 @@ export default function useThemeColor(baseColor: string) {
             }
         }
 
-        if (themeStore.darkMode) {
+        if (themeStore.darkMode && chroma.valid(color)) {
             if (chroma(color).luminance() < 0.3) {
                 color = chroma(color).brighten(0.25).hex();
             } else {

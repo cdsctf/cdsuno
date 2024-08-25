@@ -1,6 +1,4 @@
 :root {
-    --bg-color: #f8f9fa;
-
     --color-red: #ff6b6b;
     --color-pink: #f06595;
     --color-grape: #cc5de8;
@@ -32,6 +30,6 @@
 
 :root[data-theme="dark"] {
     color-scheme: dark;
-    --bg-color: #232327;
+    --bg-color: #131f24;
     --text-color: #ffffff;
 }

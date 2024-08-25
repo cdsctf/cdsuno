@@ -30,14 +30,14 @@ $text-color: var(--btn-text-color);
     &.solid {
         background-color: $bg-color;
         color: $bg-secondary-color;
-        box-shadow: 0 4px 0;
+        box-shadow: 0 3px 0;
     }
 
     &.outline {
         background-color: transparent;
         color: $bg-color;
         border-color: $bg-color;
-        box-shadow: 0 2px 0;
+        box-shadow: 0 3px 0;
     }
 
     &.ghost {
