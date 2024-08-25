@@ -32,11 +32,13 @@ $border-color: var(--border-color);
         border: 2px solid #e5e5e5;
         border-radius: 12px;
         padding: 8px 10px;
+        box-shadow: 0 3px 0 #e5e5e5;
         @include mixins.transition;
 
         @include mixins.dark {
             border-color: #37464f;
             background-color: rgba(32, 47, 54, 0.5);
+            box-shadow: 0 3px 0 #37464f;
         }
 
         &:hover {
@@ -45,7 +47,7 @@ $border-color: var(--border-color);
 
         &:focus-within {
             border-color: $border-color;
-            box-shadow: 0 0 0 1px $border-color;
+            box-shadow: 0 3px 0 $border-color;
 
             .clear-button {
                 opacity: 0.5;

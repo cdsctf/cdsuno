@@ -63,6 +63,9 @@ export default function Page() {
                 <Avatar
                     src={"https://e23.dev/Ella_Avatar.png"}
                     fallback={<>E</>}
+                    style={{
+                        marginTop: "10px",
+                    }}
                 />
             </div>
         </>
