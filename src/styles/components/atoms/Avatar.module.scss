@@ -1,13 +1,15 @@
+$border-color: var(--border-color);
+
 .root {
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    border: 2px dashed var(--color-primary);
+    border: 2px dashed $border-color;
 
     .fallback {
         overflow: hidden;
-        color: var(--color-primary);
+        color: $border-color;
     }
 
     .img {
