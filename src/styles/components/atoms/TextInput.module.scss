@@ -59,8 +59,41 @@ $border-color: var(--border-color);
                 cursor: not-allowed;
             }
         }
-
+        .input[type="password"]::-webkit-textfield-decoration-container {
+            display: none;
+        }
+        .input[type="password"]::-webkit-password-toggle-button {
+            display: none;
+        }
+        .input[type="password"]::-ms-reveal {
+            display: none;
+        }
+          
+        .input[type="password"]::-ms-clear {
+            display: none;
+        }
         .clear-button {
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: $border-color;
+
+            &:hover {
+                opacity: 1;
+                color: $border-color;
+            }
+
+            svg {
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+            }
+        }
+        .toggle-button {
             opacity: 0;
             display: flex;
             align-items: center;
