@@ -1,11 +1,12 @@
 import React, { ComponentProps, useState } from "react";
 import chroma from "chroma-js";
-import { getColor } from "@/utils/color";
+import useThemeColor from "@/hooks/useThemeColor";
 import styles from "@/styles/components/atoms/Card.module.scss"; // 使用CSS Modules
 
 export interface CardProps extends ComponentProps<"div"> {
     color?: string;
     size?: "sm" | "md" | "lg";
+    rounded?:"sm" |"md" |"lg";
     variant?: "solid" | "outline" | "ghost";
     jusitify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
@@ -28,9 +29,10 @@ export default function Card(
         ...rest
     } = props;
     const [selected, setSelected] = useState(false);
+    const baseColor = useThemeColor(color);
     const variables = {
-        "--_card-border-color": `${chroma(getColor(color)).darken(0.5)}`,
-        "--_card-bg-color": getColor(color),
+        "--_card-border-color": `${chroma.valid(baseColor) ? chroma(baseColor).darken(0.5) : baseColor}`,
+        "--_card-bg-color": baseColor,
         "--_card-text-color": variant === "solid" ? "#fff" : "#000",
     } as React.CSSProperties;
     const handleClick = () => {
