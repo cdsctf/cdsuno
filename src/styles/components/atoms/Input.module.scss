@@ -1,7 +1,7 @@
-$color-default-bg: transparent;
-$color-default-border: rgb(55, 70, 79, 0.5);
-$color-default-text: #333;
-$color-clear-button-hover: #3c9ae7;
+@use "@/styles/mixins";
+
+$bg-color: var(--bg-color);
+$border-color: var(--border-color);
 
 .root {
     display: flex;
@@ -21,21 +21,26 @@ $color-clear-button-hover: #3c9ae7;
 
     .error-text {
         margin: 2px 4px;
-        color: var(--color-error-5);
+        color: var(--color-error);
         font-size: 12px;
     }
 
     .input-wrapper {
         display: flex;
         align-items: center;
-        background-color: var($color-default-bg);
-        border: 2px solid $color-default-border;
+        background-color: rgba(247, 247, 247, 0.5);
+        border: 2px solid #e5e5e5;
         border-radius: 12px;
         padding: 8px 10px;
-        transition: border-color 0.2s ease;
+        @include mixins.transition;
+
+        @include mixins.dark {
+            border-color: #37464f;
+            background-color: rgba(32, 47, 54, 0.5);
+        }
 
         &:focus-within {
-            border-color: var(--input-color, $color-default-bg);
+            border-color: $border-color;
 
             .clear-button {
                 opacity: 0.5;
@@ -47,7 +52,7 @@ $color-clear-button-hover: #3c9ae7;
             background: transparent;
             border: none;
             outline: none;
-            color: var(--input-text-color, $color-default-text);
+            caret-color: $border-color;
             font-size: 16px;
 
             &:disabled {
@@ -63,11 +68,11 @@ $color-clear-button-hover: #3c9ae7;
             background: transparent;
             border: none;
             cursor: pointer;
-            color: var(--input-text-color, $color-default-text);
+            color: $border-color;
 
             &:hover {
                 opacity: 1;
-                color: $color-clear-button-hover;
+                color: $border-color;
             }
 
             svg {

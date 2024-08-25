@@ -40,8 +40,8 @@ export default function Input(props: InputProps) {
     const baseBgColor = useThemeColor(bgColor);
 
     const variables = {
-        "--input-color": baseColor,
-        "--input-bg-color": baseBgColor,
+        "--bg-color": baseBgColor,
+        "--border-color": baseColor,
     } as React.CSSProperties;
 
     return (

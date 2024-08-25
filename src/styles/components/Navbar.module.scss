@@ -1,0 +1,36 @@
+@use "@/styles/mixins";
+
+.root {
+    height: 4rem;
+    width: 100%;
+    z-index: 2;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid #e5e5e5;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+
+    @include mixins.dark {
+        border-color: #37464f;
+    }
+
+    .logo {
+        width: 50%;
+    }
+
+    .links {
+        display: flex;
+        flex-direction: row;
+        flex-shrink: 0;
+        gap: 0.75rem;
+    }
+
+    .features {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+    }
+}

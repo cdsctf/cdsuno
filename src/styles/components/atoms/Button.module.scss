@@ -14,7 +14,7 @@ $text-color: var(--btn-text-color);
     border-color: transparent;
     border-style: solid;
     border-width: 2px;
-    transition: all 0.2s ease;
+    @include mixins.transition;
 
     cursor: pointer;
 

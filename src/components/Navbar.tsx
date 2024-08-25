@@ -1,34 +1,15 @@
 import { useThemeStore } from "@/stores/theme";
 import Sun2BoldDuotone from "~icons/solar/sun-2-bold-duotone";
 import MoonBoldDuotone from "~icons/solar/moon-bold-duotone";
+import styles from "@/styles/components/Navbar.module.scss";
 
 export default function Navbar() {
     const darkMode = useThemeStore.getState().darkMode;
 
     return (
-        <div
-            style={{
-                height: "4rem",
-                width: "100%",
-                zIndex: 2,
-                padding: "0 2rem",
-                display: "flex",
-                flexDirection: "row",
-                borderBottom: "2px solid #37464f",
-                alignItems: "center",
-                justifyContent: "space-between",
-                position: "fixed",
-            }}
-        >
-            <div style={{ width: "50%" }}></div>
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexShrink: 0,
-                    gap: "0.75rem",
-                }}
-            >
+        <div className={styles["root"]}>
+            <div className={styles["logo"]}></div>
+            <div className={styles["links"]}>
                 <button
                     style={{
                         backgroundColor: "#6556d7",
@@ -42,7 +23,7 @@ export default function Navbar() {
                 </button>
                 <button
                     style={{
-                        backgroundColor: "#007bff", // primary-1
+                        backgroundColor: "#007bff",
                         padding: "0.75rem 1.25rem",
                         borderRadius: "0.5rem",
                     }}
@@ -59,13 +40,7 @@ export default function Navbar() {
                     团队|Teams
                 </button>
             </div>
-            <div
-                style={{
-                    width: "50%",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                }}
-            >
+            <div className={styles["features"]}>
                 <button
                     onClick={() => {
                         useThemeStore.getState().setDarkMode(!darkMode);
