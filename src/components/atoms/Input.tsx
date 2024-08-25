@@ -1,5 +1,5 @@
+import useThemeColor from "@/hooks/useThemeColor";
 import styles from "@/styles/components/atoms/Input.module.scss";
-import { getColor } from "@/utils/color";
 import { Field } from "@ark-ui/react";
 
 export interface InputProps extends Field.RootProps {
@@ -36,9 +36,12 @@ export default function Input(props: InputProps) {
         }
     };
 
+    const baseColor = useThemeColor(color);
+    const baseBgColor = useThemeColor(bgColor);
+
     const variables = {
-        "--input-color": getColor(color),
-        "--input-bg-color": getColor(bgColor),
+        "--input-color": baseColor,
+        "--input-bg-color": baseBgColor,
     } as React.CSSProperties;
 
     return (

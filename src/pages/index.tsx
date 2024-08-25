@@ -31,6 +31,9 @@ export default function Page() {
                     <Button color={color} size="lg" variant="outline">
                         123
                     </Button>
+                    <Button color={"violet"} size="lg" variant="outline">
+                        123
+                    </Button>
                 </div>
                 <Input
                     clearable

@@ -5,7 +5,7 @@ $bg-color: var(--btn-bg-color);
 $bg-secondary-color: var(--btn-bg-secondary-color);
 $text-color: var(--btn-text-color);
 
-.btn {
+.root {
     display: flex;
     align-items: center;
     background-color: transparent;
@@ -31,11 +31,6 @@ $text-color: var(--btn-text-color);
         background-color: $bg-color;
         color: $bg-secondary-color;
         box-shadow: 0 4px 0;
-
-        @include mixins.dark {
-            background-color: #0056b3; // $bg-color-dark;
-            color: #ddd; // $bg-secondary-color-dark;
-        }
     }
 
     &.outline {
@@ -86,13 +81,13 @@ $text-color: var(--btn-text-color);
             transform: rotate(360deg);
         }
     }
-}
 
-.btn-content {
-    color: $text-color;
-    font-size: 15px;
-    font:
-        700 12.5px din-ronud,
-        sans-serif;
-    letter-spacing: 0.8px;
+    .content {
+        color: $text-color;
+        font-size: 15px;
+        font:
+            700 12.5px din-ronud,
+            sans-serif;
+        letter-spacing: 0.8px;
+    }
 }

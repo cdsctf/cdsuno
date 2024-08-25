@@ -1,8 +1,7 @@
-import React, { ComponentProps, useMemo } from "react";
+import React, { ComponentProps } from "react";
 import chroma from "chroma-js";
 import styles from "@/styles/components/atoms/button.module.scss";
-import { getColor } from "@/utils/color";
-import { useThemeStore } from "@/stores/theme";
+import useThemeColor from "@/hooks/useThemeColor";
 
 export interface ButtonProps extends ComponentProps<"button"> {
     color?: string;
@@ -16,8 +15,6 @@ export interface ButtonProps extends ComponentProps<"button"> {
 export default function Button(
     props: ButtonProps & { children?: React.ReactNode }
 ) {
-    const themeStore = useThemeStore();
-
     const {
         color = "primary",
         size = "md",
@@ -27,22 +24,22 @@ export default function Button(
         ...rest
     } = props;
 
+    const baseColor = useThemeColor(color);
+
     const variables = {
-        "--btn-bg-color": useMemo(() => {
-            return getColor(color);
-        }, [themeStore.darkMode, color]),
-        "--btn-bg-secondary-color": `${chroma(getColor(color)).darken(0.5)}`,
-        "--btn-text-color": variant === "solid" ? "#fff" : getColor(color),
+        "--btn-bg-color": baseColor,
+        "--btn-bg-secondary-color": `${chroma.valid(baseColor) ? chroma(baseColor).darken(0.5) : baseColor}`,
+        "--btn-text-color": variant === "solid" ? "#fff" : baseColor,
     } as React.CSSProperties;
 
     return (
         <button
-            className={`${styles["btn"]} ${styles[size]} ${styles[variant]} ${loading ? styles["loading"] : ""} ${rest.className}`}
+            className={`${styles["root"]} ${styles[size]} ${styles[variant]} ${loading ? styles["loading"] : ""} ${rest.className}`}
             style={variables}
             align-items={"center"}
             {...rest}
         >
-            <div className={styles["btn-content"]}>{children}</div>
+            <div className={styles["content"]}>{children}</div>
         </button>
     );
 }
