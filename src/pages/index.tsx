@@ -36,25 +36,29 @@ export default function Page() {
                         123
                     </Button>
                 </div>
+                <br />
                 <TextInput
                     clearable
                     // passwd
                     invalid
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    label={"用户名"}
-                    helperText={"请输入用户名 helperText"}
-                    errorText={"请输入用户名 errorText"}
+                    // label={"用户名"}
+                    placeholder="Username"
+                    // helperText={"请输入用户名 helperText"}
+                    // errorText={"请输入用户名 errorText"}
                 />
+                <br />
                 <TextInput
                     // clearable
                     password
                     invalid
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    label={"密码"}
-                    helperText={"请输入密码 helperText"}
-                    errorText={"Invalid Password.Please Try again."}
+                    // label={"密码"}
+                    placeholder="Password"
+                    // helperText={"请输入密码 helperText"}
+                    // errorText={"Invalid Password.Please Try again."}
                 />
                 <Avatar
                     src={"https://e23.dev/Ella_Avatar.png"}

@@ -29,7 +29,7 @@ $border-color: var(--border-color);
         display: flex;
         align-items: center;
         background-color: rgba(247, 247, 247, 0.5);
-        border: 2px solid #e5e5e5;
+        border: 1px solid #e5e5e5;
         border-radius: 12px;
         padding: 8px 10px;
         @include mixins.transition;
@@ -38,7 +38,9 @@ $border-color: var(--border-color);
             border-color: #37464f;
             background-color: rgba(32, 47, 54, 0.5);
         }
-
+        &:hover{
+            box-shadow: 0 0 0 2px $border-color;
+        }
         &:focus-within {
             border-color: $border-color;
 
@@ -75,6 +77,21 @@ $border-color: var(--border-color);
         .input[type="password"]::-ms-clear {
             display: none;
         }
+
+        .placeholder {
+            color: #37464f;
+            position: absolute;
+            font-size: 12px;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 1; 
+        }
+    
+        .placeholder-active {
+            transform: translateY(-32px) translateX(-15px) scale(0.8);
+            color: var(--border-color);
+        }
+
         .clear-button {
             opacity: 0;
             display: flex;

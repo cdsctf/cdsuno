@@ -37,7 +37,11 @@ export default function Input(props: InputProps) {
     } = props;
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
+    const [isFocused, setIsFocused] = useState(false);
+    const handleFocus = () => setIsFocused(true);
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        if (!e.target.value) setIsFocused(false);
+    };
     const handleClear = () => {
         if (onChange) {
             onChange({
@@ -70,9 +74,18 @@ export default function Input(props: InputProps) {
                     value={value}
                     type={password && !isPasswordVisible ? "password" : "text"}
                     onChange={onChange}
-                    placeholder={placeholder}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                     style={style}
                 />
+                {/* Placeholder span */}
+                <span
+                    className={`${styles["placeholder"]} ${
+                        isFocused || value ? styles["placeholder-active"] : ""
+                    }`}
+                >
+                    {placeholder}
+                </span>
                 {clearable && (
                     <button
                         className={styles["clear-button"]}
