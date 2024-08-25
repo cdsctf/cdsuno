@@ -48,7 +48,7 @@ export default function Page() {
                 />
                 <TextInput
                     // clearable
-                    passwd
+                    password
                     invalid
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
