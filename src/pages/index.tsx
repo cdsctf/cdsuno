@@ -117,14 +117,13 @@ export default function Page() {
                     }}
                     onClick={() => {
                         useToastStore.getState().addToast({
-                            id: "111",
                             title: "通知",
                             description: "这是一个通知",
                             type: "success",
                             meta: {
                                 icon: "123",
                             },
-                            duration: 20000,
+                            duration: 3000,
                         });
                     }}
                 >

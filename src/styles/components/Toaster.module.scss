@@ -1,9 +1,12 @@
 .root {
-    display: flex;
-    flex-direction: column;
     position: fixed;
     right: 1rem;
     bottom: 1rem;
-    gap: 10px;
     z-index: 9999;
+
+    .toast-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 }

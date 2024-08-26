@@ -8,9 +8,9 @@ interface ToastState {
 
 export const useToastStore = create<ToastState>()((set) => ({
     toasts: [],
-    addToast: (message) =>
+    addToast: (toast) =>
         set((state) => ({
-            toasts: [...state.toasts, { id: Date.now(), message }],
+            toasts: [...state.toasts, { id: Date.now(), ...toast }],
         })),
     removeToast: (id) =>
         set((state) => ({
