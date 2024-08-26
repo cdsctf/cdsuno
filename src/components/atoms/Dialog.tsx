@@ -54,13 +54,12 @@ export default function Dialog(props: DialogProps) {
                     onExited={handleExited}
                     nodeRef={nodeRef}
                 >
-                    <div className={styles.dialog} ref={nodeRef}>
-                        <ArkDialog.Positioner className={styles.positioner}>
-                            <ArkDialog.Content className={styles.content}>
+                    <div className={styles["root"]} ref={nodeRef}>
+                        <ArkDialog.Positioner className={styles["positioner"]}>
+                            <ArkDialog.Content className={styles["content"]}>
                                 {children}
                             </ArkDialog.Content>
                         </ArkDialog.Positioner>
-                        <ArkDialog.Backdrop className={styles.backdrop} />
                     </div>
                 </CSSTransition>
             </Portal>

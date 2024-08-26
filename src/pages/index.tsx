@@ -12,6 +12,7 @@ export default function Page() {
 
     const [value, setValue] = useState<string>("");
     const [open, setOpen] = useState(false);
+    const [open2, setOpen2] = useState(false);
 
     return (
         <>
@@ -76,10 +77,22 @@ export default function Page() {
                         setOpen(true);
                     }}
                 >
-                    123
+                    打开第一个弹窗
                 </Button>
                 <Dialog open={open} onOpenChange={(e) => setOpen(e.open)}>
-                    123456
+                    ciallo
+                    <Button
+                        size="lg"
+                        variant="solid"
+                        onClick={() => {
+                            setOpen2(true);
+                        }}
+                    >
+                        打开第二个弹窗
+                    </Button>
+                    <Dialog open={open2} onOpenChange={(e) => setOpen2(e.open)}>
+                        ciallo~
+                    </Dialog>
                 </Dialog>
             </div>
         </>

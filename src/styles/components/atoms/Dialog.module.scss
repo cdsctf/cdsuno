@@ -1,22 +1,22 @@
 @use "@/styles/mixins";
 
-.backdrop {
+.root {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 3;
     // backdrop-filter: blur(1px);
-}
 
-.positioner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 4;
+    .positioner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+    }
 }
 
 .enter {
