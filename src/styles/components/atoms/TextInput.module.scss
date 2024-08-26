@@ -43,7 +43,7 @@ $border-color: var(--border-color);
 
         &:hover {
             border-color: $border-color;
-            // box-shadow: 0 3px 0  $border-color;
+            box-shadow: 0 3px 0 $border-color;
         }
 
         &:focus-within {
@@ -87,6 +87,7 @@ $border-color: var(--border-color);
             pointer-events: none;
             transition: all 0.3s ease;
             z-index: 1;
+            user-select: none;
         }
 
         .placeholder-active {

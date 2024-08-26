@@ -19,7 +19,7 @@ function App() {
             <main
                 style={{
                     height: "100vh",
-                    transition: "all 0.3s ease-in-out",
+                    transition: "all 0.1s ease-in-out",
                 }}
             >
                 <Navbar />

@@ -1,5 +1,6 @@
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
+import Dialog from "@/components/atoms/Dialog";
 import TextInput from "@/components/atoms/TextInput";
 import { useState } from "react";
 
@@ -10,6 +11,7 @@ export default function Page() {
     };
 
     const [value, setValue] = useState<string>("");
+    const [open, setOpen] = useState(false);
 
     return (
         <>
@@ -67,6 +69,18 @@ export default function Page() {
                         marginTop: "10px",
                     }}
                 />
+                <Button
+                    size="lg"
+                    variant="solid"
+                    onClick={() => {
+                        setOpen(true);
+                    }}
+                >
+                    123
+                </Button>
+                <Dialog open={open} onOpenChange={(e) => setOpen(e.open)}>
+                    123456
+                </Dialog>
             </div>
         </>
     );
