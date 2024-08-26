@@ -84,7 +84,12 @@ export default function Page() {
                 >
                     打开第一个弹窗
                 </Button>
-                <Dialog open={open} onOpenChange={(e) => setOpen(e.open)}>
+                <Dialog
+                    open={open}
+                    onClose={() => {
+                        setOpen(false);
+                    }}
+                >
                     ciallo
                     <Button
                         size="lg"
@@ -95,7 +100,12 @@ export default function Page() {
                     >
                         打开第二个弹窗
                     </Button>
-                    <Dialog open={open2} onOpenChange={(e) => setOpen2(e.open)}>
+                    <Dialog
+                        open={open2}
+                        onClose={() => {
+                            setOpen2(false);
+                        }}
+                    >
                         ciallo~
                     </Dialog>
                 </Dialog>
@@ -120,6 +130,14 @@ export default function Page() {
                 >
                     发送通知
                 </Button>
+                {/* <div
+                    style={{
+                        height: "1000px",
+                    }}
+                >
+                    placeholder
+                </div> */}
+                <div>1111</div>
             </div>
         </>
     );

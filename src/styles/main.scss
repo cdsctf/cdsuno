@@ -1,6 +1,10 @@
+@use "mixins";
 @import "theme";
 @import "tailwind";
 
 main {
+    height: 100vh;
+    overflow: hidden;
     background-color: var(--bg-color);
+    @include mixins.transition;
 }

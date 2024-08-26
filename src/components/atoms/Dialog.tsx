@@ -1,68 +1,48 @@
-import {
-    Dialog as ArkDialog,
-    DialogOpenChangeDetails,
-    Portal,
-} from "@ark-ui/react";
 import { CSSTransition } from "react-transition-group";
 import styles from "@/styles/components/atoms/Dialog.module.scss";
-import { useEffect, useRef, useState } from "react";
+import React, { ComponentProps, useRef } from "react";
 
-export interface DialogProps extends ArkDialog.RootProps {
+export interface DialogProps extends ComponentProps<"dialog"> {
     open: boolean;
-    onOpenChange: (details: DialogOpenChangeDetails) => void;
+    onClose: () => void;
 }
 
-export default function Dialog(props: DialogProps) {
-    const { children, open, onOpenChange } = props;
+export default function Dialog(
+    props: DialogProps & { children: React.ReactNode }
+) {
+    const { children, open, onClose } = props;
     const nodeRef = useRef(null);
 
-    const [innerOpen, setInnerOpen] = useState<boolean>(open);
-
-    useEffect(() => {
-        if (open) {
-            setInnerOpen(open);
+    const handleOverlayClick = (
+        e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
+        if (e.target === e.currentTarget) {
+            onClose();
         }
-    }, [open]);
-
-    const handleExited = () => {
-        setInnerOpen(false);
     };
 
     return (
-        <ArkDialog.Root
-            open={innerOpen}
-            onOpenChange={(details) => {
-                if (!details.open) {
-                    onOpenChange({ open: false });
-                }
-            }}
-            lazyMount
+        <CSSTransition
+            in={open}
+            timeout={300}
             unmountOnExit
-            role="dialog"
+            classNames={{
+                enter: styles["enter"],
+                enterActive: styles["enter-active"],
+                exit: styles["exit"],
+                exitActive: styles["exit-active"],
+            }}
+            nodeRef={nodeRef}
         >
-            <Portal>
-                <CSSTransition
-                    in={open}
-                    timeout={300}
-                    unmountOnExit
-                    classNames={{
-                        enter: styles["enter"],
-                        enterActive: styles["enter-active"],
-                        exit: styles["exit"],
-                        exitActive: styles["exit-active"],
-                    }}
-                    onExited={handleExited}
-                    nodeRef={nodeRef}
-                >
-                    <div className={styles["root"]} ref={nodeRef}>
-                        <ArkDialog.Positioner className={styles["positioner"]}>
-                            <ArkDialog.Content className={styles["content"]}>
-                                {children}
-                            </ArkDialog.Content>
-                        </ArkDialog.Positioner>
-                    </div>
-                </CSSTransition>
-            </Portal>
-        </ArkDialog.Root>
+            <div
+                className={styles["root"]}
+                ref={nodeRef}
+                onClick={handleOverlayClick}
+            >
+                <div className={styles["positioner"]}>
+                    <div className={styles["content"]}>{children}</div>
+                </div>
+            </div>
+        </CSSTransition>
     );
 }

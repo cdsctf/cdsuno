@@ -1,16 +1,18 @@
 @use "@/styles/mixins";
 
 .root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2px;
     height: 4rem;
     width: 100%;
-    z-index: 2;
     padding: 0 2rem;
     display: flex;
     flex-direction: row;
     border-bottom: 2px solid #e5e5e5;
     align-items: center;
     justify-content: space-between;
-    position: fixed;
 
     @include mixins.dark {
         border-color: #37464f;

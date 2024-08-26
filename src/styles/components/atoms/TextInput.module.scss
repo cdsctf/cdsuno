@@ -28,6 +28,7 @@ $border-color: var(--border-color);
     .input-wrapper {
         display: flex;
         align-items: center;
+        position: relative;
         background-color: rgba(247, 247, 247, 0.5);
         border: 2px solid #e5e5e5;
         border-radius: 12px;

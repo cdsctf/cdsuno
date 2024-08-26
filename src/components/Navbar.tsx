@@ -2,12 +2,17 @@ import { useThemeStore } from "@/stores/theme";
 import Sun2BoldDuotone from "~icons/solar/sun-2-bold-duotone";
 import MoonBoldDuotone from "~icons/solar/moon-bold-duotone";
 import styles from "@/styles/components/Navbar.module.scss";
+import { ComponentProps } from "react";
 
-export default function Navbar() {
+export interface NavbarProps extends ComponentProps<"header"> {}
+
+export default function Navbar(props: NavbarProps) {
+    const { style } = props;
+
     const darkMode = useThemeStore.getState().darkMode;
 
     return (
-        <div className={styles["root"]}>
+        <header className={styles["root"]} style={style}>
             <div className={styles["logo"]}></div>
             <div className={styles["links"]}>
                 <button
@@ -61,6 +66,6 @@ export default function Navbar() {
                     )}
                 </button>
             </div>
-        </div>
+        </header>
     );
 }

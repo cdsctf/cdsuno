@@ -17,17 +17,13 @@ function App() {
 
     return (
         <>
-            <main
-                style={{
-                    height: "100vh",
-                    transition: "all 0.1s ease-in-out",
-                }}
-            >
+            <main>
                 <Navbar />
                 <div
                     style={{
-                        position: "fixed",
-                        top: "4rem",
+                        marginTop: "62px",
+                        height: "calc(100vh - 62px)",
+                        overflow: "auto",
                     }}
                 >
                     <RouterProvider router={router} />
