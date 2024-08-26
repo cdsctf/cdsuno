@@ -1,7 +1,7 @@
 import React, { ComponentProps } from "react";
 import chroma from "chroma-js";
-import styles from "@/styles/components/atoms/button.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
+import styles from "@/styles/components/atoms/button.module.scss";
 
 export interface ButtonProps extends ComponentProps<"button"> {
     color?: string;
@@ -10,6 +10,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
     jusitify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
     loading?: boolean;
+    style?: React.CSSProperties;
 }
 
 export default function Button(
@@ -20,6 +21,7 @@ export default function Button(
         size = "md",
         variant = "solid",
         loading = false,
+        style,
         children,
         ...rest
     } = props;
@@ -35,7 +37,10 @@ export default function Button(
     return (
         <button
             className={`${styles["root"]} ${styles[size]} ${styles[variant]} ${loading ? styles["loading"] : ""} ${rest.className}`}
-            style={variables}
+            style={{
+                ...variables,
+                ...style,
+            }}
             align-items={"center"}
             {...rest}
         >

@@ -1,0 +1,58 @@
+@use "@/styles/typography";
+
+$bg-color: var(--bg-color, rgba(247, 247, 247, 0.5));
+$border-color: var(--border-color, #e5e5e5);
+$border-secondary-color: var(--border-secondary-color, #e5e5e5);
+
+.root {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: $bg-color;
+    border: 2px solid $border-color;
+    border-radius: 12px;
+    padding: 10px 15px;
+    box-shadow: 0 5px 0 $border-secondary-color;
+
+    min-width: 20vw;
+
+    .icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .content-wrapper {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 4px;
+
+        .title {
+            @include typography.text-lg;
+        }
+
+        .description {
+            @include typography.text-base;
+        }
+    }
+}
+
+.enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.enter-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.exit-active {
+    opacity: 0;
+    transform: translateY(20px);
+}

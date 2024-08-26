@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
-import styles from "@/styles/components/atoms/TextInput.module.scss";
-import { Field } from "@ark-ui/react";
+import { Field as ArkField } from "@ark-ui/react";
 import CloseCircleBold from "~icons/solar/close-circle-bold";
 import EyeBold from "~icons/solar/eye-bold";
 import EyeCloseBold from "~icons/solar/eye-closed-bold";
+import styles from "@/styles/components/atoms/TextInput.module.scss";
 
-export interface InputProps extends Field.RootProps {
+export interface InputProps extends ArkField.RootProps {
     color?: string;
     bgColor?: string;
     clearable?: boolean;
@@ -63,13 +63,13 @@ export default function Input(props: InputProps) {
     } as React.CSSProperties;
 
     return (
-        <Field.Root className={styles["root"]} style={variables} {...rest}>
-            <Field.Label className={styles["label"]}>{label}</Field.Label>
-            <Field.HelperText className={styles["helper-text"]}>
+        <ArkField.Root className={styles["root"]} style={variables} {...rest}>
+            <ArkField.Label className={styles["label"]}>{label}</ArkField.Label>
+            <ArkField.HelperText className={styles["helper-text"]}>
                 {helperText}
-            </Field.HelperText>
+            </ArkField.HelperText>
             <div className={styles["input-wrapper"]}>
-                <Field.Input
+                <ArkField.Input
                     className={styles["input"]}
                     value={value}
                     type={password && !isPasswordVisible ? "password" : "text"}
@@ -105,9 +105,9 @@ export default function Input(props: InputProps) {
                     </button>
                 )}
             </div>
-            <Field.ErrorText className={styles["error-text"]}>
+            <ArkField.ErrorText className={styles["error-text"]}>
                 {errorText}
-            </Field.ErrorText>
-        </Field.Root>
+            </ArkField.ErrorText>
+        </ArkField.Root>
     );
 }

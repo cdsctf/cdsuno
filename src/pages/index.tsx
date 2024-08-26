@@ -2,6 +2,7 @@ import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import Dialog from "@/components/atoms/Dialog";
 import TextInput from "@/components/atoms/TextInput";
+import { useToastStore } from "@/stores/toast";
 import { useState } from "react";
 
 export default function Page() {
@@ -19,6 +20,9 @@ export default function Page() {
             <div
                 style={{
                     padding: 20,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 20,
                 }}
             >
                 <div
@@ -39,7 +43,6 @@ export default function Page() {
                         123
                     </Button>
                 </div>
-                <br />
                 <TextInput
                     clearable
                     // passwd
@@ -51,7 +54,6 @@ export default function Page() {
                     // helperText={"请输入用户名 helperText"}
                     // errorText={"请输入用户名 errorText"}
                 />
-                <br />
                 <TextInput
                     // clearable
                     password
@@ -73,6 +75,9 @@ export default function Page() {
                 <Button
                     size="lg"
                     variant="solid"
+                    style={{
+                        width: "150px",
+                    }}
                     onClick={() => {
                         setOpen(true);
                     }}
@@ -94,6 +99,27 @@ export default function Page() {
                         ciallo~
                     </Dialog>
                 </Dialog>
+                <Button
+                    size="lg"
+                    variant="solid"
+                    style={{
+                        width: "110px",
+                    }}
+                    onClick={() => {
+                        useToastStore.getState().addToast({
+                            id: "111",
+                            title: "通知",
+                            description: "这是一个通知",
+                            type: "success",
+                            meta: {
+                                icon: "123",
+                            },
+                            duration: 20000,
+                        });
+                    }}
+                >
+                    发送通知
+                </Button>
             </div>
         </>
     );
