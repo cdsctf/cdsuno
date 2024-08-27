@@ -138,17 +138,66 @@ export default function Page() {
                     placeholder
                 </div>
                 <div>1111</div> */}
-                <Tooltip content={"sweet~"} position={"right"} offset={8}>
-                    <Button
-                        size="lg"
-                        variant="solid"
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        margin: "64px",
+                        gap: "20px",
+                    }}
+                >
+                    <div
                         style={{
-                            width: "150px",
+                            margin: "0 50px",
                         }}
                     >
-                        tooltip
-                    </Button>
-                </Tooltip>
+                        <Tooltip content={"sweet~"} position={"top"} offset={8}>
+                            <Button size="lg" variant="solid">
+                                top
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: "20px",
+                        }}
+                    >
+                        <Tooltip
+                            content={"sweet~"}
+                            position={"left"}
+                            offset={8}
+                        >
+                            <Button size="lg" variant="solid">
+                                left
+                            </Button>
+                        </Tooltip>
+                        <Tooltip
+                            content={"sweet~"}
+                            position={"right"}
+                            offset={8}
+                        >
+                            <Button size="lg" variant="solid">
+                                right
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div
+                        style={{
+                            margin: "0 40px",
+                        }}
+                    >
+                        <Tooltip
+                            content={"sweet~"}
+                            position={"bottom"}
+                            offset={8}
+                        >
+                            <Button size="lg" variant="solid">
+                                bottom
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
             </div>
         </>
     );
