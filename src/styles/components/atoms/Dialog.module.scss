@@ -12,22 +12,22 @@
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(1px);
-}
 
-.enter {
-    opacity: 0;
-}
+    &.enter {
+        opacity: 0;
+    }
 
-.enter-active {
-    opacity: 1;
-    transition: opacity 200ms ease-in;
-}
+    &.enter-active {
+        opacity: 1;
+        transition: opacity 200ms ease-in;
+    }
 
-.exit {
-    opacity: 1;
-}
+    &.exit {
+        opacity: 1;
+    }
 
-.exit-active {
-    opacity: 0;
-    transition: opacity 200ms ease-out;
+    &.exit-active {
+        opacity: 0;
+        transition: opacity 200ms ease-out;
+    }
 }

@@ -9,4 +9,22 @@
         flex-direction: column;
         gap: 10px;
     }
+
+    .enter {
+        transform: translateX(100%);
+    }
+
+    .enter-active {
+        transform: translateX(0);
+        transition: transform 200ms ease-out;
+    }
+
+    .exit {
+        transform: translateX(0);
+    }
+
+    .exit-active {
+        transform: translateX(110%);
+        transition: transform 200ms ease-in;
+    }
 }

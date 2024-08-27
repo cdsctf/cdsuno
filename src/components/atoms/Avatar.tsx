@@ -1,9 +1,9 @@
-import { Avatar as ArkAvatar } from "@ark-ui/react";
 import styles from "@/styles/components/atoms/Avatar.module.scss";
 import UserCircleBoldDuotone from "~icons/solar/user-circle-bold-duotone";
 import useThemeColor from "@/hooks/useThemeColor";
+import { ComponentProps, useState } from "react";
 
-export interface AvatarProps extends ArkAvatar.RootProps {
+export interface AvatarProps extends ComponentProps<"img"> {
     src: string;
     alt?: string;
     color?: string;
@@ -15,7 +15,7 @@ export interface AvatarProps extends ArkAvatar.RootProps {
 export default function Avatar(props: AvatarProps) {
     const {
         src,
-        alt = "avatar",
+        alt = "",
         color = "primary",
         size = "md",
         fallback = <UserCircleBoldDuotone />,
@@ -24,13 +24,14 @@ export default function Avatar(props: AvatarProps) {
     } = props;
 
     const baseColor = useThemeColor(color);
+    const [imgErr, setImgErr] = useState(false);
 
     const variables = {
         "--border-color": baseColor,
     } as React.CSSProperties;
 
     return (
-        <ArkAvatar.Root
+        <div
             className={`${styles["root"]} ${styles[size]}`}
             style={{
                 ...variables,
@@ -38,15 +39,19 @@ export default function Avatar(props: AvatarProps) {
             }}
             {...rest}
         >
-            <ArkAvatar.Fallback className={styles["fallback"]}>
-                {fallback}
-            </ArkAvatar.Fallback>
-            <ArkAvatar.Image
-                className={styles["img"]}
-                src={src}
-                alt={alt}
-                draggable={false}
-            />
-        </ArkAvatar.Root>
+            {!imgErr && src ? (
+                <img
+                    src={src}
+                    alt={alt}
+                    onError={() => setImgErr(true)}
+                    draggable={false}
+                    className={styles["img"]}
+                />
+            ) : (
+                <div className={styles["fallback"]}>
+                    {fallback || alt.charAt(0).toUpperCase()}
+                </div>
+            )}
+        </div>
     );
 }

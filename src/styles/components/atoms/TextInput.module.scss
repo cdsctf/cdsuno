@@ -110,12 +110,6 @@ $border-color: var(--border-color);
                 opacity: 1;
                 color: $border-color;
             }
-
-            svg {
-                width: 24px;
-                height: 24px;
-                vertical-align: middle;
-            }
         }
 
         .toggle-button {
@@ -131,12 +125,6 @@ $border-color: var(--border-color);
             &:hover {
                 opacity: 1;
                 color: $border-color;
-            }
-
-            svg {
-                width: 24px;
-                height: 24px;
-                vertical-align: middle;
             }
         }
     }
