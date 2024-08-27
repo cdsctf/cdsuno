@@ -22,7 +22,6 @@ function App() {
                 <div
                     style={{
                         marginTop: "62px",
-                        height: "calc(100vh - 62px)",
                         overflow: "auto",
                     }}
                 >

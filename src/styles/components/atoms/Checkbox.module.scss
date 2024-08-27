@@ -1,0 +1,52 @@
+@use "@/styles/mixins";
+
+$bg-color: var(--bg-color);
+
+.root {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    user-select: none;
+    font-size: 16px;
+    gap: 12px;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+
+    .checkmark {
+        position: relative;
+        height: 20px;
+        width: 20px;
+        background-color: transparent;
+        border: 2px solid #e5e5e5;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+
+        @include mixins.dark {
+            border-color: #37464f;
+        }
+
+        &:hover {
+            border-color: $bg-color;
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+    }
+
+    input:checked ~ .checkmark {
+        background-color: $bg-color;
+        border-color: $bg-color;
+
+        &:after {
+            display: block;
+        }
+    }
+}

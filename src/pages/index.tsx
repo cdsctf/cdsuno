@@ -1,5 +1,6 @@
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
+import Checkbox from "@/components/atoms/Checkbox";
 import Dialog from "@/components/atoms/Dialog";
 import TextInput from "@/components/atoms/TextInput";
 import Tooltip from "@/components/atoms/Tooltip";
@@ -15,6 +16,8 @@ export default function Page() {
     const [value, setValue] = useState<string>("");
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
+
+    const [checked, setChecked] = useState<boolean>(false);
 
     return (
         <>
@@ -198,6 +201,13 @@ export default function Page() {
                         </Tooltip>
                     </div>
                 </div>
+                <Checkbox
+                    checked={checked}
+                    onChange={(checked) => {
+                        setChecked(checked);
+                    }}
+                    label={"I am a checkbox"}
+                />
             </div>
         </>
     );
