@@ -23,7 +23,7 @@ $bg-color: var(--bg-color);
         width: 20px;
         background-color: transparent;
         border: 2px solid #e5e5e5;
-        border-radius: 4px;
+        border-radius: 5px;
         transition: all 0.2s ease;
 
         @include mixins.dark {
