@@ -2,6 +2,7 @@ import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import Dialog from "@/components/atoms/Dialog";
 import TextInput from "@/components/atoms/TextInput";
+import Tooltip from "@/components/atoms/Tooltip";
 import { useToastStore } from "@/stores/toast";
 import { useState } from "react";
 
@@ -135,8 +136,19 @@ export default function Page() {
                     }}
                 >
                     placeholder
-                </div> */}
-                <div>1111</div>
+                </div>
+                <div>1111</div> */}
+                <Tooltip content={"sweet~"} position={"right"} offset={8}>
+                    <Button
+                        size="lg"
+                        variant="solid"
+                        style={{
+                            width: "150px",
+                        }}
+                    >
+                        tooltip
+                    </Button>
+                </Tooltip>
             </div>
         </>
     );

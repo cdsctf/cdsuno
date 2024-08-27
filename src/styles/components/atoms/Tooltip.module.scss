@@ -1,0 +1,56 @@
+$offset: var(--offset, 8px);
+
+.root {
+    position: relative;
+    width: fit-content;
+
+    .content {
+        position: absolute;
+        background: #333;
+        color: #fff;
+        // box-shadow: box-shadow: 0 3px 0;
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 14px;
+        white-space: nowrap;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.2s ease,
+            visibility 0.2s ease;
+
+        &.top {
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: $offset;
+        }
+
+        &.bottom {
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: $offset;
+        }
+
+        &.left {
+            top: 50%;
+            right: 100%;
+            transform: translateY(-50%);
+            margin-right: $offset;
+        }
+
+        &.right {
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            margin-left: $offset;
+        }
+    }
+
+    .trigger:hover + .content {
+        opacity: 1;
+        visibility: visible;
+    }
+}

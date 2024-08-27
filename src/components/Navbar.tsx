@@ -15,7 +15,7 @@ export default function Navbar(props: NavbarProps) {
         <header className={styles["root"]} style={style}>
             <div className={styles["logo"]}></div>
             <div className={styles["links"]}>
-                <button
+                {/* <button
                     style={{
                         backgroundColor: "#6556d7",
                         padding: "0.75rem 1.25rem",
@@ -43,7 +43,7 @@ export default function Navbar(props: NavbarProps) {
                     }}
                 >
                     团队|Teams
-                </button>
+                </button> */}
             </div>
             <div className={styles["features"]}>
                 <button
@@ -53,15 +53,11 @@ export default function Navbar(props: NavbarProps) {
                 >
                     {darkMode ? (
                         <>
-                            <Sun2BoldDuotone style={{ color: "#333" }} />
+                            <Sun2BoldDuotone />
                         </>
                     ) : (
                         <>
-                            <MoonBoldDuotone
-                                style={{
-                                    color: "#339af0",
-                                }}
-                            />
+                            <MoonBoldDuotone />
                         </>
                     )}
                 </button>
