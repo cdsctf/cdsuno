@@ -25,7 +25,14 @@ $border-color: var(--border-color);
         font-size: 12px;
     }
 
-    .input-wrapper {
+    .container {
+        width: fit-content;
+        border-radius: 15px;
+        background-color: transparent;
+        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .wrapper {
         display: flex;
         align-items: center;
         position: relative;
@@ -59,7 +66,7 @@ $border-color: var(--border-color);
             }
         }
 
-        .input {
+        input {
             flex: 1;
             background: transparent;
             border: none;

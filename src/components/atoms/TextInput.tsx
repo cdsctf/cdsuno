@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { ComponentProps, useState } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
-import { Field as ArkField } from "@ark-ui/react";
 import CloseCircleBold from "~icons/solar/close-circle-bold";
 import EyeBold from "~icons/solar/eye-bold";
 import EyeCloseBold from "~icons/solar/eye-closed-bold";
 import styles from "@/styles/components/atoms/TextInput.module.scss";
 
-export interface InputProps extends ArkField.RootProps {
+export interface InputProps extends ComponentProps<"input"> {
     color?: string;
     bgColor?: string;
     clearable?: boolean;
     password?: boolean;
+    invalid?: boolean;
     value?: string;
     label?: string;
     placeholder?: string;
@@ -26,6 +26,7 @@ export default function Input(props: InputProps) {
         bgColor = "transparent",
         clearable = false,
         password = false,
+        invalid = false,
         value = "",
         onChange,
         label = "",
@@ -63,51 +64,53 @@ export default function Input(props: InputProps) {
     } as React.CSSProperties;
 
     return (
-        <ArkField.Root className={styles["root"]} style={variables} {...rest}>
-            <ArkField.Label className={styles["label"]}>{label}</ArkField.Label>
-            <ArkField.HelperText className={styles["helper-text"]}>
-                {helperText}
-            </ArkField.HelperText>
-            <div className={styles["input-wrapper"]}>
-                <ArkField.Input
-                    className={styles["input"]}
-                    value={value}
-                    type={password && !isPasswordVisible ? "password" : "text"}
-                    onChange={onChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    style={style}
-                />
-                {/* Placeholder span */}
-                <span
-                    className={`${styles["placeholder"]} ${
-                        isFocused || value ? styles["placeholder-active"] : ""
-                    }`}
-                >
-                    {placeholder}
-                </span>
-                {clearable && (
-                    <button
-                        className={styles["clear-button"]}
-                        onClick={handleClear}
-                        aria-label="Clear input"
+        <div className={styles["root"]} style={variables} {...rest}>
+            <span className={styles["label"]}>{label}</span>
+            <span className={styles["helper-text"]}>{helperText}</span>
+            <div className={styles["container"]}>
+                <div className={styles["wrapper"]}>
+                    <input
+                        value={value}
+                        type={
+                            password && !isPasswordVisible ? "password" : "text"
+                        }
+                        onChange={onChange}
+                        onFocus={handleFocus}
+                        onBlur={handleBlur}
+                        style={style}
+                    />
+                    <span
+                        className={`${styles["placeholder"]} ${
+                            isFocused || value
+                                ? styles["placeholder-active"]
+                                : ""
+                        }`}
                     >
-                        <CloseCircleBold />
-                    </button>
-                )}
-                {password && (
-                    <button
-                        className={styles["toggle-button"]}
-                        onClick={handleToggleVisibility}
-                        aria-label="Toggle Visibility"
-                    >
-                        {isPasswordVisible ? <EyeBold /> : <EyeCloseBold />}
-                    </button>
-                )}
+                        {placeholder}
+                    </span>
+                    {clearable && (
+                        <button
+                            className={styles["clear-button"]}
+                            onClick={handleClear}
+                            aria-label="Clear input"
+                        >
+                            <CloseCircleBold />
+                        </button>
+                    )}
+                    {password && (
+                        <button
+                            className={styles["toggle-button"]}
+                            onClick={handleToggleVisibility}
+                            aria-label="Toggle Visibility"
+                        >
+                            {isPasswordVisible ? <EyeBold /> : <EyeCloseBold />}
+                        </button>
+                    )}
+                </div>
             </div>
-            <ArkField.ErrorText className={styles["error-text"]}>
-                {errorText}
-            </ArkField.ErrorText>
-        </ArkField.Root>
+            {invalid && (
+                <span className={styles["error-text"]}>{errorText}</span>
+            )}
+        </div>
     );
 }

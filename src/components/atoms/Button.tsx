@@ -29,22 +29,21 @@ export default function Button(
     const baseColor = useThemeColor(color);
 
     const variables = {
-        "--btn-bg-color": baseColor,
-        "--btn-bg-secondary-color": `${chroma.valid(baseColor) ? chroma(baseColor).darken(0.5) : baseColor}`,
-        "--btn-text-color": variant === "solid" ? "#fff" : baseColor,
+        "--bg-color": baseColor,
+        "--bg-secondary-color": `${chroma.valid(baseColor) ? chroma(baseColor).darken(0.5) : baseColor}`,
+        "--text-color": variant === "solid" ? "#fff" : baseColor,
     } as React.CSSProperties;
 
     return (
-        <button
-            className={`${styles["root"]} ${styles[size]} ${styles[variant]} ${loading ? styles["loading"] : ""} ${rest.className}`}
-            style={{
-                ...variables,
-                ...style,
-            }}
-            align-items={"center"}
-            {...rest}
-        >
-            <div className={styles["content"]}>{children}</div>
-        </button>
+        <div className={styles["root"]} style={variables}>
+            <button
+                className={`${styles[size]} ${styles[variant]} ${loading ? styles["loading"] : ""} ${rest.className}`}
+                style={style}
+                align-items={"center"}
+                {...rest}
+            >
+                <div className={styles["content"]}>{children}</div>
+            </button>
+        </div>
     );
 }
