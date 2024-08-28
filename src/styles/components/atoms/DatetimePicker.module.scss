@@ -1,0 +1,103 @@
+@use "@/styles/mixins";
+
+$bg-color: var(--bg-color);
+$border-color: var(--border-color);
+
+.root {
+    position: relative;
+    width: fit-content;
+
+    .picker-container {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: fit-content;
+        background-color: $bg-color;
+        border: 2px solid $border-color;
+        border-bottom-width: 6px;
+
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        border-radius: 12px;
+        z-index: 1000;
+        padding: 16px;
+    }
+
+    .date-picker {
+        .month-year {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+
+            button {
+                background: none;
+                border: none;
+                font-size: 18px;
+                cursor: pointer;
+            }
+        }
+
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+
+            .day {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 32px;
+                height: 32px;
+                cursor: pointer;
+                border-radius: 10px;
+
+                &:hover {
+                    border: $border-color 2px solid;
+                }
+
+                &.selected {
+                    border: $border-color 2px solid;
+                }
+
+                &.empty {
+                    cursor: default;
+                }
+            }
+        }
+    }
+
+    .time-picker {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 16px 0 8px 0;
+
+        input {
+            width: 40px;
+            text-align: center;
+            font-size: 18px;
+            padding: 4px;
+            border-bottom: $border-color 2px solid;
+            border-radius: 4px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .time-separator {
+            font-size: 18px;
+            margin: 0 4px;
+        }
+    }
+}

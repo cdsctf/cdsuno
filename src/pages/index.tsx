@@ -1,10 +1,12 @@
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import Checkbox from "@/components/atoms/Checkbox";
+import DatetimePicker from "@/components/atoms/DatetimePicker";
 import Dialog from "@/components/atoms/Dialog";
 import TextInput from "@/components/atoms/TextInput";
 import Tooltip from "@/components/atoms/Tooltip";
 import { useToastStore } from "@/stores/toast";
+import { DateTime } from "luxon";
 import { useState } from "react";
 
 export default function Page() {
@@ -16,6 +18,8 @@ export default function Page() {
     const [value, setValue] = useState<string>("");
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
+
+    const [datetime, setDatetime] = useState<DateTime>(DateTime.now());
 
     const [checked, setChecked] = useState<boolean>(false);
 
@@ -74,6 +78,12 @@ export default function Page() {
                     fallback={<>E</>}
                     style={{
                         marginTop: "10px",
+                    }}
+                />
+                <DatetimePicker
+                    value={datetime}
+                    onChange={(datetime) => {
+                        setDatetime(datetime);
                     }}
                 />
                 <Button
