@@ -1,7 +1,7 @@
 import React, { ComponentProps } from "react";
 import chroma from "chroma-js";
 import useThemeColor from "@/hooks/useThemeColor";
-import styles from "@/styles/components/atoms/button.module.scss";
+import styles from "@/styles/components/atoms/Button.module.scss";
 
 export interface ButtonProps extends ComponentProps<"button"> {
     color?: string;
