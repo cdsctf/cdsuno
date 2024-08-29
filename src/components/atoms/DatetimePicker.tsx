@@ -21,6 +21,7 @@ export default function DatetimePicker(props: DatetimePickerProps) {
         minute: selectedDateTime.toFormat("mm"),
         second: selectedDateTime.toFormat("ss"),
     });
+    const [tempInputValue, setTempInputValue] = useState<string>(selectedDateTime.toFormat("yyyy-MM-dd HH:mm:ss"));
 
     const pickerRef = useRef<HTMLDivElement>(null);
 
@@ -30,44 +31,80 @@ export default function DatetimePicker(props: DatetimePickerProps) {
         const newDateTime = selectedDateTime.set({ day });
         setSelectedDateTime(newDateTime);
     }
-
+    const handleTextInputBlur = () => {
+        const newDateTime = DateTime.fromFormat(tempInputValue, "yyyy-MM-dd HH:mm:ss");
+    
+        if (newDateTime.isValid) {
+            setSelectedDateTime(newDateTime);
+            onChange?.(newDateTime);
+        } else {
+            // 恢复为原来的日期时间格式
+            setTempInputValue(selectedDateTime.toFormat("yyyy-MM-dd HH:mm:ss"));
+            console.error("Invalid date format");
+        }
+    };
+    
     const handleTimeInputChange = (
         unit: "hour" | "minute" | "second",
         value: string
     ) => {
-        setTimeInputs((prev) => ({ ...prev, [unit]: value }));
+        setTimeInputs((prev) => ({
+            ...prev,
+            [unit]: value, // 不进行格式化，直接更新输入值
+        }));
     };
+    const handleWheelChange = (
+        event: React.WheelEvent<HTMLInputElement>,
+        unit: "hour" | "minute" | "second"
+    ) => {
+        const direction = event.deltaY < 0 ? 1 : -1; // 向上滚动为正，向下滚动为负
 
+        setTimeInputs((prev) => {
+            let newValue = parseInt(prev[unit], 10) + direction;
+
+            if (unit === "hour") {
+                if (newValue < 0) newValue = 23;
+                if (newValue > 23) newValue = 0;
+            } else {
+                if (newValue < 0) newValue = 59;
+                if (newValue > 59) newValue = 0;
+            }
+
+            const formattedValue = newValue.toString().padStart(2, "0");
+            return { ...prev, [unit]: formattedValue };
+        });
+    };
     const applyChanges = () => {
-        const hour = parseInt(timeInputs.hour, 10);
-        const minute = parseInt(timeInputs.minute, 10);
-        const second = parseInt(timeInputs.second, 10);
-
-        if (
-            isNaN(hour) ||
-            isNaN(minute) ||
-            isNaN(second) ||
-            hour < 0 ||
-            hour > 23 ||
-            minute < 0 ||
-            minute > 59 ||
-            second < 0 ||
-            second > 59
-        ) {
-            setTimeInputs({
-                hour: selectedDateTime.toFormat("HH"),
-                minute: selectedDateTime.toFormat("mm"),
-                second: selectedDateTime.toFormat("ss"),
-            });
-            return;
+        let hour = parseInt(timeInputs.hour, 10);
+        let minute = parseInt(timeInputs.minute, 10);
+        let second = parseInt(timeInputs.second, 10);
+    
+        if (isNaN(hour) || hour < 0 || hour > 23) {
+            hour = selectedDateTime.hour; // 如果无效，则恢复原来的值
         }
-
+        if (isNaN(minute) || minute < 0 || minute > 59) {
+            minute = selectedDateTime.minute;
+        }
+        if (isNaN(second) || second < 0 || second > 59) {
+            second = selectedDateTime.second;
+        }
+    
+        const formattedHour = hour.toString().padStart(2, "0");
+        const formattedMinute = minute.toString().padStart(2, "0");
+        const formattedSecond = second.toString().padStart(2, "0");
+    
+        setTimeInputs({
+            hour: formattedHour,
+            minute: formattedMinute,
+            second: formattedSecond,
+        });
+    
         const newDateTime = selectedDateTime.set({ hour, minute, second });
         setSelectedDateTime(newDateTime);
-
-        // 调用 onChange 来通知外部组件值的变化
+    
         onChange?.(newDateTime);
     };
+    
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -97,8 +134,8 @@ export default function DatetimePicker(props: DatetimePickerProps) {
         <div className={styles["root"]} style={variables}>
             <TextInput
                 value={selectedDateTime.toFormat("yyyy-MM-dd HH:mm:ss")}
+                onChange={(e) => setTempInputValue(e.target.value)}
                 onClick={togglePicker}
-                readOnly
             />
             {open && (
                 <div className={styles["picker-container"]} ref={pickerRef}>
@@ -170,6 +207,7 @@ export default function DatetimePicker(props: DatetimePickerProps) {
                                 handleTimeInputChange("hour", e.target.value)
                             }
                             onBlur={applyChanges}
+                            onWheel={(e) => handleWheelChange(e, "hour")}
                             maxLength={2}
                         />
                         <span className={styles["time-separator"]}>:</span>
@@ -180,6 +218,7 @@ export default function DatetimePicker(props: DatetimePickerProps) {
                                 handleTimeInputChange("minute", e.target.value)
                             }
                             onBlur={applyChanges}
+                            onWheel={(e) => handleWheelChange(e, "minute")}
                             maxLength={2}
                         />
                         <span className={styles["time-separator"]}>:</span>
@@ -190,6 +229,7 @@ export default function DatetimePicker(props: DatetimePickerProps) {
                                 handleTimeInputChange("second", e.target.value)
                             }
                             onBlur={applyChanges}
+                            onWheel={(e) => handleWheelChange(e, "second")}
                             maxLength={2}
                         />
                     </div>

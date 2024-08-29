@@ -80,12 +80,25 @@ export default function Page() {
                         marginTop: "10px",
                     }}
                 />
-                <DatetimePicker
-                    value={datetime}
-                    onChange={(datetime) => {
-                        setDatetime(datetime);
-                    }}
-                />
+                <div
+                style={{
+                    display: "flex",
+                    gap: 20,
+                }}>
+                    <DatetimePicker
+                        value={datetime}
+                        onChange={(datetime) => {
+                            setDatetime(datetime);
+                        }}
+                    />
+                    <p style={{alignItems:"center"}}>To</p>
+                    <DatetimePicker
+                        value={datetime}
+                        onChange={(datetime) => {
+                            setDatetime(datetime);
+                        }}
+                    />
+                </div>
                 <Button
                     size="lg"
                     variant="solid"
