@@ -2,7 +2,7 @@ import InfoCircleBold from "~icons/solar/info-circle-bold";
 import styles from "@/styles/components/atoms/Toast.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
-import { ComponentProps, forwardRef } from "react";
+import { ComponentProps } from "react";
 
 export interface ToastProps extends ComponentProps<"div"> {
     id?: string;
@@ -13,7 +13,7 @@ export interface ToastProps extends ComponentProps<"div"> {
     type?: string;
 }
 
-const Toast = forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
+export default function Toast(props: ToastProps) {
     const {
         id,
         title,
@@ -33,7 +33,7 @@ const Toast = forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
     } as React.CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables} ref={ref} {...rest}>
+        <div className={styles["root"]} style={variables} {...rest}>
             <div className={styles["icon"]}>{icon}</div>
             <div className={styles["content-wrapper"]}>
                 <h2 className={styles["title"]}>{title}</h2>
@@ -41,6 +41,4 @@ const Toast = forwardRef<HTMLDivElement, ToastProps>((props, ref) => {
             </div>
         </div>
     );
-});
-
-export default Toast;
+}

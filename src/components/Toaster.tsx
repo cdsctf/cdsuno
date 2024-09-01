@@ -51,11 +51,12 @@ export default function Toaster() {
                             }}
                             unmountOnExit
                         >
-                            <Toast
-                                ref={nodeRef}
-                                title={`你好 ${toast.id}`}
-                                description={"ciallo~"}
-                            />
+                            <div ref={nodeRef} className={styles["toast"]}>
+                                <Toast
+                                    title={`你好 ${toast.id}`}
+                                    description={"ciallo~"}
+                                />
+                            </div>
                         </CSSTransition>
                     );
                 })}
