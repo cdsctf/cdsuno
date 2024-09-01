@@ -5,6 +5,7 @@ import TextInput from "./TextInput";
 import useThemeColor from "@/hooks/useThemeColor";
 import ArrowLeftLinear from "~icons/solar/arrow-left-linear";
 import ArrowRightLinear from "~icons/solar/arrow-right-linear";
+import { CSSTransition } from "react-transition-group";
 
 export interface DatetimePickerProps {
     value: DateTime;
@@ -21,7 +22,9 @@ export default function DatetimePicker(props: DatetimePickerProps) {
         minute: selectedDateTime.toFormat("mm"),
         second: selectedDateTime.toFormat("ss"),
     });
-    const [tempInputValue, setTempInputValue] = useState<string>(selectedDateTime.toFormat("yyyy-MM-dd HH:mm:ss"));
+    const [tempInputValue, setTempInputValue] = useState<string>(
+        selectedDateTime.toFormat("yyyy-MM-dd HH:mm:ss")
+    );
 
     const pickerRef = useRef<HTMLDivElement>(null);
 
@@ -32,8 +35,11 @@ export default function DatetimePicker(props: DatetimePickerProps) {
         setSelectedDateTime(newDateTime);
     }
     const handleTextInputBlur = () => {
-        const newDateTime = DateTime.fromFormat(tempInputValue, "yyyy-MM-dd HH:mm:ss");
-    
+        const newDateTime = DateTime.fromFormat(
+            tempInputValue,
+            "yyyy-MM-dd HH:mm:ss"
+        );
+
         if (newDateTime.isValid) {
             setSelectedDateTime(newDateTime);
             onChange?.(newDateTime);
@@ -43,7 +49,7 @@ export default function DatetimePicker(props: DatetimePickerProps) {
             console.error("Invalid date format");
         }
     };
-    
+
     const handleTimeInputChange = (
         unit: "hour" | "minute" | "second",
         value: string
@@ -53,6 +59,7 @@ export default function DatetimePicker(props: DatetimePickerProps) {
             [unit]: value, // 不进行格式化，直接更新输入值
         }));
     };
+
     const handleWheelChange = (
         event: React.WheelEvent<HTMLInputElement>,
         unit: "hour" | "minute" | "second"
@@ -74,11 +81,12 @@ export default function DatetimePicker(props: DatetimePickerProps) {
             return { ...prev, [unit]: formattedValue };
         });
     };
+
     const applyChanges = () => {
         let hour = parseInt(timeInputs.hour, 10);
         let minute = parseInt(timeInputs.minute, 10);
         let second = parseInt(timeInputs.second, 10);
-    
+
         if (isNaN(hour) || hour < 0 || hour > 23) {
             hour = selectedDateTime.hour; // 如果无效，则恢复原来的值
         }
@@ -88,23 +96,22 @@ export default function DatetimePicker(props: DatetimePickerProps) {
         if (isNaN(second) || second < 0 || second > 59) {
             second = selectedDateTime.second;
         }
-    
+
         const formattedHour = hour.toString().padStart(2, "0");
         const formattedMinute = minute.toString().padStart(2, "0");
         const formattedSecond = second.toString().padStart(2, "0");
-    
+
         setTimeInputs({
             hour: formattedHour,
             minute: formattedMinute,
             second: formattedSecond,
         });
-    
+
         const newDateTime = selectedDateTime.set({ hour, minute, second });
         setSelectedDateTime(newDateTime);
-    
+
         onChange?.(newDateTime);
     };
-    
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -137,14 +144,27 @@ export default function DatetimePicker(props: DatetimePickerProps) {
                 onChange={(e) => setTempInputValue(e.target.value)}
                 onClick={togglePicker}
             />
-            {open && (
+            <CSSTransition
+                in={open}
+                timeout={300}
+                nodeRef={pickerRef}
+                unmountOnExit
+                classNames={{
+                    enter: styles["enter"],
+                    enterActive: styles["enter-active"],
+                    exit: styles["exit"],
+                    exitActive: styles["exit-active"],
+                }}
+            >
                 <div className={styles["picker-container"]} ref={pickerRef}>
                     <div className={styles["date-picker"]}>
                         <div className={styles["month-year"]}>
                             <button
                                 onClick={() =>
                                     setSelectedDateTime(
-                                        selectedDateTime.minus({ months: 1 })
+                                        selectedDateTime.minus({
+                                            months: 1,
+                                        })
                                     )
                                 }
                             >
@@ -234,7 +254,7 @@ export default function DatetimePicker(props: DatetimePickerProps) {
                         />
                     </div>
                 </div>
-            )}
+            </CSSTransition>
         </div>
     );
 }
