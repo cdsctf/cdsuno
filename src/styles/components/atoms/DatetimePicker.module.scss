@@ -2,7 +2,14 @@
 
 $bg-color: var(--bg-color);
 $border-color: var(--border-color);
-
+@keyframes scale-up {
+    0% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 .root {
     position: relative;
     width: fit-content;
@@ -79,13 +86,23 @@ $border-color: var(--border-color);
                 border-radius: 10px;
 
                 &:hover {
-                    border: $border-color 2px solid;
+                    border: $border-color 1.5px solid;
+                    transition: 0.2s ease-in-out;
+                    background-color: rgba(255, 255, 255, 0.2);
                 }
 
                 &.selected {
-                    border: $border-color 2px solid;
+                    border: $border-color 3px solid;
+                    animation: scale-up 0.2s ease-in-out;
                 }
-
+                &:active.selected {
+                    animation: none; 
+                    border: $border-color 1.5px solid;
+                }
+            
+                &:active.selected::after {
+                    animation: scale-up 0.2s ease-in-out;
+                }
                 &.empty {
                     cursor: default;
                 }
