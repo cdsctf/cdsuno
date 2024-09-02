@@ -1,3 +1,4 @@
+import React, { useEffect, useRef } from "react";
 import InfoCircleBold from "~icons/solar/info-circle-bold";
 import styles from "@/styles/components/atoms/Toast.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
@@ -11,6 +12,7 @@ export interface ToastProps extends ComponentProps<"div"> {
     color?: string;
     icon?: React.ReactNode;
     type?: string;
+    duration?: number;
 }
 
 export default function Toast(props: ToastProps) {
@@ -21,10 +23,20 @@ export default function Toast(props: ToastProps) {
         color = "primary",
         icon = <InfoCircleBold />,
         type,
+        duration = 3000,
         ...rest
     } = props;
 
     const baseColor = useThemeColor(color);
+
+    const progressBarRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (progressBarRef.current) {
+            progressBarRef.current.style.transition = `width ${duration}ms linear`;
+            progressBarRef.current.style.width = "0%";
+        }
+    }, [duration]);
 
     const variables = {
         "--bg-color": baseColor,
@@ -39,6 +51,7 @@ export default function Toast(props: ToastProps) {
                 <h2 className={styles["title"]}>{title}</h2>
                 <p className={styles["description"]}>{description}</p>
             </div>
+            <div ref={progressBarRef} className={styles["progress-bar"]}></div>
         </div>
     );
 }
