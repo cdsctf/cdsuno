@@ -4,6 +4,14 @@ $bg-color: var(--bg-color, rgba(247, 247, 247, 0.5));
 $border-color: var(--border-color, #e5e5e5);
 $border-secondary-color: var(--border-secondary-color, #e5e5e5);
 $progress-bar-color: var(--progress-bar-color, #56F96D);
+@keyframes colorChange {
+    0% {
+        background-color: #56F96D;
+    }
+    100% {
+        background-color: #ff0303;
+    }
+}
 .root {
     display: flex;
     align-items: center;
@@ -15,7 +23,7 @@ $progress-bar-color: var(--progress-bar-color, #56F96D);
     box-shadow: 0 5px 0 $border-secondary-color;
     min-width: 20vw;
     position: relative;
-
+    margin-bottom: 10px;
     .icon {
         width: 2.5rem;
         height: 2.5rem;
@@ -37,11 +45,13 @@ $progress-bar-color: var(--progress-bar-color, #56F96D);
     }
     .progress-bar {
         position: absolute;
-        bottom: 0;
+        bottom: -18px;
         left: 0;
         height: 6px;
-        width: 100%;
-        background-color: $progress-bar-color; 
-        transition: width 0ms linear; 
+        width: 100%; 
+        border-radius: 10px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+        transition: width 300ms ease-in-out;
+        animation: colorChange 5s ease-out infinite;
     }
 }
