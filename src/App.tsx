@@ -5,7 +5,7 @@ import { router } from "@/routers";
 import { useEffect } from "react";
 import Toaster from "@/components/Toaster";
 
-function App() {
+export default function App() {
     const themeStore = useThemeStore();
 
     useEffect(() => {
@@ -32,5 +32,3 @@ function App() {
         </>
     );
 }
-
-export default App;
