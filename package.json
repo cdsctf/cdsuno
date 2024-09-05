@@ -12,7 +12,6 @@
         "format": "prettier --write ."
     },
     "dependencies": {
-        "@fontsource-variable/baloo-bhaijaan-2": "^5.0.21",
         "chroma-js": "^3.0.0",
         "install": "^0.13.0",
         "luxon": "^3.5.0",
