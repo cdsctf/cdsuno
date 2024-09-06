@@ -45,7 +45,7 @@ $border-color: var(--border-color);
         background-color: rgba(247, 247, 247, 0.5);
         border: 2px solid #e5e5e5;
         border-radius: 12px;
-        padding: 8px 10px;
+        padding: 8px 12px;
         box-shadow: 0 3px 0 #e5e5e5;
         gap: 5px;
         @include mixins.transition;
