@@ -97,8 +97,8 @@ $border-color: var(--border-color);
             border: none;
             outline: none;
             caret-color: $border-color;
-            font-size: 15px;
-            line-height: 0.8;
+            font-size: 16px;
+            line-height: 1.5;
 
             &:disabled {
                 cursor: not-allowed;
