@@ -13,6 +13,7 @@ export interface InputProps extends ComponentProps<"input"> {
     invalid?: boolean;
     value?: string;
     label?: string;
+    icon?: React.ReactNode;
     placeholder?: string;
     helperText?: string;
     errorText?: string;
@@ -27,6 +28,7 @@ export default function Input(props: InputProps) {
         clearable = false,
         password = false,
         invalid = false,
+        icon,
         value = "",
         onChange,
         label = "",
@@ -38,7 +40,7 @@ export default function Input(props: InputProps) {
     } = props;
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [isFocused, setIsFocused] = useState(false);
+    const [_, setIsFocused] = useState(false);
     const handleFocus = () => setIsFocused(true);
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         if (!e.target.value) setIsFocused(false);
@@ -65,29 +67,22 @@ export default function Input(props: InputProps) {
 
     return (
         <div className={styles["root"]} style={variables} {...rest}>
-            <span className={styles["label"]}>{label}</span>
-            <span className={styles["helper-text"]}>{helperText}</span>
+            <label className={styles["label"]}>{label}</label>
+            <p className={styles["helper-text"]}>{helperText}</p>
             <div className={styles["container"]}>
                 <div className={styles["wrapper"]}>
+                    {icon && <div className={styles["icon"]}>{icon}</div>}
                     <input
                         value={value}
                         type={
                             password && !isPasswordVisible ? "password" : "text"
                         }
+                        placeholder={placeholder}
                         onChange={onChange}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                         style={style}
                     />
-                    <span
-                        className={`${styles["placeholder"]} ${
-                            isFocused || value
-                                ? styles["placeholder-active"]
-                                : ""
-                        }`}
-                    >
-                        {placeholder}
-                    </span>
                     {clearable && (
                         <button
                             className={styles["clear-button"]}
@@ -108,9 +103,7 @@ export default function Input(props: InputProps) {
                     )}
                 </div>
             </div>
-            {invalid && (
-                <span className={styles["error-text"]}>{errorText}</span>
-            )}
+            {invalid && <p className={styles["error-text"]}>{errorText}</p>}
         </div>
     );
 }

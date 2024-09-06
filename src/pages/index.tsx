@@ -5,6 +5,7 @@ import DatetimePicker from "@/components/atoms/DatetimePicker";
 import Dialog from "@/components/atoms/Dialog";
 import TextInput from "@/components/atoms/TextInput";
 import Tooltip from "@/components/atoms/Tooltip";
+import UserBold from "~icons/solar/user-bold";
 import { useToastStore } from "@/stores/toast";
 import { DateTime } from "luxon";
 import { useState } from "react";
@@ -52,25 +53,27 @@ export default function Page() {
                     </Button>
                 </div>
                 <p>
-                    甲乙丙丁Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Integer nec odio. Praesent libero. Sed cursus ante
-                    dapibus diam. Sed nisi. Nulla quis sem at nibh elementum
-                    imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec
-                    tellus sed augue semper porta. Mauris massa. Vestibulum
-                    lacinia arcu eget nulla. Class aptent taciti sociosqu ad
-                    litora torquent per conubia nostra, per inceptos himenaeos.
-                    Curabitur sodales ligula in libero. Sed dignissim lacinia
-                    nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In
-                    scelerisque sem at dolor. Maecenas mattis. Sed convallis
-                    tristique sem. Proin ut ligula vel nunc egestas porttitor.
-                    Morbi lectus risus, iaculis vel, suscipit quis, luctus non,
-                    massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris
-                    ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed,
-                    euismod in, nibh. Quisque volutpat condimentum velit. Class
-                    aptent taciti sociosqu ad litora torquent per conubia
-                    nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia,
-                    urna non tincidunt mattis, tortor neque adipiscing diam, a
-                    cursus ipsum ante quis turpis.
+                    在现代社会中，technology
+                    已经成为生活中不可或缺的一部分。无论是使用 smartphones 还是
+                    laptops，我们都能感受到 innovation 带来的便利。同时，
+                    <span
+                        style={{
+                            fontStyle: "italic",
+                        }}
+                    >
+                        communication
+                    </span>
+                    方式也因为 Internet 而发生了巨大的变化，人们可以通过
+                    <span
+                        style={{
+                            fontWeight: 800,
+                        }}
+                    >
+                        email
+                    </span>
+                    、social media
+                    与世界各地的朋友保持联系。这种中英文的混合使用，不仅方便了表达，也让我们的生活充满了
+                    globalization 的色彩。
                 </p>
                 <TextInput
                     clearable
@@ -78,10 +81,11 @@ export default function Page() {
                     invalid
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    // label={"用户名"}
+                    label={"用户名"}
                     placeholder="Username"
-                    // helperText={"请输入用户名 helperText"}
-                    // errorText={"请输入用户名 errorText"}
+                    helperText={"请输入用户名 helperText"}
+                    errorText={"请输入用户名 errorText"}
+                    icon={<UserBold />}
                 />
                 <TextInput
                     // clearable
