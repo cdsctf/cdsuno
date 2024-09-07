@@ -51,12 +51,15 @@ export default function ChallengeCard(props: ChallengeCard) {
         }
         return chroma(textColor).alpha(0.1).hex();
     }, [baseColor, themeStore.darkMode]);
-
+    const cursorStyle = useMemo(() => {
+        return isHovered ? "pointer" : "default";
+    }, [isHovered]);
     const variables = {
         "--bg-color": bgColor,
         "--border-color": borderColor,
         "--text-color": textColor,
         "--grid-color": gridColor,
+        cursor: cursorStyle,
     } as CSSProperties;
 
     return (
