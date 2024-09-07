@@ -33,15 +33,18 @@ $grid-color: var(--grid-color);
 
     &:hover {
         .icon {
-            animation: move 400ms ease-in-out forwards;
+            animation: pop 400ms ease-in-out forwards;
         }
 
-        @keyframes move {
+        @keyframes pop {
             0% {
-                transform: translateY(-50%) translateX(-17rem);
+                transform: translateY(-50%) scale(1);
+            }
+            50% {
+                transform: translateY(-50%) scale(1.05);
             }
             100% {
-                transform: translateY(-50%) translateX(0rem);
+                transform: translateY(-50%) scale(1);
             }
         }
     }
@@ -71,8 +74,8 @@ $grid-color: var(--grid-color);
 
     .icon {
         position: absolute;
-        width: 8rem;
-        height: 8rem;
+        width: 7.75rem;
+        height: 7.75rem;
 
         color: $border-color;
         opacity: 0.5;
@@ -123,9 +126,12 @@ $grid-color: var(--grid-color);
         left: 7.25%;
 
         font-weight: 600;
+        color: $text-color;
 
         user-select: none;
 
         transform: translateY(-50%);
+
+        transition: all 200ms ease;
     }
 }
