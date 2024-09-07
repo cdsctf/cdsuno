@@ -9,6 +9,7 @@ import UserBold from "~icons/solar/user-bold";
 import { useToastStore } from "@/stores/toast";
 import { DateTime } from "luxon";
 import { useState } from "react";
+import Dropdown from "@/components/atoms/Dropdown";
 
 export default function Page() {
     const [color, setColor] = useState("#1cb0f6");
@@ -19,6 +20,8 @@ export default function Page() {
     const [value, setValue] = useState<string>("");
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
+
+    const [dropdownMenuOpen, setDropdownMenuOpen] = useState(false);
 
     const [datetime, setDatetime] = useState<DateTime>(DateTime.now());
 
@@ -159,6 +162,39 @@ export default function Page() {
                         ciallo~
                     </Dialog>
                 </Dialog>
+
+                <div
+                    style={{
+                        width: "fit-content",
+                        position: "relative",
+                    }}
+                >
+                    <Button
+                        size="lg"
+                        variant="solid"
+                        onClick={() => {
+                            setDropdownMenuOpen(true);
+                        }}
+                    >
+                        打开 Dropdown Menu
+                    </Button>
+                    <Dropdown
+                        open={dropdownMenuOpen}
+                        onClose={() => setDropdownMenuOpen(false)}
+                    >
+                        <div
+                            style={{
+                                width: "10rem",
+                                height: "100px",
+                                borderRadius: "8px",
+                                backgroundColor: "white",
+                            }}
+                        >
+                            1
+                        </div>
+                    </Dropdown>
+                </div>
+
                 <Button
                     size="lg"
                     variant="solid"

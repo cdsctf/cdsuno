@@ -11,11 +11,10 @@ export interface ButtonProps extends ComponentProps<"button"> {
     align?: "start" | "center" | "end";
     loading?: boolean;
     style?: React.CSSProperties;
+    children?: React.ReactNode;
 }
 
-export default function Button(
-    props: ButtonProps & { children?: React.ReactNode }
-) {
+export default function Button(props: ButtonProps) {
     const {
         color = "primary",
         size = "md",

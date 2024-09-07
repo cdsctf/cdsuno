@@ -5,11 +5,10 @@ import React, { ComponentProps, useRef } from "react";
 export interface DialogProps extends ComponentProps<"dialog"> {
     open: boolean;
     onClose: () => void;
+    children: React.ReactNode;
 }
 
-export default function Dialog(
-    props: DialogProps & { children: React.ReactNode }
-) {
+export default function Dialog(props: DialogProps) {
     const { children, open, onClose } = props;
     const nodeRef = useRef(null);
 
