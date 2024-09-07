@@ -14,6 +14,7 @@ import Badge from "@/components/atoms/Badge";
 import { useCategoryStore } from "@/stores/category";
 import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
+import useHover from "@/hooks/useHover";
 
 export interface ChallengeCard extends ComponentProps<"div"> {
     challenge: Challenge;
@@ -26,9 +27,9 @@ export default function ChallengeCard(props: ChallengeCard) {
     const categoryStore = useCategoryStore();
 
     const category = categoryStore.getCategory(challenge.category_id);
-    const nodeRef = useRef<HTMLDivElement>(null);
 
-    const [isHovered, setIsHovered] = useState<boolean>(false);
+    const nodeRef = useRef<HTMLDivElement>(null);
+    const isHovered = useHover(nodeRef);
 
     const baseColor = useThemeColor(category?.color || "primary");
 
@@ -46,24 +47,6 @@ export default function ChallengeCard(props: ChallengeCard) {
             return chroma(baseColor).hex();
         }, [isHovered]),
     } as CSSProperties;
-
-    useEffect(() => {
-        const handleMouseOver = () => setIsHovered(true);
-        const handleMouseOut = () => setIsHovered(false);
-
-        const element = nodeRef.current;
-        if (element) {
-            element.addEventListener("mouseover", handleMouseOver);
-            element.addEventListener("mouseout", handleMouseOut);
-        }
-
-        return () => {
-            if (element) {
-                element.removeEventListener("mouseover", handleMouseOver);
-                element.removeEventListener("mouseout", handleMouseOut);
-            }
-        };
-    }, []);
 
     return (
         <div className={styles["root"]} ref={nodeRef} style={variables}>
