@@ -56,12 +56,15 @@ $border-color: var(--border-color);
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
-
+            
             button {
                 background: none;
                 border: none;
                 font-size: 18px;
                 cursor: pointer;
+            }
+            span{
+                user-select: none;
             }
         }
 
@@ -71,12 +74,16 @@ $border-color: var(--border-color);
             text-align: center;
             font-weight: bold;
             margin-bottom: 8px;
+            div{
+                user-select: none;
+            }
         }
 
         .days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 4px;
+            user-select: none;
 
             .day {
                 display: flex;
@@ -107,6 +114,18 @@ $border-color: var(--border-color);
                 }
                 &.empty {
                     cursor: default;
+                    user-select: none;
+                    &:hover {
+                        border: none;
+                        background-color: transparent;
+                    }
+                    &.selected {
+                        border: none;
+                        animation: none;
+                    }
+                    &:active {
+                        border: none;
+                    }
                 }
             }
         }
