@@ -66,14 +66,19 @@ export default function ChallengeCard(props: ChallengeCard) {
                     <StarBoldDuotone color={"#FFD700"} />
                 </Tooltip>
             </div>
-            <div className={styles["category"]}>
-                <Badge variant="light" color={category?.color}>
-                    {category?.name?.toUpperCase()}
-                </Badge>
+            <div className={styles["wrapper"]}>
+                <div className={styles["category"]}>
+                    <Badge variant="light" color={category?.color}>
+                        {category?.name?.toUpperCase()}
+                    </Badge>
+                </div>
+                <div className={styles["icon"]}>{category?.icon}</div>
+                <h1 className={styles["title"]}>{challenge.title}</h1>
+                <div className={styles["divider"]} />
+                <div className={styles["status"]}>
+                    {status?.solved_times} 次解决
+                </div>
             </div>
-            <div className={styles["icon"]}>{category?.icon}</div>
-            <h1 className={styles["title"]}>{challenge.title}</h1>
-            <div className={styles["divider"]} />
         </div>
     );
 }

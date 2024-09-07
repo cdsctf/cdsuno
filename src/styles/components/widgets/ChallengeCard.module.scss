@@ -4,26 +4,47 @@ $text-color: var(--text-color);
 $grid-color: var(--grid-color);
 
 .root {
+    width: fit-content;
     position: relative;
-    width: 17.5rem;
-    height: 10rem;
 
-    background-color: $bg-color;
-    border-radius: 16px;
-    border: 3.75px solid $border-color;
-    box-shadow: 0 3px 0 $border-color;
-    padding: 10px;
+    .wrapper {
+        position: relative;
+        width: 17.5rem;
+        height: 10rem;
+        overflow: hidden;
 
-    transition: all 200ms ease-in-out;
+        background-color: $bg-color;
+        border-radius: 16px;
+        border: 3.75px solid $border-color;
+        box-shadow: 0 3px 0 $border-color;
+        padding: 10px;
 
-    background-image: linear-gradient(
-            to right,
-            $grid-color 1px,
-            transparent 1px
-        ),
-        linear-gradient(to bottom, $grid-color 1px, transparent 1px);
+        transition: all 200ms ease-in-out;
 
-    background-size: 20px 20px;
+        background-image: linear-gradient(
+                to right,
+                $grid-color 1px,
+                transparent 1px
+            ),
+            linear-gradient(to bottom, $grid-color 1px, transparent 1px);
+
+        background-size: 20px 20px;
+    }
+
+    &:hover {
+        .icon {
+            animation: move 400ms ease-in-out forwards;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(-50%) translateX(-17rem);
+            }
+            100% {
+                transform: translateY(-50%) translateX(0rem);
+            }
+        }
+    }
 
     .star {
         position: absolute;
@@ -40,7 +61,7 @@ $grid-color: var(--grid-color);
 
     .category {
         position: absolute;
-        top: 20px;
+        top: 15%;
         left: 20px;
 
         font-size: 0.85rem;
@@ -50,20 +71,22 @@ $grid-color: var(--grid-color);
 
     .icon {
         position: absolute;
-        width: 10rem;
-        height: 10rem;
+        width: 8rem;
+        height: 8rem;
 
         color: $border-color;
         opacity: 0.5;
         transition: all 200ms ease-in-out;
 
-        top: 0;
-        right: 0;
+        top: 50%;
+        right: 10px;
+
+        transform: translateY(-50%) translateX(0);
     }
 
     .title {
         position: absolute;
-        top: 35%;
+        top: 40%;
         left: 7%;
 
         font-size: 1.25rem;
@@ -83,12 +106,26 @@ $grid-color: var(--grid-color);
 
     .divider {
         position: absolute;
-        top: 60%;
+        top: 67.5%;
 
         height: 2px;
         width: 90%;
 
         background-color: $border-color;
         transition: all 200ms ease-in-out;
+
+        transform: translateY(-50%);
+    }
+
+    .status {
+        position: absolute;
+        top: 82.5%;
+        left: 7.25%;
+
+        font-weight: 600;
+
+        user-select: none;
+
+        transform: translateY(-50%);
     }
 }
