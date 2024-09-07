@@ -1,0 +1,15 @@
+$bg-color: var(--bg-color);
+$border-color: var(--border-color);
+$text-color: var(--text-color);
+
+.root {
+    border-radius: 12px;
+    background-color: $bg-color;
+    border: 2px solid $border-color;
+
+    padding: 1px 8px;
+
+    .content {
+        color: $text-color;
+    }
+}

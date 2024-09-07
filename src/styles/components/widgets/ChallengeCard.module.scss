@@ -1,0 +1,62 @@
+$bg-color: var(--bg-color);
+$border-color: var(--border-color);
+
+.root {
+    position: relative;
+    width: 17.5rem;
+    height: 10rem;
+
+    background-color: $bg-color;
+    border-radius: 12px;
+    border: 3.75px solid $border-color;
+    padding: 10px;
+
+    transition: all 200ms ease-in-out;
+
+    .star {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .category {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+
+        font-size: 0.85rem;
+        font-weight: bold;
+        user-select: none;
+    }
+
+    .title {
+        position: absolute;
+        top: 35%;
+        left: 7%;
+
+        font-size: 1.25rem;
+        font-weight: bold;
+
+        width: 85%;
+
+        overflow: hidden;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
+
+        user-select: none;
+    }
+
+    .divider {
+        position: absolute;
+        top: 60%;
+
+        height: 2px;
+        width: 90%;
+
+        background-color: $border-color;
+        transition: all 200ms ease-in-out;
+    }
+}

@@ -31,7 +31,7 @@ export default function Dropdown(props: DropdownProps) {
     return (
         <CSSTransition
             in={open}
-            timeout={300}
+            timeout={200}
             nodeRef={nodeRef}
             unmountOnExit
             classNames={{

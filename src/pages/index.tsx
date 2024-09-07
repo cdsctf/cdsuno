@@ -10,6 +10,7 @@ import { useToastStore } from "@/stores/toast";
 import { DateTime } from "luxon";
 import { useState } from "react";
 import Dropdown from "@/components/atoms/Dropdown";
+import ChallengeCard from "@/components/widgets/ChallengeCard";
 
 export default function Page() {
     const [color, setColor] = useState("#1cb0f6");
@@ -195,6 +196,17 @@ export default function Page() {
                     </Dropdown>
                 </div>
 
+                <ChallengeCard
+                    challenge={{
+                        title: "Hello CdsCTF",
+                        category_id: 1,
+                    }}
+                    status={{
+                        solved_times: 0,
+                        is_solved: false,
+                    }}
+                />
+
                 <Button
                     size="lg"
                     variant="solid"
@@ -226,11 +238,13 @@ export default function Page() {
                         flexDirection: "column",
                         margin: "64px",
                         gap: "20px",
+                        width: "fit-content",
                     }}
                 >
                     <div
                         style={{
                             margin: "0 50px",
+                            width: "fit-content",
                         }}
                     >
                         <Tooltip content={"sweet~"} position={"top"} offset={8}>
@@ -243,6 +257,7 @@ export default function Page() {
                         style={{
                             display: "flex",
                             gap: "20px",
+                            width: "fit-content",
                         }}
                     >
                         <Tooltip
@@ -267,6 +282,7 @@ export default function Page() {
                     <div
                         style={{
                             margin: "0 40px",
+                            width: "fit-content",
                         }}
                     >
                         <Tooltip

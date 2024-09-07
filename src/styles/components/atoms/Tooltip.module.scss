@@ -2,7 +2,9 @@ $offset: var(--offset, 8px);
 
 .root {
     position: relative;
-    width: fit-content;
+    width: inherit;
+    height: inherit;
+    display: inline-block;
 
     .content {
         position: absolute;
@@ -19,6 +21,8 @@ $offset: var(--offset, 8px);
         transition:
             opacity 0.2s ease,
             visibility 0.2s ease;
+
+        user-select: none;
 
         &.top {
             bottom: 100%;
