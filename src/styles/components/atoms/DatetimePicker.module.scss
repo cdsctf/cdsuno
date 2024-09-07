@@ -14,20 +14,14 @@ $border-color: var(--border-color);
     position: relative;
     width: fit-content;
 
-    .picker-container {
+    .container {
         position: absolute;
         top: 60px;
         left: 0;
         width: fit-content;
-        background-color: $bg-color;
-        border: 2px solid $border-color;
-        border-bottom-width: 6px;
-
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
         border-radius: 12px;
         z-index: 1000;
-        padding: 16px;
 
         &.enter {
             opacity: 0;
@@ -46,6 +40,14 @@ $border-color: var(--border-color);
             opacity: 0;
             transition: all 75ms ease-in;
         }
+    }
+
+    .wrapper {
+        background-color: $bg-color;
+        border: 2px solid $border-color;
+        box-shadow: 0 4px 0 $border-color;
+        border-radius: 12px;
+        padding: 16px;
     }
 
     .date-picker {
@@ -96,10 +98,10 @@ $border-color: var(--border-color);
                     animation: scale-up 0.2s ease-in-out;
                 }
                 &:active.selected {
-                    animation: none; 
+                    animation: none;
                     border: $border-color 1.5px solid;
                 }
-            
+
                 &:active.selected::after {
                     animation: scale-up 0.2s ease-in-out;
                 }
