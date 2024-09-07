@@ -119,7 +119,7 @@ export default function DatetimePicker(props: DatetimePickerProps) {
                 pickerRef.current &&
                 !pickerRef.current.contains(event.target as Node)
             ) {
-                applyChanges(); // 保存日期和时间的变化
+                applyChanges();
                 setOpen(false);
             }
         };

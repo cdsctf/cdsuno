@@ -7,7 +7,7 @@ export interface Challenge {
     id?: number;
     title?: string;
     description?: string;
-    category_id?: number;
+    category?: number;
     has_attachment?: boolean;
     is_practicable?: boolean;
     is_dynamic?: boolean;
@@ -25,7 +25,7 @@ export interface ChallengeFindRequest {
     id?: number;
     title?: string;
     description?: string;
-    category_id?: number;
+    category?: number;
     is_practicable?: boolean;
     is_dynamic?: boolean;
     is_detailed?: boolean;
@@ -40,7 +40,7 @@ export interface ChallengeUpdateRequest {
     id?: number;
     title?: string;
     description?: string;
-    category_id?: number;
+    category?: number;
     attachment_url?: string;
     is_practicable?: boolean;
     is_dynamic?: boolean;
@@ -56,7 +56,7 @@ export interface ChallengeUpdateRequest {
 export interface ChallengeCreateRequest {
     title?: string;
     description?: string;
-    category_id?: number;
+    category?: number;
     is_practicable?: boolean;
     is_dynamic?: boolean;
     duration?: number;

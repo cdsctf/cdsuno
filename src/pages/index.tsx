@@ -199,7 +199,7 @@ export default function Page() {
                 <ChallengeCard
                     challenge={{
                         title: "Hello CdsCTF",
-                        category_id: 1,
+                        category: 2,
                     }}
                     status={{
                         solved_times: 0,
