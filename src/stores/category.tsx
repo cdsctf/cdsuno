@@ -49,7 +49,7 @@ export const useCategoryStore = create<CategoryState>()(
                 {
                     id: 4,
                     name: "crypto",
-                    color: "#FFC107",
+                    color: "#607D8B",
                     icon: <HashtagBoldDuotone />,
                 },
                 {
@@ -67,7 +67,7 @@ export const useCategoryStore = create<CategoryState>()(
                 {
                     id: 7,
                     name: "pwn",
-                    color: "#FF9800",
+                    color: "#D32F2F",
                     icon: <ProgammingBoldDuotone />,
                 },
                 {
@@ -85,13 +85,13 @@ export const useCategoryStore = create<CategoryState>()(
                 {
                     id: 10,
                     name: "hardware",
-                    color: "#9C27B0",
+                    color: "#673AB7",
                     icon: <CpuBoldDuotone />,
                 },
                 {
                     id: 11,
                     name: "cloud",
-                    color: "#FFC107",
+                    color: "#FF9800",
                     icon: <CloudBoldDuotone />,
                 },
                 {
@@ -115,13 +115,13 @@ export const useCategoryStore = create<CategoryState>()(
                 {
                     id: 15,
                     name: "art",
-                    color: "#FF9800",
+                    color: "#F57F17",
                     icon: <GalleryEditBoldDuotone />,
                 },
                 {
                     id: 16,
                     name: "dev",
-                    color: "#795548",
+                    color: "#37474F",
                     icon: <CodeBoldDuotone />,
                 },
             ],
