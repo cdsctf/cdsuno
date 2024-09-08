@@ -198,16 +198,34 @@ export default function Page() {
 
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
                     (i) => (
-                        <ChallengeCard
-                            challenge={{
-                                title: "Hello CdsCTF",
-                                category: i,
+                        <div
+                            key={i}
+                            style={{
+                                display: "flex",
+                                gap: "20px",
                             }}
-                            status={{
-                                solved_times: 2,
-                                is_solved: i % 2 === 0,
-                            }}
-                        />
+                        >
+                            <ChallengeCard
+                                challenge={{
+                                    title: "Hello CdsCTF",
+                                    category: i,
+                                }}
+                                status={{
+                                    solved_times: 2,
+                                    is_solved: true,
+                                }}
+                            />
+                            <ChallengeCard
+                                challenge={{
+                                    title: "Hello CdsCTF",
+                                    category: i,
+                                }}
+                                status={{
+                                    solved_times: 2,
+                                    is_solved: false,
+                                }}
+                            />
+                        </div>
                     )
                 )}
 
