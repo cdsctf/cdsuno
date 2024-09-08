@@ -7,7 +7,6 @@ import Badge from "@/components/atoms/Badge";
 import { useCategoryStore } from "@/stores/category";
 import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
-import useHover from "@/hooks/useHover";
 import { useThemeStore } from "@/stores/theme";
 
 export interface ChallengeCard extends ComponentProps<"div"> {
@@ -23,55 +22,73 @@ export default function ChallengeCard(props: ChallengeCard) {
 
     const category = categoryStore.getCategory(challenge.category);
 
-    const nodeRef = useRef<HTMLDivElement>(null);
-    const isHovered = useHover(nodeRef);
-
     const baseColor = useThemeColor(category?.color || "primary");
     const bgColor = useMemo(() => {
-        if (isHovered) {
-            return chroma(baseColor).alpha(0.3).hex();
-        }
-        return chroma(baseColor).alpha(0.25).hex();
-    }, [baseColor, isHovered]);
+        const map = [
+            chroma(baseColor).alpha(0.25).hex(),
+            chroma(baseColor).hex(),
+        ];
+        return map[Number(status.is_solved)];
+    }, [baseColor]);
     const borderColor = useMemo(() => {
-        if (isHovered) {
-            return chroma(baseColor).brighten(0.5).hex();
-        }
         return chroma(baseColor).hex();
-    }, [baseColor, isHovered]);
+    }, [baseColor]);
+    const borderSecondayColor = useMemo(() => {
+        const map = [
+            chroma(baseColor).hex(),
+            chroma(baseColor).darken(0.5).hex(),
+        ];
+        return map[Number(status.is_solved)];
+    }, [baseColor]);
     const textColor = useMemo(() => {
-        if (themeStore.darkMode) {
-            return "#FFFFFF";
-        }
-        return baseColor;
+        const map = [
+            [baseColor, "#FFFFFF"],
+            ["#FFFFFF", "#FFFFFF"],
+        ];
+        return map[Number(themeStore.darkMode)][Number(status.is_solved)];
     }, [baseColor, themeStore.darkMode]);
+    const iconColor = useMemo(() => {
+        const map = [baseColor, "#FFFFFF"];
+        return map[Number(status.is_solved)];
+    }, [baseColor]);
     const gridColor = useMemo(() => {
-        if (themeStore.darkMode) {
-            return chroma("#FFFFFF").alpha(0.05).hex();
-        }
-        return chroma(textColor).alpha(0.1).hex();
+        const map = [
+            [
+                chroma(textColor).alpha(0.1).hex(),
+                chroma("#FFFFFF").alpha(0.05).hex(),
+            ],
+            [
+                chroma(textColor).alpha(0.1).hex(),
+                chroma("#FFFFFF").alpha(0.1).hex(),
+            ],
+        ];
+        return map[Number(themeStore.darkMode)][Number(status.is_solved)];
     }, [baseColor, themeStore.darkMode]);
-    const cursorStyle = useMemo(() => {
-        return isHovered ? "pointer" : "default";
-    }, [isHovered]);
+
     const variables = {
         "--bg-color": bgColor,
         "--border-color": borderColor,
+        "--border-secondary-color": borderSecondayColor,
         "--text-color": textColor,
+        "--icon-color": iconColor,
         "--grid-color": gridColor,
-        cursor: cursorStyle,
     } as CSSProperties;
 
     return (
-        <div className={styles["root"]} ref={nodeRef} style={variables}>
+        <div className={styles["root"]} style={variables}>
             <div className={styles["wrapper"]}>
-                <div className={styles["star"]}>
-                    <Tooltip content={"已解决"}>
-                        <StarBoldDuotone color={"#FFD700"} />
-                    </Tooltip>
-                </div>
+                {status?.is_solved && (
+                    <div className={styles["star"]}>
+                        <Tooltip content={"已解决"}>
+                            <StarBoldDuotone color={"#FFD700"} />
+                        </Tooltip>
+                    </div>
+                )}
                 <div className={styles["category"]}>
-                    <Badge variant="light" color={category?.color}>
+                    <Badge
+                        variant={"light"}
+                        color={chroma(baseColor).darken(1).hex()}
+                    >
                         {category?.name?.toUpperCase()}
                     </Badge>
                 </div>

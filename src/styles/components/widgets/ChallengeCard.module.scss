@@ -1,6 +1,8 @@
 $bg-color: var(--bg-color);
 $border-color: var(--border-color);
+$border-secondary-color: var(--border-secondary-color);
 $text-color: var(--text-color);
+$icon-color: var(--icon-color);
 $grid-color: var(--grid-color);
 
 .root {
@@ -15,7 +17,7 @@ $grid-color: var(--grid-color);
         background-color: $bg-color;
         border-radius: 16px;
         border: 3.75px solid $border-color;
-        box-shadow: 0 3px 0 $border-color;
+        box-shadow: 0 3px 0 $border-secondary-color;
         padding: 10px;
 
         transition: all 200ms ease-in-out;
@@ -32,6 +34,11 @@ $grid-color: var(--grid-color);
         &:active {
             box-shadow: none;
             transform: translateY(4px);
+        }
+
+        &:hover {
+            filter: brightness(1.125);
+            cursor: pointer;
         }
     }
 
@@ -63,7 +70,7 @@ $grid-color: var(--grid-color);
         width: 7.75rem;
         height: 7.75rem;
 
-        color: $border-color;
+        color: $icon-color;
         opacity: 0.5;
         transition: all 200ms ease-in-out;
 
@@ -100,7 +107,7 @@ $grid-color: var(--grid-color);
         height: 2px;
         width: 90%;
 
-        background-color: $border-color;
+        background-color: $icon-color;
         transition: all 200ms ease-in-out;
 
         transform: translateY(-50%);

@@ -205,7 +205,7 @@ export default function Page() {
                             }}
                             status={{
                                 solved_times: 2,
-                                is_solved: false,
+                                is_solved: i % 2 === 0,
                             }}
                         />
                     )
