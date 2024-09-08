@@ -30,7 +30,7 @@ export default function Button(props: ButtonProps) {
     const variables = {
         "--bg-color": baseColor,
         "--bg-secondary-color": `${chroma.valid(baseColor) ? chroma(baseColor).darken(0.5) : baseColor}`,
-        "--text-color": "#FFFFFF",
+        "--text-color": variant === "solid" ? "#fff" : baseColor,
     } as React.CSSProperties;
 
     return (

@@ -42,14 +42,10 @@ export default function Badge(props: BadgeProps) {
         }
     };
 
-    const textColor = () => {
-        return getTextColor(chroma(bgColor()), chroma(baseColor));
-    };
-
     const variables = {
         "--bg-color": bgColor(),
         "--border-color": borderColor(),
-        "--text-color": textColor(),
+        "--text-color": "#FFFFFF",
     } as CSSProperties;
 
     return (
