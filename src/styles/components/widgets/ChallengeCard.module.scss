@@ -11,7 +11,6 @@ $grid-color: var(--grid-color);
         position: relative;
         width: 17.5rem;
         height: 10rem;
-        overflow: hidden;
 
         background-color: $bg-color;
         border-radius: 16px;
@@ -29,23 +28,10 @@ $grid-color: var(--grid-color);
             linear-gradient(to bottom, $grid-color 1px, transparent 1px);
 
         background-size: 20px 20px;
-    }
 
-    &:hover {
-        .icon {
-            animation: pop 400ms ease-in-out forwards;
-        }
-
-        @keyframes pop {
-            0% {
-                transform: translateY(-50%) scale(1);
-            }
-            50% {
-                transform: translateY(-50%) scale(1.075);
-            }
-            100% {
-                transform: translateY(-50%) scale(1);
-            }
+        &:active {
+            box-shadow: none;
+            transform: translateY(4px);
         }
     }
 
@@ -133,5 +119,23 @@ $grid-color: var(--grid-color);
         transform: translateY(-50%);
 
         transition: all 200ms ease;
+    }
+
+    &:hover {
+        .icon {
+            animation: pop 400ms ease-in-out forwards;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: translateY(-50%) scale(1);
+            }
+            50% {
+                transform: translateY(-50%) scale(1.075);
+            }
+            100% {
+                transform: translateY(-50%) scale(1);
+            }
+        }
     }
 }

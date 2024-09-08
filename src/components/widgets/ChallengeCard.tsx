@@ -64,12 +64,12 @@ export default function ChallengeCard(props: ChallengeCard) {
 
     return (
         <div className={styles["root"]} ref={nodeRef} style={variables}>
-            <div className={styles["star"]}>
-                <Tooltip content={"已解决"}>
-                    <StarBoldDuotone color={"#FFD700"} />
-                </Tooltip>
-            </div>
             <div className={styles["wrapper"]}>
+                <div className={styles["star"]}>
+                    <Tooltip content={"已解决"}>
+                        <StarBoldDuotone color={"#FFD700"} />
+                    </Tooltip>
+                </div>
                 <div className={styles["category"]}>
                     <Badge variant="light" color={category?.color}>
                         {category?.name?.toUpperCase()}
