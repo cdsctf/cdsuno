@@ -12,33 +12,20 @@ $text-color: var(--text-color);
         background-color: transparent;
         color: transparent;
         border-radius: 12px;
-        border-color: transparent;
-        border-style: solid;
-        border-width: 2px;
+        border: 2px solid transparent;
         @include mixins.transition;
 
         cursor: pointer;
 
-        &:hover {
-            filter: brightness(1.125);
-        }
-
-        &:active {
-            color: transparent !important;
-            transform: translateY(4px);
-        }
-
         &.solid {
             background-color: $bg-color;
-            color: $bg-secondary-color;
-            box-shadow: 0 3px 0;
+            box-shadow: 0 3px 0 $bg-secondary-color;
         }
 
         &.outline {
             background-color: transparent;
-            color: $bg-color;
             border-color: $bg-color;
-            box-shadow: 0 3px 0;
+            box-shadow: 0 3px 0 $bg-color;
         }
 
         &.ghost {
@@ -81,6 +68,15 @@ $text-color: var(--text-color);
             100% {
                 transform: rotate(360deg);
             }
+        }
+
+        &:hover {
+            filter: brightness(1.125);
+        }
+
+        &:active {
+            box-shadow: 0 0 0 transparent;
+            transform: translateY(4px);
         }
 
         .content {
