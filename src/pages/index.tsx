@@ -26,6 +26,10 @@ export default function Page() {
 
     const [datetime, setDatetime] = useState<DateTime>(DateTime.now());
 
+    const [isSolveds, setIsSolveds] = useState<boolean[]>(
+        new Array(16).fill(false)
+    );
+
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
@@ -222,7 +226,14 @@ export default function Page() {
                                 }}
                                 status={{
                                     solved_times: 2,
-                                    is_solved: false,
+                                    is_solved: isSolveds[i - 1],
+                                }}
+                                onClick={() => {
+                                    console.log(1);
+                                    const newSolveds = [...isSolveds];
+                                    newSolveds[i - 1] = !newSolveds[i - 1];
+                                    setIsSolveds(newSolveds);
+                                    console.log(newSolveds);
                                 }}
                             />
                         </div>

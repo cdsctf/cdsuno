@@ -1,5 +1,5 @@
 import { Challenge, ChallengeStatus } from "@/models/challenge";
-import { CSSProperties, ComponentProps, useMemo, useRef } from "react";
+import { CSSProperties, ComponentProps, useMemo } from "react";
 import styles from "@/styles/components/widgets/ChallengeCard.module.scss";
 import StarBoldDuotone from "~icons/solar/star-bold";
 import Tooltip from "@/components/atoms/Tooltip";
@@ -7,7 +7,6 @@ import Badge from "@/components/atoms/Badge";
 import { useCategoryStore } from "@/stores/category";
 import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
-import { useThemeStore } from "@/stores/theme";
 
 export interface ChallengeCard extends ComponentProps<"div"> {
     challenge: Challenge;
@@ -15,55 +14,45 @@ export interface ChallengeCard extends ComponentProps<"div"> {
 }
 
 export default function ChallengeCard(props: ChallengeCard) {
-    const { challenge, status } = props;
+    const { challenge, status, ...rest } = props;
 
     const categoryStore = useCategoryStore();
-    const themeStore = useThemeStore();
 
     const category = categoryStore.getCategory(challenge.category);
 
     const baseColor = useThemeColor(category?.color || "primary");
+
     const bgColor = useMemo(() => {
-        const map = [
-            chroma(baseColor).alpha(0.25).hex(),
-            chroma(baseColor).hex(),
-        ];
-        return map[Number(status.is_solved)];
-    }, [baseColor]);
+        if (status.is_solved) {
+            return chroma(baseColor).hex();
+        }
+        return chroma(baseColor).alpha(0.25).hex();
+    }, [baseColor, status.is_solved]);
     const borderColor = useMemo(() => {
         return chroma(baseColor).hex();
-    }, [baseColor]);
+    }, [baseColor, status.is_solved]);
     const borderSecondayColor = useMemo(() => {
-        const map = [
-            chroma(baseColor).hex(),
-            chroma(baseColor).darken(0.5).hex(),
-        ];
-        return map[Number(status.is_solved)];
-    }, [baseColor]);
+        if (status.is_solved) {
+            return chroma(baseColor).darken(0.5).hex();
+        }
+        return chroma(baseColor).hex();
+    }, [baseColor, status.is_solved]);
     const textColor = useMemo(() => {
-        const map = [
-            [baseColor, "#FFFFFF"],
-            ["#FFFFFF", "#FFFFFF"],
-        ];
-        return map[Number(themeStore.darkMode)][Number(status.is_solved)];
-    }, [baseColor, themeStore.darkMode]);
+        if (status.is_solved) {
+            return "#FFFFFF";
+        }
+        return chroma(baseColor).darken(1).hex();
+    }, [baseColor, status.is_solved]);
     const iconColor = useMemo(() => {
         const map = [baseColor, "#FFFFFF"];
         return map[Number(status.is_solved)];
-    }, [baseColor]);
+    }, [baseColor, status.is_solved]);
     const gridColor = useMemo(() => {
-        const map = [
-            [
-                chroma(textColor).alpha(0.1).hex(),
-                chroma("#FFFFFF").alpha(0.05).hex(),
-            ],
-            [
-                chroma(textColor).alpha(0.1).hex(),
-                chroma("#FFFFFF").alpha(0.1).hex(),
-            ],
-        ];
-        return map[Number(themeStore.darkMode)][Number(status.is_solved)];
-    }, [baseColor, themeStore.darkMode]);
+        if (status?.is_solved) {
+            return chroma("#FFFFFF").alpha(0.05).hex();
+        }
+        return chroma(textColor).alpha(0.1).hex();
+    }, [baseColor, status.is_solved]);
 
     const variables = {
         "--bg-color": bgColor,
@@ -75,7 +64,7 @@ export default function ChallengeCard(props: ChallengeCard) {
     } as CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables}>
+        <div className={styles["root"]} style={variables} {...rest}>
             <div className={styles["wrapper"]}>
                 {status?.is_solved && (
                     <div className={styles["star"]}>

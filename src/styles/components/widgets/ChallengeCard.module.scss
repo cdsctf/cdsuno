@@ -1,3 +1,5 @@
+@use "@/styles/mixins";
+
 $bg-color: var(--bg-color);
 $border-color: var(--border-color);
 $border-secondary-color: var(--border-secondary-color);
@@ -30,6 +32,15 @@ $grid-color: var(--grid-color);
             linear-gradient(to bottom, $grid-color 1px, transparent 1px);
 
         background-size: 20px 20px;
+
+        @include mixins.dark {
+            background-image: linear-gradient(
+                    to right,
+                    #ffffff0d 1px,
+                    transparent 1px
+                ),
+                linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
+        }
 
         &:active {
             box-shadow: none;
@@ -98,6 +109,10 @@ $grid-color: var(--grid-color);
         transition: all 200ms ease-in-out;
 
         user-select: none;
+
+        @include mixins.dark {
+            color: #ffffff;
+        }
     }
 
     .divider {
@@ -124,8 +139,11 @@ $grid-color: var(--grid-color);
         user-select: none;
 
         transform: translateY(-50%);
-
         transition: all 200ms ease;
+
+        @include mixins.dark {
+            color: #ffffff;
+        }
     }
 
     &:hover {
