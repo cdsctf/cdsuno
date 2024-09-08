@@ -2,16 +2,23 @@ import useThemeColor from "@/hooks/useThemeColor";
 import styles from "@/styles/components/atoms/Badge.module.scss";
 import { getTextColor } from "@/utils/color";
 import chroma from "chroma-js";
-import { CSSProperties, useMemo } from "react";
+import { CSSProperties, ComponentProps } from "react";
 
-export interface BadgeProps {
+export interface BadgeProps extends ComponentProps<"div"> {
     variant?: "solid" | "light" | "outline";
     color?: string;
     children: React.ReactNode;
 }
 
 export default function Badge(props: BadgeProps) {
-    const { variant = "solid", color = "primary", children } = props;
+    const {
+        variant = "solid",
+        color = "primary",
+        children,
+        className,
+        style,
+        ...rest
+    } = props;
 
     const baseColor = useThemeColor(color);
 
@@ -46,7 +53,11 @@ export default function Badge(props: BadgeProps) {
     } as CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables}>
+        <div
+            className={`${styles["root"]} ${className}`}
+            style={{ ...variables, ...style }}
+            {...rest}
+        >
             <div className={styles["content"]}>{children}</div>
         </div>
     );

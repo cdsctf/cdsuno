@@ -6,6 +6,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import ArrowLeftLinear from "~icons/solar/arrow-left-linear";
 import ArrowRightLinear from "~icons/solar/arrow-right-linear";
 import { CSSTransition } from "react-transition-group";
+import Badge from "./Badge";
 
 export interface DatetimePickerProps {
     value: DateTime;
@@ -171,9 +172,9 @@ export default function DatetimePicker(props: DatetimePickerProps) {
                                 >
                                     <ArrowLeftLinear />
                                 </button>
-                                <span>
-                                    {selectedDateTime.toFormat("MMMM yyyy")}
-                                </span>
+                                <Badge>
+                                    {selectedDateTime.toFormat("yyyy / MM")}
+                                </Badge>
                                 <button
                                     onClick={() =>
                                         setSelectedDateTime(

@@ -3,7 +3,7 @@ $border-color: var(--border-color);
 $text-color: var(--text-color);
 
 .root {
-    border-radius: 12px;
+    border-radius: 9999px;
     background-color: $bg-color;
     border: 2px solid $border-color;
 
@@ -11,5 +11,6 @@ $text-color: var(--text-color);
 
     .content {
         color: $text-color;
+        user-select: none;
     }
 }
