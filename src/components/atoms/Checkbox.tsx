@@ -31,6 +31,7 @@ export default function Checkbox(props: CheckboxProps) {
             <input
                 type={"checkbox"}
                 onChange={(e) => onChange(e.target.checked)}
+                checked={checked}
                 {...rest}
             />
             <span className={styles["checkmark"]}>

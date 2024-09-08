@@ -11,6 +11,7 @@ import { DateTime } from "luxon";
 import { useState } from "react";
 import Dropdown from "@/components/atoms/Dropdown";
 import ChallengeCard from "@/components/widgets/ChallengeCard";
+import Switch from "@/components/atoms/Switch";
 
 export default function Page() {
     const [color, setColor] = useState("#1cb0f6");
@@ -335,6 +336,11 @@ export default function Page() {
                         setChecked(checked);
                     }}
                     label={"I am a checkbox"}
+                />
+                <Switch
+                    checked={checked}
+                    onChange={(checked) => setChecked(checked)}
+                    label={"I am a switch"}
                 />
             </div>
         </>

@@ -1,6 +1,5 @@
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "@/styles/components/atoms/Badge.module.scss";
-import { getTextColor } from "@/utils/color";
 import chroma from "chroma-js";
 import { CSSProperties, ComponentProps } from "react";
 

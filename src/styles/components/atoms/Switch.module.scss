@@ -1,0 +1,57 @@
+@use "@/styles/mixins";
+
+$bg-color: var(--bg-color);
+
+.root {
+    display: flex;
+    width: fit-content;
+    gap: 12px;
+
+    .switch {
+        position: relative;
+        width: 45px;
+        height: 24px;
+        background-color: #e9ecef;
+        border-radius: 17px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid #e5e5e5;
+
+        @include mixins.dark {
+            border-color: #37464f;
+            background-color: rgba(32, 47, 54, 0.5);
+        }
+
+        &:hover {
+            border-color: $bg-color;
+        }
+
+        &.checked {
+            background-color: $bg-color;
+            border-color: $bg-color;
+        }
+
+        &.checked .handle {
+            transform: translateY(-50%) translateX(20px);
+        }
+    }
+
+    .handle {
+        position: absolute;
+        content: "";
+        height: 15px;
+        width: 15px;
+        left: 3px;
+        top: 50%;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: 0.3s;
+
+        transform: translateY(-50%);
+    }
+
+    .label {
+        font-size: 16px;
+        user-select: none;
+    }
+}
