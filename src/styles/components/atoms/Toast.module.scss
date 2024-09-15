@@ -1,35 +1,60 @@
 @use "@/styles/typography";
+@use "@/styles/mixins";
 
 $bg-color: var(--bg-color, rgba(247, 247, 247, 0.5));
 $border-color: var(--border-color, #e5e5e5);
+$text-color: var(--text-color, #ffffff);
 $border-secondary-color: var(--border-secondary-color, #e5e5e5);
-$progress-bar-color: var(--progress-bar-color, #56f96d);
+// $progress-bar-color: var(--progress-bar-color, #56f96d);
+$grid-color: var(--grid-color);
 
-@keyframes colorChange {
-    0% {
-        background-color: #56f96d;
-    }
-    100% {
-        background-color: #ff0303;
-    }
-}
+// @keyframes colorChange {
+//     0% {
+//         background-color: #56f96d;
+//     }
+//     100% {
+//         background-color: #ff0303;
+//     }
+// }
 
 .root {
     display: flex;
     align-items: center;
     gap: 15px;
     background-color: $bg-color;
-    border: 2px solid $border-color;
-    border-radius: 12px;
+    border: 3.75px solid $border-color;
+    border-radius: 16px;
     padding: 10px 15px;
-    box-shadow: 0 5px 0 $border-secondary-color;
+    box-shadow: 0 3px 0 $border-color;
     min-width: 20vw;
     position: relative;
-    margin-bottom: 10px;
+
+    background-image: linear-gradient(
+            to right,
+            $grid-color 1px,
+            transparent 1px
+        ),
+        linear-gradient(to bottom, $grid-color 1px, transparent 1px);
+
+    background-size: 20px 20px;
+
+    @include mixins.dark {
+        background-image: linear-gradient(
+                to right,
+                #ffffff0d 1px,
+                transparent 1px
+            ),
+            linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
+    }
 
     .icon {
         width: 2.5rem;
         height: 2.5rem;
+        color: $text-color;
+
+        @include mixins.dark {
+            color: #ffffff;
+        }
     }
 
     .content-wrapper {
@@ -41,21 +66,31 @@ $progress-bar-color: var(--progress-bar-color, #56f96d);
 
     .title {
         @include typography.text-lg;
+        color: $text-color;
+
+        @include mixins.dark {
+            color: #ffffff;
+        }
     }
 
     .description {
         @include typography.text-base;
+        color: $text-color;
+
+        @include mixins.dark {
+            color: #ffffff;
+        }
     }
 
-    .progress-bar {
-        position: absolute;
-        bottom: -18px;
-        left: 0;
-        height: 6px;
-        width: 100%;
-        border-radius: 10px;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-        transition: width 300ms ease-in-out;
-        animation: colorChange 5s ease-out infinite;
-    }
+    // .progress-bar {
+    //     position: absolute;
+    //     bottom: -18px;
+    //     left: 0;
+    //     height: 6px;
+    //     width: 100%;
+    //     border-radius: 10px;
+    //     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    //     transition: width 300ms ease-in-out;
+    //     animation: colorChange 5s ease-out infinite;
+    // }
 }

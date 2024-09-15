@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { CSSProperties } from "react";
 import InfoCircleBold from "~icons/solar/info-circle-bold";
 import styles from "@/styles/components/atoms/Toast.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
@@ -29,20 +29,22 @@ export default function Toast(props: ToastProps) {
 
     const baseColor = useThemeColor(color);
 
-    const progressBarRef = useRef<HTMLDivElement>(null);
+    // const progressBarRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (progressBarRef.current) {
-            progressBarRef.current.style.transition = `width ${duration}ms linear`;
-            progressBarRef.current.style.width = "0%";
-        }
-    }, [duration]);
+    // useEffect(() => {
+    //     if (progressBarRef.current) {
+    //         progressBarRef.current.style.transition = `width ${duration}ms linear`;
+    //         progressBarRef.current.style.width = "0%";
+    //     }
+    // }, [duration]);
 
     const variables = {
-        "--bg-color": baseColor,
+        "--bg-color": chroma(baseColor).alpha(0.25).hex(),
+        "--grid-color": chroma(baseColor).darken(1).alpha(0.1).hex(),
+        "--text-color": chroma(baseColor).darken(1.75).hex(),
         "--border-color": baseColor,
         "--border-secondary-color": `${chroma.valid(baseColor) ? chroma(baseColor).darken(0.5) : baseColor}`,
-    } as React.CSSProperties;
+    } as CSSProperties;
 
     return (
         <div className={styles["root"]} style={variables} {...rest}>
@@ -51,7 +53,7 @@ export default function Toast(props: ToastProps) {
                 <h2 className={styles["title"]}>{title}</h2>
                 <p className={styles["description"]}>{description}</p>
             </div>
-            <div ref={progressBarRef} className={styles["progress-bar"]}></div>
+            {/* <div ref={progressBarRef} className={styles["progress-bar"]}></div> */}
         </div>
     );
 }
