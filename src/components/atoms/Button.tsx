@@ -37,9 +37,12 @@ export default function Button(props: ButtonProps) {
     } as React.CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables}>
+        <div
+            className={`${styles["root"]} ${loading ? styles["loading"] : ""}`}
+            style={variables}
+        >
             <button
-                className={`${styles[size]} ${styles[variant]} ${loading ? styles["loading"] : ""} ${rest.className}`}
+                className={`${styles["button"]} ${styles[size]} ${styles[variant]} ${rest.className}`}
                 style={style}
                 align-items={"center"}
                 {...rest}
