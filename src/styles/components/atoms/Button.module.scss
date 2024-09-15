@@ -7,6 +7,7 @@ $text-color: var(--text-color);
 
 .root {
     button {
+        width: fit-content;
         display: flex;
         align-items: center;
         background-color: transparent;
@@ -14,6 +15,7 @@ $text-color: var(--text-color);
         border-radius: 12px;
         border: 2px solid transparent;
         @include mixins.transition;
+        gap: 12px;
 
         cursor: pointer;
 
@@ -49,25 +51,9 @@ $text-color: var(--text-color);
         }
 
         &.loading {
-            cursor: not-allowed;
             pointer-events: none;
-
-            &::after {
-                content: "";
-                position: absolute;
-                border: 2px solid var(--btn-text-color);
-                border-top-color: transparent;
-                border-radius: 50%;
-                width: 1rem;
-                height: 1rem;
-                animation: spin 1s linear infinite;
-            }
-        }
-
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
+            cursor: not-allowed;
+            filter: brightness(0.75);
         }
 
         &:hover {
@@ -85,6 +71,10 @@ $text-color: var(--text-color);
             font-weight: 600;
             line-height: 15px;
             letter-spacing: 0.8px;
+        }
+
+        .icon {
+            color: $text-color;
         }
     }
 }

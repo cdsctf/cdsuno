@@ -24,6 +24,8 @@ export default function Page() {
     const [open, setOpen] = useState(false);
     const [open2, setOpen2] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+
     const [dropdownMenuOpen, setDropdownMenuOpen] = useState(false);
 
     const [datetime, setDatetime] = useState<DateTime>(DateTime.now());
@@ -115,6 +117,9 @@ export default function Page() {
                         marginTop: "10px",
                     }}
                 />
+                <Button loading icon={<UserBold />}>
+                    加载
+                </Button>
                 <div
                     style={{
                         display: "flex",
@@ -331,8 +336,6 @@ export default function Page() {
                         </Tooltip>
                     </div>
                 </div>
-
-                <Loading />
                 <Checkbox
                     checked={checked}
                     onChange={(checked) => {

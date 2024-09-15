@@ -1,22 +1,25 @@
-import useThemeColor from "@/hooks/useThemeColor";
-
 export interface LoadingProps {
-    height?: string;
-    width?: string;
+    size?: string;
     color?: string;
+    className?: string;
 }
 
 export default function Loading(props: LoadingProps) {
-    const { height = "32", width = "32", color = "primary" } = props;
-    const baseColor = useThemeColor(color);
+    const { color = "#fff", size = "inherit", className } = props;
 
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={width}
-            height={height}
-            color={baseColor}
+            width={"1.2em"}
+            height={"1.2em"}
+            color={color}
             viewBox="0 0 24 24"
+            className={className}
+            style={{
+                width: "100%",
+                height: "100%",
+                fontSize: size,
+            }}
         >
             <path
                 fill="currentColor"

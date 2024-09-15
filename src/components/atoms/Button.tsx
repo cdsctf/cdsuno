@@ -2,6 +2,7 @@ import React, { ComponentProps } from "react";
 import chroma from "chroma-js";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "@/styles/components/atoms/Button.module.scss";
+import Loading from "../icons/Loading";
 
 export interface ButtonProps extends ComponentProps<"button"> {
     color?: string;
@@ -10,6 +11,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
     jusitify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
     loading?: boolean;
+    icon?: React.ReactNode;
     style?: React.CSSProperties;
     children?: React.ReactNode;
 }
@@ -22,6 +24,7 @@ export default function Button(props: ButtonProps) {
         loading = false,
         style,
         children,
+        icon,
         ...rest
     } = props;
 
@@ -41,6 +44,11 @@ export default function Button(props: ButtonProps) {
                 align-items={"center"}
                 {...rest}
             >
+                {(loading || icon) && (
+                    <div className={styles["icon"]}>
+                        {loading ? <Loading /> : icon}
+                    </div>
+                )}
                 <div className={styles["content"]}>{children}</div>
             </button>
         </div>
