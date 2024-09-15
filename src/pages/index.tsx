@@ -117,7 +117,16 @@ export default function Page() {
                         marginTop: "10px",
                     }}
                 />
-                <Button loading icon={<UserBold />}>
+                <Button
+                    loading={loading}
+                    icon={<UserBold />}
+                    onClick={() => {
+                        setLoading(true);
+                        setTimeout(() => {
+                            setLoading(false);
+                        }, 3000);
+                    }}
+                >
                     加载
                 </Button>
                 <div

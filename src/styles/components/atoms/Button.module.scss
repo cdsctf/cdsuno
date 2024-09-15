@@ -23,8 +23,8 @@ $text-color: var(--text-color);
         color: transparent;
         border-radius: 12px;
         border: 2px solid transparent;
-        @include mixins.transition;
         gap: 12px;
+        @include mixins.transition;
 
         cursor: pointer;
 
