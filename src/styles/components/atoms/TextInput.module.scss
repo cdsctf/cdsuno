@@ -128,6 +128,12 @@ $border-color: var(--border-color);
                 opacity: 1;
                 color: $border-color;
             }
+
+            &:focus {
+                outline: none;
+                opacity: 1;
+                color: $border-color;
+            }
         }
 
         .toggle-button {
@@ -141,6 +147,12 @@ $border-color: var(--border-color);
             color: $border-color;
 
             &:hover {
+                opacity: 1;
+                color: $border-color;
+            }
+
+            &:focus {
+                outline: none;
                 opacity: 1;
                 color: $border-color;
             }

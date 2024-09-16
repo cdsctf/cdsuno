@@ -68,6 +68,11 @@ $text-color: var(--text-color);
             transform: translateY(4px);
         }
 
+        &:focus {
+            outline: none;
+            filter: brightness(1.125);
+        }
+
         .content {
             color: $text-color;
             font-size: 0.875rem;
