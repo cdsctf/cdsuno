@@ -35,6 +35,18 @@ export default function DatetimePicker(props: DatetimePickerProps) {
         const newDateTime = selectedDateTime.set({ day });
         setSelectedDateTime(newDateTime);
     }
+    //Page 滚动
+     useEffect(() => {
+        if (open) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [open]);
     const handleTextInputBlur = () => {
         const newDateTime = DateTime.fromFormat(
             tempInputValue,
