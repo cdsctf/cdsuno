@@ -41,7 +41,7 @@ export default function TextInput(props: InputProps) {
     } = props;
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [isFocused, setIsFocused] = useState(false);
+    const [isFocused, setIsFocused] = useState(value ? true : false);
     const handleFocus = () => setIsFocused(true);
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         setIsFocused(e.target.value ? true : false);

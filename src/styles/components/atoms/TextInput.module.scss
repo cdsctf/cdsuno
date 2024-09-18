@@ -75,7 +75,6 @@ $border-color: var(--border-color);
             }
         }
 
-        &:focus-within,
         &.focus {
             border-color: $border-color;
             box-shadow: 0 3px 0 $border-color;
@@ -84,12 +83,14 @@ $border-color: var(--border-color);
                 color: $border-color;
             }
 
-            .clear-button {
-                opacity: 0.5;
-            }
+            &:focus-within {
+                .clear-button {
+                    opacity: 0.5;
+                }
 
-            .toggle-button {
-                opacity: 0.5;
+                .toggle-button {
+                    opacity: 0.5;
+                }
             }
         }
 
