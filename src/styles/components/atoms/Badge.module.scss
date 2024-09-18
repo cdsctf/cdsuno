@@ -3,6 +3,7 @@ $border-color: var(--border-color);
 $text-color: var(--text-color);
 
 .root {
+    width: fit-content;
     border-radius: 9999px;
     background-color: $bg-color;
     border: 2px solid $border-color;

@@ -21,7 +21,7 @@ export interface InputProps extends ComponentProps<"input"> {
     style?: React.CSSProperties;
 }
 
-export default function Input(props: InputProps) {
+export default function TextInput(props: InputProps) {
     const {
         color = "primary",
         bgColor = "transparent",
@@ -36,15 +36,17 @@ export default function Input(props: InputProps) {
         helperText = "",
         errorText = "",
         style,
+        className,
         ...rest
     } = props;
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [_, setIsFocused] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
     const handleFocus = () => setIsFocused(true);
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        if (!e.target.value) setIsFocused(false);
+        setIsFocused(e.target.value ? true : false);
     };
+
     const handleClear = () => {
         if (onChange) {
             onChange({
@@ -66,11 +68,19 @@ export default function Input(props: InputProps) {
     } as React.CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables} {...rest}>
-            <label className={styles["label"]}>{label}</label>
-            <p className={styles["helper-text"]}>{helperText}</p>
+        <div
+            className={`${styles["root"]} ${className}`}
+            style={variables}
+            {...rest}
+        >
+            {label && <label className={styles["label"]}>{label}</label>}
+            {helperText && (
+                <p className={styles["helper-text"]}>{helperText}</p>
+            )}
             <div className={styles["container"]}>
-                <div className={styles["wrapper"]}>
+                <div
+                    className={`${styles["wrapper"]} ${isFocused ? styles["focus"] : ""}`}
+                >
                     {icon && <div className={styles["icon"]}>{icon}</div>}
                     <input
                         value={value}

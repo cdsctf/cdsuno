@@ -23,6 +23,7 @@ export default function Button(props: ButtonProps) {
         variant = "solid",
         loading = false,
         style,
+        className,
         children,
         icon,
         ...rest
@@ -42,7 +43,7 @@ export default function Button(props: ButtonProps) {
             style={variables}
         >
             <button
-                className={`${styles["button"]} ${styles[size]} ${styles[variant]} ${rest.className}`}
+                className={`${styles["button"]} ${styles[size]} ${styles[variant]} ${className}`}
                 style={style}
                 align-items={"center"}
                 {...rest}

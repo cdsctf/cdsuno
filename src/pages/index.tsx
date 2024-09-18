@@ -13,6 +13,7 @@ import Dropdown from "@/components/atoms/Dropdown";
 import ChallengeCard from "@/components/widgets/ChallengeCard";
 import Switch from "@/components/atoms/Switch";
 import Loading from "@/components/icons/Loading";
+import ChallengeModal from "@/components/modals/ChallengeModal";
 
 export default function Page() {
     const [color, setColor] = useState("#1cb0f6");
@@ -352,6 +353,25 @@ export default function Page() {
                     }}
                     label={"I am a checkbox"}
                 />
+
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
+                    (i) => (
+                        <div key={i}>
+                            <ChallengeModal
+                                challenge={{
+                                    title: "Hello CdsCTF",
+                                    category: i,
+                                    description: "This is a description",
+                                }}
+                                status={{
+                                    solved_times: 2,
+                                    is_solved: true,
+                                }}
+                            />
+                        </div>
+                    )
+                )}
+
                 <Switch
                     checked={checked}
                     onChange={(checked) => setChecked(checked)}
