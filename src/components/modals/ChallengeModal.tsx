@@ -51,8 +51,7 @@ export default function ChallengeModal(props: ChallengeModalProps) {
     }, []);
 
     const variables = {
-        "--bg-color": chroma(baseColor).alpha(0.25).hex(),
-        "--bg-color-2": chroma(baseColor).brighten(5).alpha(0.1).hex(),
+        "--bg-color": chroma(baseColor).alpha(0.35).hex(),
         "--border-color": chroma(baseColor).hex(),
         "--text-color": chroma(baseColor).darken(1).hex(),
         "--icon-color": baseColor,

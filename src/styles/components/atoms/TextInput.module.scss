@@ -78,15 +78,15 @@ $border-color: var(--border-color);
             .icon {
                 color: $border-color;
             }
+        }
 
-            &:focus-within {
-                .clear-button {
-                    opacity: 0.5;
-                }
+        &:focus-within {
+            .clear-button {
+                opacity: 0.5;
+            }
 
-                .toggle-button {
-                    opacity: 0.5;
-                }
+            .toggle-button {
+                opacity: 0.5;
             }
         }
 

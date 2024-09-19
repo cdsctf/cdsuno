@@ -11,10 +11,11 @@ import Badge from "./Badge";
 export interface DatetimePickerProps {
     value: DateTime;
     onChange: (value: DateTime) => void;
+    icon?: React.ReactNode;
 }
 
 export default function DatetimePicker(props: DatetimePickerProps) {
-    const { value, onChange } = props;
+    const { value, onChange, icon } = props;
 
     const [open, setOpen] = useState<boolean>(false);
     const [selectedDateTime, setSelectedDateTime] = useState<DateTime>(value);
@@ -36,15 +37,15 @@ export default function DatetimePicker(props: DatetimePickerProps) {
         setSelectedDateTime(newDateTime);
     }
     //Page 滚动
-     useEffect(() => {
+    useEffect(() => {
         if (open) {
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = "hidden";
         } else {
-            document.body.style.overflow = '';
+            document.body.style.overflow = "";
         }
 
         return () => {
-            document.body.style.overflow = '';
+            document.body.style.overflow = "";
         };
     }, [open]);
     const handleTextInputBlur = () => {
@@ -156,6 +157,7 @@ export default function DatetimePicker(props: DatetimePickerProps) {
                 value={selectedDateTime.toFormat("yyyy-MM-dd HH:mm:ss")}
                 onChange={(e) => setTempInputValue(e.target.value)}
                 onClick={togglePicker}
+                icon={icon}
             />
             <CSSTransition
                 in={open}
