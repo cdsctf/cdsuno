@@ -183,8 +183,12 @@ $grid-color: var(--grid-color);
 
             .input {
                 flex: 1;
-
                 background-color: $bg-color;
+                transition: all 150ms ease-in-out;
+
+                &:hover {
+                    filter: brightness(1.125);
+                }
             }
 
             .button {
