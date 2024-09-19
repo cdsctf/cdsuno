@@ -8,6 +8,7 @@ $text-color: var(--text-color);
 .root {
     width: fit-content;
 
+    &.disabled,
     &.loading {
         cursor: not-allowed;
         .button {

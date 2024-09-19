@@ -23,7 +23,7 @@ export default function Dialog(props: DialogProps) {
     return (
         <CSSTransition
             in={open}
-            timeout={300}
+            timeout={200}
             unmountOnExit
             classNames={{
                 enter: styles["enter"],

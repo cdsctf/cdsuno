@@ -165,24 +165,17 @@ export default function Page() {
                         setOpen(false);
                     }}
                 >
-                    ciallo
-                    <Button
-                        size="lg"
-                        variant="solid"
-                        onClick={() => {
-                            setOpen2(true);
+                    <ChallengeModal
+                        challenge={{
+                            title: "Hello CdsCTF",
+                            category: 11,
+                            description: "This is a description",
                         }}
-                    >
-                        打开第二个弹窗
-                    </Button>
-                    <Dialog
-                        open={open2}
-                        onClose={() => {
-                            setOpen2(false);
+                        status={{
+                            solved_times: 2,
+                            is_solved: true,
                         }}
-                    >
-                        ciallo~
-                    </Dialog>
+                    />
                 </Dialog>
 
                 <div
@@ -356,7 +349,12 @@ export default function Page() {
 
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
                     (i) => (
-                        <div key={i}>
+                        <div
+                            key={i}
+                            style={{
+                                paddingLeft: "64px",
+                            }}
+                        >
                             <ChallengeModal
                                 challenge={{
                                     title: "Hello CdsCTF",

@@ -7,7 +7,7 @@ import styles from "@/styles/components/atoms/TextInput.module.scss";
 
 export interface InputProps extends ComponentProps<"input"> {
     color?: string;
-    bgColor?: string;
+    constant?: boolean;
     clearable?: boolean;
     password?: boolean;
     invalid?: boolean;
@@ -24,10 +24,10 @@ export interface InputProps extends ComponentProps<"input"> {
 export default function TextInput(props: InputProps) {
     const {
         color = "primary",
-        bgColor = "transparent",
         clearable = false,
         password = false,
         invalid = false,
+        constant = false,
         icon,
         value = "",
         onChange,
@@ -60,10 +60,8 @@ export default function TextInput(props: InputProps) {
     };
 
     const baseColor = useThemeColor(color);
-    const baseBgColor = useThemeColor(bgColor);
 
     const variables = {
-        "--bg-color": baseBgColor,
         "--border-color": baseColor,
     } as React.CSSProperties;
 
@@ -79,7 +77,7 @@ export default function TextInput(props: InputProps) {
             )}
             <div className={styles["container"]}>
                 <div
-                    className={`${styles["wrapper"]} ${isFocused ? styles["focus"] : ""}`}
+                    className={`${styles["wrapper"]} ${isFocused ? styles["focus"] : ""} ${constant ? styles["constant"] : ""}`}
                 >
                     {icon && <div className={styles["icon"]}>{icon}</div>}
                     <input
@@ -91,13 +89,11 @@ export default function TextInput(props: InputProps) {
                         onChange={onChange}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
-                        style={style}
                     />
                     {clearable && (
                         <button
                             className={styles["clear-button"]}
                             onClick={handleClear}
-                            aria-label="Clear input"
                         >
                             <CloseCircleBold />
                         </button>
@@ -106,7 +102,6 @@ export default function TextInput(props: InputProps) {
                         <button
                             className={styles["toggle-button"]}
                             onClick={handleToggleVisibility}
-                            aria-label="Toggle Visibility"
                         >
                             {isPasswordVisible ? <EyeBold /> : <EyeCloseBold />}
                         </button>

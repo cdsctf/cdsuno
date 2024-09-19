@@ -11,6 +11,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
     jusitify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
     loading?: boolean;
+    disabled?: boolean;
     icon?: React.ReactNode;
     style?: React.CSSProperties;
     children?: React.ReactNode;
@@ -25,6 +26,7 @@ export default function Button(props: ButtonProps) {
         style,
         className,
         children,
+        disabled,
         icon,
         ...rest
     } = props;
@@ -39,13 +41,14 @@ export default function Button(props: ButtonProps) {
 
     return (
         <div
-            className={`${styles["root"]} ${loading ? styles["loading"] : ""}`}
+            className={`${styles["root"]} ${loading ? styles["loading"] : ""} ${disabled ? styles["disabled"] : ""}`}
             style={variables}
         >
             <button
                 className={`${styles["button"]} ${styles[size]} ${styles[variant]} ${className}`}
                 style={style}
                 align-items={"center"}
+                disabled={disabled || loading}
                 {...rest}
             >
                 {(loading || icon) && (
