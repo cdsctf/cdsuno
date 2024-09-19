@@ -168,7 +168,7 @@ export default function Page() {
                     <ChallengeModal
                         challenge={{
                             title: "Hello CdsCTF",
-                            category: 11,
+                            category: 1,
                             description: "This is a description",
                         }}
                         status={{

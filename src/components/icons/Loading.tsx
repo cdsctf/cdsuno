@@ -16,7 +16,7 @@ export default function Loading(props: LoadingProps) {
             viewBox="0 0 24 24"
             className={className}
             style={{
-                width: "100%",
+                width: "fit-content",
                 height: "100%",
                 fontSize: size,
             }}

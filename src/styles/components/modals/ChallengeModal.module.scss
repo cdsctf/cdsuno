@@ -18,6 +18,8 @@ $grid-color: var(--grid-color);
 
     filter: drop-shadow(0px 1px 3px $bg-color);
 
+    width: 80vw;
+
     @include mixins.media("lg") {
         width: 35rem;
     }
@@ -69,6 +71,11 @@ $grid-color: var(--grid-color);
             }
 
             .title {
+                max-width: 50%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
                 flex-shrink: 0;
                 font-size: 1.25rem;
                 font-weight: 700;
@@ -91,7 +98,8 @@ $grid-color: var(--grid-color);
             display: flex;
 
             width: 100%;
-            min-height: 12.5rem;
+            min-height: 15rem;
+            max-height: 25rem;
 
             background-color: $bg-color;
             border-radius: 16px;
@@ -107,7 +115,7 @@ $grid-color: var(--grid-color);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: space-around;
 
                 .tab {
                     color: #ffffff;
@@ -127,7 +135,6 @@ $grid-color: var(--grid-color);
                     border-top: 1.5px dashed #ffffff;
                     width: 100%;
                     height: 1px;
-                    margin: 0 0;
                 }
             }
 
@@ -136,6 +143,13 @@ $grid-color: var(--grid-color);
                 padding: 16px;
                 overflow: hidden;
                 transition: all 150ms ease-in-out;
+
+                overflow-y: auto;
+                overflow-wrap: break-word;
+
+                .description {
+                    text-wrap: break-word;
+                }
 
                 .pod {
                     height: 100%;
@@ -175,7 +189,6 @@ $grid-color: var(--grid-color);
 
             .button {
                 width: fit-content;
-                height: inherit;
             }
         }
     }

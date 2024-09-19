@@ -24,12 +24,18 @@ export default function ChallengeModal(props: ChallengeModalProps) {
     const { challenge, status, ...rest } = props;
 
     const categoryStore = useCategoryStore();
-
     const category = categoryStore.getCategory(challenge.category);
-
     const baseColor = useThemeColor(category?.color || "primary");
 
-    const [placeholder, setPlaceholder] = useState<string>("Flag");
+    const variables = {
+        "--bg-color": chroma(baseColor).alpha(0.35).hex(),
+        "--border-color": chroma(baseColor).hex(),
+        "--text-color": chroma(baseColor).darken(1).hex(),
+        "--icon-color": baseColor,
+        "--grid-color": chroma(baseColor).darken(1).alpha(0.1).hex(),
+    } as CSSProperties;
+
+    const [placeholder, setPlaceholder] = useState<string>("flag");
     const [flag, setFlag] = useState<string>("");
 
     const [activeTab, setActiveTab] = useState<
@@ -50,14 +56,6 @@ export default function ChallengeModal(props: ChallengeModalProps) {
         return () => clearInterval(interval);
     }, []);
 
-    const variables = {
-        "--bg-color": chroma(baseColor).alpha(0.35).hex(),
-        "--border-color": chroma(baseColor).hex(),
-        "--text-color": chroma(baseColor).darken(1).hex(),
-        "--icon-color": baseColor,
-        "--grid-color": chroma(baseColor).darken(1).alpha(0.1).hex(),
-    } as CSSProperties;
-
     return (
         <div className={styles["root"]} style={variables}>
             <div className={styles["container"]}>
@@ -70,7 +68,7 @@ export default function ChallengeModal(props: ChallengeModalProps) {
                             {category?.name?.toUpperCase()}
                         </Badge>
                     </div>
-                    <div className={styles["title"]}>{challenge.title}</div>
+                    <div className={styles["title"]}>{challenge?.title}</div>
                     <div className={styles["toggle"]}></div>
                     <div className={styles["icon"]}>{category?.icon}</div>
                 </div>

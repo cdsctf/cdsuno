@@ -10,6 +10,7 @@ export default defineConfig({
         Icons({
             compiler: "jsx",
             jsx: "react",
+            scale: 1.2,
             defaultStyle: "width: fit-content; height: 100%;",
         }),
     ],
