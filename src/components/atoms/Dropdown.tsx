@@ -6,10 +6,11 @@ export interface DropdownProps extends ComponentProps<"div"> {
     open: boolean;
     onClose: () => void;
     children: React.ReactNode;
+    targetRef?: React.RefObject<HTMLElement>;
 }
 
 export default function Dropdown(props: DropdownProps) {
-    const { open, onClose, children } = props;
+    const { open, onClose, targetRef, children } = props;
 
     const nodeRef = useRef<HTMLDivElement>(null);
 
@@ -17,7 +18,9 @@ export default function Dropdown(props: DropdownProps) {
         const handleClickOutside = (event: MouseEvent) => {
             if (
                 nodeRef.current &&
-                !nodeRef.current.contains(event.target as Node)
+                !nodeRef.current.contains(event.target as Node) &&
+                targetRef &&
+                !targetRef.current?.contains(event.target as Node)
             ) {
                 onClose();
             }

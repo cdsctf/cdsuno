@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React, { ComponentProps, forwardRef } from "react";
 import chroma from "chroma-js";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "@/styles/components/atoms/Button.module.scss";
@@ -8,7 +8,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
     color?: string;
     size?: "sm" | "md" | "lg";
     variant?: "solid" | "outline" | "ghost";
-    jusitify?: "start" | "center" | "end";
+    justify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
     loading?: boolean;
     disabled?: boolean;
@@ -17,7 +17,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
     children?: React.ReactNode;
 }
 
-export default function Button(props: ButtonProps) {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const {
         color = "primary",
         size = "md",
@@ -45,9 +45,9 @@ export default function Button(props: ButtonProps) {
             style={variables}
         >
             <button
+                ref={ref}
                 className={`${styles["button"]} ${styles[size]} ${styles[variant]} ${className}`}
                 style={style}
-                align-items={"center"}
                 disabled={disabled || loading}
                 {...rest}
             >
@@ -60,4 +60,6 @@ export default function Button(props: ButtonProps) {
             </button>
         </div>
     );
-}
+});
+
+export default Button;

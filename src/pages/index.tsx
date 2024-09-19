@@ -8,11 +8,10 @@ import Tooltip from "@/components/atoms/Tooltip";
 import UserBold from "~icons/solar/user-bold";
 import { useToastStore } from "@/stores/toast";
 import { DateTime } from "luxon";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Dropdown from "@/components/atoms/Dropdown";
 import ChallengeCard from "@/components/widgets/ChallengeCard";
 import Switch from "@/components/atoms/Switch";
-import Loading from "@/components/icons/Loading";
 import ChallengeModal from "@/components/modals/ChallengeModal";
 
 export default function Page() {
@@ -27,7 +26,8 @@ export default function Page() {
 
     const [loading, setLoading] = useState(false);
 
-    const [dropdownMenuOpen, setDropdownMenuOpen] = useState(false);
+    const dropdownMenuButtonRef = useRef<HTMLButtonElement>(null);
+    const [dropdownMenuOpen, setDropdownMenuOpen] = useState<boolean>(false);
 
     const [datetime, setDatetime] = useState<DateTime>(DateTime.now());
 
@@ -187,8 +187,9 @@ export default function Page() {
                     <Button
                         size="lg"
                         variant="solid"
+                        ref={dropdownMenuButtonRef}
                         onClick={() => {
-                            setDropdownMenuOpen(true);
+                            setDropdownMenuOpen(!dropdownMenuOpen);
                         }}
                     >
                         打开 Dropdown Menu
@@ -196,6 +197,7 @@ export default function Page() {
                     <Dropdown
                         open={dropdownMenuOpen}
                         onClose={() => setDropdownMenuOpen(false)}
+                        targetRef={dropdownMenuButtonRef}
                     >
                         <div
                             style={{
@@ -203,6 +205,7 @@ export default function Page() {
                                 height: "100px",
                                 borderRadius: "8px",
                                 backgroundColor: "white",
+                                zIndex: 1000,
                             }}
                         >
                             1
