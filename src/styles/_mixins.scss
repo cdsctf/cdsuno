@@ -7,3 +7,23 @@
 @mixin transition {
     transition: all 0.15s ease-in-out;
 }
+
+@mixin media($breakpoint) {
+    @if $breakpoint == "xs" {
+        @media (max-width: 575px) {
+            @content;
+        }
+    } @else if $breakpoint == "sm" {
+        @media (min-width: 576px) {
+            @content;
+        }
+    } @else if $breakpoint == "md" {
+        @media (min-width: 768px) {
+            @content;
+        }
+    } @else if $breakpoint == "lg" {
+        @media (min-width: 992px) {
+            @content;
+        }
+    }
+}
