@@ -54,14 +54,14 @@ export default function Page() {
                     }}
                 >
                     <input type="color" value={color} onChange={handleChange} />
-                    <Button color={color} size="lg" variant="solid">
+                    <Button color={color} variant="solid">
                         123
                     </Button>
                     {/* <Card color={color}/> */}
-                    <Button color={color} size="lg" variant="outline">
+                    <Button color={color} variant="outline">
                         123
                     </Button>
-                    <Button color={"violet"} size="lg" variant="outline">
+                    <Button color={"violet"} variant="outline">
                         123
                     </Button>
                 </div>
@@ -151,7 +151,6 @@ export default function Page() {
                     />
                 </div>
                 <Button
-                    size="lg"
                     variant="solid"
                     onClick={() => {
                         setOpen(true);
@@ -185,7 +184,6 @@ export default function Page() {
                     }}
                 >
                     <Button
-                        size="lg"
                         variant="solid"
                         ref={dropdownMenuButtonRef}
                         onClick={() => {
@@ -254,7 +252,6 @@ export default function Page() {
                 )}
 
                 <Button
-                    size="lg"
                     variant="solid"
                     onClick={() => {
                         useToastStore.getState().addToast({
@@ -270,14 +267,6 @@ export default function Page() {
                 >
                     发送通知114514
                 </Button>
-                {/* <div
-                    style={{
-                        height: "1000px",
-                    }}
-                >
-                    placeholder
-                </div>
-                <div>1111</div> */}
                 <div
                     style={{
                         display: "flex",
@@ -294,9 +283,7 @@ export default function Page() {
                         }}
                     >
                         <Tooltip content={"sweet~"} position={"top"} offset={8}>
-                            <Button size="lg" variant="solid">
-                                top
-                            </Button>
+                            <Button variant="solid">top</Button>
                         </Tooltip>
                     </div>
                     <div
@@ -311,18 +298,14 @@ export default function Page() {
                             position={"left"}
                             offset={8}
                         >
-                            <Button size="lg" variant="solid">
-                                left
-                            </Button>
+                            <Button variant="solid">left</Button>
                         </Tooltip>
                         <Tooltip
                             content={"sweet~"}
                             position={"right"}
                             offset={8}
                         >
-                            <Button size="lg" variant="solid">
-                                right
-                            </Button>
+                            <Button variant="solid">right</Button>
                         </Tooltip>
                     </div>
                     <div
@@ -336,9 +319,7 @@ export default function Page() {
                             position={"bottom"}
                             offset={8}
                         >
-                            <Button size="lg" variant="solid">
-                                bottom
-                            </Button>
+                            <Button variant="solid">bottom</Button>
                         </Tooltip>
                     </div>
                 </div>

@@ -6,7 +6,6 @@ import Loading from "../icons/Loading";
 
 export interface ButtonProps extends ComponentProps<"button"> {
     color?: string;
-    size?: "sm" | "md" | "lg";
     variant?: "solid" | "outline" | "ghost";
     justify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
@@ -20,7 +19,6 @@ export interface ButtonProps extends ComponentProps<"button"> {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const {
         color = "primary",
-        size = "md",
         variant = "solid",
         loading = false,
         style,
@@ -46,7 +44,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         >
             <button
                 ref={ref}
-                className={`${styles["button"]} ${styles[size]} ${styles[variant]} ${className}`}
+                className={`${styles["button"]} ${styles[variant]} ${className}`}
                 style={style}
                 disabled={disabled || loading}
                 {...rest}
