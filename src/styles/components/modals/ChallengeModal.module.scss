@@ -89,13 +89,13 @@ $icon-color: var(--icon-color);
             border: 3px solid $border-color;
             box-shadow: 0 3px 0 $border-color;
 
-            background-size: 20px 20px;
-            background-image: linear-gradient(
-                    to right,
-                    #ffffff17 1px,
-                    transparent 1px
-                ),
-                linear-gradient(to bottom, #ffffff17 1px, transparent 1px);
+            // background-size: 20px 20px;
+            // background-image: linear-gradient(
+            //         to right,
+            //         #ffffff17 1px,
+            //         transparent 1px
+            //     ),
+            //     linear-gradient(to bottom, #ffffff17 1px, transparent 1px);
 
             .sidebar {
                 border-right: 3px solid $border-color;
@@ -134,9 +134,20 @@ $icon-color: var(--icon-color);
                 padding: 16px;
                 overflow: hidden;
                 transition: all 150ms ease-in-out;
+                position: relative;
 
                 overflow-y: auto;
                 overflow-wrap: break-word;
+
+                .watermark {
+                    position: absolute;
+                    top: 80%;
+                    right: 10%;
+                    transform: translate(10%, -80%);
+                    font-size: 5rem;
+                    color: #ffffff;
+                    opacity: 0.1;
+                }
 
                 .description {
                     text-wrap: break-word;

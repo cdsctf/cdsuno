@@ -3,7 +3,7 @@ import { Challenge, ChallengeStatus } from "@/models/challenge";
 import { useCategoryStore } from "@/stores/category";
 import styles from "@/styles/components/modals/ChallengeModal.module.scss";
 import chroma from "chroma-js";
-import { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties, ReactNode, useEffect, useState } from "react";
 import TextInput from "../atoms/TextInput";
 import Badge from "../atoms/Badge";
 import Button from "../atoms/Button";
@@ -40,6 +40,16 @@ export default function ChallengeModal(props: ChallengeModalProps) {
     const [activeTab, setActiveTab] = useState<
         "description" | "pod" | "attachment" | "feedback"
     >("description");
+
+    const tabIcons: Record<
+        "description" | "pod" | "attachment" | "feedback",
+        ReactNode
+    > = {
+        description: <Book2Bold />,
+        pod: <Server2Bold />,
+        attachment: <FolderWithFilesBold />,
+        feedback: <SledgehammerBold />,
+    };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -82,7 +92,7 @@ export default function ChallengeModal(props: ChallengeModalProps) {
                                 position={"left"}
                                 offset={20}
                             >
-                                <Book2Bold />
+                                {tabIcons["description"]}
                             </Tooltip>
                         </div>
                         <div className={styles["divider"]} />
@@ -95,7 +105,7 @@ export default function ChallengeModal(props: ChallengeModalProps) {
                                 position={"left"}
                                 offset={20}
                             >
-                                <Server2Bold />
+                                {tabIcons["pod"]}
                             </Tooltip>
                         </div>
                         <div className={styles["divider"]} />
@@ -108,7 +118,7 @@ export default function ChallengeModal(props: ChallengeModalProps) {
                                 position={"left"}
                                 offset={20}
                             >
-                                <FolderWithFilesBold />
+                                {tabIcons["attachment"]}
                             </Tooltip>
                         </div>
                         <div className={styles["divider"]} />
@@ -121,11 +131,14 @@ export default function ChallengeModal(props: ChallengeModalProps) {
                                 position={"left"}
                                 offset={20}
                             >
-                                <SledgehammerBold />
+                                {tabIcons["feedback"]}
                             </Tooltip>
                         </div>
                     </div>
                     <div className={styles["content"]}>
+                        <div className={styles["watermark"]}>
+                            {tabIcons[activeTab]}
+                        </div>
                         {activeTab === "description" && (
                             <div className={styles["description"]}>
                                 {challenge.description}
