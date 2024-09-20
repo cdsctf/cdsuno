@@ -28,11 +28,10 @@ export default function ChallengeModal(props: ChallengeModalProps) {
     const baseColor = useThemeColor(category?.color || "primary");
 
     const variables = {
-        "--bg-color": chroma(baseColor).alpha(0.35).hex(),
+        "--bg-color": chroma(baseColor).darken(0.75).hex(),
         "--border-color": chroma(baseColor).hex(),
         "--text-color": chroma(baseColor).darken(1).hex(),
         "--icon-color": baseColor,
-        "--grid-color": chroma(baseColor).darken(1).alpha(0.1).hex(),
     } as CSSProperties;
 
     const [placeholder, setPlaceholder] = useState<string>("flag");
@@ -170,7 +169,7 @@ export default function ChallengeModal(props: ChallengeModalProps) {
                         color={category?.color}
                         placeholder={placeholder}
                         value={flag}
-                        constant
+                        variant={"filled"}
                         onChange={(e) => setFlag(e.target.value)}
                     />
                     <Button

@@ -36,7 +36,7 @@ $text-color: var(--text-color);
             box-shadow: 0 3px 0 $bg-secondary-color;
         }
 
-        &.outline {
+        &.outlined {
             background-color: transparent;
             border-color: $bg-color;
             box-shadow: 0 3px 0 $bg-color;

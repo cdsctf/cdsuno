@@ -4,10 +4,11 @@ import CloseCircleBold from "~icons/solar/close-circle-bold";
 import EyeBold from "~icons/solar/eye-bold";
 import EyeCloseBold from "~icons/solar/eye-closed-bold";
 import styles from "@/styles/components/atoms/TextInput.module.scss";
+import chroma from "chroma-js";
 
 export interface InputProps extends ComponentProps<"input"> {
     color?: string;
-    constant?: boolean;
+    variant?: "outlined" | "filled";
     clearable?: boolean;
     password?: boolean;
     invalid?: boolean;
@@ -27,7 +28,7 @@ export default function TextInput(props: InputProps) {
         clearable = false,
         password = false,
         invalid = false,
-        constant = false,
+        variant = "outlined",
         icon,
         value = "",
         onChange,
@@ -41,11 +42,6 @@ export default function TextInput(props: InputProps) {
     } = props;
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [isFocused, setIsFocused] = useState(value ? true : false);
-    const handleFocus = () => setIsFocused(true);
-    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        setIsFocused(e.target.value ? true : false);
-    };
 
     const handleClear = () => {
         if (onChange) {
@@ -62,6 +58,7 @@ export default function TextInput(props: InputProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
+        "--bg-color": chroma(baseColor).darken(0.75).hex(),
         "--border-color": baseColor,
     } as React.CSSProperties;
 
@@ -76,9 +73,7 @@ export default function TextInput(props: InputProps) {
                 <p className={styles["helper-text"]}>{helperText}</p>
             )}
             <div className={styles["container"]}>
-                <div
-                    className={`${styles["wrapper"]} ${isFocused ? styles["focus"] : ""} ${constant ? styles["constant"] : ""}`}
-                >
+                <div className={`${styles["wrapper"]} ${styles[variant]}`}>
                     {icon && <div className={styles["icon"]}>{icon}</div>}
                     <input
                         value={value}
@@ -87,8 +82,6 @@ export default function TextInput(props: InputProps) {
                         }
                         placeholder={placeholder}
                         onChange={onChange}
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
                     />
                     {clearable && (
                         <button

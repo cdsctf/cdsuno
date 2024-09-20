@@ -26,7 +26,7 @@ export default function useThemeColor(baseColor: string) {
             if (chroma(color).luminance() < 0.3) {
                 color = chroma(color).brighten(0.25).hex();
             } else {
-                color = chroma(color).darken(1).hex();
+                color = chroma(color).darken(0.5).hex();
             }
         }
 

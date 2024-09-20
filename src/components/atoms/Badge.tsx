@@ -4,7 +4,7 @@ import chroma from "chroma-js";
 import { CSSProperties, ComponentProps } from "react";
 
 export interface BadgeProps extends ComponentProps<"div"> {
-    variant?: "solid" | "light" | "outline";
+    variant?: "solid" | "light" | "outlined";
     color?: string;
     children: React.ReactNode;
 }
@@ -26,7 +26,7 @@ export default function Badge(props: BadgeProps) {
             case "solid":
                 return baseColor;
             case "light":
-            case "outline":
+            case "outlined":
                 return chroma(baseColor).alpha(0.5).hex();
         }
     };
@@ -36,7 +36,7 @@ export default function Badge(props: BadgeProps) {
             case "solid":
             case "light":
                 return "transparent";
-            case "outline":
+            case "outlined":
                 return baseColor;
         }
     };

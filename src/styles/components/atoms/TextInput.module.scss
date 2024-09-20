@@ -1,5 +1,6 @@
 @use "@/styles/mixins";
 
+$bg-color: var(--bg-color);
 $border-color: var(--border-color);
 
 .root {
@@ -40,44 +41,42 @@ $border-color: var(--border-color);
         display: flex;
         align-items: center;
         position: relative;
-        border: 2px solid #e5e5e5;
+        border: 2px solid $border-color;
         border-radius: 12px;
         padding: 8px 12px;
-        box-shadow: 0 3px 0 #e5e5e5;
-        gap: 5px;
+        box-shadow: 0 3px 0 $border-color;
+        gap: 8px;
         @include mixins.transition;
 
-        @include mixins.dark {
-            border-color: #37464f;
-            box-shadow: 0 3px 0 #37464f;
-        }
+        &.filled {
+            background-color: $bg-color;
 
-        .icon {
-            color: #e5e5e5;
-            @include mixins.transition;
+            .icon {
+                color: #ffffff;
+            }
 
-            @include mixins.dark {
-                color: #37464f;
+            input {
+                color: #ffffff;
+            }
+
+            .toggle-button {
+                color: #ffffff;
+            }
+
+            .clear-button {
+                color: #ffffff;
             }
         }
 
+        &.outlined {
+            .icon {
+                color: $border-color;
+            }
+        }
+
+        &:focus,
         &:hover {
-            border-color: $border-color;
-            box-shadow: 0 3px 0 $border-color;
-
-            .icon {
-                color: $border-color;
-            }
-        }
-
-        &.constant,
-        &.focus {
-            border-color: $border-color;
-            box-shadow: 0 3px 0 $border-color;
-
-            .icon {
-                color: $border-color;
-            }
+            filter: brightness(1.125);
         }
 
         &:focus-within {
@@ -100,17 +99,21 @@ $border-color: var(--border-color);
             font-size: 16px;
             line-height: 1.5;
 
+            &[type="password"] {
+                &::-webkit-textfield-decoration-container,
+                &::-webkit-password-toggle-button,
+                &::-ms-reveal,
+                &::-ms-clear {
+                    display: none;
+                }
+            }
+
+            // &::placeholder {
+            //     color: $border-color;
+            // }
+
             &:disabled {
                 cursor: not-allowed;
-            }
-        }
-
-        input[type="password"] {
-            &::-webkit-textfield-decoration-container,
-            &::-webkit-password-toggle-button,
-            &::-ms-reveal,
-            &::-ms-clear {
-                display: none;
             }
         }
 
@@ -126,13 +129,11 @@ $border-color: var(--border-color);
 
             &:hover {
                 opacity: 1;
-                color: $border-color;
             }
 
             &:focus {
                 outline: none;
                 opacity: 1;
-                color: $border-color;
             }
         }
 
@@ -148,13 +149,11 @@ $border-color: var(--border-color);
 
             &:hover {
                 opacity: 1;
-                color: $border-color;
             }
 
             &:focus {
                 outline: none;
                 opacity: 1;
-                color: $border-color;
             }
         }
     }

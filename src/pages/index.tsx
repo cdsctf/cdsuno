@@ -58,10 +58,10 @@ export default function Page() {
                         123
                     </Button>
                     {/* <Card color={color}/> */}
-                    <Button color={color} variant="outline">
+                    <Button color={color} variant="outlined">
                         123
                     </Button>
-                    <Button color={"violet"} variant="outline">
+                    <Button color={"violet"} variant="outlined">
                         123
                     </Button>
                 </div>
@@ -106,6 +106,7 @@ export default function Page() {
                     invalid
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
+                    variant={"filled"}
                     // label={"密码"}
                     placeholder="Password"
                     // helperText={"请输入密码 helperText"}

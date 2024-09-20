@@ -6,8 +6,8 @@ import styles from "@/styles/components/atoms/Card.module.scss"; // 使用CSS Mo
 export interface CardProps extends ComponentProps<"div"> {
     color?: string;
     size?: "sm" | "md" | "lg";
-    rounded?:"sm" |"md" |"lg";
-    variant?: "solid" | "outline" | "ghost";
+    rounded?: "sm" | "md" | "lg";
+    variant?: "solid" | "outlined" | "ghost";
     jusitify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
     loading?: boolean;

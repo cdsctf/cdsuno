@@ -21,26 +21,8 @@ $grid-color: var(--grid-color);
         border: 3.75px solid $border-color;
         box-shadow: 0 3px 0 $border-secondary-color;
         padding: 10px;
-
         transition: all 200ms ease-in-out;
-
-        background-image: linear-gradient(
-                to right,
-                $grid-color 1px,
-                transparent 1px
-            ),
-            linear-gradient(to bottom, $grid-color 1px, transparent 1px);
-
-        background-size: 20px 20px;
-
-        @include mixins.dark {
-            background-image: linear-gradient(
-                    to right,
-                    #ffffff0d 1px,
-                    transparent 1px
-                ),
-                linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
-        }
+        @include mixins.grid-background($grid-color);
 
         &:active {
             box-shadow: none;

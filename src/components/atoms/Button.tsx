@@ -6,7 +6,7 @@ import Loading from "../icons/Loading";
 
 export interface ButtonProps extends ComponentProps<"button"> {
     color?: string;
-    variant?: "solid" | "outline" | "ghost";
+    variant?: "solid" | "outlined" | "ghost";
     justify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
     loading?: boolean;
