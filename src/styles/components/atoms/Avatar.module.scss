@@ -1,3 +1,4 @@
+$size: var(--size);
 $border-color: var(--border-color);
 
 .root {
@@ -6,6 +7,8 @@ $border-color: var(--border-color);
     align-items: center;
     border-radius: 50%;
     border: 2px dashed $border-color;
+    width: $size;
+    height: $size;
 
     .fallback {
         overflow: hidden;
@@ -16,20 +19,5 @@ $border-color: var(--border-color);
         width: 95%;
         height: 95%;
         border-radius: 50%;
-    }
-
-    &.sm {
-        width: 2rem;
-        height: 2rem;
-    }
-
-    &.md {
-        width: 3rem;
-        height: 3rem;
-    }
-
-    &.lg {
-        width: 4rem;
-        height: 4rem;
     }
 }

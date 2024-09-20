@@ -17,22 +17,23 @@ export default function Avatar(props: AvatarProps) {
         src,
         alt = "",
         color = "primary",
-        size = "md",
+        size = "3rem",
         fallback = <UserCircleBoldDuotone />,
         style,
         ...rest
     } = props;
 
     const baseColor = useThemeColor(color);
-    const [imgErr, setImgErr] = useState(false);
+    const [imgErr, setImgErr] = useState<boolean>(false);
 
     const variables = {
+        "--size": size,
         "--border-color": baseColor,
     } as React.CSSProperties;
 
     return (
         <div
-            className={`${styles["root"]} ${styles[size]}`}
+            className={styles["root"]}
             style={{
                 ...variables,
                 ...style,

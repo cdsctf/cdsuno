@@ -241,11 +241,9 @@ export default function Page() {
                                     is_solved: isSolveds[i - 1],
                                 }}
                                 onClick={() => {
-                                    console.log(1);
                                     const newSolveds = [...isSolveds];
                                     newSolveds[i - 1] = !newSolveds[i - 1];
                                     setIsSolveds(newSolveds);
-                                    console.log(newSolveds);
                                 }}
                             />
                         </div>

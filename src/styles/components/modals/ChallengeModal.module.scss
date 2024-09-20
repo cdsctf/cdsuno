@@ -13,7 +13,6 @@ $icon-color: var(--icon-color);
     align-items: center;
     gap: 1rem;
     border-radius: 22.5px;
-    // border: 3px dashed $border-color;
 
     filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.3));
 
@@ -88,14 +87,6 @@ $icon-color: var(--icon-color);
             border-radius: 16px;
             border: 3px solid $border-color;
             box-shadow: 0 3px 0 $border-color;
-
-            // background-size: 20px 20px;
-            // background-image: linear-gradient(
-            //         to right,
-            //         #ffffff17 1px,
-            //         transparent 1px
-            //     ),
-            //     linear-gradient(to bottom, #ffffff17 1px, transparent 1px);
 
             .sidebar {
                 border-right: 3px solid $border-color;
