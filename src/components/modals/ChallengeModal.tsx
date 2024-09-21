@@ -182,7 +182,7 @@ export default function ChallengeModal(props: ChallengeModalProps) {
                         color={category?.color}
                         placeholder={placeholder}
                         value={flag}
-                        variant={"filled"}
+                        variant={"solid"}
                         onChange={(e) => setFlag(e.target.value)}
                     />
                     <Button

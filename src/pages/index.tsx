@@ -106,7 +106,7 @@ export default function Page() {
                     invalid
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    variant={"filled"}
+                    variant={"solid"}
                     // label={"密码"}
                     placeholder="Password"
                     // helperText={"请输入密码 helperText"}

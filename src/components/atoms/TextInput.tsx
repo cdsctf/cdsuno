@@ -8,7 +8,7 @@ import chroma from "chroma-js";
 
 export interface InputProps extends ComponentProps<"input"> {
     color?: string;
-    variant?: "outlined" | "filled";
+    variant?: "outlined" | "solid";
     clearable?: boolean;
     password?: boolean;
     invalid?: boolean;
@@ -58,8 +58,9 @@ export default function TextInput(props: InputProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
-        "--bg-color": chroma(baseColor).darken(0.75).hex(),
+        "--bg-color": baseColor,
         "--border-color": baseColor,
+        "--border-secondary-color": chroma(baseColor).darken(0.5).hex(),
     } as React.CSSProperties;
 
     return (

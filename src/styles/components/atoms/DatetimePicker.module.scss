@@ -44,8 +44,8 @@ $border-color: var(--border-color);
 
     .wrapper {
         background-color: $bg-color;
-        border: 2px solid $border-color;
-        box-shadow: 0 4px 0 $border-color;
+        border: 2.75px solid $border-color;
+        // box-shadow: 0 4px 0 $border-color;
         border-radius: 12px;
         padding: 16px;
     }

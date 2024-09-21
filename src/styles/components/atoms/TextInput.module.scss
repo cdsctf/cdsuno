@@ -2,6 +2,7 @@
 
 $bg-color: var(--bg-color);
 $border-color: var(--border-color);
+$border-secondary-color: var(--border-secondary-color);
 
 .root {
     width: fit-content;
@@ -42,14 +43,15 @@ $border-color: var(--border-color);
         align-items: center;
         position: relative;
         border: 2.75px solid $border-color;
-        border-radius: 14px;
-        padding: 8px 12px;
         box-shadow: 0 3px 0 $border-color;
+        border-radius: 12px;
+        padding: 6.75px 12px;
         gap: 8px;
         @include mixins.transition;
 
-        &.filled {
+        &.solid {
             background-color: $bg-color;
+            box-shadow: 0 3px 0 $border-secondary-color;
 
             .icon {
                 color: #ffffff;
@@ -57,6 +59,11 @@ $border-color: var(--border-color);
 
             input {
                 color: #ffffff;
+                caret-color: #ffffff;
+
+                &::placeholder {
+                    color: #ffffff7d;
+                }
             }
 
             .toggle-button {
@@ -107,10 +114,6 @@ $border-color: var(--border-color);
                     display: none;
                 }
             }
-
-            // &::placeholder {
-            //     color: $border-color;
-            // }
 
             &:disabled {
                 cursor: not-allowed;
