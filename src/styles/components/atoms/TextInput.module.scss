@@ -36,6 +36,7 @@ $border-secondary-color: var(--border-secondary-color);
     .container {
         width: 100%;
         border-radius: 15px;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     }
 
     .wrapper {
