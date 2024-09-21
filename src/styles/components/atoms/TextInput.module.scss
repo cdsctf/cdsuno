@@ -43,7 +43,7 @@ $border-secondary-color: var(--border-secondary-color);
         align-items: center;
         position: relative;
         border: 2.75px solid $border-color;
-        box-shadow: 0 3px 0 $border-color;
+        // box-shadow: 0 3px 0 $border-color;
         border-radius: 12px;
         padding: 6.75px 12px;
         gap: 8px;
@@ -51,7 +51,7 @@ $border-secondary-color: var(--border-secondary-color);
 
         &.solid {
             background-color: $bg-color;
-            box-shadow: 0 3px 0 $border-secondary-color;
+            // box-shadow: 0 3px 0 $border-secondary-color;
 
             .icon {
                 color: #ffffff;
