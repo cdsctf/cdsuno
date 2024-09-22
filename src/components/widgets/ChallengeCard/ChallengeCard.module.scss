@@ -2,7 +2,6 @@
 
 $bg-color: var(--bg-color);
 $border-color: var(--border-color);
-$border-secondary-color: var(--border-secondary-color);
 $text-color: var(--text-color);
 $icon-color: var(--icon-color);
 $grid-color: var(--grid-color);
@@ -10,6 +9,9 @@ $grid-color: var(--grid-color);
 .root {
     width: fit-content;
     position: relative;
+    border-radius: 16px;
+
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 
     .wrapper {
         position: relative;
@@ -19,7 +21,6 @@ $grid-color: var(--grid-color);
         background-color: $bg-color;
         border-radius: 16px;
         border: 3.75px solid $border-color;
-        // box-shadow: 0 3px 0 $border-secondary-color;
         padding: 10px;
         transition: all 200ms ease-in-out;
         @include mixins.grid-background($grid-color);
