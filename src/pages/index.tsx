@@ -14,6 +14,7 @@ import { ChallengeCard } from "@/components/widgets/ChallengeCard";
 import { Switch } from "@/components/core/Switch/Switch";
 import { ChallengeModal } from "@/components/modals/ChallengeModal";
 import { DatetimeInput } from "@/components/core/DatetimeInput";
+import { Textarea } from "@/components/core/Textarea";
 
 export default function Page() {
     const [color, setColor] = useState("#1cb0f6");
@@ -120,6 +121,7 @@ export default function Page() {
                         marginTop: "10px",
                     }}
                 />
+                <Textarea />
                 <Button
                     loading={loading}
                     icon={<UserBold />}

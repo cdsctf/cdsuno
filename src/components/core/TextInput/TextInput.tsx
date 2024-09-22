@@ -14,8 +14,6 @@ export interface TextInputProps extends Omit<InputWrapperProps, "onChange"> {
     label?: string;
     icon?: React.ReactNode;
     placeholder?: string;
-    helperText?: string;
-    errorText?: string;
     onChange?: (value: string) => void;
     style?: React.CSSProperties;
 }
