@@ -45,25 +45,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         } as React.CSSProperties;
 
         return (
-            <div
-                className={`${styles["root"]} ${loading ? styles["loading"] : ""} ${disabled ? styles["disabled"] : ""}`}
-                style={variables}
+            <button
+                ref={ref}
+                className={`${styles["root"]} ${className}`}
+                data-disabled={disabled}
+                data-loading={loading}
+                data-variant={variant}
+                style={{ ...variables, ...style }}
+                disabled={disabled || loading}
+                {...rest}
             >
-                <button
-                    ref={ref}
-                    className={`${styles["button"]} ${styles[variant]} ${className}`}
-                    style={style}
-                    disabled={disabled || loading}
-                    {...rest}
-                >
-                    {(loading || icon) && (
-                        <div className={styles["icon"]}>
-                            {loading ? <Loading /> : icon}
-                        </div>
-                    )}
-                    <div className={styles["content"]}>{children}</div>
-                </button>
-            </div>
+                {(loading || icon) && (
+                    <div className={styles["icon"]}>
+                        {loading ? <Loading /> : icon}
+                    </div>
+                )}
+                <div className={styles["content"]}>{children}</div>
+            </button>
         );
     }
 );

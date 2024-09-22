@@ -127,6 +127,8 @@ $icon-color: var(--icon-color);
                 transition: all 150ms ease-in-out;
                 position: relative;
 
+                z-index: 1;
+
                 overflow-y: auto;
                 overflow-wrap: break-word;
 
@@ -138,6 +140,8 @@ $icon-color: var(--icon-color);
                     font-size: 5rem;
                     color: #ffffff;
                     opacity: 0.1;
+                    user-select: none;
+                    z-index: -1;
                 }
 
                 .description {
