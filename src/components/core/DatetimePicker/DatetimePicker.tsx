@@ -1,13 +1,13 @@
 import { DateTime } from "luxon";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import styles from "./DatetimePicker.module.scss";
-import { TextInput } from "../TextInput";
 import useThemeColor from "@/hooks/useThemeColor";
 import ArrowLeftLinear from "~icons/solar/arrow-left-linear";
 import ArrowRightLinear from "~icons/solar/arrow-right-linear";
 import CalendarBold from "~icons/solar/calendar-bold";
 import { CSSTransition } from "react-transition-group";
 import { Badge } from "../Badge";
+import { DatetimeInput } from "../DatetimeInput";
 
 export interface DatetimePickerProps {
     value: DateTime;
@@ -16,18 +16,10 @@ export interface DatetimePickerProps {
 }
 
 export function DatetimePicker(props: DatetimePickerProps) {
-    const { value, onChange, icon = <CalendarBold /> } = props;
+    const { value = DateTime.now(), onChange, icon = <CalendarBold /> } = props;
 
     const [open, setOpen] = useState<boolean>(false);
     const [selectedDateTime, setSelectedDateTime] = useState<DateTime>(value);
-    const [timeInputs, setTimeInputs] = useState({
-        hour: selectedDateTime.toFormat("HH"),
-        minute: selectedDateTime.toFormat("mm"),
-        second: selectedDateTime.toFormat("ss"),
-    });
-    const [tempInputValue, setTempInputValue] = useState<string>(
-        selectedDateTime.toFormat("yyyy-MM-dd HH:mm:ss")
-    );
 
     const pickerRef = useRef<HTMLDivElement>(null);
 
@@ -37,97 +29,6 @@ export function DatetimePicker(props: DatetimePickerProps) {
         const newDateTime = selectedDateTime.set({ day });
         setSelectedDateTime(newDateTime);
     }
-    //Page 滚动
-    useEffect(() => {
-        if (open) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
-
-        return () => {
-            document.body.style.overflow = "";
-        };
-    }, [open]);
-
-    const handleTextInputBlur = () => {
-        const newDateTime = DateTime.fromFormat(
-            tempInputValue,
-            "yyyy-MM-dd HH:mm:ss"
-        );
-
-        if (newDateTime.isValid) {
-            setSelectedDateTime(newDateTime);
-            onChange?.(newDateTime);
-        } else {
-            // 恢复为原来的日期时间格式
-            setTempInputValue(selectedDateTime.toFormat("yyyy-MM-dd HH:mm:ss"));
-            console.error("Invalid date format");
-        }
-    };
-
-    const handleTimeInputChange = (
-        unit: "hour" | "minute" | "second",
-        value: string
-    ) => {
-        setTimeInputs((prev) => ({
-            ...prev,
-            [unit]: value, // 不进行格式化，直接更新输入值
-        }));
-    };
-
-    const handleWheelChange = (
-        event: React.WheelEvent<HTMLInputElement>,
-        unit: "hour" | "minute" | "second"
-    ) => {
-        const direction = event.deltaY < 0 ? 1 : -1; // 向上滚动为正，向下滚动为负
-
-        setTimeInputs((prev) => {
-            let newValue = parseInt(prev[unit], 10) + direction;
-
-            if (unit === "hour") {
-                if (newValue < 0) newValue = 23;
-                if (newValue > 23) newValue = 0;
-            } else {
-                if (newValue < 0) newValue = 59;
-                if (newValue > 59) newValue = 0;
-            }
-
-            const formattedValue = newValue.toString().padStart(2, "0");
-            return { ...prev, [unit]: formattedValue };
-        });
-    };
-
-    const applyChanges = () => {
-        let hour = parseInt(timeInputs.hour, 10);
-        let minute = parseInt(timeInputs.minute, 10);
-        let second = parseInt(timeInputs.second, 10);
-
-        if (isNaN(hour) || hour < 0 || hour > 23) {
-            hour = selectedDateTime.hour; // 如果无效，则恢复原来的值
-        }
-        if (isNaN(minute) || minute < 0 || minute > 59) {
-            minute = selectedDateTime.minute;
-        }
-        if (isNaN(second) || second < 0 || second > 59) {
-            second = selectedDateTime.second;
-        }
-
-        const formattedHour = hour.toString().padStart(2, "0");
-        const formattedMinute = minute.toString().padStart(2, "0");
-        const formattedSecond = second.toString().padStart(2, "0");
-
-        setTimeInputs({
-            hour: formattedHour,
-            minute: formattedMinute,
-            second: formattedSecond,
-        });
-
-        const newDateTime = selectedDateTime.set({ hour, minute, second });
-        setSelectedDateTime(newDateTime);
-
-        onChange?.(newDateTime);
-    };
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -135,7 +36,6 @@ export function DatetimePicker(props: DatetimePickerProps) {
                 pickerRef.current &&
                 !pickerRef.current.contains(event.target as Node)
             ) {
-                applyChanges();
                 setOpen(false);
             }
         };
@@ -144,7 +44,7 @@ export function DatetimePicker(props: DatetimePickerProps) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [timeInputs, selectedDateTime]);
+    }, [selectedDateTime]);
 
     const variables = {
         "--border-color": useThemeColor("primary"),
@@ -155,9 +55,9 @@ export function DatetimePicker(props: DatetimePickerProps) {
 
     return (
         <div className={styles["root"]} style={variables}>
-            <TextInput
-                value={selectedDateTime.toFormat("yyyy-MM-dd HH:mm:ss")}
-                onChange={(e) => setTempInputValue(e.target.value)}
+            <DatetimeInput
+                value={selectedDateTime}
+                onChange={(value) => setSelectedDateTime(value)}
                 onClick={togglePicker}
                 icon={icon}
             />
@@ -239,49 +139,6 @@ export function DatetimePicker(props: DatetimePickerProps) {
                                     </div>
                                 ))}
                             </div>
-                        </div>
-                        <div className={styles["time-picker"]}>
-                            <input
-                                type="text"
-                                value={timeInputs.hour}
-                                onChange={(e) =>
-                                    handleTimeInputChange(
-                                        "hour",
-                                        e.target.value
-                                    )
-                                }
-                                onBlur={applyChanges}
-                                onWheel={(e) => handleWheelChange(e, "hour")}
-                                maxLength={2}
-                            />
-                            <span className={styles["time-separator"]}>:</span>
-                            <input
-                                type="text"
-                                value={timeInputs.minute}
-                                onChange={(e) =>
-                                    handleTimeInputChange(
-                                        "minute",
-                                        e.target.value
-                                    )
-                                }
-                                onBlur={applyChanges}
-                                onWheel={(e) => handleWheelChange(e, "minute")}
-                                maxLength={2}
-                            />
-                            <span className={styles["time-separator"]}>:</span>
-                            <input
-                                type="text"
-                                value={timeInputs.second}
-                                onChange={(e) =>
-                                    handleTimeInputChange(
-                                        "second",
-                                        e.target.value
-                                    )
-                                }
-                                onBlur={applyChanges}
-                                onWheel={(e) => handleWheelChange(e, "second")}
-                                maxLength={2}
-                            />
                         </div>
                     </div>
                 </div>

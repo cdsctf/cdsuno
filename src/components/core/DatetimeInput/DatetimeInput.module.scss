@@ -1,6 +1,21 @@
+$bg-color: var(--bg-color);
+$border-color: var(--border-color);
+
 .root {
     display: flex;
     gap: 8px;
+
+    &[data-variant="solid"] {
+        .icon {
+            color: #ffffff;
+        }
+    }
+
+    &[data-variant="outlined"] {
+        .icon {
+            color: $border-color;
+        }
+    }
 
     .date {
         display: flex;

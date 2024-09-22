@@ -5,29 +5,20 @@ import { useState, useRef, useEffect } from "react";
 
 export interface DatetimeInputProps
     extends Omit<InputWrapperProps, "onChange"> {
+    icon?: React.ReactNode;
     value?: DateTime;
     onChange?: (value: DateTime) => void;
 }
 
 export function DatetimeInput(props: DatetimeInputProps) {
-    const { label, value, onChange } = props;
+    const { icon, label, value = DateTime.now(), onChange, ...rest } = props;
 
-    const [year, setYear] = useState<number>(
-        value?.year ?? DateTime.now().year
-    );
-    const [month, setMonth] = useState<number>(
-        value?.month ?? DateTime.now().month
-    );
-    const [day, setDay] = useState<number>(value?.day ?? DateTime.now().day);
-    const [hour, setHour] = useState<number>(
-        value?.hour ?? DateTime.now().hour
-    );
-    const [minute, setMinute] = useState<number>(
-        value?.minute ?? DateTime.now().minute
-    );
-    const [second, setSecond] = useState<number>(
-        value?.second ?? DateTime.now().second
-    );
+    const [year, setYear] = useState<number>(value?.year);
+    const [month, setMonth] = useState<number>(value?.month);
+    const [day, setDay] = useState<number>(value?.day);
+    const [hour, setHour] = useState<number>(value?.hour);
+    const [minute, setMinute] = useState<number>(value?.minute);
+    const [second, setSecond] = useState<number>(value?.second);
 
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -73,7 +64,18 @@ export function DatetimeInput(props: DatetimeInputProps) {
         if (datetime.isValid) {
             onChange?.(datetime);
         }
-    }, [year, month, day, hour, minute, second, onChange]);
+    }, [year, month, day, hour, minute, second]);
+
+    useEffect(() => {
+        if (value) {
+            setYear(value.year);
+            setMonth(value.month);
+            setDay(value.day);
+            setHour(value.hour);
+            setMinute(value.minute);
+            setSecond(value.second);
+        }
+    }, [value]);
 
     const handleInputChange =
         (setter: (value: number) => void, min?: number, max?: number) =>
@@ -91,7 +93,8 @@ export function DatetimeInput(props: DatetimeInputProps) {
         };
 
     return (
-        <InputWrapper className={styles["root"]} label={label} invalid>
+        <InputWrapper className={styles["root"]} label={label} {...rest}>
+            {icon && <div className={styles["icon"]}>{icon}</div>}
             <div className={styles["date"]}>
                 <input
                     type={"number"}

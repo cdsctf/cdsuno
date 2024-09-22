@@ -130,30 +130,4 @@ $border-color: var(--border-color);
             }
         }
     }
-
-    .time-picker {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        margin: 16px 0 8px 0;
-
-        input {
-            width: 40px;
-            text-align: center;
-            font-size: 18px;
-            padding: 4px;
-            border-bottom: $border-color 2px solid;
-            border-radius: 4px;
-
-            &:focus {
-                outline: none;
-            }
-        }
-
-        .time-separator {
-            font-size: 18px;
-            margin: 0 4px;
-        }
-    }
 }
