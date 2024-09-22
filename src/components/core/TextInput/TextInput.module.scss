@@ -4,6 +4,8 @@ $bg-color: var(--bg-color);
 $border-color: var(--border-color);
 
 .root {
+    gap: 8px;
+
     &[data-variant="solid"] {
         background-color: $bg-color;
 

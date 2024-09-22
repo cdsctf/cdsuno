@@ -13,6 +13,7 @@ import { Dropdown } from "@/components/core/Dropdown";
 import { ChallengeCard } from "@/components/widgets/ChallengeCard";
 import { Switch } from "@/components/core/Switch/Switch";
 import { ChallengeModal } from "@/components/modals/ChallengeModal";
+import { DatetimeInput } from "@/components/core/DatetimeInput";
 
 export default function Page() {
     const [color, setColor] = useState("#1cb0f6");
@@ -131,6 +132,7 @@ export default function Page() {
                 >
                     加载
                 </Button>
+                <DatetimeInput />
                 <div
                     style={{
                         display: "flex",
