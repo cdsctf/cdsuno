@@ -11,9 +11,9 @@
     --color-lime: #94d82d;
     --color-yellow: #fcc419;
     --color-orange: #ff922b;
-    --color-dark: #343535;
+    --color-dark: #131f24;
     --color-gray: #5e5e5e;
-    --color-light: #d0d0d0;
+    --color-light: #f8f8f8;
     --color-primary: #228be6;
     --color-secondary: #eca758;
     --color-info: #0ea5e9;
@@ -24,12 +24,12 @@
 
 :root[data-theme="light"] {
     color-scheme: light;
-    --bg-color: #f8f8f8;
-    --text-color: #000000;
+    --bg-color: var(--color-light);
+    --text-color: var(--color-dark);
 }
 
 :root[data-theme="dark"] {
     color-scheme: dark;
-    --bg-color: #131f24;
-    --text-color: #ffffff;
+    --bg-color: var(--color-dark);
+    --text-color: var(--color-light);
 }
