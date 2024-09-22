@@ -14,7 +14,11 @@
     "dependencies": {
         "chroma-js": "^3.0.0",
         "install": "^0.13.0",
+        "katex": "^0.16.11",
         "luxon": "^3.5.0",
+        "marked": "^14.1.2",
+        "marked-highlight": "^2.1.4",
+        "prismjs": "^1.29.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-router-dom": "^6.26.1",
@@ -28,8 +32,10 @@
         "@svgr/core": "^8.1.0",
         "@svgr/plugin-jsx": "^8.1.0",
         "@types/chroma-js": "^2.4.4",
+        "@types/katex": "^0.16.7",
         "@types/luxon": "^3.4.2",
         "@types/node": "^22.4.0",
+        "@types/prismjs": "^1.26.4",
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
         "@types/react-transition-group": "^4.4.11",
@@ -42,6 +48,7 @@
         "typescript": "^5.5.3",
         "typescript-eslint": "^8.0.1",
         "unplugin-icons": "^0.19.2",
-        "vite": "^5.4.1"
+        "vite": "^5.4.1",
+        "vite-plugin-prismjs": "^0.0.11"
     }
 }

@@ -15,6 +15,7 @@ import { Switch } from "@/components/core/Switch/Switch";
 import { ChallengeModal } from "@/components/modals/ChallengeModal";
 import { DatetimeInput } from "@/components/core/DatetimeInput";
 import { Textarea } from "@/components/core/Textarea";
+import { MarkdownRender } from "@/components/utils/MarkdownRender/MarkdownRender";
 
 export default function Page() {
     const [color, setColor] = useState("#1cb0f6");
@@ -38,6 +39,37 @@ export default function Page() {
     );
 
     const [checked, setChecked] = useState<boolean>(false);
+
+    const markdownText = `
+# welcome Heading1
+## welcome Heading2
+### welcome Heading3
+#### welcome Heading4
+##### welcome Heading5
+###### welcome Heading6
+
+*italic*
+
+**bold**
+
+***bold italic***
+
+~~strikethrough~~
+
+\`code\`
+
+\`code line\`
+
+\`\`\`python
+print("hello world")
+\`\`\`
+
+[link](https://github.com)
+
+> blockquote
+
+- list
+`;
 
     return (
         <>
@@ -362,6 +394,9 @@ export default function Page() {
                     onChange={(checked) => setChecked(checked)}
                     label={"I am a switch"}
                 />
+                <MarkdownRender src={"# Hello World"} />
+
+                <MarkdownRender src={markdownText} />
             </div>
         </>
     );

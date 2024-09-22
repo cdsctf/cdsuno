@@ -1,10 +1,14 @@
-import React, { ComponentProps, forwardRef } from "react";
+import React, {
+    ComponentProps,
+    ComponentPropsWithRef,
+    forwardRef,
+} from "react";
 import chroma from "chroma-js";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Button.module.scss";
 import Loading from "../../icons/Loading";
 
-export interface ButtonProps extends ComponentProps<"button"> {
+export interface ButtonProps extends ComponentPropsWithRef<"button"> {
     width?: string;
     height?: string;
     color?: string;
