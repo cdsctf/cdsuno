@@ -3,6 +3,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./InputWrapper.module.scss";
 
 export interface InputWrapperProps extends ComponentProps<"div"> {
+    width?: string;
     color?: string;
     variant?: "outlined" | "solid";
     invalid?: boolean;
@@ -16,6 +17,7 @@ export interface InputWrapperProps extends ComponentProps<"div"> {
 
 export function InputWrapper(props: InputWrapperProps) {
     const {
+        width = "fit-content",
         color = "primary",
         invalid = false,
         variant = "outlined",
@@ -31,6 +33,7 @@ export function InputWrapper(props: InputWrapperProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
+        "--width": width,
         "--bg-color": baseColor,
         "--border-color": baseColor,
     } as React.CSSProperties;

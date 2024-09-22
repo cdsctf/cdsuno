@@ -6,7 +6,7 @@ import EyeCloseBold from "~icons/solar/eye-closed-bold";
 import styles from "./TextInput.module.scss";
 import { InputWrapper, InputWrapperProps } from "../InputWrapper";
 
-export interface TextInputProps extends InputWrapperProps {
+export interface TextInputProps extends Omit<InputWrapperProps, "onChange"> {
     clearable?: boolean;
     password?: boolean;
     invalid?: boolean;
@@ -16,12 +16,13 @@ export interface TextInputProps extends InputWrapperProps {
     placeholder?: string;
     helperText?: string;
     errorText?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (value: string) => void;
     style?: React.CSSProperties;
 }
 
 export function TextInput(props: TextInputProps) {
     const {
+        width,
         color = "primary",
         clearable = false,
         password = false,
@@ -43,9 +44,7 @@ export function TextInput(props: TextInputProps) {
 
     const handleClear = () => {
         if (onChange) {
-            onChange({
-                target: { value: "" },
-            } as React.ChangeEvent<HTMLInputElement>);
+            onChange("");
         }
     };
 
@@ -62,13 +61,14 @@ export function TextInput(props: TextInputProps) {
 
     return (
         <InputWrapper
+            width={width}
             color={color}
             variant={variant}
             invalid={invalid}
             helperText={helperText}
             errorText={errorText}
             label={label}
-            className={styles["root"]}
+            className={`${styles["root"]} ${className}`}
             {...rest}
         >
             {icon && <div className={styles["icon"]}>{icon}</div>}
@@ -76,7 +76,7 @@ export function TextInput(props: TextInputProps) {
                 value={value}
                 type={password && !isPasswordVisible ? "password" : "text"}
                 placeholder={placeholder}
-                onChange={onChange}
+                onChange={(e) => onChange?.(e.target.value)}
             />
             {clearable && (
                 <button

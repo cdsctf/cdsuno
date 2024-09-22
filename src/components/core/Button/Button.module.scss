@@ -29,19 +29,18 @@ $text-color: var(--text-color);
         gap: 12px;
         @include mixins.transition;
         padding: 0.5rem 1.375rem;
+        white-space: nowrap;
         @include typography.text-lg;
 
         cursor: pointer;
 
         &.solid {
             background-color: $bg-color;
-            // box-shadow: 0 3px 0 $bg-secondary-color;
         }
 
         &.outlined {
             background-color: transparent;
             border-color: $bg-color;
-            // box-shadow: 0 3px 0 $bg-color;
         }
 
         &.ghost {

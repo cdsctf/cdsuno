@@ -176,6 +176,7 @@ export function ChallengeModal(props: ChallengeModalProps) {
                     }}
                 >
                     <TextInput
+                        width={"100%"}
                         className={styles["input"]}
                         icon={<FlagBold />}
                         clearable
@@ -183,7 +184,7 @@ export function ChallengeModal(props: ChallengeModalProps) {
                         placeholder={placeholder}
                         value={flag}
                         variant={"solid"}
-                        onChange={(e) => setFlag(e.target.value)}
+                        onChange={(value) => setFlag(value)}
                     />
                     <Button
                         className={styles["button"]}

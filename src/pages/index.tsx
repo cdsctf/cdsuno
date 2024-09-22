@@ -94,7 +94,7 @@ export default function Page() {
                     // passwd
                     invalid
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={(value) => setValue(value)}
                     label={"用户名"}
                     placeholder="Username"
                     helperText={"请输入用户名 helperText"}
@@ -106,7 +106,7 @@ export default function Page() {
                     password
                     invalid
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={(value) => setValue(value)}
                     variant={"solid"}
                     // label={"密码"}
                     placeholder="Password"
