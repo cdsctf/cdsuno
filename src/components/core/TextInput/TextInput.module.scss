@@ -1,0 +1,116 @@
+@use "@/styles/mixins";
+
+$bg-color: var(--bg-color);
+$border-color: var(--border-color);
+
+.root {
+    &[data-variant="solid"] {
+        background-color: $bg-color;
+
+        .icon {
+            color: #ffffff;
+        }
+
+        input {
+            color: #ffffff;
+            caret-color: #ffffff;
+
+            &::placeholder {
+                color: #ffffff7d;
+            }
+        }
+
+        .toggle-button {
+            color: #ffffff;
+        }
+
+        .clear-button {
+            color: #ffffff;
+        }
+    }
+
+    &[data-variant="outlined"] {
+        .icon {
+            color: $border-color;
+        }
+    }
+
+    &:focus,
+    &:hover {
+        filter: brightness(1.125);
+    }
+
+    &:focus-within {
+        .clear-button {
+            opacity: 0.5;
+        }
+
+        .toggle-button {
+            opacity: 0.5;
+        }
+    }
+
+    input {
+        flex: 1;
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        caret-color: $border-color;
+        font-size: 16px;
+        line-height: 1.5;
+
+        &[type="password"] {
+            &::-webkit-textfield-decoration-container,
+            &::-webkit-password-toggle-button,
+            &::-ms-reveal,
+            &::-ms-clear {
+                display: none;
+            }
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+
+    .clear-button {
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: $border-color;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:focus {
+            outline: none;
+            opacity: 1;
+        }
+    }
+
+    .toggle-button {
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: $border-color;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:focus {
+            outline: none;
+            opacity: 1;
+        }
+    }
+}

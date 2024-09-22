@@ -1,18 +1,18 @@
-import Avatar from "@/components/atoms/Avatar";
-import Button from "@/components/atoms/Button";
-import Checkbox from "@/components/atoms/Checkbox";
-import DatetimePicker from "@/components/atoms/DatetimePicker";
-import Dialog from "@/components/atoms/Dialog";
-import TextInput from "@/components/atoms/TextInput";
-import Tooltip from "@/components/atoms/Tooltip";
+import { Avatar } from "@/components/core/Avatar";
+import { Button } from "@/components/core/Button";
+import { Checkbox } from "@/components/core/Checkbox";
+import { DatetimePicker } from "@/components/core/DatetimePicker";
+import { Dialog } from "@/components/core/Dialog";
+import { TextInput } from "@/components/core/TextInput";
+import { Tooltip } from "@/components/core/Tooltip";
 import UserBold from "~icons/solar/user-bold";
 import { useToastStore } from "@/stores/toast";
 import { DateTime } from "luxon";
 import { useRef, useState } from "react";
-import Dropdown from "@/components/atoms/Dropdown";
-import ChallengeCard from "@/components/widgets/ChallengeCard";
-import Switch from "@/components/atoms/Switch";
-import ChallengeModal from "@/components/modals/ChallengeModal";
+import { Dropdown } from "@/components/core/Dropdown";
+import { ChallengeCard } from "@/components/widgets/ChallengeCard";
+import { Switch } from "@/components/core/Switch/Switch";
+import { ChallengeModal } from "@/components/modals/ChallengeModal";
 
 export default function Page() {
     const [color, setColor] = useState("#1cb0f6");

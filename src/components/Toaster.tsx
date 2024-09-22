@@ -1,4 +1,4 @@
-import Toast from "@/components/atoms/Toast";
+import { Toast } from "@/components/core/Toast";
 import { useToastStore } from "@/stores/toast";
 import styles from "@/styles/components/Toaster.module.scss";
 import React, { useEffect, useRef, useState } from "react";

@@ -1,0 +1,57 @@
+@use "@/styles/mixins";
+
+$bg-color: var(--bg-color);
+$border-color: var(--border-color);
+
+.root {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    border-radius: 15px;
+
+    .label {
+        display: inline-block;
+        margin: 2px 5px;
+        font-size: 0.9;
+        font-weight: 500;
+        line-height: 1;
+        cursor: default;
+    }
+
+    .helper-text {
+        margin: 2px 5px;
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .error-text {
+        margin: 5px 5px;
+        color: var(--color-error);
+        font-size: 12px;
+    }
+
+    .wrapper {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        display: flex;
+        align-items: center;
+        position: relative;
+        border: 2.75px solid $border-color;
+        border-radius: 12px;
+        padding: 6.75px 12px;
+        gap: 8px;
+        @include mixins.transition;
+
+        &[data-variant="solid"] {
+            background-color: $bg-color;
+        }
+
+        &:focus,
+        &:hover {
+            filter: brightness(1.125);
+        }
+    }
+}
