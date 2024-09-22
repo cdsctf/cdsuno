@@ -133,18 +133,6 @@ $icon-color: var(--icon-color);
                 overflow-y: auto;
                 overflow-wrap: break-word;
 
-                .watermark {
-                    position: absolute;
-                    top: 80%;
-                    right: 10%;
-                    transform: translate(10%, -80%);
-                    font-size: 5rem;
-                    color: $border-color;
-                    opacity: 0.25;
-                    user-select: none;
-                    z-index: -1;
-                }
-
                 .description {
                     text-wrap: break-word;
                 }

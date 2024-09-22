@@ -136,9 +136,6 @@ export function ChallengeModal(props: ChallengeModalProps) {
                         </div>
                     </div>
                     <div className={styles["content"]}>
-                        <div className={styles["watermark"]}>
-                            {tabIcons[activeTab]}
-                        </div>
                         {activeTab === "description" && (
                             <div className={styles["description"]}>
                                 {challenge.description}
