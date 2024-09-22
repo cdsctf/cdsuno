@@ -5,6 +5,8 @@ import styles from "./Button.module.scss";
 import Loading from "../../icons/Loading";
 
 export interface ButtonProps extends ComponentProps<"button"> {
+    width?: string;
+    height?: string;
     color?: string;
     variant?: "solid" | "outlined" | "ghost";
     justify?: "start" | "center" | "end";
@@ -19,6 +21,8 @@ export interface ButtonProps extends ComponentProps<"button"> {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     (props, ref) => {
         const {
+            width = "fit-content",
+            height = "auto",
             color = "primary",
             variant = "solid",
             loading = false,
@@ -33,6 +37,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         const baseColor = useThemeColor(color);
 
         const variables = {
+            "--width": width,
+            "--height": height,
             "--bg-color": baseColor,
             "--bg-secondary-color": `${chroma.valid(baseColor) ? chroma(baseColor).darken(0.5) : baseColor}`,
             "--text-color": variant === "solid" ? "#fff" : baseColor,

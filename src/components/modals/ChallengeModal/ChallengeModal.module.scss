@@ -173,15 +173,6 @@ $icon-color: var(--icon-color);
             display: flex;
             align-items: center;
             gap: 15px;
-
-            .input {
-                flex: 1;
-                transition: all 150ms ease-in-out;
-            }
-
-            .button {
-                width: fit-content;
-            }
         }
     }
 }

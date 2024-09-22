@@ -177,7 +177,6 @@ export function ChallengeModal(props: ChallengeModalProps) {
                 >
                     <TextInput
                         width={"100%"}
-                        className={styles["input"]}
                         icon={<FlagBold />}
                         clearable
                         color={category?.color}
@@ -187,7 +186,6 @@ export function ChallengeModal(props: ChallengeModalProps) {
                         onChange={(value) => setFlag(value)}
                     />
                     <Button
-                        className={styles["button"]}
                         color={category?.color}
                         variant={"solid"}
                         type={"submit"}

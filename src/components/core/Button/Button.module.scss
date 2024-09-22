@@ -1,6 +1,8 @@
 @use "@/styles/typography";
 @use "@/styles/mixins";
 
+$width: var(--width);
+$height: var(--height);
 $bg-color: var(--bg-color);
 $bg-secondary-color: var(--bg-secondary-color);
 $text-color: var(--text-color);

@@ -50,7 +50,7 @@ export function InputWrapper(props: InputWrapperProps) {
             >
                 {children}
             </div>
-            {invalid && (
+            {invalid && errorText && (
                 <label className={styles["error-text"]}>{errorText}</label>
             )}
         </div>
