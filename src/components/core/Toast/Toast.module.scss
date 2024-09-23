@@ -1,4 +1,3 @@
-@use "@/styles/typography";
 @use "@/styles/mixins";
 
 $bg-color: var(--bg-color);
@@ -34,12 +33,14 @@ $border-color: var(--border-color);
     }
 
     .title {
-        @include typography.text-lg;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
         color: #ffffff;
     }
 
     .description {
-        @include typography.text-base;
+        font-size: 1rem;
+        line-height: 1.5rem;
         color: #ffffff;
     }
 }

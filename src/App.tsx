@@ -17,19 +17,11 @@ export default function App() {
 
     return (
         <>
+            <Sidebar />
             <main>
-                <Sidebar />
-                <div
-                    style={{
-                        paddingLeft: "25px",
-                        height: "100vh",
-                        overflow: "auto",
-                    }}
-                >
-                    <RouterProvider router={router} />
-                </div>
-                <Toaster />
+                <RouterProvider router={router} />
             </main>
+            <Toaster />
         </>
     );
 }

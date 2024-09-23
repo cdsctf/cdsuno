@@ -1,4 +1,3 @@
-@use "@/styles/typography";
 @use "@/styles/mixins";
 
 $width: var(--width);
@@ -19,7 +18,8 @@ $text-color: var(--text-color);
     @include mixins.transition;
     padding: 0.5rem 1.375rem;
     white-space: nowrap;
-    @include typography.text-lg;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
 
     cursor: pointer;
 

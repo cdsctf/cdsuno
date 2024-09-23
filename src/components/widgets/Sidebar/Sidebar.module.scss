@@ -35,6 +35,8 @@ $border-color: var(--border-color);
 
     gap: 1.5em;
 
+    scrollbar-width: none;
+
     &:hover {
         left: 0;
         height: 75%;

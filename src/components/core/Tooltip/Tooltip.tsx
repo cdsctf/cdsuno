@@ -19,7 +19,7 @@ export function Tooltip(props: TooltipProps) {
     return (
         <div className={styles["root"]} style={variables}>
             <div className={styles["trigger"]}>{children}</div>
-            <div className={`${styles["content"]} ${styles[position]}`}>
+            <div className={styles["content"]} data-position={position}>
                 {content}
             </div>
         </div>
