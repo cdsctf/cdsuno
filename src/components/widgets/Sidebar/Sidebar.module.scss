@@ -3,7 +3,7 @@ $border-color: var(--border-color);
 
 .root {
     position: fixed;
-    height: 60%;
+    height: 75%;
     width: 4.25em;
     z-index: 3;
     left: -3.25em;
@@ -39,7 +39,6 @@ $border-color: var(--border-color);
 
     &:hover {
         left: 0;
-        height: 75%;
     }
 
     .icon {
@@ -65,6 +64,7 @@ $border-color: var(--border-color);
         background: #ffffff1d;
         border-radius: 12px;
 
+        &[data-active="true"],
         &:hover {
             scale: 1.2;
         }

@@ -63,7 +63,7 @@ export function Sidebar() {
                         position={"right"}
                         offset={25}
                     >
-                        <div className={styles["link"]}>{item?.icon}</div>
+                        <button className={styles["link"]}>{item?.icon}</button>
                     </Tooltip>
                 ))}
             </div>
