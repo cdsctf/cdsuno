@@ -30,11 +30,10 @@ export function Toast(props: ToastProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
-        "--bg-color": chroma(baseColor).alpha(0.25).hex(),
+        "--bg-color": chroma(baseColor).hex(),
         "--grid-color": chroma(baseColor).darken(1).alpha(0.1).hex(),
         "--text-color": chroma(baseColor).darken(1.75).hex(),
         "--border-color": baseColor,
-        "--border-secondary-color": `${chroma.valid(baseColor) ? chroma(baseColor).darken(0.5) : baseColor}`,
     } as CSSProperties;
 
     return (

@@ -1,0 +1,46 @@
+$bg-color: var(--bg-color);
+
+.root {
+    position: fixed;
+    height: 60%;
+    width: 4.25em;
+    z-index: 3;
+    left: -3.25em;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 0 1.5em 1.5em 0;
+
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+
+    background: $bg-color;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1em 0;
+
+    color: #ffffff;
+
+    transition: all 300ms ease-in-out;
+
+    &:hover {
+        left: 0;
+        height: 75%;
+    }
+
+    .links {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5em;
+    }
+
+    .link {
+        padding: 0.5em;
+        background: #ffffff1d;
+        border-radius: 12px;
+    }
+}
