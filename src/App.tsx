@@ -21,7 +21,7 @@ export default function App() {
                 <Sidebar />
                 <div
                     style={{
-                        marginLeft: "25px",
+                        paddingLeft: "25px",
                         height: "100vh",
                         overflow: "auto",
                     }}
