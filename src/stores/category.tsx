@@ -72,7 +72,7 @@ export const useCategoryStore = create<CategoryState>()(
                 },
                 {
                     id: 8,
-                    name: "steganography",
+                    name: "steg",
                     color: "#795548",
                     icon: <BlackHoleLineDuotone />,
                 },
