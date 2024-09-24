@@ -16,8 +16,9 @@ import { ChallengeModal } from "@/components/modals/ChallengeModal";
 import { DatetimeInput } from "@/components/core/DatetimeInput";
 import { Textarea } from "@/components/core/Textarea";
 import { MarkdownRender } from "@/components/utils/MarkdownRender/MarkdownRender";
+import { Default } from "@/components/layouts/Default";
 
-export default function Page() {
+export function Page() {
     const [color, setColor] = useState("#1cb0f6");
     const handleChange = (e: any) => {
         setColor(e.target.value);
@@ -72,7 +73,7 @@ print("hello world")
 `;
 
     return (
-        <>
+        <Default>
             <div
                 style={{
                     padding: 20,
@@ -398,6 +399,6 @@ print("hello world")
 
                 <MarkdownRender src={markdownText} />
             </div>
-        </>
+        </Default>
     );
 }

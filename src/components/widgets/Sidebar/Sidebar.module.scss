@@ -3,15 +3,15 @@ $border-color: var(--border-color);
 
 .root {
     position: fixed;
-    height: 75%;
+    height: 100%;
     width: 4.25em;
     z-index: 3;
-    left: -3.25em;
-    top: 50%;
-    transform: translateY(-50%);
+    // left: -3.25em;
+    // top: 50%;
+    // transform: translateY(-50%);
     border: 2.75px solid $border-color;
     border-left: none;
-    border-radius: 0 1.5em 1.5em 0;
+    // border-radius: 0 1.5em 1.5em 0;
 
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 

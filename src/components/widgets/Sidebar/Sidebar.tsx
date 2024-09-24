@@ -10,9 +10,11 @@ import { CSSProperties } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import { Tooltip } from "@/components/core";
 import chroma from "chroma-js";
+import { Link, useLocation } from "react-router-dom";
 
 export function Sidebar() {
     const themeStore = useThemeStore();
+    const pathname = useLocation().pathname;
 
     const baseColor = useThemeColor("primary");
 
@@ -63,7 +65,14 @@ export function Sidebar() {
                         position={"right"}
                         offset={25}
                     >
-                        <button className={styles["link"]}>{item?.icon}</button>
+                        <Link to={item?.href}>
+                            <div
+                                className={styles["link"]}
+                                data-active={pathname === item?.href}
+                            >
+                                {item?.icon}
+                            </div>
+                        </Link>
                     </Tooltip>
                 ))}
             </div>

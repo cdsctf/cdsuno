@@ -1,19 +1,29 @@
 import { useThemeStore } from "@/stores/theme";
 import Sun2BoldDuotone from "~icons/solar/sun-2-bold-duotone";
 import MoonBoldDuotone from "~icons/solar/moon-bold-duotone";
-import styles from "@/styles/components/Navbar.module.scss";
-import { ComponentProps } from "react";
+import styles from "./Navbar.module.scss";
+import useThemeColor from "@/hooks/useThemeColor";
+import { CSSProperties } from "react";
+import chroma from "chroma-js";
 
-export interface NavbarProps extends ComponentProps<"header"> {}
-
-export default function Navbar(props: NavbarProps) {
-    const { style } = props;
-
+export function Navbar() {
     const darkMode = useThemeStore.getState().darkMode;
 
+    const baseColor = useThemeColor("primary");
+
+    const variables = {
+        "--bg-color": chroma(baseColor).hex(),
+        "--border-color": chroma(baseColor).hex(),
+    } as CSSProperties;
+
     return (
-        <header className={styles["root"]} style={style}>
-            <div className={styles["logo"]}></div>
+        <header className={styles["root"]} style={variables}>
+            <div className={styles["info"]}>
+                <div className={styles["logo"]}>
+                    <img src="/cm2.png" alt="icon" draggable={false} />
+                </div>
+                <h1 className={styles["title"]}>Cloudsdale</h1>
+            </div>
             <div className={styles["links"]}>
                 {/* <button
                     style={{

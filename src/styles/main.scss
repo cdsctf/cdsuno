@@ -12,13 +12,8 @@
         U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-main {
-    overflow: auto;
-    height: 100vh;
-    background-color: var(--bg-color);
-    padding-left: 25px;
-    z-index: 0;
-    @include mixins.transition;
+body {
+    background: var(--bg-color);
 }
 
 *,

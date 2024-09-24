@@ -1,13 +1,10 @@
 import { useThemeStore } from "@/stores/theme";
 import { RouterProvider } from "react-router-dom";
-import { router } from "@/routers";
 import { useEffect } from "react";
-import Toaster from "@/components/Toaster";
-import { Sidebar } from "@/components/widgets/Sidebar";
+import { router } from "@/routers";
 
 export default function App() {
     const themeStore = useThemeStore();
-
     useEffect(() => {
         document.documentElement.setAttribute(
             "data-theme",
@@ -16,12 +13,6 @@ export default function App() {
     }, [themeStore.darkMode]);
 
     return (
-        <>
-            <Sidebar />
-            <main>
-                <RouterProvider router={router} />
-            </main>
-            <Toaster />
-        </>
+        <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
     );
 }

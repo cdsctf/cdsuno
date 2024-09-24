@@ -1,10 +1,10 @@
 import { Toast } from "@/components/core/Toast";
 import { useToastStore } from "@/stores/toast";
-import styles from "@/styles/components/Toaster.module.scss";
+import styles from "./Toaster.module.scss";
 import React, { useEffect, useRef, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-export default function Toaster() {
+export function Toaster() {
     const toastStore = useToastStore();
     const nodeRefs = useRef(new Map());
     const [visibleToasts, setVisibleToasts] = useState(new Set());
