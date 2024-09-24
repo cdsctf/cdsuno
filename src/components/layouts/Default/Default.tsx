@@ -1,4 +1,4 @@
-// import { Navbar } from "@/components/widgets/Navbar";
+import { Navbar } from "@/components/widgets/Navbar";
 import styles from "./Default.module.scss";
 import React from "react";
 import { Base } from "@/components/layouts/Base";
@@ -13,8 +13,8 @@ export function Default(props: DefaultProps) {
 
     return (
         <Base>
-            {/* <Navbar /> */}
-            <Sidebar />
+            <Navbar />
+            {/* <Sidebar /> */}
             <main className={styles["main"]}>{children}</main>
         </Base>
     );
