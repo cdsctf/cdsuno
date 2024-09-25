@@ -49,12 +49,14 @@ export function Navbar() {
     return (
         <header className={styles["root"]} style={variables}>
             <div className={styles["info-wrapper"]}>
-                <div className={styles["info"]}>
-                    <div className={styles["logo"]}>
-                        <img src="/cm2.png" alt="icon" draggable={false} />
+                <Link to={"/"} draggable={false}>
+                    <div className={styles["info"]}>
+                        <div className={styles["logo"]}>
+                            <img src="/cm2.png" alt="icon" draggable={false} />
+                        </div>
+                        <h1 className={styles["title"]}>Cloudsdale</h1>
                     </div>
-                    <h1 className={styles["title"]}>Cloudsdale</h1>
-                </div>
+                </Link>
             </div>
             <div className={styles["links"]}>
                 {links.map((item) => (
