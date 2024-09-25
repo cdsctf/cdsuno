@@ -48,15 +48,21 @@ export function Navbar() {
 
     return (
         <header className={styles["root"]} style={variables}>
-            <div className={styles["info-wrapper"]}>
-                <Link to={"/"} draggable={false}>
-                    <div className={styles["info"]}>
-                        <div className={styles["logo"]}>
-                            <img src="/cm2.png" alt="icon" draggable={false} />
+            <div className={styles["left-section"]}>
+                <div className={styles["info-wrapper"]}>
+                    <Link to={"/"} draggable={false}>
+                        <div className={styles["info"]}>
+                            <div className={styles["logo"]}>
+                                <img
+                                    src="/cm2.png"
+                                    alt="icon"
+                                    draggable={false}
+                                />
+                            </div>
+                            <h1 className={styles["title"]}>Cloudsdale</h1>
                         </div>
-                        <h1 className={styles["title"]}>Cloudsdale</h1>
-                    </div>
-                </Link>
+                    </Link>
+                </div>
             </div>
             <div className={styles["links"]}>
                 {links.map((item) => (
@@ -71,23 +77,25 @@ export function Navbar() {
                     </Link>
                 ))}
             </div>
-            <div className={styles["features-wrapper"]}>
-                <div className={styles["features"]}>
-                    <button
-                        onClick={() => {
-                            useThemeStore.getState().setDarkMode(!darkMode);
-                        }}
-                    >
-                        {darkMode ? (
-                            <>
-                                <Sun2BoldDuotone />
-                            </>
-                        ) : (
-                            <>
-                                <MoonBoldDuotone />
-                            </>
-                        )}
-                    </button>
+            <div className={styles["right-section"]}>
+                <div className={styles["features-wrapper"]}>
+                    <div className={styles["features"]}>
+                        <button
+                            onClick={() => {
+                                useThemeStore.getState().setDarkMode(!darkMode);
+                            }}
+                        >
+                            {darkMode ? (
+                                <>
+                                    <Sun2BoldDuotone />
+                                </>
+                            ) : (
+                                <>
+                                    <MoonBoldDuotone />
+                                </>
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
