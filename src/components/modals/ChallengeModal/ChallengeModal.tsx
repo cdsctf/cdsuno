@@ -76,62 +76,38 @@ export function ChallengeModal(props: ChallengeModalProps) {
                         </div>
                     </div>
                     <div className={styles["tabs"]}>
-                        <div
+                        <button
                             className={styles["tab"]}
                             onClick={() => setActiveTab("description")}
                             data-active={activeTab === "description"}
                         >
-                            <Tooltip
-                                content={"描述"}
-                                position={"top"}
-                                offset={25}
-                            >
-                                {tabIcons["description"]}
-                            </Tooltip>
-                            <label>描述</label>
-                        </div>
-                        <div
+                            {tabIcons["description"]}
+                            <span>描述</span>
+                        </button>
+                        <button
                             className={styles["tab"]}
                             onClick={() => setActiveTab("pod")}
                             data-active={activeTab === "pod"}
                         >
-                            <Tooltip
-                                content={"容器"}
-                                position={"top"}
-                                offset={25}
-                            >
-                                {tabIcons["pod"]}
-                            </Tooltip>
-                            <label>容器</label>
-                        </div>
-                        <div
+                            {tabIcons["pod"]}
+                            <span>容器</span>
+                        </button>
+                        <button
                             className={styles["tab"]}
                             onClick={() => setActiveTab("attachment")}
                             data-active={activeTab === "attachment"}
                         >
-                            <Tooltip
-                                content={"附件"}
-                                position={"top"}
-                                offset={25}
-                            >
-                                {tabIcons["attachment"]}
-                            </Tooltip>
-                            <label>附件</label>
-                        </div>
-                        <div
+                            {tabIcons["attachment"]}
+                            <span>附件</span>
+                        </button>
+                        <button
                             className={styles["tab"]}
                             onClick={() => setActiveTab("feedback")}
                             data-active={activeTab === "feedback"}
                         >
-                            <Tooltip
-                                content={"反馈"}
-                                position={"top"}
-                                offset={20}
-                            >
-                                {tabIcons["feedback"]}
-                            </Tooltip>
-                            <label>反馈</label>
-                        </div>
+                            {tabIcons["feedback"]}
+                            <span>反馈</span>
+                        </button>
                     </div>
                 </div>
                 <div className={styles["main"]}>
