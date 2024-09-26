@@ -9,7 +9,6 @@ import styles from "./Navbar.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
 import { CSSProperties } from "react";
 import chroma from "chroma-js";
-import { Tooltip } from "@/components/core";
 import { Link, useLocation } from "react-router-dom";
 
 export function Navbar() {
