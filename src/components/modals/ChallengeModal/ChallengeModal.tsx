@@ -69,72 +69,72 @@ export function ChallengeModal(props: ChallengeModalProps) {
         <div className={styles["root"]} style={variables}>
             <div className={styles["container"]}>
                 <div className={styles["navbar"]}>
-                    <div className={styles["category"]}>
-                        <Badge
-                            variant={"light"}
-                            color={chroma(baseColor).darken(1).hex()}
-                        >
-                            {category?.name?.toUpperCase()}
-                        </Badge>
+                    <div className={styles["info"]}>
+                        <div className={styles["icon"]}>{category?.icon}</div>
+                        <div className={styles["title"]}>
+                            {challenge?.title}
+                        </div>
                     </div>
-                    <div className={styles["title"]}>{challenge?.title}</div>
-                    <div className={styles["toggle"]}></div>
-                    <div className={styles["icon"]}>{category?.icon}</div>
-                </div>
-                <div className={styles["main"]}>
-                    <div className={styles["sidebar"]}>
+                    <div className={styles["tabs"]}>
                         <div
                             className={styles["tab"]}
                             onClick={() => setActiveTab("description")}
+                            data-active={activeTab === "description"}
                         >
                             <Tooltip
                                 content={"描述"}
-                                position={"left"}
-                                offset={20}
+                                position={"top"}
+                                offset={25}
                             >
                                 {tabIcons["description"]}
                             </Tooltip>
+                            <label>描述</label>
                         </div>
-                        <div className={styles["divider"]} />
                         <div
                             className={styles["tab"]}
                             onClick={() => setActiveTab("pod")}
+                            data-active={activeTab === "pod"}
                         >
                             <Tooltip
                                 content={"容器"}
-                                position={"left"}
-                                offset={20}
+                                position={"top"}
+                                offset={25}
                             >
                                 {tabIcons["pod"]}
                             </Tooltip>
+                            <label>容器</label>
                         </div>
-                        <div className={styles["divider"]} />
                         <div
                             className={styles["tab"]}
                             onClick={() => setActiveTab("attachment")}
+                            data-active={activeTab === "attachment"}
                         >
                             <Tooltip
                                 content={"附件"}
-                                position={"left"}
-                                offset={20}
+                                position={"top"}
+                                offset={25}
                             >
                                 {tabIcons["attachment"]}
                             </Tooltip>
+                            <label>附件</label>
                         </div>
-                        <div className={styles["divider"]} />
                         <div
                             className={styles["tab"]}
                             onClick={() => setActiveTab("feedback")}
+                            data-active={activeTab === "feedback"}
                         >
                             <Tooltip
                                 content={"反馈"}
-                                position={"left"}
+                                position={"top"}
                                 offset={20}
                             >
                                 {tabIcons["feedback"]}
                             </Tooltip>
+                            <label>反馈</label>
                         </div>
                     </div>
+                </div>
+                <div className={styles["main"]}>
                     <div className={styles["content"]}>
                         {activeTab === "description" && (
                             <div className={styles["description"]}>

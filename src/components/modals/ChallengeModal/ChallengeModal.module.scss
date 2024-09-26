@@ -11,22 +11,19 @@ $icon-color: var(--icon-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     border-radius: 22.5px;
-
-    filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.3));
 
     width: 80vw;
 
     @include mixins.media("lg") {
-        width: 35rem;
+        width: 42.5rem;
     }
 
     .container {
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.3));
 
         padding: 16px;
         border-radius: 22.5px;
@@ -37,40 +34,67 @@ $icon-color: var(--icon-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
 
             background-color: $border-color;
-            border-radius: 16px;
-            border: 3.75px solid $border-color;
-            padding: 12px;
+            border-radius: 12px 12px 0 0;
+            border: 2.75px solid $border-color;
+            padding: 10px 20px;
 
-            .category {
-                flex: 1;
-                font-size: 0.85rem;
-                font-weight: bold;
-                user-select: none;
-            }
+            color: #ffffff;
 
-            .title {
-                max-width: 50%;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-
-                flex-shrink: 0;
-                font-size: 1.25rem;
-                font-weight: 700;
-                color: #ffffff;
-            }
-
-            .icon {
+            .info {
+                width: 30%;
                 display: flex;
-                flex: 1;
-                justify-content: end;
+                align-items: center;
+                gap: 8px;
 
-                width: 2rem;
-                height: 2rem;
+                .title {
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
 
-                color: #ffffff;
+                    flex-shrink: 0;
+                    font-size: 1rem;
+                    font-weight: 700;
+                }
+
+                .icon {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+            }
+
+            .tabs {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+
+                .tab {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 150ms ease-in-out;
+                    padding: 8px 14px;
+                    border-radius: 9999px;
+                    gap: 8px;
+
+                    &[data-active="true"],
+                    &:hover {
+                        filter: brightness(1.125);
+                        background-color: #1111113d;
+                    }
+
+                    &:active {
+                        transform: translateY(2px);
+                    }
+
+                    label {
+                        font-size: 0.8rem;
+                        text-wrap: nowrap;
+                    }
+                }
             }
         }
 
@@ -78,47 +102,16 @@ $icon-color: var(--icon-color);
             display: flex;
 
             width: 100%;
-            min-height: 15rem;
-            max-height: 25rem;
+            min-height: 20rem;
+            max-height: 35rem;
 
             background-color: var(--color-light);
-            border-radius: 16px;
+            border-radius: 0 0 12px 12px;
             border: 2.75px solid $border-color;
+            border-top: none;
 
             @include mixins.dark {
                 background-color: var(--color-dark);
-            }
-
-            .sidebar {
-                border-right: 3px solid $border-color;
-                padding: 16px 12px;
-                border-radius: 10px 0 0 10px;
-                background-color: $border-color;
-
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-around;
-
-                .tab {
-                    color: #ffffff;
-                    cursor: pointer;
-                    transition: all 150ms ease-in-out;
-
-                    &:hover {
-                        filter: brightness(1.125);
-                    }
-
-                    &:active {
-                        transform: translateY(2px);
-                    }
-                }
-
-                .divider {
-                    border-top: 1.5px dashed #ffffff;
-                    width: 100%;
-                    height: 1px;
-                }
             }
 
             .content {
@@ -166,6 +159,7 @@ $icon-color: var(--icon-color);
             display: flex;
             align-items: center;
             gap: 15px;
+            margin: 12px 0;
         }
     }
 }
