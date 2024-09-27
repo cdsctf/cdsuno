@@ -7,9 +7,10 @@ $bg-secondary-color: var(--bg-secondary-color);
 $text-color: var(--text-color);
 
 .root {
-    width: fit-content;
+    width: $width;
     display: flex;
     align-items: center;
+    justify-content: center;
     color: transparent;
     border-radius: 12px;
     border: 2.75px solid transparent;

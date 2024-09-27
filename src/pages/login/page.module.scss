@@ -1,0 +1,57 @@
+$bg-color: var(--bg-color);
+
+.root {
+    display: flex;
+    height: 100vh;
+
+    .category {
+        height: 100%;
+        width: 60%;
+        position: relative;
+        background-color: $bg-color;
+        transition: all 2000ms ease-in-out;
+
+        background-image: linear-gradient(
+                to right,
+                #ffffff0d 1px,
+                transparent 1px
+            ),
+            linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
+
+        background-size: 25px 25px;
+
+        .icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 27.5%;
+            height: 27.5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+        }
+    }
+
+    .main {
+        height: 100%;
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 15px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+}
