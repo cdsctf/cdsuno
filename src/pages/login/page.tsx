@@ -1,7 +1,7 @@
 import { Plain } from "@/components/layouts/Plain";
 import styles from "./page.module.scss";
 import { useCategoryStore } from "@/stores/category";
-import { CSSProperties, useEffect, useMemo, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { Button, TextInput } from "@/components/core";
 import UserBold from "~icons/solar/user-bold";
 import LockPasswordBold from "~icons/solar/lock-password-bold";

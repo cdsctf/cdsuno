@@ -77,20 +77,17 @@ export function TextInput(props: TextInputProps) {
                 onChange={(e) => onChange?.(e.target.value)}
             />
             {clearable && (
-                <button
-                    className={styles["clear-button"]}
-                    onClick={handleClear}
-                >
+                <div className={styles["clear-button"]} onClick={handleClear}>
                     <CloseCircleBold />
-                </button>
+                </div>
             )}
             {password && (
-                <button
+                <div
                     className={styles["toggle-button"]}
                     onClick={handleToggleVisibility}
                 >
                     {isPasswordVisible ? <EyeBold /> : <EyeCloseBold />}
-                </button>
+                </div>
             )}
         </InputWrapper>
     );
