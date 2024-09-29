@@ -71,6 +71,7 @@ $border-color: var(--border-color);
         display: flex;
         flex-direction: row;
         gap: 1rem;
+        user-select: none;
     }
 
     .link {
