@@ -22,8 +22,7 @@ export function DatetimePicker(props: DatetimePickerProps) {
     const [selectedDateTime, setSelectedDateTime] = useState<DateTime>(value);
 
     const pickerRef = useRef<HTMLDivElement>(null);
-
-    const togglePicker = () => setOpen(!open);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     function handleDateChange(day: number) {
         const newDateTime = selectedDateTime.set({ day });
@@ -34,7 +33,9 @@ export function DatetimePicker(props: DatetimePickerProps) {
         const handleClickOutside = (event: MouseEvent) => {
             if (
                 pickerRef.current &&
-                !pickerRef.current.contains(event.target as Node)
+                !pickerRef.current.contains(event.target as Node) &&
+                inputRef.current &&
+                !inputRef.current.contains(event.target as Node)
             ) {
                 setOpen(false);
             }
@@ -58,8 +59,9 @@ export function DatetimePicker(props: DatetimePickerProps) {
             <DatetimeInput
                 value={selectedDateTime}
                 onChange={(value) => setSelectedDateTime(value)}
-                onClick={togglePicker}
+                onClick={() => setOpen(true)}
                 icon={icon}
+                ref={inputRef}
             />
             <CSSTransition
                 in={open}
