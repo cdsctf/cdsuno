@@ -138,7 +138,9 @@ export function DatetimeInput(props: DatetimeInputProps) {
                     type={"time"}
                     step={"1"}
                     value={time}
-                    onChange={(e) => setTime(e.target.value)}
+                    onChange={(e) =>
+                        setTime(e.target.value ? e.target.value : "00:00:00")
+                    }
                 />
             </div>
         </InputWrapper>
