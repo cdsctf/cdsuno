@@ -30,6 +30,7 @@ $border-color: var(--border-color);
     input {
         outline: none;
         background: none;
+        appearance: none;
         -moz-appearance: textfield;
 
         &::-webkit-inner-spin-button,
