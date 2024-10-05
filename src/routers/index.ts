@@ -4,33 +4,51 @@ export const router = createBrowserRouter([
     {
         path: "/",
         lazy: async () => {
-            let { Page } = await import("@/pages/index");
-            return { Component: Page };
+            let { Base } = await import("@/layouts/Base");
+            return { Component: Base };
         },
-    },
-    {
-        path: "/login",
-        lazy: async () => {
-            let { Page } = await import("@/pages/login");
-            return { Component: Page };
-        },
-    },
-    {
-        path: "/games",
         children: [
             {
-                index: true,
+                path: "login",
                 lazy: async () => {
-                    let { Page } = await import("@/pages/_games");
+                    let { Page } = await import("@/pages/login");
                     return { Component: Page };
                 },
             },
             {
-                path: ":id",
+                path: "/",
                 lazy: async () => {
-                    let { Page } = await import("@/pages/_games/_[id]");
-                    return { Component: Page };
+                    let { Default } = await import("@/layouts/Default");
+                    return { Component: Default };
                 },
+                children: [
+                    {
+                        index: true,
+                        lazy: async () => {
+                            let { Page } = await import("@/pages/index");
+                            return { Component: Page };
+                        },
+                    },
+                    {
+                        path: "games",
+                        lazy: async () => {
+                            let { Page } = await import("@/pages/_games");
+                            return { Component: Page };
+                        },
+                    },
+                ],
+            },
+            {
+                path: "games",
+                children: [
+                    {
+                        path: ":id",
+                        lazy: async () => {
+                            let { Page } = await import("@/pages/_games/_[id]");
+                            return { Component: Page };
+                        },
+                    },
+                ],
             },
         ],
     },

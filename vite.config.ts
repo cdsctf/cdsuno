@@ -4,27 +4,43 @@ import Icons from "unplugin-icons/vite";
 import { prismjsPlugin } from "vite-plugin-prismjs";
 import path from "path";
 
-// https://vitejs.dev/config/
-export default defineConfig({
-    plugins: [
-        React(),
-        Icons({
-            compiler: "jsx",
-            jsx: "react",
-            scale: 1.2,
-            defaultStyle: "width: fit-content; height: 100%;",
-        }),
-        prismjsPlugin({
-            languages: "all",
-            css: true,
-        }),
-    ],
-    resolve: {
-        alias: {
-            "@": path.resolve(__dirname, "src"),
+export default defineConfig(({ mode }) => {
+    return {
+        server: {
+            proxy: {
+                "/api": {
+                    target:
+                        mode === "development"
+                            ? "http://localhost:8888"
+                            : "/api",
+                    changeOrigin: true,
+                },
+                "/api/proxies": {
+                    target:
+                        mode === "development"
+                            ? "ws://localhost:8888"
+                            : "/api/proxies",
+                    ws: true,
+                },
+            },
         },
-    },
-    build: {
-        minify: "esbuild",
-    },
+        plugins: [
+            React(),
+            Icons({
+                compiler: "jsx",
+                jsx: "react",
+                scale: 1.2,
+                defaultStyle: "width: fit-content; height: 100%;",
+            }),
+            prismjsPlugin({
+                languages: "all",
+                css: true,
+            }),
+        ],
+        resolve: {
+            alias: {
+                "@": path.resolve(__dirname, "src"),
+            },
+        },
+    };
 });
