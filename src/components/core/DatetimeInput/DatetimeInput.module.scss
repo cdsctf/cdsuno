@@ -28,10 +28,8 @@ $border-color: var(--border-color);
     }
 
     input {
-        width: 2ch;
         outline: none;
         background: none;
-
         -moz-appearance: textfield;
 
         &::-webkit-inner-spin-button,
@@ -40,8 +38,12 @@ $border-color: var(--border-color);
             margin: 0;
         }
 
-        &.year {
-            width: 4ch;
+        &[type="number"] {
+            width: 2ch;
+
+            &.year {
+                width: 4ch;
+            }
         }
     }
 }

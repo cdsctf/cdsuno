@@ -16,9 +16,7 @@ export function DatetimeInput(props: DatetimeInputProps) {
     const [year, setYear] = useState<number>(value?.year);
     const [month, setMonth] = useState<number>(value?.month);
     const [day, setDay] = useState<number>(value?.day);
-    const [hour, setHour] = useState<number>(value?.hour);
-    const [minute, setMinute] = useState<number>(value?.minute);
-    const [second, setSecond] = useState<number>(value?.second);
+    const [time, setTime] = useState<string>(value?.toFormat("HH:mm:ss"));
 
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -56,24 +54,22 @@ export function DatetimeInput(props: DatetimeInputProps) {
             year,
             month,
             day,
-            hour,
-            minute,
-            second,
+            hour: Number(time.split(":")[0]),
+            minute: Number(time.split(":")[1]),
+            second: Number(time.split(":")[2]),
         });
 
         if (datetime.isValid) {
             onChange?.(datetime);
         }
-    }, [year, month, day, hour, minute, second]);
+    }, [year, month, day, time]);
 
     useEffect(() => {
         if (value) {
             setYear(value.year);
             setMonth(value.month);
             setDay(value.day);
-            setHour(value.hour);
-            setMinute(value.minute);
-            setSecond(value.second);
+            setTime(value.toFormat("HH:mm:ss"));
         }
     }, [value]);
 
@@ -139,39 +135,10 @@ export function DatetimeInput(props: DatetimeInputProps) {
             </div>
             <div className={styles["time"]}>
                 <input
-                    type={"number"}
-                    value={String(hour).padStart(2, "0")}
-                    onChange={handleInputChange(setHour, 0, 23)}
-                    onKeyDown={(e) => handleKeyDown(e, 3)}
-                    onFocus={() => handleFocus(3)}
-                    min={0}
-                    max={23}
-                    placeholder="HH"
-                    ref={(el) => (inputsRef.current[3] = el)}
-                />
-                <span>:</span>
-                <input
-                    type={"number"}
-                    value={String(minute).padStart(2, "0")}
-                    onChange={handleInputChange(setMinute, 0, 59)}
-                    onKeyDown={(e) => handleKeyDown(e, 4)}
-                    onFocus={() => handleFocus(4)}
-                    min={0}
-                    max={59}
-                    placeholder="mm"
-                    ref={(el) => (inputsRef.current[4] = el)}
-                />
-                <span>:</span>
-                <input
-                    type={"number"}
-                    value={String(second).padStart(2, "0")}
-                    onChange={handleInputChange(setSecond, 0, 59)}
-                    onKeyDown={(e) => handleKeyDown(e, 5)}
-                    onFocus={() => handleFocus(5)}
-                    min={0}
-                    max={59}
-                    placeholder="ss"
-                    ref={(el) => (inputsRef.current[5] = el)}
+                    type={"time"}
+                    step={"1"}
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
                 />
             </div>
         </InputWrapper>
