@@ -44,8 +44,10 @@ export function ChallengeCard(props: ChallengeCard) {
         return chroma(baseColor).darken(1).hex();
     }, [baseColor, status.is_solved]);
     const iconColor = useMemo(() => {
-        const map = [baseColor, "#FFFFFF"];
-        return map[Number(status.is_solved)];
+        if (status.is_solved) {
+            return "#FFFFFF";
+        }
+        return chroma(baseColor).hex();
     }, [baseColor, status.is_solved]);
     const gridColor = useMemo(() => {
         if (status?.is_solved) {

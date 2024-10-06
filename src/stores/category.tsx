@@ -17,6 +17,7 @@ import ProgammingBoldDuotone from "~icons/solar/programming-bold-duotone";
 import SmartphoneBoldDuotone from "~icons/solar/smartphone-bold-duotone";
 import BlackHoleLineDuotone from "~icons/solar/black-hole-line-duotone";
 import MinimalisticMagniferBoldDuotone from "~icons/solar/minimalistic-magnifer-bold-duotone";
+import DatabaseBoldDuotone from "~icons/solar/database-bold-duotone";
 
 interface CategoryState {
     categories: Array<Category>;
@@ -43,7 +44,7 @@ export const useCategoryStore = create<CategoryState>()(
                 {
                     id: 3,
                     name: "reverse",
-                    color: "#FF5722",
+                    color: "#E64A19",
                     icon: <RewindBackBoldDuotone />,
                 },
                 {
@@ -61,7 +62,7 @@ export const useCategoryStore = create<CategoryState>()(
                 {
                     id: 6,
                     name: "mobile",
-                    color: "#2196F3",
+                    color: "#1976D2",
                     icon: <SmartphoneBoldDuotone />,
                 },
                 {
@@ -97,13 +98,13 @@ export const useCategoryStore = create<CategoryState>()(
                 {
                     id: 12,
                     name: "societal",
-                    color: "#FF5722",
+                    color: "#BF360C",
                     icon: <CardSearchBoldDuotone />,
                 },
                 {
                     id: 13,
                     name: "ai",
-                    color: "#2196F3",
+                    color: "#1565C0",
                     icon: <ChatSquareCodeBoldDuotone />,
                 },
                 {
@@ -123,6 +124,12 @@ export const useCategoryStore = create<CategoryState>()(
                     name: "dev",
                     color: "#37474F",
                     icon: <CodeBoldDuotone />,
+                },
+                {
+                    id: 17,
+                    name: "ds",
+                    color: "#0D47A1",
+                    icon: <DatabaseBoldDuotone />,
                 },
             ],
             setCategories: (categories: Array<Category>) => set({ categories }),
