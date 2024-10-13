@@ -53,12 +53,12 @@ export function Navbar() {
                         <div className={styles["info"]}>
                             <div className={styles["logo"]}>
                                 <img
-                                    src="/cm2.png"
+                                    src="/13.webp"
                                     alt="icon"
                                     draggable={false}
                                 />
                             </div>
-                            <h1 className={styles["title"]}>Cloudsdale</h1>
+                            <h1 className={styles["title"]}>CdsCTF</h1>
                         </div>
                     </Link>
                 </div>
