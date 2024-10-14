@@ -23,6 +23,7 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
         const [inputValue, setInputValue] = useState(
             value.toFormat("MM/dd/yyyy HH:mm:ss")
         );
+        const [lastCursorPosition, setLastCursorPosition] = useState(0);
         const inputRef = useRef<HTMLInputElement>(null);
 
         useEffect(() => {
@@ -40,15 +41,22 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
 
         const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
             e.preventDefault();
-            const cursorPosition = e.target.selectionStart || 0;
-            const newValue = e.target.value[cursorPosition - 1];
 
-            if (!/^\d$/.test(newValue)) {
-                return;
+            let cursorPosition = e.target.selectionStart || 0;
+            const newValue = e.target.value[cursorPosition - 1];
+            if (cursorPosition === 20) {
+                cursorPosition = lastCursorPosition;
             }
+            setLastCursorPosition(cursorPosition);
+
+            // console.log("cursorPosition", cursorPosition);
+            // console.log("e.target.value", e.target.value);
+
+            console.log(newValue, /^\d$/.test(newValue));
 
             const segmentIndex = segments.findIndex(
-                (seg) => cursorPosition > seg.start && cursorPosition <= seg.end
+                (seg) =>
+                    cursorPosition >= seg.start && cursorPosition <= seg.end
             );
 
             if (segmentIndex === -1) return;
@@ -56,89 +64,90 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
             const { start, end } = segments[segmentIndex];
             let segmentValue = inputValue.slice(start, end).replace(/^0+/, "");
 
-            // console.log("start", start);
+            if (/^\d$/.test(newValue)) {
+                console.log("start", start);
 
-            // console.log("segmentValue", segmentValue);
+                console.log("segmentValue", segmentValue);
 
-            // console.log(
-            //     "segmentValue + newValue",
-            //     segmentValue + newValue,
-            //     Number(segmentValue + newValue)
-            // );
+                console.log(
+                    "segmentValue + newValue",
+                    segmentValue + newValue,
+                    Number(segmentValue + newValue)
+                );
 
-            const sn = Number(segmentValue + newValue);
+                const sn = Number(segmentValue + newValue);
 
-            switch (start) {
-                case 0:
-                    if (sn <= 12) {
-                        segmentValue = String(sn).padStart(2, "0");
-                    } else if (newValue === "0") {
-                        segmentValue = "01";
-                    } else {
-                        segmentValue = newValue.padStart(2, "0");
-                    }
-                    break;
-                case 3:
-                    if (sn <= (value.daysInMonth || 0)) {
-                        segmentValue = String(sn).padStart(2, "0");
-                    } else if (newValue === "0") {
-                        segmentValue = "01";
-                    } else {
-                        segmentValue = newValue.padStart(2, "0");
-                    }
-                    break;
-                case 6:
-                    if (sn <= 9999) {
-                        segmentValue = String(sn).padStart(4, "0");
-                    } else if (newValue === "0") {
-                        segmentValue = "0001";
-                    } else {
-                        segmentValue = newValue.padStart(4, "0");
-                    }
-                    break;
-                case 11:
-                    if (sn <= 23) {
-                        segmentValue = String(sn).padStart(2, "0");
-                    } else {
-                        segmentValue = newValue.padStart(2, "0");
-                    }
-                    break;
-                case 14:
-                    if (sn <= 59) {
-                        segmentValue = String(sn).padStart(2, "0");
-                    } else {
-                        segmentValue = newValue.padStart(2, "0");
-                    }
-                    break;
-                case 17:
-                    if (sn <= 59) {
-                        segmentValue = String(sn).padStart(2, "0");
-                    } else {
-                        segmentValue = newValue.padStart(2, "0");
-                    }
-                    break;
-            }
+                switch (start) {
+                    case 0:
+                        if (sn <= 12) {
+                            segmentValue = String(sn).padStart(2, "0");
+                        } else if (newValue === "0") {
+                            segmentValue = "01";
+                        } else {
+                            segmentValue = newValue.padStart(2, "0");
+                        }
+                        break;
+                    case 3:
+                        if (sn <= (value.daysInMonth || 0)) {
+                            segmentValue = String(sn).padStart(2, "0");
+                        } else if (newValue === "0") {
+                            segmentValue = "01";
+                        } else {
+                            segmentValue = newValue.padStart(2, "0");
+                        }
+                        break;
+                    case 6:
+                        if (sn <= 9999) {
+                            segmentValue = String(sn).padStart(4, "0");
+                        } else {
+                            segmentValue = newValue.padStart(4, "0");
+                        }
+                        break;
+                    case 11:
+                        if (sn <= 23) {
+                            segmentValue = String(sn).padStart(2, "0");
+                        } else {
+                            segmentValue = newValue.padStart(2, "0");
+                        }
+                        break;
+                    case 14:
+                        if (sn <= 59) {
+                            segmentValue = String(sn).padStart(2, "0");
+                        } else {
+                            segmentValue = newValue.padStart(2, "0");
+                        }
+                        break;
+                    case 17:
+                        if (sn <= 59) {
+                            segmentValue = String(sn).padStart(2, "0");
+                        } else {
+                            segmentValue = newValue.padStart(2, "0");
+                        }
+                        break;
+                }
 
-            // console.log("segmentValue", segmentValue);
+                // console.log("segmentValue", segmentValue);
 
-            const newFormattedValue =
-                inputValue.slice(0, start) +
-                segmentValue +
-                inputValue.slice(end, inputValue.length);
+                const newFormattedValue =
+                    inputValue.slice(0, start) +
+                    segmentValue +
+                    inputValue.slice(end, inputValue.length);
 
-            // console.log("newFormattedValue", newFormattedValue);
+                console.log("newFormattedValue", newFormattedValue);
 
-            setInputValue(newFormattedValue);
+                setInputValue(newFormattedValue);
 
-            const newDateTime = DateTime.fromFormat(
-                newFormattedValue,
-                "MM/dd/yyyy HH:mm:ss"
-            );
-            if (newDateTime.isValid) {
-                onChange?.(newDateTime);
+                const newDateTime = DateTime.fromFormat(
+                    newFormattedValue,
+                    "MM/dd/yyyy HH:mm:ss"
+                );
+                if (newDateTime.isValid) {
+                    onChange?.(newDateTime);
+                }
             }
 
             setTimeout(() => {
+                // console.log("change");
                 inputRef.current?.setSelectionRange(start, end);
             }, 0);
         };
@@ -152,6 +161,7 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
             if (segmentIndex !== -1) {
                 const { start, end } = segments[segmentIndex];
                 setTimeout(() => {
+                    // console.log("click");
                     inputRef.current?.setSelectionRange(start, end);
                 }, 0);
             }
