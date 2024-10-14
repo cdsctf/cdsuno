@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { InputWrapper, InputWrapperProps } from "../InputWrapper";
 import styles from "./DatetimeInput.module.scss";
-import { useState, useRef, useEffect, forwardRef } from "react";
+import React, { useState, useRef, useEffect, forwardRef } from "react";
 
 export interface DatetimeInputProps
     extends Omit<InputWrapperProps, "onChange"> {
@@ -20,80 +20,174 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
             ...rest
         } = props;
 
-        const [year, setYear] = useState<number>(value?.year);
-        const [month, setMonth] = useState<number>(value?.month);
-        const [day, setDay] = useState<number>(value?.day);
-        const [time, setTime] = useState<string>(value?.toFormat("HH:mm:ss"));
-
-        const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
-
-        function handleKeyDown(
-            e: React.KeyboardEvent<HTMLInputElement>,
-            index: number
-        ) {
-            if (e.key === "ArrowRight") {
-                e.preventDefault();
-                inputsRef.current[
-                    index + 1 === inputsRef.current.length ? 0 : index + 1
-                ]?.focus();
-                inputsRef.current[
-                    index + 1 === inputsRef.current.length ? 0 : index + 1
-                ]?.select();
-            }
-
-            if (e.key === "ArrowLeft") {
-                e.preventDefault();
-                inputsRef.current[
-                    index - 1 === -1 ? inputsRef.current.length - 1 : index - 1
-                ]?.focus();
-                inputsRef.current[
-                    index - 1 === -1 ? inputsRef.current.length - 1 : index - 1
-                ]?.select();
-            }
-        }
-
-        function handleFocus(index: number) {
-            inputsRef.current[index]?.select();
-        }
+        const [inputValue, setInputValue] = useState(
+            value.toFormat("MM/dd/yyyy HH:mm:ss")
+        );
+        const inputRef = useRef<HTMLInputElement>(null);
 
         useEffect(() => {
-            const datetime = DateTime.fromObject({
-                year,
-                month,
-                day,
-                hour: Number(time.split(":")[0]),
-                minute: Number(time.split(":")[1]),
-                second: Number(time.split(":")[2]),
-            });
-
-            if (datetime.isValid) {
-                onChange?.(datetime);
-            }
-        }, [year, month, day, time]);
-
-        useEffect(() => {
-            if (value) {
-                setYear(value.year);
-                setMonth(value.month);
-                setDay(value.day);
-                setTime(value.toFormat("HH:mm:ss"));
-            }
+            setInputValue(value.toFormat("MM/dd/yyyy HH:mm:ss"));
         }, [value]);
 
-        const handleInputChange =
-            (setter: (value: number) => void, min?: number, max?: number) =>
-            (e: React.ChangeEvent<HTMLInputElement>) => {
-                const value = parseInt(e.target.value, 10);
-                if (!isNaN(value)) {
-                    if (min !== undefined && value < min) {
-                        setter(min);
-                    } else if (max !== undefined && value > max) {
-                        setter(max);
+        const segments = [
+            { start: 0, end: 2, max: 12 },
+            { start: 3, end: 5, max: 31 },
+            { start: 6, end: 10, max: 9999 },
+            { start: 11, end: 13, max: 23 },
+            { start: 14, end: 16, max: 59 },
+            { start: 17, end: 19, max: 59 },
+        ];
+
+        const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+            e.preventDefault();
+            const cursorPosition = e.target.selectionStart || 0;
+            const newValue = e.target.value[cursorPosition - 1];
+
+            if (!/^\d$/.test(newValue)) {
+                return;
+            }
+
+            const segmentIndex = segments.findIndex(
+                (seg) => cursorPosition > seg.start && cursorPosition <= seg.end
+            );
+
+            if (segmentIndex === -1) return;
+
+            const { start, end } = segments[segmentIndex];
+            let segmentValue = inputValue.slice(start, end).replace(/^0+/, "");
+
+            // console.log("start", start);
+
+            // console.log("segmentValue", segmentValue);
+
+            // console.log(
+            //     "segmentValue + newValue",
+            //     segmentValue + newValue,
+            //     Number(segmentValue + newValue)
+            // );
+
+            const sn = Number(segmentValue + newValue);
+
+            switch (start) {
+                case 0:
+                    if (sn <= 12) {
+                        segmentValue = String(sn).padStart(2, "0");
+                    } else if (newValue === "0") {
+                        segmentValue = "01";
                     } else {
-                        setter(value);
+                        segmentValue = newValue.padStart(2, "0");
+                    }
+                    break;
+                case 3:
+                    if (sn <= (value.daysInMonth || 0)) {
+                        segmentValue = String(sn).padStart(2, "0");
+                    } else if (newValue === "0") {
+                        segmentValue = "01";
+                    } else {
+                        segmentValue = newValue.padStart(2, "0");
+                    }
+                    break;
+                case 6:
+                    if (sn <= 9999) {
+                        segmentValue = String(sn).padStart(4, "0");
+                    } else if (newValue === "0") {
+                        segmentValue = "0001";
+                    } else {
+                        segmentValue = newValue.padStart(4, "0");
+                    }
+                    break;
+                case 11:
+                    if (sn <= 23) {
+                        segmentValue = String(sn).padStart(2, "0");
+                    } else {
+                        segmentValue = newValue.padStart(2, "0");
+                    }
+                    break;
+                case 14:
+                    if (sn <= 59) {
+                        segmentValue = String(sn).padStart(2, "0");
+                    } else {
+                        segmentValue = newValue.padStart(2, "0");
+                    }
+                    break;
+                case 17:
+                    if (sn <= 59) {
+                        segmentValue = String(sn).padStart(2, "0");
+                    } else {
+                        segmentValue = newValue.padStart(2, "0");
+                    }
+                    break;
+            }
+
+            // console.log("segmentValue", segmentValue);
+
+            const newFormattedValue =
+                inputValue.slice(0, start) +
+                segmentValue +
+                inputValue.slice(end, inputValue.length);
+
+            // console.log("newFormattedValue", newFormattedValue);
+
+            setInputValue(newFormattedValue);
+
+            const newDateTime = DateTime.fromFormat(
+                newFormattedValue,
+                "MM/dd/yyyy HH:mm:ss"
+            );
+            if (newDateTime.isValid) {
+                onChange?.(newDateTime);
+            }
+
+            setTimeout(() => {
+                inputRef.current?.setSelectionRange(start, end);
+            }, 0);
+        };
+
+        const handleFocus = (e: any) => {
+            const cursorPosition = e.target.selectionStart || 0;
+            const segmentIndex = segments.findIndex(
+                (seg) =>
+                    cursorPosition >= seg.start && cursorPosition <= seg.end
+            );
+            if (segmentIndex !== -1) {
+                const { start, end } = segments[segmentIndex];
+                setTimeout(() => {
+                    inputRef.current?.setSelectionRange(start, end);
+                }, 0);
+            }
+        };
+
+        const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (!/^\d$/.test(e.key)) {
+                e.preventDefault();
+            }
+            if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+                const cursorPosition =
+                    (e.target as HTMLInputElement).selectionStart || 0;
+                const segmentIndex = segments.findIndex(
+                    (seg) =>
+                        cursorPosition >= seg.start && cursorPosition <= seg.end
+                );
+                if (segmentIndex !== -1) {
+                    if (e.key === "ArrowLeft") {
+                        const s = segmentIndex - 1 > -1 ? segmentIndex - 1 : 0;
+                        const { start, end } = segments[s % segments.length];
+                        setTimeout(() => {
+                            inputRef.current?.setSelectionRange(start, end);
+                        }, 0);
+                    } else if (e.key === "ArrowRight") {
+                        const s =
+                            segmentIndex + 1 < segments.length
+                                ? segmentIndex + 1
+                                : segments.length - 1;
+                        const { start, end } = segments[s % segments.length];
+                        setTimeout(() => {
+                            inputRef.current?.setSelectionRange(start, end);
+                        }, 0);
                     }
                 }
-            };
+            }
+        };
 
         return (
             <InputWrapper
@@ -103,60 +197,15 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
                 {...rest}
             >
                 {icon && <div className={styles["icon"]}>{icon}</div>}
-                <div className={styles["date"]}>
-                    <input
-                        type={"number"}
-                        value={String(year).padStart(4, "0")}
-                        onChange={handleInputChange(setYear, 0, 9999)}
-                        onKeyDown={(e) => handleKeyDown(e, 0)}
-                        onFocus={() => handleFocus(0)}
-                        min={0}
-                        max={9999}
-                        placeholder="YYYY"
-                        ref={(el) => (inputsRef.current[0] = el)}
-                        className={styles["year"]}
-                    />
-                    <span>-</span>
-                    <input
-                        type={"number"}
-                        value={String(month).padStart(2, "0")}
-                        onChange={handleInputChange(setMonth, 1, 12)}
-                        onKeyDown={(e) => handleKeyDown(e, 1)}
-                        onFocus={() => handleFocus(1)}
-                        min={1}
-                        max={12}
-                        placeholder="MM"
-                        ref={(el) => (inputsRef.current[1] = el)}
-                    />
-                    <span>-</span>
-                    <input
-                        type={"number"}
-                        value={String(day).padStart(2, "0")}
-                        onChange={handleInputChange(
-                            setDay,
-                            1,
-                            DateTime.fromObject({ year, month }).daysInMonth
-                        )}
-                        onKeyDown={(e) => handleKeyDown(e, 2)}
-                        onFocus={() => handleFocus(2)}
-                        min={1}
-                        max={DateTime.fromObject({ year, month }).daysInMonth}
-                        placeholder="DD"
-                        ref={(el) => (inputsRef.current[2] = el)}
-                    />
-                </div>
-                <div className={styles["time"]}>
-                    <input
-                        type={"time"}
-                        step={"1"}
-                        value={time}
-                        onChange={(e) =>
-                            setTime(
-                                e.target.value ? e.target.value : "00:00:00"
-                            )
-                        }
-                    />
-                </div>
+                <input
+                    type="text"
+                    ref={inputRef}
+                    value={inputValue}
+                    onChange={handleInput}
+                    onKeyDown={handleKeyDown}
+                    onFocus={handleFocus}
+                    onClick={handleFocus}
+                />
             </InputWrapper>
         );
     }

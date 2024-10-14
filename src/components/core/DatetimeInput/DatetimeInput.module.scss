@@ -17,16 +17,6 @@ $border-color: var(--border-color);
         }
     }
 
-    .date {
-        display: flex;
-        gap: 2px;
-    }
-
-    .time {
-        display: flex;
-        gap: 2px;
-    }
-
     input {
         outline: none;
         background: none;
@@ -39,18 +29,6 @@ $border-color: var(--border-color);
             display: none;
             -webkit-appearance: none;
             margin: 0;
-        }
-
-        &[type="number"] {
-            width: 2ch;
-
-            &.year {
-                width: 4ch;
-            }
-        }
-
-        &[type="time"] {
-            width: fit-content;
         }
     }
 }
