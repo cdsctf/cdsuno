@@ -16,19 +16,24 @@ $border-color: var(--border-color);
         width: 100%;
     }
 
+    .info {
+        display: flex;
+        align-items: end;
+        width: fit-content;
+        margin: 5px 5px;
+        gap: 5px;
+    }
+
     .label {
         display: inline-block;
-        margin: 5px 5px;
-        font-size: 0.9;
-        font-weight: 500;
-        line-height: 1;
+        font-size: 1em;
+        line-height: 1.25;
         cursor: default;
     }
 
     .helper-text {
-        margin: 2px 5px;
-        font-size: 11px;
-        line-height: 1.5;
+        font-size: 0.7em;
+        color: var(--color-gray);
     }
 
     .error-text {
