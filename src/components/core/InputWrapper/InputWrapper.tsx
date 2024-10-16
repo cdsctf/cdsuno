@@ -41,16 +41,18 @@ export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
 
         return (
             <div className={styles["root"]} style={variables} {...rest}>
-                <div className={styles["info"]}>
-                    {label && (
-                        <label className={styles["label"]}>{label}</label>
-                    )}
-                    {helperText && (
-                        <label className={styles["helper-text"]}>
-                            {helperText}
-                        </label>
-                    )}
-                </div>
+                {(label || helperText) && (
+                    <div className={styles["info"]}>
+                        {label && (
+                            <label className={styles["label"]}>{label}</label>
+                        )}
+                        {helperText && (
+                            <label className={styles["helper-text"]}>
+                                {helperText}
+                            </label>
+                        )}
+                    </div>
+                )}
                 <div
                     className={`${styles["wrapper"]} ${className}`}
                     data-variant={variant}
