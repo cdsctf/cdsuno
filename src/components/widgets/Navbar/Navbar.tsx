@@ -53,7 +53,7 @@ export function Navbar() {
                         <div className={styles["info"]}>
                             <div className={styles["logo"]}>
                                 <img
-                                    src="/13.webp"
+                                    src="dm3.png"
                                     alt="icon"
                                     draggable={false}
                                 />
