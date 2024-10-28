@@ -1,8 +1,8 @@
 import React, { ComponentProps, forwardRef } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
-import styles from "./InputWrapper.module.scss";
+import styles from "./InputBase.module.scss";
 
-export interface InputWrapperProps extends ComponentProps<"div"> {
+export interface InputBaseProps extends ComponentProps<"div"> {
     width?: string;
     color?: string;
     variant?: "outlined" | "solid";
@@ -15,7 +15,7 @@ export interface InputWrapperProps extends ComponentProps<"div"> {
     children?: React.ReactNode;
 }
 
-export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
+export const InputBase = forwardRef<HTMLDivElement, InputBaseProps>(
     (props, ref) => {
         const {
             width = "fit-content",

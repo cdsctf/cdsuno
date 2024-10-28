@@ -4,9 +4,9 @@ import CloseCircleBold from "~icons/solar/close-circle-bold";
 import EyeBold from "~icons/solar/eye-bold";
 import EyeCloseBold from "~icons/solar/eye-closed-bold";
 import styles from "./TextInput.module.scss";
-import { InputWrapper, InputWrapperProps } from "../InputWrapper";
+import { InputBase, InputBaseProps } from "../InputBase";
 
-export interface TextInputProps extends Omit<InputWrapperProps, "onChange"> {
+export interface TextInputProps extends Omit<InputBaseProps, "onChange"> {
     clearable?: boolean;
     password?: boolean;
     invalid?: boolean;
@@ -58,7 +58,7 @@ export function TextInput(props: TextInputProps) {
     } as React.CSSProperties;
 
     return (
-        <InputWrapper
+        <InputBase
             width={width}
             color={color}
             variant={variant}
@@ -89,6 +89,6 @@ export function TextInput(props: TextInputProps) {
                     {isPasswordVisible ? <EyeBold /> : <EyeCloseBold />}
                 </div>
             )}
-        </InputWrapper>
+        </InputBase>
     );
 }

@@ -1,10 +1,9 @@
 import { DateTime } from "luxon";
-import { InputWrapper, InputWrapperProps } from "../InputWrapper";
+import { InputBase, InputBaseProps } from "../InputBase";
 import styles from "./DatetimeInput.module.scss";
 import React, { useState, useRef, useEffect, forwardRef } from "react";
 
-export interface DatetimeInputProps
-    extends Omit<InputWrapperProps, "onChange"> {
+export interface DatetimeInputProps extends Omit<InputBaseProps, "onChange"> {
     icon?: React.ReactNode;
     value?: DateTime;
     onChange?: (value: DateTime) => void;
@@ -200,7 +199,7 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
         };
 
         return (
-            <InputWrapper
+            <InputBase
                 className={styles["root"]}
                 label={label}
                 ref={ref}
@@ -216,7 +215,7 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
                     onFocus={handleFocus}
                     onClick={handleFocus}
                 />
-            </InputWrapper>
+            </InputBase>
         );
     }
 );

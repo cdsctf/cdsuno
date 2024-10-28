@@ -58,9 +58,13 @@ $border-color: var(--border-color);
             background-color: $bg-color;
         }
 
+        &[data-variant="outlined"] {
+            background-color: #ffffff0d;
+        }
+
         &:focus,
         &:hover {
-            filter: brightness(1.125);
+            filter: brightness(1.2);
         }
     }
 }

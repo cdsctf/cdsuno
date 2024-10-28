@@ -21,19 +21,15 @@ $bg-color: var(--bg-color);
         position: relative;
         height: 24px;
         width: 24px;
-        background-color: transparent;
-        border: 2px solid #e5e5e5;
+        background-color: #ffffff0d;
+        border: 2px solid $bg-color;
         border-radius: 8px;
-        transition: all 0.2s ease;
+        transition: all 200ms ease-in-out;
 
         color: #ffffff;
 
-        @include mixins.dark {
-            border-color: #37464f;
-        }
-
         &:hover {
-            border-color: $bg-color;
+            filter: brightness(1.2);
         }
 
         &:after {

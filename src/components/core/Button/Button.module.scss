@@ -47,7 +47,7 @@ $text-color: var(--text-color);
 
     &:not(:disabled, [data-loading="true"], [data-disabled="true"]) {
         &:hover {
-            filter: brightness(1.125);
+            filter: brightness(1.2);
         }
 
         &:active {
@@ -57,7 +57,7 @@ $text-color: var(--text-color);
 
         &:focus {
             outline: none;
-            filter: brightness(1.125);
+            filter: brightness(1.2);
         }
     }
 

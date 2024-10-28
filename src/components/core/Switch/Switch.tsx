@@ -19,10 +19,10 @@ export function Switch(props: SwitchProps) {
     } as CSSProperties;
 
     return (
-        <div className={styles["root"]}>
+        <div className={styles["root"]} style={variables}>
             <div
-                className={`${styles["switch"]} ${checked ? styles["checked"] : ""}`}
-                style={variables}
+                className={styles["switch"]}
+                data-checked={checked}
                 onClick={() => onChange(!checked)}
             >
                 <div className={styles["handle"]}></div>

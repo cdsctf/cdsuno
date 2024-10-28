@@ -1,16 +1,14 @@
 import katex, { type KatexOptions } from "katex";
 import "katex/dist/katex.min.css";
-import type marked from "marked";
+import { MarkedExtension, TokenizerAndRendererExtension } from "marked";
 
-export default function (options: KatexOptions = {}): marked.MarkedExtension {
+export default function (options: KatexOptions = {}): MarkedExtension {
     return {
         extensions: [inlineKatex(options), blockKatex(options)],
     };
 }
 
-function inlineKatex(
-    options: KatexOptions
-): marked.TokenizerAndRendererExtension {
+function inlineKatex(options: KatexOptions): TokenizerAndRendererExtension {
     return {
         name: "inlineKatex",
         level: "inline",
@@ -33,9 +31,7 @@ function inlineKatex(
     };
 }
 
-function blockKatex(
-    options: KatexOptions
-): marked.TokenizerAndRendererExtension {
+function blockKatex(options: KatexOptions): TokenizerAndRendererExtension {
     return {
         name: "blockKatex",
         level: "block",

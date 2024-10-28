@@ -1,25 +1,25 @@
-.radio-button{
-        --card-border-color:var(--_card-border-color,#57bbd4);
-        --card-bg-color:var(--_card-bg-color,#45d3ff);
-        --_card-text-color:var(--_card-text-color,#ffffff);
-        width: 292px;
-        border: solid transparent;
-        border-radius: var(--card-border-radius,12px);
-        border-width: 1px 0px 4px 0px;
-        cursor: pointer;
-        display: inline-flex;
-        outline: 0;
-        position: relative;
-        touch-action: manipulation;
-        transform: translateZ(0);
-        transition: all 0.2s ease;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    &:before{
+.radio-button {
+    --card-border-color: var(--_card-border-color, #57bbd4);
+    --card-bg-color: var(--_card-bg-color, #45d3ff);
+    --_card-text-color: var(--_card-text-color, #ffffff);
+    width: 292px;
+    border: solid transparent;
+    border-radius: var(--card-border-radius, 12px);
+    border-width: 1px 0px 4px 0px;
+    cursor: pointer;
+    display: inline-flex;
+    outline: 0;
+    position: relative;
+    touch-action: manipulation;
+    transform: translateZ(0);
+    transition: all 0.2s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    &:before {
         background-color: var(--card-bg-color);
         border: 2px solid var(--card-border-color);
-        border-radius: var(--card-border-radius,12px);
+        border-radius: var(--card-border-radius, 12px);
         border-width: 2px 2px 4px 2px;
         bottom: -2px;
         box-shadow: 0 2px 0 var(--card-border-color);
@@ -32,17 +32,17 @@
         transition: all 0.2s ease;
     }
     &:hover:not(:active):not(.selected):not(.pressed):before {
-        filter: brightness(1.125);
-        }
-    &.pressed:not(.selected):not(.active), 
+        filter: brightness(1.2);
+    }
+    &.pressed:not(.selected):not(.active),
     &:active:not(.pressed) {
         transform: translateY(4px) translateZ(0);
     }
-    &.pressed:not(.selected):not(.active):before, 
+    &.pressed:not(.selected):not(.active):before,
     &:active:not(.pressed):before {
         box-shadow: none;
     }
-    &.selected{
+    &.selected {
         transform: translateY(4px) translateZ(0);
         --card-border-color: transparent;
     }
@@ -51,17 +51,17 @@
         color: rgb(24, 153, 214);
     }
     .icon {
-            height: 40px;
-            margin-right: 16px;
-            margin-left: 16px;
-            width: 40px;
-        }
+        height: 40px;
+        margin-right: 16px;
+        margin-left: 16px;
+        width: 40px;
+    }
     .proficiency-text {
-    color: var(--_card-text-color);
-    font-size: 17px;
-    font-weight: 700;
-    line-height: 24px;
-}
+        color: var(--_card-text-color);
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 24px;
+    }
     .flex-container {
         align-items: center;
         display: flex;
@@ -123,16 +123,16 @@
 // .radio-button:hover:not(:active):not(.selected):not(.pressed):before {
 //     background-color: #4eedff;
 // }
-// .radio-button.pressed:not(.selected):not(.active), 
+// .radio-button.pressed:not(.selected):not(.active),
 // .radio-button:active:not(.pressed) {
 //     transform: translateY(2px) translateZ(0);
 // }
-// .radio-button.selected, 
+// .radio-button.selected,
 // .radio-button:active:not(.pressed) {
 //     --border-color: rgb(63,133,167);
 //     color: rgb(24, 153, 214);
 // }
-// .radio-button.pressed:not(.selected):not(.active):before, 
+// .radio-button.pressed:not(.selected):not(.active):before,
 // .radio-button:active:not(.pressed):before {
 //     box-shadow: none;
 // }

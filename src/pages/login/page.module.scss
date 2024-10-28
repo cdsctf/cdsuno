@@ -6,7 +6,7 @@ $bg-color: var(--bg-color);
 
     .category {
         height: 100%;
-        width: 60%;
+        width: 65%;
         position: relative;
         background-color: $bg-color;
         transition: all 2000ms ease-in-out;
@@ -36,7 +36,7 @@ $bg-color: var(--bg-color);
 
     .main {
         height: 100%;
-        width: 40%;
+        width: 35%;
         display: flex;
         flex-direction: column;
         justify-content: center;

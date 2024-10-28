@@ -11,28 +11,20 @@ $bg-color: var(--bg-color);
         position: relative;
         width: 45px;
         height: 24px;
-        background-color: #e9ecef;
+        background-color: $bg-color;
         border-radius: 17px;
         cursor: pointer;
         transition: all 0.3s ease;
-        border: 2px solid #e5e5e5;
-
-        @include mixins.dark {
-            border-color: #37464f;
-            background-color: rgba(32, 47, 54, 0.5);
-        }
+        border: 2px solid $bg-color;
 
         &:hover {
-            border-color: $bg-color;
+            filter: brightness(1.2);
         }
 
-        &.checked {
-            background-color: $bg-color;
-            border-color: $bg-color;
-        }
-
-        &.checked .handle {
-            transform: translateY(-50%) translateX(20px);
+        &[data-checked="true"] {
+            .handle {
+                transform: translateY(-50%) translateX(20px);
+            }
         }
     }
 
@@ -41,12 +33,11 @@ $bg-color: var(--bg-color);
         content: "";
         height: 15px;
         width: 15px;
-        left: 3px;
+        left: 4px;
         top: 50%;
-        background-color: #fff;
+        background-color: #ffffff;
         border-radius: 50%;
         transition: 0.3s;
-
         transform: translateY(-50%);
     }
 

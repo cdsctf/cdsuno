@@ -1,7 +1,7 @@
-import { InputWrapper, InputWrapperProps } from "../InputWrapper";
+import { InputBase, InputBaseProps } from "../InputBase";
 import styles from "./Textarea.module.scss";
 
-export interface TextareaProps extends Omit<InputWrapperProps, "onChange"> {
+export interface TextareaProps extends Omit<InputBaseProps, "onChange"> {
     width?: string;
     value?: string;
     onChange?: (value: string) => void;
@@ -16,12 +16,12 @@ export function Textarea(props: TextareaProps) {
     } as React.CSSProperties;
 
     return (
-        <InputWrapper className={styles["root"]} style={variables}>
+        <InputBase className={styles["root"]} style={variables}>
             {icon && <div className={styles["icon"]}>{icon}</div>}
             <textarea
                 value={value}
                 onChange={(e) => onChange?.(e.target.value)}
             />
-        </InputWrapper>
+        </InputBase>
     );
 }
