@@ -1,0 +1,46 @@
+@use "@/styles/mixins";
+
+.main {
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.poster {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .info {
+        position: absolute;
+        width: 20%;
+        height: 10vh;
+        top: 0;
+        left: 30%;
+        transform: translate(-50%, -50%);
+        border-radius: 12px;
+        border: 2.75px solid var(--color-primary);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        background-color: var(--color-light);
+
+        @include mixins.dark {
+            background-color: var(--color-dark);
+        }
+    }
+
+    .enter {
+        position: absolute;
+        width: 10%;
+        height: 7vh;
+        bottom: 0;
+        right: 25%;
+        transform: translate(50%, 50%);
+    }
+}

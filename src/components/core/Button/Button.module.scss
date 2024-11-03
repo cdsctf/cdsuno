@@ -8,6 +8,7 @@ $text-color: var(--text-color);
 
 .root {
     width: $width;
+    height: $height;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,6 +22,7 @@ $text-color: var(--text-color);
     white-space: nowrap;
     font-size: 1.125rem;
     line-height: 1.75rem;
+    overflow: hidden;
 
     cursor: pointer;
 
@@ -29,8 +31,12 @@ $text-color: var(--text-color);
     }
 
     &[data-variant="outlined"] {
-        background-color: transparent;
+        background-color: var(--color-light);
         border-color: $bg-color;
+
+        @include mixins.dark {
+            background-color: var(--color-dark);
+        }
     }
 
     &[data-variant="ghost"] {

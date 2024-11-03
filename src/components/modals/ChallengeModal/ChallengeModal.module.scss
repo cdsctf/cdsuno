@@ -23,6 +23,7 @@ $icon-color: var(--icon-color);
         width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
         filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.3));
 
         padding: 16px;
@@ -157,6 +158,7 @@ $icon-color: var(--icon-color);
 
         .submit {
             display: flex;
+            width: 99%;
             align-items: center;
             gap: 15px;
             margin: 12px 0;
