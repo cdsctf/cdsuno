@@ -26,7 +26,7 @@ export function ChallengeCard(props: ChallengeCard) {
         if (status.is_solved) {
             return chroma(baseColor).hex();
         }
-        return chroma(baseColor).alpha(0.25).hex();
+        return chroma(baseColor).alpha(0.375).hex();
     }, [baseColor, status.is_solved]);
     const borderColor = useMemo(() => {
         return chroma(baseColor).hex();
@@ -57,12 +57,12 @@ export function ChallengeCard(props: ChallengeCard) {
     }, [baseColor, status.is_solved]);
 
     const variables = {
-        "--bg-color": bgColor,
-        "--border-color": borderColor,
-        "--border-secondary-color": borderSecondayColor,
-        "--text-color": textColor,
-        "--icon-color": iconColor,
-        "--grid-color": gridColor,
+        "--challenge-card-bg-color": bgColor,
+        "--challenge-card-border-color": borderColor,
+        "--challenge-card-border-secondary-color": borderSecondayColor,
+        "--challenge-card-text-color": textColor,
+        "--challenge-card-icon-color": iconColor,
+        "--challenge-card-grid-color": gridColor,
     } as CSSProperties;
 
     return (

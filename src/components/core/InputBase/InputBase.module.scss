@@ -1,8 +1,8 @@
 @use "@/styles/mixins";
 
-$width: var(--width);
-$bg-color: var(--bg-color);
-$border-color: var(--border-color);
+$width: var(--input-width);
+$bg-color: var(--input-bg-color);
+$border-color: var(--input-border-color);
 
 .root {
     width: $width;
@@ -60,7 +60,7 @@ $border-color: var(--border-color);
     }
 
     &[data-variant="outlined"] {
-        background-color: #ffffff0d;
+        background-color: var(--bg-2-color);
     }
 
     &:focus,

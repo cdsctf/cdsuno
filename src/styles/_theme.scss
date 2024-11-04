@@ -26,10 +26,12 @@
     color-scheme: light;
     --bg-color: var(--color-light);
     --text-color: var(--color-dark);
+    --bg-2-color: #f8f8f8;
 }
 
 :root[data-theme="dark"] {
     color-scheme: dark;
     --bg-color: var(--color-dark);
     --text-color: var(--color-light);
+    --bg-2-color: #1f2a2f;
 }

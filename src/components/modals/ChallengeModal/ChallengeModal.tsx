@@ -5,7 +5,6 @@ import styles from "./ChallengeModal.module.scss";
 import chroma from "chroma-js";
 import { CSSProperties, ReactNode, useEffect, useState } from "react";
 import { TextInput } from "../../core/TextInput/TextInput";
-import { Badge } from "../../core/Badge";
 import { Button } from "../../core/Button/Button";
 import Plain2Bold from "~icons/solar/plain-2-bold";
 import Book2Bold from "~icons/solar/book-2-bold";
@@ -13,7 +12,6 @@ import SledgehammerBold from "~icons/solar/sledgehammer-bold";
 import Server2Bold from "~icons/solar/server-2-bold";
 import FolderWithFilesBold from "~icons/solar/folder-with-files-bold";
 import FlagBold from "~icons/solar/flag-bold";
-import { Tooltip } from "../../core/Tooltip";
 
 export interface ChallengeModalProps {
     challenge: Challenge;
@@ -28,10 +26,10 @@ export function ChallengeModal(props: ChallengeModalProps) {
     const baseColor = useThemeColor(category?.color || "primary");
 
     const variables = {
-        "--bg-color": chroma(baseColor).darken(0.75).hex(),
-        "--border-color": chroma(baseColor).hex(),
-        "--text-color": chroma(baseColor).darken(1).hex(),
-        "--icon-color": baseColor,
+        "--challenge-modal-bg-color": chroma(baseColor).darken(0.75).hex(),
+        "--challenge-modal-border-color": chroma(baseColor).hex(),
+        "--challenge-modal-text-color": chroma(baseColor).darken(1).hex(),
+        "--challenge-modal-icon-color": baseColor,
     } as CSSProperties;
 
     const [placeholder, setPlaceholder] = useState<string>("flag");

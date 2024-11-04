@@ -1,7 +1,6 @@
 @use "@/styles/mixins";
 
-$bg-color: var(--bg-color);
-$border-color: var(--border-color);
+$border-color: var(--dtp-border-color);
 
 @keyframes scale-up {
     0% {
@@ -46,7 +45,7 @@ $border-color: var(--border-color);
 }
 
 .wrapper {
-    background-color: $bg-color;
+    background-color: var(--bg-2-color);
     border: 2.75px solid $border-color;
     border-radius: 12px;
     padding: 16px;

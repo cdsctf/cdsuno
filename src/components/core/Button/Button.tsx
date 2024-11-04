@@ -41,11 +41,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         const baseColor = useThemeColor(color);
 
         const variables = {
-            "--width": width,
-            "--height": height,
-            "--bg-color": baseColor,
-            "--bg-secondary-color": `${chroma.valid(baseColor) ? chroma(baseColor).darken(0.5) : baseColor}`,
-            "--text-color": variant === "solid" ? "#fff" : baseColor,
+            "--button-width": width,
+            "--button-height": height,
+            "--button-bg-color": baseColor,
+            "--button-text-color": variant === "solid" ? "#fff" : baseColor,
         } as React.CSSProperties;
 
         return (

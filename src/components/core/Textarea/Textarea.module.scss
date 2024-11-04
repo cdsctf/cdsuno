@@ -1,9 +1,4 @@
-$width: var(--width);
-$border-color: var(--border-color);
-
 .root {
-    width: $width;
-
     &[data-variant="solid"] {
         .icon {
             color: #ffffff;
@@ -20,10 +15,10 @@ $border-color: var(--border-color);
     }
 
     &[data-variant="outlined"] {
-        background-color: #ffffff0d;
+        background-color: var(--bg-2-color);
 
         .icon {
-            color: $border-color;
+            color: var(--input-border-color);
         }
     }
 
@@ -49,7 +44,7 @@ $border-color: var(--border-color);
     background: transparent;
     border: none;
     outline: none;
-    caret-color: $border-color;
+    caret-color: var(--input-border-color);
     font-size: 16px;
     line-height: 1.5;
 

@@ -1,19 +1,16 @@
 @use "@/styles/mixins";
 
-$bg-color: var(--bg-color);
-$border-color: var(--border-color);
-
 .root {
     gap: 8px;
 
     &[data-variant="solid"] {
-        background-color: $bg-color;
+        background-color: var(--input-bg-color);
 
         .icon {
             color: #ffffff;
         }
 
-        input {
+        .input {
             color: #ffffff;
             caret-color: #ffffff;
 
@@ -33,7 +30,23 @@ $border-color: var(--border-color);
 
     &[data-variant="outlined"] {
         .icon {
-            color: $border-color;
+            color: var(--input-border-color);
+
+            @include mixins.dark {
+                color: #ffffff;
+            }
+        }
+
+        .toggle-button {
+            @include mixins.dark {
+                color: #ffffff;
+            }
+        }
+
+        .clear-button {
+            @include mixins.dark {
+                color: #ffffff;
+            }
         }
     }
 
@@ -59,7 +72,7 @@ $border-color: var(--border-color);
     background: transparent;
     border: none;
     outline: none;
-    caret-color: $border-color;
+    caret-color: var(--input-border-color);
     font-size: 16px;
     line-height: 1.5;
 
@@ -85,7 +98,7 @@ $border-color: var(--border-color);
     background: transparent;
     border: none;
     cursor: pointer;
-    color: $border-color;
+    color: var(--input-border-color);
     transition: all 150ms ease-in-out;
 
     &:hover {
@@ -106,7 +119,7 @@ $border-color: var(--border-color);
     background: transparent;
     border: none;
     cursor: pointer;
-    color: $border-color;
+    color: var(--input-border-color);
     transition: all 150ms ease-in-out;
 
     &:hover {

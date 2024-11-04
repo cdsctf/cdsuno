@@ -1,5 +1,4 @@
-$bg-color: var(--bg-color);
-$border-color: var(--border-color);
+@use "@/styles/mixins";
 
 .root {
     display: flex;
@@ -13,7 +12,11 @@ $border-color: var(--border-color);
 
     &[data-variant="outlined"] {
         .icon {
-            color: $border-color;
+            color: var(--input-border-color);
+
+            @include mixins.dark {
+                color: #ffffff;
+            }
         }
     }
 }

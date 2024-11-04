@@ -30,10 +30,10 @@ export function Toast(props: ToastProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
-        "--bg-color": chroma(baseColor).hex(),
-        "--grid-color": chroma(baseColor).darken(1).alpha(0.1).hex(),
-        "--text-color": chroma(baseColor).darken(1.75).hex(),
-        "--border-color": baseColor,
+        "--toast-bg-color": chroma(baseColor).hex(),
+        "--toast-grid-color": chroma(baseColor).darken(1).alpha(0.1).hex(),
+        "--toast-text-color": chroma(baseColor).darken(1.75).hex(),
+        "--toast-border-color": baseColor,
     } as CSSProperties;
 
     return (
@@ -43,7 +43,6 @@ export function Toast(props: ToastProps) {
                 <h2 className={styles["title"]}>{title}</h2>
                 <p className={styles["description"]}>{description}</p>
             </div>
-            {/* <div ref={progressBarRef} className={styles["progress-bar"]}></div> */}
         </div>
     );
 }

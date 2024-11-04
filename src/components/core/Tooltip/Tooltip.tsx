@@ -13,7 +13,7 @@ export function Tooltip(props: TooltipProps) {
     const { content, position = "top", offset = 8, children } = props;
 
     const variables = {
-        "--offset": `${offset}px`,
+        "--tooltip-offset": `${offset}px`,
     } as CSSProperties;
 
     return (

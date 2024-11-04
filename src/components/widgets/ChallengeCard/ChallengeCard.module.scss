@@ -1,10 +1,10 @@
 @use "@/styles/mixins";
 
-$bg-color: var(--bg-color);
-$border-color: var(--border-color);
-$text-color: var(--text-color);
-$icon-color: var(--icon-color);
-$grid-color: var(--grid-color);
+$bg-color: var(--challenge-card-bg-color);
+$border-color: var(--challenge-card-border-color);
+$text-color: var(--challenge-card-text-color);
+$icon-color: var(--challenge-card-icon-color);
+$grid-color: var(--challenge-card-grid-color);
 
 .root {
     width: fit-content;
@@ -12,122 +12,6 @@ $grid-color: var(--grid-color);
     border-radius: 16px;
 
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-
-    .wrapper {
-        position: relative;
-        width: 17.5rem;
-        height: 10rem;
-
-        background-color: $bg-color;
-        border-radius: 16px;
-        border: 3.75px solid $border-color;
-        padding: 10px;
-        transition: all 200ms ease-in-out;
-        @include mixins.grid-background($grid-color);
-
-        &:active {
-            box-shadow: none;
-            transform: translateY(4px);
-        }
-
-        &:hover {
-            filter: brightness(1.2);
-            cursor: pointer;
-        }
-    }
-
-    .star {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-
-        width: 1.5rem;
-        height: 1.5rem;
-
-        z-index: 1;
-
-        filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.3));
-    }
-
-    .category {
-        position: absolute;
-        top: 15%;
-        left: 20px;
-
-        font-size: 0.85rem;
-        font-weight: bold;
-        user-select: none;
-    }
-
-    .icon {
-        position: absolute;
-        width: 7.75rem;
-        height: 7.75rem;
-
-        color: $icon-color;
-        opacity: 0.5;
-        transition: all 200ms ease-in-out;
-
-        top: 50%;
-        right: 10px;
-
-        transform: translateY(-50%) translateX(0);
-    }
-
-    .title {
-        position: absolute;
-        top: 40%;
-        left: 7%;
-
-        font-size: 1.25rem;
-        font-weight: bold;
-
-        width: 85%;
-
-        overflow: hidden;
-        text-wrap: nowrap;
-        text-overflow: ellipsis;
-
-        color: $text-color;
-        transition: all 200ms ease-in-out;
-
-        user-select: none;
-
-        @include mixins.dark {
-            color: #ffffff;
-        }
-    }
-
-    .divider {
-        position: absolute;
-        top: 67.5%;
-
-        height: 2px;
-        width: 90%;
-
-        background-color: $icon-color;
-        transition: all 200ms ease-in-out;
-
-        transform: translateY(-50%);
-    }
-
-    .status {
-        position: absolute;
-        top: 82.5%;
-        left: 7.25%;
-
-        font-weight: 600;
-        color: $text-color;
-
-        user-select: none;
-
-        transform: translateY(-50%);
-        transition: all 200ms ease;
-
-        @include mixins.dark {
-            color: #ffffff;
-        }
-    }
 
     &:hover {
         .icon {
@@ -145,5 +29,121 @@ $grid-color: var(--grid-color);
                 transform: translateY(-50%) scale(1);
             }
         }
+    }
+}
+
+.wrapper {
+    position: relative;
+    width: 16rem;
+    height: 9rem;
+
+    background-color: $bg-color;
+    border-radius: 16px;
+    border: 2.75px solid $border-color;
+    padding: 10px;
+    transition: all 200ms ease-in-out;
+
+    &:active {
+        box-shadow: none;
+        transform: translateY(4px);
+    }
+
+    &:hover {
+        filter: brightness(1.2);
+        cursor: pointer;
+    }
+}
+
+.star {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    width: 1.5rem;
+    height: 1.5rem;
+
+    z-index: 1;
+
+    filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.3));
+}
+
+.category {
+    position: absolute;
+    top: 12.5%;
+    left: 20px;
+
+    font-size: 0.75rem;
+    font-weight: bold;
+    user-select: none;
+}
+
+.icon {
+    position: absolute;
+    width: 7rem;
+    height: 7rem;
+
+    color: $icon-color;
+    opacity: 0.5;
+    transition: all 200ms ease-in-out;
+
+    top: 50%;
+    right: 10px;
+
+    transform: translateY(-50%) translateX(0);
+}
+
+.title {
+    position: absolute;
+    top: 37.5%;
+    left: 7%;
+
+    font-size: 1.175rem;
+    font-weight: bold;
+
+    width: 85%;
+
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+
+    color: $text-color;
+    transition: all 200ms ease-in-out;
+
+    user-select: none;
+
+    @include mixins.dark {
+        color: #ffffff;
+    }
+}
+
+.divider {
+    position: absolute;
+    top: 65%;
+
+    height: 2px;
+    width: 90%;
+
+    background-color: $icon-color;
+    transition: all 200ms ease-in-out;
+
+    transform: translateY(-50%);
+}
+
+.status {
+    position: absolute;
+    top: 82.5%;
+    left: 7.25%;
+
+    font-weight: 600;
+    color: $text-color;
+    font-size: 0.85rem;
+
+    user-select: none;
+
+    transform: translateY(-50%);
+    transition: all 200ms ease;
+
+    @include mixins.dark {
+        color: #ffffff;
     }
 }

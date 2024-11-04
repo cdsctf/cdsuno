@@ -48,7 +48,7 @@ export function DatetimePicker(props: DatetimePickerProps) {
     }, [selectedDateTime]);
 
     const variables = {
-        "--border-color": useThemeColor("primary"),
+        "--dtp-border-color": useThemeColor("primary"),
     } as CSSProperties;
 
     const daysInMonth = selectedDateTime.daysInMonth || 31;

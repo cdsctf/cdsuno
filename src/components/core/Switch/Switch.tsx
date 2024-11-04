@@ -15,7 +15,7 @@ export function Switch(props: SwitchProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
-        "--bg-color": baseColor,
+        "--switch-bg-color": baseColor,
     } as CSSProperties;
 
     return (

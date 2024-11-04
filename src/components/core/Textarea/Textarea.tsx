@@ -11,12 +11,8 @@ export interface TextareaProps extends Omit<InputBaseProps, "onChange"> {
 export function Textarea(props: TextareaProps) {
     const { width = "fit-content", value, onChange, icon, ...rest } = props;
 
-    const variables = {
-        "--width": width,
-    } as React.CSSProperties;
-
     return (
-        <InputBase className={styles["root"]} style={variables}>
+        <InputBase className={styles["root"]} width={width}>
             {icon && <div className={styles["icon"]}>{icon}</div>}
             <textarea
                 className={styles["textarea"]}

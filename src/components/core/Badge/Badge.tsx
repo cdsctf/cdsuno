@@ -42,9 +42,9 @@ export function Badge(props: BadgeProps) {
     };
 
     const variables = {
-        "--bg-color": bgColor(),
-        "--border-color": borderColor(),
-        "--text-color": "#FFFFFF",
+        "--badge-bg-color": bgColor(),
+        "--badge-border-color": borderColor(),
+        "--badge-text-color": "#FFFFFF",
     } as CSSProperties;
 
     return (

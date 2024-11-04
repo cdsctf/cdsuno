@@ -1,7 +1,7 @@
 @use "@/styles/mixins";
 
-$bg-color: var(--bg-color);
-$border-color: var(--border-color);
+$bg-color: var(--navbar-bg-color);
+$border-color: var(--navbar-border-color);
 
 .root {
     position: fixed;
@@ -22,11 +22,6 @@ $border-color: var(--border-color);
     color: #ffffff;
 
     transition: all 300ms ease-in-out;
-
-    background-image: linear-gradient(to right, #ffffff0d 1px, transparent 1px),
-        linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
-
-    background-size: 20px 20px;
 
     .left-section,
     .right-section {

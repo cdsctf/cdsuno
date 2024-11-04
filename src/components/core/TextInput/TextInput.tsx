@@ -50,13 +50,6 @@ export function TextInput(props: TextInputProps) {
         setIsPasswordVisible(!isPasswordVisible);
     };
 
-    const baseColor = useThemeColor(color);
-
-    const variables = {
-        "--bg-color": baseColor,
-        "--border-color": baseColor,
-    } as React.CSSProperties;
-
     return (
         <InputBase
             width={width}

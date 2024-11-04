@@ -18,8 +18,8 @@ export function Navbar() {
     const baseColor = useThemeColor("primary");
 
     const variables = {
-        "--bg-color": chroma(baseColor).hex(),
-        "--border-color": chroma(baseColor).hex(),
+        "--navbar-bg-color": chroma(baseColor).hex(),
+        "--navbar-border-color": chroma(baseColor).hex(),
     } as CSSProperties;
 
     const links = [

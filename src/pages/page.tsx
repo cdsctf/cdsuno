@@ -247,8 +247,17 @@ print("hello world")
                 </Dropdown>
             </div>
 
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].map(
-                (i) => (
+            <div
+                style={{
+                    display: "flex",
+                    gap: "20px",
+                    flexWrap: "wrap",
+                }}
+            >
+                {" "}
+                {[
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+                ].map((i) => (
                     <div
                         key={i}
                         style={{
@@ -282,8 +291,8 @@ print("hello world")
                             }}
                         />
                     </div>
-                )
-            )}
+                ))}
+            </div>
 
             <Button
                 variant="solid"

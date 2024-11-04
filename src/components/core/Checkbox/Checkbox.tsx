@@ -23,7 +23,7 @@ export function Checkbox(props: CheckboxProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
-        "--bg-color": baseColor,
+        "--checkbox-bg-color": baseColor,
     } as CSSProperties;
 
     return (

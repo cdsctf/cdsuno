@@ -1,7 +1,7 @@
 @use "@/styles/mixins";
 
-$bg-color: var(--bg-color);
-$border-color: var(--border-color);
+$bg-color: var(--toast-bg-color);
+$border-color: var(--toast-border-color);
 
 .root {
     display: flex;

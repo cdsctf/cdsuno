@@ -34,9 +34,9 @@ export const InputBase = forwardRef<HTMLDivElement, InputBaseProps>(
         const baseColor = useThemeColor(color);
 
         const variables = {
-            "--width": width,
-            "--bg-color": baseColor,
-            "--border-color": baseColor,
+            "--input-width": width,
+            "--input-bg-color": baseColor,
+            "--input-border-color": baseColor,
         } as React.CSSProperties;
 
         return (

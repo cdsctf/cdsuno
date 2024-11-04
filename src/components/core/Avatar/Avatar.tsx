@@ -27,8 +27,8 @@ export function Avatar(props: AvatarProps) {
     const [imgErr, setImgErr] = useState<boolean>(false);
 
     const variables = {
-        "--size": size,
-        "--border-color": baseColor,
+        "--avatar-size": size,
+        "--avatar-border-color": baseColor,
     } as React.CSSProperties;
 
     return (
