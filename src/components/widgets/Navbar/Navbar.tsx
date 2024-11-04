@@ -7,15 +7,19 @@ import UsersGroupTwoRoundedBoldDuotone from "~icons/solar/users-group-two-rounde
 import PlanetBoldDuotone from "~icons/solar/planet-bold-duotone";
 import styles from "./Navbar.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
-import { CSSProperties } from "react";
+import { CSSProperties, useRef, useState } from "react";
 import chroma from "chroma-js";
 import { Link, useLocation } from "react-router-dom";
+import { Avatar, Dropdown } from "@/components/core";
 
 export function Navbar() {
     const darkMode = useThemeStore.getState().darkMode;
     const pathname = useLocation().pathname;
 
     const baseColor = useThemeColor("primary");
+
+    const [dropdownMenuOpen, setDropdownMenuOpen] = useState<boolean>(false);
+    const dropdownMenuButtonRef = useRef(null);
 
     const variables = {
         "--navbar-bg-color": chroma(baseColor).hex(),
@@ -83,6 +87,10 @@ export function Navbar() {
                             onClick={() => {
                                 useThemeStore.getState().setDarkMode(!darkMode);
                             }}
+                            style={{
+                                width: "fit-content",
+                                height: "fit-content",
+                            }}
                         >
                             {darkMode ? (
                                 <>
@@ -94,6 +102,36 @@ export function Navbar() {
                                 </>
                             )}
                         </button>
+                        <div
+                            className={styles["avatar"]}
+                            onClick={() => {
+                                setDropdownMenuOpen((r) => !r);
+                            }}
+                            ref={dropdownMenuButtonRef}
+                        >
+                            <Avatar
+                                src={"https://e23.dev/Ella_Avatar.png"}
+                                fallback={<>E</>}
+                                color={"transparent"}
+                            />
+                        </div>
+                        <Dropdown
+                            open={dropdownMenuOpen}
+                            onClose={() => setDropdownMenuOpen(false)}
+                            targetRef={dropdownMenuButtonRef}
+                        >
+                            <div
+                                style={{
+                                    width: "10rem",
+                                    height: "100px",
+                                    borderRadius: "8px",
+                                    backgroundColor: "var(--bg-2-color)",
+                                    zIndex: 1000,
+                                }}
+                            >
+                                1
+                            </div>
+                        </Dropdown>
                     </div>
                 </div>
             </div>
