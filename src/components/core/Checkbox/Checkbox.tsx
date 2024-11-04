@@ -29,6 +29,7 @@ export function Checkbox(props: CheckboxProps) {
     return (
         <label className={styles["root"]} style={variables}>
             <input
+                className={styles["input"]}
                 type={"checkbox"}
                 onChange={(e) => onChange(e.target.checked)}
                 checked={checked}

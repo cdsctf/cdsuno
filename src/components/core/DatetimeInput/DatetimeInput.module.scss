@@ -16,20 +16,20 @@ $border-color: var(--border-color);
             color: $border-color;
         }
     }
+}
 
-    input {
-        caret-color: transparent;
-        outline: none;
-        background: none;
-        appearance: none;
-        -moz-appearance: textfield;
+.input {
+    caret-color: transparent;
+    outline: none;
+    background: none;
+    appearance: none;
+    -moz-appearance: textfield;
 
-        &::-webkit-inner-spin-button,
-        &::-webkit-outer-spin-button,
-        &::-webkit-calendar-picker-indicator {
-            display: none;
-            -webkit-appearance: none;
-            margin: 0;
-        }
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button,
+    &::-webkit-calendar-picker-indicator {
+        display: none;
+        -webkit-appearance: none;
+        margin: 0;
     }
 }

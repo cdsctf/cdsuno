@@ -29,6 +29,7 @@ export function Image(props: ImageProps) {
             }}
         >
             <img
+                className={styles["img"]}
                 src={src}
                 alt={""}
                 onLoad={() => setLoading(false)}

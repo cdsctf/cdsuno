@@ -9,15 +9,15 @@ $border-color: var(--border-color);
     border: 2px dashed $border-color;
     width: $size;
     height: $size;
+}
 
-    .fallback {
-        overflow: hidden;
-        color: $border-color;
-    }
+.fallback {
+    overflow: hidden;
+    color: $border-color;
+}
 
-    .img {
-        width: 95%;
-        height: 95%;
-        border-radius: 50%;
-    }
+.img {
+    width: 95%;
+    height: 95%;
+    border-radius: 50%;
 }

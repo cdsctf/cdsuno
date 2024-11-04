@@ -51,70 +51,70 @@ $border-color: var(--border-color);
             opacity: 0.5;
         }
     }
+}
 
-    input {
-        flex: 1;
-        width: 100%;
-        background: transparent;
-        border: none;
+.input {
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    caret-color: $border-color;
+    font-size: 16px;
+    line-height: 1.5;
+
+    &[type="password"] {
+        &::-webkit-textfield-decoration-container,
+        &::-webkit-password-toggle-button,
+        &::-ms-reveal,
+        &::-ms-clear {
+            display: none;
+        }
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.clear-button {
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: $border-color;
+    transition: all 150ms ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &:focus {
         outline: none;
-        caret-color: $border-color;
-        font-size: 16px;
-        line-height: 1.5;
+        opacity: 1;
+    }
+}
 
-        &[type="password"] {
-            &::-webkit-textfield-decoration-container,
-            &::-webkit-password-toggle-button,
-            &::-ms-reveal,
-            &::-ms-clear {
-                display: none;
-            }
-        }
+.toggle-button {
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: $border-color;
+    transition: all 150ms ease-in-out;
 
-        &:disabled {
-            cursor: not-allowed;
-        }
+    &:hover {
+        opacity: 1;
     }
 
-    .clear-button {
-        opacity: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        color: $border-color;
-        transition: all 150ms ease-in-out;
-
-        &:hover {
-            opacity: 1;
-        }
-
-        &:focus {
-            outline: none;
-            opacity: 1;
-        }
-    }
-
-    .toggle-button {
-        opacity: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        color: $border-color;
-        transition: all 150ms ease-in-out;
-
-        &:hover {
-            opacity: 1;
-        }
-
-        &:focus {
-            outline: none;
-            opacity: 1;
-        }
+    &:focus {
+        outline: none;
+        opacity: 1;
     }
 }

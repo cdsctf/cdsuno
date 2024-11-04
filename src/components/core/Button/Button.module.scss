@@ -66,16 +66,16 @@ $text-color: var(--text-color);
             filter: brightness(1.2);
         }
     }
+}
 
-    .content {
-        color: $text-color;
-        font-size: 0.875rem;
-        font-weight: 600;
-        line-height: 21.6px;
-        letter-spacing: 0.8px;
-    }
+.content {
+    color: $text-color;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 21.6px;
+    letter-spacing: 0.8px;
+}
 
-    .icon {
-        color: $text-color;
-    }
+.icon {
+    color: $text-color;
 }

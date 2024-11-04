@@ -18,29 +18,29 @@ $border-color: var(--border-color);
         linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
 
     background-size: 20px 20px;
+}
 
-    .icon {
-        width: 2.5rem;
-        height: 2.5rem;
-        color: #ffffff;
-    }
+.icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #ffffff;
+}
 
-    .content-wrapper {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        gap: 4px;
-    }
+.content-wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+}
 
-    .title {
-        font-size: 1.125rem;
-        line-height: 1.75rem;
-        color: #ffffff;
-    }
+.title {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: #ffffff;
+}
 
-    .description {
-        font-size: 1rem;
-        line-height: 1.5rem;
-        color: #ffffff;
-    }
+.description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #ffffff;
 }

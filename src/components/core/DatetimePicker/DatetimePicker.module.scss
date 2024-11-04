@@ -2,6 +2,7 @@
 
 $bg-color: var(--bg-color);
 $border-color: var(--border-color);
+
 @keyframes scale-up {
     0% {
         transform: scale(0.9);
@@ -10,122 +11,122 @@ $border-color: var(--border-color);
         transform: scale(1);
     }
 }
+
 .root {
     position: relative;
     width: fit-content;
+}
 
-    .container {
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: fit-content;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 12px;
-        z-index: 2;
+.container {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: fit-content;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    z-index: 2;
 
-        &.enter {
-            opacity: 0;
-        }
-
-        &.enter-active {
-            opacity: 1;
-            transition: all 75ms ease-in;
-        }
-
-        &.exit {
-            opacity: 1;
-        }
-
-        &.exit-active {
-            opacity: 0;
-            transition: all 75ms ease-in;
-        }
+    &.enter {
+        opacity: 0;
     }
 
-    .wrapper {
-        background-color: $bg-color;
-        border: 2.75px solid $border-color;
-        // box-shadow: 0 4px 0 $border-color;
-        border-radius: 12px;
-        padding: 16px;
+    &.enter-active {
+        opacity: 1;
+        transition: all 75ms ease-in;
     }
 
-    .date-picker {
-        .month-year {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
+    &.exit {
+        opacity: 1;
+    }
 
-            button {
-                background: none;
-                border: none;
-                font-size: 18px;
-                cursor: pointer;
-            }
-            span {
-                user-select: none;
-            }
+    &.exit-active {
+        opacity: 0;
+        transition: all 75ms ease-in;
+    }
+}
+
+.wrapper {
+    background-color: $bg-color;
+    border: 2.75px solid $border-color;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.date-picker {
+    .month-year {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
         }
-
-        .weekdays {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 8px;
-            div {
-                user-select: none;
-            }
-        }
-
-        .days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
+        span {
             user-select: none;
+        }
+    }
 
-            .day {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 32px;
-                height: 32px;
-                cursor: pointer;
-                border-radius: 10px;
+    .weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 8px;
+        div {
+            user-select: none;
+        }
+    }
 
+    .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+        user-select: none;
+
+        .day {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            border-radius: 10px;
+
+            &:hover {
+                border: $border-color 1.5px solid;
+                transition: 0.2s ease-in-out;
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            &.selected {
+                border: $border-color 3px solid;
+                animation: scale-up 0.2s ease-in-out;
+            }
+            &:active.selected {
+                animation: none;
+                border: $border-color 1.5px solid;
+            }
+
+            &:active.selected::after {
+                animation: scale-up 0.2s ease-in-out;
+            }
+            &.empty {
+                cursor: default;
+                user-select: none;
                 &:hover {
-                    border: $border-color 1.5px solid;
-                    transition: 0.2s ease-in-out;
-                    background-color: rgba(255, 255, 255, 0.2);
+                    border: none;
+                    background-color: transparent;
                 }
-
                 &.selected {
-                    border: $border-color 3px solid;
-                    animation: scale-up 0.2s ease-in-out;
-                }
-                &:active.selected {
+                    border: none;
                     animation: none;
-                    border: $border-color 1.5px solid;
                 }
-
-                &:active.selected::after {
-                    animation: scale-up 0.2s ease-in-out;
-                }
-                &.empty {
-                    cursor: default;
-                    user-select: none;
-                    &:hover {
-                        border: none;
-                        background-color: transparent;
-                    }
-                    &.selected {
-                        border: none;
-                        animation: none;
-                    }
-                    &:active {
-                        border: none;
-                    }
+                &:active {
+                    border: none;
                 }
             }
         }

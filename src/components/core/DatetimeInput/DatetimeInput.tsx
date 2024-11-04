@@ -207,6 +207,7 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
             >
                 {icon && <div className={styles["icon"]}>{icon}</div>}
                 <input
+                    className={styles["input"]}
                     type="text"
                     ref={inputRef}
                     value={inputValue}

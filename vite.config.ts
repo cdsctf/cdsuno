@@ -3,6 +3,7 @@ import React from "@vitejs/plugin-react-swc";
 import Icons from "unplugin-icons/vite";
 import { prismjsPlugin } from "vite-plugin-prismjs";
 import path from "path";
+import crypto from "crypto";
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd());
@@ -38,6 +39,27 @@ export default defineConfig(({ mode }) => {
         resolve: {
             alias: {
                 "@": path.resolve(__dirname, "src"),
+            },
+        },
+        css: {
+            modules: {
+                generateScopedName: (
+                    name: string,
+                    filename: string,
+                    css: string
+                ) => {
+                    const shortFilename = filename
+                        .replace(/\\/g, "/")
+                        .split("/")
+                        .pop()!
+                        .replace(/(\.\w+)+$/, "");
+                    const hash = crypto
+                        .createHash("sha256")
+                        .update(name.concat(css))
+                        .digest("hex")
+                        .substring(0, 5);
+                    return `cdsuno_${shortFilename}_${name}_${hash}`;
+                },
             },
         },
     };

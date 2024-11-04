@@ -71,6 +71,7 @@ export function TextInput(props: TextInputProps) {
         >
             {icon && <div className={styles["icon"]}>{icon}</div>}
             <input
+                className={styles["input"]}
                 value={value}
                 type={password && !isPasswordVisible ? "password" : "text"}
                 placeholder={placeholder}

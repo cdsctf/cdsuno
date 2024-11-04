@@ -19,6 +19,7 @@ export function Textarea(props: TextareaProps) {
         <InputBase className={styles["root"]} style={variables}>
             {icon && <div className={styles["icon"]}>{icon}</div>}
             <textarea
+                className={styles["textarea"]}
                 value={value}
                 onChange={(e) => onChange?.(e.target.value)}
             />

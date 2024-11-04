@@ -4,21 +4,6 @@ $border-color: var(--border-color);
 .root {
     width: $width;
 
-    textarea {
-        flex: 1;
-        width: 100%;
-        background: transparent;
-        border: none;
-        outline: none;
-        caret-color: $border-color;
-        font-size: 16px;
-        line-height: 1.5;
-
-        &:disabled {
-            cursor: not-allowed;
-        }
-    }
-
     &[data-variant="solid"] {
         .icon {
             color: #ffffff;
@@ -55,5 +40,20 @@ $border-color: var(--border-color);
         .toggle-button {
             opacity: 0.5;
         }
+    }
+}
+
+.textarea {
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    caret-color: $border-color;
+    font-size: 16px;
+    line-height: 1.5;
+
+    &:disabled {
+        cursor: not-allowed;
     }
 }

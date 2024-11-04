@@ -6,43 +6,43 @@ $bg-color: var(--bg-color);
     display: flex;
     width: fit-content;
     gap: 12px;
+}
 
-    .switch {
-        position: relative;
-        width: 45px;
-        height: 24px;
-        background-color: $bg-color;
-        border-radius: 17px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 2px solid $bg-color;
+.switch {
+    position: relative;
+    width: 45px;
+    height: 24px;
+    background-color: $bg-color;
+    border-radius: 17px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid $bg-color;
 
-        &:hover {
-            filter: brightness(1.2);
+    &:hover {
+        filter: brightness(1.2);
+    }
+
+    &[data-checked="true"] {
+        .handle {
+            transform: translateY(-50%) translateX(20px);
         }
-
-        &[data-checked="true"] {
-            .handle {
-                transform: translateY(-50%) translateX(20px);
-            }
-        }
     }
+}
 
-    .handle {
-        position: absolute;
-        content: "";
-        height: 15px;
-        width: 15px;
-        left: 4px;
-        top: 50%;
-        background-color: #ffffff;
-        border-radius: 50%;
-        transition: 0.3s;
-        transform: translateY(-50%);
-    }
+.handle {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 4px;
+    top: 50%;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: 0.3s;
+    transform: translateY(-50%);
+}
 
-    .label {
-        font-size: 16px;
-        user-select: none;
-    }
+.label {
+    font-size: 16px;
+    user-select: none;
 }
