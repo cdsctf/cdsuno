@@ -10,7 +10,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import { CSSProperties, useRef, useState } from "react";
 import chroma from "chroma-js";
 import { Link, useLocation } from "react-router-dom";
-import { Avatar, Dropdown } from "@/components/core";
+import { Avatar, Popover } from "@/components/core";
 
 export function Navbar() {
     const darkMode = useThemeStore.getState().darkMode;
@@ -102,36 +102,38 @@ export function Navbar() {
                                 </>
                             )}
                         </button>
-                        <div
-                            className={styles["avatar"]}
-                            onClick={() => {
-                                setDropdownMenuOpen((r) => !r);
-                            }}
-                            ref={dropdownMenuButtonRef}
-                        >
-                            <Avatar
-                                src={"https://e23.dev/Ella_Avatar.png"}
-                                fallback={<>E</>}
-                                color={"transparent"}
-                            />
-                        </div>
-                        <Dropdown
-                            open={dropdownMenuOpen}
-                            onClose={() => setDropdownMenuOpen(false)}
-                            targetRef={dropdownMenuButtonRef}
+                        <Popover
+                            opened={dropdownMenuOpen}
+                            onChange={setDropdownMenuOpen}
+                            offsetY={20}
+                            content={
+                                <div
+                                    style={{
+                                        width: "10rem",
+                                        height: "100px",
+                                        borderRadius: "8px",
+                                        backgroundColor: "var(--bg-2-color)",
+                                        zIndex: 1000,
+                                    }}
+                                >
+                                    1
+                                </div>
+                            }
                         >
                             <div
-                                style={{
-                                    width: "10rem",
-                                    height: "100px",
-                                    borderRadius: "8px",
-                                    backgroundColor: "var(--bg-2-color)",
-                                    zIndex: 1000,
+                                className={styles["avatar"]}
+                                onClick={() => {
+                                    setDropdownMenuOpen((r) => !r);
                                 }}
+                                ref={dropdownMenuButtonRef}
                             >
-                                1
+                                <Avatar
+                                    src={"https://e23.dev/Ella_Avatar.png"}
+                                    fallback={<>E</>}
+                                    color={"transparent"}
+                                />
                             </div>
-                        </Dropdown>
+                        </Popover>
                     </div>
                 </div>
             </div>

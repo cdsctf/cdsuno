@@ -9,13 +9,14 @@ import UserBold from "~icons/solar/user-bold";
 import { useToastStore } from "@/stores/toast";
 import { DateTime } from "luxon";
 import { useRef, useState } from "react";
-import { Dropdown } from "@/components/core/Dropdown";
 import { ChallengeCard } from "@/components/widgets/ChallengeCard";
 import { Switch } from "@/components/core/Switch/Switch";
 import { ChallengeModal } from "@/components/modals/ChallengeModal";
 import { DatetimeInput } from "@/components/core/DatetimeInput";
 import { Textarea } from "@/components/core/Textarea";
 import { MarkdownRender } from "@/components/utils/MarkdownRender/MarkdownRender";
+import globalRouter from "@/utils/globalRouter";
+import { Popover } from "@/components/core/Popover/Popover";
 
 export function Page() {
     const [color, setColor] = useState("#1cb0f6");
@@ -25,7 +26,7 @@ export function Page() {
 
     const [value, setValue] = useState<string>("");
     const [open, setOpen] = useState(false);
-    const [open2, setOpen2] = useState(false);
+    const [popoverOpen, setPopoverOpen] = useState(false);
 
     const [loading, setLoading] = useState(false);
 
@@ -194,6 +195,36 @@ print("hello world")
             >
                 打开第一个弹窗
             </Button>
+
+            <Button
+                variant="solid"
+                onClick={() => {
+                    globalRouter.navigate?.("/login");
+                }}
+            >
+                Global Router
+            </Button>
+
+            <Popover
+                opened={popoverOpen}
+                onChange={setPopoverOpen}
+                content={
+                    <div
+                        style={{
+                            width: "100px",
+                            height: "100px",
+                            backgroundColor: "green",
+                        }}
+                    >
+                        Popover Controlled
+                    </div>
+                }
+            >
+                <Button onClick={() => setPopoverOpen((r) => !r)}>
+                    Popover Controlled
+                </Button>
+            </Popover>
+
             <Dialog
                 open={open}
                 onClose={() => {
@@ -212,40 +243,6 @@ print("hello world")
                     }}
                 />
             </Dialog>
-
-            <div
-                style={{
-                    width: "fit-content",
-                    position: "relative",
-                }}
-            >
-                <Button
-                    variant="solid"
-                    ref={dropdownMenuButtonRef}
-                    onClick={() => {
-                        setDropdownMenuOpen(!dropdownMenuOpen);
-                    }}
-                >
-                    打开 Dropdown Menu
-                </Button>
-                <Dropdown
-                    open={dropdownMenuOpen}
-                    onClose={() => setDropdownMenuOpen(false)}
-                    targetRef={dropdownMenuButtonRef}
-                >
-                    <div
-                        style={{
-                            width: "10rem",
-                            height: "100px",
-                            borderRadius: "8px",
-                            backgroundColor: "white",
-                            zIndex: 1000,
-                        }}
-                    >
-                        1
-                    </div>
-                </Dropdown>
-            </div>
 
             <div
                 style={{

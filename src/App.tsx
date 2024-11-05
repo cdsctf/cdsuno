@@ -5,6 +5,7 @@ import { router } from "@/routers";
 
 export default function App() {
     const themeStore = useThemeStore();
+
     useEffect(() => {
         document.documentElement.setAttribute(
             "data-theme",
