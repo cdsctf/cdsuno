@@ -113,6 +113,9 @@ export function Navbar() {
                                         height: "100px",
                                         borderRadius: "8px",
                                         backgroundColor: "var(--bg-2-color)",
+                                        color: "var(--text-color)",
+                                        boxShadow:
+                                            "0px 4px 20px rgba(0, 0, 0, 0.1)",
                                         zIndex: 1000,
                                     }}
                                 >
