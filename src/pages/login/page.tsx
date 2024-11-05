@@ -30,7 +30,7 @@ export function Page() {
     }, [categories]);
 
     const variables = {
-        "--bg-color": bgColors[index],
+        "--category-bg-color": bgColors[index],
     } as CSSProperties;
 
     return (

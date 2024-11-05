@@ -4,8 +4,28 @@
     }
 }
 
+@mixin responsive($breakpoint) {
+    @if $breakpoint == "xs" {
+        @media (max-width: 575px) {
+            @content;
+        }
+    } @else if $breakpoint == "sm" {
+        @media (min-width: 576px) {
+            @content;
+        }
+    } @else if $breakpoint == "md" {
+        @media (min-width: 768px) {
+            @content;
+        }
+    } @else if $breakpoint == "lg" {
+        @media (min-width: 992px) {
+            @content;
+        }
+    }
+}
+
 @mixin transition {
-    transition: all 0.15s ease-in-out;
+    transition: all 150ms ease-in-out;
 }
 
 @mixin grid-background($grid-color) {
@@ -25,25 +45,5 @@
                 transparent 1px
             ),
             linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
-    }
-}
-
-@mixin media($breakpoint) {
-    @if $breakpoint == "xs" {
-        @media (max-width: 575px) {
-            @content;
-        }
-    } @else if $breakpoint == "sm" {
-        @media (min-width: 576px) {
-            @content;
-        }
-    } @else if $breakpoint == "md" {
-        @media (min-width: 768px) {
-            @content;
-        }
-    } @else if $breakpoint == "lg" {
-        @media (min-width: 992px) {
-            @content;
-        }
     }
 }

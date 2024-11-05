@@ -1,9 +1,4 @@
-import React, {
-    ComponentProps,
-    ComponentPropsWithRef,
-    forwardRef,
-} from "react";
-import chroma from "chroma-js";
+import React, { ComponentPropsWithRef, forwardRef } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Button.module.scss";
 import Loading from "../../icons/Loading";

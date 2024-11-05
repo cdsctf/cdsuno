@@ -7,6 +7,7 @@ import { Badge } from "@/components/core/Badge";
 import { useCategoryStore } from "@/stores/category";
 import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
+import { Icon } from "@/components/core/Icon";
 
 export interface ChallengeCard extends ComponentProps<"div"> {
     challenge: Challenge;
@@ -71,7 +72,9 @@ export function ChallengeCard(props: ChallengeCard) {
                 {status?.is_solved && (
                     <div className={styles["star"]}>
                         <Tooltip content={"已解决"}>
-                            <StarBoldDuotone color={"#FFD700"} />
+                            <Icon
+                                icon={<StarBoldDuotone color={"#FFD700"} />}
+                            />
                         </Tooltip>
                     </div>
                 )}
