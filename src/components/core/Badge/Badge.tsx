@@ -2,6 +2,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Badge.module.scss";
 import chroma from "chroma-js";
 import { CSSProperties, ComponentProps } from "react";
+import clsx from "clsx";
 
 export interface BadgeProps extends ComponentProps<"div"> {
     variant?: "solid" | "light" | "outlined";
@@ -49,7 +50,7 @@ export function Badge(props: BadgeProps) {
 
     return (
         <div
-            className={`${styles["root"]} ${className}`}
+            className={clsx(styles["root"], className)}
             style={{ ...variables, ...style }}
             {...rest}
         >

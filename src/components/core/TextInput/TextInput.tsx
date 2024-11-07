@@ -5,6 +5,7 @@ import EyeBold from "~icons/solar/eye-bold";
 import EyeCloseBold from "~icons/solar/eye-closed-bold";
 import styles from "./TextInput.module.scss";
 import { InputBase, InputBaseProps } from "../InputBase";
+import clsx from "clsx";
 
 export interface TextInputProps extends Omit<InputBaseProps, "onChange"> {
     clearable?: boolean;
@@ -59,7 +60,7 @@ export function TextInput(props: TextInputProps) {
             helperText={helperText}
             errorText={errorText}
             label={label}
-            className={`${styles["root"]} ${className}`}
+            className={clsx(styles["root"], className)}
             {...rest}
         >
             {icon && <div className={styles["icon"]}>{icon}</div>}

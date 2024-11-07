@@ -1,10 +1,18 @@
 import { Typography } from "@/components/core/Typography";
 import { ComponentProps } from "react";
-import KatexExtension from "@/utils/katex";
-import Prism from "prismjs";
-import { Marked } from "marked";
-import { markedHighlight } from "marked-highlight";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeKatex from "rehype-katex";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeStringify from "rehype-stringify";
+import rehypeHighlight from "rehype-highlight";
+import "katex/dist/katex.min.css";
+import "highlight.js/styles/atom-one-dark.min.css";
 import styles from "./MarkdownRender.module.scss";
+import clsx from "clsx";
 
 export interface MarkdownRenderProps extends ComponentProps<"div"> {
     src: string;
@@ -13,35 +21,32 @@ export interface MarkdownRenderProps extends ComponentProps<"div"> {
 export function MarkdownRender(props: MarkdownRenderProps) {
     const { src, ...rest } = props;
 
-    Prism.manual = true;
-
-    const marked = new Marked(
-        markedHighlight({
-            highlight(code, lang) {
-                if (lang && Prism.languages[lang]) {
-                    return Prism.highlight(code, Prism.languages[lang], lang);
-                } else {
-                    return code;
-                }
-            },
-        })
-    );
-
-    marked.use(KatexExtension({}));
-    const renderer = new marked.Renderer();
-    marked.setOptions({
-        renderer,
-        silent: true,
-    });
-
     return (
         <Typography>
-            <div
-                className={styles["root"]}
-                dangerouslySetInnerHTML={{
-                    __html: marked.parse(src),
+            <Markdown
+                remarkPlugins={[
+                    remarkGfm,
+                    remarkParse,
+                    remarkMath,
+                    remarkRehype,
+                ]}
+                rehypePlugins={[
+                    rehypeKatex,
+                    rehypeAutolinkHeadings,
+                    rehypeStringify,
+                    rehypeHighlight,
+                ]}
+                components={{
+                    pre: ({ children }) => {
+                        return (
+                            <pre className={clsx(styles.pre)}>{children}</pre>
+                        );
+                    },
                 }}
-            />
+                className={clsx(styles["root"])}
+            >
+                {src}
+            </Markdown>
         </Typography>
     );
 }

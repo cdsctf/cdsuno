@@ -2,6 +2,7 @@ import React, { ComponentProps, useState } from "react";
 import chroma from "chroma-js";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Card.module.scss"; // 使用CSS Modules
+import clsx from "clsx";
 
 export interface CardProps extends ComponentProps<"div"> {
     color?: string;
@@ -38,7 +39,10 @@ export function Card(props: CardProps & { children?: React.ReactNode }) {
     };
     return (
         <div
-            className={`${styles["radio-button"]} ${selected ? styles.selected : ""}`}
+            className={clsx(
+                styles["radio-button"],
+                selected ? styles.selected : ""
+            )}
             style={variables}
             {...rest}
             onClick={handleClick}

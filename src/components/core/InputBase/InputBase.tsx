@@ -1,6 +1,7 @@
 import React, { ComponentProps, forwardRef } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./InputBase.module.scss";
+import clsx from "clsx";
 
 export interface InputBaseProps extends ComponentProps<"div"> {
     width?: string;
@@ -54,7 +55,7 @@ export const InputBase = forwardRef<HTMLDivElement, InputBaseProps>(
                     </div>
                 )}
                 <div
-                    className={`${styles["wrapper"]} ${className}`}
+                    className={clsx(styles["wrapper"], className)}
                     data-variant={variant}
                     ref={ref}
                 >

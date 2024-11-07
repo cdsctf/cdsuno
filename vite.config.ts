@@ -1,7 +1,6 @@
 import { defineConfig, loadEnv } from "vite";
 import React from "@vitejs/plugin-react-swc";
 import Icons from "unplugin-icons/vite";
-import { prismjsPlugin } from "vite-plugin-prismjs";
 import path from "path";
 import crypto from "crypto";
 
@@ -31,10 +30,6 @@ export default defineConfig(({ mode }) => {
                 scale: 1.2,
                 defaultStyle: "width: fit-content; height: 100%;",
             }),
-            prismjsPlugin({
-                languages: "all",
-                css: true,
-            }),
         ],
         resolve: {
             alias: {
@@ -57,10 +52,22 @@ export default defineConfig(({ mode }) => {
                         .createHash("sha256")
                         .update(name.concat(css))
                         .digest("hex")
-                        .substring(0, 5);
+                        .substring(0, 8);
                     return `cdsuno_${shortFilename}_${name}_${hash}`;
                 },
             },
+        },
+        build: {
+            rollupOptions: {
+                output: {
+                    manualChunks(id) {
+                        if (id.includes("node_modules")) {
+                            return id.split("node_modules/")[1].split("/")[0]; // 按库拆分
+                        }
+                    },
+                },
+            },
+            cssCodeSplit: true,
         },
     };
 });

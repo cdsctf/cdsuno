@@ -2,6 +2,7 @@ import React, { ComponentPropsWithRef, forwardRef } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Button.module.scss";
 import Loading from "../../icons/Loading";
+import clsx from "clsx";
 
 export interface ButtonProps extends ComponentPropsWithRef<"button"> {
     width?: string;
@@ -45,7 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         return (
             <button
                 ref={ref}
-                className={`${styles["root"]} ${className}`}
+                className={clsx(styles["root"], className)}
                 data-disabled={disabled}
                 data-loading={loading}
                 data-variant={variant}

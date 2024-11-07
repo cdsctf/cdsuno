@@ -8,6 +8,7 @@ import CalendarBold from "~icons/solar/calendar-bold";
 import { CSSTransition } from "react-transition-group";
 import { Badge } from "../Badge";
 import { DatetimeInput } from "../DatetimeInput";
+import clsx from "clsx";
 
 export interface DatetimePickerProps {
     value: DateTime;
@@ -127,14 +128,22 @@ export function DatetimePicker(props: DatetimePickerProps) {
                                     (_, i) => (
                                         <div
                                             key={`empty-${i}`}
-                                            className={`${styles["day"]} ${styles["empty"]}`}
+                                            className={clsx(
+                                                styles["day"],
+                                                styles["empty"]
+                                            )}
                                         ></div>
                                     )
                                 )}
                                 {Array.from({ length: daysInMonth }, (_, i) => (
                                     <div
                                         key={i + 1}
-                                        className={`${styles["day"]} ${selectedDateTime.day === i + 1 ? styles["selected"] : ""}`}
+                                        className={clsx(
+                                            styles["day"],
+                                            selectedDateTime.day === i + 1
+                                                ? styles["selected"]
+                                                : ""
+                                        )}
                                         onClick={() => handleDateChange(i + 1)}
                                     >
                                         {i + 1}

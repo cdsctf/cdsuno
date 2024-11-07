@@ -65,6 +65,22 @@ export function Page() {
 print("hello world")
 \`\`\`
 
+\`\`\`js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Markdown from 'react-markdown'
+import rehypeHighlight from 'rehype-highlight'
+
+const markdown = \`
+# Your markdown here
+\`
+
+ReactDOM.render(
+  <Markdown rehypePlugins={[rehypeHighlight]}>{markdown}</Markdown>,
+  document.querySelector('#content')
+)
+\`\`\`
+
 [link](https://github.com)
 
 > blockquote
