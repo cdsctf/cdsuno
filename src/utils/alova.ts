@@ -8,4 +8,9 @@ export const alovaInstance = createAlova({
     timeout: 5000,
     shareRequest: true,
     statesHook: ReactHook,
+    responded: {
+        onSuccess: async (response, _method) => {
+            return response.json();
+        },
+    },
 });

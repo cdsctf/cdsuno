@@ -1,7 +1,7 @@
-import { Game } from "@/types/game";
-import { Team } from "@/types/team";
-import { Challenge } from "@/types/challenge";
-import { User } from "@/types/user";
+import { Game } from "./game";
+import { Team } from "./team";
+import { Challenge } from "./challenge";
+import { User } from "./user";
 
 export interface Submission {
     id?: number;

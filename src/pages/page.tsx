@@ -307,22 +307,70 @@ ReactDOM.render(
                 ))}
             </div>
 
-            <Button
-                variant="solid"
-                onClick={() => {
-                    useToastStore.getState().addToast({
-                        title: "通知",
-                        description: "这是一个通知",
-                        type: "success",
-                        meta: {
-                            icon: "123",
-                        },
-                        duration: 3000,
-                    });
+            <div
+                style={{
+                    display: "flex",
+                    gap: "20px",
                 }}
             >
-                发送通知114514
-            </Button>
+                <Button
+                    variant="solid"
+                    onClick={() => {
+                        useToastStore.getState().add({
+                            title: "Info Message",
+                            description: "这是一个通知",
+                            type: "info",
+                            duration: 3000,
+                        });
+                    }}
+                    color={"info"}
+                >
+                    info
+                </Button>
+                <Button
+                    variant="solid"
+                    onClick={() => {
+                        useToastStore.getState().add({
+                            title: "Success Message",
+                            description: "这是一个通知",
+                            type: "success",
+                            duration: 3000,
+                        });
+                    }}
+                    color={"success"}
+                >
+                    success
+                </Button>
+                <Button
+                    variant="solid"
+                    onClick={() => {
+                        useToastStore.getState().add({
+                            title: "Warning Message",
+                            description: "这是一个通知",
+                            type: "warning",
+                            duration: 3000,
+                        });
+                    }}
+                    color={"warning"}
+                >
+                    warning
+                </Button>
+                <Button
+                    variant="solid"
+                    onClick={() => {
+                        useToastStore.getState().add({
+                            title: "Error Message",
+                            description: "这是一个通知",
+                            type: "error",
+                            duration: 3000,
+                        });
+                    }}
+                    color={"error"}
+                >
+                    error
+                </Button>
+            </div>
+
             <div
                 style={{
                     display: "flex",

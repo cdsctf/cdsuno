@@ -3,11 +3,28 @@ import { useToastStore } from "@/stores/toast";
 import styles from "./Toaster.module.scss";
 import React, { useEffect, useRef, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import InfoCircleBold from "~icons/solar/info-circle-bold";
+import CheckCircleBold from "~icons/solar/check-circle-bold";
+import DangerCircleBold from "~icons/solar/danger-circle-bold";
+import CloseCircleBold from "~icons/solar/close-circle-bold";
 
 export function Toaster() {
     const toastStore = useToastStore();
     const nodeRefs = useRef(new Map());
     const [visibleToasts, setVisibleToasts] = useState(new Set());
+
+    function getIcon(type: string) {
+        switch (type) {
+            case "info":
+                return <InfoCircleBold />;
+            case "success":
+                return <CheckCircleBold />;
+            case "warning":
+                return <DangerCircleBold />;
+            case "error":
+                return <CloseCircleBold />;
+        }
+    }
 
     useEffect(() => {
         toastStore.toasts.forEach((toast) => {
@@ -20,7 +37,7 @@ export function Toaster() {
                         newSet.delete(toast.id);
                         return newSet;
                     });
-                    toastStore.removeToast(toast.id);
+                    toastStore.remove(toast.id);
                     nodeRefs.current.delete(toast.id);
                 }, toast.duration || 3000);
 
@@ -53,8 +70,10 @@ export function Toaster() {
                         >
                             <div ref={nodeRef} className={styles["toast"]}>
                                 <Toast
-                                    title={`你好 ${toast.id}`}
-                                    description={"ciallo~"}
+                                    title={toast?.title}
+                                    description={toast?.description}
+                                    icon={toast?.icon || getIcon(toast?.type)}
+                                    color={toast?.type}
                                 />
                             </div>
                         </CSSTransition>

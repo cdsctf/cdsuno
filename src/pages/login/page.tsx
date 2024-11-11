@@ -6,9 +6,16 @@ import UserBold from "~icons/solar/user-bold";
 import LockPasswordBold from "~icons/solar/lock-password-bold";
 import LoginBold from "~icons/solar/login-bold";
 import useThemeColor from "@/hooks/useThemeColor";
+import { login } from "@/api/user";
+import { useAuthStore } from "@/stores/auth";
+import { useNavigate } from "react-router-dom";
+import { useToastStore } from "@/stores/toast";
 
 export function Page() {
+    const authStore = useAuthStore();
     const categoryStore = useCategoryStore();
+    const toastStore = useToastStore();
+    const navigate = useNavigate();
 
     const categories = categoryStore.categories;
 
@@ -18,8 +25,28 @@ export function Page() {
         useThemeColor(category.color!)
     );
 
-    const [username, setUsername] = useState<string>("");
+    const [account, setAccount] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
+
+    async function handleLogin() {
+        setLoading(true);
+        const res = await login({ account, password });
+        const code = res?.code;
+        switch (code) {
+            case 200:
+                const user = res?.data;
+                authStore.setUser(user);
+                toastStore.add({
+                    title: "登录成功",
+                    description: `欢迎你 ${user?.nickname}`,
+                    type: "success",
+                    duration: 3000,
+                });
+                navigate("/");
+        }
+        setLoading(false);
+    }
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -49,8 +76,8 @@ export function Page() {
                         placeholder="Username"
                         label={"用户名"}
                         icon={<UserBold />}
-                        value={username}
-                        onChange={(value) => setUsername(value)}
+                        value={account}
+                        onChange={(value) => setAccount(value)}
                     />
                     <TextInput
                         width="100%"
@@ -67,6 +94,8 @@ export function Page() {
                         style={{
                             margin: "1rem 0",
                         }}
+                        onClick={handleLogin}
+                        loading={loading}
                     >
                         登录
                     </Button>

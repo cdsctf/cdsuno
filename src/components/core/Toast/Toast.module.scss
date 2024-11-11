@@ -10,20 +10,16 @@ $border-color: var(--toast-border-color);
     background-color: $bg-color;
     border: 2.75px solid $border-color;
     border-radius: 16px;
-    padding: 10px 15px;
+    padding: 10px 20px;
     min-width: 20vw;
     position: relative;
-
-    background-image: linear-gradient(to right, #ffffff0d 1px, transparent 1px),
-        linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
-
-    background-size: 20px 20px;
 }
 
 .icon {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     color: #ffffff;
+    border-radius: 50%;
 }
 
 .content-wrapper {
@@ -34,13 +30,13 @@ $border-color: var(--toast-border-color);
 }
 
 .title {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
     color: #ffffff;
 }
 
 .description {
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-size: 0.75rem;
+    line-height: 1.125rem;
     color: #ffffff;
 }

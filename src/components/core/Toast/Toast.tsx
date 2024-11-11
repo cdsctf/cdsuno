@@ -4,15 +4,15 @@ import styles from "./Toast.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
 import { ComponentProps } from "react";
+import { Icon } from "../Icon";
 
 export interface ToastProps extends ComponentProps<"div"> {
     id?: string;
     title?: string;
     description?: string;
     color?: string;
-    icon?: React.ReactNode;
+    icon?: React.ReactElement;
     type?: string;
-    duration?: number;
 }
 
 export function Toast(props: ToastProps) {
@@ -23,7 +23,6 @@ export function Toast(props: ToastProps) {
         color = "primary",
         icon = <InfoCircleBold />,
         type,
-        duration = 3000,
         ...rest
     } = props;
 
@@ -38,7 +37,9 @@ export function Toast(props: ToastProps) {
 
     return (
         <div className={styles["root"]} style={variables} {...rest}>
-            <div className={styles["icon"]}>{icon}</div>
+            <div className={styles["icon"]}>
+                <Icon icon={icon} />
+            </div>
             <div className={styles["content-wrapper"]}>
                 <h2 className={styles["title"]}>{title}</h2>
                 <p className={styles["description"]}>{description}</p>

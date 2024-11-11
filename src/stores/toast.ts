@@ -1,18 +1,33 @@
+import { Toast } from "@/types/toast";
 import { create } from "zustand";
+import { nanoid } from "nanoid";
 
 interface ToastState {
-    toasts: any[];
-    addToast: (toast: any) => void;
-    removeToast: (id: string) => void;
+    toasts: Array<Toast>;
+    add: (toast: Toast) => void;
+    update: (id?: string, toast?: Toast) => void;
+    remove: (id?: string) => void;
 }
 
 export const useToastStore = create<ToastState>()((set) => ({
     toasts: [],
-    addToast: (toast) =>
+    add: (toast) =>
         set((state) => ({
-            toasts: [...state.toasts, { id: Date.now(), ...toast }],
+            toasts: [
+                ...state.toasts,
+                {
+                    id: toast.id || nanoid(),
+                    ...toast,
+                },
+            ],
         })),
-    removeToast: (id) =>
+    update: (id, toast) =>
+        set((state) => ({
+            toasts: state.toasts.map((t) =>
+                t.id === id ? { ...t, ...toast } : t
+            ),
+        })),
+    remove: (id) =>
         set((state) => ({
             toasts: state.toasts.filter((toast) => toast.id !== id),
         })),
