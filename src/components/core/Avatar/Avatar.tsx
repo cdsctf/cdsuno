@@ -2,6 +2,7 @@ import styles from "./Avatar.module.scss";
 import UserCircleBoldDuotone from "~icons/solar/user-circle-bold-duotone";
 import useThemeColor from "@/hooks/useThemeColor";
 import { ComponentProps, useState } from "react";
+import { Icon } from "../Icon";
 
 export interface AvatarProps extends ComponentProps<"img"> {
     src: string;
@@ -18,7 +19,7 @@ export function Avatar(props: AvatarProps) {
         alt = "",
         color = "primary",
         size = "3rem",
-        fallback = <UserCircleBoldDuotone />,
+        fallback = <Icon icon={<UserCircleBoldDuotone />} />,
         style,
         ...rest
     } = props;

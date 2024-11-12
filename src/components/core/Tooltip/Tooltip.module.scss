@@ -2,8 +2,8 @@ $offset: var(--tooltip-offset, 8px);
 
 .root {
     position: relative;
-    width: inherit;
-    height: inherit;
+    width: fit-content;
+    height: fit-content;
     display: inline-block;
 }
 

@@ -2,9 +2,10 @@ import { DateTime } from "luxon";
 import { InputBase, InputBaseProps } from "../InputBase";
 import styles from "./DatetimeInput.module.scss";
 import React, { useState, useRef, useEffect, forwardRef } from "react";
+import { Icon } from "../Icon";
 
 export interface DatetimeInputProps extends Omit<InputBaseProps, "onChange"> {
-    icon?: React.ReactNode;
+    icon?: React.ReactElement;
     value?: DateTime;
     onChange?: (value: DateTime) => void;
 }
@@ -51,7 +52,7 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
             // console.log("cursorPosition", cursorPosition);
             // console.log("e.target.value", e.target.value);
 
-            console.log(newValue, /^\d$/.test(newValue));
+            // console.log(newValue, /^\d$/.test(newValue));
 
             const segmentIndex = segments.findIndex(
                 (seg) =>
@@ -205,7 +206,11 @@ export const DatetimeInput = forwardRef<HTMLInputElement, DatetimeInputProps>(
                 ref={ref}
                 {...rest}
             >
-                {icon && <div className={styles["icon"]}>{icon}</div>}
+                {icon && (
+                    <div className={styles["icon"]}>
+                        <Icon icon={icon} />
+                    </div>
+                )}
                 <input
                     className={styles["input"]}
                     type="text"

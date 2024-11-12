@@ -55,14 +55,14 @@ $icon-color: var(--challenge-modal-icon-color);
     color: #ffffff;
 
     .info {
-        width: 30%;
+        width: 50%;
         display: flex;
         align-items: center;
         gap: 8px;
 
         .icon {
-            width: 1.5rem;
-            height: 1.5rem;
+            width: 1.75rem;
+            height: 1.75rem;
         }
 
         .title {
@@ -80,6 +80,7 @@ $icon-color: var(--challenge-modal-icon-color);
     .tabs {
         display: flex;
         gap: 8px;
+        height: 36px;
         align-items: center;
 
         .tab {
@@ -87,23 +88,12 @@ $icon-color: var(--challenge-modal-icon-color);
             align-items: center;
             cursor: pointer;
             transition: all 150ms ease-in-out;
-            padding: 8px 14px;
             border-radius: 9999px;
+            padding: 2px;
             gap: 8px;
-
-            &[data-active="true"],
-            &:hover {
-                filter: brightness(1.2);
-                background-color: #1111113d;
-            }
 
             &:active {
                 transform: translateY(2px);
-            }
-
-            span {
-                font-size: 0.8rem;
-                text-wrap: nowrap;
             }
         }
     }
@@ -118,7 +108,7 @@ $icon-color: var(--challenge-modal-icon-color);
 
     background-color: var(--bg-2-color);
     border-radius: 0 0 12px 12px;
-    border: 2.75px solid $border-color;
+    border: 2.75px dotted $border-color;
     border-top: none;
 
     .content {

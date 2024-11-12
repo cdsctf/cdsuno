@@ -6,6 +6,7 @@ import EyeCloseBold from "~icons/solar/eye-closed-bold";
 import styles from "./TextInput.module.scss";
 import { InputBase, InputBaseProps } from "../InputBase";
 import clsx from "clsx";
+import { Icon } from "../Icon";
 
 export interface TextInputProps extends Omit<InputBaseProps, "onChange"> {
     clearable?: boolean;
@@ -74,7 +75,7 @@ export function TextInput(props: TextInputProps) {
             />
             {clearable && (
                 <div className={styles["clear-button"]} onClick={handleClear}>
-                    <CloseCircleBold />
+                    <Icon icon={<CloseCircleBold />} />
                 </div>
             )}
             {password && (
@@ -82,7 +83,11 @@ export function TextInput(props: TextInputProps) {
                     className={styles["toggle-button"]}
                     onClick={handleToggleVisibility}
                 >
-                    {isPasswordVisible ? <EyeBold /> : <EyeCloseBold />}
+                    <Icon
+                        icon={
+                            isPasswordVisible ? <EyeBold /> : <EyeCloseBold />
+                        }
+                    />
                 </div>
             )}
         </InputBase>

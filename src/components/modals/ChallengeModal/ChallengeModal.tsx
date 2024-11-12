@@ -13,6 +13,7 @@ import Server2Bold from "~icons/solar/server-2-bold";
 import FolderWithFilesBold from "~icons/solar/folder-with-files-bold";
 import FlagBold from "~icons/solar/flag-bold";
 import { Icon } from "@/components/core/Icon";
+import { Tooltip } from "@/components/core";
 
 export interface ChallengeModalProps {
     challenge: Challenge;
@@ -40,15 +41,23 @@ export function ChallengeModal(props: ChallengeModalProps) {
         "description" | "pod" | "attachment" | "feedback"
     >("description");
 
-    const tabIcons: Record<
-        "description" | "pod" | "attachment" | "feedback",
-        ReactNode
-    > = {
-        description: <Book2Bold />,
-        pod: <Server2Bold />,
-        attachment: <FolderWithFilesBold />,
-        feedback: <SledgehammerBold />,
-    };
+    const tabs: Array<Record<string, any>> = [
+        {
+            id: "description",
+            name: "描述",
+            icon: <Book2Bold />,
+        },
+        {
+            id: "pod",
+            name: "靶机",
+            icon: <Server2Bold />,
+        },
+        {
+            id: "feedback",
+            name: "反馈",
+            icon: <SledgehammerBold />,
+        },
+    ];
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -78,38 +87,28 @@ export function ChallengeModal(props: ChallengeModalProps) {
                         </div>
                     </div>
                     <div className={styles["tabs"]}>
-                        <button
-                            className={styles["tab"]}
-                            onClick={() => setActiveTab("description")}
-                            data-active={activeTab === "description"}
-                        >
-                            {tabIcons["description"]}
-                            <span>描述</span>
-                        </button>
-                        <button
-                            className={styles["tab"]}
-                            onClick={() => setActiveTab("pod")}
-                            data-active={activeTab === "pod"}
-                        >
-                            {tabIcons["pod"]}
-                            <span>容器</span>
-                        </button>
-                        <button
-                            className={styles["tab"]}
-                            onClick={() => setActiveTab("attachment")}
-                            data-active={activeTab === "attachment"}
-                        >
-                            {tabIcons["attachment"]}
-                            <span>附件</span>
-                        </button>
-                        <button
-                            className={styles["tab"]}
-                            onClick={() => setActiveTab("feedback")}
-                            data-active={activeTab === "feedback"}
-                        >
-                            {tabIcons["feedback"]}
-                            <span>反馈</span>
-                        </button>
+                        {tabs?.map((tab, index) => (
+                            <>
+                                <Tooltip content={tab.name} key={tab.id}>
+                                    <button
+                                        className={styles["tab"]}
+                                        onClick={() => setActiveTab(tab.id)}
+                                        data-active={activeTab === tab.id}
+                                    >
+                                        <Icon icon={tab.icon} />
+                                    </button>
+                                </Tooltip>
+                                {index !== tabs.length - 1 && (
+                                    <span
+                                        style={{
+                                            userSelect: "none",
+                                        }}
+                                    >
+                                        /
+                                    </span>
+                                )}
+                            </>
+                        ))}
                     </div>
                 </div>
                 <div className={styles["main"]}>
@@ -135,9 +134,6 @@ export function ChallengeModal(props: ChallengeModalProps) {
                                     </Button>
                                 </div>
                             </div>
-                        )}
-                        {activeTab === "attachment" && (
-                            <div className={styles["attachment"]}></div>
                         )}
                         {activeTab === "feedback" && (
                             <div className={styles["feedback"]}></div>

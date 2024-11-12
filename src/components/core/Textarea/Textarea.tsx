@@ -1,3 +1,4 @@
+import { Icon } from "../Icon";
 import { InputBase, InputBaseProps } from "../InputBase";
 import styles from "./Textarea.module.scss";
 
@@ -5,7 +6,7 @@ export interface TextareaProps extends Omit<InputBaseProps, "onChange"> {
     width?: string;
     value?: string;
     onChange?: (value: string) => void;
-    icon?: React.ReactNode;
+    icon?: React.ReactElement;
 }
 
 export function Textarea(props: TextareaProps) {
@@ -13,7 +14,11 @@ export function Textarea(props: TextareaProps) {
 
     return (
         <InputBase className={styles["root"]} width={width}>
-            {icon && <div className={styles["icon"]}>{icon}</div>}
+            {icon && (
+                <div className={styles["icon"]}>
+                    <Icon icon={icon} />
+                </div>
+            )}
             <textarea
                 className={styles["textarea"]}
                 value={value}

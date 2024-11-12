@@ -13,7 +13,7 @@ import clsx from "clsx";
 export interface DatetimePickerProps {
     value: DateTime;
     onChange: (value: DateTime) => void;
-    icon?: React.ReactNode;
+    icon?: React.ReactElement;
 }
 
 export function DatetimePicker(props: DatetimePickerProps) {
