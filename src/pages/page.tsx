@@ -30,9 +30,6 @@ export function Page() {
 
     const [loading, setLoading] = useState(false);
 
-    const dropdownMenuButtonRef = useRef<HTMLButtonElement>(null);
-    const [dropdownMenuOpen, setDropdownMenuOpen] = useState<boolean>(false);
-
     const [datetime, setDatetime] = useState<DateTime>(DateTime.now());
 
     const [isSolveds, setIsSolveds] = useState<boolean[]>(
@@ -115,29 +112,6 @@ ReactDOM.render(
                     123
                 </Button>
             </div>
-            <p>
-                在现代社会中，technology
-                已经成为生活中不可或缺的一部分。无论是使用 smartphones 还是
-                laptops，我们都能感受到 innovation 带来的便利。同时，
-                <span
-                    style={{
-                        fontStyle: "italic",
-                    }}
-                >
-                    communication
-                </span>
-                方式也因为 Internet 而发生了巨大的变化，人们可以通过
-                <span
-                    style={{
-                        fontWeight: 800,
-                    }}
-                >
-                    email
-                </span>
-                、social media
-                与世界各地的朋友保持联系。这种中英文的混合使用，不仅方便了表达，也让我们的生活充满了
-                globalization 的色彩。
-            </p>
             <TextInput
                 clearable
                 // passwd
@@ -425,15 +399,10 @@ ReactDOM.render(
 
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].map(
                 (i) => (
-                    <div
-                        key={i}
-                        style={{
-                            paddingLeft: "64px",
-                        }}
-                    >
+                    <div key={i}>
                         <ChallengeModal
                             challenge={{
-                                title: "Hello CdsCTF",
+                                title: "Hello CdsCTFxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                                 category: i,
                                 description: "This is a description",
                             }}

@@ -86,7 +86,9 @@ export function ChallengeCard(props: ChallengeCard) {
                         {category?.name?.toUpperCase()}
                     </Badge>
                 </div>
-                <div className={styles["icon"]}>{category?.icon}</div>
+                <div className={styles["icon"]}>
+                    <Icon icon={category?.icon} />
+                </div>
                 <h1 className={styles["title"]}>{challenge.title}</h1>
                 <div className={styles["divider"]} />
                 <div className={styles["status"]}>

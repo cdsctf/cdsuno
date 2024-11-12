@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
                 compiler: "jsx",
                 jsx: "react",
                 scale: 1.2,
-                defaultStyle: "width: fit-content; height: 100%;",
+                defaultStyle: "width: 100%; height: 100%;",
             }),
         ],
         resolve: {
@@ -58,15 +58,6 @@ export default defineConfig(({ mode }) => {
             },
         },
         build: {
-            rollupOptions: {
-                output: {
-                    manualChunks(id) {
-                        if (id.includes("node_modules")) {
-                            return id.split("node_modules/")[1].split("/")[0]; // 按库拆分
-                        }
-                    },
-                },
-            },
             cssCodeSplit: true,
         },
     };

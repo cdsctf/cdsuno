@@ -41,7 +41,14 @@ export const InputBase = forwardRef<HTMLDivElement, InputBaseProps>(
         } as React.CSSProperties;
 
         return (
-            <div className={styles["root"]} style={variables} {...rest}>
+            <div
+                className={styles["root"]}
+                style={{
+                    ...variables,
+                    ...style,
+                }}
+                {...rest}
+            >
                 {(label || helperText) && (
                     <div className={styles["info"]}>
                         {label && (

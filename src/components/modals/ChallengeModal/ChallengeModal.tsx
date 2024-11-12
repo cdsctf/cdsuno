@@ -12,6 +12,7 @@ import SledgehammerBold from "~icons/solar/sledgehammer-bold";
 import Server2Bold from "~icons/solar/server-2-bold";
 import FolderWithFilesBold from "~icons/solar/folder-with-files-bold";
 import FlagBold from "~icons/solar/flag-bold";
+import { Icon } from "@/components/core/Icon";
 
 export interface ChallengeModalProps {
     challenge: Challenge;
@@ -68,7 +69,10 @@ export function ChallengeModal(props: ChallengeModalProps) {
             <div className={styles["container"]}>
                 <div className={styles["navbar"]}>
                     <div className={styles["info"]}>
-                        <div className={styles["icon"]}>{category?.icon}</div>
+                        <Icon
+                            icon={category?.icon}
+                            className={styles["icon"]}
+                        />
                         <div className={styles["title"]}>
                             {challenge?.title}
                         </div>
@@ -147,7 +151,6 @@ export function ChallengeModal(props: ChallengeModalProps) {
                     }}
                 >
                     <TextInput
-                        width={"100%"}
                         icon={<FlagBold />}
                         clearable
                         color={category?.color}
@@ -155,6 +158,9 @@ export function ChallengeModal(props: ChallengeModalProps) {
                         value={flag}
                         variant={"solid"}
                         onChange={(value) => setFlag(value)}
+                        style={{
+                            flex: 1,
+                        }}
                     />
                     <Button
                         color={category?.color}

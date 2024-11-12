@@ -3,6 +3,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Button.module.scss";
 import Loading from "../../icons/Loading";
 import clsx from "clsx";
+import { Icon } from "../Icon";
 
 export interface ButtonProps extends ComponentPropsWithRef<"button"> {
     width?: string;
@@ -13,7 +14,7 @@ export interface ButtonProps extends ComponentPropsWithRef<"button"> {
     align?: "start" | "center" | "end";
     loading?: boolean;
     disabled?: boolean;
-    icon?: React.ReactNode;
+    icon?: React.ReactElement;
     style?: React.CSSProperties;
     children?: React.ReactNode;
 }
@@ -55,9 +56,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 {...rest}
             >
                 {(loading || icon) && (
-                    <div className={styles["icon"]}>
-                        {loading ? <Loading /> : icon}
-                    </div>
+                    <Icon
+                        className={styles["icon"]}
+                        icon={loading ? <Loading /> : icon}
+                    />
                 )}
                 <div className={styles["content"]}>{children}</div>
             </button>

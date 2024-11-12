@@ -61,6 +61,7 @@ export function TextInput(props: TextInputProps) {
             errorText={errorText}
             label={label}
             className={clsx(styles["root"], className)}
+            style={style}
             {...rest}
         >
             {icon && <div className={styles["icon"]}>{icon}</div>}

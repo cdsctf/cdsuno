@@ -4,5 +4,5 @@ export interface Category {
     id?: number;
     name?: string;
     color?: string;
-    icon?: React.ReactNode;
+    icon?: React.ReactElement;
 }

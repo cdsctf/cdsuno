@@ -11,6 +11,7 @@ import { CSSProperties, useRef, useState } from "react";
 import chroma from "chroma-js";
 import { Link, useLocation } from "react-router-dom";
 import { Avatar, Popover } from "@/components/core";
+import { Icon } from "@/components/core/Icon";
 
 export function Navbar() {
     const darkMode = useThemeStore.getState().darkMode;
@@ -74,7 +75,9 @@ export function Navbar() {
                             className={styles["link"]}
                             data-active={pathname === item?.href}
                         >
-                            <div className={styles["icon"]}>{item?.icon}</div>
+                            <div className={styles["icon"]}>
+                                <Icon icon={item?.icon} />
+                            </div>
                             <div className={styles["label"]}>{item?.label}</div>
                         </div>
                     </Link>
