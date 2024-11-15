@@ -16,6 +16,10 @@ export default defineConfig(({ mode }) => {
                     target: apiUrl,
                     changeOrigin: true,
                 },
+                "/metrics": {
+                    target: apiUrl,
+                    changeOrigin: true,
+                },
                 "/api/proxies": {
                     target: apiUrl.replace("http", "ws"),
                     ws: true,
