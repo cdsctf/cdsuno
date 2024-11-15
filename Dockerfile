@@ -11,4 +11,4 @@ FROM busybox:uclibc
 
 COPY --from=builder /app/dist /app
 
-CMD [ "sh", "-c", "trap 'exit 0' SIGTERM; while true; do sleep 3600; done" ]
+CMD [ "sh", "-c", "trap 'exit 0' SIGTERM; while true; do sleep 1; done" ]
