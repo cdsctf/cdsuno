@@ -1,6 +1,6 @@
 FROM node:20 AS builder
 
-COPY ./web /app
+COPY ./ /app
     
 WORKDIR /app
     
