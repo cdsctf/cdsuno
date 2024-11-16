@@ -58,7 +58,7 @@ export function Navbar() {
                         <div className={styles["info"]}>
                             <div className={styles["logo"]}>
                                 <img
-                                    src="dm3.png"
+                                    src="/api/configs/icon"
                                     alt="icon"
                                     draggable={false}
                                 />

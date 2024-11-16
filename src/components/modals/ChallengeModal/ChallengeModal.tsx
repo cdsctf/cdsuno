@@ -3,14 +3,13 @@ import { Challenge, ChallengeStatus } from "@/models/challenge";
 import { useCategoryStore } from "@/stores/category";
 import styles from "./ChallengeModal.module.scss";
 import chroma from "chroma-js";
-import { CSSProperties, ReactNode, useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { TextInput } from "../../core/TextInput/TextInput";
 import { Button } from "../../core/Button/Button";
 import Plain2Bold from "~icons/solar/plain-2-bold";
 import Book2Bold from "~icons/solar/book-2-bold";
 import SledgehammerBold from "~icons/solar/sledgehammer-bold";
 import Server2Bold from "~icons/solar/server-2-bold";
-import FolderWithFilesBold from "~icons/solar/folder-with-files-bold";
 import FlagBold from "~icons/solar/flag-bold";
 import { Icon } from "@/components/core/Icon";
 import { Tooltip } from "@/components/core";
@@ -88,8 +87,8 @@ export function ChallengeModal(props: ChallengeModalProps) {
                     </div>
                     <div className={styles["tabs"]}>
                         {tabs?.map((tab, index) => (
-                            <>
-                                <Tooltip content={tab.name} key={tab.id}>
+                            <React.Fragment key={tab.id}>
+                                <Tooltip content={tab.name}>
                                     <button
                                         className={styles["tab"]}
                                         onClick={() => setActiveTab(tab.id)}
@@ -107,7 +106,7 @@ export function ChallengeModal(props: ChallengeModalProps) {
                                         /
                                     </span>
                                 )}
-                            </>
+                            </React.Fragment>
                         ))}
                     </div>
                 </div>
