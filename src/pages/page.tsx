@@ -38,8 +38,6 @@ export function Page() {
 
     const [checked, setChecked] = useState<boolean>(false);
 
-    // throw new Error("123");
-
     const markdownText = `
 # welcome Heading1
 ## welcome Heading2

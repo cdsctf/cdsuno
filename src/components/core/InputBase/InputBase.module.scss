@@ -1,13 +1,11 @@
 @use "@/styles/mixins";
 
 $width: var(--input-width);
-$height: var(--input-height);
 $bg-color: var(--input-bg-color);
 $border-color: var(--input-border-color);
 
 .root {
     width: $width;
-    height: $height;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -47,7 +45,6 @@ $border-color: var(--input-border-color);
 
 .wrapper {
     width: 100%;
-    height: 100%;
     border-radius: 15px;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     display: flex;

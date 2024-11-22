@@ -5,7 +5,6 @@ import clsx from "clsx";
 
 export interface InputBaseProps extends ComponentProps<"div"> {
     width?: string;
-    height?: string;
     color?: string;
     variant?: "outlined" | "solid";
     invalid?: boolean;
@@ -21,7 +20,6 @@ export const InputBase = forwardRef<HTMLDivElement, InputBaseProps>(
     (props, ref) => {
         const {
             width = "fit-content",
-            height = "fit-content",
             color = "primary",
             invalid = false,
             variant = "outlined",
@@ -38,7 +36,6 @@ export const InputBase = forwardRef<HTMLDivElement, InputBaseProps>(
 
         const variables = {
             "--input-width": width,
-            "--input-height": height,
             "--input-bg-color": baseColor,
             "--input-border-color": baseColor,
         } as React.CSSProperties;

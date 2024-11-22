@@ -1,6 +1,5 @@
 import { useThemeStore } from "@/stores/theme";
 import { RouterProvider } from "react-router-dom";
-import { ErrorBoundary } from "react-error-boundary";
 import { useEffect } from "react";
 import { router } from "@/routers";
 
