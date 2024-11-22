@@ -5,6 +5,7 @@ import Book2BoldDuotone from "~icons/solar/book-2-bold-duotone";
 import FlagBoldDuotone from "~icons/solar/flag-bold-duotone";
 import UsersGroupTwoRoundedBoldDuotone from "~icons/solar/users-group-two-rounded-bold-duotone";
 import PlanetBoldDuotone from "~icons/solar/planet-bold-duotone";
+import SolarSettingsBoldDuotone from '~icons/solar/settings-bold-duotone';
 import styles from "./Navbar.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
 import { CSSProperties, useRef, useState } from "react";
@@ -47,6 +48,11 @@ export function Navbar() {
             icon: <UsersGroupTwoRoundedBoldDuotone />,
             label: "团队",
             href: "/teams",
+        },
+        {
+            icon: <SolarSettingsBoldDuotone />,
+            label: "管理",
+            href: "/settings",
         },
     ];
 
