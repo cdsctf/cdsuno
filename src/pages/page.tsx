@@ -17,6 +17,7 @@ import { Textarea } from "@/components/core/Textarea";
 import { MarkdownRender } from "@/components/utils/MarkdownRender/MarkdownRender";
 import globalRouter from "@/utils/globalRouter";
 import { Popover } from "@/components/core/Popover/Popover";
+import { Card } from "@/components/core";
 
 export function Page() {
     const [color, setColor] = useState("#1cb0f6");
@@ -112,6 +113,7 @@ ReactDOM.render(
                     123
                 </Button>
             </div>
+            <Card />
             <TextInput
                 clearable
                 // passwd

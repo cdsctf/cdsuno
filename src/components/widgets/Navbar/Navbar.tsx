@@ -1,11 +1,11 @@
 import { useThemeStore } from "@/stores/theme";
 import Sun2BoldDuotone from "~icons/solar/sun-2-bold-duotone";
 import MoonBoldDuotone from "~icons/solar/moon-bold-duotone";
+import PlanetBoldDuotone from "~icons/solar/planet-bold-duotone";
 import Book2BoldDuotone from "~icons/solar/book-2-bold-duotone";
 import FlagBoldDuotone from "~icons/solar/flag-bold-duotone";
 import UsersGroupTwoRoundedBoldDuotone from "~icons/solar/users-group-two-rounded-bold-duotone";
-import PlanetBoldDuotone from "~icons/solar/planet-bold-duotone";
-import SolarSettingsBoldDuotone from '~icons/solar/settings-bold-duotone';
+import SolarSettingsBoldDuotone from "~icons/solar/settings-bold-duotone";
 import styles from "./Navbar.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
 import { CSSProperties, useRef, useState } from "react";
@@ -14,21 +14,16 @@ import { Link, useLocation } from "react-router-dom";
 import { Avatar, Popover } from "@/components/core";
 import { Icon } from "@/components/core/Icon";
 
-export function Navbar() {
-    const darkMode = useThemeStore.getState().darkMode;
-    const pathname = useLocation().pathname;
+interface NavbarProps {
+    links?: {
+        icon: JSX.Element;
+        label: string;
+        href: string;
+    }[];
+}
 
-    const baseColor = useThemeColor("primary");
-
-    const [dropdownMenuOpen, setDropdownMenuOpen] = useState<boolean>(false);
-    const dropdownMenuButtonRef = useRef(null);
-
-    const variables = {
-        "--navbar-bg-color": chroma(baseColor).hex(),
-        "--navbar-border-color": chroma(baseColor).hex(),
-    } as CSSProperties;
-
-    const links = [
+export function Navbar({ links }: NavbarProps) {
+    const defaultLinks = [
         {
             icon: <PlanetBoldDuotone />,
             label: "主页",
@@ -56,6 +51,21 @@ export function Navbar() {
         },
     ];
 
+    const finalLinks = links || defaultLinks;
+
+    const darkMode = useThemeStore.getState().darkMode;
+    const pathname = useLocation().pathname;
+
+    const baseColor = useThemeColor("primary");
+
+    const [dropdownMenuOpen, setDropdownMenuOpen] = useState<boolean>(false);
+    const dropdownMenuButtonRef = useRef(null);
+
+    const variables = {
+        "--navbar-bg-color": chroma(baseColor).hex(),
+        "--navbar-border-color": chroma(baseColor).hex(),
+    } as CSSProperties;
+
     return (
         <header className={styles["root"]} style={variables}>
             <div className={styles["left-section"]}>
@@ -75,7 +85,7 @@ export function Navbar() {
                 </div>
             </div>
             <div className={styles["links"]}>
-                {links.map((item) => (
+                {finalLinks.map((item) => (
                     <Link to={item?.href} key={item?.href} draggable={false}>
                         <div
                             className={styles["link"]}
@@ -102,13 +112,9 @@ export function Navbar() {
                             }}
                         >
                             {darkMode ? (
-                                <>
-                                    <Sun2BoldDuotone />
-                                </>
+                                <Sun2BoldDuotone />
                             ) : (
-                                <>
-                                    <MoonBoldDuotone />
-                                </>
+                                <MoonBoldDuotone />
                             )}
                         </button>
                         <Popover

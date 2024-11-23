@@ -16,6 +16,13 @@ export const router = createBrowserRouter([
                 },
             },
             {
+                path: "settings",
+                lazy: async () => {
+                    let { Default } = await import("@/pages/settings");
+                    return { Component: Default };
+                },
+            },
+            {
                 path: "/",
                 lazy: async () => {
                     let { Default } = await import("@/layouts/Default");
@@ -33,13 +40,6 @@ export const router = createBrowserRouter([
                         path: "games",
                         lazy: async () => {
                             let { Page } = await import("@/pages/_games");
-                            return { Component: Page };
-                        },
-                    },
-                    {
-                        path: "settings",
-                        lazy: async () => {
-                            let { Page } = await import("@/pages/settings");
                             return { Component: Page };
                         },
                     },
