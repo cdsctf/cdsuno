@@ -24,10 +24,10 @@ $bg-color: var(--category-bg-color);
     background-color: $bg-color;
     transition: background-color 2000ms ease-in-out;
 
-    background-image: linear-gradient(to right, #ffffff0d 1px, transparent 1px),
-        linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
+    // background-image: linear-gradient(to right, #ffffff0d 1px, transparent 1px),
+    //     linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
 
-    background-size: 25px 25px;
+    // background-size: 25px 25px;
 }
 
 .icon {

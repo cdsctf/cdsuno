@@ -11,14 +11,14 @@ export const router = createBrowserRouter([
             {
                 path: "login",
                 lazy: async () => {
-                    let { Page } = await import("@/pages/login");
-                    return { Component: Page };
+                    let { Login } = await import("@/pages/Login");
+                    return { Component: Login };
                 },
             },
             {
                 path: "settings",
                 lazy: async () => {
-                    let { Default } = await import("@/pages/settings");
+                    let { Default } = await import("@/pages/_settings/Default");
                     return { Component: Default };
                 },
             },
@@ -32,15 +32,17 @@ export const router = createBrowserRouter([
                     {
                         index: true,
                         lazy: async () => {
-                            let { Page } = await import("@/pages/index");
-                            return { Component: Page };
+                            let { Default } = await import("@/pages/Default");
+                            return { Component: Default };
                         },
                     },
                     {
                         path: "games",
                         lazy: async () => {
-                            let { Page } = await import("@/pages/_games");
-                            return { Component: Page };
+                            let { Default } = await import(
+                                "@/pages/_games/Default"
+                            );
+                            return { Component: Default };
                         },
                     },
                 ],
@@ -51,8 +53,10 @@ export const router = createBrowserRouter([
                     {
                         path: ":id",
                         lazy: async () => {
-                            let { Page } = await import("@/pages/_games/_[id]");
-                            return { Component: Page };
+                            let { Default } = await import(
+                                "@/pages/_games/_[id]/Default"
+                            );
+                            return { Component: Default };
                         },
                     },
                 ],

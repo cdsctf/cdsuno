@@ -1,4 +1,4 @@
-import styles from "./page.module.scss";
+import styles from "./Login.module.scss";
 import { useCategoryStore } from "@/stores/category";
 import { CSSProperties, useEffect, useState } from "react";
 import { Button, TextInput } from "@/components/core";
@@ -11,7 +11,7 @@ import { useAuthStore } from "@/stores/auth";
 import { useNavigate } from "react-router-dom";
 import { useToastStore } from "@/stores/toast";
 
-export function Page() {
+export function Login() {
     const authStore = useAuthStore();
     const categoryStore = useCategoryStore();
     const toastStore = useToastStore();

@@ -13,6 +13,7 @@ import chroma from "chroma-js";
 import { Link, useLocation } from "react-router-dom";
 import { Avatar, Popover } from "@/components/core";
 import { Icon } from "@/components/core/Icon";
+import { Box } from "@/components/core/Box";
 
 interface NavbarProps {
     links?: {
@@ -122,7 +123,7 @@ export function Navbar({ links }: NavbarProps) {
                             onChange={setDropdownMenuOpen}
                             offsetY={20}
                             content={
-                                <div
+                                <Box
                                     style={{
                                         width: "10rem",
                                         height: "100px",
@@ -135,7 +136,7 @@ export function Navbar({ links }: NavbarProps) {
                                     }}
                                 >
                                     1
-                                </div>
+                                </Box>
                             }
                         >
                             <div

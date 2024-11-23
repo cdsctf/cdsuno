@@ -19,7 +19,7 @@ import globalRouter from "@/utils/globalRouter";
 import { Popover } from "@/components/core/Popover/Popover";
 import { Card } from "@/components/core";
 
-export function Page() {
+export function Default() {
     const [color, setColor] = useState("#1cb0f6");
     const handleChange = (e: any) => {
         setColor(e.target.value);

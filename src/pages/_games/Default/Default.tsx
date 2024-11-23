@@ -3,7 +3,7 @@ import styles from "./page.module.scss";
 import { Button } from "@/components/core";
 import PlayCircleBold from "~icons/solar/play-circle-bold";
 
-export function Page() {
+export function Default() {
     return (
         <>
             <h1>近期赛事</h1>
