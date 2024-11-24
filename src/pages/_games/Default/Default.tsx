@@ -1,5 +1,5 @@
 import { Image } from "@/components/core/Image";
-import styles from "./page.module.scss";
+import styles from "./Default.module.scss";
 import { Button } from "@/components/core";
 import PlayCircleBold from "~icons/solar/play-circle-bold";
 

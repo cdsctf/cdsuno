@@ -8,7 +8,7 @@ import LoginBold from "~icons/solar/login-bold";
 import useThemeColor from "@/hooks/useThemeColor";
 import { login } from "@/api/user";
 import { useAuthStore } from "@/stores/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useToastStore } from "@/stores/toast";
 
 export function Login() {

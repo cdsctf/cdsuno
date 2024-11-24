@@ -7,10 +7,10 @@ export interface IconProps extends ComponentProps<"i"> {
 }
 
 export const Icon = forwardRef<HTMLElement, IconProps>((props, ref) => {
-    const { icon, className } = props;
+    const { icon, className, ...rest } = props;
 
     return (
-        <i ref={ref} className={clsx(styles["root"], className)}>
+        <i ref={ref} className={clsx(styles["root"], className)} {...rest}>
             {icon}
         </i>
     );

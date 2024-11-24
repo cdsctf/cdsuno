@@ -6,24 +6,18 @@ import Book2BoldDuotone from "~icons/solar/book-2-bold-duotone";
 import FlagBoldDuotone from "~icons/solar/flag-bold-duotone";
 import UsersGroupTwoRoundedBoldDuotone from "~icons/solar/users-group-two-rounded-bold-duotone";
 import SolarSettingsBoldDuotone from "~icons/solar/settings-bold-duotone";
+import SolarFiltersBoldDuotone from "~icons/solar/filters-bold-duotone";
+import SolarRoundArrowLeftBoldDuotone from "~icons/solar/round-arrow-left-bold-duotone";
 import styles from "./Navbar.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
-import { CSSProperties, useRef, useState } from "react";
+import { CSSProperties, useMemo, useRef, useState } from "react";
 import chroma from "chroma-js";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import { Avatar, Popover } from "@/components/core";
 import { Icon } from "@/components/core/Icon";
 import { Box } from "@/components/core/Box";
 
-interface NavbarProps {
-    links?: {
-        icon: JSX.Element;
-        label: string;
-        href: string;
-    }[];
-}
-
-export function Navbar({ links }: NavbarProps) {
+export function Navbar() {
     const defaultLinks = [
         {
             icon: <PlanetBoldDuotone />,
@@ -52,7 +46,47 @@ export function Navbar({ links }: NavbarProps) {
         },
     ];
 
-    const finalLinks = links || defaultLinks;
+    const settingLinks = [
+        {
+            icon: <Book2BoldDuotone />,
+            label: "题库管理",
+            href: "/settings/challenges",
+        },
+        {
+            icon: <FlagBoldDuotone />,
+            label: "比赛管理",
+            href: "/settings/games",
+        },
+        {
+            icon: <UsersGroupTwoRoundedBoldDuotone />,
+            label: "用户管理",
+            href: "/settings/users",
+        },
+        {
+            icon: <SolarSettingsBoldDuotone />,
+            label: "系统设置",
+            href: "/settings/system",
+        },
+        {
+            icon: <SolarFiltersBoldDuotone />,
+            label: "外观设置",
+            href: "/settings/appearance",
+        },
+        {
+            icon: <SolarRoundArrowLeftBoldDuotone />,
+            label: "返回上级",
+            href: "/",
+        },
+    ];
+
+    const location = useLocation();
+
+    const finalLinks = useMemo(() => {
+        if (location.pathname.startsWith("/settings")) {
+            return settingLinks;
+        }
+        return defaultLinks;
+    }, [location.pathname]);
 
     const darkMode = useThemeStore.getState().darkMode;
     const pathname = useLocation().pathname;

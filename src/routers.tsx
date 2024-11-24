@@ -1,7 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router";
+import { HydrateFallback } from "@/components/utils/HydrateFallback";
 
 export const router = createBrowserRouter([
     {
+        hydrateFallbackElement: <HydrateFallback />,
         path: "/",
         lazy: async () => {
             let { Base } = await import("@/layouts/Base");
@@ -13,13 +15,6 @@ export const router = createBrowserRouter([
                 lazy: async () => {
                     let { Login } = await import("@/pages/Login");
                     return { Component: Login };
-                },
-            },
-            {
-                path: "settings",
-                lazy: async () => {
-                    let { Default } = await import("@/pages/_settings/Default");
-                    return { Component: Default };
                 },
             },
             {
@@ -44,6 +39,20 @@ export const router = createBrowserRouter([
                             );
                             return { Component: Default };
                         },
+                    },
+                    {
+                        path: "settings",
+                        children: [
+                            {
+                                index: true,
+                                lazy: async () => {
+                                    let { Default } = await import(
+                                        "@/pages/_settings/Default"
+                                    );
+                                    return { Component: Default };
+                                },
+                            },
+                        ],
                     },
                 ],
             },

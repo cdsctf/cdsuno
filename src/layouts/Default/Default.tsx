@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/widgets/Navbar";
 import styles from "./Default.module.scss";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 
 export function Default() {
     return (

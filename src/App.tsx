@@ -1,5 +1,5 @@
 import { useThemeStore } from "@/stores/theme";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router";
 import { useEffect } from "react";
 import { router } from "@/routers";
 
@@ -13,7 +13,5 @@ export default function App() {
         );
     }, [themeStore.darkMode]);
 
-    return (
-        <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
-    );
+    return <RouterProvider router={router} />;
 }
