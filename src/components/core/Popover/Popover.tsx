@@ -1,6 +1,7 @@
 import { cloneElement, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Popover.module.scss";
 import { CSSTransition } from "react-transition-group";
+import { Box } from "../Box";
 
 export interface PopoverProps {
     /**
@@ -111,13 +112,13 @@ export function Popover(props: PopoverProps) {
                     exitActive: styles["exit-active"],
                 }}
             >
-                <div
+                <Box
                     className={styles["content"]}
                     style={positionStyle}
                     ref={contentRef}
                 >
                     {content}
-                </div>
+                </Box>
             </CSSTransition>
         </div>
     );

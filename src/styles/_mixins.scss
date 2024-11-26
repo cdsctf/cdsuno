@@ -23,27 +23,3 @@
         }
     }
 }
-
-@mixin transition {
-    transition: all 150ms ease-in-out;
-}
-
-@mixin grid-background($grid-color) {
-    background-image: linear-gradient(
-            to right,
-            $grid-color 1px,
-            transparent 1px
-        ),
-        linear-gradient(to bottom, $grid-color 1px, transparent 1px);
-
-    background-size: 20px 20px;
-
-    @include dark {
-        background-image: linear-gradient(
-                to right,
-                #ffffff0d 1px,
-                transparent 1px
-            ),
-            linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
-    }
-}

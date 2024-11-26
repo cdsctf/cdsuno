@@ -1,12 +1,12 @@
-import React, { ComponentPropsWithRef, forwardRef } from "react";
+import React, { ComponentPropsWithRef, CSSProperties, forwardRef } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Button.module.scss";
 import Loading from "../../icons/Loading";
 import clsx from "clsx";
 import { Icon } from "../Icon";
+import { Box } from "../Box";
 
 export interface ButtonProps extends ComponentPropsWithRef<"button"> {
-    width?: string;
     height?: string;
     color?: string;
     variant?: "solid" | "outlined" | "ghost";
@@ -15,14 +15,13 @@ export interface ButtonProps extends ComponentPropsWithRef<"button"> {
     loading?: boolean;
     disabled?: boolean;
     icon?: React.ReactElement;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
     children?: React.ReactNode;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     (props, ref) => {
         const {
-            width = "fit-content",
             height = "auto",
             color = "primary",
             variant = "solid",
@@ -38,11 +37,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         const baseColor = useThemeColor(color);
 
         const variables = {
-            "--button-width": width,
             "--button-height": height,
             "--button-bg-color": baseColor,
             "--button-text-color": variant === "solid" ? "#fff" : baseColor,
-        } as React.CSSProperties;
+        } as CSSProperties;
 
         return (
             <button
@@ -61,7 +59,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                         icon={loading ? <Loading /> : icon}
                     />
                 )}
-                <div className={styles["content"]}>{children}</div>
+                <Box className={styles["content"]}>{children}</Box>
             </button>
         );
     }

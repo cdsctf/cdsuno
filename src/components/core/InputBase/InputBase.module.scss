@@ -56,14 +56,14 @@ $border-color: var(--input-border-color);
     border: 2.75px solid $border-color;
     border-radius: 12px;
     padding: 6.75px 12px;
-    @include mixins.transition;
+    transition: all 0.2s ease-in-out;
 
     &[data-variant="solid"] {
         background-color: $bg-color;
     }
 
     &[data-variant="outlined"] {
-        background-color: var(--bg-2-color);
+        background-color: var(--bg-2nd-color);
     }
 
     &:focus,

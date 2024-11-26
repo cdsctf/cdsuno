@@ -162,7 +162,7 @@ export function Navbar() {
                                         width: "10rem",
                                         height: "100px",
                                         borderRadius: "8px",
-                                        backgroundColor: "var(--bg-2-color)",
+                                        backgroundColor: "var(--bg-2nd-color)",
                                         color: "var(--text-color)",
                                         boxShadow:
                                             "0px 4px 20px rgba(0, 0, 0, 0.1)",
@@ -173,7 +173,7 @@ export function Navbar() {
                                 </Box>
                             }
                         >
-                            <div
+                            <Box
                                 className={styles["avatar"]}
                                 onClick={() => {
                                     setDropdownMenuOpen((r) => !r);
@@ -185,7 +185,7 @@ export function Navbar() {
                                     fallback={<>E</>}
                                     color={"transparent"}
                                 />
-                            </div>
+                            </Box>
                         </Popover>
                     </div>
                 </div>
