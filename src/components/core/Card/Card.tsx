@@ -13,8 +13,10 @@ export interface CardProps extends ComponentProps<"div"> {
     align?: "start" | "center" | "end";
     loading?: boolean;
     text?: string;
+    children?: React.ReactNode;
 }
-export function Card(props: CardProps & { children?: React.ReactNode }) {
+
+export function Card(props: CardProps) {
     const {
         color = "primary",
         size = "md",

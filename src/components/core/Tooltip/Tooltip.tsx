@@ -1,6 +1,6 @@
 import useHover from "@/hooks/useHover";
 import styles from "./Tooltip.module.scss";
-import { cloneElement, CSSProperties, useRef, useState } from "react";
+import { cloneElement, CSSProperties, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
 export interface TooltipProps {
@@ -24,7 +24,9 @@ export function Tooltip(props: TooltipProps) {
 
     return (
         <div className={styles["root"]} style={variables}>
-            {cloneElement(children, { ref: triggerRef })}
+            {cloneElement<any>(children, {
+                ref: triggerRef,
+            })}
             <CSSTransition
                 in={isHovered}
                 unmountOnExit

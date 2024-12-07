@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useState } from "react";
 
-export default function useHover(ref: RefObject<HTMLElement>) {
+export default function useHover(ref: RefObject<HTMLElement | null>) {
     const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {

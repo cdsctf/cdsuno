@@ -6,12 +6,12 @@ export interface IconProps extends ComponentProps<"i"> {
     icon?: React.ReactElement;
 }
 
-export const Icon = forwardRef<HTMLElement, IconProps>((props, ref) => {
-    const { icon, className, ...rest } = props;
+export function Icon(props: IconProps) {
+    const { icon, className, ref, ...rest } = props;
 
     return (
         <i ref={ref} className={clsx(styles["root"], className)} {...rest}>
             {icon}
         </i>
     );
-});
+}

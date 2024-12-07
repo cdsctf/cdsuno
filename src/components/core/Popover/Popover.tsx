@@ -99,7 +99,7 @@ export function Popover(props: PopoverProps) {
 
     return (
         <div className={styles["root"]}>
-            {cloneElement(children, { ref: triggerRef })}
+            {cloneElement<any>(children, { ref: triggerRef })}
             <CSSTransition
                 in={opened}
                 timeout={300}

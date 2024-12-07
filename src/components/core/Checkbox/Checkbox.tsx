@@ -17,6 +17,7 @@ export function Checkbox(props: CheckboxProps) {
         color = "primary",
         onChange,
         label,
+        ref,
         ...rest
     } = props;
 
@@ -33,6 +34,7 @@ export function Checkbox(props: CheckboxProps) {
                 type={"checkbox"}
                 onChange={(e) => onChange(e.target.checked)}
                 checked={checked}
+                ref={ref}
                 {...rest}
             />
             <span className={styles["checkmark"]}>
