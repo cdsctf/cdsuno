@@ -7,6 +7,7 @@ import styles from "./TextInput.module.scss";
 import { InputBase, InputBaseProps } from "../InputBase";
 import clsx from "clsx";
 import { Icon } from "../Icon";
+import { Box } from "../Box";
 
 export interface TextInputProps extends Omit<InputBaseProps, "onChange"> {
     clearable?: boolean;
@@ -74,12 +75,12 @@ export function TextInput(props: TextInputProps) {
                 onChange={(e) => onChange?.(e.target.value)}
             />
             {clearable && (
-                <div className={styles["clear-button"]} onClick={handleClear}>
+                <Box className={styles["clear-button"]} onClick={handleClear}>
                     <Icon icon={<CloseCircleBold />} />
-                </div>
+                </Box>
             )}
             {password && (
-                <div
+                <Box
                     className={styles["toggle-button"]}
                     onClick={handleToggleVisibility}
                 >
@@ -88,7 +89,7 @@ export function TextInput(props: TextInputProps) {
                             isPasswordVisible ? <EyeBold /> : <EyeCloseBold />
                         }
                     />
-                </div>
+                </Box>
             )}
         </InputBase>
     );

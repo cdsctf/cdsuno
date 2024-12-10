@@ -98,7 +98,7 @@ export function Popover(props: PopoverProps) {
     }, []);
 
     return (
-        <div className={styles["root"]}>
+        <Box className={styles["root"]}>
             {cloneElement<any>(children, { ref: triggerRef })}
             <CSSTransition
                 in={opened}
@@ -120,6 +120,6 @@ export function Popover(props: PopoverProps) {
                     {content}
                 </Box>
             </CSSTransition>
-        </div>
+        </Box>
     );
 }

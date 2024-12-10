@@ -17,13 +17,15 @@ import { Textarea } from "@/components/core/Textarea";
 import { MarkdownRender } from "@/components/utils/MarkdownRender/MarkdownRender";
 import globalRouter from "@/utils/globalRouter";
 import { Popover } from "@/components/core/Popover/Popover";
-import { Card } from "@/components/core";
+import { Pagination } from "@/components/core/Pagination";
 
 export function Default() {
     const [color, setColor] = useState("#1cb0f6");
     const handleChange = (e: any) => {
         setColor(e.target.value);
     };
+
+    const [paginationPage, setPaginationPage] = useState(1);
 
     const [value, setValue] = useState<string>("");
     const [open, setOpen] = useState(false);
@@ -113,7 +115,6 @@ ReactDOM.render(
                     123
                 </Button>
             </div>
-            <Card />
             <TextInput
                 clearable
                 // passwd
@@ -425,6 +426,12 @@ ReactDOM.render(
             <MarkdownRender src={"# Hello World"} />
 
             <MarkdownRender src={markdownText} />
+
+            <Pagination
+                total={10}
+                value={paginationPage}
+                onChange={setPaginationPage}
+            />
         </div>
     );
 }

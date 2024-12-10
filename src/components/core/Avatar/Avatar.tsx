@@ -3,6 +3,7 @@ import UserCircleBoldDuotone from "~icons/solar/user-circle-bold-duotone";
 import useThemeColor from "@/hooks/useThemeColor";
 import { ComponentProps, useState } from "react";
 import { Icon } from "../Icon";
+import { Box } from "../Box";
 
 export interface AvatarProps extends ComponentProps<"img"> {
     src: string;
@@ -33,7 +34,7 @@ export function Avatar(props: AvatarProps) {
     } as React.CSSProperties;
 
     return (
-        <div
+        <Box
             className={styles["root"]}
             style={{
                 ...variables,
@@ -50,10 +51,10 @@ export function Avatar(props: AvatarProps) {
                     className={styles["img"]}
                 />
             ) : (
-                <div className={styles["fallback"]}>
+                <Box className={styles["fallback"]}>
                     {fallback || alt.charAt(0).toUpperCase()}
-                </div>
+                </Box>
             )}
-        </div>
+        </Box>
     );
 }

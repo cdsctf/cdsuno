@@ -5,6 +5,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
 import { ComponentProps } from "react";
 import { Icon } from "../Icon";
+import { Box } from "../Box";
 
 export interface ToastProps extends ComponentProps<"div"> {
     id?: string;
@@ -36,14 +37,14 @@ export function Toast(props: ToastProps) {
     } as CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables} {...rest}>
-            <div className={styles["icon"]}>
+        <Box className={styles["root"]} style={variables} {...rest}>
+            <Box className={styles["icon"]}>
                 <Icon icon={icon} />
-            </div>
-            <div className={styles["content-wrapper"]}>
+            </Box>
+            <Box className={styles["content-wrapper"]}>
                 <h2 className={styles["title"]}>{title}</h2>
                 <p className={styles["description"]}>{description}</p>
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 }

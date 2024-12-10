@@ -2,6 +2,7 @@ import React, { ComponentProps } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./InputBase.module.scss";
 import clsx from "clsx";
+import { Box } from "../Box";
 
 export interface InputBaseProps extends ComponentProps<"div"> {
     width?: string;
@@ -44,7 +45,7 @@ export function InputBase(props: InputBaseProps) {
     } as React.CSSProperties;
 
     return (
-        <div
+        <Box
             className={styles["root"]}
             style={{
                 ...variables,
@@ -53,7 +54,7 @@ export function InputBase(props: InputBaseProps) {
             {...rest}
         >
             {(label || helperText) && (
-                <div className={styles["info"]}>
+                <Box className={styles["info"]}>
                     {label && (
                         <label className={styles["label"]}>{label}</label>
                     )}
@@ -62,18 +63,18 @@ export function InputBase(props: InputBaseProps) {
                             {helperText}
                         </label>
                     )}
-                </div>
+                </Box>
             )}
-            <div
+            <Box
                 className={clsx(styles["wrapper"], className)}
                 data-variant={variant}
                 ref={ref}
             >
                 {children}
-            </div>
+            </Box>
             {invalid && errorText && (
                 <label className={styles["error-text"]}>{errorText}</label>
             )}
-        </div>
+        </Box>
     );
 }

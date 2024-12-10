@@ -1,6 +1,7 @@
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Switch.module.scss";
 import { CSSProperties } from "react";
+import { Box } from "../Box";
 
 export interface SwitchProps {
     checked: boolean;
@@ -19,15 +20,15 @@ export function Switch(props: SwitchProps) {
     } as CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables}>
-            <div
+        <Box className={styles["root"]} style={variables}>
+            <Box
                 className={styles["switch"]}
                 data-checked={checked}
                 onClick={() => onChange(!checked)}
             >
-                <div className={styles["handle"]}></div>
-            </div>
-            <div className={styles["label"]}>{label}</div>
-        </div>
+                <Box className={styles["handle"]}></Box>
+            </Box>
+            <Box className={styles["label"]}>{label}</Box>
+        </Box>
     );
 }

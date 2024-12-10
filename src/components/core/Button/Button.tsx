@@ -59,7 +59,7 @@ export function Button(props: ButtonProps) {
                     icon={loading ? <Loading /> : icon}
                 />
             )}
-            <Box className={styles["content"]}>{children}</Box>
+            {children && <Box className={styles["content"]}>{children}</Box>}
         </button>
     );
 }

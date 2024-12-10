@@ -1,6 +1,7 @@
 import { CSSTransition } from "react-transition-group";
 import styles from "./Dialog.module.scss";
 import React, { ComponentProps, useRef } from "react";
+import { Box } from "../Box";
 
 export interface DialogProps extends ComponentProps<"dialog"> {
     open: boolean;
@@ -33,15 +34,15 @@ export function Dialog(props: DialogProps) {
             }}
             nodeRef={nodeRef}
         >
-            <div
+            <Box
                 className={styles["root"]}
                 ref={nodeRef}
                 onClick={handleOverlayClick}
             >
-                <div className={styles["positioner"]}>
-                    <div className={styles["content"]}>{children}</div>
-                </div>
-            </div>
+                <Box className={styles["positioner"]}>
+                    <Box className={styles["content"]}>{children}</Box>
+                </Box>
+            </Box>
         </CSSTransition>
     );
 }

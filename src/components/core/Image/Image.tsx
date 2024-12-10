@@ -1,6 +1,7 @@
 import React, { ComponentProps, useState } from "react";
 import styles from "./Image.module.scss";
 import Loading from "@/components/icons/Loading";
+import { Box } from "../Box";
 
 export interface ImageProps extends ComponentProps<"img"> {
     src?: string;
@@ -21,7 +22,7 @@ export function Image(props: ImageProps) {
     } as React.CSSProperties;
 
     return (
-        <div
+        <Box
             className={styles["root"]}
             style={{
                 ...variables,
@@ -37,12 +38,12 @@ export function Image(props: ImageProps) {
                 draggable={false}
             />
             {loading && (
-                <div className={styles["loading"]}>
-                    <div className={styles["loading-icon"]}>
+                <Box className={styles["loading"]}>
+                    <Box className={styles["loading-icon"]}>
                         <Loading />
-                    </div>
-                </div>
+                    </Box>
+                </Box>
             )}
-        </div>
+        </Box>
     );
 }

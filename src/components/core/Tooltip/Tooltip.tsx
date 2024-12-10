@@ -2,6 +2,7 @@ import useHover from "@/hooks/useHover";
 import styles from "./Tooltip.module.scss";
 import { cloneElement, CSSProperties, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
+import { Box } from "../Box";
 
 export interface TooltipProps {
     content?: React.ReactNode;
@@ -23,7 +24,7 @@ export function Tooltip(props: TooltipProps) {
     } as CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables}>
+        <Box className={styles["root"]} style={variables}>
             {cloneElement<any>(children, {
                 ref: triggerRef,
             })}
@@ -39,14 +40,14 @@ export function Tooltip(props: TooltipProps) {
                     exitActive: styles["exit-active"],
                 }}
             >
-                <div
+                <Box
                     className={styles["content"]}
                     data-position={position}
                     ref={contentRef}
                 >
                     {content}
-                </div>
+                </Box>
             </CSSTransition>
-        </div>
+        </Box>
     );
 }

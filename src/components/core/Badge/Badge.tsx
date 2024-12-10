@@ -3,6 +3,7 @@ import styles from "./Badge.module.scss";
 import chroma from "chroma-js";
 import { CSSProperties, ComponentProps } from "react";
 import clsx from "clsx";
+import { Box } from "../Box";
 
 export interface BadgeProps extends ComponentProps<"div"> {
     variant?: "solid" | "light" | "outlined";
@@ -49,12 +50,12 @@ export function Badge(props: BadgeProps) {
     } as CSSProperties;
 
     return (
-        <div
+        <Box
             className={clsx(styles["root"], className)}
             style={{ ...variables, ...style }}
             {...rest}
         >
-            <div className={styles["content"]}>{children}</div>
-        </div>
+            <Box className={styles["content"]}>{children}</Box>
+        </Box>
     );
 }

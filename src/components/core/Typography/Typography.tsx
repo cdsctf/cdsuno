@@ -1,5 +1,6 @@
 import { ComponentProps } from "react";
 import styles from "./Typography.module.scss";
+import { Box } from "../Box";
 
 export interface TypographyProps extends ComponentProps<"div"> {
     children: React.ReactNode;
@@ -8,5 +9,5 @@ export interface TypographyProps extends ComponentProps<"div"> {
 export function Typography(props: TypographyProps) {
     const { children } = props;
 
-    return <div className={styles["root"]}>{children}</div>;
+    return <Box className={styles["root"]}>{children}</Box>;
 }

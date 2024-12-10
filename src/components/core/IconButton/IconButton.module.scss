@@ -1,0 +1,70 @@
+@use "@/styles/mixins";
+
+.root {
+    width: var(--icon-button-height);
+    height: var(--icon-button-height);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    border-radius: 12px;
+    border: 2.75px solid transparent;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    &[data-variant="solid"] {
+        background-color: var(--icon-button-bg-color);
+    }
+
+    &[data-variant="outlined"] {
+        background-color: var(--bg-2nd-color);
+        border-color: var(--icon-button-bg-color);
+    }
+
+    &[data-variant="ghost"] {
+        background-color: transparent;
+        color: var(--icon-button-bg-color);
+    }
+
+    &:disabled,
+    [data-loading="true"],
+    [data-disabled="true"] {
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+
+    &:not(:disabled, [data-loading="true"], [data-disabled="true"]) {
+        &:hover {
+            filter: brightness(1.2);
+        }
+
+        &:active {
+            box-shadow: 0 0 0 transparent;
+            transform: translateY(4px);
+        }
+
+        &:focus {
+            outline: none;
+            filter: brightness(1.2);
+        }
+    }
+}
+
+.content {
+    color: var(--icon-button-text-color);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 21.6px;
+    letter-spacing: 0.8px;
+
+    @include mixins.dark {
+        color: #ffffff;
+    }
+}
