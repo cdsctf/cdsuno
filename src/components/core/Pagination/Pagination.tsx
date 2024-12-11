@@ -6,6 +6,7 @@ import { IconButton } from "../IconButton";
 import styles from "./Pagination.module.scss";
 import AltArrowLeftBold from "~icons/solar/alt-arrow-left-bold";
 import AltArrowRightBold from "~icons/solar/alt-arrow-right-bold";
+import React from "react";
 
 export interface PaginationProps {
     total: number;
@@ -67,7 +68,7 @@ export function Pagination(props: PaginationProps) {
                 <Icon icon={<AltArrowLeftBold />} />
             </IconButton>
             {pages.map((page) => (
-                <>
+                <React.Fragment key={page}>
                     {page === -1 ? (
                         <Box className={styles["separator"]}>...</Box>
                     ) : (
@@ -78,7 +79,7 @@ export function Pagination(props: PaginationProps) {
                             {page}
                         </IconButton>
                     )}
-                </>
+                </React.Fragment>
             ))}
             <IconButton
                 onClick={() => onChange(value < total ? value + 1 : total)}

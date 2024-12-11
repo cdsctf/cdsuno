@@ -1,4 +1,6 @@
 .root {
     display: flex;
     gap: var(--flex-gap, 0);
+    align-items: var(--flex-align, baseline);
+    justify-content: var(--flex-justify, flex-start);
 }

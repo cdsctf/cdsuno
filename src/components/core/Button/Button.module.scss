@@ -25,12 +25,13 @@
     }
 
     &[data-variant="outlined"] {
-        background-color: var(--bg-2nd-color);
+        background-color: transparent;
         border-color: var(--button-bg-color);
     }
 
     &[data-variant="ghost"] {
         background-color: transparent;
+        box-shadow: none;
         color: var(--button-bg-color);
     }
 

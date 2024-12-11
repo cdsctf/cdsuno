@@ -1,6 +1,3 @@
-import { useThemeStore } from "@/stores/theme";
-import Sun2BoldDuotone from "~icons/solar/sun-2-bold-duotone";
-import MoonBoldDuotone from "~icons/solar/moon-bold-duotone";
 import PlanetBoldDuotone from "~icons/solar/planet-bold-duotone";
 import Book2BoldDuotone from "~icons/solar/book-2-bold-duotone";
 import FlagBoldDuotone from "~icons/solar/flag-bold-duotone";
@@ -13,9 +10,11 @@ import useThemeColor from "@/hooks/useThemeColor";
 import { CSSProperties, useMemo, useRef, useState } from "react";
 import chroma from "chroma-js";
 import { Link, useLocation } from "react-router";
-import { Avatar, Popover } from "@/components/core";
+import { Avatar, Popover, Tooltip } from "@/components/core";
 import { Icon } from "@/components/core/Icon";
 import { Box } from "@/components/core/Box";
+import { IconButton } from "@/components/core/IconButton";
+import { Dropdown } from "./Dropdown";
 
 export function Navbar() {
     const defaultLinks = [
@@ -38,11 +37,6 @@ export function Navbar() {
             icon: <UsersGroupTwoRoundedBoldDuotone />,
             label: "团队",
             href: "/teams",
-        },
-        {
-            icon: <SolarSettingsBoldDuotone />,
-            label: "管理",
-            href: "/settings",
         },
     ];
 
@@ -72,11 +66,6 @@ export function Navbar() {
             label: "外观设置",
             href: "/settings/appearance",
         },
-        {
-            icon: <SolarRoundArrowLeftBoldDuotone />,
-            label: "返回上级",
-            href: "/",
-        },
     ];
 
     const location = useLocation();
@@ -88,7 +77,6 @@ export function Navbar() {
         return defaultLinks;
     }, [location.pathname]);
 
-    const darkMode = useThemeStore.getState().darkMode;
     const pathname = useLocation().pathname;
 
     const baseColor = useThemeColor("primary");
@@ -103,75 +91,68 @@ export function Navbar() {
 
     return (
         <header className={styles["root"]} style={variables}>
-            <div className={styles["left-section"]}>
-                <div className={styles["info-wrapper"]}>
+            <Box className={styles["left-section"]}>
+                <Box className={styles["info-wrapper"]}>
                     <Link to={"/"} draggable={false}>
-                        <div className={styles["info"]}>
-                            <div className={styles["logo"]}>
+                        <Box className={styles["info"]}>
+                            <Box className={styles["logo"]}>
                                 <img
                                     src="/api/configs/icon"
                                     alt="icon"
                                     draggable={false}
                                 />
-                            </div>
+                            </Box>
                             <h1 className={styles["title"]}>CdsCTF</h1>
-                        </div>
+                        </Box>
                     </Link>
-                </div>
-            </div>
-            <div className={styles["links"]}>
+                </Box>
+            </Box>
+            <Box className={styles["links"]}>
                 {finalLinks.map((item) => (
                     <Link to={item?.href} key={item?.href} draggable={false}>
-                        <div
+                        <Box
                             className={styles["link"]}
                             data-active={pathname === item?.href}
                         >
-                            <div className={styles["icon"]}>
+                            <Box className={styles["icon"]}>
                                 <Icon icon={item?.icon} />
-                            </div>
-                            <div className={styles["label"]}>{item?.label}</div>
-                        </div>
+                            </Box>
+                            <Box className={styles["label"]}>{item?.label}</Box>
+                        </Box>
                     </Link>
                 ))}
-            </div>
-            <div className={styles["right-section"]}>
-                <div className={styles["features-wrapper"]}>
-                    <div className={styles["features"]}>
-                        <button
-                            onClick={() => {
-                                useThemeStore.getState().setDarkMode(!darkMode);
-                            }}
-                            style={{
-                                width: "fit-content",
-                                height: "fit-content",
-                            }}
-                        >
-                            {darkMode ? (
-                                <Sun2BoldDuotone />
-                            ) : (
-                                <MoonBoldDuotone />
-                            )}
-                        </button>
+            </Box>
+            <Box className={styles["right-section"]}>
+                <Box className={styles["features-wrapper"]}>
+                    <Box className={styles["features"]}>
+                        {location.pathname.startsWith("/settings") ? (
+                            <Link to={"/"} draggable={false}>
+                                <Tooltip content={"主页"} position={"bottom"}>
+                                    <IconButton
+                                        variant={"ghost"}
+                                        color={"white"}
+                                    >
+                                        <SolarRoundArrowLeftBoldDuotone />
+                                    </IconButton>
+                                </Tooltip>
+                            </Link>
+                        ) : (
+                            <Link to={"/settings"} draggable={false}>
+                                <Tooltip content={"管理"} position={"bottom"}>
+                                    <IconButton
+                                        variant={"ghost"}
+                                        color={"white"}
+                                    >
+                                        <SolarSettingsBoldDuotone />
+                                    </IconButton>
+                                </Tooltip>
+                            </Link>
+                        )}
                         <Popover
                             opened={dropdownMenuOpen}
                             onChange={setDropdownMenuOpen}
                             offsetY={20}
-                            content={
-                                <Box
-                                    style={{
-                                        width: "10rem",
-                                        height: "100px",
-                                        borderRadius: "8px",
-                                        backgroundColor: "var(--bg-2nd-color)",
-                                        color: "var(--text-color)",
-                                        boxShadow:
-                                            "0px 4px 20px rgba(0, 0, 0, 0.1)",
-                                        zIndex: 1000,
-                                    }}
-                                >
-                                    1
-                                </Box>
-                            }
+                            content={<Dropdown />}
                         >
                             <Box
                                 className={styles["avatar"]}
@@ -187,9 +168,9 @@ export function Navbar() {
                                 />
                             </Box>
                         </Popover>
-                    </div>
-                </div>
-            </div>
+                    </Box>
+                </Box>
+            </Box>
         </header>
     );
 }

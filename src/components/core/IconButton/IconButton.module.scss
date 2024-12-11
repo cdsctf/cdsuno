@@ -4,11 +4,10 @@
     width: var(--icon-button-height);
     height: var(--icon-button-height);
     display: flex;
-    gap: 12px;
     align-items: center;
     justify-content: center;
     color: transparent;
-    border-radius: 12px;
+    border-radius: var(--icon-button-radius, 12px);
     border: 2.75px solid transparent;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     transition: all 0.2s ease-in-out;
@@ -24,13 +23,14 @@
     }
 
     &[data-variant="outlined"] {
-        background-color: var(--bg-2nd-color);
+        background-color: transparent;
         border-color: var(--icon-button-bg-color);
     }
 
     &[data-variant="ghost"] {
         background-color: transparent;
         color: var(--icon-button-bg-color);
+        box-shadow: none;
     }
 
     &:disabled,
@@ -58,6 +58,8 @@
 }
 
 .content {
+    width: 62.5%;
+    height: 62.5%;
     color: var(--icon-button-text-color);
     font-size: 0.875rem;
     font-weight: 600;

@@ -20,7 +20,7 @@ export function Avatar(props: AvatarProps) {
         alt = "",
         color = "primary",
         size = "3rem",
-        fallback = <Icon icon={<UserCircleBoldDuotone />} />,
+        fallback = <UserCircleBoldDuotone />,
         style,
         ...rest
     } = props;

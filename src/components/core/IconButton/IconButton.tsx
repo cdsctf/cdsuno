@@ -5,7 +5,8 @@ import { Box } from "../Box";
 
 export interface IconButtonProps extends ComponentProps<"button"> {
     height?: string;
-    variant?: "solid" | "outlined" | "subtle" | "transparent";
+    variant?: "solid" | "outlined" | "subtle" | "ghost";
+    radius?: string;
     loading?: boolean;
     disabled?: boolean;
     color?: string;
@@ -17,6 +18,7 @@ export function IconButton(props: IconButtonProps) {
     const {
         height = "36px",
         variant = "solid",
+        radius = "12px",
         color = "primary",
         loading = false,
         disabled = false,
@@ -31,6 +33,7 @@ export function IconButton(props: IconButtonProps) {
         "--icon-button-height": height,
         "--icon-button-bg-color": baseColor,
         "--icon-button-text-color": variant === "solid" ? "#fff" : baseColor,
+        "--icon-button-radius": radius,
     } as CSSProperties;
 
     return (

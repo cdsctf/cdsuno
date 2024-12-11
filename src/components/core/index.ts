@@ -11,6 +11,7 @@ export * from "./Tooltip";
 export * from "./Popover";
 export * from "./Icon";
 export * from "./Pagination";
+export * from "./Stack";
 // export * from "./Input";
 // export * from "./Link";
 // export * from "./Loader";

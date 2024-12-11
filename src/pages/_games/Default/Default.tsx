@@ -21,12 +21,7 @@ export function Default() {
                         <span>CdsCTF 2024</span>
                     </div>
                     <div className={styles["enter"]}>
-                        <Button
-                            icon={<PlayCircleBold />}
-                            variant={"outlined"}
-                            width="100%"
-                            height="100%"
-                        >
+                        <Button icon={<PlayCircleBold />} height="100%">
                             进入
                         </Button>
                     </div>
