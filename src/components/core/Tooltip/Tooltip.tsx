@@ -40,76 +40,81 @@ export function Tooltip(props: TooltipProps) {
     useEffect(() => {
         if (!isHovered || !triggerRef.current || !contentRef.current) return;
 
-        const triggerRect = triggerRef.current.getBoundingClientRect();
-        const contentRect = contentRef.current.getBoundingClientRect();
+        console.log("triggerRef.current");
+        console.log(triggerRef?.current?.getBoundingClientRect().top);
+
         const newStyle: CSSProperties = {};
+
+        const triggerRect = triggerRef?.current?.getBoundingClientRect();
+        const contentRect = contentRef?.current?.getBoundingClientRect();
 
         switch (position) {
             case "top":
-                newStyle.top = triggerRect.top - contentRect.height - offset;
+                newStyle.top =
+                    triggerRect?.top! - contentRect?.height! - offset;
                 newStyle.left =
-                    triggerRect.left +
-                    (triggerRect.width - contentRect.width) / 2;
+                    triggerRect?.left! +
+                    (triggerRect?.width! - contentRect?.width!) / 2;
                 break;
             case "bottom":
-                newStyle.top = triggerRect.bottom + offset;
+                newStyle.top = triggerRect?.bottom! + offset;
                 newStyle.left =
-                    triggerRect.left +
-                    (triggerRect.width - contentRect.width) / 2;
+                    triggerRect?.left! +
+                    (triggerRect?.width! - contentRect?.width!) / 2;
                 break;
             case "left":
                 newStyle.top =
-                    triggerRect.top +
-                    (triggerRect.height - contentRect.height) / 2;
-                newStyle.left = triggerRect.left - contentRect.width - offset;
+                    triggerRect?.top! +
+                    (triggerRect?.height! - contentRect?.height!) / 2;
+                newStyle.left =
+                    triggerRect?.left! - contentRect?.width! - offset;
                 break;
             case "right":
                 newStyle.top =
-                    triggerRect.top +
-                    (triggerRect.height - contentRect.height) / 2;
-                newStyle.left = triggerRect.right + offset;
+                    triggerRect?.top! +
+                    (triggerRect?.height! - contentRect?.height!) / 2;
+                newStyle.left = triggerRect?.right! + offset;
                 break;
         }
 
-        newStyle.position = "absolute";
+        newStyle.position = "fixed";
         setTooltipStyle(newStyle);
-    }, [isHovered, position, offset]);
-
-    const tooltipContent = (
-        <CSSTransition
-            in={isHovered}
-            unmountOnExit
-            timeout={300}
-            nodeRef={contentRef}
-            classNames={{
-                enter: styles["enter"],
-                enterActive: styles["enter-active"],
-                exit: styles["exit"],
-                exitActive: styles["exit-active"],
-            }}
-        >
-            <Box
-                className={styles["content"]}
-                style={tooltipStyle}
-                ref={contentRef}
-            >
-                {content}
-            </Box>
-        </CSSTransition>
-    );
+    }, [
+        isHovered,
+        position,
+        offset,
+        triggerRef?.current?.getBoundingClientRect().top,
+        triggerRef?.current?.getBoundingClientRect().left,
+    ]);
 
     return (
-        <Box
-            className={clsx(styles["root"], className)}
-            style={{
-                ...style,
-            }}
-            {...rest}
-        >
+        <>
             {cloneElement<any>(children, {
                 ref: triggerRef,
             })}
-            {createPortal(tooltipContent, document.body)}
-        </Box>
+            {createPortal(
+                <CSSTransition
+                    in={isHovered}
+                    unmountOnExit
+                    timeout={300}
+                    nodeRef={contentRef}
+                    classNames={{
+                        enter: styles["enter"],
+                        enterActive: styles["enter-active"],
+                        exit: styles["exit"],
+                        exitActive: styles["exit-active"],
+                    }}
+                >
+                    <Box
+                        className={styles["content"]}
+                        style={tooltipStyle}
+                        ref={contentRef}
+                    >
+                        {content}
+                    </Box>
+                </CSSTransition>,
+                document.body
+            )}
+        </>
     );
 }
