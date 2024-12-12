@@ -1,5 +1,3 @@
-$offset: var(--tooltip-offset, 8px);
-
 .root {
     position: relative;
     width: fit-content;
@@ -8,14 +6,14 @@ $offset: var(--tooltip-offset, 8px);
 }
 
 .content {
-    position: absolute;
+    position: fixed;
     background: #333;
     color: #fff;
     padding: 8px 12px;
     border-radius: 12px;
     font-size: 14px;
     white-space: nowrap;
-    z-index: 1;
+    z-index: 9999;
     transition:
         opacity 0.2s ease,
         visibility 0.2s ease;
@@ -23,31 +21,23 @@ $offset: var(--tooltip-offset, 8px);
     user-select: none;
 
     &[data-position="top"] {
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-bottom: $offset;
+        transform: translate(-50%, -100%);
+        margin-bottom: var(--tooltip-offset, 8px);
     }
 
     &[data-position="bottom"] {
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: $offset;
+        transform: translate(-50%, 0%);
+        margin-top: var(--tooltip-offset, 8px);
     }
 
     &[data-position="left"] {
-        top: 50%;
-        right: 100%;
-        transform: translateY(-50%);
-        margin-right: $offset;
+        transform: translate(-100%, -50%);
+        margin-right: var(--tooltip-offset, 8px);
     }
 
     &[data-position="right"] {
-        top: 50%;
-        left: 100%;
-        transform: translateY(-50%);
-        margin-left: $offset;
+        transform: translate(0%, -50%);
+        margin-left: var(--tooltip-offset, 8px);
     }
 
     &.enter {

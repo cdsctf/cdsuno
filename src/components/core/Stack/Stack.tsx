@@ -4,7 +4,8 @@ import styles from "./Stack.module.scss";
 import clsx from "clsx";
 
 export interface StackProps extends BoxProps {
-    gap?: string;
+    width?: string | number;
+    gap?: string | number;
     justify?:
         | "flex-start"
         | "flex-end"
@@ -18,6 +19,7 @@ export interface StackProps extends BoxProps {
 export function Stack(props: StackProps) {
     const {
         children,
+        width = "auto",
         gap = "15px",
         justify = "flex-start",
         align = "baseline",
@@ -27,7 +29,8 @@ export function Stack(props: StackProps) {
     } = props;
 
     const variables = {
-        "--stack-gap": gap,
+        "--stack-width": typeof width === "string" ? width : `${width}px`,
+        "--stack-gap": typeof gap === "string" ? gap : `${gap}px`,
         "--stack-justify": justify,
         "--stack-align": align,
     } as CSSProperties;

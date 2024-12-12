@@ -1,0 +1,9 @@
+.root {
+    width: var(--grid-width, 100%);
+    display: grid;
+    justify-content: var(--grid-justify, flex-start);
+    grid-template-columns: repeat(auto-fill, var(--grid-item-width, 1fr));
+    grid-template-rows: repeat(auto-fill, var(--grid-item-height, 1fr));
+    grid-gap: var(--grid-gap, 16px);
+    align-items: var(--grid-align, flex-start);
+}

@@ -60,7 +60,7 @@ export function Pagination(props: PaginationProps) {
     }, [total, value]);
 
     return (
-        <Flex className={styles["root"]} gap={"5px"}>
+        <Flex className={styles["root"]} gap={"5px"} align={"center"}>
             <IconButton
                 onClick={() => onChange(value > 1 ? value - 1 : 1)}
                 disabled={value === 1}

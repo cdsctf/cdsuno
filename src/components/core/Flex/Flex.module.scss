@@ -1,4 +1,5 @@
 .root {
+    width: var(--flex-width, auto);
     display: flex;
     gap: var(--flex-gap, 0);
     align-items: var(--flex-align, baseline);

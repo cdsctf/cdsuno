@@ -5,6 +5,7 @@ export interface Toast {
     title: string;
     description: string;
     type: "success" | "error" | "info" | "warning";
-    duration: number;
+    duration?: number;
+    removedAt?: number; // unix timestamp
     icon?: React.ReactElement;
 }

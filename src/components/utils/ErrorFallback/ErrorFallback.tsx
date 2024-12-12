@@ -20,7 +20,7 @@ export function ErrorFallback(props: FallbackProps) {
                 <h2 className={styles["title"]}>好像出了点问题</h2>
             </div>
             <Textarea value={error.stack} width="50vw" height="50vh" />
-            <Flex className={styles["actions"]}>
+            <Flex className={styles["actions"]} align={"center"} gap={10}>
                 <Button onClick={resetErrorBoundary} icon={<RestartBold />}>
                     重置
                 </Button>

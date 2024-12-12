@@ -8,14 +8,17 @@ import { useCategoryStore } from "@/stores/category";
 import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
 import { Icon } from "@/components/core/Icon";
+import { Box } from "@/components/core/Box";
+import { Flex } from "@/components/core/Flex";
+import clsx from "clsx";
 
 export interface ChallengeCard extends ComponentProps<"div"> {
     challenge: Challenge;
-    status: ChallengeStatus;
+    status?: ChallengeStatus;
 }
 
 export function ChallengeCard(props: ChallengeCard) {
-    const { challenge, status, ...rest } = props;
+    const { challenge, status, className, style, ref, ...rest } = props;
 
     const categoryStore = useCategoryStore();
 
@@ -24,38 +27,38 @@ export function ChallengeCard(props: ChallengeCard) {
     const baseColor = useThemeColor(category?.color || "primary");
 
     const bgColor = useMemo(() => {
-        if (status.is_solved) {
+        if (status?.is_solved) {
             return chroma(baseColor).hex();
         }
         return chroma(baseColor).alpha(0.375).hex();
-    }, [baseColor, status.is_solved]);
+    }, [baseColor, status?.is_solved]);
     const borderColor = useMemo(() => {
         return chroma(baseColor).hex();
-    }, [baseColor, status.is_solved]);
+    }, [baseColor, status?.is_solved]);
     const borderSecondayColor = useMemo(() => {
-        if (status.is_solved) {
+        if (status?.is_solved) {
             return chroma(baseColor).darken(0.5).hex();
         }
         return chroma(baseColor).hex();
-    }, [baseColor, status.is_solved]);
+    }, [baseColor, status?.is_solved]);
     const textColor = useMemo(() => {
-        if (status.is_solved) {
+        if (status?.is_solved) {
             return "#FFFFFF";
         }
         return chroma(baseColor).darken(1).hex();
-    }, [baseColor, status.is_solved]);
+    }, [baseColor, status?.is_solved]);
     const iconColor = useMemo(() => {
-        if (status.is_solved) {
+        if (status?.is_solved) {
             return "#FFFFFF";
         }
         return chroma(baseColor).hex();
-    }, [baseColor, status.is_solved]);
+    }, [baseColor, status?.is_solved]);
     const gridColor = useMemo(() => {
         if (status?.is_solved) {
             return chroma("#FFFFFF").alpha(0.05).hex();
         }
         return chroma(textColor).alpha(0.1).hex();
-    }, [baseColor, status.is_solved]);
+    }, [baseColor, status?.is_solved]);
 
     const variables = {
         "--challenge-card-bg-color": bgColor,
@@ -67,34 +70,40 @@ export function ChallengeCard(props: ChallengeCard) {
     } as CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables} {...rest}>
-            <div className={styles["wrapper"]}>
-                {status?.is_solved && (
-                    <div className={styles["star"]}>
-                        <Tooltip content={"已解决"}>
-                            <Icon
-                                icon={<StarBoldDuotone color={"#FFD700"} />}
-                            />
-                        </Tooltip>
-                    </div>
-                )}
-                <div className={styles["category"]}>
-                    <Badge
-                        variant={"light"}
-                        color={chroma(baseColor).darken(1).hex()}
-                    >
-                        {category?.name?.toUpperCase()}
-                    </Badge>
-                </div>
-                <div className={styles["icon"]}>
-                    <Icon icon={category?.icon} />
-                </div>
-                <h1 className={styles["title"]}>{challenge.title}</h1>
-                <div className={styles["divider"]} />
-                <div className={styles["status"]}>
-                    {status?.solved_times} 次解决
-                </div>
-            </div>
-        </div>
+        <Box
+            className={clsx(styles["root"], className)}
+            style={{ ...style, ...variables }}
+            ref={ref}
+            {...rest}
+        >
+            <Flex className={styles["category"]}>
+                <Badge
+                    variant={"light"}
+                    color={chroma(baseColor).darken(1).hex()}
+                >
+                    {category?.name?.toUpperCase()}
+                </Badge>
+            </Flex>
+            <Box className={styles["icon"]}>
+                <Icon icon={category?.icon} />
+            </Box>
+            {status?.is_solved && (
+                <Box className={styles["star"]}>
+                    <Tooltip content={"已解决"}>
+                        <StarBoldDuotone color={"#FFD700"} />
+                    </Tooltip>
+                </Box>
+            )}
+            <h1 className={styles["title"]}>{challenge.title}</h1>
+            <Box className={styles["divider"]} />
+            <Box className={styles["id"]}>
+                # {challenge?.id?.toString(16).toUpperCase().padStart(6, "0")}
+            </Box>
+            <Box className={styles["status"]}>
+                <Tooltip content={"123"} position={"bottom"}>
+                    <Box>{status?.solved_times} 次解决</Box>
+                </Tooltip>
+            </Box>
+        </Box>
     );
 }

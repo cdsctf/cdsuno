@@ -60,13 +60,9 @@
 .content {
     width: 62.5%;
     height: 62.5%;
-    color: var(--icon-button-text-color);
+    color: light-dark(var(--icon-button-text-color), #ffffff);
     font-size: 0.875rem;
     font-weight: 600;
     line-height: 21.6px;
     letter-spacing: 0.8px;
-
-    @include mixins.dark {
-        color: #ffffff;
-    }
 }

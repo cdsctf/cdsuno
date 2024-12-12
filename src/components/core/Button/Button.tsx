@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithRef, CSSProperties } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Button.module.scss";
-import Loading from "../../icons/Loading";
+import Loading from "~icons/svg-spinners/180-ring-with-bg";
 import clsx from "clsx";
 import { Icon } from "../Icon";
 import { Box } from "../Box";
@@ -12,6 +12,8 @@ export interface ButtonProps extends ComponentPropsWithRef<"button"> {
     variant?: "solid" | "outlined" | "ghost";
     justify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
+    radius?: string | number;
+    shadow?: "none" | "sm" | "md" | "lg" | "xl";
     loading?: boolean;
     disabled?: boolean;
     icon?: React.ReactElement;
@@ -24,6 +26,8 @@ export function Button(props: ButtonProps) {
         height = "auto",
         color = "primary",
         variant = "solid",
+        radius = 12,
+        shadow = "md",
         loading = false,
         style,
         className,
@@ -40,6 +44,8 @@ export function Button(props: ButtonProps) {
         "--button-height": height,
         "--button-bg-color": baseColor,
         "--button-text-color": variant === "solid" ? "#fff" : baseColor,
+        "--button-radius": typeof radius === "string" ? radius : `${radius}px`,
+        "--button-shadow": `var(--shadow-${shadow})`,
     } as CSSProperties;
 
     return (

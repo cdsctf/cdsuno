@@ -8,9 +8,9 @@
     align-items: center;
     justify-content: center;
     color: transparent;
-    border-radius: 12px;
+    border-radius: var(--button-radius);
     border: 2.75px solid transparent;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    box-shadow: var(--button-shadow);
     transition: all 0.2s ease-in-out;
     padding: 0.5rem 1.375rem;
     white-space: nowrap;
@@ -60,21 +60,13 @@
 }
 
 .content {
-    color: var(--button-text-color);
+    color: light-dark(var(--button-text-color), #ffffff);
     font-size: 0.875rem;
     font-weight: 600;
     line-height: 21.6px;
     letter-spacing: 0.8px;
-
-    @include mixins.dark {
-        color: #ffffff;
-    }
 }
 
 .icon {
-    color: var(--button-text-color);
-
-    @include mixins.dark {
-        color: #ffffff;
-    }
+    color: light-dark(var(--button-text-color), #ffffff);
 }

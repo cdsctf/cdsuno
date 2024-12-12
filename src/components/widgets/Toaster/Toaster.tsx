@@ -11,7 +11,6 @@ import CloseCircleBold from "~icons/solar/close-circle-bold";
 export function Toaster() {
     const toastStore = useToastStore();
     const nodeRefs = useRef(new Map());
-    const [visibleToasts, setVisibleToasts] = useState(new Set());
 
     function getIcon(type: string) {
         switch (type) {
@@ -27,24 +26,17 @@ export function Toaster() {
     }
 
     useEffect(() => {
-        toastStore.toasts.forEach((toast) => {
-            if (!visibleToasts.has(toast.id)) {
-                setVisibleToasts((prev) => new Set(prev).add(toast.id));
-
-                const timer = setTimeout(() => {
-                    setVisibleToasts((prev) => {
-                        const newSet = new Set(prev);
-                        newSet.delete(toast.id);
-                        return newSet;
-                    });
+        const interval = setInterval(() => {
+            const timestamp = Date.now();
+            toastStore?.toasts.forEach((toast) => {
+                if (Number(toast?.removedAt) < timestamp) {
                     toastStore.remove(toast.id);
-                    nodeRefs.current.delete(toast.id);
-                }, toast.duration || 3000);
+                }
+            });
+        }, 1000);
 
-                return () => clearTimeout(timer);
-            }
-        });
-    }, [toastStore.toasts]);
+        return () => clearInterval(interval);
+    }, [toastStore?.toasts]);
 
     return (
         <div className={styles["root"]}>

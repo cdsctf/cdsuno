@@ -4,7 +4,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import { Box } from "../Box";
 
 export interface IconButtonProps extends ComponentProps<"button"> {
-    height?: string;
+    size?: string | number;
     variant?: "solid" | "outlined" | "subtle" | "ghost";
     radius?: string;
     loading?: boolean;
@@ -16,7 +16,7 @@ export interface IconButtonProps extends ComponentProps<"button"> {
 
 export function IconButton(props: IconButtonProps) {
     const {
-        height = "36px",
+        size = 36,
         variant = "solid",
         radius = "12px",
         color = "primary",
@@ -30,7 +30,7 @@ export function IconButton(props: IconButtonProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
-        "--icon-button-height": height,
+        "--icon-button-height": typeof size === "string" ? size : `${size}px`,
         "--icon-button-bg-color": baseColor,
         "--icon-button-text-color": variant === "solid" ? "#fff" : baseColor,
         "--icon-button-radius": radius,

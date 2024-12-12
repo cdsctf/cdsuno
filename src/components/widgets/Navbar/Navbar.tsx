@@ -3,18 +3,18 @@ import Book2BoldDuotone from "~icons/solar/book-2-bold-duotone";
 import FlagBoldDuotone from "~icons/solar/flag-bold-duotone";
 import UsersGroupTwoRoundedBoldDuotone from "~icons/solar/users-group-two-rounded-bold-duotone";
 import SolarSettingsBoldDuotone from "~icons/solar/settings-bold-duotone";
-import SolarFiltersBoldDuotone from "~icons/solar/filters-bold-duotone";
 import SolarRoundArrowLeftBoldDuotone from "~icons/solar/round-arrow-left-bold-duotone";
 import styles from "./Navbar.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
 import { CSSProperties, useMemo, useRef, useState } from "react";
 import chroma from "chroma-js";
 import { Link, useLocation } from "react-router";
-import { Avatar, Popover, Tooltip } from "@/components/core";
-import { Icon } from "@/components/core/Icon";
+import { Avatar, Button, Popover, Tooltip } from "@/components/core";
 import { Box } from "@/components/core/Box";
 import { IconButton } from "@/components/core/IconButton";
 import { Dropdown } from "./Dropdown";
+import { Flex } from "@/components/core/Flex";
+import React from "react";
 
 export function Navbar() {
     const defaultLinks = [
@@ -42,29 +42,29 @@ export function Navbar() {
 
     const settingLinks = [
         {
+            icon: <SolarSettingsBoldDuotone />,
+            label: "全局",
+            href: "/settings/system",
+        },
+        {
             icon: <Book2BoldDuotone />,
-            label: "题库管理",
+            label: "题库",
             href: "/settings/challenges",
         },
         {
             icon: <FlagBoldDuotone />,
-            label: "比赛管理",
+            label: "比赛",
             href: "/settings/games",
         },
         {
             icon: <UsersGroupTwoRoundedBoldDuotone />,
-            label: "用户管理",
+            label: "团队",
             href: "/settings/users",
         },
         {
-            icon: <SolarSettingsBoldDuotone />,
-            label: "系统设置",
-            href: "/settings/system",
-        },
-        {
-            icon: <SolarFiltersBoldDuotone />,
-            label: "外观设置",
-            href: "/settings/appearance",
+            icon: <UsersGroupTwoRoundedBoldDuotone />,
+            label: "用户",
+            href: "/settings/users",
         },
     ];
 
@@ -77,8 +77,6 @@ export function Navbar() {
         return defaultLinks;
     }, [location.pathname]);
 
-    const pathname = useLocation().pathname;
-
     const baseColor = useThemeColor("primary");
 
     const [dropdownMenuOpen, setDropdownMenuOpen] = useState<boolean>(false);
@@ -86,7 +84,6 @@ export function Navbar() {
 
     const variables = {
         "--navbar-bg-color": chroma(baseColor).hex(),
-        "--navbar-border-color": chroma(baseColor).hex(),
     } as CSSProperties;
 
     return (
@@ -107,21 +104,38 @@ export function Navbar() {
                     </Link>
                 </Box>
             </Box>
-            <Box className={styles["links"]}>
-                {finalLinks.map((item) => (
-                    <Link to={item?.href} key={item?.href} draggable={false}>
-                        <Box
-                            className={styles["link"]}
-                            data-active={pathname === item?.href}
-                        >
-                            <Box className={styles["icon"]}>
-                                <Icon icon={item?.icon} />
-                            </Box>
-                            <Box className={styles["label"]}>{item?.label}</Box>
-                        </Box>
-                    </Link>
+            <Flex gap={3} align={"center"}>
+                {finalLinks.map((item, index) => (
+                    <React.Fragment key={index}>
+                        <Link to={item?.href} draggable={false}>
+                            <Button
+                                icon={item?.icon}
+                                variant={"ghost"}
+                                color={"white"}
+                                shadow={"none"}
+                                radius={"9999px"}
+                            >
+                                <span
+                                    style={{
+                                        fontSize: "1rem",
+                                    }}
+                                >
+                                    {item?.label}
+                                </span>
+                            </Button>
+                        </Link>
+                        {index !== finalLinks.length - 1 && (
+                            <span
+                                style={{
+                                    userSelect: "none",
+                                }}
+                            >
+                                /
+                            </span>
+                        )}
+                    </React.Fragment>
                 ))}
-            </Box>
+            </Flex>
             <Box className={styles["right-section"]}>
                 <Box className={styles["features-wrapper"]}>
                     <Box className={styles["features"]}>

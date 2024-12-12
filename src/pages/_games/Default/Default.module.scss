@@ -28,11 +28,7 @@
         border-radius: 12px;
         border: 2.75px solid var(--color-primary);
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        background-color: var(--color-light);
-
-        @include mixins.dark {
-            background-color: var(--color-dark);
-        }
+        background-color: light-dark(var(--color-light), var(--color-dark));
     }
 
     .enter {

@@ -4,9 +4,10 @@ import { Avatar, Button, Stack } from "@/components/core";
 import { Flex } from "@/components/core/Flex";
 import { useThemeStore } from "@/stores/theme";
 import { IconButton } from "@/components/core/IconButton";
+import { useAuthStore } from "@/stores/auth";
 
 export function Dropdown() {
-    const darkMode = useThemeStore.getState().darkMode;
+    const authStore = useAuthStore();
 
     return (
         <Stack
@@ -19,8 +20,21 @@ export function Dropdown() {
         >
             <Button variant={"outlined"}>
                 <Flex justify={"center"} align={"center"} gap={"15px"}>
-                    <Avatar src="https://avatars.githubusercontent.com/u/84963630?v=4" />
-                    <span>elabsoak233</span>
+                    <Avatar src={`/api/users/${authStore?.user?.id}/avatar`} />
+                    <Stack gap={0}>
+                        <span>{authStore?.user?.nickname}</span>
+                        <span
+                            style={{
+                                fontSize: "12px",
+                            }}
+                        >
+                            #{" "}
+                            {authStore?.user?.id
+                                ?.toString(16)
+                                .toUpperCase()
+                                .padStart(6, "0")}
+                        </span>
+                    </Stack>
                 </Flex>
             </Button>
             <Flex

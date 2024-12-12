@@ -9,12 +9,8 @@ $height: var(--height);
     height: $height;
     border-radius: 12px;
     overflow: hidden;
-    background-color: #0000001d;
+    background-color: light-dark(#0000001d, #ffffff0d);
     transition: all 200ms ease-in-out;
-
-    @include mixins.dark {
-        background-color: #ffffff0d;
-    }
 }
 
 .img {

@@ -21,7 +21,7 @@ export interface Challenge {
     hints?: Array<Hint>;
 }
 
-export interface ChallengeFindRequest {
+export interface ChallengeGetRequest {
     id?: number;
     title?: string;
     description?: string;

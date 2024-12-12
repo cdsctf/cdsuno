@@ -1,6 +1,6 @@
 import React, { ComponentProps, useState } from "react";
 import styles from "./Image.module.scss";
-import Loading from "@/components/icons/Loading";
+import Loading from "~icons/svg-spinners/180-ring-with-bg";
 import { Box } from "../Box";
 
 export interface ImageProps extends ComponentProps<"img"> {

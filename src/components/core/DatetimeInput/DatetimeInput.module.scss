@@ -12,11 +12,7 @@
 
     &[data-variant="outlined"] {
         .icon {
-            color: var(--input-border-color);
-
-            @include mixins.dark {
-                color: #ffffff;
-            }
+            color: light-dark(var(--input-border-color), #ffffff);
         }
     }
 }

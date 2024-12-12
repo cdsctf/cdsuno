@@ -3,4 +3,5 @@ export interface Result<T> {
     data?: T;
     msg?: string;
     ts: number;
+    total?: number;
 }

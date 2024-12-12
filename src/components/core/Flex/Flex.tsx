@@ -4,7 +4,8 @@ import styles from "./Flex.module.scss";
 import clsx from "clsx";
 
 export interface FlexProps extends BoxProps {
-    gap?: string;
+    width?: string | number;
+    gap?: string | number;
     justify?:
         | "flex-start"
         | "flex-end"
@@ -17,7 +18,8 @@ export interface FlexProps extends BoxProps {
 
 export function Flex(props: FlexProps) {
     const {
-        gap,
+        width = "auto",
+        gap = 0,
         justify = "flex-start",
         align = "baseline",
         children,
@@ -27,7 +29,8 @@ export function Flex(props: FlexProps) {
     } = props;
 
     const variables = {
-        "--flex-gap": gap,
+        "--flex-width": typeof width === "string" ? width : `${width}px`,
+        "--flex-gap": typeof gap === "string" ? gap : `${gap}px`,
         "--flex-justify": justify,
         "--flex-align": align,
     } as CSSProperties;
