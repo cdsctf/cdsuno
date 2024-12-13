@@ -26,7 +26,7 @@ export function Default() {
     };
 
     function gen_colors(color: string) {
-        return `light-dark(${color}, color-mix(in srgb, ${color} 90%, gray 10%))`;
+        return `light-dark(${color}, color-mix(in srgb, ${color} 80%, gray 20%))`;
     }
 
     useEffect(() => {

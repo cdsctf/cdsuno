@@ -2,6 +2,7 @@ import React, { ComponentProps, useState } from "react";
 import styles from "./Image.module.scss";
 import Loading from "~icons/svg-spinners/180-ring-with-bg";
 import { Box } from "../Box";
+import clsx from "clsx";
 
 export interface ImageProps extends ComponentProps<"img"> {
     src?: string;
@@ -11,22 +12,28 @@ export interface ImageProps extends ComponentProps<"img"> {
 }
 
 export function Image(props: ImageProps) {
-    const { src, width = "fit-content", height = "100%", style } = props;
+    const {
+        src,
+        width = "fit-content",
+        height = "100%",
+        className,
+        style,
+    } = props;
 
     const [err, setErr] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
     const variables = {
-        "--width": width,
-        "--height": height,
+        "--image-width": width,
+        "--image-height": height,
     } as React.CSSProperties;
 
     return (
         <Box
-            className={styles["root"]}
+            className={clsx(styles["root"], className)}
             style={{
-                ...variables,
                 ...style,
+                ...variables,
             }}
         >
             <img

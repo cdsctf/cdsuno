@@ -1,14 +1,13 @@
 import { Image } from "@/components/core/Image";
 import styles from "./Default.module.scss";
-import { Button } from "@/components/core";
+import { Box, Button, Flex, Stack } from "@/components/core";
 import PlayCircleBold from "~icons/solar/play-circle-bold";
 
 export function Default() {
     return (
-        <>
-            <h1>近期赛事</h1>
-            <div className={styles["main"]}>
-                <div className={styles["poster"]}>
+        <Stack className={styles["root"]} gap={0}>
+            <Stack className={styles["recent"]} width={"100%"}>
+                <Box className={styles["poster"]}>
                     <Image
                         src="https://picsum.photos/1920/1080"
                         width="50%"
@@ -17,16 +16,17 @@ export function Default() {
                             boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
                         }}
                     />
-                    <div className={styles["info"]}>
+                    <Box className={styles["info"]}>
                         <span>CdsCTF 2024</span>
-                    </div>
-                    <div className={styles["enter"]}>
+                    </Box>
+                    <Box className={styles["enter"]}>
                         <Button icon={<PlayCircleBold />} height="100%">
                             进入
                         </Button>
-                    </div>
-                </div>
-            </div>
-        </>
+                    </Box>
+                </Box>
+            </Stack>
+            <Stack className={styles["all"]}>11</Stack>
+        </Stack>
     );
 }

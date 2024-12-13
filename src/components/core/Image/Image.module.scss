@@ -1,16 +1,14 @@
 @use "@/styles/mixins";
 
-$width: var(--width);
-$height: var(--height);
-
 .root {
     position: relative;
-    width: $width;
-    height: $height;
+    width: var(--image-width);
+    height: var(--image-height);
     border-radius: 12px;
     overflow: hidden;
     background-color: light-dark(#0000001d, #ffffff0d);
     transition: all 200ms ease-in-out;
+    user-select: none;
 }
 
 .img {
