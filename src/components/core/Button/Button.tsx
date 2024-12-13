@@ -3,12 +3,12 @@ import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./Button.module.scss";
 import Loading from "~icons/svg-spinners/180-ring-with-bg";
 import clsx from "clsx";
-import { Icon } from "../Icon";
 import { Box } from "../Box";
+import { ThemeColor } from "@/types/theme";
 
 export interface ButtonProps extends ComponentPropsWithRef<"button"> {
     height?: string;
-    color?: string;
+    color?: ThemeColor | string;
     variant?: "solid" | "outlined" | "ghost";
     justify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
@@ -60,10 +60,9 @@ export function Button(props: ButtonProps) {
             {...rest}
         >
             {(loading || icon) && (
-                <Icon
-                    className={styles["icon"]}
-                    icon={loading ? <Loading /> : icon}
-                />
+                <Box className={styles["icon"]}>
+                    {loading ? <Loading /> : icon}
+                </Box>
             )}
             {children && <Box className={styles["content"]}>{children}</Box>}
         </button>

@@ -1,8 +1,8 @@
-@mixin dark {
-    [data-theme="dark"] & {
-        @content;
-    }
-}
+// @mixin dark {
+//     [data-theme="dark"] & {
+//         @content;
+//     }
+// }
 
 @mixin responsive($breakpoint) {
     @if $breakpoint == "xs" {

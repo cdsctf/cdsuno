@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { Box } from "../Box";
 import { Flex } from "../Flex";
-import { Icon } from "../Icon";
 import { IconButton } from "../IconButton";
 import styles from "./Pagination.module.scss";
 import AltArrowLeftBold from "~icons/solar/alt-arrow-left-bold";
@@ -65,7 +64,7 @@ export function Pagination(props: PaginationProps) {
                 onClick={() => onChange(value > 1 ? value - 1 : 1)}
                 disabled={value === 1}
             >
-                <Icon icon={<AltArrowLeftBold />} />
+                <AltArrowLeftBold />
             </IconButton>
             {pages.map((page) => (
                 <React.Fragment key={page}>
@@ -85,7 +84,7 @@ export function Pagination(props: PaginationProps) {
                 onClick={() => onChange(value < total ? value + 1 : total)}
                 disabled={value === total}
             >
-                <Icon icon={<AltArrowRightBold />} />
+                <AltArrowRightBold />
             </IconButton>
         </Flex>
     );

@@ -5,12 +5,17 @@
     height: 9rem;
     position: relative;
     border-radius: 12px;
-    background-color: var(--challenge-card-bg-color);
-    border: 2.75px dotted var(--challenge-card-border-color);
+    background-color: color-mix(
+        in srgb,
+        var(--color-primary) 25%,
+        transparent 75%
+    );
+    border: 2.75px dotted
+        color-mix(in srgb, var(--color-primary) 25%, transparent 75%);
     padding: 10px;
     transition: all 200ms ease-in-out;
 
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    box-shadow: var(--shadow-md);
 
     &:active {
         box-shadow: none;
@@ -37,6 +42,21 @@
             }
         }
     }
+
+    &[data-solved="true"] {
+        background-color: color-mix(
+            in srgb,
+            var(--challenge-card-solved-bg-color) 75%,
+            transparent 25%
+        );
+
+        border: 2.75px dotted
+            color-mix(
+                in srgb,
+                var(--challenge-card-solved-bg-color) 75%,
+                transparent 25%
+            );
+    }
 }
 
 .trapezoid {
@@ -45,7 +65,7 @@
     top: -3px;
     width: 75px;
     height: 75px;
-    background-color: var(--challenge-card-trapezoid-color);
+    background-color: var(--challenge-card-solved-trapezoid-color);
     clip-path: polygon(100% 100%, 100% 50%, 50% 0, 0% 0);
 }
 
@@ -78,6 +98,10 @@
     user-select: none;
 
     color: light-dark(var(--challenge-card-text-color), #ffffff);
+
+    [data-solved="true"] & {
+        color: light-dark(var(--challenge-card-solved-text-color), #ffffff);
+    }
 }
 
 .icon {
@@ -93,6 +117,10 @@
     right: 10px;
 
     transform: translateY(-50%) translateX(0);
+
+    [data-solved="true"] & {
+        color: light-dark(var(--challenge-card-solved-icon-color), #ffffff66);
+    }
 }
 
 .title {
@@ -109,10 +137,14 @@
     text-wrap: nowrap;
     text-overflow: ellipsis;
 
-    color: light-dark(var(--challenge-card-text-color), #ffffff);
+    color: light-dark(var(--challenge-card-text-color), #ffffffbd);
     transition: all 200ms ease-in-out;
 
     user-select: none;
+
+    [data-solved="true"] & {
+        color: light-dark(var(--challenge-card-solved-text-color), #ffffffbd);
+    }
 }
 
 .divider {
@@ -126,6 +158,13 @@
     transition: all 200ms ease-in-out;
 
     transform: translateY(-50%);
+
+    [data-solved="true"] & {
+        background-color: light-dark(
+            var(--challenge-card-solved-icon-color),
+            #ffffff66
+        );
+    }
 }
 
 .status {
@@ -140,4 +179,8 @@
     user-select: none;
 
     transform: translateY(-50%);
+
+    [data-solved="true"] & {
+        color: light-dark(var(--challenge-card-solved-text-color), #ffffff);
+    }
 }

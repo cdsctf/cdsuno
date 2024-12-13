@@ -1,14 +1,9 @@
-@use "@/styles/mixins";
-
-$bg-color: var(--toast-bg-color);
-$border-color: var(--toast-border-color);
-
 .root {
     display: flex;
     align-items: center;
     gap: 15px;
-    background-color: $bg-color;
-    border: 2.75px solid $border-color;
+    background-color: var(--bg-2nd-color);
+    border: 2.75px solid var(--toast-border-color);
     border-radius: 16px;
     padding: 10px 20px;
     min-width: 20vw;
@@ -18,7 +13,7 @@ $border-color: var(--toast-border-color);
 .icon {
     width: 2rem;
     height: 2rem;
-    color: #ffffff;
+    color: light-dark(var(--toast-text-color), #ffffff);
     border-radius: 50%;
 }
 
@@ -32,11 +27,11 @@ $border-color: var(--toast-border-color);
 .title {
     font-size: 1rem;
     line-height: 1.5rem;
-    color: #ffffff;
+    color: light-dark(var(--toast-text-color), #ffffff);
 }
 
 .description {
     font-size: 0.75rem;
     line-height: 1.125rem;
-    color: #ffffff;
+    color: light-dark(var(--toast-text-color), #ffffff);
 }

@@ -40,9 +40,6 @@ export function Tooltip(props: TooltipProps) {
     useEffect(() => {
         if (!isHovered || !triggerRef.current || !contentRef.current) return;
 
-        console.log("triggerRef.current");
-        console.log(triggerRef?.current?.getBoundingClientRect().top);
-
         const newStyle: CSSProperties = {};
 
         const triggerRect = triggerRef?.current?.getBoundingClientRect();
@@ -79,13 +76,7 @@ export function Tooltip(props: TooltipProps) {
 
         newStyle.position = "fixed";
         setTooltipStyle(newStyle);
-    }, [
-        isHovered,
-        position,
-        offset,
-        triggerRef?.current?.getBoundingClientRect().top,
-        triggerRef?.current?.getBoundingClientRect().left,
-    ]);
+    }, [isHovered, position, offset]);
 
     return (
         <>
@@ -106,9 +97,13 @@ export function Tooltip(props: TooltipProps) {
                     }}
                 >
                     <Box
-                        className={styles["content"]}
-                        style={tooltipStyle}
+                        className={clsx(styles["root"], className)}
+                        style={{
+                            ...style,
+                            ...tooltipStyle,
+                        }}
                         ref={contentRef}
+                        {...rest}
                     >
                         {content}
                     </Box>

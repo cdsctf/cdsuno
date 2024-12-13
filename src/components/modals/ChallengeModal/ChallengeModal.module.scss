@@ -1,10 +1,5 @@
 @use "@/styles/mixins";
 
-$bg-color: var(--challenge-modal-bg-color);
-$border-color: var(--challenge-modal-border-color);
-$text-color: var(--challenge-modal-text-color);
-$icon-color: var(--challenge-modal-icon-color);
-
 .root {
     width: fit-content;
 
@@ -47,9 +42,9 @@ $icon-color: var(--challenge-modal-icon-color);
     align-items: center;
     gap: 16px;
 
-    background-color: $border-color;
+    background-color: var(--color-primary);
     border-radius: 12px 12px 0 0;
-    border: 2.75px solid $border-color;
+    border: 2.75px solid var(--color-primary);
     padding: 10px 20px;
 
     color: #ffffff;
@@ -108,7 +103,7 @@ $icon-color: var(--challenge-modal-icon-color);
 
     background-color: var(--bg-2nd-color);
     border-radius: 0 0 12px 12px;
-    border: 2.75px dotted $border-color;
+    border: 2.75px dotted var(--color-primary);
     border-top: none;
 
     .content {

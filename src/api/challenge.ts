@@ -18,7 +18,7 @@ export async function getStatus(request: ChallengeStatusRequest) {
         "/challenges/status",
         request,
         {
-            cacheFor: 10 * 1000,
+            cacheFor: 0,
         }
     );
 }

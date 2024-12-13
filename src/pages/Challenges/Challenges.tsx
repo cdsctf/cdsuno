@@ -13,13 +13,16 @@ import { Challenge, ChallengeStatus } from "@/models/challenge";
 import { useAuthStore } from "@/stores/auth";
 import { useEffect, useMemo, useState } from "react";
 import MinimalisticMagniferBoldDuotone from "~icons/solar/minimalistic-magnifer-bold-duotone";
+import HashtagBoldDuotone from "~icons/solar/hashtag-bold-duotone";
 import { Grid } from "@/components/core/Grid";
 import { useResizeDetector } from "react-resize-detector";
 import { LoadingOverlay } from "@/components/core/LoadingOverlay/LoadingOverlay";
 import { Box } from "@/components/core/Box";
+import { useSharedStore } from "@/stores/shared";
 
 export function Challenges() {
     const authStore = useAuthStore();
+    const sharedStore = useSharedStore();
 
     const {
         width: challengeGroupWidth,
@@ -35,6 +38,8 @@ export function Challenges() {
             ? 1
             : Math.ceil(total / size);
     }, [total, size]);
+    const [id, setId] = useState<number>();
+    const [idInput, setIdInput] = useState("");
     const [searchInput, setSearchInput] = useState("");
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
@@ -52,6 +57,7 @@ export function Challenges() {
         setLoading(true);
         setChallenges([]);
         get({
+            id: id ? id : undefined,
             is_practicable: true,
             page: page,
             size: size,
@@ -73,8 +79,10 @@ export function Challenges() {
     }
 
     useEffect(() => {
-        fetchChallenges();
-    }, [page, search, size]);
+        if (challengeGroupWidth && challengeGroupHeight) {
+            fetchChallenges();
+        }
+    }, [page, search, size, id]);
 
     useEffect(() => {
         setSize(
@@ -87,7 +95,7 @@ export function Challenges() {
         if (challenges?.length) {
             fetchChallengeStatus();
         }
-    }, [challenges]);
+    }, [challenges, sharedStore.refresh]);
 
     return (
         <>
@@ -102,12 +110,21 @@ export function Challenges() {
                         onSubmit={(e) => {
                             e.preventDefault();
                             setSearch(searchInput);
+                            setId(parseInt(idInput, 16));
                         }}
                         style={{
                             width: "80%",
                         }}
                     >
                         <Flex align={"center"} gap={15}>
+                            <TextInput
+                                icon={<HashtagBoldDuotone />}
+                                placeholder={"题目 ID"}
+                                value={idInput}
+                                onChange={setIdInput}
+                                variant={"solid"}
+                                width={"10%"}
+                            />
                             <TextInput
                                 icon={<MinimalisticMagniferBoldDuotone />}
                                 placeholder={"搜索"}
@@ -145,7 +162,7 @@ export function Challenges() {
                             style={{
                                 height: "calc(100vh - 275px)",
                                 padding: "1rem",
-                                borderRadius: "10px",
+                                borderRadius: "15px",
                                 backgroundColor:
                                     "light-dark(#0000000d, #ffffff0d)",
                             }}

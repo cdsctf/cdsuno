@@ -2,7 +2,6 @@ import styles from "./Avatar.module.scss";
 import UserCircleBoldDuotone from "~icons/solar/user-circle-bold-duotone";
 import useThemeColor from "@/hooks/useThemeColor";
 import { ComponentProps, useState } from "react";
-import { Icon } from "../Icon";
 import { Box } from "../Box";
 
 export interface AvatarProps extends ComponentProps<"img"> {

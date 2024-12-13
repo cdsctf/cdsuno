@@ -17,8 +17,8 @@ export default function useThemeColor(baseColor: string) {
                 .getPropertyValue(`--color-${baseColor}`)
                 .trim();
 
-            if (!color) {
-                color = baseColor;
+            if (color) {
+                return `var(--color-${baseColor})`;
             }
         }
 

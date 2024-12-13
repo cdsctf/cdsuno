@@ -1,7 +1,5 @@
 @use "@/styles/mixins";
 
-$bg-color: var(--switch-bg-color);
-
 .root {
     display: flex;
     width: fit-content;
@@ -12,17 +10,20 @@ $bg-color: var(--switch-bg-color);
     position: relative;
     width: 45px;
     height: 24px;
-    background-color: $bg-color;
     border-radius: 17px;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 2px solid $bg-color;
+    border: 2px solid var(--switch-unchecked-bg-color);
+    background-color: var(--switch-unchecked-bg-color);
 
     &:hover {
         filter: brightness(1.2);
     }
 
     &[data-checked="true"] {
+        border: 2px solid var(--switch-bg-color);
+        background-color: var(--switch-bg-color);
+
         .handle {
             transform: translateY(-50%) translateX(20px);
         }

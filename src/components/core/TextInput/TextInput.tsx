@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import useThemeColor from "@/hooks/useThemeColor";
 import CloseCircleBold from "~icons/solar/close-circle-bold";
 import EyeBold from "~icons/solar/eye-bold";
 import EyeCloseBold from "~icons/solar/eye-closed-bold";
 import styles from "./TextInput.module.scss";
 import { InputBase, InputBaseProps } from "../InputBase";
 import clsx from "clsx";
-import { Icon } from "../Icon";
 import { Box } from "../Box";
 
 export interface TextInputProps extends Omit<InputBaseProps, "onChange"> {
@@ -76,7 +74,7 @@ export function TextInput(props: TextInputProps) {
             />
             {clearable && (
                 <Box className={styles["clear-button"]} onClick={handleClear}>
-                    <Icon icon={<CloseCircleBold />} />
+                    {<CloseCircleBold />}
                 </Box>
             )}
             {password && (
@@ -84,11 +82,7 @@ export function TextInput(props: TextInputProps) {
                     className={styles["toggle-button"]}
                     onClick={handleToggleVisibility}
                 >
-                    <Icon
-                        icon={
-                            isPasswordVisible ? <EyeBold /> : <EyeCloseBold />
-                        }
-                    />
+                    {isPasswordVisible ? <EyeBold /> : <EyeCloseBold />}
                 </Box>
             )}
         </InputBase>

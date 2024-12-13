@@ -8,7 +8,7 @@ import { Tooltip } from "@/components/core/Tooltip";
 import UserBold from "~icons/solar/user-bold";
 import { useToastStore } from "@/stores/toast";
 import { DateTime } from "luxon";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChallengeCard } from "@/components/widgets/ChallengeCard";
 import { Switch } from "@/components/core/Switch/Switch";
 import { ChallengeModal } from "@/components/modals/ChallengeModal";
@@ -20,10 +20,18 @@ import { Popover } from "@/components/core/Popover/Popover";
 import { Pagination } from "@/components/core/Pagination";
 
 export function Default() {
-    const [color, setColor] = useState("#1cb0f6");
+    const [color, setColor] = useState("#0d47a1");
     const handleChange = (e: any) => {
         setColor(e.target.value);
     };
+
+    function gen_colors(color: string) {
+        return `light-dark(${color}, color-mix(in srgb, ${color} 90%, gray 10%))`;
+    }
+
+    useEffect(() => {
+        document.body.style.setProperty("--color-primary", gen_colors(color));
+    }, [color]);
 
     const [paginationPage, setPaginationPage] = useState(1);
 
@@ -399,24 +407,6 @@ ReactDOM.render(
                 }}
                 label={"I am a checkbox"}
             />
-
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].map(
-                (i) => (
-                    <div key={i}>
-                        <ChallengeModal
-                            challenge={{
-                                title: "Hello CdsCTFxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                                category: i,
-                                description: "This is a description",
-                            }}
-                            status={{
-                                solved_times: 2,
-                                is_solved: true,
-                            }}
-                        />
-                    </div>
-                )
-            )}
 
             <Switch
                 checked={checked}

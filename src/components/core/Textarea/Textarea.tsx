@@ -1,4 +1,4 @@
-import { Icon } from "../Icon";
+import { Box } from "../Box";
 import { InputBase, InputBaseProps } from "../InputBase";
 import styles from "./Textarea.module.scss";
 
@@ -22,7 +22,7 @@ export function Textarea(props: TextareaProps) {
 
     return (
         <InputBase className={styles["root"]} width={width}>
-            {icon && <Icon icon={icon} className={styles["icon"]} />}
+            {icon && <Box className={styles["icon"]}>{icon}</Box>}
             <textarea
                 className={styles["textarea"]}
                 value={value}

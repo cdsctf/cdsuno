@@ -77,17 +77,11 @@ export function Navbar() {
         return defaultLinks;
     }, [location.pathname]);
 
-    const baseColor = useThemeColor("primary");
-
     const [dropdownMenuOpen, setDropdownMenuOpen] = useState<boolean>(false);
     const dropdownMenuButtonRef = useRef(null);
 
-    const variables = {
-        "--navbar-bg-color": chroma(baseColor).hex(),
-    } as CSSProperties;
-
     return (
-        <header className={styles["root"]} style={variables}>
+        <header className={styles["root"]}>
             <Box className={styles["left-section"]}>
                 <Box className={styles["info-wrapper"]}>
                     <Link to={"/"} draggable={false}>
