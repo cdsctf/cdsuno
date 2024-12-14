@@ -6,7 +6,6 @@ import { useEffect, useRef } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet, useNavigate } from "react-router";
 import styles from "./Base.module.scss";
-import { Box } from "@/components/core";
 
 export function Base() {
     const navigate = useNavigate();
@@ -24,11 +23,9 @@ export function Base() {
     return (
         <>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <Box className={styles["wrapper"]}>
-                    <main ref={ref}>
-                        <Outlet />
-                    </main>
-                </Box>
+                <main className={styles["root"]} ref={ref}>
+                    <Outlet />
+                </main>
                 <Toaster />
             </ErrorBoundary>
         </>
