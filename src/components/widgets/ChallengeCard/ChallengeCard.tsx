@@ -69,6 +69,7 @@ export function ChallengeCard(props: ChallengeCard) {
             </Box>
             <Box className={styles["status"]}>
                 <Tooltip
+                    hasArrow
                     content={
                         <>
                             {Number(status?.solved_times) > 0 && (

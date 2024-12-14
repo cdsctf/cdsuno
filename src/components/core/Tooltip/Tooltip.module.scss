@@ -1,36 +1,81 @@
 .root {
-    position: fixed;
+    position: absolute;
     background: #333;
     color: #fff;
     padding: 8px 12px;
     border-radius: 12px;
     font-size: 14px;
     white-space: nowrap;
-    z-index: 9999;
+    z-index: 1;
     transition:
         opacity 0.2s ease,
         visibility 0.2s ease;
 
+    inset: 0px auto auto 0px;
+    margin: 0;
+
     user-select: none;
 
-    &[data-position="top"] {
-        transform: translate(-50%, -100%);
-        margin-bottom: var(--tooltip-offset, 8px);
-    }
+    &[data-arrow="true"] {
+        &[data-position="top"] {
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 100%);
+                width: 0;
+                height: 0;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-top: 5px solid #333;
+            }
+        }
 
-    &[data-position="bottom"] {
-        transform: translate(-50%, 0%);
-        margin-top: var(--tooltip-offset, 8px);
-    }
+        &[data-position="bottom"] {
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translate(-50%, -100%);
+                width: 0;
+                height: 0;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-bottom: 5px solid #333;
+            }
+        }
 
-    &[data-position="left"] {
-        transform: translate(-100%, -50%);
-        margin-right: var(--tooltip-offset, 8px);
-    }
+        &[data-position="left"] {
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transform: translate(100%, -50%);
+                width: 0;
+                height: 0;
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                border-left: 5px solid #333;
+            }
+        }
 
-    &[data-position="right"] {
-        transform: translate(0%, -50%);
-        margin-left: var(--tooltip-offset, 8px);
+        &[data-position="right"] {
+            &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translate(-100%, -50%);
+                width: 0;
+                height: 0;
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                border-right: 5px solid #333;
+            }
+        }
     }
 
     &.enter {
