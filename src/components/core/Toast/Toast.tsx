@@ -26,12 +26,10 @@ export function Toast(props: ToastProps) {
         ...rest
     } = props;
 
-    const baseColor = useThemeColor(color);
-
     const variables = {
-        "--toast-bg-color": chroma(baseColor).alpha(0.5).hex(),
-        "--toast-text-color": chroma(baseColor).darken(1.75).hex(),
-        "--toast-border-color": baseColor,
+        // "--toast-color": chroma(baseColor).alpha(0.5).hex(),
+        // "--toast-text-color": chroma(baseColor).darken(1.75).hex(),
+        "--toast-color": `var(--color-${color})`,
     } as CSSProperties;
 
     return (

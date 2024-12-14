@@ -2,8 +2,13 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    background-color: var(--bg-2nd-color);
-    border: 2.75px solid var(--toast-border-color);
+    background-color: color-mix(
+        in srgb,
+        var(--toast-color) 20%,
+        transparent 80%
+    );
+    border: 2.75px dotted
+        color-mix(in srgb, var(--toast-color) 50%, transparent 50%); // darken(1.75)
     border-radius: 16px;
     padding: 10px 20px;
     min-width: 20vw;
@@ -13,7 +18,10 @@
 .icon {
     width: 2rem;
     height: 2rem;
-    color: light-dark(var(--toast-text-color), #ffffff);
+    color: light-dark(
+        color-mix(in srgb, var(--toast-color) 80%, black 20%),
+        #ffffff
+    );
     border-radius: 50%;
 }
 
@@ -27,11 +35,17 @@
 .title {
     font-size: 1rem;
     line-height: 1.5rem;
-    color: light-dark(var(--toast-text-color), #ffffff);
+    color: light-dark(
+        color-mix(in srgb, var(--toast-color) 80%, black 20%),
+        #ffffff
+    );
 }
 
 .description {
     font-size: 0.75rem;
     line-height: 1.125rem;
-    color: light-dark(var(--toast-text-color), #ffffff);
+    color: light-dark(
+        color-mix(in srgb, var(--toast-color) 80%, black 20%),
+        #ffffff
+    );
 }
