@@ -1,0 +1,116 @@
+.root {
+    position: relative;
+    min-height: 100%;
+    scroll-snap-align: center;
+    flex: 1;
+}
+
+.left-section {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+
+.right-section {
+    position: absolute;
+    top: 50%;
+    right: 25%;
+}
+
+.panel {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    padding: 1.5rem;
+    border-radius: 25px;
+    background-color: light-dark(#0000000d, #ffffff0d);
+
+    .poster {
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            filter: brightness(0.8);
+        }
+    }
+
+    .info-section {
+        position: absolute;
+        top: -10%;
+        left: -10%;
+        min-width: 80%;
+        max-width: 80%;
+    }
+
+    .icon-section {
+        box-sizing: border-box;
+        position: absolute;
+        border-radius: 35px;
+        top: -2px;
+        left: -2px;
+        height: calc(12vh + 4px);
+        aspect-ratio: 1.25/1;
+        background-color: var(--bg-2nd-color);
+        border: 2.75px solid var(--color-primary);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        clip-path: polygon(0% 100%, 85% 100%, 95% 0, 0% 0);
+    }
+
+    .info {
+        position: relative;
+        height: 12vh;
+        border-radius: 35px;
+        box-shadow: var(--shadow-md);
+        background-color: var(--color-primary);
+        backdrop-filter: blur(10px);
+
+        padding-left: 22.5%;
+    }
+
+    .enter {
+        position: absolute;
+        height: 7vh;
+        bottom: 0;
+        right: 0;
+        transform: translate(50%, 50%);
+    }
+
+    .pagination {
+        position: absolute;
+        bottom: -50px;
+        left: 7.5%;
+    }
+}
+
+.scoreboard {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 25px;
+    background-color: light-dark(#0000000d, #ffffff0d);
+    transform: translate(50%, -50%);
+    box-shadow: var(--shadow-lg);
+    border: 2.75px dotted var(--color-primary);
+
+    width: 17.5vw;
+    height: 45vh;
+
+    .trapezoid {
+        position: absolute;
+        right: -4px;
+        top: -4px;
+        width: 85px;
+        height: 85px;
+        background-color: var(--color-primary);
+        clip-path: polygon(100% 100%, 100% 50%, 50% 0, 0% 0);
+    }
+
+    .cup {
+        position: absolute;
+        right: 17.5px;
+        top: 17.5px;
+    }
+}

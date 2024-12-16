@@ -7,6 +7,7 @@ import { Box } from "../Box";
 import { ThemeColor } from "@/types/theme";
 
 export interface ButtonProps extends ComponentPropsWithRef<"button"> {
+    width?: number | string;
     height?: string;
     color?: ThemeColor | string;
     variant?: "solid" | "outlined" | "ghost";
@@ -23,6 +24,7 @@ export interface ButtonProps extends ComponentPropsWithRef<"button"> {
 
 export function Button(props: ButtonProps) {
     const {
+        width = "auto",
         height = "auto",
         color = "primary",
         variant = "solid",
@@ -41,6 +43,7 @@ export function Button(props: ButtonProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
+        "--button-width": typeof width === "string" ? width : `${width}px`,
         "--button-height": height,
         "--button-bg-color": baseColor,
         "--button-text-color": variant === "solid" ? "#fff" : baseColor,

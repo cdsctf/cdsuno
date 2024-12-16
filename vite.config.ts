@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
                 compiler: "jsx",
                 jsx: "react",
                 scale: 1.2,
-                defaultStyle: "width: 100%; height: 100%;",
+                defaultClass: "iconify",
             }),
         ],
         resolve: {

@@ -4,11 +4,14 @@
     position: relative;
     width: var(--image-width);
     height: var(--image-height);
-    border-radius: 12px;
+    border-radius: var(--image-radius);
     overflow: hidden;
     background-color: light-dark(#0000001d, #ffffff0d);
-    transition: all 200ms ease-in-out;
+    transition: all 0.2s ease-in-out;
     user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .img {

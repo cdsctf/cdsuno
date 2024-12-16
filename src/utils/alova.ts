@@ -1,6 +1,8 @@
 import { createAlova } from "alova";
 import adapterFetch from "alova/fetch";
 import ReactHook from "alova/react";
+import globalRouter from "./globalRouter";
+import { useToastStore } from "@/stores/toast";
 
 export const alovaInstance = createAlova({
     baseURL: "/api",
@@ -10,6 +12,14 @@ export const alovaInstance = createAlova({
     statesHook: ReactHook,
     responded: {
         onSuccess: async (response, _method) => {
+            if (response.status === 401) {
+                globalRouter?.navigate?.("/login");
+                useToastStore.getState().add({
+                    type: "warning",
+                    title: "请先登录",
+                    description: "登录后才能继续操作",
+                });
+            }
             return response.json();
         },
     },

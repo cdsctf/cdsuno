@@ -1,9 +1,11 @@
-import { Status } from "./submission";
+import { GameTeam } from "./game_team";
+import { GameSubmission, Status } from "./submission";
 
 export interface Game {
     id?: number;
     title?: string;
     bio?: string;
+    sketch?: string;
     description?: string;
     is_enabled?: boolean;
     is_public?: boolean;
@@ -17,14 +19,23 @@ export interface Game {
     updated_at?: number;
 }
 
-export interface GameFindRequest {
+export interface ScoreRecord {
+    game_team?: GameTeam;
+    submissions?: Array<GameSubmission>;
+}
+
+export interface GameGetRequest {
     id?: number;
     title?: string;
     is_enabled?: boolean;
+    sorts?: string;
     page?: number;
     size?: number;
-    sort_key?: string;
-    sort_order?: string;
+}
+
+export interface GameScoreboardGetRequest {
+    size?: number;
+    page?: number;
 }
 
 export interface GameSubmissionGetRequest {

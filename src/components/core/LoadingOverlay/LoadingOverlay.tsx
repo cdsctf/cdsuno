@@ -34,7 +34,7 @@ export function LoadingOverlay(props: LoadingOverlayProps) {
                         ...variables,
                     }}
                 >
-                    <Box className={"icon"}>
+                    <Box className={styles["icon"]}>
                         <Loading color={"white"} />
                     </Box>
                 </Box>

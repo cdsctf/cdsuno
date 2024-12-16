@@ -1,0 +1,27 @@
+.root {
+    position: absolute;
+    bottom: 1em;
+    right: 5em;
+
+    user-select: none;
+    color: light-dark(var(--color-primary), white);
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(3px);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+    100% {
+        transform: translateY(3px);
+    }
+}

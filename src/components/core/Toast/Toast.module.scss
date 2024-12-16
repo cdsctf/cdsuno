@@ -8,11 +8,12 @@
         transparent 80%
     );
     border: 2.75px dotted
-        color-mix(in srgb, var(--toast-color) 50%, transparent 50%); // darken(1.75)
+        color-mix(in srgb, var(--toast-color) 50%, transparent 50%);
     border-radius: 16px;
     padding: 10px 20px;
     min-width: 20vw;
     position: relative;
+    backdrop-filter: blur(10px);
 }
 
 .icon {
