@@ -13,8 +13,8 @@ export const router = createBrowserRouter([
             {
                 path: "login",
                 lazy: async () => {
-                    let { Login } = await import("@/pages/Login");
-                    return { Component: Login };
+                    let { Index } = await import("@/pages/login");
+                    return { Component: Index };
                 },
             },
             {
@@ -27,26 +27,22 @@ export const router = createBrowserRouter([
                     {
                         index: true,
                         lazy: async () => {
-                            let { Default } = await import("@/pages/Default");
-                            return { Component: Default };
+                            let { Index } = await import("@/pages");
+                            return { Component: Index };
                         },
                     },
                     {
                         path: "games",
                         lazy: async () => {
-                            let { Default } = await import(
-                                "@/pages/_games/Default"
-                            );
-                            return { Component: Default };
+                            let { Index } = await import("@/pages/games");
+                            return { Component: Index };
                         },
                     },
                     {
                         path: "challenges",
                         lazy: async () => {
-                            let { Challenges } = await import(
-                                "@/pages/Challenges"
-                            );
-                            return { Component: Challenges };
+                            let { Index } = await import("@/pages/challenges");
+                            return { Component: Index };
                         },
                     },
                     {
@@ -55,10 +51,10 @@ export const router = createBrowserRouter([
                             {
                                 index: true,
                                 lazy: async () => {
-                                    let { Default } = await import(
-                                        "@/pages/_settings/Default"
+                                    let { Index } = await import(
+                                        "@/pages/settings"
                                     );
-                                    return { Component: Default };
+                                    return { Component: Index };
                                 },
                             },
                         ],
@@ -71,10 +67,8 @@ export const router = createBrowserRouter([
                     {
                         path: ":id",
                         lazy: async () => {
-                            let { Default } = await import(
-                                "@/pages/_games/_[id]/Default"
-                            );
-                            return { Component: Default };
+                            let { Index } = await import("@/pages/games/[id]");
+                            return { Component: Index };
                         },
                     },
                 ],

@@ -6,6 +6,7 @@ import { Game, ScoreRecord } from "@/models/game";
 import React, { useEffect, useState } from "react";
 import { get, getScoreboard } from "@/api/game";
 import CupBold from "~icons/solar/cup-bold";
+import Planet2BoldDuotone from "~icons/solar/planet-2-bold-duotone";
 
 export function Recent() {
     const [games, setGames] = useState<Array<Game>>();
@@ -56,7 +57,7 @@ export function Recent() {
         if (games?.length) {
             const timer = setInterval(() => {
                 setIndex((prev) => (prev === games.length - 1 ? 0 : prev + 1));
-            }, 3000);
+            }, 5000);
             return () => {
                 clearInterval(timer);
             };
@@ -86,42 +87,67 @@ export function Recent() {
                             积分榜
                         </span>
                     </Flex>
-                    {scoreboard?.map((item, index) => (
-                        <Flex key={index} width={"100%"} align={"center"}>
-                            <Flex gap={10} align={"center"}>
-                                <Box>{getRankIcon(item?.game_team?.rank!)}</Box>
-                                <span>
-                                    <Badge>{item?.game_team?.team?.name}</Badge>
-                                </span>
+                    <Stack
+                        gap={5}
+                        width={"100%"}
+                        style={{ flex: 1, position: "relative" }}
+                    >
+                        {scoreboard?.map((item, index) => (
+                            <Flex key={index} width={"100%"} align={"center"}>
+                                <Flex gap={10} align={"center"}>
+                                    <Box>
+                                        {getRankIcon(item?.game_team?.rank!)}
+                                    </Box>
+                                    <span>
+                                        <Badge>
+                                            {item?.game_team?.team?.name}
+                                        </Badge>
+                                    </span>
+                                </Flex>
+                                <Flex
+                                    justify={"flex-end"}
+                                    style={{
+                                        flex: 1,
+                                    }}
+                                >
+                                    {item?.game_team?.pts}
+                                </Flex>
                             </Flex>
-                            <Flex
-                                justify={"flex-end"}
-                                style={{
-                                    flex: 1,
-                                }}
-                            >
-                                {item?.game_team?.pts}
-                            </Flex>
-                        </Flex>
-                    ))}
+                        ))}
+                    </Stack>
                     <Box className={styles["trapezoid"]} />
                     <CupBold color={"white"} className={styles["cup"]} />
+                    {!scoreboard?.length && (
+                        <Stack
+                            style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                width: "50%",
+                                color: "color-mix(in srgb, light-dark(var(--color-primary), white) 40%, transparent 60%)",
+                            }}
+                            align={"center"}
+                            gap={5}
+                        >
+                            <Planet2BoldDuotone />
+                            <span>暂无数据</span>
+                        </Stack>
+                    )}
                 </Stack>
             </Box>
 
             <Box className={styles["left-section"]}>
                 <Box className={styles["panel"]}>
-                    <Box className={styles["poster"]}>
-                        <Image
-                            src={`/api/games/${games?.[index]?.id || 1}/poster`}
-                            height="50vh"
-                            width="45vw"
-                            radius={25}
-                            style={{
-                                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
-                            }}
-                        />
-                    </Box>
+                    <Image
+                        src={`/api/games/${games?.[index]?.id}/poster`}
+                        height="50vh"
+                        width="45vw"
+                        radius={25}
+                        style={{
+                            boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                        }}
+                    />
                     <Box className={styles["info-section"]}>
                         <Flex
                             className={styles["info"]}
@@ -136,10 +162,14 @@ export function Recent() {
                                     }}
                                 >
                                     <Image
-                                        src={`/api/games/${games?.[index]?.id || 1}/icon`}
+                                        src={`/api/games/${games?.[index]?.id}/icon`}
                                         height="100%"
                                         width="100%"
                                         radius={9999}
+                                        style={{
+                                            border: "2px solid white",
+                                            backgroundColor: "transparent",
+                                        }}
                                     />
                                 </Box>
                             </Box>
@@ -155,7 +185,7 @@ export function Recent() {
                                     style={{
                                         fontWeight: 600,
                                         fontSize: "1.75rem",
-                                        color: "white",
+                                        color: "light-dark(var(--color-primary), white)",
                                         maxWidth: "80%",
                                         textWrap: "nowrap",
                                         overflow: "hidden",
@@ -166,7 +196,7 @@ export function Recent() {
                                 </span>
                                 <span
                                     style={{
-                                        color: "white",
+                                        color: "light-dark(var(--color-primary), white)",
                                         fontStyle: "italic",
                                         textWrap: "nowrap",
                                         maxWidth: "75%",
@@ -199,7 +229,11 @@ export function Recent() {
                             <Button
                                 key={i}
                                 width={"100%"}
-                                color={i === index ? "primary" : "#2222221d"}
+                                color={
+                                    i === index
+                                        ? "primary"
+                                        : "light-dark(#0000000d, #ffffff0d)"
+                                }
                                 onClick={() => {
                                     setIndex(i);
                                 }}

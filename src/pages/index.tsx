@@ -8,7 +8,7 @@ import { Tooltip } from "@/components/core/Tooltip";
 import UserBold from "~icons/solar/user-bold";
 import { useToastStore } from "@/stores/toast";
 import { DateTime } from "luxon";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ChallengeCard } from "@/components/widgets/ChallengeCard";
 import { Switch } from "@/components/core/Switch/Switch";
 import { ChallengeModal } from "@/components/modals/ChallengeModal";
@@ -19,7 +19,7 @@ import globalRouter from "@/utils/globalRouter";
 import { Popover } from "@/components/core/Popover/Popover";
 import { Pagination } from "@/components/core/Pagination";
 
-export function Default() {
+export function Index() {
     const [color, setColor] = useState("#0d47a1");
     const handleChange = (e: any) => {
         setColor(e.target.value);

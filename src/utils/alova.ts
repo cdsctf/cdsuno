@@ -10,6 +10,11 @@ export const alovaInstance = createAlova({
     timeout: 5000,
     shareRequest: true,
     statesHook: ReactHook,
+    cacheFor: {
+        POST: 0,
+        PUT: 0,
+        DELETE: 0,
+    },
     responded: {
         onSuccess: async (response, _method) => {
             if (response.status === 401) {
@@ -19,7 +24,9 @@ export const alovaInstance = createAlova({
                     title: "请先登录",
                     description: "登录后才能继续操作",
                 });
+                return Promise.reject(response);
             }
+
             return response.json();
         },
     },

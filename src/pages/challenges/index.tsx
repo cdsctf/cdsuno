@@ -20,7 +20,7 @@ import { LoadingOverlay } from "@/components/core/LoadingOverlay/LoadingOverlay"
 import { Box } from "@/components/core/Box";
 import { useSharedStore } from "@/stores/shared";
 
-export function Challenges() {
+export function Index() {
     const authStore = useAuthStore();
     const sharedStore = useSharedStore();
 

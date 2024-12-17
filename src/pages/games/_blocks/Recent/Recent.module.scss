@@ -26,14 +26,6 @@
     border-radius: 25px;
     background-color: light-dark(#0000000d, #ffffff0d);
 
-    .poster {
-        transition: all 0.2s ease-in-out;
-
-        &:hover {
-            filter: brightness(0.8);
-        }
-    }
-
     .info-section {
         position: absolute;
         top: -10%;
@@ -50,7 +42,7 @@
         left: -2px;
         height: calc(12vh + 4px);
         aspect-ratio: 1.25/1;
-        background-color: var(--bg-2nd-color);
+        background-color: var(--color-primary);
         border: 2.75px solid var(--color-primary);
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
@@ -61,12 +53,13 @@
     }
 
     .info {
+        box-sizing: content-box;
         position: relative;
         height: 12vh;
         border-radius: 35px;
+        border: 2.75px dotted var(--color-primary);
         box-shadow: var(--shadow-md);
-        background-color: var(--color-primary);
-        backdrop-filter: blur(10px);
+        background-color: var(--bg-2nd-color);
 
         padding-left: 22.5%;
     }
@@ -74,7 +67,7 @@
     .enter {
         position: absolute;
         height: 7vh;
-        bottom: 0;
+        bottom: 15px;
         right: 0;
         transform: translate(50%, 50%);
     }

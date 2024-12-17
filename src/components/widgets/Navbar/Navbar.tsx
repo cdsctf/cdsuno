@@ -5,9 +5,7 @@ import UsersGroupTwoRoundedBoldDuotone from "~icons/solar/users-group-two-rounde
 import SolarSettingsBoldDuotone from "~icons/solar/settings-bold-duotone";
 import SolarRoundArrowLeftBoldDuotone from "~icons/solar/round-arrow-left-bold-duotone";
 import styles from "./Navbar.module.scss";
-import useThemeColor from "@/hooks/useThemeColor";
-import { CSSProperties, useMemo, useRef, useState } from "react";
-import chroma from "chroma-js";
+import { useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Avatar, Button, Popover, Tooltip } from "@/components/core";
 import { Box } from "@/components/core/Box";

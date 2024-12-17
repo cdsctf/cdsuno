@@ -1,13 +1,7 @@
 .root {
     position: absolute;
     scroll-snap-type: y mandatory;
-    overflow: scroll;
+    overflow-y: scroll;
     height: 100%;
     width: 100%;
-}
-
-.all {
-    min-height: 100%;
-    scroll-snap-align: center;
-    flex: 1;
 }

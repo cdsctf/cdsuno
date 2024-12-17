@@ -1,0 +1,38 @@
+.root {
+    position: relative;
+    box-shadow: var(--shadow-md);
+    background-color: var(--bg-2nd-color);
+    min-height: calc(25% - 15px);
+    max-height: calc(25% - 15px);
+    width: 80%;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+
+    &:hover {
+        filter: brightness(1.2);
+    }
+
+    &:active {
+        box-shadow: none;
+        transform: translateY(4px);
+    }
+}
+
+.icon {
+    position: absolute;
+    left: -50%;
+}
+
+.trapezoid {
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    width: 85px;
+    height: 85px;
+    background-color: var(--color-primary);
+    clip-path: polygon(100% 100%, 100% 50%, 50% 0, 0% 0);
+}

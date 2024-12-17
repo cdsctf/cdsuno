@@ -1,7 +1,5 @@
 @use "@/styles/mixins";
 
-$bg-color: var(--category-bg-color);
-
 .root {
     display: flex;
     height: 100vh;
@@ -21,13 +19,8 @@ $bg-color: var(--category-bg-color);
     height: 100%;
     width: 0%;
     position: relative;
-    background-color: $bg-color;
+    background-color: var(--category-bg-color);
     transition: background-color 2000ms ease-in-out;
-
-    // background-image: linear-gradient(to right, #ffffff0d 1px, transparent 1px),
-    //     linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
-
-    // background-size: 25px 25px;
 }
 
 .icon {
