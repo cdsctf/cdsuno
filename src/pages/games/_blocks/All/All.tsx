@@ -5,8 +5,11 @@ import MinimalisticMagniferBoldDuotone from "~icons/solar/minimalistic-magnifer-
 import { Game } from "@/models/game";
 import { get } from "@/api/game";
 import { GameCard } from "./GameCard";
+import { useNavigate } from "react-router";
 
 export function All() {
+    const navigate = useNavigate();
+
     const [search, setSearch] = useState("");
     const [searchInput, setSearchInput] = useState("");
     const [games, setGames] = useState<Array<Game>>();
@@ -63,7 +66,13 @@ export function All() {
                 </Flex>
             </form>
             <Stack width={"100%"} align={"center"} style={{ flex: 1 }} gap={15}>
-                {games?.map((game) => <GameCard key={game.id} game={game} />)}
+                {games?.map((game) => (
+                    <GameCard
+                        key={game.id}
+                        game={game}
+                        onClick={() => navigate(`/games/${game?.id}`)}
+                    />
+                ))}
             </Stack>
             <Stack width={"100%"} align={"center"}>
                 <Pagination

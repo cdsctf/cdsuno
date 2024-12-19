@@ -1,13 +1,11 @@
-@use "@/styles/mixins";
-
 .root {
-    min-height: 100vh;
-    width: 100%;
+    height: 100vh;
+    min-width: fit-content;
     display: flex;
     flex-direction: column;
 }
 
 .outlet {
-    position: relative;
     flex: 1;
+    overflow: auto;
 }

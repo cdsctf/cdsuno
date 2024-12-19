@@ -27,37 +27,23 @@
     flex: 1;
 }
 
-.info-wrapper {
-    width: fit-content;
+.logo {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
 }
 
-.info {
-    display: flex;
-    justify-content: flex-start;
-    transition: all 300ms ease-in-out;
-    align-items: center;
-    gap: 8px;
-    user-select: none;
-
-    &:hover {
-        cursor: pointer;
-        scale: 1.05;
-    }
-
-    .logo {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-    }
-
-    .title {
-        font-size: 1.25rem;
-        font-weight: 700;
-    }
+.title {
+    max-width: 25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .features-wrapper {

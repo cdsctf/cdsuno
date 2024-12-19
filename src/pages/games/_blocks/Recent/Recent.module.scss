@@ -1,6 +1,7 @@
 .root {
     position: relative;
     min-height: 100%;
+    max-height: 100%;
     scroll-snap-align: center;
     flex: 1;
 }

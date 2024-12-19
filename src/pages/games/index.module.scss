@@ -1,7 +1,6 @@
 .root {
-    position: absolute;
     scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100%;
     width: 100%;
 }

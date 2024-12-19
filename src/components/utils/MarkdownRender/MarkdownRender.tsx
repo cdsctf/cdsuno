@@ -15,7 +15,7 @@ import styles from "./MarkdownRender.module.scss";
 import clsx from "clsx";
 
 export interface MarkdownRenderProps extends ComponentProps<"div"> {
-    src: string;
+    src?: string;
 }
 
 export function MarkdownRender(props: MarkdownRenderProps) {

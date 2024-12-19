@@ -33,10 +33,26 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: "games",
-                        lazy: async () => {
-                            let { Index } = await import("@/pages/games");
-                            return { Component: Index };
-                        },
+                        children: [
+                            {
+                                index: true,
+                                lazy: async () => {
+                                    let { Index } = await import(
+                                        "@/pages/games"
+                                    );
+                                    return { Component: Index };
+                                },
+                            },
+                            {
+                                path: ":id",
+                                lazy: async () => {
+                                    let { Index } = await import(
+                                        "@/pages/games/[id]"
+                                    );
+                                    return { Component: Index };
+                                },
+                            },
+                        ],
                     },
                     {
                         path: "challenges",
@@ -58,18 +74,6 @@ export const router = createBrowserRouter([
                                 },
                             },
                         ],
-                    },
-                ],
-            },
-            {
-                path: "games",
-                children: [
-                    {
-                        path: ":id",
-                        lazy: async () => {
-                            let { Index } = await import("@/pages/games/[id]");
-                            return { Component: Index };
-                        },
                     },
                 ],
             },

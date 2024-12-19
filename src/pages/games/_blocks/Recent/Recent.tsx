@@ -7,8 +7,12 @@ import React, { useEffect, useState } from "react";
 import { get, getScoreboard } from "@/api/game";
 import CupBold from "~icons/solar/cup-bold";
 import Planet2BoldDuotone from "~icons/solar/planet-2-bold-duotone";
+import PlanetBoldDuotone from "~icons/solar/planet-bold-duotone";
+import { useNavigate } from "react-router";
 
 export function Recent() {
+    const navigate = useNavigate();
+
     const [games, setGames] = useState<Array<Game>>();
     const [index, setIndex] = useState<number>(-1);
 
@@ -163,6 +167,15 @@ export function Recent() {
                                 >
                                     <Image
                                         src={`/api/games/${games?.[index]?.id}/icon`}
+                                        fallback={
+                                            <PlanetBoldDuotone
+                                                color={"white"}
+                                                style={{
+                                                    height: "40%",
+                                                    width: "40%",
+                                                }}
+                                            />
+                                        }
                                         height="100%"
                                         width="100%"
                                         radius={9999}
@@ -215,6 +228,9 @@ export function Recent() {
                             height={"4rem"}
                             width={"10rem"}
                             radius={"9999px"}
+                            onClick={() =>
+                                navigate(`/games/${games?.[index]?.id}`)
+                            }
                         >
                             进入
                         </Button>

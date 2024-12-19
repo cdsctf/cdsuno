@@ -1,0 +1,33 @@
+.root {
+    height: 100%;
+    width: 100%;
+
+    padding: 0 15rem;
+    flex-direction: row-reverse;
+    overflow-y: auto;
+}
+
+.paper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: var(--bg-2nd-color);
+    box-shadow: var(--shadow-xl);
+    min-height: 100%;
+    padding: 4rem;
+}
+
+.panel {
+    position: sticky;
+    top: 0;
+    width: 33%;
+    justify-content: space-between;
+
+    padding: 2rem 0;
+    max-height: 100%;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}

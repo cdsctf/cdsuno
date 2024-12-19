@@ -4,13 +4,19 @@ import { Game } from "@/models/game";
 
 export interface GameCardProps {
     game: Game;
+    onClick?: () => void;
 }
 
 export function GameCard(props: GameCardProps) {
-    const { game } = props;
+    const { game, onClick } = props;
 
     return (
-        <Flex className={styles["root"]} gap={30} align={"flex-start"}>
+        <Flex
+            className={styles["root"]}
+            gap={30}
+            align={"flex-start"}
+            onClick={onClick}
+        >
             <Image
                 src={`/api/games/${game?.id}/poster`}
                 width={"25%"}
