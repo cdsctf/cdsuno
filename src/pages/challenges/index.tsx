@@ -70,7 +70,7 @@ export function Index() {
 
     function fetchChallengeStatus() {
         getStatus({
-            cids: challenges?.map((challenge) => challenge.id!) || [],
+            challenge_ids: challenges?.map((challenge) => challenge.id!) || [],
             user_id: authStore?.user?.id,
         }).then((res) => {
             setChallengeStatus(res.data);

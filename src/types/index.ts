@@ -1,4 +1,4 @@
-export interface Result<T> {
+export interface Response<T> {
     code: number;
     data?: T;
     msg?: string;

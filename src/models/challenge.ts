@@ -79,7 +79,7 @@ export interface ChallengeStatus {
 }
 
 export interface ChallengeStatusRequest {
-    cids: Array<number>;
+    challenge_ids: Array<number>;
     user_id?: number;
     team_id?: number;
     game_id?: number;
