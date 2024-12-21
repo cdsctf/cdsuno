@@ -1,10 +1,8 @@
 .root {
-    height: 100%;
     width: 100%;
 
     padding: 0 15rem;
     flex-direction: row-reverse;
-    overflow-y: auto;
 }
 
 .paper {
@@ -19,7 +17,8 @@
 
 .panel {
     position: sticky;
-    top: 0;
+    top: 64px;
+    left: 0;
     width: 33%;
     justify-content: space-between;
 

@@ -20,6 +20,8 @@
         "katex": "^0.16.15",
         "luxon": "^3.5.0",
         "nanoid": "^5.0.9",
+        "overlayscrollbars": "^2.10.1",
+        "overlayscrollbars-react": "^0.5.6",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-error-boundary": "^4.1.2",

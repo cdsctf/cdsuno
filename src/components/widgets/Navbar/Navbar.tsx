@@ -132,7 +132,7 @@ export function Navbar() {
                                             : "/api/configs/icon"
                                     }
                                     fallback={<PlanetBoldDuotone />}
-                                    radius={9999}
+                                    radius={"30%"}
                                     style={{
                                         backgroundColor: "transparent",
                                     }}

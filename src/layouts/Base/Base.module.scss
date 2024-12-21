@@ -1,6 +1,14 @@
 .root {
     min-height: 100vh;
-    width: 100%;
+    min-width: fit-content;
     display: flex;
     flex-direction: column;
+}
+
+.overlay-scrollbars {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 0;
+    overflow: auto;
 }

@@ -24,20 +24,22 @@ export function Index() {
     }, []);
 
     return (
-        <Flex className={styles["root"]} align={"flex-start"} gap={"5rem"}>
-            <Box className={styles["paper"]}>
-                <MarkdownRender src={game?.description} />
-            </Box>
-            <Stack className={styles["panel"]} align={"center"}>
-                <Image
-                    src={`/api/games/${id}/poster`}
-                    width={"100%"}
-                    style={{
-                        aspectRatio: "16 / 9",
-                    }}
-                />
-                <h1 className={styles["title"]}>{game?.title}</h1>
-            </Stack>
-        </Flex>
+        <>
+            <Flex className={styles["root"]} align={"flex-start"} gap={"5rem"}>
+                <Box className={styles["paper"]}>
+                    <MarkdownRender src={game?.description} />
+                </Box>
+                <Stack className={styles["panel"]} align={"center"}>
+                    <Image
+                        src={`/api/games/${id}/poster`}
+                        width={"100%"}
+                        style={{
+                            aspectRatio: "16 / 9",
+                        }}
+                    />
+                    <h1 className={styles["title"]}>{game?.title}</h1>
+                </Stack>
+            </Flex>
+        </>
     );
 }
