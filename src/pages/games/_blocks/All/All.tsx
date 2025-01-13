@@ -6,6 +6,7 @@ import { Game } from "@/models/game";
 import { get } from "@/api/game";
 import { GameCard } from "./GameCard";
 import { useNavigate } from "react-router";
+import { Empty } from "../Empty";
 
 export function All() {
     const navigate = useNavigate();
@@ -65,14 +66,23 @@ export function All() {
                     <Button type={"submit"}>搜索</Button>
                 </Flex>
             </form>
-            <Stack width={"100%"} align={"center"} style={{ flex: 1 }} gap={15}>
-                {games?.map((game) => (
-                    <GameCard
-                        key={game.id}
-                        game={game}
-                        onClick={() => navigate(`/games/${game?.id}`)}
-                    />
-                ))}
+            <Stack
+                width={"100%"}
+                align={"center"}
+                style={{ flex: 1, position: "relative" }}
+                gap={15}
+            >
+                {games?.length ? (
+                    games?.map((game) => (
+                        <GameCard
+                            key={game.id}
+                            game={game}
+                            onClick={() => navigate(`/games/${game?.id}`)}
+                        />
+                    ))
+                ) : (
+                    <Empty />
+                )}
             </Stack>
             <Stack width={"100%"} align={"center"}>
                 <Pagination

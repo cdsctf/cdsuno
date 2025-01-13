@@ -2,6 +2,7 @@ import PlanetBoldDuotone from "~icons/solar/planet-bold-duotone";
 import Book2BoldDuotone from "~icons/solar/book-2-bold-duotone";
 import FlagBoldDuotone from "~icons/solar/flag-bold-duotone";
 import UsersGroupTwoRoundedBoldDuotone from "~icons/solar/users-group-two-rounded-bold-duotone";
+import UserBoldDuotone from "~icons/solar/user-circle-bold-duotone";
 import SolarSettingsBoldDuotone from "~icons/solar/settings-bold-duotone";
 import SolarRoundArrowLeftBoldDuotone from "~icons/solar/round-arrow-left-bold-duotone";
 import StarFallMinimalistic2BoldDuotone from "~icons/solar/star-fall-minimalistic-2-bold-duotone";
@@ -23,10 +24,12 @@ import { Dropdown } from "./Dropdown";
 import React from "react";
 import { get } from "@/api/game";
 import { Game } from "@/models/game";
+import { useAuthStore } from "@/stores/auth";
 
 export function Navbar() {
     const location = useLocation();
     const { id } = useParams();
+    const authStore = useAuthStore();
 
     const links = {
         default: [
@@ -222,8 +225,18 @@ export function Navbar() {
                                 ref={dropdownMenuButtonRef}
                             >
                                 <Avatar
-                                    src={"https://e23.dev/Ella_Avatar.png"}
-                                    fallback={<>E</>}
+                                    src={
+                                        authStore?.user
+                                            ? `/api/users/${authStore?.user?.id}/avatar`
+                                            : ""
+                                    }
+                                    fallback={
+                                        <UserBoldDuotone
+                                            color="white"
+                                            width={"1.5rem"}
+                                            height={"1.5rem"}
+                                        />
+                                    }
                                     color={"transparent"}
                                 />
                             </Box>

@@ -19,6 +19,7 @@ import { useResizeDetector } from "react-resize-detector";
 import { LoadingOverlay } from "@/components/core/LoadingOverlay/LoadingOverlay";
 import { Box } from "@/components/core/Box";
 import { useSharedStore } from "@/stores/shared";
+import { Empty } from "./_blocks/Empty";
 
 export function Index() {
     const authStore = useAuthStore();
@@ -75,7 +76,6 @@ export function Index() {
         }).then((res) => {
             setChallengeStatus(res.data);
         });
-        setLoading(false);
     }
 
     useEffect(() => {
@@ -95,6 +95,7 @@ export function Index() {
         if (challenges?.length) {
             fetchChallengeStatus();
         }
+        setLoading(false);
     }, [challenges, sharedStore.refresh]);
 
     return (
@@ -124,6 +125,9 @@ export function Index() {
                                 onChange={setIdInput}
                                 variant={"solid"}
                                 width={"10%"}
+                                style={{
+                                    minWidth: "125px",
+                                }}
                             />
                             <TextInput
                                 icon={<MinimalisticMagniferBoldDuotone />}
@@ -168,20 +172,26 @@ export function Index() {
                             }}
                             ref={challengeGroupRef}
                         >
-                            {challenges?.map((challenge) => (
-                                <ChallengeCard
-                                    challenge={challenge}
-                                    status={challengeStatus?.[challenge.id!]}
-                                    key={challenge?.id}
-                                    onClick={() => {
-                                        setSelectedChallenge(challenge);
-                                        setSelectedChallengeStatus(
+                            {challenges?.length ? (
+                                challenges?.map((challenge) => (
+                                    <ChallengeCard
+                                        challenge={challenge}
+                                        status={
                                             challengeStatus?.[challenge.id!]
-                                        );
-                                        setModalOpen(true);
-                                    }}
-                                />
-                            ))}
+                                        }
+                                        key={challenge?.id}
+                                        onClick={() => {
+                                            setSelectedChallenge(challenge);
+                                            setSelectedChallengeStatus(
+                                                challengeStatus?.[challenge.id!]
+                                            );
+                                            setModalOpen(true);
+                                        }}
+                                    />
+                                ))
+                            ) : (
+                                <Empty />
+                            )}
                         </Grid>
                     </Box>
                     <Stack align={"center"} width={"100%"}>

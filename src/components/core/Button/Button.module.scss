@@ -29,6 +29,19 @@
         border-color: var(--button-bg-color);
     }
 
+    &[data-variant="tonal"] {
+        background-color: var(--bg-color);
+        border-color: var(--button-bg-color);
+    }
+
+    &[data-variant="subtle"] {
+        background-color: color-mix(
+            in srgb,
+            var(--button-bg-color) 30%,
+            #ffffff 10%
+        );
+    }
+
     &[data-variant="ghost"] {
         background-color: transparent;
         box-shadow: none;

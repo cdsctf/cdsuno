@@ -115,11 +115,13 @@ ReactDOM.render(
                 <Button color={color} variant="solid">
                     123
                 </Button>
-                {/* <Card color={color}/> */}
                 <Button color={color} variant="outlined">
                     123
                 </Button>
                 <Button color={"violet"} variant="outlined">
+                    123
+                </Button>
+                <Button color={"violet"} variant={"subtle"}>
                     123
                 </Button>
             </div>
