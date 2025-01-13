@@ -1,19 +1,22 @@
-$size: var(--avatar-size);
-$border-color: var(--avatar-border-color);
-
 .root {
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    border: 2px dashed $border-color;
-    width: $size;
-    height: $size;
+    border: 2px dashed var(--avatar-border-color);
+    width: var(--avatar-size);
+    height: var(--avatar-size);
 }
 
 .fallback {
     overflow: hidden;
-    color: $border-color;
+    color: var(--avatar-border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: 95%;
+    font-size: 1.5rem;
 }
 
 .img {

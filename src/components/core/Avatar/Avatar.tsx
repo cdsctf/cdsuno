@@ -1,5 +1,5 @@
 import styles from "./Avatar.module.scss";
-import UserCircleBoldDuotone from "~icons/solar/user-circle-bold-duotone";
+import UserCircleBoldDuotone from "~icons/solar/user-circle-bold";
 import useThemeColor from "@/hooks/useThemeColor";
 import { ComponentProps, useState } from "react";
 import { Box } from "../Box";
@@ -19,7 +19,9 @@ export function Avatar(props: AvatarProps) {
         alt = "",
         color = "primary",
         size = "3rem",
-        fallback = <UserCircleBoldDuotone />,
+        fallback = (
+            <UserCircleBoldDuotone color="light-dark(var(--color-primary), #fff)" />
+        ),
         style,
         ...rest
     } = props;
