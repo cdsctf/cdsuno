@@ -12,6 +12,7 @@
         "format": "prettier --write ."
     },
     "dependencies": {
+        "@ark-ui/react": "^4.8.1",
         "alova": "^3.2.7",
         "chroma-js": "^3.1.2",
         "clsx": "^2.1.1",
