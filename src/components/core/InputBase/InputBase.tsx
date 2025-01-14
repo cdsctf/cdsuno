@@ -40,8 +40,8 @@ export function InputBase(props: InputBaseProps) {
     const variables = {
         "--input-width": width,
         "--input-height": height,
-        "--input-bg-color": baseColor,
-        "--input-border-color": baseColor,
+        "--input-bg-color": invalid ? useThemeColor("error") : baseColor,
+        "--input-border-color": invalid ? useThemeColor("error") : baseColor,
     } as React.CSSProperties;
 
     return (

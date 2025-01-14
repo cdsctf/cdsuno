@@ -6,7 +6,7 @@ import { Game } from "@/models/game";
 import { get } from "@/api/game";
 import { GameCard } from "./GameCard";
 import { useNavigate } from "react-router";
-import { Empty } from "../Empty";
+import { Empty } from "../_blocks/Empty";
 
 export function All() {
     const navigate = useNavigate();

@@ -7,9 +7,9 @@ import React, { useEffect, useState } from "react";
 import { get, getScoreboard } from "@/api/game";
 import CupBold from "~icons/solar/cup-bold";
 import Planet2BoldDuotone from "~icons/solar/planet-2-bold-duotone";
-import PlanetBoldDuotone from "~icons/solar/planet-bold-duotone";
+import PlanetBold from "~icons/solar/planet-bold";
 import { useNavigate } from "react-router";
-import { Empty } from "../Empty";
+import { Empty } from "../_blocks/Empty";
 
 export function Recent() {
     const navigate = useNavigate();
@@ -164,7 +164,7 @@ export function Recent() {
                                 width="45vw"
                                 radius={25}
                                 style={{
-                                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.5)",
                                 }}
                             />
                             <Box className={styles["info-section"]}>
@@ -183,11 +183,11 @@ export function Recent() {
                                             <Image
                                                 src={`/api/games/${games?.[index]?.id}/icon`}
                                                 fallback={
-                                                    <PlanetBoldDuotone
+                                                    <PlanetBold
                                                         color={"white"}
                                                         style={{
-                                                            height: "40%",
-                                                            width: "40%",
+                                                            height: "65%",
+                                                            width: "65%",
                                                         }}
                                                     />
                                                 }

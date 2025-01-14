@@ -18,6 +18,11 @@ import { MarkdownRender } from "@/components/utils/MarkdownRender/MarkdownRender
 import globalRouter from "@/utils/globalRouter";
 import { Popover } from "@/components/core/Popover/Popover";
 import { Pagination } from "@/components/core/Pagination";
+import { Table } from "@/components/core/Table";
+import { TableHead } from "@/components/core/TableHead";
+import { TableRow } from "@/components/core/TableRow";
+import { TableCell } from "@/components/core/TableCell/TableCell";
+import { TableBody } from "@/components/core/TableBody/TableBody";
 
 export function Index() {
     const [color, setColor] = useState("#0d47a1");
@@ -122,6 +127,9 @@ ReactDOM.render(
                     123
                 </Button>
                 <Button color={"violet"} variant={"subtle"}>
+                    123
+                </Button>
+                <Button color={"violet"} variant={"ghost"}>
                     123
                 </Button>
             </div>
@@ -424,6 +432,39 @@ ReactDOM.render(
                 value={paginationPage}
                 onChange={setPaginationPage}
             />
+
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>公开</TableCell>
+                        <TableCell sortDirection={"asc"} onClick={() => {}}>
+                            ID
+                        </TableCell>
+                        <TableCell>标题</TableCell>
+                        <TableCell>描述</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow>
+                        <TableCell>是</TableCell>
+                        <TableCell>1</TableCell>
+                        <TableCell>1321312</TableCell>
+                        <TableCell>12321321312312321</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>否</TableCell>
+                        <TableCell>2</TableCell>
+                        <TableCell>123123</TableCell>
+                        <TableCell>12312312321312</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>是</TableCell>
+                        <TableCell>1</TableCell>
+                        <TableCell>123</TableCell>
+                        <TableCell>2132132132</TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
         </div>
     );
 }

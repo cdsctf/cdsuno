@@ -33,6 +33,7 @@ export function Dropdown() {
                                 ? `/api/users/${authStore?.user?.id}/avatar`
                                 : ""
                         }
+                        size={2.5}
                     />
                 }
                 onClick={() => {

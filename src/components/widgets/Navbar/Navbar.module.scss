@@ -65,10 +65,6 @@
     transition: all 200ms ease-in-out;
     cursor: pointer;
 
-    &:hover {
-        background: #1111113d;
-    }
-
     &:active {
         transform: translateY(2px);
     }
