@@ -206,19 +206,8 @@ export function Navbar() {
                                 </Tooltip>
                             </Link>
                         )}
-                        <Popover
-                            opened={dropdownMenuOpen}
-                            onChange={setDropdownMenuOpen}
-                            offsetY={20}
-                            content={<Dropdown />}
-                        >
-                            <Box
-                                className={styles["avatar"]}
-                                onClick={() => {
-                                    setDropdownMenuOpen((r) => !r);
-                                }}
-                                ref={dropdownMenuButtonRef}
-                            >
+                        <Popover content={<Dropdown />}>
+                            <Box className={styles["avatar"]}>
                                 <Avatar
                                     src={
                                         authStore?.user
