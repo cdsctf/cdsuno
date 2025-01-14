@@ -10,6 +10,7 @@ export interface InputBaseProps extends ComponentProps<"div"> {
     color?: string;
     variant?: "outlined" | "solid";
     invalid?: boolean;
+    disabled?: boolean;
     label?: string;
     helperText?: string;
     errorText?: string;
@@ -24,6 +25,7 @@ export function InputBase(props: InputBaseProps) {
         height = "fit-content",
         color = "primary",
         invalid = false,
+        disabled = false,
         variant = "outlined",
         label = "",
         helperText = "",
@@ -68,6 +70,7 @@ export function InputBase(props: InputBaseProps) {
             <Box
                 className={clsx(styles["wrapper"], className)}
                 data-variant={variant}
+                data-disabled={disabled}
                 ref={ref}
             >
                 {children}

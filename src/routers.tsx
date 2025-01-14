@@ -73,6 +73,15 @@ export const router = createBrowserRouter([
                                     return { Component: Index };
                                 },
                             },
+                            {
+                                path: "challenges",
+                                lazy: async () => {
+                                    let { Index } = await import(
+                                        "@/pages/settings/challenges"
+                                    );
+                                    return { Component: Index };
+                                },
+                            },
                         ],
                     },
                 ],

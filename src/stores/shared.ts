@@ -1,3 +1,4 @@
+import { Config } from "@/models/config";
 import { create } from "zustand";
 
 interface SharedState {
@@ -6,6 +7,9 @@ interface SharedState {
 
     portal?: HTMLDivElement;
     setPortal: (el: HTMLDivElement) => void;
+
+    config?: Config;
+    setConfig: (config?: Config) => void;
 }
 
 export const useSharedStore = create<SharedState>()((set, get) => ({
@@ -14,4 +18,7 @@ export const useSharedStore = create<SharedState>()((set, get) => ({
 
     portal: undefined,
     setPortal: (el) => set({ portal: el }),
+
+    config: undefined,
+    setConfig: (config) => set({ config }),
 }));

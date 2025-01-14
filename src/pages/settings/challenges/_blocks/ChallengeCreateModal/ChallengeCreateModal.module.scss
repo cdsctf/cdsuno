@@ -1,0 +1,12 @@
+.root {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    min-height: 15rem;
+    min-width: 30rem;
+    padding: 20px;
+}
+
+.divider {
+    width: 100%;
+    border-bottom: 1px solid light-dark(var(--color-primary), #ffffff);
+}

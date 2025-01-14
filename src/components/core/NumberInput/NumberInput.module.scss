@@ -1,0 +1,46 @@
+.root {
+    gap: 8px;
+
+    &[data-variant="solid"] {
+        background-color: var(--input-bg-color);
+
+        .icon {
+            color: #ffffff;
+        }
+
+        .input {
+            color: #ffffff;
+            caret-color: #ffffff;
+
+            &::placeholder {
+                color: #ffffff7d;
+            }
+        }
+    }
+
+    &[data-variant="outlined"] {
+        .icon {
+            color: light-dark(var(--input-border-color), #ffffff);
+        }
+    }
+
+    &:focus,
+    &:hover {
+        filter: brightness(1.2);
+    }
+}
+
+.input {
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    caret-color: var(--input-border-color);
+    font-size: 16px;
+    line-height: 1.5;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
