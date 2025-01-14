@@ -1,5 +1,5 @@
 import styles from "./Avatar.module.scss";
-import UserCircleBoldDuotone from "~icons/solar/user-circle-bold";
+import UserCircleBold from "~icons/solar/user-circle-bold";
 import useThemeColor from "@/hooks/useThemeColor";
 import { ComponentProps, useState } from "react";
 import { Box } from "../Box";
@@ -9,7 +9,7 @@ export interface AvatarProps extends ComponentProps<"img"> {
     alt?: string;
     color?: string;
     fallback?: React.ReactNode;
-    size?: string;
+    size?: string | number;
     style?: React.CSSProperties;
 }
 
@@ -20,7 +20,7 @@ export function Avatar(props: AvatarProps) {
         color = "primary",
         size = "3rem",
         fallback = (
-            <UserCircleBoldDuotone color="light-dark(var(--color-primary), #fff)" />
+            <UserCircleBold color="light-dark(var(--color-primary), #fff)" />
         ),
         style,
         ...rest
@@ -30,7 +30,7 @@ export function Avatar(props: AvatarProps) {
     const [imgErr, setImgErr] = useState<boolean>(false);
 
     const variables = {
-        "--avatar-size": size,
+        "--avatar-size": typeof size === "number" ? `${size}rem` : size,
         "--avatar-border-color": baseColor,
     } as React.CSSProperties;
 

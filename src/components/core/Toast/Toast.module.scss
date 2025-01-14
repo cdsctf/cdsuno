@@ -4,25 +4,19 @@
     gap: 15px;
     background-color: color-mix(
         in srgb,
-        var(--toast-color) 20%,
-        transparent 80%
+        var(--toast-color) 90%,
+        var(--bg-color) 10%
     );
-    border: 2.75px dotted
-        color-mix(in srgb, var(--toast-color) 50%, transparent 50%);
     border-radius: 16px;
     padding: 10px 20px;
     min-width: 20vw;
     position: relative;
-    backdrop-filter: blur(10px);
 }
 
 .icon {
     width: 2rem;
     height: 2rem;
-    color: light-dark(
-        color-mix(in srgb, var(--toast-color) 80%, black 20%),
-        #ffffff
-    );
+    color: #ffffff;
     border-radius: 50%;
 }
 
@@ -36,17 +30,11 @@
 .title {
     font-size: 1rem;
     line-height: 1.5rem;
-    color: light-dark(
-        color-mix(in srgb, var(--toast-color) 80%, black 20%),
-        #ffffff
-    );
+    color: #ffffff;
 }
 
 .description {
     font-size: 0.75rem;
     line-height: 1.125rem;
-    color: light-dark(
-        color-mix(in srgb, var(--toast-color) 80%, black 20%),
-        #ffffff
-    );
+    color: #ffffff;
 }

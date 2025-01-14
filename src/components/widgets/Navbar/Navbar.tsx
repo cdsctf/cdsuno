@@ -1,12 +1,12 @@
-import PlanetBoldDuotone from "~icons/solar/planet-bold-duotone";
-import Book2BoldDuotone from "~icons/solar/book-2-bold-duotone";
-import FlagBoldDuotone from "~icons/solar/flag-bold-duotone";
-import UsersGroupTwoRoundedBoldDuotone from "~icons/solar/users-group-two-rounded-bold-duotone";
-import UserBoldDuotone from "~icons/solar/user-circle-bold-duotone";
-import SolarSettingsBoldDuotone from "~icons/solar/settings-bold-duotone";
-import SolarRoundArrowLeftBoldDuotone from "~icons/solar/round-arrow-left-bold-duotone";
-import StarFallMinimalistic2BoldDuotone from "~icons/solar/star-fall-minimalistic-2-bold-duotone";
-import CupStarBoldDuotone from "~icons/solar/cup-star-bold-duotone";
+import PlanetBold from "~icons/solar/planet-bold";
+import Book2Bold from "~icons/solar/book-2-bold";
+import FlagBold from "~icons/solar/flag-bold";
+import UsersGroupTwoRoundedBold from "~icons/solar/users-group-two-rounded-bold";
+import UserCircleBold from "~icons/solar/user-circle-bold";
+import SolarSettingsBold from "~icons/solar/settings-bold";
+import SolarRoundArrowLeftBold from "~icons/solar/round-arrow-left-bold";
+import StarFallMinimalistic2Bold from "~icons/solar/star-fall-minimalistic-2-bold";
+import CupStarBold from "~icons/solar/cup-star-bold";
 import styles from "./Navbar.module.scss";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useParams } from "react-router";
@@ -34,56 +34,56 @@ export function Navbar() {
     const links = {
         default: [
             {
-                icon: <Book2BoldDuotone />,
+                icon: <Book2Bold />,
                 label: "题库",
                 href: "/challenges",
             },
             {
-                icon: <FlagBoldDuotone />,
+                icon: <FlagBold />,
                 label: "比赛",
                 href: "/games",
             },
             {
-                icon: <UsersGroupTwoRoundedBoldDuotone />,
+                icon: <UsersGroupTwoRoundedBold />,
                 label: "团队",
                 href: "/teams",
             },
         ],
         setting: [
             {
-                icon: <SolarSettingsBoldDuotone />,
+                icon: <SolarSettingsBold />,
                 label: "全局",
                 href: "/settings/system",
             },
             {
-                icon: <Book2BoldDuotone />,
+                icon: <Book2Bold />,
                 label: "题库",
                 href: "/settings/challenges",
             },
             {
-                icon: <FlagBoldDuotone />,
+                icon: <FlagBold />,
                 label: "比赛",
                 href: "/settings/games",
             },
             {
-                icon: <UsersGroupTwoRoundedBoldDuotone />,
+                icon: <UsersGroupTwoRoundedBold />,
                 label: "团队",
                 href: "/settings/users",
             },
             {
-                icon: <UsersGroupTwoRoundedBoldDuotone />,
+                icon: <UsersGroupTwoRoundedBold />,
                 label: "用户",
                 href: "/settings/users",
             },
         ],
         game: [
             {
-                icon: <StarFallMinimalistic2BoldDuotone />,
+                icon: <StarFallMinimalistic2Bold />,
                 label: "题目",
                 href: `/games/${id}/challenges`,
             },
             {
-                icon: <CupStarBoldDuotone />,
+                icon: <CupStarBold />,
                 label: "积分榜",
                 href: `/games/${id}/scoreboard`,
             },
@@ -134,7 +134,7 @@ export function Navbar() {
                                             ? `/api/games/${id}/icon`
                                             : "/api/configs/icon"
                                     }
-                                    fallback={<PlanetBoldDuotone />}
+                                    fallback={<PlanetBold />}
                                     radius={"30%"}
                                     style={{
                                         backgroundColor: "transparent",
@@ -162,7 +162,7 @@ export function Navbar() {
                                 variant={"ghost"}
                                 color={"white"}
                                 shadow={"none"}
-                                radius={"9999px"}
+                                radius={9999}
                             >
                                 <span
                                     style={{
@@ -173,15 +173,6 @@ export function Navbar() {
                                 </span>
                             </Button>
                         </Link>
-                        {index !== links[mode].length - 1 && (
-                            <span
-                                style={{
-                                    userSelect: "none",
-                                }}
-                            >
-                                /
-                            </span>
-                        )}
                     </React.Fragment>
                 ))}
             </Flex>
@@ -195,7 +186,7 @@ export function Navbar() {
                                         variant={"ghost"}
                                         color={"white"}
                                     >
-                                        <SolarSettingsBoldDuotone />
+                                        <SolarSettingsBold />
                                     </IconButton>
                                 </Tooltip>
                             </Link>
@@ -206,7 +197,7 @@ export function Navbar() {
                                         variant={"ghost"}
                                         color={"white"}
                                     >
-                                        <SolarRoundArrowLeftBoldDuotone />
+                                        <SolarRoundArrowLeftBold />
                                     </IconButton>
                                 </Tooltip>
                             </Link>
@@ -230,14 +221,9 @@ export function Navbar() {
                                             ? `/api/users/${authStore?.user?.id}/avatar`
                                             : ""
                                     }
-                                    fallback={
-                                        <UserBoldDuotone
-                                            color="white"
-                                            width={"1.5rem"}
-                                            height={"1.5rem"}
-                                        />
-                                    }
-                                    color={"transparent"}
+                                    fallback={<UserCircleBold color="white" />}
+                                    color={"#ffffff"}
+                                    size={2}
                                 />
                             </Box>
                         </Popover>

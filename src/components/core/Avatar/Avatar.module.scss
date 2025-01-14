@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    border: 2px dashed var(--avatar-border-color);
+    border: 2px solid var(--avatar-border-color);
     width: var(--avatar-size);
     height: var(--avatar-size);
 }
@@ -14,13 +14,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 95%;
-    height: 95%;
+    width: 90%;
+    height: 90%;
     font-size: 1.5rem;
 }
 
 .img {
-    width: 95%;
-    height: 95%;
+    width: 90%;
+    height: 90%;
     border-radius: 50%;
 }

@@ -11,7 +11,7 @@ import { CSSTransition } from "react-transition-group";
 import { Box, BoxProps } from "../Box";
 import clsx from "clsx";
 import { createPortal } from "react-dom";
-import { useTooltipStore } from "@/stores/tooltip";
+import { useSharedStore } from "@/stores/shared";
 
 export interface TooltipProps extends Omit<BoxProps, "content"> {
     content?: React.ReactNode;
@@ -33,7 +33,7 @@ export function Tooltip(props: TooltipProps) {
         ...rest
     } = props;
 
-    const tooltipStore = useTooltipStore();
+    const sharedStore = useSharedStore();
     const triggerRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const isHovered = useHover(triggerRef);
@@ -45,13 +45,13 @@ export function Tooltip(props: TooltipProps) {
             !isHovered ||
             !triggerRef.current ||
             !contentRef.current ||
-            !tooltipStore?.portal
+            !sharedStore?.portal
         )
             return;
 
         const triggerRect = triggerRef.current.getBoundingClientRect();
         const contentRect = contentRef.current.getBoundingClientRect();
-        const portalRect = tooltipStore.portal.getBoundingClientRect();
+        const portalRect = sharedStore.portal.getBoundingClientRect();
 
         const newStyle: CSSProperties = {};
 
@@ -100,14 +100,14 @@ export function Tooltip(props: TooltipProps) {
         newStyle.left = Math.max(0, Number(newStyle.left) || 0);
 
         setTooltipStyle(newStyle);
-    }, [isHovered, position, offset, tooltipStore?.portal]);
+    }, [isHovered, position, offset, sharedStore?.portal]);
 
     return (
         <>
             {cloneElement<any>(children, {
                 ref: triggerRef,
             })}
-            {tooltipStore?.portal &&
+            {sharedStore?.portal &&
                 createPortal(
                     <CSSTransition
                         in={isHovered}
@@ -148,7 +148,7 @@ export function Tooltip(props: TooltipProps) {
                             )}
                         </Box>
                     </CSSTransition>,
-                    tooltipStore?.portal
+                    sharedStore?.portal
                 )}
         </>
     );

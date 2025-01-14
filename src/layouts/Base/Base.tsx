@@ -1,6 +1,5 @@
 import { ErrorFallback } from "@/components/utils/ErrorFallback/ErrorFallback";
 import { Toaster } from "@/components/widgets/Toaster";
-import { useTooltipStore } from "@/stores/tooltip";
 import globalRouter from "@/utils/globalRouter";
 import { useEffect, useRef } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -10,6 +9,7 @@ import { Box } from "@/components/core";
 import { useThemeStore } from "@/stores/theme";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
+import { useSharedStore } from "@/stores/shared";
 
 export function Base() {
     const themeStore = useThemeStore();
@@ -17,12 +17,12 @@ export function Base() {
     const navigate = useNavigate();
     globalRouter.navigate = navigate;
 
-    const tooltipStore = useTooltipStore();
+    const sharedStore = useSharedStore();
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (ref.current) {
-            tooltipStore.setPortal(ref.current);
+            sharedStore.setPortal(ref.current);
         }
     }, [ref.current]);
 
