@@ -59,7 +59,7 @@ export function Index() {
         setChallenges([]);
         get({
             id: id ? id : undefined,
-            is_practicable: true,
+            is_public: true,
             page: page,
             size: size,
             title: search,
@@ -97,6 +97,10 @@ export function Index() {
         }
         setLoading(false);
     }, [challenges, sharedStore.refresh]);
+
+    useEffect(() => {
+        document.title = `题库 - ${sharedStore?.config?.site?.title}`;
+    }, [sharedStore?.config?.site?.title]);
 
     return (
         <>

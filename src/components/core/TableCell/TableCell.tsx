@@ -9,14 +9,20 @@ import { Box } from "../Box";
 
 export interface TableCellProps
     extends Omit<ComponentProps<"th" | "td">, "align"> {
-    align?: "left" | "right" | "center" | "justify" | "start" | "end";
+    justify?:
+        | "flex-start"
+        | "flex-end"
+        | "center"
+        | "space-between"
+        | "space-around"
+        | "space-evenly";
     sortDirection?: "asc" | "desc";
     onClick?: () => void;
 }
 
 export function TableCell(props: TableCellProps) {
     const {
-        align,
+        justify,
         sortDirection,
         style,
         children,
@@ -29,30 +35,24 @@ export function TableCell(props: TableCellProps) {
 
     const Element = tablelvl2Context === "head" ? "th" : "td";
 
-    const variables = {
-        textAlign: align,
-    } as CSSProperties;
-
     return (
         <Element
             className={clsx(styles["root"], className)}
             style={{
-                ...variables,
                 ...style,
             }}
             data-clickable={onClick !== undefined}
+            onClick={onClick}
             {...rest}
         >
-            <Flex gap={5} className={styles["content"]} align={"center"}>
+            <Flex width={"100%"} gap={5} justify={justify} align={"center"}>
                 <Box>{children}</Box>
-                <Box>
-                    {sortDirection !== undefined && (
-                        <>
-                            {sortDirection === "asc" && <ArrowDownLinear />}
-                            {sortDirection === "desc" && <ArrowUpLinear />}
-                        </>
-                    )}
-                </Box>
+                {sortDirection !== undefined && (
+                    <Box>
+                        {sortDirection === "asc" && <ArrowDownLinear />}
+                        {sortDirection === "desc" && <ArrowUpLinear />}
+                    </Box>
+                )}
             </Flex>
         </Element>
     );

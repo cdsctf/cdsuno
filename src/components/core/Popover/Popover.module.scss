@@ -1,15 +1,8 @@
 .root {
-    position: relative;
-    width: fit-content;
-}
-
-.trigger {
-    display: inline-block;
-}
-
-.content {
     position: absolute;
-    z-index: 1;
+    z-index: 9999;
+    inset: 0px auto auto 0px;
+    margin: 0;
 
     &.enter {
         opacity: 0;

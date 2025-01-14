@@ -10,12 +10,14 @@ import { login } from "@/api/user";
 import { useAuthStore } from "@/stores/auth";
 import { useNavigate } from "react-router";
 import { useToastStore } from "@/stores/toast";
+import { useSharedStore } from "@/stores/shared";
 
 export function Index() {
     const authStore = useAuthStore();
     const categoryStore = useCategoryStore();
     const toastStore = useToastStore();
     const navigate = useNavigate();
+    const sharedStore = useSharedStore();
 
     const categories = categoryStore.categories;
 
@@ -55,6 +57,10 @@ export function Index() {
 
         return () => clearInterval(intervalId);
     }, [categories]);
+
+    useEffect(() => {
+        document.title = `登录 - ${sharedStore?.config?.site?.title}`;
+    }, [sharedStore?.config?.site?.title]);
 
     const variables = {
         "--category-bg-color": bgColors[index],

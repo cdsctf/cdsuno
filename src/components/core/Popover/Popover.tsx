@@ -1,36 +1,26 @@
-import { cloneElement, useEffect, useMemo, useRef, useState } from "react";
+import { cloneElement, useEffect, useRef, useState } from "react";
 import styles from "./Popover.module.scss";
 import { CSSTransition } from "react-transition-group";
 import { Box } from "../Box";
+import clsx from "clsx";
+import { useSharedStore } from "@/stores/shared";
+import { createPortal } from "react-dom";
 
 export interface PopoverProps {
-    /**
-     * The content of the popover.
-     */
     children: React.ReactElement;
-    /**
-     * The offset of the popover.
-     */
     offsetY?: number;
-    /**
-     * The offset of the popover.
-     */
     offsetX?: number;
-    /**
-     * The trigger of the popover.
-     */
     content: React.ReactElement;
-    /**
-     * Whether the popover is opened or not.
-     */
     opened: boolean;
-    /**
-     * The callback function when the popover is opened.
-     */
     onChange: (opened: boolean) => void;
+    className?: string;
+    style?: React.CSSProperties;
+    portal?: HTMLDivElement | null;
 }
 
 export function Popover(props: PopoverProps) {
+    const sharedStore = useSharedStore();
+
     const {
         children,
         offsetY = 10,
@@ -38,47 +28,56 @@ export function Popover(props: PopoverProps) {
         content,
         opened,
         onChange,
+        className,
+        style,
+        portal = sharedStore?.portal,
     } = props;
 
     const contentRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLElement>(null);
 
-    const [position, setPosition] = useState<"top" | "bottom">("bottom");
+    const [popoverStyle, setPopoverStyle] = useState<React.CSSProperties>({});
 
     useEffect(() => {
-        if (triggerRef.current && opened) {
-            const triggerRect = triggerRef.current.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
+        if (
+            !sharedStore?.portal ||
+            !triggerRef.current ||
+            !contentRef.current ||
+            !opened
+        )
+            return;
 
-            const spaceBelow = viewportHeight - triggerRect.bottom - offsetY;
-            const spaceAbove = triggerRect.top - offsetY;
+        const portalRect = portal?.getBoundingClientRect()!;
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+        const contentRect = contentRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const viewportWidth = window.innerWidth;
 
-            if (
-                spaceBelow < (contentRef?.current?.offsetHeight || 0) &&
-                spaceAbove > (contentRef?.current?.offsetHeight || 0)
-            ) {
-                setPosition("top");
-            } else {
-                setPosition("bottom");
-            }
+        let newStyle: React.CSSProperties = {};
+
+        // Calculate vertical position
+        if (
+            viewportHeight - triggerRect.bottom >=
+            contentRect.height + offsetY
+        ) {
+            newStyle.top = `${triggerRect.bottom - portalRect.top + offsetY}px`;
+        } else if (triggerRect.top >= contentRect.height + offsetY) {
+            newStyle.top = `${triggerRect.top - portalRect.top - contentRect.height - offsetY}px`;
+        } else {
+            newStyle.top = `${Math.max(triggerRect.top - portalRect.top, 0)}px`;
         }
-    }, [opened, offsetY]);
 
-    const positionStyle = useMemo(() => {
-        switch (position) {
-            case "top":
-                return {
-                    bottom: `calc(100% + ${offsetY}px)`,
-                    right: `${offsetX}px`,
-                };
-            case "bottom":
-            default:
-                return {
-                    top: `calc(100% + ${offsetY}px)`,
-                    right: `${offsetX}px`,
-                };
+        // Calculate horizontal position
+        if (viewportWidth - triggerRect.left >= contentRect.width + offsetX) {
+            newStyle.left = `${triggerRect.left - portalRect.left + offsetX}px`;
+        } else if (triggerRect.right >= contentRect.width + offsetX) {
+            newStyle.left = `${triggerRect.right - portalRect.left - contentRect.width - offsetX}px`;
+        } else {
+            newStyle.left = `${Math.max(triggerRect.left - portalRect.left, 0)}px`;
         }
-    }, [position, offsetY, offsetX]);
+
+        setPopoverStyle(newStyle);
+    }, [opened, offsetY, offsetX]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -98,28 +97,32 @@ export function Popover(props: PopoverProps) {
     }, []);
 
     return (
-        <Box className={styles["root"]}>
+        <>
             {cloneElement<any>(children, { ref: triggerRef })}
-            <CSSTransition
-                in={opened}
-                timeout={300}
-                unmountOnExit
-                nodeRef={contentRef}
-                classNames={{
-                    enter: styles["enter"],
-                    enterActive: styles["enter-active"],
-                    exit: styles["exit"],
-                    exitActive: styles["exit-active"],
-                }}
-            >
-                <Box
-                    className={styles["content"]}
-                    style={positionStyle}
-                    ref={contentRef}
-                >
-                    {content}
-                </Box>
-            </CSSTransition>
-        </Box>
+            {sharedStore?.portal &&
+                createPortal(
+                    <CSSTransition
+                        in={opened}
+                        timeout={300}
+                        unmountOnExit
+                        nodeRef={contentRef}
+                        classNames={{
+                            enter: styles["enter"],
+                            enterActive: styles["enter-active"],
+                            exit: styles["exit"],
+                            exitActive: styles["exit-active"],
+                        }}
+                    >
+                        <Box
+                            className={clsx(styles["root"], className)}
+                            style={{ ...style, ...popoverStyle }}
+                            ref={contentRef}
+                        >
+                            {content}
+                        </Box>
+                    </CSSTransition>,
+                    sharedStore?.portal
+                )}
+        </>
     );
 }

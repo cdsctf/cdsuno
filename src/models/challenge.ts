@@ -9,7 +9,7 @@ export interface Challenge {
     description?: string;
     category?: number;
     has_attachment?: boolean;
-    is_practicable?: boolean;
+    is_public?: boolean;
     is_dynamic?: boolean;
     duration?: number;
     image_name?: string;
@@ -19,6 +19,7 @@ export interface Challenge {
     envs?: Array<Env>;
     flags?: Array<Flag>;
     hints?: Array<Hint>;
+    updated_at?: string;
 }
 
 export interface ChallengeGetRequest {
@@ -26,14 +27,13 @@ export interface ChallengeGetRequest {
     title?: string;
     description?: string;
     category?: number;
-    is_practicable?: boolean;
+    is_public?: boolean;
     is_dynamic?: boolean;
     is_detailed?: boolean;
     difficulty?: number;
     page?: number;
     size?: number;
-    sort_key?: string;
-    sort_order?: string;
+    sorts?: string;
 }
 
 export interface ChallengeUpdateRequest {
@@ -42,7 +42,7 @@ export interface ChallengeUpdateRequest {
     description?: string;
     category?: number;
     attachment_url?: string;
-    is_practicable?: boolean;
+    is_public?: boolean;
     is_dynamic?: boolean;
     duration?: number;
     image_name?: string;
@@ -57,7 +57,7 @@ export interface ChallengeCreateRequest {
     title?: string;
     description?: string;
     category?: number;
-    is_practicable?: boolean;
+    is_public?: boolean;
     is_dynamic?: boolean;
     duration?: number;
     image_name?: string;

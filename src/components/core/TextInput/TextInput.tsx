@@ -15,6 +15,7 @@ export interface TextInputProps extends Omit<InputBaseProps, "onChange"> {
     label?: string;
     icon?: React.ReactNode;
     placeholder?: string;
+    disabled?: boolean;
     onChange?: (value: string) => void;
     style?: React.CSSProperties;
 }
@@ -26,6 +27,7 @@ export function TextInput(props: TextInputProps) {
         clearable = false,
         password = false,
         invalid = false,
+        disabled = false,
         variant = "outlined",
         icon,
         value = "",
@@ -60,6 +62,7 @@ export function TextInput(props: TextInputProps) {
             helperText={helperText}
             errorText={errorText}
             label={label}
+            disabled={disabled}
             className={clsx(styles["root"], className)}
             style={style}
             {...rest}
@@ -71,6 +74,7 @@ export function TextInput(props: TextInputProps) {
                 type={password && !isPasswordVisible ? "password" : "text"}
                 placeholder={placeholder}
                 onChange={(e) => onChange?.(e.target.value)}
+                disabled={disabled}
             />
             {clearable && (
                 <Box className={styles["clear-button"]} onClick={handleClear}>

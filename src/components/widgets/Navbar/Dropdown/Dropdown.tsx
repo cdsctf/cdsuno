@@ -100,7 +100,10 @@ export function Dropdown() {
                     variant={"solid"}
                     color={"error"}
                     icon={<LogoutLineDuotone />}
-                    onClick={() => authStore?.clear()}
+                    onClick={() => {
+                        authStore?.clear();
+                        navigate("/login");
+                    }}
                 >
                     退出登录
                 </Button>

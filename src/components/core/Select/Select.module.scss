@@ -1,0 +1,11 @@
+.dropdown {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    min-width: 200px;
+    max-height: 15rem;
+
+    padding: 15px;
+    box-shadow: var(--shadow-lg);
+
+    overflow: auto;
+}

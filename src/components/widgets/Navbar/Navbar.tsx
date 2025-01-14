@@ -25,11 +25,13 @@ import React from "react";
 import { get } from "@/api/game";
 import { Game } from "@/models/game";
 import { useAuthStore } from "@/stores/auth";
+import { useSharedStore } from "@/stores/shared";
 
 export function Navbar() {
     const location = useLocation();
     const { id } = useParams();
     const authStore = useAuthStore();
+    const sharedStore = useSharedStore();
 
     const links = {
         default: [
@@ -148,7 +150,9 @@ export function Navbar() {
                         radius={9999}
                     >
                         <h1 className={styles["title"]}>
-                            {mode === "game" ? game?.title : "CdsCTF"}
+                            {mode === "game"
+                                ? game?.title
+                                : sharedStore?.config?.site?.title}
                         </h1>
                     </Button>
                 </Link>

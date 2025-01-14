@@ -23,8 +23,14 @@ import { TableHead } from "@/components/core/TableHead";
 import { TableRow } from "@/components/core/TableRow";
 import { TableCell } from "@/components/core/TableCell/TableCell";
 import { TableBody } from "@/components/core/TableBody/TableBody";
+import { useSharedStore } from "@/stores/shared";
+import { Box, Flex, Select } from "@/components/core";
+import { useCategoryStore } from "@/stores/category";
 
 export function Index() {
+    const sharedStore = useSharedStore();
+    const categoryStore = useCategoryStore();
+
     const [color, setColor] = useState("#0d47a1");
     const handleChange = (e: any) => {
         setColor(e.target.value);
@@ -43,6 +49,8 @@ export function Index() {
     const [value, setValue] = useState<string>("");
     const [open, setOpen] = useState(false);
     const [popoverOpen, setPopoverOpen] = useState(false);
+
+    const [category, setCategory] = useState<number>(1);
 
     const [loading, setLoading] = useState(false);
 
@@ -100,6 +108,10 @@ ReactDOM.render(
 
 - list
 `;
+
+    useEffect(() => {
+        document.title = sharedStore?.config?.site?.title || "";
+    }, [sharedStore?.config?.site?.title]);
 
     return (
         <div
@@ -465,6 +477,28 @@ ReactDOM.render(
                     </TableRow>
                 </TableBody>
             </Table>
+
+            <Select
+                label={"分类"}
+                helperText={"请为题目选择合适的分类"}
+                value={String(category)}
+                onChange={(value) => setCategory(Number(value))}
+                options={categoryStore?.categories.map((category) => ({
+                    label: (
+                        <Flex
+                            align={"center"}
+                            gap={10}
+                            style={{
+                                color: category?.color,
+                            }}
+                        >
+                            <Box>{category?.icon}</Box>
+                            {category.name}
+                        </Flex>
+                    ),
+                    value: String(category.id),
+                }))}
+            />
         </div>
     );
 }
