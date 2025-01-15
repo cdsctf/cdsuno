@@ -62,6 +62,8 @@ export function Index() {
 
     const [checked, setChecked] = useState<boolean>(false);
 
+    const [inputInvalid, setInputInvalid] = useState(false);
+
     const markdownText = `
 # welcome Heading1
 ## welcome Heading2
@@ -141,14 +143,17 @@ ReactDOM.render(
                 <Button color={"violet"} variant={"subtle"}>
                     123
                 </Button>
-                <Button color={"violet"} variant={"ghost"}>
+                <Button
+                    color={"violet"}
+                    variant={"ghost"}
+                    onClick={() => setInputInvalid(true)}
+                >
                     123
                 </Button>
             </div>
             <TextInput
                 clearable
-                // passwd
-                invalid
+                invalid={inputInvalid}
                 value={value}
                 onChange={(value) => setValue(value)}
                 label={"用户名"}

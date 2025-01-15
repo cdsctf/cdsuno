@@ -10,7 +10,7 @@ export * from "./Flex";
 export * from "./Grid";
 export * from "./IconButton";
 export * from "./Image";
-export * from "./InputBase";
+export * from "./_blocks/InputBase";
 export * from "./LoadingOverlay";
 export * from "./NumberInput";
 export * from "./Pagination";

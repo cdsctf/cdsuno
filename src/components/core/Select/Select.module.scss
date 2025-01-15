@@ -1,11 +1,28 @@
 .dropdown {
     background-color: var(--bg-color);
-    border-radius: 12px;
     min-width: 200px;
     max-height: 15rem;
+    border-radius: 12px;
 
     padding: 15px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
 
-    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.option {
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 15px;
+    display: block;
+
+    &:hover {
+        background-color: light-dark(#0000000d, #ffffff0d);
+    }
+}
+
+.value {
+    width: 100%;
 }

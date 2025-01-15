@@ -1,5 +1,6 @@
 import {
     Challenge,
+    ChallengeCreateRequest,
     ChallengeGetRequest,
     ChallengeStatus,
     ChallengeStatusRequest,
@@ -32,4 +33,10 @@ export async function update(request: ChallengeUpdateRequest) {
             cacheFor: 0,
         }
     );
+}
+
+export async function create(request: ChallengeCreateRequest) {
+    return alovaInstance.Post<Response<Challenge>>("/challenges", request, {
+        cacheFor: 0,
+    });
 }

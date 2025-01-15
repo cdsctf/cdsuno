@@ -2,7 +2,8 @@ import React, { ComponentProps } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import styles from "./InputBase.module.scss";
 import clsx from "clsx";
-import { Box } from "../Box";
+import { Field as ArkField } from "@ark-ui/react";
+import { Box } from "../../Box";
 
 export interface InputBaseProps extends ComponentProps<"div"> {
     width?: string;
@@ -38,32 +39,40 @@ export function InputBase(props: InputBaseProps) {
     } = props;
 
     const baseColor = useThemeColor(color);
+    const errorColor = useThemeColor("error");
 
     const variables = {
         "--input-width": width,
         "--input-height": height,
-        "--input-bg-color": invalid ? useThemeColor("error") : baseColor,
-        "--input-border-color": invalid ? useThemeColor("error") : baseColor,
+        "--input-bg-color": invalid ? errorColor : baseColor,
+        "--input-border-color": invalid ? errorColor : baseColor,
     } as React.CSSProperties;
 
     return (
-        <Box
+        <ArkField.Root
             className={styles["root"]}
             style={{
                 ...variables,
                 ...style,
             }}
+            invalid={invalid}
+            disabled={disabled}
             {...rest}
         >
             {(label || helperText) && (
                 <Box className={styles["info"]}>
-                    {label && (
-                        <label className={styles["label"]}>{label}</label>
-                    )}
-                    {helperText && (
-                        <label className={styles["helper-text"]}>
+                    <ArkField.Label className={styles["label"]}>
+                        {label}
+                    </ArkField.Label>
+                    {!invalid && (
+                        <ArkField.HelperText className={styles["helper-text"]}>
                             {helperText}
-                        </label>
+                        </ArkField.HelperText>
+                    )}
+                    {invalid && (
+                        <ArkField.ErrorText className={styles["error-text"]}>
+                            {errorText}
+                        </ArkField.ErrorText>
                     )}
                 </Box>
             )}
@@ -75,9 +84,6 @@ export function InputBase(props: InputBaseProps) {
             >
                 {children}
             </Box>
-            {invalid && errorText && (
-                <label className={styles["error-text"]}>{errorText}</label>
-            )}
-        </Box>
+        </ArkField.Root>
     );
 }
