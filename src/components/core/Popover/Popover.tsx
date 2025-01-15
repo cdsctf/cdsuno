@@ -1,11 +1,7 @@
-import { cloneElement, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./Popover.module.scss";
-import { CSSTransition } from "react-transition-group";
-import { Box } from "../Box";
 import clsx from "clsx";
-import { useSharedStore } from "@/stores/shared";
 import { Popover as ArkPopover, Portal } from "@ark-ui/react";
-import { createPortal } from "react-dom";
 
 export interface PopoverProps {
     children: React.ReactElement;
@@ -20,6 +16,10 @@ export function Popover(props: PopoverProps) {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const portal = useRef<HTMLElement | null>(
+        document.getElementById("popover-portal")!
+    );
+
     return (
         <ArkPopover.Root
             positioning={{
@@ -32,13 +32,13 @@ export function Popover(props: PopoverProps) {
             open={isOpen}
             onOpenChange={(v) => setIsOpen(v.open)}
         >
-            <ArkPopover.Trigger onClick={() => setIsOpen(true)}>
+            <ArkPopover.Trigger onClick={() => setIsOpen(true)} asChild>
                 {children}
             </ArkPopover.Trigger>
-            <Portal>
-                <ArkPopover.Positioner>
+            <Portal container={portal}>
+                <ArkPopover.Positioner className={styles["positioner"]}>
                     <ArkPopover.Content
-                        className={clsx(styles["root"], className)}
+                        className={clsx(styles["content"], className)}
                     >
                         {content}
                     </ArkPopover.Content>

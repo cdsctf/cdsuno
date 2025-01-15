@@ -5,6 +5,10 @@
     flex-direction: column;
 }
 
+.portal {
+    z-index: 9999;
+}
+
 .overlay-scrollbars {
     position: relative;
     width: 100vw;
