@@ -1,12 +1,13 @@
 import { Toast } from "@/components/core/Toast";
 import { useToastStore } from "@/stores/toast";
 import styles from "./Toaster.module.scss";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import InfoCircleBold from "~icons/solar/info-circle-bold";
 import CheckCircleBold from "~icons/solar/check-circle-bold";
 import DangerCircleBold from "~icons/solar/danger-circle-bold";
 import CloseCircleBold from "~icons/solar/close-circle-bold";
+import { Portal } from "@ark-ui/react";
 
 export function Toaster() {
     const toastStore = useToastStore();
@@ -39,39 +40,43 @@ export function Toaster() {
     }, [toastStore?.toasts]);
 
     return (
-        <div className={styles["root"]}>
-            <TransitionGroup className={styles["toast-wrapper"]}>
-                {toastStore.toasts.map((toast) => {
-                    if (!nodeRefs.current.has(toast.id)) {
-                        nodeRefs.current.set(toast.id, React.createRef());
-                    }
-                    const nodeRef = nodeRefs.current.get(toast.id);
+        <Portal>
+            <div className={styles["root"]}>
+                <TransitionGroup className={styles["toast-wrapper"]}>
+                    {toastStore.toasts.map((toast) => {
+                        if (!nodeRefs.current.has(toast.id)) {
+                            nodeRefs.current.set(toast.id, React.createRef());
+                        }
+                        const nodeRef = nodeRefs.current.get(toast.id);
 
-                    return (
-                        <CSSTransition
-                            nodeRef={nodeRef}
-                            key={toast.id}
-                            timeout={300}
-                            classNames={{
-                                enter: styles["enter"],
-                                enterActive: styles["enter-active"],
-                                exit: styles["exit"],
-                                exitActive: styles["exit-active"],
-                            }}
-                            unmountOnExit
-                        >
-                            <div ref={nodeRef} className={styles["toast"]}>
-                                <Toast
-                                    title={toast?.title}
-                                    description={toast?.description}
-                                    icon={toast?.icon || getIcon(toast?.type)}
-                                    color={toast?.type}
-                                />
-                            </div>
-                        </CSSTransition>
-                    );
-                })}
-            </TransitionGroup>
-        </div>
+                        return (
+                            <CSSTransition
+                                nodeRef={nodeRef}
+                                key={toast.id}
+                                timeout={300}
+                                classNames={{
+                                    enter: styles["enter"],
+                                    enterActive: styles["enter-active"],
+                                    exit: styles["exit"],
+                                    exitActive: styles["exit-active"],
+                                }}
+                                unmountOnExit
+                            >
+                                <div ref={nodeRef} className={styles["toast"]}>
+                                    <Toast
+                                        title={toast?.title}
+                                        description={toast?.description}
+                                        icon={
+                                            toast?.icon || getIcon(toast?.type)
+                                        }
+                                        color={toast?.type}
+                                    />
+                                </div>
+                            </CSSTransition>
+                        );
+                    })}
+                </TransitionGroup>
+            </div>
+        </Portal>
     );
 }

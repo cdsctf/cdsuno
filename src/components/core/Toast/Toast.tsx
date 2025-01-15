@@ -1,8 +1,6 @@
 import React, { CSSProperties } from "react";
 import InfoCircleBold from "~icons/solar/info-circle-bold";
 import styles from "./Toast.module.scss";
-import useThemeColor from "@/hooks/useThemeColor";
-import chroma from "chroma-js";
 import { ComponentProps } from "react";
 import { Box } from "../Box";
 
@@ -27,8 +25,6 @@ export function Toast(props: ToastProps) {
     } = props;
 
     const variables = {
-        // "--toast-color": chroma(baseColor).alpha(0.5).hex(),
-        // "--toast-text-color": chroma(baseColor).darken(1.75).hex(),
         "--toast-color": `var(--color-${color})`,
     } as CSSProperties;
 

@@ -1,9 +1,6 @@
-import { CSSTransition } from "react-transition-group";
 import styles from "./Dialog.module.scss";
-import React, { ComponentProps, useRef } from "react";
-import { Box } from "../Box";
-import { createPortal } from "react-dom";
-import { useSharedStore } from "@/stores/shared";
+import React, { ComponentProps } from "react";
+import { Dialog as ArkDialog, Portal } from "@ark-ui/react";
 
 export interface DialogProps extends ComponentProps<"dialog"> {
     open: boolean;
@@ -14,48 +11,16 @@ export interface DialogProps extends ComponentProps<"dialog"> {
 export function Dialog(props: DialogProps) {
     const { children, open, onClose } = props;
 
-    const sharedStore = useSharedStore();
-
-    const nodeRef = useRef(null);
-
-    const handleOverlayClick = (
-        e: React.MouseEvent<HTMLDivElement, MouseEvent>
-    ) => {
-        if (e.target === e.currentTarget) {
-            onClose();
-        }
-    };
-
     return (
-        <>
-            {sharedStore?.portal &&
-                createPortal(
-                    <CSSTransition
-                        in={open}
-                        timeout={150}
-                        unmountOnExit
-                        classNames={{
-                            enter: styles["enter"],
-                            enterActive: styles["enter-active"],
-                            exit: styles["exit"],
-                            exitActive: styles["exit-active"],
-                        }}
-                        nodeRef={nodeRef}
-                    >
-                        <Box
-                            className={styles["root"]}
-                            ref={nodeRef}
-                            onClick={handleOverlayClick}
-                        >
-                            <Box className={styles["positioner"]}>
-                                <Box className={styles["content"]}>
-                                    {children}
-                                </Box>
-                            </Box>
-                        </Box>
-                    </CSSTransition>,
-                    sharedStore?.portal
-                )}
-        </>
+        <ArkDialog.Root open={open} onOpenChange={(details) => onClose()}>
+            <Portal>
+                <ArkDialog.Backdrop className={styles["backdrop"]} />
+                <ArkDialog.Positioner className={styles["positioner"]}>
+                    <ArkDialog.Content className={styles["content"]}>
+                        {children}
+                    </ArkDialog.Content>
+                </ArkDialog.Positioner>
+            </Portal>
+        </ArkDialog.Root>
     );
 }

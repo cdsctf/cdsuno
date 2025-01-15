@@ -229,8 +229,6 @@ ReactDOM.render(
             </Button>
 
             <Popover
-                opened={popoverOpen}
-                onChange={setPopoverOpen}
                 content={
                     <div
                         style={{
@@ -243,9 +241,7 @@ ReactDOM.render(
                     </div>
                 }
             >
-                <Button onClick={() => setPopoverOpen((r) => !r)}>
-                    Popover Controlled
-                </Button>
+                <Button>Popover Controlled</Button>
             </Popover>
 
             <Dialog
@@ -382,7 +378,7 @@ ReactDOM.render(
                 style={{
                     display: "flex",
                     flexDirection: "column",
-                    margin: "64px",
+                    margin: "128px",
                     gap: "20px",
                     width: "fit-content",
                 }}
@@ -393,7 +389,7 @@ ReactDOM.render(
                         width: "fit-content",
                     }}
                 >
-                    <Tooltip content={"sweet~"} position={"top"} offset={8}>
+                    <Tooltip content={"sweet~"} placement={"top"}>
                         <Button variant="solid">top</Button>
                     </Tooltip>
                 </div>
@@ -404,10 +400,10 @@ ReactDOM.render(
                         width: "fit-content",
                     }}
                 >
-                    <Tooltip content={"sweet~"} position={"left"} offset={8}>
+                    <Tooltip content={"sweet~"} placement={"left"}>
                         <Button variant="solid">left</Button>
                     </Tooltip>
-                    <Tooltip content={"sweet~"} position={"right"} offset={8}>
+                    <Tooltip content={"sweet~"} placement={"right"}>
                         <Button variant="solid">right</Button>
                     </Tooltip>
                 </div>
@@ -417,7 +413,7 @@ ReactDOM.render(
                         width: "fit-content",
                     }}
                 >
-                    <Tooltip content={"sweet~"} position={"bottom"} offset={8}>
+                    <Tooltip content={"sweet~"} placement={"bottom"}>
                         <Button variant="solid">bottom</Button>
                     </Tooltip>
                 </div>

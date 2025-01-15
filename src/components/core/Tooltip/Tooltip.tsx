@@ -1,23 +1,13 @@
-import useHover from "@/hooks/useHover";
 import styles from "./Tooltip.module.scss";
-import {
-    cloneElement,
-    CSSProperties,
-    useRef,
-    useState,
-    useEffect,
-} from "react";
-import { CSSTransition } from "react-transition-group";
-import { Box, BoxProps } from "../Box";
-import clsx from "clsx";
-import { createPortal } from "react-dom";
-import { useSharedStore } from "@/stores/shared";
-import { Tooltip as ArkTooltip, useTooltip } from "@ark-ui/react";
+import { Tooltip as ArkTooltip, Portal } from "@ark-ui/react";
 
-export interface TooltipProps extends Omit<BoxProps, "content"> {
+export interface TooltipProps {
     content?: React.ReactNode;
-    position?: "top" | "right" | "bottom" | "left";
-    offset?: number;
+    placement?: "top" | "right" | "bottom" | "left";
+    offset?: {
+        mainAxis?: number;
+        crossAxis?: number;
+    };
     hasArrow?: boolean;
     children: React.ReactElement;
 }
@@ -25,23 +15,37 @@ export interface TooltipProps extends Omit<BoxProps, "content"> {
 export function Tooltip(props: TooltipProps) {
     const {
         content,
-        position = "top",
-        offset = 8,
+        placement = "top",
+        offset = {
+            mainAxis: 0,
+            crossAxis: 0,
+        },
         hasArrow = false,
         children,
-        className,
-        style,
-        ...rest
     } = props;
 
     return (
-        <ArkTooltip.Root>
+        <ArkTooltip.Root
+            closeDelay={100}
+            openDelay={100}
+            positioning={{
+                placement: placement,
+                offset: offset,
+            }}
+        >
             <ArkTooltip.Trigger asChild>{children}</ArkTooltip.Trigger>
-            <ArkTooltip.Positioner>
-                <ArkTooltip.Content className={styles["root"]}>
-                    {content}
-                </ArkTooltip.Content>
-            </ArkTooltip.Positioner>
+            <Portal>
+                <ArkTooltip.Positioner className={styles["positioner"]}>
+                    <ArkTooltip.Content className={styles["content"]}>
+                        {hasArrow && (
+                            <ArkTooltip.Arrow>
+                                <ArkTooltip.ArrowTip />
+                            </ArkTooltip.Arrow>
+                        )}
+                        {content}
+                    </ArkTooltip.Content>
+                </ArkTooltip.Positioner>
+            </Portal>
         </ArkTooltip.Root>
     );
 }
