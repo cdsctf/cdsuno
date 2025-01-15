@@ -1,3 +1,5 @@
-.separator {
-    user-select: none;
+.root {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }

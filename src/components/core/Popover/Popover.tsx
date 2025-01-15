@@ -35,11 +35,15 @@ export function Popover(props: PopoverProps) {
             <ArkPopover.Trigger onClick={() => setIsOpen(true)}>
                 {children}
             </ArkPopover.Trigger>
-            <ArkPopover.Positioner>
-                <ArkPopover.Content className={clsx(styles["root"], className)}>
-                    {content}
-                </ArkPopover.Content>
-            </ArkPopover.Positioner>
+            <Portal>
+                <ArkPopover.Positioner>
+                    <ArkPopover.Content
+                        className={clsx(styles["root"], className)}
+                    >
+                        {content}
+                    </ArkPopover.Content>
+                </ArkPopover.Positioner>
+            </Portal>
         </ArkPopover.Root>
     );
 }

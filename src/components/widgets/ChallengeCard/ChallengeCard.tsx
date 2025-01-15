@@ -168,7 +168,7 @@ export function ChallengeCard(props: ChallengeCard) {
                             )}
                         </>
                     }
-                    position={"bottom"}
+                    placement={"bottom"}
                 >
                     <Box>{status?.solved_times} 次解决</Box>
                 </Tooltip>

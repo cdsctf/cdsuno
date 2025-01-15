@@ -185,7 +185,7 @@ export function Navbar() {
                     <Box className={styles["features"]}>
                         {mode === "default" ? (
                             <Link to={"/settings"} draggable={false}>
-                                <Tooltip content={"管理"} position={"bottom"}>
+                                <Tooltip content={"管理"} placement={"bottom"}>
                                     <IconButton
                                         variant={"ghost"}
                                         color={"white"}
@@ -196,7 +196,7 @@ export function Navbar() {
                             </Link>
                         ) : (
                             <Link to={"/"} draggable={false}>
-                                <Tooltip content={"返回"} position={"bottom"}>
+                                <Tooltip content={"返回"} placement={"bottom"}>
                                     <IconButton
                                         variant={"ghost"}
                                         color={"white"}

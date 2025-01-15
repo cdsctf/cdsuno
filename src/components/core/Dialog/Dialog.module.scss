@@ -1,33 +1,58 @@
-@use "@/styles/mixins";
-
-.root {
+.backdrop {
     z-index: 3;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     backdrop-filter: blur(2.5px);
     background-color: #1111115d;
 
-    &.enter {
+    &:is([open], [data-open], [data-state="open"]) {
+        animation: fade-in 0.2s ease-out;
+    }
+
+    &:is([closed], [data-closed], [data-state="closed"]) {
+        animation: fade-out 0.2s ease-out;
+    }
+}
+
+.positioner {
+    z-index: 4;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    &:is([open], [data-open], [data-state="open"]) {
+        animation: fade-in 0.2s ease-out;
+    }
+
+    &:is([closed], [data-closed], [data-state="closed"]) {
+        animation: fade-out 0.2s ease-out;
+    }
+}
+
+@keyframes fade-in {
+    from {
         opacity: 0;
     }
-
-    &.enter-active {
-        opacity: 1;
-        transition: opacity 150ms ease-in;
-    }
-
-    &.exit {
+    to {
         opacity: 1;
     }
+}
 
-    &.exit-active {
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
         opacity: 0;
-        transition: opacity 150ms ease-out;
     }
 }
