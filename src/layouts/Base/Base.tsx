@@ -9,22 +9,12 @@ import { Box } from "@/components/core";
 import { useThemeStore } from "@/stores/theme";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
-import { useSharedStore } from "@/stores/shared";
 
 export function Base() {
     const themeStore = useThemeStore();
 
     const navigate = useNavigate();
     globalRouter.navigate = navigate;
-
-    const sharedStore = useSharedStore();
-    const ref = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (ref.current) {
-            sharedStore.setPortal(ref.current);
-        }
-    }, [ref.current]);
 
     return (
         <>
@@ -39,7 +29,7 @@ export function Base() {
                     }}
                     defer
                 >
-                    <Box className={styles["root"]} ref={ref}>
+                    <Box className={styles["root"]}>
                         <Outlet />
                     </Box>
                     <Toaster />

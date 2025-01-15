@@ -1,5 +1,4 @@
 .backdrop {
-    z-index: 3;
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -18,7 +17,6 @@
 }
 
 .positioner {
-    z-index: 4;
     position: fixed;
     width: 100vw;
     height: 100vh;

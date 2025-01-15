@@ -1,4 +1,6 @@
-.root {
+.content {
+    z-index: inherit;
+
     &:is([open], [data-open], [data-state="open"]) {
         animation: fade-in 0.2s ease-out;
     }

@@ -1,5 +1,6 @@
 import styles from "./Tooltip.module.scss";
 import { Tooltip as ArkTooltip, Portal } from "@ark-ui/react";
+import { useRef } from "react";
 
 export interface TooltipProps {
     content?: React.ReactNode;
@@ -24,6 +25,10 @@ export function Tooltip(props: TooltipProps) {
         children,
     } = props;
 
+    const portal = useRef<HTMLElement | null>(
+        document.getElementById("tooltip-portal")!
+    );
+
     return (
         <ArkTooltip.Root
             closeDelay={100}
@@ -34,7 +39,7 @@ export function Tooltip(props: TooltipProps) {
             }}
         >
             <ArkTooltip.Trigger asChild>{children}</ArkTooltip.Trigger>
-            <Portal>
+            <Portal container={portal}>
                 <ArkTooltip.Positioner className={styles["positioner"]}>
                     <ArkTooltip.Content className={styles["content"]}>
                         {hasArrow && (

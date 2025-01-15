@@ -1,5 +1,5 @@
 import styles from "./Dialog.module.scss";
-import React, { ComponentProps } from "react";
+import React, { ComponentProps, useRef } from "react";
 import { Dialog as ArkDialog, Portal } from "@ark-ui/react";
 
 export interface DialogProps extends ComponentProps<"dialog"> {
@@ -10,10 +10,13 @@ export interface DialogProps extends ComponentProps<"dialog"> {
 
 export function Dialog(props: DialogProps) {
     const { children, open, onClose } = props;
+    const portal = useRef<HTMLElement | null>(
+        document.getElementById("dialog-portal")!
+    );
 
     return (
         <ArkDialog.Root open={open} onOpenChange={(details) => onClose()}>
-            <Portal>
+            <Portal container={portal}>
                 <ArkDialog.Backdrop className={styles["backdrop"]} />
                 <ArkDialog.Positioner className={styles["positioner"]}>
                     <ArkDialog.Content className={styles["content"]}>

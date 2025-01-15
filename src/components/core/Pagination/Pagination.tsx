@@ -23,7 +23,7 @@ export function Pagination(props: PaginationProps) {
             onPageChange={(details) => onChange(details.page)}
             className={styles["root"]}
         >
-            <ArkPagination.PrevTrigger>
+            <ArkPagination.PrevTrigger asChild>
                 <IconButton
                     onClick={() => onChange(value > 1 ? value - 1 : 1)}
                     disabled={value === 1}
@@ -35,7 +35,7 @@ export function Pagination(props: PaginationProps) {
                 {(pagination) =>
                     pagination.pages.map((page, index) =>
                         page.type === "page" ? (
-                            <ArkPagination.Item key={index} {...page}>
+                            <ArkPagination.Item key={index} {...page} asChild>
                                 <IconButton
                                     variant={
                                         value === page.value
@@ -54,39 +54,11 @@ export function Pagination(props: PaginationProps) {
                     )
                 }
             </ArkPagination.Context>
-            <ArkPagination.NextTrigger>
+            <ArkPagination.NextTrigger asChild>
                 <IconButton disabled={value === total}>
                     <AltArrowRightBold />
                 </IconButton>
             </ArkPagination.NextTrigger>
         </ArkPagination.Root>
-        // <Flex className={styles["root"]} gap={"5px"} align={"center"}>
-        //     <IconButton
-        //         onClick={() => onChange(value > 1 ? value - 1 : 1)}
-        //         disabled={value === 1}
-        //     >
-        //         <AltArrowLeftBold />
-        //     </IconButton>
-        //     {pages.map((page) => (
-        //         <React.Fragment key={page}>
-        //             {page === -1 ? (
-        //                 <Box className={styles["separator"]}>...</Box>
-        //             ) : (
-        // <IconButton
-        //     variant={value === page ? "solid" : "outlined"}
-        //     onClick={() => onChange(page)}
-        // >
-        //     {page}
-        // </IconButton>
-        //             )}
-        //         </React.Fragment>
-        //     ))}
-        // <IconButton
-        //     onClick={() => onChange(value < total ? value + 1 : total)}
-        //     disabled={value === total}
-        // >
-        //     <AltArrowRightBold />
-        // </IconButton>
-        // </Flex>
     );
 }
