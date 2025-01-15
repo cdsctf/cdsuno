@@ -27,11 +27,14 @@ import TrashBinTrashBold from "~icons/solar/trash-bin-trash-bold";
 import styles from "./index.module.scss";
 import { useCategoryStore } from "@/stores/category";
 import { ChallengeCreateModal } from "./_blocks/ChallengeCreateModal";
+import { useNavigate } from "react-router";
+import { ChallengeDeleteModal } from "./_blocks/ChallengeDeleteModal";
 
 export function Index() {
     const toastStore = useToastStore();
     const sharedStore = useSharedStore();
     const categoryStore = useCategoryStore();
+    const navigate = useNavigate();
 
     const [challenges, setChallenges] = useState<Array<Challenge>>();
     const [total, setTotal] = useState<number>(0);
@@ -42,6 +45,9 @@ export function Index() {
 
     const [challengeCreateModalOpen, setChallengeCreateModalOpen] =
         useState<boolean>(false);
+    const [challengeDeleteModalOpen, setChallengeDeleteModalOpen] =
+        useState<boolean>(false);
+    const [selectedChallenge, setSelectedChallenge] = useState<Challenge>();
 
     function fetchChallenges() {
         get({
@@ -153,7 +159,7 @@ export function Index() {
                                 </TableCell>
                                 <TableCell
                                     style={{
-                                        width: "100px",
+                                        width: "150px",
                                     }}
                                 >
                                     分类
@@ -261,12 +267,27 @@ export function Index() {
                                     </TableCell>
                                     <TableCell>
                                         <Flex gap={10}>
-                                            <IconButton variant={"ghost"}>
+                                            <IconButton
+                                                variant={"ghost"}
+                                                onClick={() =>
+                                                    navigate(
+                                                        `/settings/challenges/${challenge?.id}`
+                                                    )
+                                                }
+                                            >
                                                 <GalleryEditBold />
                                             </IconButton>
                                             <IconButton
                                                 variant={"ghost"}
                                                 color={"error"}
+                                                onClick={() => {
+                                                    setSelectedChallenge(
+                                                        challenge
+                                                    );
+                                                    setChallengeDeleteModalOpen(
+                                                        true
+                                                    );
+                                                }}
                                             >
                                                 <TrashBinTrashBold />
                                             </IconButton>
@@ -305,6 +326,12 @@ export function Index() {
                 onClose={() => setChallengeCreateModalOpen(false)}
             >
                 <ChallengeCreateModal />
+            </Dialog>
+            <Dialog
+                open={challengeDeleteModalOpen}
+                onClose={() => setChallengeDeleteModalOpen(false)}
+            >
+                <ChallengeDeleteModal challenge={selectedChallenge} />
             </Dialog>
         </>
     );

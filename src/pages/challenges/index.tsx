@@ -34,11 +34,6 @@ export function Index() {
     const [size, setSize] = useState(20);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
-    const pageTotal = useMemo(() => {
-        return Math.ceil(total / size) === Infinity
-            ? 1
-            : Math.ceil(total / size);
-    }, [total, size]);
     const [id, setId] = useState<number>();
     const [idInput, setIdInput] = useState("");
     const [searchInput, setSearchInput] = useState("");
@@ -200,7 +195,8 @@ export function Index() {
                     </Box>
                     <Stack align={"center"} width={"100%"}>
                         <Pagination
-                            total={pageTotal}
+                            total={total}
+                            size={size}
                             value={page}
                             onChange={(page) => setPage(page)}
                         />

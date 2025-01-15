@@ -3,9 +3,10 @@ import CloseCircleBold from "~icons/solar/close-circle-bold";
 import EyeBold from "~icons/solar/eye-bold";
 import EyeCloseBold from "~icons/solar/eye-closed-bold";
 import styles from "./TextInput.module.scss";
-import { InputBase, InputBaseProps } from "../InputBase";
+import { InputBase, InputBaseProps } from "../_blocks/InputBase";
 import clsx from "clsx";
 import { Box } from "../Box";
+import { Field as ArkField } from "@ark-ui/react";
 
 export interface TextInputProps extends Omit<InputBaseProps, "onChange"> {
     clearable?: boolean;
@@ -68,7 +69,7 @@ export function TextInput(props: TextInputProps) {
             {...rest}
         >
             {icon && <div className={styles["icon"]}>{icon}</div>}
-            <input
+            <ArkField.Input
                 className={styles["input"]}
                 value={value}
                 type={password && !isPasswordVisible ? "password" : "text"}

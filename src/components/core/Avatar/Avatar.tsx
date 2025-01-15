@@ -3,6 +3,7 @@ import UserCircleBold from "~icons/solar/user-circle-bold";
 import useThemeColor from "@/hooks/useThemeColor";
 import { ComponentProps, useState } from "react";
 import { Box } from "../Box";
+import { Avatar as ArkAvatar } from "@ark-ui/react";
 
 export interface AvatarProps extends ComponentProps<"img"> {
     src: string;
@@ -27,15 +28,13 @@ export function Avatar(props: AvatarProps) {
     } = props;
 
     const baseColor = useThemeColor(color);
-    const [imgErr, setImgErr] = useState<boolean>(false);
-
     const variables = {
         "--avatar-size": typeof size === "number" ? `${size}rem` : size,
         "--avatar-border-color": baseColor,
     } as React.CSSProperties;
 
     return (
-        <Box
+        <ArkAvatar.Root
             className={styles["root"]}
             style={{
                 ...variables,
@@ -43,19 +42,15 @@ export function Avatar(props: AvatarProps) {
             }}
             {...rest}
         >
-            {!imgErr && src ? (
-                <img
-                    src={src}
-                    alt={alt}
-                    onError={() => setImgErr(true)}
-                    draggable={false}
-                    className={styles["img"]}
-                />
-            ) : (
-                <Box className={styles["fallback"]}>
-                    {fallback || alt.charAt(0).toUpperCase()}
-                </Box>
-            )}
-        </Box>
+            <ArkAvatar.Fallback className={styles["fallback"]}>
+                {fallback || alt.charAt(0).toUpperCase()}
+            </ArkAvatar.Fallback>
+            <ArkAvatar.Image
+                src={src}
+                alt={alt}
+                draggable={false}
+                className={styles["img"]}
+            />
+        </ArkAvatar.Root>
     );
 }

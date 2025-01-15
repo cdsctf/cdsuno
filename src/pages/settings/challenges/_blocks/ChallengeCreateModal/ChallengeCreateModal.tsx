@@ -12,12 +12,43 @@ import ArrowRightLinear from "~icons/solar/arrow-right-linear";
 import styles from "./ChallengeCreateModal.module.scss";
 import { useState } from "react";
 import { useCategoryStore } from "@/stores/category";
+import { create } from "@/api/challenge";
+import { useToastStore } from "@/stores/toast";
+import { useNavigate } from "react-router";
 
 export function ChallengeCreateModal() {
     const categoryStore = useCategoryStore();
+    const toastStore = useToastStore();
+    const navigate = useNavigate();
 
     const [title, setTitle] = useState<string>("");
+    const [titleInvalid, setTitleInvalid] = useState<boolean>(false);
+
     const [category, setCategory] = useState<number>(1);
+
+    function handleChallengeCreate() {
+        if (title.length < 1) {
+            setTitleInvalid(true);
+            return;
+        }
+
+        create({
+            title: title,
+            category: category,
+            is_public: false,
+            is_dynamic: false,
+            description: "",
+        }).then((res) => {
+            toastStore.add({
+                type: "success",
+                title: "成功",
+                description: `新建题目 ${res.data?.title} 成功`,
+            });
+            setTitle("");
+            setCategory(1);
+            navigate(`/settings/challenges/${res.data?.id}`);
+        });
+    }
 
     return (
         <Stack className={styles["root"]}>
@@ -40,6 +71,10 @@ export function ChallengeCreateModal() {
                     <TextInput
                         label={"标题"}
                         helperText={"请输入合适长度的题目标题"}
+                        value={title}
+                        onChange={setTitle}
+                        invalid={titleInvalid}
+                        errorText={"标题不能为空"}
                     />
                     <Select
                         label={"分类"}
@@ -62,6 +97,14 @@ export function ChallengeCreateModal() {
                             value: String(category.id),
                         }))}
                     />
+                    <IconButton
+                        style={{
+                            marginTop: "1.75rem",
+                        }}
+                        onClick={handleChallengeCreate}
+                    >
+                        <ArrowRightLinear />
+                    </IconButton>
                 </Flex>
                 <Box className={styles["divider"]} />
                 <Flex

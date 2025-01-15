@@ -1,10 +1,12 @@
-import React, { ComponentProps, useRef, useState } from "react";
-import { InputBase, InputBaseProps } from "../InputBase";
+import React, { useState } from "react";
+import { InputBase, InputBaseProps } from "../_blocks/InputBase";
 import clsx from "clsx";
 import styles from "./Select.module.scss";
 import { Popover } from "../Popover";
 import { Box } from "../Box";
 import { Stack } from "../Stack";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { useThemeStore } from "@/stores/theme";
 
 export interface SelectProps extends Omit<InputBaseProps, "onChange"> {
     value: string;
@@ -32,7 +34,7 @@ export function Select(props: SelectProps) {
     } = props;
 
     const [open, setOpen] = useState<boolean>(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const themeStore = useThemeStore();
 
     return (
         <InputBase
@@ -49,11 +51,23 @@ export function Select(props: SelectProps) {
         >
             {icon && <div className={styles["icon"]}>{icon}</div>}
             <Popover
+                controlled
+                open={open}
+                onOpenChange={setOpen}
                 style={{
                     width: "100%",
                 }}
                 content={
-                    <Stack className={styles["dropdown"]} ref={dropdownRef}>
+                    <OverlayScrollbarsComponent
+                        defer
+                        options={{
+                            scrollbars: {
+                                theme: `os-theme-${themeStore.darkMode ? "light" : "dark"}`,
+                                autoHide: "scroll",
+                            },
+                        }}
+                        className={styles["dropdown"]}
+                    >
                         {options.map((option) => (
                             <Box
                                 className={styles["option"]}
@@ -66,14 +80,10 @@ export function Select(props: SelectProps) {
                                 {option.label}
                             </Box>
                         ))}
-                    </Stack>
+                    </OverlayScrollbarsComponent>
                 }
-                opened={open}
-                onChange={setOpen}
-                offsetX={Number(dropdownRef.current?.clientWidth) * -1}
-                offsetY={20}
             >
-                <Box onClick={() => setOpen(true)}>
+                <Box onClick={() => setOpen(true)} className={styles["value"]}>
                     {options.find((option) => option.value === value)?.label}
                 </Box>
             </Popover>

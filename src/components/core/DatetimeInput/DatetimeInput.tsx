@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { InputBase, InputBaseProps } from "../InputBase";
+import { InputBase, InputBaseProps } from "../_blocks/InputBase";
 import styles from "./DatetimeInput.module.scss";
 import React, { useState, useRef, useEffect } from "react";
 import { Box } from "../Box";

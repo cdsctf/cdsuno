@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { InputBase, InputBaseProps } from "../InputBase";
+import { InputBase, InputBaseProps } from "../_blocks/InputBase";
 import styles from "./NumberInput.module.scss";
 
 export interface NumberInputProps extends Omit<InputBaseProps, "onChange"> {

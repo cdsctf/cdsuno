@@ -2,6 +2,7 @@ import { ComponentProps, CSSProperties } from "react";
 import styles from "./IconButton.module.scss";
 import useThemeColor from "@/hooks/useThemeColor";
 import { Box } from "../Box";
+import clsx from "clsx";
 
 export interface IconButtonProps extends ComponentProps<"button"> {
     size?: string | number;
@@ -23,6 +24,8 @@ export function IconButton(props: IconButtonProps) {
         loading = false,
         disabled = false,
         children,
+        style,
+        className,
         ref,
         ...rest
     } = props;
@@ -39,8 +42,11 @@ export function IconButton(props: IconButtonProps) {
     return (
         <button
             ref={ref}
-            className={styles["root"]}
-            style={variables}
+            className={clsx(styles["root"], className)}
+            style={{
+                ...variables,
+                ...style,
+            }}
             data-disabled={disabled}
             data-loading={loading}
             data-variant={variant}
