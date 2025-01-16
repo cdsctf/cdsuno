@@ -45,25 +45,9 @@ export function Popover(props: PopoverProps) {
         }
     }
 
-    const portal = useRef<HTMLElement | null>(null);
-
-    useEffect(() => {
-        const ctn = document.createElement("div");
-        ctn.id = `popover-portal-${nanoid()}`;
-        document.getElementById("portals")!.appendChild(ctn);
-        portal.current = ctn;
-
-        return () => {
-            if (portal.current) {
-                document.getElementById("portals")!.removeChild(portal.current);
-                portal.current = null;
-            }
-        };
-    }, []);
-
-    if (!portal.current) {
-        return;
-    }
+    const portal = useRef<HTMLElement | null>(
+        document.getElementById("portals")
+    );
 
     return (
         <ArkPopover.Root
@@ -81,6 +65,7 @@ export function Popover(props: PopoverProps) {
             onOpenChange={(v) => {
                 handleOpenChange(v.open);
             }}
+            lazyMount
         >
             <ArkPopover.Trigger asChild>{children}</ArkPopover.Trigger>
             <Portal container={portal}>
