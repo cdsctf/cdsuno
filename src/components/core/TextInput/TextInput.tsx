@@ -29,6 +29,7 @@ export function TextInput(props: TextInputProps) {
         password = false,
         invalid = false,
         disabled = false,
+        shadow = "md",
         variant = "outlined",
         icon,
         value = "",
@@ -58,6 +59,7 @@ export function TextInput(props: TextInputProps) {
         <InputBase
             width={width}
             color={color}
+            shadow={shadow}
             variant={variant}
             invalid={invalid}
             helperText={helperText}
