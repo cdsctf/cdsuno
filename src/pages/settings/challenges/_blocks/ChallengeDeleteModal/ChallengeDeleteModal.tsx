@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Stack } from "@/components/core";
+import { Box, Button, Dialog, Flex, Stack } from "@/components/core";
 import { Challenge } from "@/models/challenge";
 import TrashBinTrashBold from "~icons/solar/trash-bin-trash-bold";
 import styles from "./ChallengeDeleteModal.module.scss";
 import { deleteChallenge } from "@/api/challenge";
 import { useToastStore } from "@/stores/toast";
 import { useSharedStore } from "@/stores/shared";
+import { useState } from "react";
 
 export interface ChallengeDeleteModalProps {
     challenge?: Challenge;
@@ -15,6 +16,8 @@ export function ChallengeDeleteModal(props: ChallengeDeleteModalProps) {
     const { challenge, onClose } = props;
     const toastStore = useToastStore();
     const sharedStore = useSharedStore();
+
+    const [open2, setOpen2] = useState(false);
 
     function handleChallengeDelete() {
         deleteChallenge({
@@ -58,7 +61,26 @@ export function ChallengeDeleteModal(props: ChallengeDeleteModalProps) {
             <span>
                 将从题库中软删除，但无法恢复。所有与之相关的数据会得到保留。请问你确定要删除这道题目吗？
             </span>
+            <Dialog open={open2} onClose={() => setOpen2(false)}>
+                <Box
+                    style={{
+                        padding: "1rem",
+                        fontSize: "1.25rem",
+                        fontWeight: 600,
+                        backgroundColor: "#000",
+                    }}
+                >
+                    test
+                </Box>
+            </Dialog>
             <Flex width={"100%"} justify={"flex-end"}>
+                <Button
+                    variant={"solid"}
+                    color={"primary"}
+                    onClick={() => setOpen2(true)}
+                >
+                    确定
+                </Button>
                 <Button
                     variant={"solid"}
                     color={"error"}

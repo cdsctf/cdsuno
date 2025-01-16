@@ -26,25 +26,9 @@ export function Tooltip(props: TooltipProps) {
         children,
     } = props;
 
-    const portal = useRef<HTMLElement | null>(null);
-
-    useEffect(() => {
-        const ctn = document.createElement("div");
-        ctn.id = `tooltip-portal-${nanoid()}`;
-        document.getElementById("portals")!.appendChild(ctn);
-        portal.current = ctn;
-
-        return () => {
-            if (portal.current) {
-                document.getElementById("portals")!.removeChild(portal.current);
-                portal.current = null;
-            }
-        };
-    }, []);
-
-    if (!portal.current) {
-        return;
-    }
+    const portal = useRef<HTMLElement | null>(
+        document.getElementById("portals")
+    );
 
     return (
         <ArkTooltip.Root
@@ -54,6 +38,7 @@ export function Tooltip(props: TooltipProps) {
                 placement: placement,
                 offset: offset,
             }}
+            lazyMount
         >
             <ArkTooltip.Trigger asChild>{children}</ArkTooltip.Trigger>
             <Portal container={portal}>
