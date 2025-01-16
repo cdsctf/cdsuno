@@ -9,6 +9,7 @@ export interface InputBaseProps extends ComponentProps<"div"> {
     width?: string;
     height?: string;
     color?: string;
+    shadow?: "none" | "sm" | "md" | "lg" | "xl";
     variant?: "outlined" | "solid";
     invalid?: boolean;
     disabled?: boolean;
@@ -26,6 +27,7 @@ export function InputBase(props: InputBaseProps) {
         width = "fit-content",
         height = "fit-content",
         color = "primary",
+        shadow = "md",
         invalid = false,
         disabled = false,
         readOnly = false,
@@ -48,6 +50,7 @@ export function InputBase(props: InputBaseProps) {
         "--input-height": height,
         "--input-bg-color": invalid ? errorColor : baseColor,
         "--input-border-color": invalid ? errorColor : baseColor,
+        "--input-shadow": `var(--shadow-${shadow})`,
     } as React.CSSProperties;
 
     return (

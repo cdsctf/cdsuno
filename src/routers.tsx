@@ -18,6 +18,27 @@ export const router = createBrowserRouter([
                 },
             },
             {
+                path: "about",
+                children: [
+                    {
+                        index: true,
+                        lazy: async () => {
+                            let { Index } = await import("@/pages/about");
+                            return { Component: Index };
+                        },
+                    },
+                    {
+                        path: "playground",
+                        lazy: async () => {
+                            let { Index } = await import(
+                                "@/pages/about/playground"
+                            );
+                            return { Component: Index };
+                        },
+                    },
+                ],
+            },
+            {
                 path: "login",
                 lazy: async () => {
                     let { Index } = await import("@/pages/login");

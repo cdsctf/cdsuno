@@ -3,7 +3,7 @@ import { Box } from "@/components/core";
 export function Index() {
     return (
         <Box>
-            <h1>Home</h1>
+            <h1>About</h1>
         </Box>
     );
 }
