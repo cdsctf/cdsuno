@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./Popover.module.scss";
 import clsx from "clsx";
 import { Popover as ArkPopover, Portal } from "@ark-ui/react";
-import { nanoid } from "nanoid";
 
 export interface PopoverProps {
     children: React.ReactElement;
