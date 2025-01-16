@@ -2,15 +2,15 @@
 
 .root {
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 64px);
 
     @include mixins.responsive("lg") {
         .category {
-            width: 65%;
+            width: 60%;
         }
 
         .main {
-            width: 35%;
+            width: 40%;
         }
     }
 }

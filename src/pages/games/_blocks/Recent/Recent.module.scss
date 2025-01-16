@@ -44,7 +44,7 @@
         height: calc(12vh + 6px);
         aspect-ratio: 1.25/1;
         background-color: var(--color-primary);
-        border: 2.75px solid var(--color-primary);
+        border: 1px solid var(--color-primary);
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         display: flex;
@@ -58,7 +58,7 @@
         position: relative;
         height: 12vh;
         border-radius: 35px;
-        border: 2.75px dotted var(--color-primary);
+        border: 1px dotted var(--color-primary);
         box-shadow: var(--shadow-md);
         background-color: var(--bg-2nd-color);
 
@@ -87,7 +87,7 @@
     background-color: light-dark(#0000000d, #ffffff0d);
     transform: translate(50%, -50%);
     box-shadow: var(--shadow-lg);
-    border: 2.75px dotted var(--color-primary);
+    border: 1px dotted var(--color-primary);
 
     width: 17.5vw;
     height: 70vh;

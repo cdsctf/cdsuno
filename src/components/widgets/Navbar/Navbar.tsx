@@ -141,10 +141,9 @@ export function Navbar() {
                                 />
                             </Box>
                         }
-                        variant={"ghost"}
+                        variant={"text"}
                         color={"white"}
                         shadow={"none"}
-                        radius={9999}
                     >
                         <h1 className={styles["title"]}>
                             {mode === "game"
@@ -154,7 +153,7 @@ export function Navbar() {
                     </Button>
                 </Link>
             </Box>
-            <Flex gap={3} align={"center"}>
+            <Flex gap={5} align={"center"}>
                 {links[mode].map((item, index) => (
                     <React.Fragment key={index}>
                         <Link to={item?.href} draggable={false}>

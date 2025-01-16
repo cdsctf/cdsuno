@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 export interface IconButtonProps extends ComponentProps<"button"> {
     size?: string | number;
-    variant?: "solid" | "outlined" | "subtle" | "ghost";
+    variant?: "solid" | "outlined" | "subtle" | "ghost" | "text";
     radius?: string;
     loading?: boolean;
     disabled?: boolean;

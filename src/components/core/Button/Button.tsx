@@ -11,7 +11,7 @@ export interface ButtonProps extends ComponentPropsWithRef<"button"> {
     height?: string;
     color?: ThemeColor | string;
     bgColor?: string;
-    variant?: "solid" | "outlined" | "tonal" | "subtle" | "ghost";
+    variant?: "solid" | "outlined" | "tonal" | "subtle" | "ghost" | "text";
     justify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
     radius?: string | number;

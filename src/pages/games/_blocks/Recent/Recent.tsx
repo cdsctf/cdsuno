@@ -195,7 +195,7 @@ export function Recent() {
                                                 width="100%"
                                                 radius={9999}
                                                 style={{
-                                                    border: "2px solid white",
+                                                    border: "1px solid white",
                                                     backgroundColor:
                                                         "transparent",
                                                 }}

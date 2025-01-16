@@ -10,7 +10,7 @@
         var(--color-primary) 25%,
         transparent 75%
     );
-    border: 2.75px dotted
+    border: 1px dotted
         color-mix(in srgb, var(--color-primary) 25%, transparent 75%);
     padding: 10px;
     transition: all 200ms ease-in-out;
@@ -19,7 +19,7 @@
 
     &:active {
         box-shadow: none;
-        transform: translateY(4px);
+        transform: translateY(2px);
     }
 
     &:hover {
@@ -50,7 +50,7 @@
             transparent 25%
         );
 
-        border: 2.75px dotted
+        border: 1px dotted
             color-mix(
                 in srgb,
                 var(--challenge-card-solved-bg-color) 75%,
