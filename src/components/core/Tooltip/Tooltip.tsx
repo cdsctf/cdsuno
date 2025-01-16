@@ -39,6 +39,7 @@ export function Tooltip(props: TooltipProps) {
                 offset: offset,
             }}
             lazyMount
+            unmountOnExit
         >
             <ArkTooltip.Trigger asChild>{children}</ArkTooltip.Trigger>
             <Portal container={portal}>

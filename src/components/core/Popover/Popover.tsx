@@ -66,6 +66,7 @@ export function Popover(props: PopoverProps) {
                 handleOpenChange(v.open);
             }}
             lazyMount
+            unmountOnExit
         >
             <ArkPopover.Trigger asChild>{children}</ArkPopover.Trigger>
             <Portal container={portal}>
