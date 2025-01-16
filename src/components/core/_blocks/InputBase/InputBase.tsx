@@ -12,6 +12,7 @@ export interface InputBaseProps extends ComponentProps<"div"> {
     variant?: "outlined" | "solid";
     invalid?: boolean;
     disabled?: boolean;
+    readOnly?: boolean;
     label?: string;
     helperText?: string;
     errorText?: string;
@@ -27,6 +28,7 @@ export function InputBase(props: InputBaseProps) {
         color = "primary",
         invalid = false,
         disabled = false,
+        readOnly = false,
         variant = "outlined",
         label = "",
         helperText = "",
@@ -57,6 +59,7 @@ export function InputBase(props: InputBaseProps) {
             }}
             invalid={invalid}
             disabled={disabled}
+            readOnly={readOnly}
             {...rest}
         >
             {(label || helperText) && (

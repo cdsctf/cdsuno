@@ -1,7 +1,6 @@
 import styles from "./Tooltip.module.scss";
 import { Tooltip as ArkTooltip, Portal } from "@ark-ui/react";
-import { nanoid } from "nanoid";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export interface TooltipProps {
     content?: React.ReactNode;

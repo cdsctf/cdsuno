@@ -140,8 +140,8 @@ ReactDOM.render(
                 <Button color={"violet"} variant="outlined">
                     123
                 </Button>
-                <Button color={"violet"} variant={"subtle"}>
-                    123
+                <Button color={"violet"} variant={"subtle"} onClick={() => {}}>
+                    触发 Error Boundary
                 </Button>
                 <Button
                     color={"violet"}
