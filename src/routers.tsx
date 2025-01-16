@@ -6,10 +6,17 @@ export const router = createBrowserRouter([
         hydrateFallbackElement: <HydrateFallback />,
         path: "/",
         lazy: async () => {
-            let { Base } = await import("@/layouts/Base");
-            return { Component: Base };
+            let { Layout } = await import("@/pages/layout");
+            return { Component: Layout };
         },
         children: [
+            {
+                index: true,
+                lazy: async () => {
+                    let { Index } = await import("@/pages");
+                    return { Component: Index };
+                },
+            },
             {
                 path: "login",
                 lazy: async () => {
@@ -18,27 +25,49 @@ export const router = createBrowserRouter([
                 },
             },
             {
-                path: "/",
-                lazy: async () => {
-                    let { Default } = await import("@/layouts/Default");
-                    return { Component: Default };
-                },
+                path: "games",
                 children: [
                     {
                         index: true,
                         lazy: async () => {
-                            let { Index } = await import("@/pages");
+                            let { Index } = await import("@/pages/games");
                             return { Component: Index };
                         },
                     },
                     {
-                        path: "games",
+                        path: ":id",
+                        lazy: async () => {
+                            let { Index } = await import("@/pages/games/[id]");
+                            return { Component: Index };
+                        },
+                    },
+                ],
+            },
+            {
+                path: "challenges",
+                lazy: async () => {
+                    let { Index } = await import("@/pages/challenges");
+                    return { Component: Index };
+                },
+            },
+            {
+                path: "settings",
+                children: [
+                    {
+                        index: true,
+                        lazy: async () => {
+                            let { Index } = await import("@/pages/settings");
+                            return { Component: Index };
+                        },
+                    },
+                    {
+                        path: "challenges",
                         children: [
                             {
                                 index: true,
                                 lazy: async () => {
                                     let { Index } = await import(
-                                        "@/pages/games"
+                                        "@/pages/settings/challenges"
                                     );
                                     return { Component: Index };
                                 },
@@ -47,54 +76,10 @@ export const router = createBrowserRouter([
                                 path: ":id",
                                 lazy: async () => {
                                     let { Index } = await import(
-                                        "@/pages/games/[id]"
+                                        "@/pages/settings/challenges/[id]"
                                     );
                                     return { Component: Index };
                                 },
-                            },
-                        ],
-                    },
-                    {
-                        path: "challenges",
-                        lazy: async () => {
-                            let { Index } = await import("@/pages/challenges");
-                            return { Component: Index };
-                        },
-                    },
-                    {
-                        path: "settings",
-                        children: [
-                            {
-                                index: true,
-                                lazy: async () => {
-                                    let { Index } = await import(
-                                        "@/pages/settings"
-                                    );
-                                    return { Component: Index };
-                                },
-                            },
-                            {
-                                path: "challenges",
-                                children: [
-                                    {
-                                        index: true,
-                                        lazy: async () => {
-                                            let { Index } = await import(
-                                                "@/pages/settings/challenges"
-                                            );
-                                            return { Component: Index };
-                                        },
-                                    },
-                                    {
-                                        path: ":id",
-                                        lazy: async () => {
-                                            let { Index } = await import(
-                                                "@/pages/settings/challenges/[id]"
-                                            );
-                                            return { Component: Index };
-                                        },
-                                    },
-                                ],
                             },
                         ],
                     },
