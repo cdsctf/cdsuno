@@ -60,12 +60,6 @@
 }
 
 .avatar {
-    border-radius: 50%;
-    padding: 2px;
-    transition: all 200ms ease-in-out;
+    padding: 5px;
     cursor: pointer;
-
-    &:active {
-        transform: translateY(2px);
-    }
 }

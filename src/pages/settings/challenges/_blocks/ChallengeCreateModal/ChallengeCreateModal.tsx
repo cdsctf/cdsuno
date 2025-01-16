@@ -12,7 +12,7 @@ import ArrowRightLinear from "~icons/solar/arrow-right-linear";
 import styles from "./ChallengeCreateModal.module.scss";
 import { useState } from "react";
 import { useCategoryStore } from "@/stores/category";
-import { create } from "@/api/challenge";
+import { createChallenge } from "@/api/challenge";
 import { useToastStore } from "@/stores/toast";
 import { useNavigate } from "react-router";
 
@@ -32,7 +32,7 @@ export function ChallengeCreateModal() {
             return;
         }
 
-        create({
+        createChallenge({
             title: title,
             category: category,
             is_public: false,
