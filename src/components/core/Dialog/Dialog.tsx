@@ -19,6 +19,7 @@ export function Dialog(props: DialogProps) {
             open={open}
             onOpenChange={(details) => onClose()}
             lazyMount
+            unmountOnExit
         >
             <Portal container={portal}>
                 <ArkDialog.Backdrop className={styles["backdrop"]} />
