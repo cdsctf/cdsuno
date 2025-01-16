@@ -44,7 +44,7 @@
 
     &[data-variant="ghost"] {
         background-color: transparent;
-        box-shadow: none;
+        box-shadow: 0 0 0 0 var(--button-bg-color);
         color: var(--button-bg-color);
     }
 

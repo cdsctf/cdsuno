@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Popover.module.scss";
 import clsx from "clsx";
 import { Popover as ArkPopover, Portal } from "@ark-ui/react";
+import { nanoid } from "nanoid";
 
 export interface PopoverProps {
     children: React.ReactElement;
@@ -44,9 +45,25 @@ export function Popover(props: PopoverProps) {
         }
     }
 
-    const portal = useRef<HTMLElement | null>(
-        document.getElementById("popover-portal")!
-    );
+    const portal = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        const ctn = document.createElement("div");
+        ctn.id = `popover-portal-${nanoid()}`;
+        document.getElementById("portals")!.appendChild(ctn);
+        portal.current = ctn;
+
+        return () => {
+            if (portal.current) {
+                document.getElementById("portals")!.removeChild(portal.current);
+                portal.current = null;
+            }
+        };
+    }, []);
+
+    if (!portal.current) {
+        return;
+    }
 
     return (
         <ArkPopover.Root

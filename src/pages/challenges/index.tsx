@@ -1,4 +1,4 @@
-import { get, getStatus } from "@/api/challenge";
+import { getChallenges, getChallengeStatus } from "@/api/challenge";
 import {
     Button,
     Dialog,
@@ -52,7 +52,7 @@ export function Index() {
     function fetchChallenges() {
         setLoading(true);
         setChallenges([]);
-        get({
+        getChallenges({
             id: id ? id : undefined,
             is_public: true,
             page: page,
@@ -65,7 +65,7 @@ export function Index() {
     }
 
     function fetchChallengeStatus() {
-        getStatus({
+        getChallengeStatus({
             challenge_ids: challenges?.map((challenge) => challenge.id!) || [],
             user_id: authStore?.user?.id,
         }).then((res) => {

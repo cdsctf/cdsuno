@@ -1,6 +1,7 @@
 import styles from "./Tooltip.module.scss";
 import { Tooltip as ArkTooltip, Portal } from "@ark-ui/react";
-import { useRef } from "react";
+import { nanoid } from "nanoid";
+import { useEffect, useRef } from "react";
 
 export interface TooltipProps {
     content?: React.ReactNode;
@@ -25,9 +26,25 @@ export function Tooltip(props: TooltipProps) {
         children,
     } = props;
 
-    const portal = useRef<HTMLElement | null>(
-        document.getElementById("tooltip-portal")!
-    );
+    const portal = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        const ctn = document.createElement("div");
+        ctn.id = `tooltip-portal-${nanoid()}`;
+        document.getElementById("portals")!.appendChild(ctn);
+        portal.current = ctn;
+
+        return () => {
+            if (portal.current) {
+                document.getElementById("portals")!.removeChild(portal.current);
+                portal.current = null;
+            }
+        };
+    }, []);
+
+    if (!portal.current) {
+        return;
+    }
 
     return (
         <ArkTooltip.Root

@@ -1,4 +1,4 @@
-import { get, update } from "@/api/challenge";
+import { getChallenges, updateChallenge } from "@/api/challenge";
 import {
     Box,
     Button,
@@ -50,7 +50,7 @@ export function Index() {
     const [selectedChallenge, setSelectedChallenge] = useState<Challenge>();
 
     function fetchChallenges() {
-        get({
+        getChallenges({
             page: page,
             size: size,
             sorts: sorts,
@@ -62,7 +62,7 @@ export function Index() {
     }
 
     function handleVisibilityChange(challenge: Challenge) {
-        update({
+        updateChallenge({
             id: challenge.id,
             is_public: !challenge.is_public,
         })
@@ -331,7 +331,10 @@ export function Index() {
                 open={challengeDeleteModalOpen}
                 onClose={() => setChallengeDeleteModalOpen(false)}
             >
-                <ChallengeDeleteModal challenge={selectedChallenge} />
+                <ChallengeDeleteModal
+                    challenge={selectedChallenge}
+                    onClose={() => setChallengeDeleteModalOpen(false)}
+                />
             </Dialog>
         </>
     );

@@ -1,6 +1,7 @@
 import styles from "./Dialog.module.scss";
-import React, { ComponentProps, useRef } from "react";
+import React, { ComponentProps, useEffect, useRef } from "react";
 import { Dialog as ArkDialog, Portal } from "@ark-ui/react";
+import { nanoid } from "nanoid";
 
 export interface DialogProps extends ComponentProps<"dialog"> {
     open: boolean;
@@ -10,9 +11,25 @@ export interface DialogProps extends ComponentProps<"dialog"> {
 
 export function Dialog(props: DialogProps) {
     const { children, open, onClose } = props;
-    const portal = useRef<HTMLElement | null>(
-        document.getElementById("dialog-portal")!
-    );
+    const portal = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        const ctn = document.createElement("div");
+        ctn.id = `dialog-portal-${nanoid()}`;
+        document.getElementById("portals")!.appendChild(ctn);
+        portal.current = ctn;
+
+        return () => {
+            if (portal.current) {
+                document.getElementById("portals")!.removeChild(portal.current);
+                portal.current = null;
+            }
+        };
+    }, []);
+
+    if (!portal.current) {
+        return;
+    }
 
     return (
         <ArkDialog.Root open={open} onOpenChange={(details) => onClose()}>

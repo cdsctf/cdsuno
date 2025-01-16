@@ -5,17 +5,18 @@ import {
     ChallengeStatus,
     ChallengeStatusRequest,
     ChallengeUpdateRequest,
+    ChallengeDeleteRequest,
 } from "@/models/challenge";
 import { Response } from "@/types";
 import { alovaInstance } from "@/utils/alova";
 
-export async function get(request: ChallengeGetRequest) {
+export async function getChallenges(request: ChallengeGetRequest) {
     return alovaInstance.Get<Response<Array<Challenge>>>("/challenges", {
         params: request,
     });
 }
 
-export async function getStatus(request: ChallengeStatusRequest) {
+export async function getChallengeStatus(request: ChallengeStatusRequest) {
     return alovaInstance.Post<Response<Record<number, ChallengeStatus>>>(
         "/challenges/status",
         request,
@@ -25,7 +26,7 @@ export async function getStatus(request: ChallengeStatusRequest) {
     );
 }
 
-export async function update(request: ChallengeUpdateRequest) {
+export async function updateChallenge(request: ChallengeUpdateRequest) {
     return alovaInstance.Put<Response<Challenge>>(
         `/challenges/${request?.id}`,
         request,
@@ -35,8 +36,14 @@ export async function update(request: ChallengeUpdateRequest) {
     );
 }
 
-export async function create(request: ChallengeCreateRequest) {
+export async function createChallenge(request: ChallengeCreateRequest) {
     return alovaInstance.Post<Response<Challenge>>("/challenges", request, {
+        cacheFor: 0,
+    });
+}
+
+export async function deleteChallenge(request: ChallengeDeleteRequest) {
+    return alovaInstance.Delete<Response<never>>(`/challenges/${request.id}`, {
         cacheFor: 0,
     });
 }

@@ -8,7 +8,7 @@ import SolarRoundArrowLeftBold from "~icons/solar/round-arrow-left-bold";
 import StarFallMinimalistic2Bold from "~icons/solar/star-fall-minimalistic-2-bold";
 import CupStarBold from "~icons/solar/cup-star-bold";
 import styles from "./Navbar.module.scss";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useParams } from "react-router";
 import {
     Avatar,
@@ -20,7 +20,7 @@ import {
     Flex,
     Box,
 } from "@/components/core";
-import { Dropdown } from "./Dropdown";
+import { Dropdown } from "./_blocks/Dropdown";
 import React from "react";
 import { get } from "@/api/game";
 import { Game } from "@/models/game";
@@ -116,9 +116,6 @@ export function Navbar() {
         });
     }, [location.pathname]);
 
-    const [dropdownMenuOpen, setDropdownMenuOpen] = useState<boolean>(false);
-    const dropdownMenuButtonRef = useRef(null);
-
     return (
         <header className={styles["root"]}>
             <Box className={styles["left-section"]}>
@@ -207,7 +204,10 @@ export function Navbar() {
                             </Link>
                         )}
                         <Popover content={<Dropdown />}>
-                            <Box className={styles["avatar"]}>
+                            <Button
+                                variant={"ghost"}
+                                className={styles["avatar"]}
+                            >
                                 <Avatar
                                     src={
                                         authStore?.user
@@ -218,7 +218,7 @@ export function Navbar() {
                                     color={"#ffffff"}
                                     size={2}
                                 />
-                            </Box>
+                            </Button>
                         </Popover>
                     </Box>
                 </Box>
