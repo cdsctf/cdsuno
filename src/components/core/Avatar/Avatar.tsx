@@ -21,7 +21,7 @@ export function Avatar(props: AvatarProps) {
         color = "primary",
         size = "3rem",
         fallback = (
-            <UserCircleBold color="light-dark(var(--color-primary), #fff)" />
+            <UserCircleBold color="light-dark(var(--avatar-border-color), #fff)" />
         ),
         style,
         ...rest

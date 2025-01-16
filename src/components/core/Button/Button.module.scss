@@ -1,5 +1,3 @@
-@use "@/styles/mixins";
-
 .root {
     width: var(--button-width, auto);
     height: var(--button-height);
@@ -9,7 +7,7 @@
     justify-content: center;
     color: transparent;
     border-radius: var(--button-radius);
-    border: 2.75px solid transparent;
+    border: 1px solid transparent;
     box-shadow: var(--button-shadow);
     transition: all 0.2s ease-in-out;
     padding: 0.5rem 1.375rem;
@@ -42,7 +40,8 @@
         );
     }
 
-    &[data-variant="ghost"] {
+    &[data-variant="ghost"],
+    &[data-variant="text"] {
         background-color: transparent;
         box-shadow: 0 0 0 0 var(--button-bg-color);
         color: var(--button-bg-color);
@@ -58,11 +57,19 @@
     &:not(:disabled, [data-loading="true"], [data-disabled="true"]) {
         &:hover {
             filter: brightness(1.2);
+
+            &[data-variant="ghost"] {
+                background-color: color-mix(
+                    in srgb,
+                    light-dark(#000, #fff) 5%,
+                    transparent 95%
+                );
+            }
         }
 
         &:active {
             box-shadow: none;
-            transform: translateY(4px);
+            transform: translateY(2px);
         }
 
         &:focus {
