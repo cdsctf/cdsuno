@@ -41,8 +41,8 @@
 .textarea {
     flex: 1;
     width: 100%;
-    min-height: var(--textarea-height, auto);
-    max-height: var(--textarea-height, auto);
+    min-height: var(--textarea-min-height, auto);
+    max-height: var(--textarea-max-height, auto);
     background: transparent;
     border: none;
     outline: none;

@@ -23,7 +23,13 @@ export function ErrorFallback(props: FallbackProps) {
                 </Box>
                 <h2 className={styles["title"]}>好像出了点问题</h2>
             </Flex>
-            <Textarea value={error.stack} width="45vw" height="40vh" readOnly />
+            <Textarea
+                value={error.stack}
+                width="45vw"
+                minHeight="40vh"
+                maxHeight="40vh"
+                readOnly
+            />
             <Flex
                 width={"100%"}
                 className={styles["actions"]}

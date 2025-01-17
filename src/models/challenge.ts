@@ -41,7 +41,7 @@ export interface ChallengeUpdateRequest {
     title?: string;
     description?: string;
     category?: number;
-    attachment_url?: string;
+    has_attachment?: boolean;
     is_public?: boolean;
     is_dynamic?: boolean;
     duration?: number;

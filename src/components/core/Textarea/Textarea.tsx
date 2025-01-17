@@ -6,7 +6,8 @@ import { Field as ArkField } from "@ark-ui/react";
 
 export interface TextareaProps extends Omit<InputBaseProps, "onChange"> {
     width?: string;
-    height?: string;
+    minHeight?: string;
+    maxHeight?: string;
     value?: string;
     autoresize?: boolean;
     onChange?: (value: string) => void;
@@ -19,7 +20,11 @@ export interface TextareaProps extends Omit<InputBaseProps, "onChange"> {
 export function Textarea(props: TextareaProps) {
     const {
         width = "fit-content",
-        height = "fit-content",
+        minHeight = "fit-content",
+        maxHeight = "fit-content",
+        label,
+        helperText,
+        errorText,
         autoresize = false,
         value,
         onChange,
@@ -31,7 +36,10 @@ export function Textarea(props: TextareaProps) {
     } = props;
 
     const variables = {
-        "--textarea-height": height,
+        "--textarea-min-height":
+            typeof minHeight === "number" ? `${minHeight}px` : minHeight,
+        "--textarea-max-height":
+            typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
     } as CSSProperties;
 
     return (
@@ -41,6 +49,9 @@ export function Textarea(props: TextareaProps) {
             disabled={disabled}
             invalid={invalid}
             readOnly={readOnly}
+            helperText={helperText}
+            errorText={errorText}
+            label={label}
         >
             {icon && <Box className={styles["icon"]}>{icon}</Box>}
 
