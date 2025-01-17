@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import Tablelvl2Context from "../Table/Tablelvl2Context";
+import Tablelvl2Context from "../Tablelvl2Context";
 import styles from "./TableBody.module.scss";
 import clsx from "clsx";
 

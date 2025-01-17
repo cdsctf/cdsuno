@@ -12,10 +12,6 @@ import {
     TextInput,
 } from "@/components/core";
 import { Table } from "@/components/core/Table";
-import { TableBody } from "@/components/core/TableBody/TableBody";
-import { TableCell } from "@/components/core/TableCell/TableCell";
-import { TableHead } from "@/components/core/TableHead";
-import { TableRow } from "@/components/core/TableRow";
 import { Challenge } from "@/models/challenge";
 import { useSharedStore } from "@/stores/shared";
 import { useToastStore } from "@/stores/toast";
@@ -110,15 +106,15 @@ export function Index() {
                 </Flex>
                 <Box className={styles["table"]}>
                     <Table>
-                        <TableHead
+                        <Table.Head
                             style={{
                                 backgroundColor: "var(--color-primary)",
                                 color: "#ffffff",
                             }}
                         >
-                            <TableRow>
-                                <TableCell>公开</TableCell>
-                                <TableCell
+                            <Table.Row>
+                                <Table.Cell>公开</Table.Cell>
+                                <Table.Cell
                                     sortDirection={
                                         sorts.includes("id")
                                             ? sorts.startsWith("-")
@@ -135,8 +131,8 @@ export function Index() {
                                     }}
                                 >
                                     #
-                                </TableCell>
-                                <TableCell
+                                </Table.Cell>
+                                <Table.Cell
                                     sortDirection={
                                         sorts.includes("title")
                                             ? sorts.startsWith("-")
@@ -156,22 +152,22 @@ export function Index() {
                                     }}
                                 >
                                     标题
-                                </TableCell>
-                                <TableCell
+                                </Table.Cell>
+                                <Table.Cell
                                     style={{
                                         width: "150px",
                                     }}
                                 >
                                     分类
-                                </TableCell>
-                                <TableCell
+                                </Table.Cell>
+                                <Table.Cell
                                     style={{
                                         width: "500px",
                                     }}
                                 >
                                     描述
-                                </TableCell>
-                                <TableCell
+                                </Table.Cell>
+                                <Table.Cell
                                     sortDirection={
                                         sorts.includes("updated_at")
                                             ? sorts.startsWith("-")
@@ -188,21 +184,21 @@ export function Index() {
                                     }}
                                 >
                                     最后更新于
-                                </TableCell>
-                                <TableCell
+                                </Table.Cell>
+                                <Table.Cell
                                     justify={"center"}
                                     style={{
                                         width: "100px",
                                     }}
                                 >
                                     操作
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
+                                </Table.Cell>
+                            </Table.Row>
+                        </Table.Head>
+                        <Table.Body>
                             {challenges?.map((challenge) => (
-                                <TableRow key={challenge.id}>
-                                    <TableCell>
+                                <Table.Row key={challenge.id}>
+                                    <Table.Cell>
                                         <Switch
                                             checked={challenge?.is_public!}
                                             onChange={() => {
@@ -211,9 +207,9 @@ export function Index() {
                                                 );
                                             }}
                                         />
-                                    </TableCell>
-                                    <TableCell>{challenge.id}</TableCell>
-                                    <TableCell>
+                                    </Table.Cell>
+                                    <Table.Cell>{challenge.id}</Table.Cell>
+                                    <Table.Cell>
                                         <p
                                             style={{
                                                 maxWidth: "200px",
@@ -225,8 +221,8 @@ export function Index() {
                                         >
                                             {challenge.title}
                                         </p>
-                                    </TableCell>
-                                    <TableCell>
+                                    </Table.Cell>
+                                    <Table.Cell>
                                         <Flex
                                             align={"center"}
                                             gap={5}
@@ -247,8 +243,8 @@ export function Index() {
                                                 )
                                                 ?.name?.toUpperCase()}
                                         </Flex>
-                                    </TableCell>
-                                    <TableCell>
+                                    </Table.Cell>
+                                    <Table.Cell>
                                         <p
                                             style={{
                                                 maxWidth: "500px",
@@ -259,13 +255,13 @@ export function Index() {
                                         >
                                             {challenge.description}
                                         </p>
-                                    </TableCell>
-                                    <TableCell>
+                                    </Table.Cell>
+                                    <Table.Cell>
                                         {new Date(
                                             Number(challenge.updated_at) * 1000
                                         ).toLocaleString()}
-                                    </TableCell>
-                                    <TableCell>
+                                    </Table.Cell>
+                                    <Table.Cell>
                                         <Flex gap={10}>
                                             <IconButton
                                                 variant={"ghost"}
@@ -292,10 +288,10 @@ export function Index() {
                                                 <TrashBinTrashBold />
                                             </IconButton>
                                         </Flex>
-                                    </TableCell>
-                                </TableRow>
+                                    </Table.Cell>
+                                </Table.Row>
                             ))}
-                        </TableBody>
+                        </Table.Body>
                     </Table>
                 </Box>
                 <Flex

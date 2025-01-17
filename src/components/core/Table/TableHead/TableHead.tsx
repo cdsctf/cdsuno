@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 import styles from "./TableHead.module.scss";
 import clsx from "clsx";
-import Tablelvl2Context from "../Table/Tablelvl2Context";
+import Tablelvl2Context from "../Tablelvl2Context";
 
 export interface TableHeadProps extends ComponentProps<"thead"> {}
 
