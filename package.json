@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@ark-ui/react": "^4.8.1",
+        "@hookform/resolvers": "^3.10.0",
         "alova": "^3.2.7",
         "chroma-js": "^3.1.2",
         "clsx": "^2.1.1",
@@ -26,6 +27,7 @@
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-error-boundary": "^5.0.0",
+        "react-hook-form": "^7.54.2",
         "react-markdown": "^9.0.3",
         "react-resize-detector": "^12.0.2",
         "react-router": "^7.1.1",
@@ -39,6 +41,7 @@
         "remark-parse": "^11.0.0",
         "remark-rehype": "^11.1.1",
         "sass": "^1.83.1",
+        "zod": "^3.24.1",
         "zustand": "^5.0.3"
     },
     "devDependencies": {

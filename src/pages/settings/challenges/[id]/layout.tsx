@@ -48,7 +48,11 @@ export function Layout() {
             <Flex className={styles["root"]} gap={"3rem"} align={"flex-start"}>
                 <Sidebar />
                 <Stack className={styles["paper"]}>
-                    <Flex width={"100%"} justify={"space-between"}>
+                    <Flex
+                        width={"100%"}
+                        justify={"space-between"}
+                        align={"center"}
+                    >
                         <Flex
                             align={"center"}
                             gap={10}
