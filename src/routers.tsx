@@ -111,6 +111,33 @@ export const router = createBrowserRouter([
                                             return { Component: Index };
                                         },
                                     },
+                                    {
+                                        path: "flags",
+                                        lazy: async () => {
+                                            let { Index } = await import(
+                                                "@/pages/settings/challenges/[id]/flags"
+                                            );
+                                            return { Component: Index };
+                                        },
+                                    },
+                                    {
+                                        path: "pods",
+                                        lazy: async () => {
+                                            let { Index } = await import(
+                                                "@/pages/settings/challenges/[id]/pods"
+                                            );
+                                            return { Component: Index };
+                                        },
+                                    },
+                                    {
+                                        path: "attachments",
+                                        lazy: async () => {
+                                            let { Index } = await import(
+                                                "@/pages/settings/challenges/[id]/attachments"
+                                            );
+                                            return { Component: Index };
+                                        },
+                                    },
                                 ],
                             },
                         ],

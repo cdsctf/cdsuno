@@ -1,0 +1,22 @@
+.root {
+    padding: 0 15%;
+    width: 100%;
+}
+
+.paper {
+    box-shadow: var(--shadow-lg);
+    min-height: calc(100vh - 64px);
+    background: var(--bg-2nd-color);
+    flex: 1;
+
+    padding: 4rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.category {
+    font-size: 1.5rem;
+}

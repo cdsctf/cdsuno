@@ -1,5 +1,10 @@
 .root {
-    min-height: calc(100vh - 64px);
+    position: sticky;
+    height: calc(100vh - 64px);
     min-width: 15rem;
-    border-right: 1px solid #e0e0e0;
+
+    top: 64px;
+    left: 0;
+
+    padding: 1rem;
 }

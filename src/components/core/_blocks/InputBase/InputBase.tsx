@@ -7,7 +7,7 @@ import { Box } from "../../Box";
 
 export interface InputBaseProps extends ComponentProps<"div"> {
     width?: string;
-    height?: string;
+    minHeight?: string;
     color?: string;
     shadow?: "none" | "sm" | "md" | "lg" | "xl";
     variant?: "outlined" | "solid";
@@ -25,7 +25,7 @@ export interface InputBaseProps extends ComponentProps<"div"> {
 export function InputBase(props: InputBaseProps) {
     const {
         width = "fit-content",
-        height = "fit-content",
+        minHeight: height = "fit-content",
         color = "primary",
         shadow = "md",
         invalid = false,
