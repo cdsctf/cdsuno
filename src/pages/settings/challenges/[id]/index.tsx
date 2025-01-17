@@ -2,7 +2,6 @@ import {
     Box,
     Button,
     Flex,
-    Grid,
     Select,
     Stack,
     Switch,
@@ -10,33 +9,54 @@ import {
     TextInput,
 } from "@/components/core";
 import Context from "./Context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useCategoryStore } from "@/stores/category";
 import CheckCircleBold from "~icons/solar/check-circle-bold";
 import styles from "./index.module.scss";
 import { updateChallenge } from "@/api/challenge";
 import { useToastStore } from "@/stores/toast";
-import { Divider } from "@/components/core/Divider";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
 
 export function Index() {
     const { challenge, setRefresh } = useContext(Context);
     const categoryStore = useCategoryStore();
     const toastStore = useToastStore();
 
-    const [title, setTitle] = useState<string>();
-    const [category, setCategory] = useState<number>();
-    const [description, setDescription] = useState<string>();
-    const [isDynamic, setIsDynamic] = useState<boolean>();
-    const [hasAttachment, setHasAttachment] = useState<boolean>();
+    const schema = z.object({
+        title: z
+            .string()
+            .min(1, "标题不能为空")
+            .max(50, "标题不能超过 50 个字符"),
+        category: z.number().int().min(1),
+        description: z.string(),
+        is_dynamic: z.boolean(),
+        has_attachment: z.boolean(),
+    });
 
-    function handleChallengeUpdate() {
+    type FormData = z.infer<typeof schema>;
+
+    const {
+        control,
+        setValue,
+        watch,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormData>({
+        resolver: zodResolver(schema),
+    });
+
+    const formWatch = watch();
+
+    function handleChallengeUpdate(data: FormData) {
         updateChallenge({
             id: challenge?.id,
-            title: title,
-            category: category,
-            description: description,
-            is_dynamic: isDynamic,
-            has_attachment: hasAttachment,
+            title: data.title,
+            category: data.category,
+            description: data.description,
+            is_dynamic: data.is_dynamic,
+            has_attachment: data.has_attachment,
         })
             .then((res) => {
                 const code = res.code;
@@ -64,85 +84,142 @@ export function Index() {
 
     useEffect(() => {
         if (challenge) {
-            setTitle(challenge.title);
-            setCategory(challenge.category);
-            setDescription(challenge.description);
-            setIsDynamic(challenge.is_dynamic);
-            setHasAttachment(challenge.has_attachment);
+            setValue("title", challenge.title || "");
+            setValue("category", challenge.category || 1);
+            setValue("description", challenge.description || "");
+            setValue("is_dynamic", challenge.is_dynamic || false);
+            setValue("has_attachment", challenge.has_attachment || false);
         }
     }, [challenge]);
 
+    useEffect(() => {
+        const handleCtrlS = (event: KeyboardEvent) => {
+            if ((event.ctrlKey || event.metaKey) && event.key === "s") {
+                event.preventDefault();
+                handleChallengeUpdate(formWatch);
+            }
+        };
+
+        window.addEventListener("keydown", handleCtrlS);
+        return () => {
+            window.removeEventListener("keydown", handleCtrlS);
+        };
+    }, [formWatch, challenge?.id]);
+
     return (
-        <Stack
+        <form
             className={styles["root"]}
-            width={"100%"}
-            justify={"space-between"}
+            onSubmit={handleSubmit(handleChallengeUpdate)}
+            autoComplete={"off"}
         >
-            <Stack className={styles["form"]} width={"100%"} gap={20}>
-                <Flex width={"100%"} align={"center"} gap={20}>
-                    <TextInput
-                        label={"标题"}
-                        helperText={"请输入合适长度的题目标题"}
-                        value={title}
-                        onChange={setTitle}
-                        style={{
-                            flex: 1,
-                        }}
-                    />
-                    <Select
-                        label={"分类"}
-                        helperText={"请为题目选择合适的分类"}
-                        value={String(category)}
-                        onChange={(value) => setCategory(Number(value))}
-                        options={categoryStore?.categories.map((category) => ({
-                            label: (
-                                <Flex
-                                    align={"center"}
-                                    gap={10}
+            <Stack
+                width={"100%"}
+                justify={"space-between"}
+                style={{
+                    flex: 1,
+                }}
+            >
+                <Stack className={styles["form"]} width={"100%"} gap={20}>
+                    <Flex width={"100%"} align={"center"} gap={20}>
+                        <Controller
+                            name={"title"}
+                            control={control}
+                            render={({ field }) => (
+                                <TextInput
+                                    label={"标题"}
+                                    helperText={"请输入合适长度的题目标题"}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    errorText={errors.title?.message?.toString()}
+                                    invalid={!!errors.title}
                                     style={{
-                                        color: category?.color,
+                                        flex: 1,
                                     }}
-                                >
-                                    <Box>{category?.icon}</Box>
-                                    {category.name?.toUpperCase()}
-                                </Flex>
-                            ),
-                            value: String(category.id),
-                        }))}
-                    />
-                </Flex>
-                <Flex width={"100%"}>
-                    <Textarea
-                        label={"描述"}
-                        helperText={"请输入题目的详细描述，可使用 Markdown"}
-                        width={"100%"}
-                        minHeight={"15rem"}
-                        value={description}
-                        onChange={setDescription}
-                        style={{ flex: 1 }}
-                    />
-                </Flex>
-                <Flex width={"100%"} justify={"space-between"}>
-                    <Switch
-                        label={"是否使用容器"}
-                        checked={Boolean(isDynamic)}
-                        onChange={setIsDynamic}
-                    />
-                    <Switch
-                        label={"是否提供附件"}
-                        checked={Boolean(hasAttachment)}
-                        onChange={setHasAttachment}
-                    />
+                                />
+                            )}
+                        />
+                        <Controller
+                            name={"category"}
+                            control={control}
+                            render={({ field }) => (
+                                <Select
+                                    label={"分类"}
+                                    helperText={"请为题目选择合适的分类"}
+                                    value={String(field.value)}
+                                    onChange={(value) => {
+                                        field.onChange(Number(value));
+                                    }}
+                                    options={categoryStore?.categories.map(
+                                        (category) => ({
+                                            label: (
+                                                <Flex
+                                                    align={"center"}
+                                                    gap={10}
+                                                    style={{
+                                                        color: category?.color,
+                                                    }}
+                                                >
+                                                    <Box>{category?.icon}</Box>
+                                                    {category.name?.toUpperCase()}
+                                                </Flex>
+                                            ),
+                                            value: String(category.id),
+                                        })
+                                    )}
+                                />
+                            )}
+                        />
+                    </Flex>
+                    <Flex width={"100%"}>
+                        <Controller
+                            name={"description"}
+                            control={control}
+                            render={({ field }) => (
+                                <Textarea
+                                    label={"描述"}
+                                    helperText={
+                                        "请输入题目的详细描述，可使用 Markdown"
+                                    }
+                                    width={"100%"}
+                                    minHeight={"15rem"}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    style={{ flex: 1 }}
+                                />
+                            )}
+                        />
+                    </Flex>
+                    <Flex width={"100%"} justify={"space-between"}>
+                        <Controller
+                            name={"is_dynamic"}
+                            control={control}
+                            render={({ field }) => (
+                                <Switch
+                                    label={"是否使用容器"}
+                                    checked={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
+                        />
+                        <Controller
+                            name={"has_attachment"}
+                            control={control}
+                            render={({ field }) => (
+                                <Switch
+                                    label={"是否使用容器"}
+                                    checked={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
+                        />
+                    </Flex>
+                </Stack>
+                <Flex width={"100%"} justify={"flex-end"}>
+                    <Button icon={<CheckCircleBold />} type={"submit"}>
+                        保存
+                    </Button>
                 </Flex>
             </Stack>
-            <Flex width={"100%"} justify={"flex-end"}>
-                <Button
-                    icon={<CheckCircleBold />}
-                    onClick={handleChallengeUpdate}
-                >
-                    保存
-                </Button>
-            </Flex>
-        </Stack>
+        </form>
     );
 }

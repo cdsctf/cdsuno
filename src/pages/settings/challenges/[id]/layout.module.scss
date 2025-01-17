@@ -15,6 +15,12 @@
 .title {
     font-size: 2rem;
     font-weight: 600;
+
+    max-width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    text-wrap: nowrap;
 }
 
 .category {
