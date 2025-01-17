@@ -1,23 +1,18 @@
-import useThemeColor from "@/hooks/useThemeColor";
 import { Challenge, ChallengeStatus } from "@/models/challenge";
 import { useCategoryStore } from "@/stores/category";
 import styles from "./ChallengeModal.module.scss";
-import chroma from "chroma-js";
-import React, { CSSProperties, useEffect, useState } from "react";
-import { TextInput } from "../../core/TextInput/TextInput";
-import { Button } from "../../core/Button/Button";
+import React, { useEffect, useState } from "react";
+import { Button, TextInput, Tooltip, Box } from "@/components/core";
+import { getByID, post } from "@/api/submission";
+import { useToastStore } from "@/stores/toast";
+import { useSharedStore } from "@/stores/shared";
+import { nanoid } from "nanoid";
 import Plain2Bold from "~icons/solar/plain-2-bold";
 import Book2Bold from "~icons/solar/book-2-bold";
 import SledgehammerBold from "~icons/solar/sledgehammer-bold";
 import Server2Bold from "~icons/solar/server-2-bold";
 import FlagBold from "~icons/solar/flag-bold";
-import { Tooltip } from "@/components/core";
-import { Box } from "@/components/core/Box";
-import { getByID, post } from "@/api/submission";
 import Loading from "~icons/svg-spinners/180-ring-with-bg";
-import { useToastStore } from "@/stores/toast";
-import { nanoid } from "nanoid";
-import { useSharedStore } from "@/stores/shared";
 
 export interface ChallengeModalProps {
     challenge?: Challenge;
@@ -139,6 +134,7 @@ export function ChallengeModal(props: ChallengeModalProps) {
                         });
                         break;
                 }
+                setFlag("");
                 clearInterval(intervalID);
                 setToastID(nanoid());
                 setSubmitLoading(false);

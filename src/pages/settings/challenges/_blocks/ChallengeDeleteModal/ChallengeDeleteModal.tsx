@@ -62,6 +62,7 @@ export function ChallengeDeleteModal(props: ChallengeDeleteModalProps) {
                 <Button
                     variant={"solid"}
                     color={"error"}
+                    shadow={"none"}
                     onClick={handleChallengeDelete}
                 >
                     确定

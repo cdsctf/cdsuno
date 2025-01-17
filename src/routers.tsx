@@ -96,11 +96,22 @@ export const router = createBrowserRouter([
                             {
                                 path: ":id",
                                 lazy: async () => {
-                                    let { Index } = await import(
-                                        "@/pages/settings/challenges/[id]"
+                                    let { Layout } = await import(
+                                        "@/pages/settings/challenges/[id]/layout"
                                     );
-                                    return { Component: Index };
+                                    return { Component: Layout };
                                 },
+                                children: [
+                                    {
+                                        index: true,
+                                        lazy: async () => {
+                                            let { Index } = await import(
+                                                "@/pages/settings/challenges/[id]"
+                                            );
+                                            return { Component: Index };
+                                        },
+                                    },
+                                ],
                             },
                         ],
                     },

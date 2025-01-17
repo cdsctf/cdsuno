@@ -1,11 +1,11 @@
 import { ComponentProps, CSSProperties, useContext } from "react";
 import styles from "./TableCell.module.scss";
 import clsx from "clsx";
-import Tablelvl2Context from "../Table/Tablelvl2Context";
+import Tablelvl2Context from "../Tablelvl2Context";
 import ArrowDownLinear from "~icons/solar/arrow-down-linear";
 import ArrowUpLinear from "~icons/solar/arrow-up-linear";
-import { Flex } from "../Flex";
-import { Box } from "../Box";
+import { Flex } from "../../Flex";
+import { Box } from "../../Box";
 
 export interface TableCellProps
     extends Omit<ComponentProps<"th" | "td">, "align"> {
