@@ -62,6 +62,7 @@
         "@unocss/preset-typography": "^65.4.2",
         "@unocss/preset-uno": "^65.4.2",
         "@unocss/preset-web-fonts": "^65.4.2",
+        "@unocss/transformer-directives": "^65.4.2",
         "@unocss/transformer-variant-group": "^65.4.2",
         "@vitejs/plugin-react-swc": "^3.7.2",
         "eslint": "^9.18.0",

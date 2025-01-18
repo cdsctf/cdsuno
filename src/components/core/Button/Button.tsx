@@ -26,7 +26,7 @@ export interface ButtonProps extends ComponentPropsWithRef<"button"> {
 export function Button(props: ButtonProps) {
     const {
         width = "auto",
-        height = "auto",
+        height = "2.5rem",
         color = "primary",
         variant = "solid",
         radius = 12,
@@ -59,6 +59,7 @@ export function Button(props: ButtonProps) {
             data-disabled={disabled}
             data-loading={loading}
             data-variant={variant}
+            data-icon-btn={!children}
             style={{ ...variables, ...style }}
             disabled={disabled || loading}
             {...rest}
@@ -68,7 +69,7 @@ export function Button(props: ButtonProps) {
                     {loading ? <Loading /> : icon}
                 </Box>
             )}
-            {children && <Box className={"button-content"}>{children}</Box>}
+            {children}
         </button>
     );
 }

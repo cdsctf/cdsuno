@@ -268,17 +268,16 @@ export function Index() {
                                     </Table.Cell>
                                     <Table.Cell>
                                         <Box className={"flex gap-[10px]"}>
-                                            <IconButton
+                                            <Button
                                                 variant={"ghost"}
                                                 onClick={() =>
                                                     navigate(
                                                         `/settings/challenges/${challenge?.id}`
                                                     )
                                                 }
-                                            >
-                                                <GalleryEditBold />
-                                            </IconButton>
-                                            <IconButton
+                                                icon={<GalleryEditBold />}
+                                            />
+                                            <Button
                                                 variant={"ghost"}
                                                 color={"error"}
                                                 onClick={() => {
@@ -289,9 +288,8 @@ export function Index() {
                                                         true
                                                     );
                                                 }}
-                                            >
-                                                <TrashBinTrashBold />
-                                            </IconButton>
+                                                icon={<TrashBinTrashBold />}
+                                            />
                                         </Box>
                                     </Table.Cell>
                                 </Table.Row>

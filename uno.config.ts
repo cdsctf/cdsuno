@@ -5,6 +5,7 @@ import {
     presetWebFonts,
 } from "unocss";
 import transformerVariantGroup from "@unocss/transformer-variant-group";
+import transformerDirectives from "@unocss/transformer-directives";
 import presetIcons from "@unocss/preset-icons";
 
 export default defineConfig({
@@ -30,7 +31,7 @@ export default defineConfig({
             },
         }),
     ],
-    transformers: [transformerVariantGroup()],
+    transformers: [transformerVariantGroup(), transformerDirectives()],
     theme: {
         colors: {
             red: "var(--color-red)",
