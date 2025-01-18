@@ -1,5 +1,5 @@
-import { Stack } from "@/components/core";
+import { Box } from "@/components/core";
 
 export function Index() {
-    return <Stack>attachments</Stack>;
+    return <Box>attachments</Box>;
 }

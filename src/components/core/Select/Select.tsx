@@ -4,7 +4,6 @@ import clsx from "clsx";
 import styles from "./Select.module.scss";
 import { Popover } from "../Popover";
 import { Box } from "../Box";
-import { Stack } from "../Stack";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { useThemeStore } from "@/stores/theme";
 

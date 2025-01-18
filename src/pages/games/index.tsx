@@ -1,9 +1,10 @@
 import styles from "./index.module.scss";
-import { Stack } from "@/components/core";
 import { Recent } from "./_blocks/Recent";
 import { All } from "./_blocks/All";
 import { useSharedStore } from "@/stores/shared";
 import { useEffect } from "react";
+import { Box } from "@/components/core";
+import clsx from "clsx";
 
 export function Index() {
     const sharedStore = useSharedStore();
@@ -13,9 +14,9 @@ export function Index() {
     }, [sharedStore?.config?.site?.title]);
 
     return (
-        <Stack className={styles["root"]} gap={0}>
+        <Box className={clsx(styles["root"], "flex flex-col")}>
             <Recent />
             <All />
-        </Stack>
+        </Box>
     );
 }

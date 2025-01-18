@@ -1,4 +1,4 @@
-import { Box, Image, Stack } from "@/components/core";
+import { Box, Image } from "@/components/core";
 import styles from "./index.module.scss";
 import { MarkdownRender } from "@/components/utils/MarkdownRender";
 import { useParams } from "react-router";
@@ -29,7 +29,9 @@ export function Index() {
             <Box className={styles["paper"]}>
                 <MarkdownRender src={game?.description} />
             </Box>
-            <Stack className={styles["panel"]} align={"center"}>
+            <Box
+                className={clsx(styles["panel"], "flex flex-col items-center")}
+            >
                 <Image
                     src={`/api/games/${id}/poster`}
                     width={"100%"}
@@ -38,7 +40,7 @@ export function Index() {
                     }}
                 />
                 <h1 className={styles["title"]}>{game?.title}</h1>
-            </Stack>
+            </Box>
         </Box>
     );
 }

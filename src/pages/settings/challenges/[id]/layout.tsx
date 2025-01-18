@@ -1,4 +1,4 @@
-import { Box, Stack } from "@/components/core";
+import { Box } from "@/components/core";
 import { Sidebar } from "./_blocks/Sidebar";
 import { Outlet, useParams } from "react-router";
 import styles from "./layout.module.scss";
@@ -50,7 +50,7 @@ export function Layout() {
                 className={clsx(styles["root"], "flex gap-[3rem] items-start")}
             >
                 <Sidebar />
-                <Stack className={styles["paper"]}>
+                <Box className={clsx(styles["paper"], "flex flex-col")}>
                     <Box className={"flex w-full justify-between items-center"}>
                         <Box
                             className={clsx(
@@ -80,7 +80,7 @@ export function Layout() {
                     </Box>
                     <Divider variant={"dashed"} />
                     <Outlet />
-                </Stack>
+                </Box>
             </Box>
         </Context.Provider>
     );

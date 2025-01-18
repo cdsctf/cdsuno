@@ -1,11 +1,5 @@
 import { getChallenges, getChallengeStatus } from "@/api/challenge";
-import {
-    Button,
-    Dialog,
-    Pagination,
-    Stack,
-    TextInput,
-} from "@/components/core";
+import { Button, Dialog, Pagination, TextInput } from "@/components/core";
 import { ChallengeModal } from "@/components/modals/ChallengeModal";
 import { ChallengeCard } from "@/components/widgets/ChallengeCard";
 import { Challenge, ChallengeStatus } from "@/models/challenge";
@@ -99,7 +93,7 @@ export function Index() {
     return (
         <>
             <Box className={"flex items-start px-[10rem] py-[35px]"}>
-                <Stack width={"100%"} gap={30} align={"center"}>
+                <Box className={"flex flex-col w-full gap-[30px] items-center"}>
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
@@ -187,15 +181,15 @@ export function Index() {
                             )}
                         </Grid>
                     </Box>
-                    <Stack align={"center"} width={"100%"}>
+                    <Box className={"flex flex-col items-center w-full"}>
                         <Pagination
                             total={total}
                             size={size}
                             value={page}
                             onChange={(page) => setPage(page)}
                         />
-                    </Stack>
-                </Stack>
+                    </Box>
+                </Box>
             </Box>
             <Dialog
                 open={modalOpen}

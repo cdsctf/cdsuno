@@ -1,4 +1,4 @@
-import { Box, Image, Stack } from "@/components/core";
+import { Box, Image } from "@/components/core";
 import styles from "./GameCard.module.scss";
 import { Game } from "@/models/game";
 import clsx from "clsx";
@@ -21,13 +21,7 @@ export function GameCard(props: GameCardProps) {
                 width={"25%"}
                 radius={"20px 0 0 20px"}
             />
-            <Stack
-                gap={10}
-                width={"50%"}
-                style={{
-                    margin: "2rem 0",
-                }}
-            >
+            <Box className={"flex flex-col gap-[10px] w-1/2 my-2"}>
                 <h2
                     style={{
                         fontSize: "1.25rem",
@@ -44,7 +38,7 @@ export function GameCard(props: GameCardProps) {
                 >
                     {game?.sketch}
                 </p>
-            </Stack>
+            </Box>
             <Box className={styles["trapezoid"]} />
         </Box>
     );

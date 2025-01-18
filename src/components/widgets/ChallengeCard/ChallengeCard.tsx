@@ -9,7 +9,6 @@ import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
 import { Box } from "@/components/core/Box";
 import clsx from "clsx";
-import { Stack } from "@/components/core";
 import CupFirstBold from "~icons/solar/cup-first-bold";
 import FlagBold from "~icons/solar/flag-bold";
 
@@ -76,7 +75,7 @@ export function ChallengeCard(props: ChallengeCard) {
                     content={
                         <>
                             {Number(status?.solved_times) > 0 && (
-                                <Stack gap={5}>
+                                <Box className={"flex flex-col gap-[5px]"}>
                                     {Number(status?.bloods?.length) > 0 && (
                                         <Box
                                             className={
@@ -84,7 +83,7 @@ export function ChallengeCard(props: ChallengeCard) {
                                             }
                                         >
                                             <CupFirstBold color={"#FFC107"} />
-                                            <Stack gap={0}>
+                                            <Box className={"flex flex-col"}>
                                                 <span
                                                     style={{
                                                         fontSize: "0.8rem",
@@ -107,7 +106,7 @@ export function ChallengeCard(props: ChallengeCard) {
                                                         ) * 1000
                                                     ).toLocaleString()}
                                                 </span>
-                                            </Stack>
+                                            </Box>
                                         </Box>
                                     )}
                                     {Number(status?.bloods?.length) > 1 && (
@@ -117,7 +116,7 @@ export function ChallengeCard(props: ChallengeCard) {
                                             }
                                         >
                                             <FlagBold color={"#9E9E9E"} />
-                                            <Stack gap={0}>
+                                            <Box className={"flex flex-col"}>
                                                 <span
                                                     style={{
                                                         fontSize: "0.8rem",
@@ -140,7 +139,7 @@ export function ChallengeCard(props: ChallengeCard) {
                                                         ) * 1000
                                                     ).toLocaleString()}
                                                 </span>
-                                            </Stack>
+                                            </Box>
                                         </Box>
                                     )}
                                     {Number(status?.bloods?.length) > 2 && (
@@ -150,7 +149,7 @@ export function ChallengeCard(props: ChallengeCard) {
                                             }
                                         >
                                             <FlagBold color={"#FF9800"} />
-                                            <Stack gap={0}>
+                                            <Box className={"flex flex-col"}>
                                                 <span
                                                     style={{
                                                         fontSize: "0.8rem",
@@ -173,10 +172,10 @@ export function ChallengeCard(props: ChallengeCard) {
                                                         ) * 1000
                                                     ).toLocaleString()}
                                                 </span>
-                                            </Stack>
+                                            </Box>
                                         </Box>
                                     )}
-                                </Stack>
+                                </Box>
                             )}
                             {Number(status?.solved_times) == 0 && (
                                 <span>虚位以待</span>

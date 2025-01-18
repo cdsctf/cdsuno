@@ -1,4 +1,4 @@
-import { Box, IconButton, Select, Stack, TextInput } from "@/components/core";
+import { Box, IconButton, Select, TextInput } from "@/components/core";
 import PenNewSquareBold from "~icons/solar/pen-new-square-bold";
 import LinkCircleBold from "~icons/solar/link-circle-bold";
 import ArrowRightLinear from "~icons/solar/arrow-right-linear";
@@ -8,6 +8,7 @@ import { useCategoryStore } from "@/stores/category";
 import { createChallenge } from "@/api/challenge";
 import { useToastStore } from "@/stores/toast";
 import { useNavigate } from "react-router";
+import clsx from "clsx";
 
 export function ChallengeCreateModal() {
     const categoryStore = useCategoryStore();
@@ -44,8 +45,8 @@ export function ChallengeCreateModal() {
     }
 
     return (
-        <Stack className={styles["root"]}>
-            <Stack width={"100%"}>
+        <Box className={clsx(styles["root"], "flex flex-col")}>
+            <Box className={"flex flex-col w-full"}>
                 <Box
                     className={
                         "flex items-center gap-[5px] text-primary dark:text-white"
@@ -120,7 +121,7 @@ export function ChallengeCreateModal() {
                         <ArrowRightLinear />
                     </IconButton>
                 </Box>
-            </Stack>
-        </Stack>
+            </Box>
+        </Box>
     );
 }
