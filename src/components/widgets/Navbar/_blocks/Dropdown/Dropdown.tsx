@@ -37,6 +37,7 @@ export function Dropdown() {
                             navigate("/login");
                         }
                     }}
+                    className={"py-10"}
                 >
                     <Box className={"flex flex-col w-full gap-[8px]"}>
                         {authStore?.user ? (

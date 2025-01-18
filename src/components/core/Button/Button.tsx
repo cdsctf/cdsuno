@@ -1,7 +1,6 @@
 import React, { CSSProperties, Ref } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import Loading from "~icons/svg-spinners/180-ring-with-bg";
-import "./Button.scss";
 import clsx from "clsx";
 import { Box } from "../Box";
 import { ThemeColor } from "@/types/theme";
