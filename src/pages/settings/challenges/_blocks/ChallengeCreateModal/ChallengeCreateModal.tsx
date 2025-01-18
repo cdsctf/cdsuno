@@ -46,7 +46,7 @@ export function ChallengeCreateModal() {
 
     return (
         <Box className={clsx(styles["root"], "flex flex-col")}>
-            <Box className={"flex flex-col w-full"}>
+            <Box className={"flex flex-col w-full gap-2"}>
                 <Box
                     className={
                         "flex items-center gap-[5px] text-primary dark:text-white"
@@ -97,7 +97,7 @@ export function ChallengeCreateModal() {
                         <ArrowRightLinear />
                     </IconButton>
                 </Box>
-                <Box className={styles["divider"]} />
+                <Box className={clsx(styles["divider"], "my-2")} />
                 <Box
                     className={
                         "flex items-center gap-[5px] text-primary dark:text-white"

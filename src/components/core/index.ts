@@ -9,7 +9,6 @@ export * from "./Dialog";
 export * from "./Grid";
 export * from "./IconButton";
 export * from "./Image";
-export * from "./_blocks/InputBase";
 export * from "./LoadingOverlay";
 export * from "./NumberInput";
 export * from "./Pagination";

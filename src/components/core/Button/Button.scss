@@ -15,6 +15,11 @@
     font-size: 1.125rem;
     line-height: 1.75rem;
     overflow: hidden;
+    color: light-dark(var(--button-text-color), #ffffff);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 21.6px;
+    letter-spacing: 0.8px;
 
     cursor: pointer;
 
@@ -77,17 +82,15 @@
             filter: brightness(1.2);
         }
     }
-}
 
-.button-content {
-    color: light-dark(var(--button-text-color), #ffffff);
-    font-size: 0.875rem;
-    font-weight: 600;
-    line-height: 21.6px;
-    letter-spacing: 0.8px;
+    &[data-icon-btn="true"] {
+        padding: 0.5rem;
+        width: var(--button-height);
+    }
 }
 
 .button-icon {
+    font-size: 1rem;
     display: inline-block;
     color: light-dark(var(--button-text-color), #ffffff);
 }
