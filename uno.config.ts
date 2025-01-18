@@ -32,6 +32,9 @@ export default defineConfig({
         }),
     ],
     transformers: [transformerVariantGroup(), transformerDirectives()],
+    shortcuts: {
+        stack: "flex flex-col",
+    },
     theme: {
         colors: {
             red: "var(--color-red)",
@@ -64,26 +67,5 @@ export default defineConfig({
             xl: "var(--shadow-xl)",
         },
     },
-    rules: [
-        // Custom theme rules for light mode
-        [
-            "[data-theme=light]",
-            {
-                "color-scheme": "light",
-                "--bg-color": "var(--color-light)",
-                "--bg-2nd-color": "#f2f2f2",
-                "--text-color": "var(--color-dark)",
-            },
-        ],
-        // Custom theme rules for dark mode
-        [
-            "[data-theme=dark]",
-            {
-                "color-scheme": "dark",
-                "--bg-color": "var(--color-dark)",
-                "--bg-2nd-color": "#1f2a2f",
-                "--text-color": "var(--color-light)",
-            },
-        ],
-    ],
+    rules: [],
 });
