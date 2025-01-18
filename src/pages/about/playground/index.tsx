@@ -1,7 +1,6 @@
 import { Avatar } from "@/components/core/Avatar";
 import { Button } from "@/components/core/Button";
 import { Checkbox } from "@/components/core/Checkbox";
-import { DatetimePicker } from "@/components/core/DatetimePicker";
 import { Dialog } from "@/components/core/Dialog";
 import { TextInput } from "@/components/core/TextInput";
 import { Tooltip } from "@/components/core/Tooltip";
@@ -24,7 +23,7 @@ import { TableRow } from "@/components/core/Table/TableRow";
 import { TableCell } from "@/components/core/Table/TableCell/TableCell";
 import { TableBody } from "@/components/core/Table/TableBody/TableBody";
 import { useSharedStore } from "@/stores/shared";
-import { Box, Flex, Select } from "@/components/core";
+import { Box, Select } from "@/components/core";
 import { useCategoryStore } from "@/stores/category";
 
 export function Index() {
@@ -48,13 +47,10 @@ export function Index() {
 
     const [value, setValue] = useState<string>("");
     const [open, setOpen] = useState(false);
-    const [popoverOpen, setPopoverOpen] = useState(false);
 
     const [category, setCategory] = useState<number>(1);
 
     const [loading, setLoading] = useState(false);
-
-    const [datetime, setDatetime] = useState<DateTime>(DateTime.now());
 
     const [isSolveds, setIsSolveds] = useState<boolean[]>(
         new Array(16).fill(false)
@@ -195,26 +191,6 @@ ReactDOM.render(
                 加载
             </Button>
             <DatetimeInput />
-            <div
-                style={{
-                    display: "flex",
-                    gap: 20,
-                }}
-            >
-                <DatetimePicker
-                    value={datetime}
-                    onChange={(datetime) => {
-                        setDatetime(datetime);
-                    }}
-                />
-                <p style={{ alignItems: "center" }}>To</p>
-                <DatetimePicker
-                    value={datetime}
-                    onChange={(datetime) => {
-                        setDatetime(datetime);
-                    }}
-                />
-            </div>
             <Button
                 variant="solid"
                 onClick={() => {
@@ -486,16 +462,15 @@ ReactDOM.render(
                 onChange={(value) => setCategory(Number(value))}
                 options={categoryStore?.categories.map((category) => ({
                     label: (
-                        <Flex
-                            align={"center"}
-                            gap={10}
+                        <Box
+                            className={"flex items-center gap-[10px]"}
                             style={{
                                 color: category?.color,
                             }}
                         >
                             <Box>{category?.icon}</Box>
                             {category.name}
-                        </Flex>
+                        </Box>
                     ),
                     value: String(category.id),
                 }))}

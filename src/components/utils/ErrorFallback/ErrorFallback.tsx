@@ -3,26 +3,26 @@ import { FallbackProps } from "react-error-boundary";
 import styles from "./ErrorFallback.module.scss";
 import SolarPlanet2BoldDuotone from "~icons/solar/planet-2-bold-duotone";
 import { Textarea } from "@/components/core/Textarea";
-import { Flex } from "@/components/core/Flex";
 import RestartBold from "~icons/solar/restart-bold";
 import DocumentAddBold from "~icons/solar/document-add-bold";
+import clsx from "clsx";
 
 export function ErrorFallback(props: FallbackProps) {
     const { error, resetErrorBoundary } = props;
 
     return (
         <Stack className={styles["root"]}>
-            <Flex
-                width={"100%"}
-                align={"center"}
-                justify={"center"}
-                className={styles["nav"]}
+            <Box
+                className={clsx(
+                    styles["nav"],
+                    "flex w-full items-center justify-center"
+                )}
             >
                 <Box className={styles["icon"]}>
                     <SolarPlanet2BoldDuotone />
                 </Box>
                 <h2 className={styles["title"]}>好像出了点问题</h2>
-            </Flex>
+            </Box>
             <Textarea
                 value={error.stack}
                 width="45vw"
@@ -30,11 +30,11 @@ export function ErrorFallback(props: FallbackProps) {
                 maxHeight="40vh"
                 readOnly
             />
-            <Flex
-                width={"100%"}
-                className={styles["actions"]}
-                align={"center"}
-                gap={10}
+            <Box
+                className={clsx(
+                    styles["actions"],
+                    "flex items-center w-full gap-[10px]"
+                )}
             >
                 <Button
                     width={"100%"}
@@ -50,7 +50,7 @@ export function ErrorFallback(props: FallbackProps) {
                 >
                     查看错误信息
                 </Button>
-            </Flex>
+            </Box>
         </Stack>
     );
 }

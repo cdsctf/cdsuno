@@ -1,10 +1,11 @@
-import { Box, Flex, Image, Stack } from "@/components/core";
+import { Box, Image, Stack } from "@/components/core";
 import styles from "./index.module.scss";
 import { MarkdownRender } from "@/components/utils/MarkdownRender";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { Game } from "@/models/game";
 import { get } from "@/api/game";
+import clsx from "clsx";
 
 export function Index() {
     const { id } = useParams();
@@ -24,7 +25,7 @@ export function Index() {
     }, []);
 
     return (
-        <Flex className={styles["root"]} align={"flex-start"} gap={"5rem"}>
+        <Box className={clsx(styles["root"], "flex items-start gap-[5rem]")}>
             <Box className={styles["paper"]}>
                 <MarkdownRender src={game?.description} />
             </Box>
@@ -38,6 +39,6 @@ export function Index() {
                 />
                 <h1 className={styles["title"]}>{game?.title}</h1>
             </Stack>
-        </Flex>
+        </Box>
     );
 }

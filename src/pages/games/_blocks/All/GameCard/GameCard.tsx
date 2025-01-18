@@ -1,6 +1,7 @@
-import { Box, Flex, Image, Stack } from "@/components/core";
+import { Box, Image, Stack } from "@/components/core";
 import styles from "./GameCard.module.scss";
 import { Game } from "@/models/game";
+import clsx from "clsx";
 
 export interface GameCardProps {
     game: Game;
@@ -11,10 +12,8 @@ export function GameCard(props: GameCardProps) {
     const { game, onClick } = props;
 
     return (
-        <Flex
-            className={styles["root"]}
-            gap={30}
-            align={"flex-start"}
+        <Box
+            className={clsx(styles["root"], "flex items-start gap-[30px]")}
             onClick={onClick}
         >
             <Image
@@ -47,6 +46,6 @@ export function GameCard(props: GameCardProps) {
                 </p>
             </Stack>
             <Box className={styles["trapezoid"]} />
-        </Flex>
+        </Box>
     );
 }

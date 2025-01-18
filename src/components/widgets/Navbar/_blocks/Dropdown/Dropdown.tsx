@@ -2,7 +2,6 @@ import Sun2BoldDuotone from "~icons/solar/sun-2-bold-duotone";
 import MoonBoldDuotone from "~icons/solar/moon-bold-duotone";
 import LogoutLineDuotone from "~icons/solar/logout-linear";
 import { Avatar, Box, Button, Stack } from "@/components/core";
-import { Flex } from "@/components/core/Flex";
 import { useThemeStore } from "@/stores/theme";
 import { IconButton } from "@/components/core/IconButton";
 import { useAuthStore } from "@/stores/auth";
@@ -62,11 +61,10 @@ export function Dropdown() {
                 </Button>
                 <Box className={styles["divider"]} />
                 <Stack width={"100%"} className={styles["features"]}>
-                    <Flex
-                        width={"100%"}
-                        gap={"20px"}
-                        align={"center"}
-                        justify={"center"}
+                    <Box
+                        className={
+                            "flex w-full flex gap-[20px] items-center justify-center"
+                        }
                     >
                         <IconButton
                             variant={"ghost"}
@@ -85,7 +83,7 @@ export function Dropdown() {
                         >
                             <MoonBoldDuotone />
                         </IconButton>
-                    </Flex>
+                    </Box>
                     {authStore?.user && (
                         <Button
                             width={"100%"}

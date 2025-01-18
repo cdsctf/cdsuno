@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Image, Flex, Badge } from "@/components/core";
+import { Box, Button, Stack, Image, Badge } from "@/components/core";
 import PlayCircleBold from "~icons/solar/play-circle-bold";
 import styles from "./Recent.module.scss";
 import { Tip } from "./Tip";
@@ -10,6 +10,7 @@ import Planet2BoldDuotone from "~icons/solar/planet-2-bold-duotone";
 import PlanetBold from "~icons/solar/planet-bold";
 import { useNavigate } from "react-router";
 import { Empty } from "../_blocks/Empty";
+import clsx from "clsx";
 
 export function Recent() {
     const navigate = useNavigate();
@@ -75,14 +76,10 @@ export function Recent() {
                 <>
                     <Box className={styles["right-section"]}>
                         <Stack className={styles["scoreboard"]}>
-                            <Flex
-                                gap={10}
-                                width={"100%"}
-                                justify={"center"}
-                                align={"center"}
-                                style={{
-                                    userSelect: "none",
-                                }}
+                            <Box
+                                className={
+                                    "flex w-full justify-center items-center select-none gap-[10px]"
+                                }
                             >
                                 <span
                                     style={{
@@ -93,19 +90,22 @@ export function Recent() {
                                 >
                                     积分榜
                                 </span>
-                            </Flex>
+                            </Box>
                             <Stack
                                 gap={5}
                                 width={"100%"}
                                 style={{ flex: 1, position: "relative" }}
                             >
                                 {scoreboard?.map((item, index) => (
-                                    <Flex
+                                    <Box
                                         key={index}
-                                        width={"100%"}
-                                        align={"center"}
+                                        className={"flex w-full items-center"}
                                     >
-                                        <Flex gap={10} align={"center"}>
+                                        <Box
+                                            className={
+                                                "flex items-center gap-[10px]"
+                                            }
+                                        >
                                             <Box>
                                                 {getRankIcon(
                                                     item?.game_team?.rank!
@@ -119,16 +119,15 @@ export function Recent() {
                                                     }
                                                 </Badge>
                                             </span>
-                                        </Flex>
-                                        <Flex
-                                            justify={"flex-end"}
-                                            style={{
-                                                flex: 1,
-                                            }}
+                                        </Box>
+                                        <Box
+                                            className={
+                                                "flex justify-end flex-1"
+                                            }
                                         >
                                             {item?.game_team?.pts}
-                                        </Flex>
-                                    </Flex>
+                                        </Box>
+                                    </Box>
                                 ))}
                             </Stack>
                             <Box className={styles["trapezoid"]} />
@@ -168,10 +167,11 @@ export function Recent() {
                                 }}
                             />
                             <Box className={styles["info-section"]}>
-                                <Flex
-                                    className={styles["info"]}
-                                    align={"center"}
-                                    gap={20}
+                                <Box
+                                    className={clsx(
+                                        styles["info"],
+                                        "flex items-center gap-[20px]"
+                                    )}
                                 >
                                     <Box className={styles["icon-section"]}>
                                         <Box
@@ -236,7 +236,7 @@ export function Recent() {
                                             {games?.[index]?.sketch}
                                         </span>
                                     </Stack>
-                                </Flex>
+                                </Box>
                             </Box>
                             <Box className={styles["enter"]}>
                                 <Button
@@ -252,10 +252,11 @@ export function Recent() {
                                 </Button>
                             </Box>
                             <Box className={styles["trapezoid"]} />
-                            <Flex
-                                className={styles["pagination"]}
-                                gap={10}
-                                width={"80%"}
+                            <Box
+                                className={clsx(
+                                    styles["pagination"],
+                                    "flex w-[80%] gap-[10px]"
+                                )}
                             >
                                 {games?.map((_, i) => (
                                     <Button
@@ -271,7 +272,7 @@ export function Recent() {
                                         }}
                                     />
                                 ))}
-                            </Flex>
+                            </Box>
                         </Box>
                     </Box>
                 </>

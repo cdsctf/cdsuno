@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from "vite";
 import React from "@vitejs/plugin-react-swc";
 import Icons from "unplugin-icons/vite";
+import UnoCSS from "unocss/vite";
 import path from "path";
 import crypto from "crypto";
 
@@ -28,6 +29,7 @@ export default defineConfig(({ mode }) => {
         },
         plugins: [
             React(),
+            UnoCSS(),
             Icons({
                 compiler: "jsx",
                 jsx: "react",

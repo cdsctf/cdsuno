@@ -6,12 +6,11 @@ import {
     Stack,
     TextInput,
 } from "@/components/core";
-import { Flex } from "@/components/core/Flex";
 import { ChallengeModal } from "@/components/modals/ChallengeModal";
 import { ChallengeCard } from "@/components/widgets/ChallengeCard";
 import { Challenge, ChallengeStatus } from "@/models/challenge";
 import { useAuthStore } from "@/stores/auth";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import MinimalisticMagniferBoldDuotone from "~icons/solar/minimalistic-magnifer-bold-duotone";
 import HashtagBoldDuotone from "~icons/solar/hashtag-bold-duotone";
 import { Grid } from "@/components/core/Grid";
@@ -99,12 +98,7 @@ export function Index() {
 
     return (
         <>
-            <Flex
-                style={{
-                    padding: "35px 10rem",
-                }}
-                align={"flex-start"}
-            >
+            <Box className={"flex items-start px-[10rem] py-[35px]"}>
                 <Stack width={"100%"} gap={30} align={"center"}>
                     <form
                         onSubmit={(e) => {
@@ -116,7 +110,7 @@ export function Index() {
                             width: "80%",
                         }}
                     >
-                        <Flex align={"center"} gap={15}>
+                        <Box className={"flex items-center gap-[15px]"}>
                             <TextInput
                                 icon={<HashtagBoldDuotone />}
                                 placeholder={"题目 ID"}
@@ -140,7 +134,7 @@ export function Index() {
                                 }}
                             />
                             <Button type={"submit"}>搜索</Button>
-                        </Flex>
+                        </Box>
                     </form>
                     <Box
                         style={{
@@ -202,7 +196,7 @@ export function Index() {
                         />
                     </Stack>
                 </Stack>
-            </Flex>
+            </Box>
             <Dialog
                 open={modalOpen}
                 onClose={() => {

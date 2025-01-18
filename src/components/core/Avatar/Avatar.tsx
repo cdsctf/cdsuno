@@ -1,8 +1,7 @@
-import styles from "./Avatar.module.scss";
-import UserCircleBold from "~icons/solar/user-circle-bold";
+import "./Avatar.scss";
 import useThemeColor from "@/hooks/useThemeColor";
-import { ComponentProps, useState } from "react";
-import { Box } from "../Box";
+import UserCircleBold from "~icons/solar/user-circle-bold";
+import { ComponentProps } from "react";
 import { Avatar as ArkAvatar } from "@ark-ui/react";
 
 export interface AvatarProps extends ComponentProps<"img"> {
@@ -21,7 +20,9 @@ export function Avatar(props: AvatarProps) {
         color = "primary",
         size = "3rem",
         fallback = (
-            <UserCircleBold color="light-dark(var(--avatar-border-color), #fff)" />
+            <UserCircleBold
+                className={"iconify text-primary dark:text-white"}
+            />
         ),
         style,
         ...rest
@@ -35,21 +36,21 @@ export function Avatar(props: AvatarProps) {
 
     return (
         <ArkAvatar.Root
-            className={styles["root"]}
+            className={`avatar`}
             style={{
                 ...variables,
                 ...style,
             }}
             {...rest}
         >
-            <ArkAvatar.Fallback className={styles["fallback"]}>
+            <ArkAvatar.Fallback className={`avatar-fallback`}>
                 {fallback || alt.charAt(0).toUpperCase()}
             </ArkAvatar.Fallback>
             <ArkAvatar.Image
                 src={src}
                 alt={alt}
                 draggable={false}
-                className={styles["img"]}
+                className={`avatar-img`}
             />
         </ArkAvatar.Root>
     );

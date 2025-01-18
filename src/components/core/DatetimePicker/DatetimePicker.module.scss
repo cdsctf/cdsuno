@@ -1,7 +1,3 @@
-@use "@/styles/mixins";
-
-$border-color: var(--dtp-border-color);
-
 @keyframes scale-up {
     0% {
         transform: scale(0.9);
@@ -46,7 +42,7 @@ $border-color: var(--dtp-border-color);
 
 .wrapper {
     background-color: var(--bg-2nd-color);
-    border: 1px solid $border-color;
+    border: 1px solid var(--dtp-border-color);
     border-radius: 12px;
     padding: 16px;
 }
@@ -96,23 +92,24 @@ $border-color: var(--dtp-border-color);
             border-radius: 10px;
 
             &:hover {
-                border: $border-color 1.5px solid;
+                border: var(--dtp-border-color) 1.5px solid;
                 transition: 0.2s ease-in-out;
                 background-color: rgba(255, 255, 255, 0.2);
             }
 
             &.selected {
-                border: $border-color 3px solid;
+                border: var(--dtp-border-color) 3px solid;
                 animation: scale-up 0.2s ease-in-out;
             }
             &:active.selected {
                 animation: none;
-                border: $border-color 1.5px solid;
+                border: var(--dtp-border-color) 1.5px solid;
             }
 
             &:active.selected::after {
                 animation: scale-up 0.2s ease-in-out;
             }
+
             &.empty {
                 cursor: default;
                 user-select: none;

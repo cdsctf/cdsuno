@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Box, BoxProps } from "../Box";
-import styles from "./Divider.module.scss";
+import "./Divider.scss";
 
 export interface DividerProps extends BoxProps {
     orientation?: "horizontal" | "vertical";
@@ -22,7 +22,7 @@ export function Divider(props: DividerProps) {
 
     return (
         <Box
-            className={clsx(styles["root"], className)}
+            className={clsx("divider", className)}
             style={{
                 ...variables,
                 ...style,

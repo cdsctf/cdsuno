@@ -3,7 +3,6 @@ import {
     Box,
     Button,
     Dialog,
-    Flex,
     IconButton,
     NumberInput,
     Pagination,
@@ -85,7 +84,7 @@ export function Index() {
     return (
         <>
             <Stack className={styles["root"]} align={"center"} gap={20}>
-                <Flex width={"80%"} gap={20} align={"center"}>
+                <Box className={"flex w-[80%] gap-[20px] items-center"}>
                     <TextInput
                         placeholder={"搜索"}
                         icon={<MinimalisticMagniferBoldDuotone />}
@@ -103,7 +102,7 @@ export function Index() {
                     >
                         新建题目
                     </Button>
-                </Flex>
+                </Box>
                 <Box className={styles["table"]}>
                     <Table>
                         <Table.Head
@@ -223,9 +222,10 @@ export function Index() {
                                         </p>
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Flex
-                                            align={"center"}
-                                            gap={5}
+                                        <Box
+                                            className={
+                                                "flex items-center gap-[5px]"
+                                            }
                                             style={{
                                                 color: categoryStore?.getCategory(
                                                     challenge?.category
@@ -242,7 +242,7 @@ export function Index() {
                                                     challenge?.category
                                                 )
                                                 ?.name?.toUpperCase()}
-                                        </Flex>
+                                        </Box>
                                     </Table.Cell>
                                     <Table.Cell>
                                         <p
@@ -262,7 +262,7 @@ export function Index() {
                                         ).toLocaleString()}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Flex gap={10}>
+                                        <Box className={"flex gap-[10px]"}>
                                             <IconButton
                                                 variant={"ghost"}
                                                 onClick={() =>
@@ -287,25 +287,24 @@ export function Index() {
                                             >
                                                 <TrashBinTrashBold />
                                             </IconButton>
-                                        </Flex>
+                                        </Box>
                                     </Table.Cell>
                                 </Table.Row>
                             ))}
                         </Table.Body>
                     </Table>
                 </Box>
-                <Flex
-                    width={"80%"}
-                    justify={"space-between"}
-                    align={"center"}
-                    gap={20}
+                <Box
+                    className={
+                        "flex w-[80%] justify-between items-center gap-[20px]"
+                    }
                 >
                     <Pagination
                         total={Math.ceil(total / size)}
                         value={page}
                         onChange={(value) => setPage(value)}
                     />
-                    <Flex align={"center"} gap={10}>
+                    <Box className={"flex items-center gap-[10px]"}>
                         <span>每页显示</span>
                         <NumberInput
                             width={"100px"}
@@ -314,8 +313,8 @@ export function Index() {
                             onChange={setSize}
                             min={1}
                         />
-                    </Flex>
-                </Flex>
+                    </Box>
+                </Box>
             </Stack>
             <Dialog
                 open={challengeCreateModalOpen}

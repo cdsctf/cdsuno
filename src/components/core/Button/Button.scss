@@ -1,4 +1,4 @@
-.root {
+.button {
     width: var(--button-width, auto);
     height: var(--button-height);
     display: flex;
@@ -79,7 +79,7 @@
     }
 }
 
-.content {
+.button-content {
     color: light-dark(var(--button-text-color), #ffffff);
     font-size: 0.875rem;
     font-weight: 600;
@@ -87,6 +87,7 @@
     letter-spacing: 0.8px;
 }
 
-.icon {
+.button-icon {
+    display: inline-block;
     color: light-dark(var(--button-text-color), #ffffff);
 }

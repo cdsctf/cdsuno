@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithRef, CSSProperties } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
-import styles from "./Button.module.scss";
 import Loading from "~icons/svg-spinners/180-ring-with-bg";
+import "./Button.scss";
 import clsx from "clsx";
 import { Box } from "../Box";
 import { ThemeColor } from "@/types/theme";
@@ -55,7 +55,7 @@ export function Button(props: ButtonProps) {
     return (
         <button
             ref={ref}
-            className={clsx(styles["root"], className)}
+            className={clsx("button", className)}
             data-disabled={disabled}
             data-loading={loading}
             data-variant={variant}
@@ -64,11 +64,11 @@ export function Button(props: ButtonProps) {
             {...rest}
         >
             {(loading || icon) && (
-                <Box className={styles["icon"]}>
+                <Box className={"button-icon"}>
                     {loading ? <Loading /> : icon}
                 </Box>
             )}
-            {children && <Box className={styles["content"]}>{children}</Box>}
+            {children && <Box className={"button-content"}>{children}</Box>}
         </button>
     );
 }

@@ -8,7 +8,6 @@ import { useCategoryStore } from "@/stores/category";
 import useThemeColor from "@/hooks/useThemeColor";
 import chroma from "chroma-js";
 import { Box } from "@/components/core/Box";
-import { Flex } from "@/components/core/Flex";
 import clsx from "clsx";
 import { Stack } from "@/components/core";
 import CupFirstBold from "~icons/solar/cup-first-bold";
@@ -53,14 +52,18 @@ export function ChallengeCard(props: ChallengeCard) {
             ref={ref}
             {...rest}
         >
-            <Flex className={styles["category"]}>
+            <Box
+                className={
+                    "flex absolute top-[12.5%] left-[20px] text-[0.75rem] font-semibold select-none"
+                }
+            >
                 <Badge
                     variant={"solid"}
                     color={chroma(baseColor).darken(1).hex()}
                 >
                     {category?.name?.toUpperCase()}
                 </Badge>
-            </Flex>
+            </Box>
             <Box className={styles["icon"]}>{category?.icon}</Box>
             <h1 className={styles["title"]}>{challenge.title}</h1>
             <Box className={styles["divider"]} />
@@ -75,7 +78,11 @@ export function ChallengeCard(props: ChallengeCard) {
                             {Number(status?.solved_times) > 0 && (
                                 <Stack gap={5}>
                                     {Number(status?.bloods?.length) > 0 && (
-                                        <Flex gap={10} align={"center"}>
+                                        <Box
+                                            className={
+                                                "flex items-center gap-[10px]"
+                                            }
+                                        >
                                             <CupFirstBold color={"#FFC107"} />
                                             <Stack gap={0}>
                                                 <span
@@ -101,10 +108,14 @@ export function ChallengeCard(props: ChallengeCard) {
                                                     ).toLocaleString()}
                                                 </span>
                                             </Stack>
-                                        </Flex>
+                                        </Box>
                                     )}
                                     {Number(status?.bloods?.length) > 1 && (
-                                        <Flex gap={10} align={"center"}>
+                                        <Box
+                                            className={
+                                                "flex items-center gap-[10px]"
+                                            }
+                                        >
                                             <FlagBold color={"#9E9E9E"} />
                                             <Stack gap={0}>
                                                 <span
@@ -130,10 +141,14 @@ export function ChallengeCard(props: ChallengeCard) {
                                                     ).toLocaleString()}
                                                 </span>
                                             </Stack>
-                                        </Flex>
+                                        </Box>
                                     )}
                                     {Number(status?.bloods?.length) > 2 && (
-                                        <Flex gap={10} align={"center"}>
+                                        <Box
+                                            className={
+                                                "flex items-center gap-[10px]"
+                                            }
+                                        >
                                             <FlagBold color={"#FF9800"} />
                                             <Stack gap={0}>
                                                 <span
@@ -159,7 +174,7 @@ export function ChallengeCard(props: ChallengeCard) {
                                                     ).toLocaleString()}
                                                 </span>
                                             </Stack>
-                                        </Flex>
+                                        </Box>
                                     )}
                                 </Stack>
                             )}
