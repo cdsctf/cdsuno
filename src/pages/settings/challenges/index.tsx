@@ -3,7 +3,6 @@ import {
     Box,
     Button,
     Dialog,
-    IconButton,
     NumberInput,
     Pagination,
     Switch,

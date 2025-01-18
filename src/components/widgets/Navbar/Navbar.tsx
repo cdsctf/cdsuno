@@ -9,14 +9,13 @@ import StarFallMinimalistic2Bold from "~icons/solar/star-fall-minimalistic-2-bol
 import CupStarBold from "~icons/solar/cup-star-bold";
 import styles from "./Navbar.module.scss";
 import { useEffect, useMemo, useState } from "react";
-import { Link, useLocation, useParams } from "react-router";
+import { Link as ReactRouterLink, useLocation, useParams } from "react-router";
 import {
     Avatar,
     Button,
     Popover,
     Tooltip,
     Image,
-    IconButton,
     Box,
 } from "@/components/core";
 import { Dropdown } from "./_blocks/Dropdown";
@@ -123,7 +122,7 @@ export function Navbar() {
             )}
         >
             <Box className={styles["left-section"]}>
-                <Link
+                <ReactRouterLink
                     to={mode === "game" ? `/games/${id}` : "/"}
                     draggable={false}
                     style={{ width: "fit-content", display: "block" }}
@@ -155,12 +154,29 @@ export function Navbar() {
                                 : sharedStore?.config?.site?.title}
                         </h1>
                     </Button>
-                </Link>
+                </ReactRouterLink>
             </Box>
             <Box className={"flex items-center gap-[5px]"}>
                 {links[mode].map((item, index) => (
                     <React.Fragment key={index}>
-                        <Link to={item?.href} draggable={false}>
+                        <Button
+                            shadow={"none"}
+                            to={item?.href}
+                            draggable={false}
+                            icon={item?.icon}
+                            variant={"ghost"}
+                            color={"white"}
+                            radius={9999}
+                        >
+                            <span
+                                style={{
+                                    fontSize: "1rem",
+                                }}
+                            >
+                                {item?.label}
+                            </span>
+                        </Button>
+                        {/* <ReactRouterLink to={item?.href} draggable={false}>
                             <Button
                                 icon={item?.icon}
                                 variant={"ghost"}
@@ -176,7 +192,7 @@ export function Navbar() {
                                     {item?.label}
                                 </span>
                             </Button>
-                        </Link>
+                        </ReactRouterLink> */}
                     </React.Fragment>
                 ))}
             </Box>
@@ -184,27 +200,25 @@ export function Navbar() {
                 <Box className={styles["features-wrapper"]}>
                     <Box className={styles["features"]}>
                         {mode === "default" ? (
-                            <Link to={"/settings"} draggable={false}>
+                            <ReactRouterLink to={"/settings"} draggable={false}>
                                 <Tooltip content={"管理"} placement={"bottom"}>
-                                    <IconButton
+                                    <Button
                                         variant={"ghost"}
                                         color={"white"}
-                                    >
-                                        <SolarSettingsBold />
-                                    </IconButton>
+                                        icon={<SolarSettingsBold />}
+                                    />
                                 </Tooltip>
-                            </Link>
+                            </ReactRouterLink>
                         ) : (
-                            <Link to={"/"} draggable={false}>
+                            <ReactRouterLink to={"/"} draggable={false}>
                                 <Tooltip content={"返回"} placement={"bottom"}>
-                                    <IconButton
+                                    <Button
                                         variant={"ghost"}
                                         color={"white"}
-                                    >
-                                        <SolarRoundArrowLeftBold />
-                                    </IconButton>
+                                        icon={<SolarRoundArrowLeftBold />}
+                                    />
                                 </Tooltip>
-                            </Link>
+                            </ReactRouterLink>
                         )}
                         <Popover content={<Dropdown />}>
                             <Button

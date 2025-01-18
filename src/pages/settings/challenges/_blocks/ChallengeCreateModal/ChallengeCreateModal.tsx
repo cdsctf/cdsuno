@@ -1,4 +1,4 @@
-import { Box, IconButton, Select, TextInput } from "@/components/core";
+import { Box, Button, Select, TextInput } from "@/components/core";
 import PenNewSquareBold from "~icons/solar/pen-new-square-bold";
 import LinkCircleBold from "~icons/solar/link-circle-bold";
 import ArrowRightLinear from "~icons/solar/arrow-right-linear";
@@ -88,14 +88,13 @@ export function ChallengeCreateModal() {
                             value: String(category.id),
                         }))}
                     />
-                    <IconButton
+                    <Button
                         style={{
                             marginTop: "1.75rem",
                         }}
                         onClick={handleChallengeCreate}
-                    >
-                        <ArrowRightLinear />
-                    </IconButton>
+                        icon={<ArrowRightLinear />}
+                    />
                 </Box>
                 <Box className={clsx(styles["divider"], "my-2")} />
                 <Box
@@ -117,9 +116,7 @@ export function ChallengeCreateModal() {
                             flex: 1,
                         }}
                     />
-                    <IconButton disabled>
-                        <ArrowRightLinear />
-                    </IconButton>
+                    <Button disabled icon={<ArrowRightLinear />} />
                 </Box>
             </Box>
         </Box>
