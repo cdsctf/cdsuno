@@ -1,10 +1,9 @@
-import { ComponentProps, CSSProperties, useContext } from "react";
+import { ComponentProps, useContext } from "react";
 import styles from "./TableCell.module.scss";
 import clsx from "clsx";
 import Tablelvl2Context from "../Tablelvl2Context";
 import ArrowDownLinear from "~icons/solar/arrow-down-linear";
 import ArrowUpLinear from "~icons/solar/arrow-up-linear";
-import { Flex } from "../../Flex";
 import { Box } from "../../Box";
 
 export interface TableCellProps
@@ -45,7 +44,12 @@ export function TableCell(props: TableCellProps) {
             onClick={onClick}
             {...rest}
         >
-            <Flex width={"100%"} gap={5} justify={justify} align={"center"}>
+            <Box
+                className={`flex w-full items-center gap-[5px]`}
+                style={{
+                    justifyContent: justify,
+                }}
+            >
                 <Box>{children}</Box>
                 {sortDirection !== undefined && (
                     <Box>
@@ -53,7 +57,7 @@ export function TableCell(props: TableCellProps) {
                         {sortDirection === "desc" && <ArrowUpLinear />}
                     </Box>
                 )}
-            </Flex>
+            </Box>
         </Element>
     );
 }

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Box, BoxProps } from "../Box";
-import styles from "./Card.module.scss";
+import "./Card.scss";
 
 export interface CardProps extends BoxProps {}
 
@@ -8,7 +8,7 @@ export function Card(props: CardProps) {
     const { children, className, ...rest } = props;
 
     return (
-        <Box className={clsx(styles["root"], className)} {...rest}>
+        <Box className={clsx("card", className)} {...rest}>
             {children}
         </Box>
     );

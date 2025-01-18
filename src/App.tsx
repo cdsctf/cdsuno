@@ -16,9 +16,10 @@ export default function App() {
     }
 
     useEffect(() => {
-        document.documentElement.setAttribute(
-            "data-theme",
-            themeStore.darkMode ? "dark" : "light"
+        document.documentElement.classList.toggle("dark", themeStore.darkMode);
+        document.documentElement.classList.toggle(
+            "light",
+            !themeStore.darkMode
         );
     }, [themeStore.darkMode]);
 

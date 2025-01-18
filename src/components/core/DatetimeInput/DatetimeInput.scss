@@ -1,6 +1,4 @@
-@use "@/styles/mixins";
-
-.root {
+.datetime-input {
     display: flex;
     gap: 8px;
 
@@ -17,7 +15,7 @@
     }
 }
 
-.input {
+.datetime-input-input {
     caret-color: transparent;
     outline: none;
     background: none;

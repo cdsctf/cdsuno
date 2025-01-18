@@ -1,4 +1,4 @@
-import { Button, Flex, Pagination, Stack, TextInput } from "@/components/core";
+import { Box, Button, Pagination, Stack, TextInput } from "@/components/core";
 import styles from "./All.module.scss";
 import { useEffect, useState } from "react";
 import MinimalisticMagniferBoldDuotone from "~icons/solar/minimalistic-magnifer-bold-duotone";
@@ -51,7 +51,7 @@ export function All() {
                     width: "80%",
                 }}
             >
-                <Flex align={"center"} gap={15}>
+                <Box className={"flex items-center gap-[15px]"}>
                     <TextInput
                         icon={<MinimalisticMagniferBoldDuotone />}
                         placeholder={"搜索"}
@@ -64,7 +64,7 @@ export function All() {
                         }}
                     />
                     <Button type={"submit"}>搜索</Button>
-                </Flex>
+                </Box>
             </form>
             <Stack
                 width={"100%"}

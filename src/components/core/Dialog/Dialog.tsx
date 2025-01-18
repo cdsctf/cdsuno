@@ -1,4 +1,4 @@
-import styles from "./Dialog.module.scss";
+import "./Dialog.scss";
 import React, { ComponentProps, useRef } from "react";
 import { Dialog as ArkDialog, Portal } from "@ark-ui/react";
 
@@ -22,9 +22,9 @@ export function Dialog(props: DialogProps) {
             unmountOnExit
         >
             <Portal container={portal}>
-                <ArkDialog.Backdrop className={styles["backdrop"]} />
-                <ArkDialog.Positioner className={styles["positioner"]}>
-                    <ArkDialog.Content className={styles["content"]}>
+                <ArkDialog.Backdrop className={"dialog-backdrop"} />
+                <ArkDialog.Positioner className={"dialog-positioner"}>
+                    <ArkDialog.Content className={"dialog-content"}>
                         {children}
                     </ArkDialog.Content>
                 </ArkDialog.Positioner>

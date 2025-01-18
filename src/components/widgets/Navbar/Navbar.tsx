@@ -17,7 +17,6 @@ import {
     Tooltip,
     Image,
     IconButton,
-    Flex,
     Box,
 } from "@/components/core";
 import { Dropdown } from "./_blocks/Dropdown";
@@ -26,6 +25,7 @@ import { get } from "@/api/game";
 import { Game } from "@/models/game";
 import { useAuthStore } from "@/stores/auth";
 import { useSharedStore } from "@/stores/shared";
+import clsx from "clsx";
 
 export function Navbar() {
     const location = useLocation();
@@ -117,7 +117,11 @@ export function Navbar() {
     }, [location.pathname]);
 
     return (
-        <header className={styles["root"]}>
+        <header
+            className={clsx(
+                "bg-primary sticky top-0 left-0 z-2 min-h-[64px] max-h-[64px] w-full px-[2rem] flex items-center justify-between text-white transition-all duration-300 ease-in-out"
+            )}
+        >
             <Box className={styles["left-section"]}>
                 <Link
                     to={mode === "game" ? `/games/${id}` : "/"}
@@ -153,7 +157,7 @@ export function Navbar() {
                     </Button>
                 </Link>
             </Box>
-            <Flex gap={5} align={"center"}>
+            <Box className={"flex items-center gap-[5px]"}>
                 {links[mode].map((item, index) => (
                     <React.Fragment key={index}>
                         <Link to={item?.href} draggable={false}>
@@ -175,7 +179,7 @@ export function Navbar() {
                         </Link>
                     </React.Fragment>
                 ))}
-            </Flex>
+            </Box>
             <Box className={styles["right-section"]}>
                 <Box className={styles["features-wrapper"]}>
                     <Box className={styles["features"]}>

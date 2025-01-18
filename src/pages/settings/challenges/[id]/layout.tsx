@@ -1,4 +1,4 @@
-import { Box, Flex, Stack } from "@/components/core";
+import { Box, Stack } from "@/components/core";
 import { Sidebar } from "./_blocks/Sidebar";
 import { Outlet, useParams } from "react-router";
 import styles from "./layout.module.scss";
@@ -9,6 +9,7 @@ import Context from "./Context";
 import { useSharedStore } from "@/stores/shared";
 import { useCategoryStore } from "@/stores/category";
 import { Divider } from "@/components/core/Divider";
+import clsx from "clsx";
 
 export function Layout() {
     const sharedStore = useSharedStore();
@@ -45,18 +46,17 @@ export function Layout() {
                 },
             }}
         >
-            <Flex className={styles["root"]} gap={"3rem"} align={"flex-start"}>
+            <Box
+                className={clsx(styles["root"], "flex gap-[3rem] items-start")}
+            >
                 <Sidebar />
                 <Stack className={styles["paper"]}>
-                    <Flex
-                        width={"100%"}
-                        justify={"space-between"}
-                        align={"center"}
-                    >
-                        <Flex
-                            align={"center"}
-                            gap={10}
-                            className={styles["category"]}
+                    <Box className={"flex w-full justify-between items-center"}>
+                        <Box
+                            className={clsx(
+                                styles["category"],
+                                "flex gap-[10px] items-center"
+                            )}
                             style={{
                                 color: categoryStore?.getCategory(
                                     challenge?.category
@@ -75,13 +75,13 @@ export function Layout() {
                                     ?.getCategory(challenge?.category)
                                     ?.name?.toUpperCase()}
                             </span>
-                        </Flex>
+                        </Box>
                         <h2 className={styles["title"]}>{challenge?.title}</h2>
-                    </Flex>
+                    </Box>
                     <Divider variant={"dashed"} />
                     <Outlet />
                 </Stack>
-            </Flex>
+            </Box>
         </Context.Provider>
     );
 }

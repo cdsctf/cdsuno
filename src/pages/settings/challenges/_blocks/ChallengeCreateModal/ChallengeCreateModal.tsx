@@ -1,11 +1,4 @@
-import {
-    Box,
-    Flex,
-    IconButton,
-    Select,
-    Stack,
-    TextInput,
-} from "@/components/core";
+import { Box, IconButton, Select, Stack, TextInput } from "@/components/core";
 import PenNewSquareBold from "~icons/solar/pen-new-square-bold";
 import LinkCircleBold from "~icons/solar/link-circle-bold";
 import ArrowRightLinear from "~icons/solar/arrow-right-linear";
@@ -53,12 +46,10 @@ export function ChallengeCreateModal() {
     return (
         <Stack className={styles["root"]}>
             <Stack width={"100%"}>
-                <Flex
-                    align={"center"}
-                    gap={5}
-                    style={{
-                        color: "light-dark(var(--color-primary), #ffffff)",
-                    }}
+                <Box
+                    className={
+                        "flex items-center gap-[5px] text-primary dark:text-white"
+                    }
                 >
                     <Box style={{ fontSize: "1.125rem" }}>
                         <PenNewSquareBold />
@@ -66,8 +57,8 @@ export function ChallengeCreateModal() {
                     <h2 style={{ fontSize: "0.95rem" }}>
                         提供必要的信息以新建题目
                     </h2>
-                </Flex>
-                <Flex align={"center"} gap={10}>
+                </Box>
+                <Box className={"flex items-center gap-[10px]"}>
                     <TextInput
                         label={"标题"}
                         helperText={"请输入合适长度的题目标题"}
@@ -83,16 +74,15 @@ export function ChallengeCreateModal() {
                         onChange={(value) => setCategory(Number(value))}
                         options={categoryStore?.categories.map((category) => ({
                             label: (
-                                <Flex
-                                    align={"center"}
-                                    gap={10}
+                                <Box
+                                    className="flex items-center gap-[10px]"
                                     style={{
                                         color: category?.color,
                                     }}
                                 >
                                     <Box>{category?.icon}</Box>
                                     {category.name}
-                                </Flex>
+                                </Box>
                             ),
                             value: String(category.id),
                         }))}
@@ -105,14 +95,12 @@ export function ChallengeCreateModal() {
                     >
                         <ArrowRightLinear />
                     </IconButton>
-                </Flex>
+                </Box>
                 <Box className={styles["divider"]} />
-                <Flex
-                    align={"center"}
-                    gap={5}
-                    style={{
-                        color: "light-dark(var(--color-primary), #ffffff)",
-                    }}
+                <Box
+                    className={
+                        "flex items-center gap-[5px] text-primary dark:text-white"
+                    }
                 >
                     <Box style={{ fontSize: "1.125rem" }}>
                         <LinkCircleBold />
@@ -120,8 +108,8 @@ export function ChallengeCreateModal() {
                     <h2 style={{ fontSize: "0.95rem" }}>
                         或者使用分享链接以导入题目
                     </h2>
-                </Flex>
-                <Flex width={"100%"} gap={10} align={"center"}>
+                </Box>
+                <Box className={"flex items-center w-full gap-[10px]"}>
                     <TextInput
                         disabled
                         style={{
@@ -131,7 +119,7 @@ export function ChallengeCreateModal() {
                     <IconButton disabled>
                         <ArrowRightLinear />
                     </IconButton>
-                </Flex>
+                </Box>
             </Stack>
         </Stack>
     );

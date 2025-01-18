@@ -1,7 +1,6 @@
 import {
     Box,
     Button,
-    Flex,
     Select,
     Stack,
     Switch,
@@ -120,7 +119,7 @@ export function Index() {
                 }}
             >
                 <Stack className={styles["form"]} width={"100%"} gap={20}>
-                    <Flex width={"100%"} align={"center"} gap={20}>
+                    <Box className={"flex w-full items-center gap-[20px]"}>
                         <Controller
                             name={"title"}
                             control={control}
@@ -152,16 +151,17 @@ export function Index() {
                                     options={categoryStore?.categories.map(
                                         (category) => ({
                                             label: (
-                                                <Flex
-                                                    align={"center"}
-                                                    gap={10}
+                                                <Box
                                                     style={{
                                                         color: category?.color,
                                                     }}
+                                                    className={
+                                                        "flex items-center gap-[10px]"
+                                                    }
                                                 >
                                                     <Box>{category?.icon}</Box>
                                                     {category.name?.toUpperCase()}
-                                                </Flex>
+                                                </Box>
                                             ),
                                             value: String(category.id),
                                         })
@@ -169,8 +169,8 @@ export function Index() {
                                 />
                             )}
                         />
-                    </Flex>
-                    <Flex width={"100%"}>
+                    </Box>
+                    <Box className={"flex w-full"}>
                         <Controller
                             name={"description"}
                             control={control}
@@ -188,8 +188,8 @@ export function Index() {
                                 />
                             )}
                         />
-                    </Flex>
-                    <Flex width={"100%"} justify={"space-between"}>
+                    </Box>
+                    <Box className={"flex w-full justify-between"}>
                         <Controller
                             name={"is_dynamic"}
                             control={control}
@@ -212,13 +212,13 @@ export function Index() {
                                 />
                             )}
                         />
-                    </Flex>
+                    </Box>
                 </Stack>
-                <Flex width={"100%"} justify={"flex-end"}>
+                <Box className={"flex w-full justify-end"}>
                     <Button icon={<CheckCircleBold />} type={"submit"}>
                         保存
                     </Button>
-                </Flex>
+                </Box>
             </Stack>
         </form>
     );

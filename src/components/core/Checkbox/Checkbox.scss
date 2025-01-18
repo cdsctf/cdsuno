@@ -1,4 +1,4 @@
-.root {
+.checkbox {
     display: flex;
     width: fit-content;
     align-items: center;
@@ -7,7 +7,7 @@
     gap: 12px;
 }
 
-.control {
+.checkbox-control {
     position: relative;
     height: 24px;
     width: 24px;
@@ -32,6 +32,6 @@
     }
 }
 
-.indicator {
+.checkbox-indicator {
     color: #ffffff;
 }
