@@ -2,7 +2,6 @@ import {
     Box,
     Button,
     Select,
-    Stack,
     Switch,
     Textarea,
     TextInput,
@@ -17,6 +16,7 @@ import { useToastStore } from "@/stores/toast";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import clsx from "clsx";
 
 export function Index() {
     const { challenge, setRefresh } = useContext(Context);
@@ -111,14 +111,13 @@ export function Index() {
             onSubmit={handleSubmit(handleChallengeUpdate)}
             autoComplete={"off"}
         >
-            <Stack
-                width={"100%"}
-                justify={"space-between"}
-                style={{
-                    flex: 1,
-                }}
-            >
-                <Stack className={styles["form"]} width={"100%"} gap={20}>
+            <Box className={"flex flex-col w-full justify-center flex-1"}>
+                <Box
+                    className={clsx(
+                        styles["form"],
+                        "flex flex-col w-full gap-[20px]"
+                    )}
+                >
                     <Box className={"flex w-full items-center gap-[20px]"}>
                         <Controller
                             name={"title"}
@@ -213,13 +212,13 @@ export function Index() {
                             )}
                         />
                     </Box>
-                </Stack>
+                </Box>
                 <Box className={"flex w-full justify-end"}>
                     <Button icon={<CheckCircleBold />} type={"submit"}>
                         保存
                     </Button>
                 </Box>
-            </Stack>
+            </Box>
         </form>
     );
 }

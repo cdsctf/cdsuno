@@ -1,4 +1,4 @@
-import { Badge, Button, Stack } from "@/components/core";
+import { Box, Button } from "@/components/core";
 import styles from "./Sidebar.module.scss";
 import ArrowLeftLinear from "~icons/solar/arrow-left-linear";
 import InfoCircleBold from "~icons/solar/info-circle-bold";
@@ -6,37 +6,37 @@ import FlagBold from "~icons/solar/flag-bold";
 import PaperClipLinear from "~icons/solar/paperclip-linear";
 import BoxMinimalisticBold from "~icons/solar/box-minimalistic-bold";
 import CalendarSearchBold from "~icons/solar/calendar-search-bold";
-import { Link, NavLink, useLocation, useNavigate } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useContext } from "react";
 import Context from "../../Context";
 import { Card } from "@/components/core/Card";
 import { Divider } from "@/components/core/Divider";
+import clsx from "clsx";
 
 export function Sidebar() {
     const { challenge } = useContext(Context);
     const location = useLocation();
 
     return (
-        <Stack
-            className={styles["root"]}
-            justify={"space-between"}
-            align={"center"}
+        <Box
+            className={clsx(
+                styles["root"],
+                "flex flex-col justify-between items-center"
+            )}
         >
-            <Stack width={"100%"} align={"center"}>
+            <Box className={"flex flex-col w-full items-center gap-[8px]"}>
                 <h2 className={styles["title"]}>{challenge?.title}</h2>
                 <Divider />
-            </Stack>
+            </Box>
             <Card
                 style={{
                     width: "100%",
                 }}
             >
-                <Stack
-                    width={"100%"}
-                    style={{
-                        padding: "15px 10px",
-                    }}
-                    gap={10}
+                <Box
+                    className={
+                        "flex flex-col w-full gap-[10px] py-[15px] px-[10px]"
+                    }
                 >
                     <Link
                         to={`/settings/challenges/${challenge?.id}`}
@@ -132,9 +132,9 @@ export function Sidebar() {
                     >
                         统计
                     </Button>
-                </Stack>
+                </Box>
             </Card>
-            <Stack width={"100%"}>
+            <Box className={"flex flex-col w-full gap-[8px]"}>
                 <Divider />
                 <Link to={"/settings/challenges"} className={styles["link"]}>
                     <Button
@@ -145,7 +145,7 @@ export function Sidebar() {
                         返回上级
                     </Button>
                 </Link>
-            </Stack>
-        </Stack>
+            </Box>
+        </Box>
     );
 }

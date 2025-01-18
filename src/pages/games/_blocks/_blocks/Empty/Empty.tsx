@@ -1,10 +1,11 @@
-import { Stack } from "@/components/core";
+import { Box } from "@/components/core";
 import FlagBoldDuotone from "~icons/solar/flag-bold-duotone";
 import styles from "./Empty.module.scss";
+import clsx from "clsx";
 
 export function Empty() {
     return (
-        <Stack className={styles["root"]}>
+        <Box className={clsx(styles["root"], "flex flex-col")}>
             <FlagBoldDuotone
                 style={{
                     color: "light-dark(var(--color-primary), white)",
@@ -12,6 +13,6 @@ export function Empty() {
                 }}
             />
             暂无比赛
-        </Stack>
+        </Box>
     );
 }

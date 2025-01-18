@@ -1,10 +1,11 @@
-import { Box, Button, Stack } from "@/components/core";
+import { Box, Button } from "@/components/core";
 import { Challenge } from "@/models/challenge";
 import TrashBinTrashBold from "~icons/solar/trash-bin-trash-bold";
 import styles from "./ChallengeDeleteModal.module.scss";
 import { deleteChallenge } from "@/api/challenge";
 import { useToastStore } from "@/stores/toast";
 import { useSharedStore } from "@/stores/shared";
+import clsx from "clsx";
 
 export interface ChallengeDeleteModalProps {
     challenge?: Challenge;
@@ -31,7 +32,7 @@ export function ChallengeDeleteModal(props: ChallengeDeleteModalProps) {
     }
 
     return (
-        <Stack className={styles["root"]}>
+        <Box className={clsx(styles["root"], "flex flex-col")}>
             <Box
                 className={
                     "flex items-center gap-[5px] text-error dark:text-white"
@@ -66,6 +67,6 @@ export function ChallengeDeleteModal(props: ChallengeDeleteModalProps) {
                     确定
                 </Button>
             </Box>
-        </Stack>
+        </Box>
     );
 }

@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from "@/components/core";
+import { Box, Button } from "@/components/core";
 import { FallbackProps } from "react-error-boundary";
 import styles from "./ErrorFallback.module.scss";
 import SolarPlanet2BoldDuotone from "~icons/solar/planet-2-bold-duotone";
@@ -11,7 +11,7 @@ export function ErrorFallback(props: FallbackProps) {
     const { error, resetErrorBoundary } = props;
 
     return (
-        <Stack className={styles["root"]}>
+        <Box className={clsx(styles["root"], "flex flex-col")}>
             <Box
                 className={clsx(
                     styles["nav"],
@@ -51,6 +51,6 @@ export function ErrorFallback(props: FallbackProps) {
                     查看错误信息
                 </Button>
             </Box>
-        </Stack>
+        </Box>
     );
 }

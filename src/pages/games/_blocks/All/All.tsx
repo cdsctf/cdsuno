@@ -1,4 +1,4 @@
-import { Box, Button, Pagination, Stack, TextInput } from "@/components/core";
+import { Box, Button, Pagination, TextInput } from "@/components/core";
 import styles from "./All.module.scss";
 import { useEffect, useState } from "react";
 import MinimalisticMagniferBoldDuotone from "~icons/solar/minimalistic-magnifer-bold-duotone";
@@ -7,6 +7,7 @@ import { get } from "@/api/game";
 import { GameCard } from "./GameCard";
 import { useNavigate } from "react-router";
 import { Empty } from "../_blocks/Empty";
+import clsx from "clsx";
 
 export function All() {
     const navigate = useNavigate();
@@ -36,11 +37,11 @@ export function All() {
     }, [search, page]);
 
     return (
-        <Stack
-            className={styles["root"]}
-            align={"center"}
-            width={"100%"}
-            gap={25}
+        <Box
+            className={clsx(
+                styles["root"],
+                "flex flex-col items-center w-full gap-[25px]"
+            )}
         >
             <form
                 onSubmit={(e) => {
@@ -66,11 +67,10 @@ export function All() {
                     <Button type={"submit"}>搜索</Button>
                 </Box>
             </form>
-            <Stack
-                width={"100%"}
-                align={"center"}
-                style={{ flex: 1, position: "relative" }}
-                gap={15}
+            <Box
+                className={
+                    "flex flex-col items-center flex-1 relative gap-[15px]"
+                }
             >
                 {games?.length ? (
                     games?.map((game) => (
@@ -83,14 +83,14 @@ export function All() {
                 ) : (
                     <Empty />
                 )}
-            </Stack>
-            <Stack width={"100%"} align={"center"}>
+            </Box>
+            <Box className={"flex flex-col w-full items-center"}>
                 <Pagination
                     total={Math.ceil(total / size)}
                     value={page}
                     onChange={setPage}
                 />
-            </Stack>
-        </Stack>
+            </Box>
+        </Box>
     );
 }

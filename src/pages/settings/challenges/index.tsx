@@ -6,7 +6,6 @@ import {
     IconButton,
     NumberInput,
     Pagination,
-    Stack,
     Switch,
     TextInput,
 } from "@/components/core";
@@ -24,6 +23,7 @@ import { useCategoryStore } from "@/stores/category";
 import { ChallengeCreateModal } from "./_blocks/ChallengeCreateModal";
 import { useNavigate } from "react-router";
 import { ChallengeDeleteModal } from "./_blocks/ChallengeDeleteModal";
+import clsx from "clsx";
 
 export function Index() {
     const toastStore = useToastStore();
@@ -83,7 +83,12 @@ export function Index() {
 
     return (
         <>
-            <Stack className={styles["root"]} align={"center"} gap={20}>
+            <Box
+                className={clsx(
+                    styles["root"],
+                    "flex flex-col items-center gap-[20px]"
+                )}
+            >
                 <Box className={"flex w-[80%] gap-[20px] items-center"}>
                     <TextInput
                         placeholder={"搜索"}
@@ -315,7 +320,7 @@ export function Index() {
                         />
                     </Box>
                 </Box>
-            </Stack>
+            </Box>
             <Dialog
                 open={challengeCreateModalOpen}
                 onClose={() => setChallengeCreateModalOpen(false)}

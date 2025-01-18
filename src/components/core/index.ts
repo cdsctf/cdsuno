@@ -15,7 +15,6 @@ export * from "./NumberInput";
 export * from "./Pagination";
 export * from "./Popover";
 export * from "./Select";
-export * from "./Stack";
 export * from "./Switch";
 export * from "./Table";
 export * from "./Table/TableBody";

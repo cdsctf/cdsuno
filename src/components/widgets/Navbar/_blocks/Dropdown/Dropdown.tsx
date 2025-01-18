@@ -1,13 +1,14 @@
 import Sun2BoldDuotone from "~icons/solar/sun-2-bold-duotone";
 import MoonBoldDuotone from "~icons/solar/moon-bold-duotone";
 import LogoutLineDuotone from "~icons/solar/logout-linear";
-import { Avatar, Box, Button, Stack } from "@/components/core";
+import { Avatar, Box, Button } from "@/components/core";
 import { useThemeStore } from "@/stores/theme";
 import { IconButton } from "@/components/core/IconButton";
 import { useAuthStore } from "@/stores/auth";
 import { useNavigate } from "react-router";
 import styles from "./Dropdown.module.scss";
 import { Card } from "@/components/core/Card";
+import clsx from "clsx";
 
 export function Dropdown() {
     const authStore = useAuthStore();
@@ -15,7 +16,7 @@ export function Dropdown() {
 
     return (
         <Card>
-            <Stack gap={8}>
+            <Box className={"flex flex-col gap-[8px]"}>
                 <Button
                     variant={"ghost"}
                     width={"100%"}
@@ -38,7 +39,7 @@ export function Dropdown() {
                         }
                     }}
                 >
-                    <Stack gap={0} width={"100%"}>
+                    <Box className={"flex flex-col w-full gap-[8px]"}>
                         {authStore?.user ? (
                             <>
                                 <span>{authStore?.user?.nickname}</span>
@@ -57,10 +58,12 @@ export function Dropdown() {
                         ) : (
                             <span>请登录</span>
                         )}
-                    </Stack>
+                    </Box>
                 </Button>
                 <Box className={styles["divider"]} />
-                <Stack width={"100%"} className={styles["features"]}>
+                <Box
+                    className={clsx(styles["features"], "flex flex-col w-full")}
+                >
                     <Box
                         className={
                             "flex w-full flex gap-[20px] items-center justify-center"
@@ -99,8 +102,8 @@ export function Dropdown() {
                             退出登录
                         </Button>
                     )}
-                </Stack>
-            </Stack>
+                </Box>
+            </Box>
         </Card>
     );
 }

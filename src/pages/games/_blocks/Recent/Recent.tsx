@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Image, Badge } from "@/components/core";
+import { Box, Button, Image, Badge } from "@/components/core";
 import PlayCircleBold from "~icons/solar/play-circle-bold";
 import styles from "./Recent.module.scss";
 import { Tip } from "./Tip";
@@ -71,11 +71,16 @@ export function Recent() {
     }, [games]);
 
     return (
-        <Stack className={styles["root"]} width={"100%"}>
+        <Box className={clsx(styles["root"], "flex flex-col w-full")}>
             {games?.length ? (
                 <>
                     <Box className={styles["right-section"]}>
-                        <Stack className={styles["scoreboard"]}>
+                        <Box
+                            className={clsx(
+                                styles["scoreboard"],
+                                "flex flex-col"
+                            )}
+                        >
                             <Box
                                 className={
                                     "flex w-full justify-center items-center select-none gap-[10px]"
@@ -91,10 +96,10 @@ export function Recent() {
                                     积分榜
                                 </span>
                             </Box>
-                            <Stack
-                                gap={5}
-                                width={"100%"}
-                                style={{ flex: 1, position: "relative" }}
+                            <Box
+                                className={
+                                    "flex flex-col w-full gap-[5px] flex-1 relative"
+                                }
                             >
                                 {scoreboard?.map((item, index) => (
                                     <Box
@@ -129,30 +134,26 @@ export function Recent() {
                                         </Box>
                                     </Box>
                                 ))}
-                            </Stack>
+                            </Box>
                             <Box className={styles["trapezoid"]} />
                             <CupBold
                                 color={"white"}
                                 className={styles["cup"]}
                             />
                             {!scoreboard?.length && (
-                                <Stack
+                                <Box
+                                    className={
+                                        "flex flex-col items-center gap-[5px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2"
+                                    }
                                     style={{
-                                        position: "absolute",
-                                        top: "50%",
-                                        left: "50%",
-                                        transform: "translate(-50%, -50%)",
-                                        width: "50%",
                                         color: "color-mix(in srgb, light-dark(var(--color-primary), white) 40%, transparent 60%)",
                                     }}
-                                    align={"center"}
-                                    gap={5}
                                 >
                                     <Planet2BoldDuotone />
                                     <span>暂无数据</span>
-                                </Stack>
+                                </Box>
                             )}
-                        </Stack>
+                        </Box>
                     </Box>
 
                     <Box className={styles["left-section"]}>
@@ -202,13 +203,10 @@ export function Recent() {
                                             />
                                         </Box>
                                     </Box>
-                                    <Stack
-                                        style={{
-                                            flex: 1,
-                                            height: "65%",
-                                            width: "100%",
-                                        }}
-                                        gap={1}
+                                    <Box
+                                        className={
+                                            "flex flex-col flex-1 h-[65%] w-full gap-[1px]"
+                                        }
                                     >
                                         <span
                                             style={{
@@ -235,7 +233,7 @@ export function Recent() {
                                         >
                                             {games?.[index]?.sketch}
                                         </span>
-                                    </Stack>
+                                    </Box>
                                 </Box>
                             </Box>
                             <Box className={styles["enter"]}>
@@ -281,6 +279,6 @@ export function Recent() {
             )}
 
             <Tip />
-        </Stack>
+        </Box>
     );
 }
