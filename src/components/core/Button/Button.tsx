@@ -1,26 +1,28 @@
-import React, { ComponentPropsWithRef, CSSProperties } from "react";
+import React, { CSSProperties, Ref } from "react";
 import useThemeColor from "@/hooks/useThemeColor";
 import Loading from "~icons/svg-spinners/180-ring-with-bg";
 import "./Button.scss";
 import clsx from "clsx";
 import { Box } from "../Box";
 import { ThemeColor } from "@/types/theme";
+import { Link, To } from "react-router";
 
-export interface ButtonProps extends ComponentPropsWithRef<"button"> {
+export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
     width?: number | string;
     height?: string;
     color?: ThemeColor | string;
-    bgColor?: string;
+    to?: To;
+    type?: "button" | "submit" | "reset";
     variant?: "solid" | "outlined" | "tonal" | "subtle" | "ghost" | "text";
-    justify?: "start" | "center" | "end";
-    align?: "start" | "center" | "end";
     radius?: string | number;
     shadow?: "none" | "sm" | "md" | "lg" | "xl";
     loading?: boolean;
     disabled?: boolean;
-    icon?: React.ReactElement;
+    icon?: React.ReactNode;
     style?: CSSProperties;
+    className?: string;
     children?: React.ReactNode;
+    ref?: React.Ref<HTMLElement>;
 }
 
 export function Button(props: ButtonProps) {
@@ -28,6 +30,8 @@ export function Button(props: ButtonProps) {
         width = "auto",
         height = "2.5rem",
         color = "primary",
+        to,
+        type = "button",
         variant = "solid",
         radius = 12,
         shadow = "md",
@@ -52,9 +56,12 @@ export function Button(props: ButtonProps) {
         "--button-shadow": `var(--shadow-${shadow})`,
     } as CSSProperties;
 
+    const Element = (to ? Link : "button") as React.ElementType;
+
     return (
-        <button
-            ref={ref}
+        <Element
+            ref={ref as Ref<HTMLButtonElement | HTMLAnchorElement>}
+            {...(to ? { to: !disabled ? to : "" } : {})}
             className={clsx("button", className)}
             data-disabled={disabled}
             data-loading={loading}
@@ -62,6 +69,7 @@ export function Button(props: ButtonProps) {
             data-icon-btn={!children}
             style={{ ...variables, ...style }}
             disabled={disabled || loading}
+            {...(!to ? { type: type } : {})}
             {...rest}
         >
             {(loading || icon) && (
@@ -70,6 +78,6 @@ export function Button(props: ButtonProps) {
                 </Box>
             )}
             {children}
-        </button>
+        </Element>
     );
 }

@@ -7,7 +7,6 @@ export * from "./DatetimeInput";
 export * from "./DatetimePicker";
 export * from "./Dialog";
 export * from "./Grid";
-export * from "./IconButton";
 export * from "./Image";
 export * from "./LoadingOverlay";
 export * from "./NumberInput";

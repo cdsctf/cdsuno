@@ -1,8 +1,8 @@
-import { IconButton } from "../IconButton";
 import { Pagination as ArkPagination } from "@ark-ui/react";
 import AltArrowLeftBold from "~icons/solar/alt-arrow-left-bold";
 import AltArrowRightBold from "~icons/solar/alt-arrow-right-bold";
 import styles from "./Pagination.module.scss";
+import { Button } from "../Button";
 
 export interface PaginationProps {
     total: number;
@@ -24,27 +24,27 @@ export function Pagination(props: PaginationProps) {
             className={styles["root"]}
         >
             <ArkPagination.PrevTrigger asChild>
-                <IconButton
+                <Button
+                    height={"2.25rem"}
                     onClick={() => onChange(value > 1 ? value - 1 : 1)}
                     disabled={value === 1}
-                >
-                    <AltArrowLeftBold />
-                </IconButton>
+                    icon={<AltArrowLeftBold />}
+                />
             </ArkPagination.PrevTrigger>
             <ArkPagination.Context>
                 {(pagination) =>
                     pagination.pages.map((page, index) =>
                         page.type === "page" ? (
                             <ArkPagination.Item key={index} {...page} asChild>
-                                <IconButton
+                                <Button
+                                    height={"2.25rem"}
                                     variant={
                                         value === page.value
                                             ? "solid"
                                             : "outlined"
                                     }
-                                >
-                                    {page.value}
-                                </IconButton>
+                                    icon={page.value}
+                                />
                             </ArkPagination.Item>
                         ) : (
                             <ArkPagination.Ellipsis key={index} index={index}>
@@ -55,9 +55,11 @@ export function Pagination(props: PaginationProps) {
                 }
             </ArkPagination.Context>
             <ArkPagination.NextTrigger asChild>
-                <IconButton disabled={value === total}>
-                    <AltArrowRightBold />
-                </IconButton>
+                <Button
+                    height={"2.25rem"}
+                    disabled={value === total}
+                    icon={<AltArrowRightBold />}
+                />
             </ArkPagination.NextTrigger>
         </ArkPagination.Root>
     );

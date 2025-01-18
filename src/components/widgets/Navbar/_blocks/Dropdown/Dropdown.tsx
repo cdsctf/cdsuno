@@ -3,7 +3,6 @@ import MoonBoldDuotone from "~icons/solar/moon-bold-duotone";
 import LogoutLineDuotone from "~icons/solar/logout-linear";
 import { Avatar, Box, Button } from "@/components/core";
 import { useThemeStore } from "@/stores/theme";
-import { IconButton } from "@/components/core/IconButton";
 import { useAuthStore } from "@/stores/auth";
 import { useNavigate } from "react-router";
 import styles from "./Dropdown.module.scss";
@@ -69,35 +68,33 @@ export function Dropdown() {
                             "flex w-full flex gap-[20px] items-center justify-center"
                         }
                     >
-                        <IconButton
+                        <Button
                             variant={"ghost"}
                             onClick={() => {
                                 useThemeStore.getState().setDarkMode(false);
                             }}
-                        >
-                            <Sun2BoldDuotone />
-                        </IconButton>
+                            icon={<Sun2BoldDuotone />}
+                        />
                         <span>/</span>
-                        <IconButton
+                        <Button
                             variant={"ghost"}
                             onClick={() => {
                                 useThemeStore.getState().setDarkMode(true);
                             }}
-                        >
-                            <MoonBoldDuotone />
-                        </IconButton>
+                            icon={<MoonBoldDuotone />}
+                        />
                     </Box>
                     {authStore?.user && (
                         <Button
                             width={"100%"}
                             variant={"ghost"}
                             color={"error"}
-                            shadow={"none"}
                             icon={<LogoutLineDuotone />}
                             onClick={() => {
                                 authStore?.clear();
                                 navigate("/login");
                             }}
+                            shadow={"none"}
                         >
                             退出登录
                         </Button>

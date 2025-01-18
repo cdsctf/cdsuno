@@ -50,7 +50,7 @@ export function Layout() {
                 className={clsx(styles["root"], "flex gap-[3rem] items-start")}
             >
                 <Sidebar />
-                <Box className={clsx(styles["paper"], "flex flex-col")}>
+                <Box className={clsx(styles["paper"], "flex flex-col gap-4")}>
                     <Box className={"flex w-full justify-between items-center"}>
                         <Box
                             className={clsx(

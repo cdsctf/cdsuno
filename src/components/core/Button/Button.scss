@@ -53,8 +53,8 @@
     }
 
     &:disabled,
-    [data-loading="true"],
-    [data-disabled="true"] {
+    &[data-loading="true"],
+    &[data-disabled="true"] {
         cursor: not-allowed;
         opacity: 0.75;
     }
