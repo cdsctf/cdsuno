@@ -8,14 +8,10 @@ import { Link, To } from "react-router";
 import styles from "./Button.module.scss";
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
-    width?: number | string;
-    height?: string;
     color?: ThemeColor | string;
     to?: To;
     type?: "button" | "submit" | "reset";
     variant?: "solid" | "outlined" | "tonal" | "subtle" | "ghost" | "text";
-    radius?: string | number;
-    shadow?: "none" | "sm" | "md" | "lg" | "xl";
     loading?: boolean;
     disabled?: boolean;
     icon?: React.ReactNode;
@@ -27,14 +23,10 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
 
 export function Button(props: ButtonProps) {
     const {
-        width = "auto",
-        height = "2.5rem",
         color = "primary",
         to,
         type = "button",
         variant = "solid",
-        radius = 12,
-        shadow = "md",
         loading = false,
         style,
         className,
@@ -48,12 +40,8 @@ export function Button(props: ButtonProps) {
     const baseColor = useThemeColor(color);
 
     const variables = {
-        "--button-width": typeof width === "string" ? width : `${width}px`,
-        "--button-height": height,
         "--button-bg-color": baseColor,
         "--button-text-color": variant === "solid" ? "#fff" : baseColor,
-        "--button-radius": typeof radius === "string" ? radius : `${radius}px`,
-        "--button-shadow": `var(--shadow-${shadow})`,
     } as CSSProperties;
 
     const Element = (to ? Link : "button") as React.ElementType;
@@ -66,7 +54,6 @@ export function Button(props: ButtonProps) {
             data-variant={variant}
             data-disabled={disabled}
             data-loading={loading}
-            data-icon-btn={!children}
             style={{ ...variables, ...style }}
             disabled={disabled || loading}
             {...(!to ? { type: type } : {})}

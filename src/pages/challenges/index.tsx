@@ -4,7 +4,7 @@ import { ChallengeModal } from "@/components/modals/ChallengeModal";
 import { ChallengeCard } from "@/components/widgets/ChallengeCard";
 import { Challenge, ChallengeStatus } from "@/models/challenge";
 import { useAuthStore } from "@/stores/auth";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import MinimalisticMagniferBoldDuotone from "~icons/solar/minimalistic-magnifer-bold-duotone";
 import HashtagBoldDuotone from "~icons/solar/hashtag-bold-duotone";
 import { useResizeDetector } from "react-resize-detector";
@@ -148,12 +148,16 @@ export function Index() {
                         />
                         <Box
                             className={
-                                "grid grid-cols-3 gap-[1rem] rounded-[15px] h-[calc(100vh-275px)]"
+                                "grid grid-cols-[repeat(var(--cols),minmax(0,1fr))] grid-rows-[repeat(var(--rows),minmax(0,1fr))] gap-[1rem] rounded-[15px] h-[calc(100vh-275px)] p-5"
                             }
-                            style={{
-                                backgroundColor:
-                                    "light-dark(#0000000d, #ffffff0d)",
-                            }}
+                            style={
+                                {
+                                    backgroundColor:
+                                        "light-dark(#0000000d, #ffffff0d)",
+                                    "--cols": cols,
+                                    "--rows": rows,
+                                } as CSSProperties
+                            }
                             ref={challengeGroupRef}
                         >
                             {challenges?.length ? (

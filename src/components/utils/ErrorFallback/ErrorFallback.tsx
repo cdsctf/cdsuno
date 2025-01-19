@@ -37,7 +37,7 @@ export function ErrorFallback(props: FallbackProps) {
                 )}
             >
                 <Button
-                    width={"100%"}
+                    className="w-full"
                     onClick={resetErrorBoundary}
                     icon={<RestartBold />}
                 >
@@ -45,7 +45,7 @@ export function ErrorFallback(props: FallbackProps) {
                 </Button>
                 <Button
                     icon={<DocumentAddBold />}
-                    width={"100%"}
+                    className="w-full"
                     onClick={() => console.log(error)}
                 >
                     查看错误信息

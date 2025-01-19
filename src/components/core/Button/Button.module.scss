@@ -1,13 +1,13 @@
 .button {
-    width: var(--button-width, auto);
-    height: var(--button-height);
+    width: auto;
+    height: 2.5rem;
     display: flex;
     gap: 12px;
     align-items: center;
     justify-content: center;
-    border-radius: var(--button-radius);
+    border-radius: 12px;
     border: 1px solid transparent;
-    box-shadow: var(--button-shadow);
+    box-shadow: var(--shadow-md);
     transition: all 0.2s ease-in-out;
     padding: 0.5rem 1.375rem;
     white-space: nowrap;
@@ -78,11 +78,6 @@
             outline: none;
             filter: brightness(1.2);
         }
-    }
-
-    &[data-icon-btn="true"] {
-        padding: 0.5rem;
-        width: var(--button-height);
     }
 }
 
