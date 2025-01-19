@@ -63,9 +63,9 @@ export function Button(props: ButtonProps) {
             ref={ref as Ref<HTMLButtonElement | HTMLAnchorElement>}
             {...(to ? { to: !disabled ? to : "" } : {})}
             className={clsx(styles["button"], className)}
+            data-variant={variant}
             data-disabled={disabled}
             data-loading={loading}
-            data-variant={variant}
             data-icon-btn={!children}
             style={{ ...variables, ...style }}
             disabled={disabled || loading}
