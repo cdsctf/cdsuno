@@ -6,12 +6,7 @@ import clsx from "clsx";
 export function Empty() {
     return (
         <Box className={clsx(styles["root"], "flex flex-col")}>
-            <FlagBoldDuotone
-                style={{
-                    color: "light-dark(var(--color-primary), white)",
-                    rotate: "15deg",
-                }}
-            />
+            <FlagBoldDuotone className="text-primary dark:text-white" />
             暂无题目
         </Box>
     );

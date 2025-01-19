@@ -104,9 +104,7 @@ export function Index() {
                             setSearch(searchInput);
                             setId(parseInt(idInput, 16));
                         }}
-                        style={{
-                            width: "80%",
-                        }}
+                        className={"w-4/5"}
                     >
                         <Box className={"flex items-center gap-[15px]"}>
                             <TextInput

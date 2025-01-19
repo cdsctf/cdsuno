@@ -35,9 +35,7 @@ export function Index() {
                 <Image
                     src={`/api/games/${id}/poster`}
                     width={"100%"}
-                    style={{
-                        aspectRatio: "16 / 9",
-                    }}
+                    className={"aspect-16/9"}
                 />
                 <h1 className={styles["title"]}>{game?.title}</h1>
             </Box>

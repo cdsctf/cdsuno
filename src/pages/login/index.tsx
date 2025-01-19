@@ -78,30 +78,27 @@ export function Index() {
                     onSubmit={(e) => e.preventDefault()}
                 >
                     <TextInput
-                        width="100%"
                         placeholder="Username"
                         label={"用户名"}
                         icon={<UserBold />}
                         value={account}
                         onChange={(value) => setAccount(value)}
+                        className="w-full"
                     />
                     <TextInput
-                        width="100%"
                         placeholder="Password"
                         label={"密码"}
                         icon={<LockPasswordBold />}
                         password
                         value={password}
                         onChange={(value) => setPassword(value)}
+                        className="w-full"
                     />
                     <Button
-                        width="100%"
                         icon={<LoginBold />}
-                        style={{
-                            margin: "1rem 0",
-                        }}
                         onClick={handleLogin}
                         loading={loading}
+                        className="w-full my-[1rem]"
                     >
                         登录
                     </Button>

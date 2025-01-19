@@ -95,9 +95,7 @@ export function Index() {
                         value={search}
                         onChange={(value) => setSearch(value)}
                         clearable
-                        style={{
-                            flex: 1,
-                        }}
+                        className="flex-1"
                     />
                     <Button
                         variant={"solid"}
@@ -109,12 +107,7 @@ export function Index() {
                 </Box>
                 <Box className={styles["table"]}>
                     <Table>
-                        <Table.Head
-                            style={{
-                                backgroundColor: "var(--color-primary)",
-                                color: "#ffffff",
-                            }}
-                        >
+                        <Table.Head className="bg-[var(--color-primary)] text-white">
                             <Table.Row>
                                 <Table.Cell>公开</Table.Cell>
                                 <Table.Cell
@@ -150,24 +143,14 @@ export function Index() {
                                             setSorts("title");
                                         }
                                     }}
-                                    style={{
-                                        width: "200px",
-                                    }}
+                                    className="w-[200px]"
                                 >
                                     标题
                                 </Table.Cell>
-                                <Table.Cell
-                                    style={{
-                                        width: "150px",
-                                    }}
-                                >
+                                <Table.Cell className="w-[150px]">
                                     分类
                                 </Table.Cell>
-                                <Table.Cell
-                                    style={{
-                                        width: "500px",
-                                    }}
-                                >
+                                <Table.Cell className="w-[500px]">
                                     描述
                                 </Table.Cell>
                                 <Table.Cell
@@ -190,9 +173,7 @@ export function Index() {
                                 </Table.Cell>
                                 <Table.Cell
                                     justify={"center"}
-                                    style={{
-                                        width: "100px",
-                                    }}
+                                    className={"w-full"}
                                 >
                                     操作
                                 </Table.Cell>
@@ -213,15 +194,7 @@ export function Index() {
                                     </Table.Cell>
                                     <Table.Cell>{challenge.id}</Table.Cell>
                                     <Table.Cell>
-                                        <p
-                                            style={{
-                                                maxWidth: "200px",
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                                whiteSpace: "nowrap",
-                                                fontWeight: 600,
-                                            }}
-                                        >
+                                        <p className="max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap font-semibold">
                                             {challenge.title}
                                         </p>
                                     </Table.Cell>
@@ -250,12 +223,9 @@ export function Index() {
                                     </Table.Cell>
                                     <Table.Cell>
                                         <p
-                                            style={{
-                                                maxWidth: "500px",
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                                whiteSpace: "nowrap",
-                                            }}
+                                            className={
+                                                "max-w-[500px] text-nowrap overflow-hidden text-ellipsis whitespace-nowrap"
+                                            }
                                         >
                                             {challenge.description}
                                         </p>

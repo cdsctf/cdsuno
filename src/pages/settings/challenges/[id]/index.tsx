@@ -130,9 +130,7 @@ export function Index() {
                                     onChange={field.onChange}
                                     errorText={errors.title?.message?.toString()}
                                     invalid={!!errors.title}
-                                    style={{
-                                        flex: 1,
-                                    }}
+                                    className={"flex-1"}
                                 />
                             )}
                         />
@@ -183,7 +181,7 @@ export function Index() {
                                     minHeight={"15rem"}
                                     value={field.value}
                                     onChange={field.onChange}
-                                    style={{ flex: 1 }}
+                                    className={"flex-1"}
                                 />
                             )}
                         />
