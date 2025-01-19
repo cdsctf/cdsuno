@@ -60,7 +60,12 @@ export function Button(props: ButtonProps) {
             {...rest}
         >
             {(loading || icon) && (
-                <Box className={styles["button-icon"]}>
+                <Box
+                    className={clsx(
+                        "inline-block",
+                        "text-[1rem] text-[light-dark(var(--button-text-color),#ffffff)]"
+                    )}
+                >
                     {loading ? <Loading /> : icon}
                 </Box>
             )}
