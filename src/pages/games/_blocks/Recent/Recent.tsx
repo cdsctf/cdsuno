@@ -239,7 +239,7 @@ export function Recent() {
                             <Box className={styles["enter"]}>
                                 <Button
                                     icon={<PlayCircleBold />}
-                                    className="w-[10rem] h-[4rem] rounded-full"
+                                    className="w-[10rem] h-[4rem] rounded-full text-lg"
                                     onClick={() =>
                                         navigate(`/games/${games?.[index]?.id}`)
                                     }

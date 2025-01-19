@@ -5,9 +5,8 @@ import { Avatar, Box, Button } from "@/components/core";
 import { useThemeStore } from "@/stores/theme";
 import { useAuthStore } from "@/stores/auth";
 import { useNavigate } from "react-router";
-import styles from "./Dropdown.module.scss";
 import { Card } from "@/components/core/Card";
-import clsx from "clsx";
+import { Divider } from "@/components/core/Divider";
 
 export function Dropdown() {
     const authStore = useAuthStore();
@@ -18,8 +17,6 @@ export function Dropdown() {
             <Box className={"flex flex-col gap-[8px]"}>
                 <Button
                     variant={"ghost"}
-                    width={"100%"}
-                    shadow={"none"}
                     icon={
                         <Avatar
                             src={
@@ -37,17 +34,13 @@ export function Dropdown() {
                             navigate("/login");
                         }
                     }}
-                    className={"py-10"}
+                    className={"w-full py-7"}
                 >
-                    <Box className={"flex flex-col w-full gap-[8px]"}>
+                    <Box className={"flex flex-col w-full"}>
                         {authStore?.user ? (
                             <>
                                 <span>{authStore?.user?.nickname}</span>
-                                <span
-                                    style={{
-                                        fontSize: "12px",
-                                    }}
-                                >
+                                <span className={"text-[12px]"}>
                                     #{" "}
                                     {authStore?.user?.id
                                         ?.toString(16)
@@ -60,10 +53,8 @@ export function Dropdown() {
                         )}
                     </Box>
                 </Button>
-                <Box className={styles["divider"]} />
-                <Box
-                    className={clsx(styles["features"], "flex flex-col w-full")}
-                >
+                <Divider />
+                <Box className={"flex flex-col w-full"}>
                     <Box
                         className={
                             "flex w-full flex gap-[20px] items-center justify-center"
@@ -87,7 +78,6 @@ export function Dropdown() {
                     </Box>
                     {authStore?.user && (
                         <Button
-                            width={"100%"}
                             variant={"ghost"}
                             color={"error"}
                             icon={<LogoutLineDuotone />}
@@ -95,7 +85,7 @@ export function Dropdown() {
                                 authStore?.clear();
                                 navigate("/login");
                             }}
-                            shadow={"none"}
+                            className="w-full"
                         >
                             退出登录
                         </Button>

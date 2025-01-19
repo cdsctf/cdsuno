@@ -29,7 +29,6 @@ export function TextInput(props: TextInputProps) {
         password = false,
         invalid = false,
         disabled = false,
-        shadow = "md",
         variant = "outlined",
         icon,
         value = "",
@@ -40,6 +39,7 @@ export function TextInput(props: TextInputProps) {
         errorText = "",
         style,
         className,
+        wrapperClassName,
         ...rest
     } = props;
 
@@ -59,24 +59,25 @@ export function TextInput(props: TextInputProps) {
         <InputBase
             width={width}
             color={color}
-            shadow={shadow}
             variant={variant}
             invalid={invalid}
             helperText={helperText}
             errorText={errorText}
+            icon={icon}
             label={label}
             disabled={disabled}
-            className={clsx(styles["root"], className)}
+            className={className}
+            wrapperClassName={wrapperClassName}
             style={style}
             {...rest}
         >
-            {icon && <div className={styles["icon"]}>{icon}</div>}
             <ArkField.Input
                 className={styles["input"]}
                 value={value}
                 type={password && !isPasswordVisible ? "password" : "text"}
                 placeholder={placeholder}
                 onChange={(e) => onChange?.(e.target.value)}
+                data-variant={variant}
                 disabled={disabled}
             />
             {clearable && (

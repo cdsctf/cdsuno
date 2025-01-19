@@ -44,11 +44,11 @@ export function Select(props: SelectProps) {
             helperText={helperText}
             errorText={errorText}
             label={label}
+            icon={icon}
             className={clsx(styles["root"], className)}
             style={style}
             {...rest}
         >
-            {icon && <div className={styles["icon"]}>{icon}</div>}
             <Popover
                 controlled
                 open={open}

@@ -116,9 +116,7 @@ export function Index() {
                                 onChange={setIdInput}
                                 variant={"solid"}
                                 width={"10%"}
-                                style={{
-                                    minWidth: "125px",
-                                }}
+                                className="mw-[125px]"
                             />
                             <TextInput
                                 icon={<MinimalisticMagniferBoldDuotone />}
@@ -127,24 +125,15 @@ export function Index() {
                                 onChange={setSearchInput}
                                 clearable
                                 variant={"outlined"}
-                                style={{
-                                    flex: "1",
-                                }}
+                                className="flex-1"
                             />
                             <Button type={"submit"}>搜索</Button>
                         </Box>
                     </form>
-                    <Box
-                        style={{
-                            width: "100%",
-                            position: "relative",
-                        }}
-                    >
+                    <Box className={"w-full relative"}>
                         <LoadingOverlay
                             visible={loading}
-                            style={{
-                                borderRadius: "10px",
-                            }}
+                            className="rounded-[10px]"
                         />
                         <Box
                             className={

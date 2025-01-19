@@ -89,7 +89,7 @@ export function ChallengeCreateModal() {
                         }))}
                     />
                     <Button
-                        className="mt-[1.75rem]"
+                        className="mt-[1.75rem] aspect-square p-1 shadow-none"
                         onClick={handleChallengeCreate}
                         icon={<ArrowRightLinear />}
                     />
@@ -114,7 +114,11 @@ export function ChallengeCreateModal() {
                             flex: 1,
                         }}
                     />
-                    <Button disabled icon={<ArrowRightLinear />} />
+                    <Button
+                        disabled
+                        icon={<ArrowRightLinear />}
+                        className="aspect-square p-1 shadow-none"
+                    />
                 </Box>
             </Box>
         </Box>

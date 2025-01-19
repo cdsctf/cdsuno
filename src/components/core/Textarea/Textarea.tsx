@@ -52,9 +52,8 @@ export function Textarea(props: TextareaProps) {
             helperText={helperText}
             errorText={errorText}
             label={label}
+            icon={icon}
         >
-            {icon && <Box className={styles["icon"]}>{icon}</Box>}
-
             <ArkField.Textarea
                 autoresize={autoresize}
                 className={styles["textarea"]}

@@ -202,11 +202,9 @@ export function DatetimeInput(props: DatetimeInputProps) {
             className={styles["datetime-input"]}
             label={label}
             ref={ref}
+            icon={icon}
             {...rest}
         >
-            {icon && (
-                <Box className={styles["datetime-input-icon"]}>{icon}</Box>
-            )}
             <input
                 className={styles["datetime-input-input"]}
                 type="text"
