@@ -31,6 +31,7 @@ export function NumberInput(props: NumberInputProps) {
         max,
         style,
         className,
+        wrapperClassName,
         ...rest
     } = props;
 
@@ -44,6 +45,7 @@ export function NumberInput(props: NumberInputProps) {
             errorText={errorText}
             label={label}
             className={clsx(styles["root"], className)}
+            wrapperClassName={wrapperClassName}
             icon={icon}
             style={style}
             {...rest}
