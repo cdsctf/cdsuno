@@ -2,7 +2,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import UserCircleBold from "~icons/solar/user-circle-bold";
 import { ComponentProps } from "react";
 import { Avatar as ArkAvatar } from "@ark-ui/react";
-import styles from "./Avatar.module.scss";
+import clsx from "clsx";
 
 export interface AvatarProps extends ComponentProps<"img"> {
     src: string;
@@ -36,21 +36,31 @@ export function Avatar(props: AvatarProps) {
 
     return (
         <ArkAvatar.Root
-            className={styles["avatar"]}
+            className={clsx(
+                "w-[var(--avatar-size)] h-[var(--avatar-size)]",
+                "flex justify-center items-center",
+                "rounded-[50%]",
+                "border-2 border-solid border-[var(--avatar-border-color)]"
+            )}
             style={{
                 ...variables,
                 ...style,
             }}
             {...rest}
         >
-            <ArkAvatar.Fallback className={styles["avatar-fallback"]}>
+            <ArkAvatar.Fallback
+                className={clsx(
+                    "w-[92.5%] h-[92.5%] overflow-hidden",
+                    "text-[var(--avatar-border-color)] text-center text-[1.5rem]"
+                )}
+            >
                 {fallback || alt.charAt(0).toUpperCase()}
             </ArkAvatar.Fallback>
             <ArkAvatar.Image
                 src={src}
                 alt={alt}
                 draggable={false}
-                className={styles["avatar-img"]}
+                className={clsx("w-[92.5%] h-[92.5%] rounded-[50%]")}
             />
         </ArkAvatar.Root>
     );

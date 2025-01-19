@@ -1,8 +1,7 @@
 import { CSSProperties } from "react";
-import { Box } from "../Box";
 import { InputBase, InputBaseProps } from "../_blocks/InputBase";
-import styles from "./Textarea.module.scss";
 import { Field as ArkField } from "@ark-ui/react";
+import clsx from "clsx";
 
 export interface TextareaProps extends Omit<InputBaseProps, "onChange"> {
     width?: string;
@@ -22,6 +21,7 @@ export function Textarea(props: TextareaProps) {
         width = "fit-content",
         minHeight = "fit-content",
         maxHeight = "fit-content",
+        variant = "outlined",
         label,
         helperText,
         errorText,
@@ -32,6 +32,8 @@ export function Textarea(props: TextareaProps) {
         readOnly,
         disabled,
         invalid,
+        className,
+        wrapperClassName,
         ...rest
     } = props;
 
@@ -44,7 +46,8 @@ export function Textarea(props: TextareaProps) {
 
     return (
         <InputBase
-            className={styles["root"]}
+            className={className}
+            wrapperClassName={wrapperClassName}
             width={width}
             disabled={disabled}
             invalid={invalid}
@@ -56,7 +59,14 @@ export function Textarea(props: TextareaProps) {
         >
             <ArkField.Textarea
                 autoresize={autoresize}
-                className={styles["textarea"]}
+                className={clsx(
+                    "w-full flex-1 bg-transparent border-none outline-none",
+                    "min-h-[var(--textarea-min-height,auto)] max-h-[var(--textarea-max-height,auto)]",
+                    "text-[16px] line-height-[1.5]",
+                    "data-[variant=outlined]:text-black",
+                    "disabled:cursor-not-allowed"
+                )}
+                data-variant={variant}
                 value={value}
                 style={variables}
                 onChange={(e) => onChange?.(e.target.value)}
