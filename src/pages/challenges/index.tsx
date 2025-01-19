@@ -7,7 +7,6 @@ import { useAuthStore } from "@/stores/auth";
 import { useEffect, useState } from "react";
 import MinimalisticMagniferBoldDuotone from "~icons/solar/minimalistic-magnifer-bold-duotone";
 import HashtagBoldDuotone from "~icons/solar/hashtag-bold-duotone";
-import { Grid } from "@/components/core/Grid";
 import { useResizeDetector } from "react-resize-detector";
 import { LoadingOverlay } from "@/components/core/LoadingOverlay/LoadingOverlay";
 import { Box } from "@/components/core/Box";
@@ -32,6 +31,9 @@ export function Index() {
     const [searchInput, setSearchInput] = useState("");
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const [cols, setCols] = useState(0);
+    const [rows, setRows] = useState(0);
 
     const [challenges, setChallenges] = useState<Array<Challenge>>();
     const [challengeStatus, setChallengeStatus] =
@@ -73,11 +75,13 @@ export function Index() {
     }, [page, search, size, id]);
 
     useEffect(() => {
-        setSize(
-            Math.floor((challengeGroupWidth! - 130) / 260) *
-                Math.floor(challengeGroupHeight! / 150) || 0
-        );
+        setCols(Math.floor((challengeGroupWidth! - 130) / 260) || 0);
+        setRows(Math.floor(challengeGroupHeight! / 150) || 0);
     }, [challengeGroupHeight, challengeGroupWidth]);
+
+    useEffect(() => {
+        setSize(cols * rows);
+    }, [cols, rows]);
 
     useEffect(() => {
         if (challenges?.length) {
@@ -142,18 +146,11 @@ export function Index() {
                                 borderRadius: "10px",
                             }}
                         />
-                        <Grid
-                            item={{
-                                width: "16rem",
-                                height: "9rem",
-                            }}
-                            justify={"center"}
-                            align={"flex-start"}
-                            gap={16}
+                        <Box
+                            className={
+                                "grid grid-cols-3 gap-[1rem] rounded-[15px] h-[calc(100vh-275px)]"
+                            }
                             style={{
-                                height: "calc(100vh - 275px)",
-                                padding: "1rem",
-                                borderRadius: "15px",
                                 backgroundColor:
                                     "light-dark(#0000000d, #ffffff0d)",
                             }}
@@ -179,7 +176,7 @@ export function Index() {
                             ) : (
                                 <Empty />
                             )}
-                        </Grid>
+                        </Box>
                     </Box>
                     <Box className={"flex flex-col items-center w-full"}>
                         <Pagination

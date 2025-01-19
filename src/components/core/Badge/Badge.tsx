@@ -1,9 +1,9 @@
 import useThemeColor from "@/hooks/useThemeColor";
-import "./Badge.scss";
 import chroma from "chroma-js";
 import { CSSProperties, ComponentProps } from "react";
 import clsx from "clsx";
 import { Box } from "../Box";
+import styles from "./Badge.module.scss";
 
 export interface BadgeProps extends ComponentProps<"div"> {
     variant?: "solid" | "light" | "outlined";
@@ -51,11 +51,11 @@ export function Badge(props: BadgeProps) {
 
     return (
         <Box
-            className={clsx("badge", className)}
+            className={clsx(styles["badge"], className)}
             style={{ ...variables, ...style }}
             {...rest}
         >
-            <Box className={"badge-content"}>{children}</Box>
+            <Box className={styles["badge-content"]}>{children}</Box>
         </Box>
     );
 }

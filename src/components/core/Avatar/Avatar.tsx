@@ -1,8 +1,8 @@
-import "./Avatar.scss";
 import useThemeColor from "@/hooks/useThemeColor";
 import UserCircleBold from "~icons/solar/user-circle-bold";
 import { ComponentProps } from "react";
 import { Avatar as ArkAvatar } from "@ark-ui/react";
+import styles from "./Avatar.module.scss";
 
 export interface AvatarProps extends ComponentProps<"img"> {
     src: string;
@@ -36,21 +36,21 @@ export function Avatar(props: AvatarProps) {
 
     return (
         <ArkAvatar.Root
-            className={`avatar`}
+            className={styles["avatar"]}
             style={{
                 ...variables,
                 ...style,
             }}
             {...rest}
         >
-            <ArkAvatar.Fallback className={`avatar-fallback`}>
+            <ArkAvatar.Fallback className={styles["avatar-fallback"]}>
                 {fallback || alt.charAt(0).toUpperCase()}
             </ArkAvatar.Fallback>
             <ArkAvatar.Image
                 src={src}
                 alt={alt}
                 draggable={false}
-                className={`avatar-img`}
+                className={styles["avatar-img"]}
             />
         </ArkAvatar.Root>
     );

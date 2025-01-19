@@ -1,8 +1,8 @@
 import { ComponentProps, CSSProperties } from "react";
-import "./Checkbox.scss";
 import useThemeColor from "@/hooks/useThemeColor";
 import UnreadLinear from "~icons/solar/unread-linear";
 import { Checkbox as ArkCheckbox } from "@ark-ui/react";
+import styles from "./Checkbox.module.scss";
 
 export interface CheckboxProps {
     checked: boolean;
@@ -32,15 +32,15 @@ export function Checkbox(props: CheckboxProps) {
         <ArkCheckbox.Root
             checked={checked}
             onCheckedChange={(e) => onChange(Boolean(e.checked))}
-            className={"checkbox"}
+            className={styles["checkbox"]}
             style={variables}
             ref={ref}
         >
             <ArkCheckbox.Control
                 data-checked={checked}
-                className={"checkbox-control"}
+                className={styles["checkbox-control"]}
             >
-                <ArkCheckbox.Indicator className={"checkbox-indicator"}>
+                <ArkCheckbox.Indicator className={styles["checkbox-indicator"]}>
                     <UnreadLinear />
                 </ArkCheckbox.Indicator>
             </ArkCheckbox.Control>

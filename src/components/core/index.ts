@@ -6,7 +6,6 @@ export * from "./Checkbox";
 export * from "./DatetimeInput";
 export * from "./DatetimePicker";
 export * from "./Dialog";
-export * from "./Grid";
 export * from "./Image";
 export * from "./LoadingOverlay";
 export * from "./NumberInput";
