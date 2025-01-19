@@ -1,9 +1,3 @@
-// @mixin dark {
-//     [data-theme="dark"] & {
-//         @content;
-//     }
-// }
-
 @mixin responsive($breakpoint) {
     @if $breakpoint == "xs" {
         @media (max-width: 575px) {

@@ -7,7 +7,6 @@ import SolarSettingsBold from "~icons/solar/settings-bold";
 import SolarRoundArrowLeftBold from "~icons/solar/round-arrow-left-bold";
 import StarFallMinimalistic2Bold from "~icons/solar/star-fall-minimalistic-2-bold";
 import CupStarBold from "~icons/solar/cup-star-bold";
-import styles from "./Navbar.module.scss";
 import { useEffect, useMemo, useState } from "react";
 import { Link as ReactRouterLink, useLocation, useParams } from "react-router";
 import {
@@ -121,7 +120,7 @@ export function Navbar() {
                 "bg-primary sticky top-0 left-0 z-2 min-h-[64px] max-h-[64px] w-full px-[2rem] flex items-center justify-between text-white transition-all duration-300 ease-in-out"
             )}
         >
-            <Box className={styles["left-section"]}>
+            <Box className={"flex-1"}>
                 <ReactRouterLink
                     to={mode === "game" ? `/games/${id}` : "/"}
                     draggable={false}
@@ -129,7 +128,11 @@ export function Navbar() {
                 >
                     <Button
                         icon={
-                            <Box className={styles["logo"]}>
+                            <Box
+                                className={
+                                    "w-[2.5rem] h-[2.5rem] rounded-full flex items-center justify-center fw-bold"
+                                }
+                            >
                                 <Image
                                     src={
                                         mode === "game"
@@ -148,7 +151,11 @@ export function Navbar() {
                         color={"white"}
                         className="shadow-none"
                     >
-                        <h1 className={styles["title"]}>
+                        <h1
+                            className={
+                                "max-w-[25rem] text-[1.25rem] font-bold text-nowrap overflow-hidden whitespace-nowrap text-ellipsis"
+                            }
+                        >
                             {mode === "game"
                                 ? game?.title
                                 : sharedStore?.config?.site?.title}
@@ -175,29 +182,16 @@ export function Navbar() {
                                 {item?.label}
                             </span>
                         </Button>
-                        {/* <ReactRouterLink to={item?.href} draggable={false}>
-                            <Button
-                                icon={item?.icon}
-                                variant={"ghost"}
-                                color={"white"}
-                                shadow={"none"}
-                                radius={9999}
-                            >
-                                <span
-                                    style={{
-                                        fontSize: "1rem",
-                                    }}
-                                >
-                                    {item?.label}
-                                </span>
-                            </Button>
-                        </ReactRouterLink> */}
                     </React.Fragment>
                 ))}
             </Box>
-            <Box className={styles["right-section"]}>
-                <Box className={styles["features-wrapper"]}>
-                    <Box className={styles["features"]}>
+            <Box className={"flex-1"}>
+                <Box className={"flex justify-end items-center"}>
+                    <Box
+                        className={
+                            "flex justify-end items-center gap-[0.75rem]"
+                        }
+                    >
                         {mode === "default" ? (
                             <ReactRouterLink to={"/settings"} draggable={false}>
                                 <Tooltip content={"管理"} placement={"bottom"}>
@@ -205,6 +199,7 @@ export function Navbar() {
                                         variant={"ghost"}
                                         color={"white"}
                                         icon={<SolarSettingsBold />}
+                                        className={"aspect-square p-1"}
                                     />
                                 </Tooltip>
                             </ReactRouterLink>
@@ -215,6 +210,7 @@ export function Navbar() {
                                         variant={"ghost"}
                                         color={"white"}
                                         icon={<SolarRoundArrowLeftBold />}
+                                        className={"aspect-square p-1"}
                                     />
                                 </Tooltip>
                             </ReactRouterLink>
@@ -222,19 +218,22 @@ export function Navbar() {
                         <Popover content={<Dropdown />}>
                             <Button
                                 variant={"ghost"}
-                                className={styles["avatar"]}
-                            >
-                                <Avatar
-                                    src={
-                                        authStore?.user
-                                            ? `/api/users/${authStore?.user?.id}/avatar`
-                                            : ""
-                                    }
-                                    fallback={<UserCircleBold color="white" />}
-                                    color={"#ffffff"}
-                                    size={2}
-                                />
-                            </Button>
+                                className={"aspect-square p-1"}
+                                icon={
+                                    <Avatar
+                                        src={
+                                            authStore?.user
+                                                ? `/api/users/${authStore?.user?.id}/avatar`
+                                                : ""
+                                        }
+                                        fallback={
+                                            <UserCircleBold color="white" />
+                                        }
+                                        color={"#ffffff"}
+                                        size={2}
+                                    />
+                                }
+                            />
                         </Popover>
                     </Box>
                 </Box>

@@ -231,9 +231,7 @@ export function ChallengeModal(props: ChallengeModalProps) {
                         value={flag}
                         variant={"solid"}
                         onChange={(value) => setFlag(value)}
-                        style={{
-                            flex: 1,
-                        }}
+                        className="flex-1"
                     />
                     <Button
                         variant={"solid"}

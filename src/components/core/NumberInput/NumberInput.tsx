@@ -44,10 +44,10 @@ export function NumberInput(props: NumberInputProps) {
             errorText={errorText}
             label={label}
             className={clsx(styles["root"], className)}
+            icon={icon}
             style={style}
             {...rest}
         >
-            {icon && <div className={styles["icon"]}>{icon}</div>}
             <input
                 className={styles["input"]}
                 value={value}

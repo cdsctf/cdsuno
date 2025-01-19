@@ -1,68 +1,9 @@
-.root {
-    gap: 8px;
-
-    &[data-variant="solid"] {
-        background-color: var(--input-bg-color);
-
-        .icon {
-            color: #ffffff;
-        }
-
-        .input {
-            color: #ffffff;
-            caret-color: #ffffff;
-
-            &::placeholder {
-                color: #ffffff7d;
-            }
-        }
-
-        .toggle-button {
-            color: #ffffff;
-        }
-
-        .clear-button {
-            color: #ffffff;
-        }
-    }
-
-    &[data-variant="outlined"] {
-        .icon {
-            color: light-dark(var(--input-border-color), #ffffff);
-        }
-
-        .toggle-button {
-            color: light-dark(var(--input-border-color), #ffffff);
-        }
-
-        .clear-button {
-            color: light-dark(var(--input-border-color), #ffffff);
-        }
-    }
-
-    &:focus,
-    &:hover {
-        filter: brightness(1.2);
-    }
-
-    &:focus-within {
-        .clear-button {
-            opacity: 0.5;
-        }
-
-        .toggle-button {
-            opacity: 0.5;
-        }
-    }
-}
-
 .input {
     flex: 1;
     width: 100%;
     background: transparent;
     border: none;
     outline: none;
-    caret-color: var(--input-border-color);
     font-size: 16px;
     line-height: 1.5;
 
@@ -78,6 +19,29 @@
     &:disabled {
         cursor: not-allowed;
     }
+
+    &:focus,
+    &:hover {
+        filter: brightness(1.2);
+    }
+
+    &:focus-within {
+        ~ .clear-button {
+            opacity: 0.5;
+        }
+
+        ~ .toggle-button {
+            opacity: 0.5;
+        }
+    }
+
+    &[data-variant="solid"] {
+        color: #fff;
+    }
+
+    &[data-variant="outlined"] {
+        color: #000;
+    }
 }
 
 .clear-button {
@@ -88,7 +52,6 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: var(--input-border-color);
     transition: all 150ms ease-in-out;
 
     &:hover {
@@ -98,6 +61,14 @@
     &:focus {
         outline: none;
         opacity: 1;
+    }
+
+    &[data-variant="solid"] {
+        color: #fff;
+    }
+
+    &[data-variant="outlined"] {
+        color: var(--input-border-color);
     }
 }
 
@@ -109,7 +80,6 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: var(--input-border-color);
     transition: all 150ms ease-in-out;
 
     &:hover {
@@ -119,5 +89,13 @@
     &:focus {
         outline: none;
         opacity: 1;
+    }
+
+    &[data-variant="solid"] {
+        color: #fff;
+    }
+
+    &[data-variant="outlined"] {
+        color: var(--input-border-color);
     }
 }

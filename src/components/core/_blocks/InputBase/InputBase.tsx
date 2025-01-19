@@ -9,7 +9,6 @@ export interface InputBaseProps extends ComponentProps<"div"> {
     width?: string;
     minHeight?: string;
     color?: string;
-    shadow?: "none" | "sm" | "md" | "lg" | "xl";
     variant?: "outlined" | "solid";
     invalid?: boolean;
     disabled?: boolean;
@@ -17,8 +16,10 @@ export interface InputBaseProps extends ComponentProps<"div"> {
     label?: string;
     helperText?: string;
     errorText?: string;
+    icon?: React.ReactNode;
     style?: React.CSSProperties;
     className?: string;
+    wrapperClassName?: string;
     children?: React.ReactNode;
 }
 
@@ -27,16 +28,17 @@ export function InputBase(props: InputBaseProps) {
         width = "fit-content",
         minHeight: height = "fit-content",
         color = "primary",
-        shadow = "md",
         invalid = false,
         disabled = false,
         readOnly = false,
         variant = "outlined",
+        icon,
         label = "",
         helperText = "",
         errorText = "",
         style,
         className,
+        wrapperClassName,
         children,
         ref,
         ...rest
@@ -50,12 +52,11 @@ export function InputBase(props: InputBaseProps) {
         "--input-height": height,
         "--input-bg-color": invalid ? errorColor : baseColor,
         "--input-border-color": invalid ? errorColor : baseColor,
-        "--input-shadow": `var(--shadow-${shadow})`,
     } as React.CSSProperties;
 
     return (
         <ArkField.Root
-            className={styles["root"]}
+            className={clsx(styles["root"], className)}
             style={{
                 ...variables,
                 ...style,
@@ -66,28 +67,37 @@ export function InputBase(props: InputBaseProps) {
             {...rest}
         >
             {(label || helperText) && (
-                <Box className={styles["info"]}>
-                    <ArkField.Label className={styles["label"]}>
+                <Box className={"flex items-end w-fit m-[5px] gap-[5px]"}>
+                    <ArkField.Label
+                        className={
+                            "inline-block text-[1em] line-height-[1.25em]"
+                        }
+                    >
                         {label}
                     </ArkField.Label>
                     {!invalid && (
-                        <ArkField.HelperText className={styles["helper-text"]}>
+                        <ArkField.HelperText
+                            className={"text-[0.7em] text-gray"}
+                        >
                             {helperText}
                         </ArkField.HelperText>
                     )}
                     {invalid && (
-                        <ArkField.ErrorText className={styles["error-text"]}>
+                        <ArkField.ErrorText
+                            className={"text-[0.7em] text-error"}
+                        >
                             {errorText}
                         </ArkField.ErrorText>
                     )}
                 </Box>
             )}
             <Box
-                className={clsx(styles["wrapper"], className)}
+                className={clsx(styles["wrapper"], wrapperClassName)}
                 data-variant={variant}
                 data-disabled={disabled}
                 ref={ref}
             >
+                {icon && <div className={styles["icon"]}>{icon}</div>}
                 {children}
             </Box>
         </ArkField.Root>
