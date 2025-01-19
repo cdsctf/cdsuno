@@ -117,7 +117,10 @@ export function Navbar() {
     return (
         <header
             className={clsx(
-                "bg-primary sticky top-0 left-0 z-2 min-h-[64px] max-h-[64px] w-full px-[2rem] flex items-center justify-between text-white transition-all duration-300 ease-in-out"
+                "bg-primary sticky top-0 left-0 z-2",
+                "min-h-[64px] max-h-[64px] w-full px-[2rem] flex items-center justify-between text-white",
+                "shadow-md",
+                "transition-all duration-300 ease-in-out"
             )}
         >
             <Box className={"flex-1"}>
