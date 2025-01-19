@@ -58,12 +58,6 @@
 }
 
 .trapezoid {
-    position: absolute;
-    right: -3px;
-    top: -3px;
-    width: 75px;
-    height: 75px;
-    background-color: var(--challenge-card-solved-trapezoid-color);
     clip-path: polygon(100% 100%, 100% 50%, 50% 0, 0% 0);
 }
 
@@ -152,23 +146,5 @@
             var(--challenge-card-solved-icon-color),
             #ffffff66
         );
-    }
-}
-
-.status {
-    position: absolute;
-    top: 82.5%;
-    left: 7.25%;
-
-    font-weight: 600;
-    color: light-dark(var(--challenge-card-text-color), #ffffff);
-    font-size: 0.85rem;
-
-    user-select: none;
-
-    transform: translateY(-50%);
-
-    [data-solved="true"] & {
-        color: light-dark(var(--challenge-card-solved-text-color), #ffffff);
     }
 }

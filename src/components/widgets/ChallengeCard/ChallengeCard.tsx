@@ -45,7 +45,7 @@ export function ChallengeCard(props: ChallengeCard) {
 
     return (
         <Box
-            className={clsx(styles["root"], className)}
+            className={clsx(styles["root"], "group", className)}
             style={{ ...style, ...variables }}
             data-solved={status?.is_solved}
             ref={ref}
@@ -69,7 +69,15 @@ export function ChallengeCard(props: ChallengeCard) {
             <Box className={styles["id"]}>
                 # {challenge?.id?.toString(16).toUpperCase().padStart(6, "0")}
             </Box>
-            <Box className={styles["status"]}>
+            <Box
+                className={clsx(
+                    "absolute top-[82.5%] left-[7.25%] select-none",
+                    "font-semibold text-[0.85rem]",
+                    "text-[light-dark(var(--challenge-card-text-color),#ffffff)]",
+                    "-translate-y-1/2",
+                    "group-data-[solved=true]:text-[light-dark(var(--challenge-card-solved-text-color),#ffffff)]"
+                )}
+            >
                 <Tooltip
                     hasArrow
                     content={
@@ -84,21 +92,13 @@ export function ChallengeCard(props: ChallengeCard) {
                                         >
                                             <CupFirstBold color={"#FFC107"} />
                                             <Box className={"flex flex-col"}>
-                                                <span
-                                                    style={{
-                                                        fontSize: "0.8rem",
-                                                    }}
-                                                >
+                                                <span className="text-[0.8rem]">
                                                     {
                                                         status?.bloods?.[0]
                                                             ?.user?.nickname
                                                     }
                                                 </span>
-                                                <span
-                                                    style={{
-                                                        fontSize: "0.75rem",
-                                                    }}
-                                                >
+                                                <span className="text-[0.75rem]">
                                                     {new Date(
                                                         Number(
                                                             status?.bloods?.[0]
@@ -117,21 +117,13 @@ export function ChallengeCard(props: ChallengeCard) {
                                         >
                                             <FlagBold color={"#9E9E9E"} />
                                             <Box className={"flex flex-col"}>
-                                                <span
-                                                    style={{
-                                                        fontSize: "0.8rem",
-                                                    }}
-                                                >
+                                                <span className="text-[0.8rem]">
                                                     {
                                                         status?.bloods?.[1]
                                                             ?.user?.nickname
                                                     }
                                                 </span>
-                                                <span
-                                                    style={{
-                                                        fontSize: "0.75rem",
-                                                    }}
-                                                >
+                                                <span className="text-[0.75rem]">
                                                     {new Date(
                                                         Number(
                                                             status?.bloods?.[1]
@@ -150,21 +142,13 @@ export function ChallengeCard(props: ChallengeCard) {
                                         >
                                             <FlagBold color={"#FF9800"} />
                                             <Box className={"flex flex-col"}>
-                                                <span
-                                                    style={{
-                                                        fontSize: "0.8rem",
-                                                    }}
-                                                >
+                                                <span className="text-[0.8rem]">
                                                     {
                                                         status?.bloods?.[2]
                                                             ?.user?.nickname
                                                     }
                                                 </span>
-                                                <span
-                                                    style={{
-                                                        fontSize: "0.75rem",
-                                                    }}
-                                                >
+                                                <span className="text-[0.75rem]">
                                                     {new Date(
                                                         Number(
                                                             status?.bloods?.[2]
@@ -189,7 +173,13 @@ export function ChallengeCard(props: ChallengeCard) {
             </Box>
             {status?.is_solved && (
                 <>
-                    <Box className={styles["trapezoid"]} />
+                    <Box
+                        className={clsx(
+                            "absolute -right-[3px] -top-[3px] w-[75px] h-[75px]",
+                            "bg-[var(--challenge-card-solved-trapezoid-color)]",
+                            styles["trapezoid"]
+                        )}
+                    />
                     <Box className={styles["star"]}>
                         <Tooltip content={"已解决"}>
                             <StarBoldDuotone color={"white"} />

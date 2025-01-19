@@ -46,20 +46,20 @@ export default defineConfig(({ mode }) => {
             modules: {
                 generateScopedName: (
                     name: string,
-                    filename: string,
+                    _filename: string,
                     css: string
                 ) => {
-                    const shortFilename = filename
-                        .replace(/\\/g, "/")
-                        .split("/")
-                        .pop()!
-                        .replace(/(\.\w+)+$/, "");
+                    // const shortFilename = filename
+                    //     .replace(/\\/g, "/")
+                    //     .split("/")
+                    //     .pop()!
+                    //     .replace(/(\.\w+)+$/, "");
                     const hash = crypto
                         .createHash("sha256")
                         .update(name.concat(css))
                         .digest("hex")
                         .substring(0, 8);
-                    return `cdsuno_${shortFilename}_${name}_${hash}`;
+                    return `cdsuno_${hash}`;
                 },
             },
         },

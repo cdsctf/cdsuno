@@ -145,9 +145,7 @@ export function Navbar() {
                                     }
                                     fallback={<PlanetBold />}
                                     radius={"30%"}
-                                    style={{
-                                        backgroundColor: "transparent",
-                                    }}
+                                    className="bg-transparent"
                                 />
                             </Box>
                         }
@@ -160,9 +158,9 @@ export function Navbar() {
                                 "max-w-[25rem] text-[1.25rem] font-bold text-nowrap overflow-hidden whitespace-nowrap text-ellipsis"
                             }
                         >
-                            {mode === "game"
+                            {(mode === "game"
                                 ? game?.title
-                                : sharedStore?.config?.site?.title}
+                                : sharedStore?.config?.site?.title) || "CdsCTF"}
                         </h1>
                     </Button>
                 </ReactRouterLink>
