@@ -1,6 +1,6 @@
-import "./Dialog.scss";
 import React, { ComponentProps, useRef } from "react";
 import { Dialog as ArkDialog, Portal } from "@ark-ui/react";
+import styles from "./Dialog.module.scss";
 
 export interface DialogProps extends ComponentProps<"dialog"> {
     open: boolean;
@@ -17,14 +17,14 @@ export function Dialog(props: DialogProps) {
     return (
         <ArkDialog.Root
             open={open}
-            onOpenChange={(details) => onClose()}
+            onOpenChange={(_) => onClose()}
             lazyMount
             unmountOnExit
         >
             <Portal container={portal}>
-                <ArkDialog.Backdrop className={"dialog-backdrop"} />
-                <ArkDialog.Positioner className={"dialog-positioner"}>
-                    <ArkDialog.Content className={"dialog-content"}>
+                <ArkDialog.Backdrop className={styles["dialog-backdrop"]} />
+                <ArkDialog.Positioner className={styles["dialog-positioner"]}>
+                    <ArkDialog.Content className={styles["dialog-content"]}>
                         {children}
                     </ArkDialog.Content>
                 </ArkDialog.Positioner>

@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
 import { InputBase, InputBaseProps } from "../_blocks/InputBase";
-import "./DatetimeInput.scss";
 import React, { useState, useRef, useEffect } from "react";
 import { Box } from "../Box";
+import styles from "./DatetimeInput.module.scss";
 
 export interface DatetimeInputProps extends Omit<InputBaseProps, "onChange"> {
     icon?: React.ReactElement;
@@ -199,14 +199,16 @@ export function DatetimeInput(props: DatetimeInputProps) {
 
     return (
         <InputBase
-            className={"datetime-input"}
+            className={styles["datetime-input"]}
             label={label}
             ref={ref}
             {...rest}
         >
-            {icon && <Box className={"datetime-input-icon"}>{icon}</Box>}
+            {icon && (
+                <Box className={styles["datetime-input-icon"]}>{icon}</Box>
+            )}
             <input
-                className={"datetime-input-input"}
+                className={styles["datetime-input-input"]}
                 type="text"
                 ref={inputRef}
                 value={inputValue}

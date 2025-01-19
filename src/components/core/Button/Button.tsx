@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { Box } from "../Box";
 import { ThemeColor } from "@/types/theme";
 import { Link, To } from "react-router";
+import styles from "./Button.module.scss";
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
     width?: number | string;
@@ -61,7 +62,7 @@ export function Button(props: ButtonProps) {
         <Element
             ref={ref as Ref<HTMLButtonElement | HTMLAnchorElement>}
             {...(to ? { to: !disabled ? to : "" } : {})}
-            className={clsx("button", className)}
+            className={clsx(styles["button"], className)}
             data-disabled={disabled}
             data-loading={loading}
             data-variant={variant}
@@ -72,7 +73,7 @@ export function Button(props: ButtonProps) {
             {...rest}
         >
             {(loading || icon) && (
-                <Box className={"button-icon"}>
+                <Box className={styles["button-icon"]}>
                     {loading ? <Loading /> : icon}
                 </Box>
             )}
