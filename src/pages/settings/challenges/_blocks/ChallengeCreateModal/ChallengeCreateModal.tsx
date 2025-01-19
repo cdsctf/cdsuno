@@ -89,9 +89,7 @@ export function ChallengeCreateModal() {
                         }))}
                     />
                     <Button
-                        style={{
-                            marginTop: "1.75rem",
-                        }}
+                        className="mt-[1.75rem]"
                         onClick={handleChallengeCreate}
                         icon={<ArrowRightLinear />}
                     />

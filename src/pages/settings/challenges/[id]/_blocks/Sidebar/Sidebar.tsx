@@ -43,8 +43,7 @@ export function Sidebar() {
                         className={styles["link"]}
                     >
                         <Button
-                            width={"100%"}
-                            shadow={"none"}
+                            className="w-full shadow-none"
                             icon={<InfoCircleBold />}
                             variant={
                                 location.pathname.endsWith(`/${challenge?.id}`)
@@ -60,8 +59,7 @@ export function Sidebar() {
                         className={styles["link"]}
                     >
                         <Button
-                            width={"100%"}
-                            shadow={"none"}
+                            className="w-full shadow-none"
                             icon={<FlagBold />}
                             variant={
                                 location.pathname.endsWith(
@@ -81,8 +79,7 @@ export function Sidebar() {
                             className={styles["link"]}
                         >
                             <Button
-                                width={"100%"}
-                                shadow={"none"}
+                                className="w-full shadow-none"
                                 icon={<PaperClipLinear />}
                                 variant={
                                     location.pathname.endsWith(
@@ -102,8 +99,7 @@ export function Sidebar() {
                             className={styles["link"]}
                         >
                             <Button
-                                width={"100%"}
-                                shadow={"none"}
+                                className="w-full shadow-none"
                                 icon={<BoxMinimalisticBold />}
                                 variant={
                                     location.pathname.endsWith(
@@ -118,8 +114,7 @@ export function Sidebar() {
                         </Link>
                     )}
                     <Button
-                        width={"100%"}
-                        shadow={"none"}
+                        className="w-full shadow-none"
                         icon={<CalendarSearchBold />}
                         variant={
                             location.pathname.endsWith(
@@ -138,7 +133,7 @@ export function Sidebar() {
                 <Divider />
                 <Link to={"/settings/challenges"} className={styles["link"]}>
                     <Button
-                        width={"100%"}
+                        className="w-full shadow-none"
                         variant={"ghost"}
                         icon={<ArrowLeftLinear />}
                     >

@@ -25,7 +25,7 @@ export function Pagination(props: PaginationProps) {
         >
             <ArkPagination.PrevTrigger asChild>
                 <Button
-                    height={"2.25rem"}
+                    className="h-[2.25rem] aspect-square p-1"
                     onClick={() => onChange(value > 1 ? value - 1 : 1)}
                     disabled={value === 1}
                     icon={<AltArrowLeftBold />}
@@ -37,7 +37,7 @@ export function Pagination(props: PaginationProps) {
                         page.type === "page" ? (
                             <ArkPagination.Item key={index} {...page} asChild>
                                 <Button
-                                    height={"2.25rem"}
+                                    className="h-[2.25rem] aspect-square p-1"
                                     variant={
                                         value === page.value
                                             ? "solid"
@@ -56,7 +56,7 @@ export function Pagination(props: PaginationProps) {
             </ArkPagination.Context>
             <ArkPagination.NextTrigger asChild>
                 <Button
-                    height={"2.25rem"}
+                    className="h-[2.25rem] aspect-square p-1"
                     disabled={value === total}
                     icon={<AltArrowRightBold />}
                 />

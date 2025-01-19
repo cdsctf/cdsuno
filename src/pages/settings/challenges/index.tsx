@@ -275,6 +275,9 @@ export function Index() {
                                                     )
                                                 }
                                                 icon={<GalleryEditBold />}
+                                                className={
+                                                    "h-9 aspect-square p-1"
+                                                }
                                             />
                                             <Button
                                                 variant={"ghost"}
@@ -288,6 +291,9 @@ export function Index() {
                                                     );
                                                 }}
                                                 icon={<TrashBinTrashBold />}
+                                                className={
+                                                    "h-9 aspect-square p-1"
+                                                }
                                             />
                                         </Box>
                                     </Table.Cell>

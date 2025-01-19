@@ -239,9 +239,7 @@ export function Recent() {
                             <Box className={styles["enter"]}>
                                 <Button
                                     icon={<PlayCircleBold />}
-                                    height={"4rem"}
-                                    width={"10rem"}
-                                    radius={"9999px"}
+                                    className="w-[10rem] h-[4rem] rounded-full"
                                     onClick={() =>
                                         navigate(`/games/${games?.[index]?.id}`)
                                     }
@@ -259,7 +257,7 @@ export function Recent() {
                                 {games?.map((_, i) => (
                                     <Button
                                         key={i}
-                                        width={"100%"}
+                                        className="w-full h-[1.5rem]"
                                         color={
                                             i === index
                                                 ? "primary"

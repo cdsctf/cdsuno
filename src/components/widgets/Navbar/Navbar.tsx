@@ -146,7 +146,7 @@ export function Navbar() {
                         }
                         variant={"text"}
                         color={"white"}
-                        shadow={"none"}
+                        className="shadow-none"
                     >
                         <h1 className={styles["title"]}>
                             {mode === "game"
@@ -160,13 +160,12 @@ export function Navbar() {
                 {links[mode].map((item, index) => (
                     <React.Fragment key={index}>
                         <Button
-                            shadow={"none"}
+                            className="shadow-none rounded-full"
                             to={item?.href}
                             draggable={false}
                             icon={item?.icon}
                             variant={"ghost"}
                             color={"white"}
-                            radius={9999}
                         >
                             <span
                                 style={{

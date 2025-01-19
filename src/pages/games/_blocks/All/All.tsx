@@ -48,9 +48,7 @@ export function All() {
                     e.preventDefault();
                     setSearch(searchInput);
                 }}
-                style={{
-                    width: "80%",
-                }}
+                className="w-3/4"
             >
                 <Box className={"flex items-center gap-[15px]"}>
                     <TextInput
@@ -69,7 +67,7 @@ export function All() {
             </form>
             <Box
                 className={
-                    "flex flex-col items-center flex-1 relative gap-[15px]"
+                    "flex flex-col items-center flex-1 relative gap-[15px] w-full"
                 }
             >
                 {games?.length ? (
