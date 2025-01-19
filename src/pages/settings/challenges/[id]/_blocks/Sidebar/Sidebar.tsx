@@ -28,11 +28,7 @@ export function Sidebar() {
                 <h2 className={styles["title"]}>{challenge?.title}</h2>
                 <Divider />
             </Box>
-            <Card
-                style={{
-                    width: "100%",
-                }}
-            >
+            <Card className="w-full">
                 <Box
                     className={
                         "flex flex-col w-full gap-[10px] py-[15px] px-[10px]"

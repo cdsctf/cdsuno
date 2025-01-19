@@ -52,10 +52,10 @@ export function ChallengeCreateModal() {
                         "flex items-center gap-[5px] text-primary dark:text-white"
                     }
                 >
-                    <Box style={{ fontSize: "1.125rem" }}>
+                    <Box className={"text-[1.125rem]"}>
                         <PenNewSquareBold />
                     </Box>
-                    <h2 style={{ fontSize: "0.95rem" }}>
+                    <h2 className={"text-[0.95rem]"}>
                         提供必要的信息以新建题目
                     </h2>
                 </Box>
@@ -100,20 +100,15 @@ export function ChallengeCreateModal() {
                         "flex items-center gap-[5px] text-primary dark:text-white"
                     }
                 >
-                    <Box style={{ fontSize: "1.125rem" }}>
+                    <Box className={"text-[1.125rem]"}>
                         <LinkCircleBold />
                     </Box>
-                    <h2 style={{ fontSize: "0.95rem" }}>
+                    <h2 className={"text-[0.95rem]"}>
                         或者使用分享链接以导入题目
                     </h2>
                 </Box>
                 <Box className={"flex items-center w-full gap-[10px]"}>
-                    <TextInput
-                        disabled
-                        style={{
-                            flex: 1,
-                        }}
-                    />
+                    <TextInput disabled className={"flex-1"} />
                     <Button
                         disabled
                         icon={<ArrowRightLinear />}

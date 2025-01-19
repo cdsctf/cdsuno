@@ -176,13 +176,7 @@ export function ChallengeModal(props: ChallengeModalProps) {
                                     </button>
                                 </Tooltip>
                                 {index !== tabs.length - 1 && (
-                                    <span
-                                        style={{
-                                            userSelect: "none",
-                                        }}
-                                    >
-                                        /
-                                    </span>
+                                    <span className={"select-none"}>/</span>
                                 )}
                             </React.Fragment>
                         ))}

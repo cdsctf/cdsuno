@@ -38,19 +38,13 @@ export function ChallengeDeleteModal(props: ChallengeDeleteModalProps) {
                     "flex items-center gap-[5px] text-error dark:text-white"
                 }
             >
-                <Box style={{ fontSize: "1.125rem" }}>
+                <Box className={"text-[1.125rem]"}>
                     <TrashBinTrashBold />
                 </Box>
-                <h2 style={{ fontSize: "0.95rem" }}>从题库中删除题目</h2>
+                <h2 className={"text-[0.95rem]"}>从题库中删除题目</h2>
             </Box>
             <Box className={"flex w-full justify-center"}>
-                <p
-                    style={{
-                        fontSize: "1.25rem",
-                        fontWeight: 600,
-                        textDecoration: "underline",
-                    }}
-                >
+                <p className={"text-[1.125rem] font-semibold underline"}>
                     {challenge?.title}
                 </p>
             </Box>

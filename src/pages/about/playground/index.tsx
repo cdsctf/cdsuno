@@ -364,23 +364,12 @@ ReactDOM.render(
                     width: "fit-content",
                 }}
             >
-                <div
-                    style={{
-                        margin: "0 50px",
-                        width: "fit-content",
-                    }}
-                >
+                <div className="w-fit m-x-[50px]">
                     <Tooltip content={"sweet~"} placement={"top"}>
                         <Button variant="solid">top</Button>
                     </Tooltip>
                 </div>
-                <div
-                    style={{
-                        display: "flex",
-                        gap: "20px",
-                        width: "fit-content",
-                    }}
-                >
+                <div className="flex-1 gap-[20px] w-fit">
                     <Tooltip content={"sweet~"} placement={"left"}>
                         <Button variant="solid">left</Button>
                     </Tooltip>
@@ -388,12 +377,7 @@ ReactDOM.render(
                         <Button variant="solid">right</Button>
                     </Tooltip>
                 </div>
-                <div
-                    style={{
-                        margin: "0 40px",
-                        width: "fit-content",
-                    }}
-                >
+                <div className="w-fit mx-[40px]">
                     <Tooltip content={"sweet~"} placement={"bottom"}>
                         <Button variant="solid">bottom</Button>
                     </Tooltip>

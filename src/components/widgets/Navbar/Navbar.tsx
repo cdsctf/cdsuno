@@ -128,7 +128,7 @@ export function Navbar() {
                 <ReactRouterLink
                     to={mode === "game" ? `/games/${id}` : "/"}
                     draggable={false}
-                    style={{ width: "fit-content", display: "block" }}
+                    className="w-fit block"
                 >
                     <Button
                         icon={
@@ -176,13 +176,7 @@ export function Navbar() {
                             variant={"ghost"}
                             color={"white"}
                         >
-                            <span
-                                style={{
-                                    fontSize: "1rem",
-                                }}
-                            >
-                                {item?.label}
-                            </span>
+                            <span className="text-[1rem]">{item?.label}</span>
                         </Button>
                     </React.Fragment>
                 ))}

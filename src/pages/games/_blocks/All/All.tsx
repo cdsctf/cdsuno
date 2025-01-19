@@ -58,9 +58,7 @@ export function All() {
                         onChange={setSearchInput}
                         clearable
                         variant={"outlined"}
-                        style={{
-                            flex: "1",
-                        }}
+                        className={"flex-1"}
                     />
                     <Button type={"submit"}>搜索</Button>
                 </Box>

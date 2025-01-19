@@ -86,13 +86,7 @@ export function Recent() {
                                     "flex w-full justify-center items-center select-none gap-[10px]"
                                 }
                             >
-                                <span
-                                    style={{
-                                        fontWeight: 600,
-                                        fontSize: "1.25rem",
-                                        color: "light-dark(var(--color-primary), white)",
-                                    }}
-                                >
+                                <span className="font-semibold text-xl text-[var(--color-primary)] dark:text-white">
                                     积分榜
                                 </span>
                             </Box>
@@ -142,12 +136,11 @@ export function Recent() {
                             />
                             {!scoreboard?.length && (
                                 <Box
-                                    className={
-                                        "flex flex-col items-center gap-[5px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2"
-                                    }
-                                    style={{
-                                        color: "color-mix(in srgb, light-dark(var(--color-primary), white) 40%, transparent 60%)",
-                                    }}
+                                    className={clsx(
+                                        "flex flex-col items-center gap-[5px]",
+                                        "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2",
+                                        "text-[color-mix(in_srgb,light-dark(var(--color-primary),_white)_40%,transparent_60%)]"
+                                    )}
                                 >
                                     <Planet2BoldDuotone />
                                     <span>暂无数据</span>
@@ -163,9 +156,7 @@ export function Recent() {
                                 height="50vh"
                                 width="45vw"
                                 radius={25}
-                                style={{
-                                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.5)",
-                                }}
+                                className="shadow-xl"
                             />
                             <Box className={styles["info-section"]}>
                                 <Box
@@ -176,30 +167,24 @@ export function Recent() {
                                 >
                                     <Box className={styles["icon-section"]}>
                                         <Box
-                                            style={{
-                                                height: "65%",
-                                                aspectRatio: "1",
-                                            }}
+                                            className={"h-[65%] aspect-square"}
                                         >
                                             <Image
                                                 src={`/api/games/${games?.[index]?.id}/icon`}
                                                 fallback={
                                                     <PlanetBold
                                                         color={"white"}
-                                                        style={{
-                                                            height: "65%",
-                                                            width: "65%",
-                                                        }}
+                                                        className={
+                                                            "h-[65%] w-[65%]"
+                                                        }
                                                     />
                                                 }
                                                 height="100%"
                                                 width="100%"
                                                 radius={9999}
-                                                style={{
-                                                    border: "1px solid white",
-                                                    backgroundColor:
-                                                        "transparent",
-                                                }}
+                                                className={
+                                                    "border-1 border-solid border-white bg-transparent"
+                                                }
                                             />
                                         </Box>
                                     </Box>
@@ -209,27 +194,18 @@ export function Recent() {
                                         }
                                     >
                                         <span
-                                            style={{
-                                                fontWeight: 600,
-                                                fontSize: "1.75rem",
-                                                color: "light-dark(var(--color-primary), white)",
-                                                maxWidth: "80%",
-                                                textWrap: "nowrap",
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                            }}
+                                            className={clsx(
+                                                "font-semibold text-3xl max-w-[80%] text-nowrap overflow-hidden text-ellipsis",
+                                                "text-[var(--color-primary)] dark:text-white"
+                                            )}
                                         >
                                             {games?.[index]?.title}
                                         </span>
                                         <span
-                                            style={{
-                                                color: "light-dark(var(--color-primary), white)",
-                                                fontStyle: "italic",
-                                                textWrap: "nowrap",
-                                                maxWidth: "75%",
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                            }}
+                                            className={clsx(
+                                                "font-semibold text-3xl max-w-[75%] text-nowrap overflow-hidden text-ellipsis",
+                                                "text-[var(--color-primary)] dark:text-white"
+                                            )}
                                         >
                                             {games?.[index]?.sketch}
                                         </span>
