@@ -77,7 +77,7 @@ export function Index() {
                 <div
                     className={clsx(
                         "absolute top-1/2 left-1/2 -translate-1/2 w-[27.5%] h-[27.5%]",
-                        "flex justify-center items-center text-white"
+                        "flex justify-center items-center text-[white]"
                     )}
                 >
                     {categories[index].icon}

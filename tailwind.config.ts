@@ -1,40 +1,8 @@
-import {
-    defineConfig,
-    presetUno,
-    presetTypography,
-    presetWebFonts,
-} from "unocss";
-import transformerVariantGroup from "@unocss/transformer-variant-group";
-import transformerDirectives from "@unocss/transformer-directives";
-import presetIcons from "@unocss/preset-icons";
+import type { Config } from "tailwindcss";
 
-export default defineConfig({
-    presets: [
-        presetUno({
-            dark: "class",
-        }),
-        presetTypography(),
-        presetIcons({
-            extraProperties: {
-                display: "inline-block",
-                "vertical-align": "middle",
-                height: "100%",
-                width: "100%",
-            },
-        }),
-        presetWebFonts({
-            provider: "none",
-            fonts: {
-                sans: "ubuntu",
-                mono: "ubuntu",
-                lato: "ubuntu",
-            },
-        }),
-    ],
-    transformers: [transformerVariantGroup(), transformerDirectives()],
-    shortcuts: {
-        stack: "flex flex-col",
-    },
+export default {
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    darkMode: "class",
     theme: {
         colors: {
             red: "var(--color-red)",
@@ -67,5 +35,5 @@ export default defineConfig({
             xl: "var(--shadow-xl)",
         },
     },
-    rules: [],
-});
+    plugins: [],
+} satisfies Config;

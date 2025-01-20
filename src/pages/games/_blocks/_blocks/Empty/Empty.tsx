@@ -10,7 +10,7 @@ export function Empty() {
                 "absolute top-1/2 left-1/2 -translate-1/2"
             )}
         >
-            <FlagBoldDuotone className="text-primary dark:text-white text-[5rem]" />
+            <FlagBoldDuotone className="text-primary dark:text-[white] text-[5rem]" />
             暂无比赛
         </Box>
     );

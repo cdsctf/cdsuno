@@ -86,7 +86,7 @@ export function Recent() {
                                     "flex w-full justify-center items-center select-none gap-[10px]"
                                 }
                             >
-                                <span className="font-semibold text-xl text-[var(--color-primary)] dark:text-white">
+                                <span className="font-semibold text-xl text-[var(--color-primary)] dark:text-[white]">
                                     积分榜
                                 </span>
                             </Box>
@@ -183,7 +183,7 @@ export function Recent() {
                                                 width="100%"
                                                 radius={9999}
                                                 className={
-                                                    "border-1 border-solid border-white bg-transparent"
+                                                    "border-2 border-solid border-white bg-[transparent]"
                                                 }
                                             />
                                         </Box>
@@ -196,7 +196,7 @@ export function Recent() {
                                         <span
                                             className={clsx(
                                                 "font-semibold text-3xl max-w-[80%] text-nowrap overflow-hidden text-ellipsis",
-                                                "text-[var(--color-primary)] dark:text-white"
+                                                "text-[var(--color-primary)] dark:text-[white]"
                                             )}
                                         >
                                             {games?.[index]?.title}
@@ -204,7 +204,7 @@ export function Recent() {
                                         <span
                                             className={clsx(
                                                 "font-semibold text-3xl max-w-[75%] text-nowrap overflow-hidden text-ellipsis",
-                                                "text-[var(--color-primary)] dark:text-white"
+                                                "text-[var(--color-primary)] dark:text-[white]"
                                             )}
                                         >
                                             {games?.[index]?.sketch}

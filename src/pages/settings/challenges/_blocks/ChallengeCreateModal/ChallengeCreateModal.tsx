@@ -49,7 +49,7 @@ export function ChallengeCreateModal() {
             <Box className={"flex flex-col w-full gap-2"}>
                 <Box
                     className={
-                        "flex items-center gap-[5px] text-primary dark:text-white"
+                        "flex items-center gap-[5px] text-primary dark:text-[white]"
                     }
                 >
                     <Box className={"text-[1.125rem]"}>
@@ -97,7 +97,7 @@ export function ChallengeCreateModal() {
                 <Box className={clsx(styles["divider"], "my-2")} />
                 <Box
                     className={
-                        "flex items-center gap-[5px] text-primary dark:text-white"
+                        "flex items-center gap-[5px] text-primary dark:text-[white]"
                     }
                 >
                     <Box className={"text-[1.125rem]"}>

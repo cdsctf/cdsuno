@@ -7,7 +7,7 @@ export function HydrateFallback() {
         <Box className={styles["root"]}>
             <Box
                 className={
-                    "flex items-center justify-center gap-[15px] text-primary dark:text-white"
+                    "flex items-center justify-center gap-[15px] text-primary dark:text-[white]"
                 }
             >
                 <Box>

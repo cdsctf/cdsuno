@@ -108,7 +108,7 @@ export function Index() {
                     }
                 >
                     <Table className="w-full">
-                        <Table.Head className="bg-[var(--color-primary)] text-white">
+                        <Table.Head className="bg-[var(--color-primary)] text-[white]">
                             <Table.Row>
                                 <Table.Cell>公开</Table.Cell>
                                 <Table.Cell

@@ -60,10 +60,10 @@ export function Textarea(props: TextareaProps) {
             <ArkField.Textarea
                 autoresize={autoresize}
                 className={clsx(
-                    "w-full flex-1 bg-transparent border-none outline-none",
+                    "w-full flex-1 bg-[transparent] border-none outline-none",
                     "min-h-[var(--textarea-min-height,auto)] max-h-[var(--textarea-max-height,auto)]",
                     "text-[16px] line-height-[1.5]",
-                    "data-[variant=outlined]:text-black",
+                    "data-[variant=outlined]:text-[var(--text-color)]",
                     "disabled:cursor-not-allowed"
                 )}
                 data-variant={variant}
