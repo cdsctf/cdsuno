@@ -117,7 +117,7 @@ export function Navbar() {
     return (
         <header
             className={clsx(
-                "sticky top-0 left-0 z-2",
+                "sticky top-0 left-0 z-[2]",
                 "min-h-[64px] max-h-[64px] w-full px-[2rem]",
                 "flex items-center justify-between",
                 "shadow-md bg-primary text-[white]",

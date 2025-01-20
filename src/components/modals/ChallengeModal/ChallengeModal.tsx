@@ -216,11 +216,11 @@ export function ChallengeModal(props: ChallengeModalProps) {
                         className={clsx(
                             "relative w-full overflow-hidden p-[16px]",
                             "transition-all duration-200 ease-in-out",
-                            "z-1 overflow-y-auto break-words"
+                            "z-[1] overflow-y-auto break-words"
                         )}
                     >
                         {activeTab === "description" && (
-                            <Box className={"break-words "}>
+                            <Box className={"break-words"}>
                                 {challenge?.description}
                             </Box>
                         )}
