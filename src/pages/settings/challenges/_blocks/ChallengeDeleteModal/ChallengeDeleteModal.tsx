@@ -35,7 +35,7 @@ export function ChallengeDeleteModal(props: ChallengeDeleteModalProps) {
         <Box className={clsx(styles["root"], "flex flex-col")}>
             <Box
                 className={
-                    "flex items-center gap-[5px] text-error dark:text-white"
+                    "flex items-center gap-[5px] text-error dark:text-[white]"
                 }
             >
                 <Box className={"text-[1.125rem]"}>

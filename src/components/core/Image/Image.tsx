@@ -21,7 +21,7 @@ export function Image(props: ImageProps) {
         height = "100%",
         radius = 12,
         fallback = (
-            <Flag2BoldDuotone className="w-[35%] h-[35%] text-primary dark:text-white" />
+            <Flag2BoldDuotone className="w-[35%] h-[35%] text-primary dark:text-[white]" />
         ),
         className,
         style,

@@ -21,7 +21,7 @@ export function Avatar(props: AvatarProps) {
         size = "3rem",
         fallback = (
             <UserCircleBold
-                className={"iconify text-primary dark:text-white"}
+                className={"iconify text-primary dark:text-[white]"}
             />
         ),
         style,

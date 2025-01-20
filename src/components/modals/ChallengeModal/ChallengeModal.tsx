@@ -168,7 +168,7 @@ export function ChallengeModal(props: ChallengeModalProps) {
                 <Box
                     className={clsx(
                         "w-full flex justify-between items-center gap-[16px]",
-                        "bg-primary rounded-t-[12px] py-[10px] px-[20px] text-white"
+                        "bg-primary rounded-t-[12px] py-[10px] px-[20px] text-[white]"
                     )}
                 >
                     <Box className={clsx("w-1/2 flex items-center gap-[8px]")}>
@@ -193,7 +193,7 @@ export function ChallengeModal(props: ChallengeModalProps) {
                                             "flex items-center cursor-pointer",
                                             "transition-all duration-200 ease-in-out",
                                             "rounded-full p-[2px] gap-[8px]",
-                                            "active:translate-y-[2px] bg-transparent"
+                                            "active:translate-y-[2px] bg-[transparent]"
                                         )}
                                         onClick={() => setActiveTab(tab.id)}
                                         data-active={activeTab === tab.id}

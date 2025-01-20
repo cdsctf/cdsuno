@@ -3,6 +3,7 @@ import useThemeColor from "@/hooks/useThemeColor";
 import clsx from "clsx";
 import { Field as ArkField } from "@ark-ui/react";
 import { Box } from "../../Box";
+import styles from "./InputBase.module.scss";
 
 export interface InputBaseProps extends ComponentProps<"div"> {
     width?: string;
@@ -55,12 +56,7 @@ export function InputBase(props: InputBaseProps) {
 
     return (
         <ArkField.Root
-            className={clsx(
-                "w-[var(--input-width)] h-[var(--input-height)]",
-                "flex flex-col items-start justify-start",
-                "rounded-[12px]",
-                className
-            )}
+            className={clsx(styles["root"], className)}
             style={{
                 ...variables,
                 ...style,
@@ -96,20 +92,7 @@ export function InputBase(props: InputBaseProps) {
                 </Box>
             )}
             <Box
-                className={clsx(
-                    "w-full h-full",
-                    "rounded-[12px] shadow-[var(--input-shadow)]",
-                    "flex items-center relative gap-[8px]",
-                    "border-[1px] border-solid border-[var(--input-border-color)]",
-                    "px-[12px] py-[6.75px]",
-                    "transition-all duration-200 ease-in-out",
-                    "data-[variant=solid]:(bg-[var(--input-bg-color)] text-white)",
-                    "data-[variant=outlined]:(bg-[var(--bg-2nd-color)] text-[var(--input-border-color)])",
-                    "hover:(brightness-[1.125])",
-                    "focus:(brightness-[1.125])",
-                    "data-[disabled=true]:(cursor-not-allowed opacity-[0.5])",
-                    wrapperClassName
-                )}
+                className={clsx(styles["wrapper"], wrapperClassName)}
                 data-variant={variant}
                 data-disabled={disabled}
                 ref={ref}

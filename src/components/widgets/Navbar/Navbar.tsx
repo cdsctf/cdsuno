@@ -120,7 +120,7 @@ export function Navbar() {
                 "sticky top-0 left-0 z-2",
                 "min-h-[64px] max-h-[64px] w-full px-[2rem]",
                 "flex items-center justify-between",
-                "shadow-md bg-primary text-white",
+                "shadow-md bg-primary text-[white]",
                 "transition-all duration-300 ease-in-out"
             )}
         >
@@ -145,7 +145,7 @@ export function Navbar() {
                                     }
                                     fallback={<PlanetBold />}
                                     radius={"30%"}
-                                    className="bg-transparent"
+                                    className="bg-[transparent]"
                                 />
                             </Box>
                         }

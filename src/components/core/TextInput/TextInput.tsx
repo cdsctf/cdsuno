@@ -72,7 +72,7 @@ export function TextInput(props: TextInputProps) {
             {...rest}
         >
             <ArkField.Input
-                className={styles["input"]}
+                className={clsx(styles["input"], "outline-none")}
                 value={value}
                 type={password && !isPasswordVisible ? "password" : "text"}
                 placeholder={placeholder}

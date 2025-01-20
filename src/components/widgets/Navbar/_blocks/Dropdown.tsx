@@ -34,7 +34,7 @@ export function Dropdown() {
                             navigate("/login");
                         }
                     }}
-                    className={"w-full py-7"}
+                    className={"w-full py-9"}
                 >
                     <Box className={"flex flex-col w-full"}>
                         {authStore?.user ? (
