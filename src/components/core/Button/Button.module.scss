@@ -1,82 +1,83 @@
-.button {
-    width: auto;
-    height: 2.5rem;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    border: 1px solid transparent;
-    box-shadow: var(--shadow-md);
-    transition: all 0.2s ease-in-out;
-    padding: 0.5rem 1.375rem;
-    white-space: nowrap;
-    line-height: 1.75rem;
-    overflow: hidden;
-    color: light-dark(var(--button-text-color), #ffffff);
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.8px;
+@layer default {
+    .button {
+        width: auto;
+        height: 2.5rem;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        box-shadow: var(--shadow-md);
+        transition: all 0.2s ease-in-out;
+        padding: 0.5rem 1.375rem;
+        white-space: nowrap;
+        line-height: 1.75rem;
+        overflow: hidden;
+        color: light-dark(var(--button-text-color), #ffffff);
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.8px;
 
-    cursor: pointer;
+        cursor: pointer;
 
-    &[data-variant="solid"] {
-        background-color: var(--button-bg-color);
-    }
+        &[data-variant="solid"] {
+            background-color: var(--button-bg-color);
+        }
 
-    &[data-variant="outlined"] {
-        background-color: transparent;
-        border-color: var(--button-bg-color);
-    }
+        &[data-variant="outlined"] {
+            background-color: transparent;
+            border-color: var(--button-bg-color);
+        }
 
-    &[data-variant="tonal"] {
-        background-color: var(--bg-color);
-        border-color: var(--button-bg-color);
-    }
+        &[data-variant="tonal"] {
+            background-color: var(--bg-color);
+            border-color: var(--button-bg-color);
+        }
 
-    &[data-variant="subtle"] {
-        background-color: color-mix(
-            in srgb,
-            var(--button-bg-color) 30%,
-            #ffffff 10%
-        );
-    }
+        &[data-variant="subtle"] {
+            background-color: color-mix(
+                in srgb,
+                var(--button-bg-color) 30%,
+                #ffffff 10%
+            );
+        }
 
-    &[data-variant="ghost"],
-    &[data-variant="text"] {
-        background-color: transparent;
-        box-shadow: 0 0 0 0 var(--button-bg-color);
-        color: light-dark(var(--button-bg-color), #ffffff);
-    }
+        &[data-variant="ghost"],
+        &[data-variant="text"] {
+            background-color: transparent;
+            box-shadow: 0 0 0 0 var(--button-bg-color);
+            color: light-dark(var(--button-bg-color), #ffffff);
+        }
 
-    &:disabled,
-    &[data-loading="true"],
-    &[data-disabled="true"] {
-        cursor: not-allowed;
-        opacity: 0.75;
-    }
+        &:disabled,
+        &[data-loading="true"],
+        &[data-disabled="true"] {
+            cursor: not-allowed;
+        }
 
-    &:not(:disabled, [data-loading="true"], [data-disabled="true"]) {
-        &:hover {
-            filter: brightness(1.2);
+        &:not(:disabled, [data-loading="true"], [data-disabled="true"]) {
+            &:hover {
+                filter: brightness(1.2);
 
-            &[data-variant="ghost"] {
-                background-color: color-mix(
-                    in srgb,
-                    light-dark(#000, #fff) 5%,
-                    transparent 95%
-                );
+                &[data-variant="ghost"] {
+                    background-color: color-mix(
+                        in srgb,
+                        light-dark(#000, #fff) 5%,
+                        transparent 95%
+                    );
+                }
             }
-        }
 
-        &:active {
-            box-shadow: none;
-            transform: translateY(2px);
-        }
+            &:active {
+                box-shadow: none;
+                transform: translateY(2px);
+            }
 
-        &:focus {
-            outline: none;
-            filter: brightness(1.2);
+            &:focus {
+                outline: none;
+                filter: brightness(1.2);
+            }
         }
     }
 }

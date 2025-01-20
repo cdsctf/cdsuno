@@ -50,7 +50,7 @@ export function TableCell(props: TableCellProps) {
                     justifyContent: justify,
                 }}
             >
-                <Box>{children}</Box>
+                {children}
                 {sortDirection !== undefined && (
                     <Box>
                         {sortDirection === "asc" && <ArrowDownLinear />}

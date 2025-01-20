@@ -1,95 +1,94 @@
 @import "@unocss/reset/tailwind-compat.css" layer(default);
 
-@font-face {
-    font-family: "ubuntu";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 400 800;
-    src: url("/fonts/ubuntu.woff2") format("woff2-variations");
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-        U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
-        U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
+@layer default {
+    @font-face {
+        font-family: "ubuntu";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400 800;
+        src: url("/fonts/ubuntu.woff2") format("woff2-variations");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+            U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+            U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
 
-body {
-    background: var(--bg-color);
-}
+    body {
+        background: var(--bg-color);
+    }
 
-.iconify {
-    width: 100%;
-    height: 100%;
-}
+    .iconify {
+        width: 100%;
+        height: 100%;
+    }
 
-* {
-    scrollbar-width: none;
-}
+    html,
+    :host {
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        -moz-tab-size: 4;
+        tab-size: 4;
+        font-family: ubuntu, ui-sans-serif, system-ui, sans-serif,
+            "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+            "Noto Color Emoji";
+        font-feature-settings: normal;
+        font-variation-settings: normal;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-html,
-:host {
-    line-height: 1.5;
-    -webkit-text-size-adjust: 100%;
-    -moz-tab-size: 4;
-    tab-size: 4;
-    font-family: ubuntu, ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
-    font-feature-settings: normal;
-    font-variation-settings: normal;
-    -webkit-tap-highlight-color: transparent;
-}
+    *,
+    ::before,
+    ::after {
+        box-sizing: border-box;
+        border-width: 0;
+        border-style: solid;
+        border-color: #e5e7eb;
+    }
 
-*,
-::before,
-::after {
-    box-sizing: border-box;
-    border-width: 0;
-    border-style: solid;
-    border-color: #e5e7eb;
-}
+    :root {
+        --color-red: light-dark(#ff6b6b, #e65555);
+        --color-pink: light-dark(#f06595, #d85484);
+        --color-grape: light-dark(#cc5de8, #b350cf);
+        --color-violet: light-dark(#845ef7, #754fdf);
+        --color-indigo: light-dark(#5c7cfa, #4e6de1);
+        --color-blue: light-dark(#339af0, #2c84d6);
+        --color-cyan: light-dark(#22b8cf, #1c9fb3);
+        --color-teal: light-dark(#20c997, #1aa982);
+        --color-green: light-dark(#52c48a, #45a373);
+        --color-lime: light-dark(#94d82d, #7bb023);
+        --color-yellow: light-dark(#fcc419, #d8a315);
+        --color-orange: light-dark(#ff922b, #d77a23);
+        --color-dark: #131f24;
+        --color-gray: #5e5e5e;
+        --color-light: #f2f2f2;
+        --color-primary: light-dark(#0d47a1, #0b3e8f);
+        --color-secondary: light-dark(#eca758, #c28c4a);
+        --color-info: light-dark(#0ea5e9, #0c8fc9);
+        --color-success: light-dark(#28a745, #23893b);
+        --color-warning: light-dark(#fb923c, #d27a32);
+        --color-error: light-dark(#dc3545, #b92d3a);
 
-:root {
-    --color-red: light-dark(#ff6b6b, #e65555);
-    --color-pink: light-dark(#f06595, #d85484);
-    --color-grape: light-dark(#cc5de8, #b350cf);
-    --color-violet: light-dark(#845ef7, #754fdf);
-    --color-indigo: light-dark(#5c7cfa, #4e6de1);
-    --color-blue: light-dark(#339af0, #2c84d6);
-    --color-cyan: light-dark(#22b8cf, #1c9fb3);
-    --color-teal: light-dark(#20c997, #1aa982);
-    --color-green: light-dark(#52c48a, #45a373);
-    --color-lime: light-dark(#94d82d, #7bb023);
-    --color-yellow: light-dark(#fcc419, #d8a315);
-    --color-orange: light-dark(#ff922b, #d77a23);
-    --color-dark: #131f24;
-    --color-gray: #5e5e5e;
-    --color-light: #f2f2f2;
-    --color-primary: light-dark(#0d47a1, #0b3e8f);
-    --color-secondary: light-dark(#eca758, #c28c4a);
-    --color-info: light-dark(#0ea5e9, #0c8fc9);
-    --color-success: light-dark(#28a745, #23893b);
-    --color-warning: light-dark(#fb923c, #d27a32);
-    --color-error: light-dark(#dc3545, #b92d3a);
+        --shadow-none: none;
+        --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1),
+            0 1px 2px -1px rgb(0 0 0 / 0.1);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+            0 2px 4px -1px rgb(0 0 0 / 0.06);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+            0 4px 6px -2px rgb(0 0 0 / 0.05);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+            0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
 
-    --shadow-none: none;
-    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
-        0 2px 4px -1px rgb(0 0 0 / 0.06);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-        0 4px 6px -2px rgb(0 0 0 / 0.05);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-        0 8px 10px -6px rgb(0 0 0 / 0.1);
-}
+    .light {
+        color-scheme: light;
+        --bg-color: var(--color-light);
+        --bg-2nd-color: #f2f2f2;
+        --text-color: var(--color-dark);
+    }
 
-.light {
-    color-scheme: light;
-    --bg-color: var(--color-light);
-    --bg-2nd-color: #f2f2f2;
-    --text-color: var(--color-dark);
-}
-
-.dark {
-    color-scheme: dark;
-    --bg-color: var(--color-dark);
-    --bg-2nd-color: #1f2a2f;
-    --text-color: var(--color-light);
+    .dark {
+        color-scheme: dark;
+        --bg-color: var(--color-dark);
+        --bg-2nd-color: #1f2a2f;
+        --text-color: var(--color-light);
+    }
 }
