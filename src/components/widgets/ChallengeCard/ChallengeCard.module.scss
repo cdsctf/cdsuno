@@ -24,21 +24,21 @@
         filter: brightness(1.2);
         cursor: pointer;
 
-        .icon {
-            animation: pop 400ms ease-in-out forwards;
-        }
+        // .icon {
+        //     animation: pop 400ms ease-in-out forwards;
+        // }
 
-        @keyframes pop {
-            0% {
-                transform: translateY(-50%) scale(1);
-            }
-            50% {
-                transform: translateY(-50%) scale(1.075);
-            }
-            100% {
-                transform: translateY(-50%) scale(1);
-            }
-        }
+        // @keyframes pop {
+        //     0% {
+        //         transform: translateY(-50%) scale(1);
+        //     }
+        //     50% {
+        //         transform: translateY(-50%) scale(1.075);
+        //     }
+        //     100% {
+        //         transform: translateY(-50%) scale(1);
+        //     }
+        // }
     }
 
     &[data-solved="true"] {

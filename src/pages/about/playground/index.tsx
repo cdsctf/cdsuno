@@ -363,7 +363,7 @@ ReactDOM.render(
                     width: "fit-content",
                 }}
             >
-                <div className="w-fit m-x-[50px]">
+                <div className="w-fit mx-[50px]">
                     <Tooltip content={"sweet~"} placement={"top"}>
                         <Button variant="solid">top</Button>
                     </Tooltip>
