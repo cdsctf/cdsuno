@@ -1,7 +1,6 @@
 import { Box } from "@/components/core";
 import { Navbar } from "@/components/widgets/Navbar";
 import { Outlet, useNavigate } from "react-router";
-import styles from "./layout.module.scss";
 import { useThemeStore } from "@/stores/theme";
 import globalRouter from "@/utils/globalRouter";
 import { Toaster } from "@/components/widgets/Toaster";
@@ -19,7 +18,7 @@ export function Layout() {
     return (
         <ErrorBoundary FallbackComponent={ErrorFallback}>
             <OverlayScrollbarsComponent
-                className={styles["overlay-scrollbars"]}
+                className={"relative w-screen h-screen m-0 overflow-auto"}
                 options={{
                     scrollbars: {
                         theme: `os-theme-${themeStore?.darkMode ? "light" : "dark"}`,
@@ -28,9 +27,9 @@ export function Layout() {
                 }}
                 defer
             >
-                <Box className={styles["root"]}>
+                <Box className={"min-h-screen min-w-fit flex flex-col"}>
                     <Navbar />
-                    <Box className={styles["outlet"]}>
+                    <Box className={"flex flex-1 flex-col"}>
                         <Outlet />
                     </Box>
                 </Box>

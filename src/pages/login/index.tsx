@@ -1,4 +1,3 @@
-import styles from "./index.module.scss";
 import { useCategoryStore } from "@/stores/category";
 import { CSSProperties, useEffect, useState } from "react";
 import { Button, TextInput } from "@/components/core";
@@ -11,6 +10,7 @@ import { useAuthStore } from "@/stores/auth";
 import { useNavigate } from "react-router";
 import { useToastStore } from "@/stores/toast";
 import { useSharedStore } from "@/stores/shared";
+import clsx from "clsx";
 
 export function Index() {
     const authStore = useAuthStore();
@@ -67,14 +67,30 @@ export function Index() {
     } as CSSProperties;
 
     return (
-        <div className={styles["root"]} style={variables}>
-            <div className={styles["category"]}>
-                <div className={styles["icon"]}>{categories[index].icon}</div>
+        <div className={"flex h-[calc(100vh-64px)]"} style={variables}>
+            <div
+                className={clsx(
+                    "h-full w-0 xl:w-3/5 relative bg-[var(--category-bg-color)]",
+                    "transition-background-color duration-2000 ease-in-out"
+                )}
+            >
+                <div
+                    className={clsx(
+                        "absolute top-1/2 left-1/2 -translate-1/2 w-[27.5%] h-[27.5%]",
+                        "flex justify-center items-center text-white"
+                    )}
+                >
+                    {categories[index].icon}
+                </div>
             </div>
-            <div className={styles["main"]}>
-                <h1 className={styles["title"]}>登录</h1>
+            <div
+                className={
+                    "w-full xl:w-2/5 h-full flex flex-col justify-center items-center"
+                }
+            >
+                <h1 className={"text-[2rem] font-semibold m-[15px]"}>登录</h1>
                 <form
-                    className={styles["form"]}
+                    className={"flex flex-col gap-[0.5rem]"}
                     onSubmit={(e) => e.preventDefault()}
                 >
                     <TextInput

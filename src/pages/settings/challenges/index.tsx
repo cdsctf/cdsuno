@@ -17,12 +17,10 @@ import MinimalisticMagniferBoldDuotone from "~icons/solar/minimalistic-magnifer-
 import PenNewSquareBold from "~icons/solar/pen-new-square-bold";
 import GalleryEditBold from "~icons/solar/gallery-edit-bold";
 import TrashBinTrashBold from "~icons/solar/trash-bin-trash-bold";
-import styles from "./index.module.scss";
 import { useCategoryStore } from "@/stores/category";
 import { ChallengeCreateModal } from "./_blocks/ChallengeCreateModal";
 import { useNavigate } from "react-router";
 import { ChallengeDeleteModal } from "./_blocks/ChallengeDeleteModal";
-import clsx from "clsx";
 
 export function Index() {
     const toastStore = useToastStore();
@@ -83,12 +81,11 @@ export function Index() {
     return (
         <>
             <Box
-                className={clsx(
-                    styles["root"],
-                    "flex flex-col items-center gap-[20px]"
-                )}
+                className={
+                    "flex flex-col items-center gap-[20px] p-[20px] min-h-[calc(100vh-64px)]"
+                }
             >
-                <Box className={"flex w-[80%] gap-[20px] items-center"}>
+                <Box className={"flex w-4/5 gap-[20px] items-center"}>
                     <TextInput
                         placeholder={"搜索"}
                         icon={<MinimalisticMagniferBoldDuotone />}
@@ -105,8 +102,12 @@ export function Index() {
                         新建题目
                     </Button>
                 </Box>
-                <Box className={styles["table"]}>
-                    <Table>
+                <Box
+                    className={
+                        "w-4/5 flex-1 shadow-md rounded-lg overflow-scroll"
+                    }
+                >
+                    <Table className="w-full">
                         <Table.Head className="bg-[var(--color-primary)] text-white">
                             <Table.Row>
                                 <Table.Cell>公开</Table.Cell>
@@ -125,6 +126,7 @@ export function Index() {
                                             setSorts("id");
                                         }
                                     }}
+                                    className="min-w-[7rem] max-w-[7rem]"
                                 >
                                     #
                                 </Table.Cell>
@@ -143,14 +145,14 @@ export function Index() {
                                             setSorts("title");
                                         }
                                     }}
-                                    className="w-[200px]"
+                                    className="min-w-[20rem] max-w-[20rem]"
                                 >
                                     标题
                                 </Table.Cell>
-                                <Table.Cell className="w-[150px]">
+                                <Table.Cell className="min-w-[10rem]">
                                     分类
                                 </Table.Cell>
-                                <Table.Cell className="w-[500px]">
+                                <Table.Cell className="w-[30rem]">
                                     描述
                                 </Table.Cell>
                                 <Table.Cell
@@ -198,7 +200,7 @@ export function Index() {
                                             {challenge.title}
                                         </p>
                                     </Table.Cell>
-                                    <Table.Cell>
+                                    <Table.Cell className="min-w-[10rem]">
                                         <Box
                                             className={
                                                 "flex items-center gap-[5px]"
@@ -230,13 +232,17 @@ export function Index() {
                                             {challenge.description}
                                         </p>
                                     </Table.Cell>
-                                    <Table.Cell>
+                                    <Table.Cell className="min-w-[10rem]">
                                         {new Date(
                                             Number(challenge.updated_at) * 1000
                                         ).toLocaleString()}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Box className={"flex gap-[10px]"}>
+                                        <Box
+                                            className={
+                                                "w-full flex justify-center gap-[10px]"
+                                            }
+                                        >
                                             <Button
                                                 variant={"ghost"}
                                                 onClick={() =>

@@ -165,7 +165,7 @@ export function Navbar() {
                     </Button>
                 </ReactRouterLink>
             </Box>
-            <Box className={"flex items-center gap-[5px]"}>
+            <Box className={"flex items-center gap-[5px] <xl:hidden"}>
                 {links[mode].map((item, index) => (
                     <React.Fragment key={index}>
                         <Button
