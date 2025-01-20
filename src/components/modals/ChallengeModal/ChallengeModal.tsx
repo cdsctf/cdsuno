@@ -1,6 +1,5 @@
 import { Challenge, ChallengeStatus } from "@/models/challenge";
 import { useCategoryStore } from "@/stores/category";
-import styles from "./ChallengeModal.module.scss";
 import React, { useEffect, useState } from "react";
 import { Button, TextInput, Tooltip, Box } from "@/components/core";
 import { getByID, post } from "@/api/submission";
@@ -13,6 +12,7 @@ import SledgehammerBold from "~icons/solar/sledgehammer-bold";
 import Server2Bold from "~icons/solar/server-2-bold";
 import FlagBold from "~icons/solar/flag-bold";
 import Loading from "~icons/svg-spinners/180-ring-with-bg";
+import clsx from "clsx";
 
 export interface ChallengeModalProps {
     challenge?: Challenge;
@@ -154,48 +154,89 @@ export function ChallengeModal(props: ChallengeModalProps) {
     }, [submissionID]);
 
     return (
-        <Box className={styles["root"]}>
-            <Box className={styles["container"]}>
-                <Box className={styles["navbar"]}>
-                    <Box className={styles["info"]}>
-                        <Box className={styles["icon"]}>{category?.icon}</Box>
-                        <Box className={styles["title"]}>
+        <Box
+            className={clsx(
+                "flex flex-col items-center",
+                "rounded-[22.5px] w-[80vw] xl:w-[42.5rem]"
+            )}
+        >
+            <Box
+                className={clsx(
+                    "flex flex-col items-center w-full p-[16px] rounded-[22.5px]"
+                )}
+            >
+                <Box
+                    className={clsx(
+                        "w-full flex justify-between items-center gap-[16px]",
+                        "bg-primary rounded-t-[12px] py-[10px] px-[20px] text-white"
+                    )}
+                >
+                    <Box className={clsx("w-1/2 flex items-center gap-[8px]")}>
+                        <Box className={"w-[1.75rem] h-[1.75rem]"}>
+                            {category?.icon}
+                        </Box>
+                        <Box
+                            className={clsx(
+                                "w-4/5 overflow-hidden flex-shrink-0",
+                                "text-ellipsis whitespace-nowrap text-[1rem] font-bold"
+                            )}
+                        >
                             {challenge?.title}
                         </Box>
                     </Box>
-                    <Box className={styles["tabs"]}>
+                    <Box className={"flex gap-[8px] h-[36px] items-center"}>
                         {tabs?.map((tab, index) => (
                             <React.Fragment key={tab.id}>
                                 <Tooltip content={tab.name}>
                                     <button
-                                        className={styles["tab"]}
+                                        className={clsx(
+                                            "flex items-center cursor-pointer",
+                                            "transition-all duration-200 ease-in-out",
+                                            "rounded-full p-[2px] gap-[8px]",
+                                            "active:translate-y-[2px] bg-transparent"
+                                        )}
                                         onClick={() => setActiveTab(tab.id)}
                                         data-active={activeTab === tab.id}
                                     >
                                         {tab.icon}
                                     </button>
                                 </Tooltip>
-                                {index !== tabs.length - 1 && (
-                                    <span className={"select-none"}>/</span>
-                                )}
                             </React.Fragment>
                         ))}
                     </Box>
                 </Box>
-                <Box className={styles["main"]}>
-                    <Box className={styles["content"]}>
+                <Box
+                    className={clsx(
+                        "flex w-full min-h-[20rem] max-h-[35rem]",
+                        "bg-[var(--bg-2nd-color)]",
+                        "rounded-b-[12px] border-1 border-dotted border-primary border-t-none"
+                    )}
+                >
+                    <Box
+                        className={clsx(
+                            "relative w-full overflow-hidden p-[16px]",
+                            "transition-all duration-200 ease-in-out",
+                            "z-1 overflow-y-auto break-words"
+                        )}
+                    >
                         {activeTab === "description" && (
-                            <Box className={styles["description"]}>
+                            <Box className={"break-words "}>
                                 {challenge?.description}
                             </Box>
                         )}
                         {activeTab === "pod" && (
-                            <Box className={styles["pod"]}>
-                                <Box className={styles["tip"]}>
+                            <Box className={"h-full flex flex-col gap-[10px]"}>
+                                <Box
+                                    className={
+                                        "flex justify-center text-[0.75rem]"
+                                    }
+                                >
                                     本题为动态容器题目，解题需开启容器实例。
                                 </Box>
-                                <Box className={styles["info"]}></Box>
-                                <Box className={styles["controllers"]}>
+                                <Box className={"flex-1"}></Box>
+                                <Box
+                                    className={"flex justify-center gap-[15px]"}
+                                >
                                     <Button color={"success"}>启动</Button>
                                     <Button color={"error"} disabled>
                                         销毁
@@ -206,13 +247,13 @@ export function ChallengeModal(props: ChallengeModalProps) {
                                 </Box>
                             </Box>
                         )}
-                        {activeTab === "feedback" && (
-                            <Box className={styles["feedback"]}></Box>
-                        )}
+                        {activeTab === "feedback" && <Box></Box>}
                     </Box>
                 </Box>
                 <form
-                    className={styles["submit"]}
+                    className={clsx(
+                        "flex w-[99%] items-center gap-[15px] my-[12px]"
+                    )}
                     onSubmit={(e) => {
                         e.preventDefault();
                         handleSubmit();

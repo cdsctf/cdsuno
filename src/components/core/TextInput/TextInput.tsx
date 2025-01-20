@@ -79,6 +79,7 @@ export function TextInput(props: TextInputProps) {
                 onChange={(e) => onChange?.(e.target.value)}
                 data-variant={variant}
                 disabled={disabled}
+                autoComplete="off"
             />
             {clearable && (
                 <Box className={styles["clear-button"]} onClick={handleClear}>

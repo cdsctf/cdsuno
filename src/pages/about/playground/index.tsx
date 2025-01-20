@@ -6,7 +6,6 @@ import { TextInput } from "@/components/core/TextInput";
 import { Tooltip } from "@/components/core/Tooltip";
 import UserBold from "~icons/solar/user-bold";
 import { useToastStore } from "@/stores/toast";
-import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
 import { ChallengeCard } from "@/components/widgets/ChallengeCard";
 import { Switch } from "@/components/core/Switch/Switch";
@@ -369,7 +368,7 @@ ReactDOM.render(
                         <Button variant="solid">top</Button>
                     </Tooltip>
                 </div>
-                <div className="flex-1 gap-[20px] w-fit">
+                <div className="flex flex-1 gap-[20px] w-fit">
                     <Tooltip content={"sweet~"} placement={"left"}>
                         <Button variant="solid">left</Button>
                     </Tooltip>
