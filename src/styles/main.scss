@@ -1,4 +1,4 @@
-@use "mixins";
+@import "@unocss/reset/tailwind-compat.css" layer(default);
 
 @font-face {
     font-family: "ubuntu";
