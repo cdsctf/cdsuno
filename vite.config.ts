@@ -1,5 +1,6 @@
 import path from "path";
 import React from "@vitejs/plugin-react-swc";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, loadEnv } from "vite";
 
 export default defineConfig(({ mode }) => {
@@ -34,7 +35,7 @@ export default defineConfig(({ mode }) => {
                 },
             },
         },
-        plugins: [React()],
+        plugins: [React(), tailwindcss()],
         resolve: {
             alias: {
                 "@": path.resolve(__dirname, "./src"),
