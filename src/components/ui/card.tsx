@@ -13,7 +13,7 @@ function Card(props: React.ComponentProps<"div">) {
                     "border",
                     "bg-card",
                     "text-card-foreground",
-                    "shadow-sm",
+                    "shadow-xs",
                 ],
                 className
             )}
