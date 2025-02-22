@@ -19,6 +19,8 @@ const buttonVariants = cva(
         "transition-colors",
         "disabled:pointer-events-none",
         "disabled:opacity-50",
+        "cursor-pointer",
+        "select-none",
         "[&_svg]:pointer-events-none",
         "[&_svg]:size-4",
         "[&_svg]:shrink-0",
@@ -29,7 +31,7 @@ const buttonVariants = cva(
                 solid: [
                     "bg-primary",
                     "text-primary-foreground",
-                    "hover:bg-primary/90",
+                    "hover:bg-primary/50",
                 ],
                 destructive: [
                     "bg-destructive",
@@ -39,12 +41,12 @@ const buttonVariants = cva(
                 outline: [
                     "border",
                     "border-input",
-                    "bg-background",
+                    "bg-transparent",
                     "hover:bg-accent",
                     "hover:text-accent-foreground",
                 ],
                 secondary: [
-                    "bg-secondary/50",
+                    "bg-secondary",
                     "text-secondary-foreground",
                     "hover:bg-secondary/80",
                 ],
