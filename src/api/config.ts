@@ -1,7 +1,16 @@
-import { alovaInstance } from "@/utils/alova";
+import { alova } from "@/utils/alova";
 import { Response } from "@/types";
-import { Config } from "@/models/config";
+import { ConfigState } from "@/storages/config";
 
-export async function get() {
-    return alovaInstance.Get<Response<Config>>("/configs");
+export async function getConfigs() {
+    return alova.Get<Response<ConfigState["config"]>>("/configs");
+}
+
+export async function getCaptcha() {
+    return alova.Get<
+        Response<{
+            id?: string;
+            challenge?: string;
+        }>
+    >("/configs/captcha");
 }

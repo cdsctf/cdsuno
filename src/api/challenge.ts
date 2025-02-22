@@ -1,23 +1,26 @@
 import {
     Challenge,
-    ChallengeCreateRequest,
-    ChallengeGetRequest,
+    CreateChallengeRequest,
+    GetChallengeRequest,
     ChallengeStatus,
-    ChallengeStatusRequest,
-    ChallengeUpdateRequest,
-    ChallengeDeleteRequest,
+    GetChallengeStatusRequest,
+    UpdateChallengeRequest,
+    DeleteChallengeRequest,
+    UpdateChallengeCheckerRequest,
+    UpdateChallengeEnvRequest,
 } from "@/models/challenge";
+import { Metadata } from "@/models/media";
 import { Response } from "@/types";
-import { alovaInstance } from "@/utils/alova";
+import { alova } from "@/utils/alova";
 
-export async function getChallenges(request: ChallengeGetRequest) {
-    return alovaInstance.Get<Response<Array<Challenge>>>("/challenges", {
+export async function getChallenges(request: GetChallengeRequest) {
+    return alova.Get<Response<Array<Challenge>>>("/challenges", {
         params: request,
     });
 }
 
-export async function getChallengeStatus(request: ChallengeStatusRequest) {
-    return alovaInstance.Post<Response<Record<number, ChallengeStatus>>>(
+export async function getChallengeStatus(request: GetChallengeStatusRequest) {
+    return alova.Post<Response<Record<string, ChallengeStatus>>>(
         "/challenges/status",
         request,
         {
@@ -26,8 +29,8 @@ export async function getChallengeStatus(request: ChallengeStatusRequest) {
     );
 }
 
-export async function updateChallenge(request: ChallengeUpdateRequest) {
-    return alovaInstance.Put<Response<Challenge>>(
+export async function updateChallenge(request: UpdateChallengeRequest) {
+    return alova.Put<Response<Challenge>>(
         `/challenges/${request?.id}`,
         request,
         {
@@ -36,14 +39,44 @@ export async function updateChallenge(request: ChallengeUpdateRequest) {
     );
 }
 
-export async function createChallenge(request: ChallengeCreateRequest) {
-    return alovaInstance.Post<Response<Challenge>>("/challenges", request, {
+export async function updateChallengeEnv(request: UpdateChallengeEnvRequest) {
+    return alova.Put<Response<never>>(
+        `/challenges/${request?.id}/env`,
+        request,
+        {
+            cacheFor: 0,
+        }
+    );
+}
+
+export async function updateChallengeChecker(
+    request: UpdateChallengeCheckerRequest
+) {
+    return alova.Put<Response<never>>(
+        `/challenges/${request?.id}/checker`,
+        request,
+        {
+            cacheFor: 0,
+        }
+    );
+}
+
+export async function createChallenge(request: CreateChallengeRequest) {
+    return alova.Post<Response<Challenge>>("/challenges", request, {
         cacheFor: 0,
     });
 }
 
-export async function deleteChallenge(request: ChallengeDeleteRequest) {
-    return alovaInstance.Delete<Response<never>>(`/challenges/${request.id}`, {
-        cacheFor: 0,
-    });
+export async function deleteChallenge(request: DeleteChallengeRequest) {
+    return alova.Delete<Response<never>>(`/challenges/${request.id}`);
+}
+
+export async function getChallengeAttachmentMetadata(id: string) {
+    return alova.Get<Response<Metadata>>(
+        `/challenges/${id}/attachment/metadata`
+    );
+}
+
+export async function deleteChallengeAttachment(id: string) {
+    return alova.Delete<Response<never>>(`/challenges/${id}/attachment`);
 }

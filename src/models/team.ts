@@ -3,52 +3,58 @@ import { User } from "./user";
 export interface Team {
     id?: number;
     name?: string;
+    slogan?: string;
     description?: string;
     email?: string;
-    captain_id?: number;
-    captain?: User;
     is_locked?: boolean;
+    deleted_at?: string;
     created_at?: string;
     updated_at?: string;
     users?: Array<User>;
 }
 
-export interface TeamFindRequest {
+export interface GetTeamRequest {
     id?: number;
     name?: string;
-    captain_id?: number;
+    user_id?: number;
     page?: number;
     size?: number;
-    sort_key?: string;
-    sort_order?: string;
+    sorts?: string;
 }
 
-export interface TeamUpdateRequest {
+export interface UpdateTeamRequest {
     id?: number;
     name?: string;
+    slogan?: string;
     description?: string;
     email?: string;
-    captain_id?: number;
-    is_locked?: boolean;
+    password?: string;
 }
 
-export interface TeamCreateRequest {
-    name: string;
-    description: string;
+export interface CreateTeamRequest {
+    name?: string;
+    slogan?: string;
     email?: string;
-    captain_id: number;
+    password?: string;
 }
 
-export interface TeamDeleteRequest {
+export interface RegisterTeamRequest {
+    name?: string;
+    email?: string;
+    password?: string;
+}
+
+export interface DeleteTeamRequest {
     id: number;
 }
 
 export interface TeamJoinRequest {
-    id: number;
-    token: string;
+    user_id?: number;
+    team_id: number;
+    password: string;
 }
 
-export interface TeamLeaveRequest {
+export interface TeamQuitRequest {
     id: number;
 }
 
@@ -60,7 +66,12 @@ export interface TeamUpdateInviteTokenRequest {
     id: number;
 }
 
-export interface TeamDeleteUserRequest {
-    id: number;
+export interface DeleteTeamUserRequest {
+    team_id: number;
+    user_id: number;
+}
+
+export interface CreateTeamUserRequest {
+    team_id: number;
     user_id: number;
 }

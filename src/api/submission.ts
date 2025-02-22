@@ -1,13 +1,18 @@
-import { Submission, SubmissionCreateRequest } from "@/models/submission";
+import {
+    Submission,
+    CreateSubmissionRequest,
+    GetSubmissionRequest,
+} from "@/models/submission";
 import { Response } from "@/types";
-import { alovaInstance } from "@/utils/alova";
+import { alova } from "@/utils/alova";
 
-export async function post(request: SubmissionCreateRequest) {
-    return alovaInstance.Post<Response<Submission>>("/submissions", request);
+export async function postSubmission(request: CreateSubmissionRequest) {
+    return alova.Post<Response<Submission>>("/submissions", request);
 }
 
-export async function getByID(id: number) {
-    return alovaInstance.Get<Response<Submission>>(`/submissions/${id}`, {
+export async function getSubmission(request: GetSubmissionRequest) {
+    return alova.Get<Response<Array<Submission>>>(`/submissions`, {
+        params: request,
         cacheFor: 0,
     });
 }
