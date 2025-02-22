@@ -1,1 +1,0 @@
-export { ChallengeDeleteModal } from "./ChallengeDeleteModal";

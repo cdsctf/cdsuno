@@ -4,17 +4,19 @@ import { GameSubmission, Status } from "./submission";
 export interface Game {
     id?: number;
     title?: string;
-    bio?: string;
     sketch?: string;
     description?: string;
     is_enabled?: boolean;
     is_public?: boolean;
+    is_need_write_up?: boolean;
+
     member_limit_min?: number;
     member_limit_max?: number;
-    parallel_container_limit?: number;
-    is_need_write_up?: boolean;
+
     started_at?: number;
+    frozen_at?: number;
     ended_at?: number;
+
     created_at?: number;
     updated_at?: number;
 }
@@ -24,7 +26,7 @@ export interface ScoreRecord {
     submissions?: Array<GameSubmission>;
 }
 
-export interface GameGetRequest {
+export interface GetGameRequest {
     id?: number;
     title?: string;
     is_enabled?: boolean;
@@ -33,72 +35,66 @@ export interface GameGetRequest {
     size?: number;
 }
 
-export interface GameScoreboardGetRequest {
+export interface GetGameScoreboardRequest {
+    id?: number;
     size?: number;
     page?: number;
 }
 
-export interface GameSubmissionGetRequest {
+export interface GetGameSubmissionRequest {
     id?: number;
     status?: Status;
 }
 
-export interface GameChallengeFindRequest {
-    game_id?: number;
-    is_enabled?: boolean;
-}
-
-export interface GameCreateRequest {
+export interface CreateGameRequest {
     title?: string;
-    bio?: string;
+    sketch?: string;
     description?: string;
     is_enabled?: boolean;
     is_public?: boolean;
+    is_need_write_up?: boolean;
     member_limit_min?: number;
     member_limit_max?: number;
-    parallel_container_limit?: number;
-    is_need_write_up?: boolean;
     started_at?: number;
     ended_at?: number;
 }
 
-export interface GameUpdateRequest {
+export interface UpdateGameRequest {
     id?: number;
     title?: string;
-    bio?: string;
+    sketch?: string;
     description?: string;
     is_enabled?: boolean;
     is_public?: boolean;
-    password?: string;
+    is_need_write_up?: boolean;
     member_limit_min?: number;
     member_limit_max?: number;
-    parallel_container_limit?: number;
-    is_need_write_up?: boolean;
     started_at?: number;
+    frozen_at?: number;
     ended_at?: number;
 }
 
-export interface GameDeleteRequest {
+export interface DeleteGameRequest {
     id?: number;
 }
 
-export interface GameTeamFindRequest {
+export interface GetGameTeamRequest {
     game_id?: number;
     team_id?: number;
 }
 
-export interface GameTeamCreateRequest {
+export interface CreateGameTeamRequest {
     game_id?: number;
     team_id?: number;
 }
 
-export interface GameTeamUpdateRequest {
+export interface UpdateGameTeamRequest {
     game_id?: number;
     team_id?: number;
     is_allowed?: boolean;
 }
 
-export interface GameTeamDeleteRequest {
+export interface DeleteGameTeamRequest {
     game_id?: number;
     team_id?: number;
 }

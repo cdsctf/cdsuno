@@ -1,1 +1,0 @@
-export { ChallengeModal } from "./ChallengeModal";

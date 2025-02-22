@@ -5,11 +5,11 @@ import { User } from "./user";
 
 export interface Submission {
     id?: number;
-    flag?: string;
+    content?: string;
     status?: Status;
     user_id?: number;
     user?: User;
-    challenge_id?: number;
+    challenge_id?: string;
     challenge?: Challenge;
     team_id?: number;
     team?: Team;
@@ -32,26 +32,28 @@ export enum Status {
     Invalid = 4,
 }
 
-export interface SubmissionCreateRequest {
-    flag?: string;
-    challenge_id?: number;
+export interface CreateSubmissionRequest {
+    content?: string;
+    challenge_id?: string;
     team_id?: number;
     game_id?: number;
 }
 
-export interface SubmissionFindRequest {
+export interface GetSubmissionRequest {
     id?: number;
-    flag?: string;
+    content?: string;
     status?: number;
     user_id?: number;
     is_detailed?: boolean;
-    challenge_id?: number;
+    challenge_id?: string;
     team_id?: number;
     game_id?: number;
     size?: number;
     page?: number;
+
+    is_desensitized?: boolean;
 }
 
-export interface SubmissionDeleteRequest {
+export interface DeleteSubmissionRequest {
     id?: number;
 }

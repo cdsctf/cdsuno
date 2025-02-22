@@ -6,6 +6,7 @@ export interface User {
     nickname?: string;
     email?: string;
     group?: Group;
+    description?: string;
     teams?: Array<Team>;
     created_at?: string;
     updated_at?: string;
@@ -18,29 +19,28 @@ export enum Group {
     Admin = 3,
 }
 
-export interface UserFindRequest {
+export interface GetUserRequest {
     id?: number;
     name?: string;
     username?: string;
-    nickname?: string;
     email?: string;
     group?: Group;
     page?: number;
     size?: number;
-    sort_key?: string;
-    sort_order?: string;
+    sorts?: string;
 }
 
-export interface UserUpdateRequest {
+export interface UpdateUserRequest {
     id: number;
     username?: string;
     nickname?: string;
     email?: string;
     group?: Group;
     password?: string;
+    description?: string;
 }
 
-export interface UserCreateRequest {
+export interface CreateUserRequest {
     username?: string;
     nickname?: string;
     email?: string;
@@ -48,13 +48,17 @@ export interface UserCreateRequest {
     password?: string;
 }
 
-export interface UserDeleteRequest {
+export interface DeleteUserRequest {
     id: number;
 }
 
 export interface UserLoginRequest {
     account: string;
     password: string;
+    captcha?: {
+        id?: string;
+        content?: string;
+    };
 }
 
 export interface UserRegisterRequest {
@@ -62,5 +66,20 @@ export interface UserRegisterRequest {
     nickname: string;
     email: string;
     password: string;
-    token?: string;
+    captcha?: {
+        id?: string;
+        content?: string;
+    };
+}
+
+export interface UpdateUserProfileRequest {
+    nickname?: string;
+    email?: string;
+    password?: string;
+    description?: string;
+}
+
+export interface UpdateUserProfilePasswordRequest {
+    old_password: string;
+    new_password: string;
 }

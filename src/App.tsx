@@ -1,31 +1,48 @@
-import { useThemeStore } from "@/stores/theme";
 import { RouterProvider } from "react-router";
+import routers from "@/routers";
+import { Toaster } from "@/components/ui/sonner";
 import { useEffect } from "react";
-import { router } from "@/routers";
-import { useSharedStore } from "./stores/shared";
-import { get } from "./api/config";
+import { useThemeStore } from "@/storages/theme";
+import { useConfigStore } from "@/storages/config";
+import { getConfigs } from "@/api/config";
 
-export default function App() {
-    const themeStore = useThemeStore();
-    const sharedStore = useSharedStore();
-
-    function fetchConfigs() {
-        get().then((res) => {
-            sharedStore.setConfig(res.data);
-        });
-    }
+function App() {
+    const { theme } = useThemeStore();
+    const configStore = useConfigStore();
 
     useEffect(() => {
-        document.documentElement.classList.toggle("dark", themeStore.darkMode);
-        document.documentElement.classList.toggle(
-            "light",
-            !themeStore.darkMode
-        );
-    }, [themeStore.darkMode]);
+        const root = window.document.documentElement;
+        root.classList.remove("light", "dark");
+        if (theme === "system") {
+            const systemTheme = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches
+                ? "dark"
+                : "light";
+
+            root.classList.add(systemTheme);
+            return;
+        }
+
+        root.classList.add(theme);
+    }, [theme]);
+
+    function fetchConfigs() {
+        getConfigs().then((res) => {
+            configStore.setConfig(res.data);
+        });
+    }
 
     useEffect(() => {
         fetchConfigs();
     }, []);
 
-    return <RouterProvider router={router} />;
+    return (
+        <>
+            <Toaster />
+            <RouterProvider router={routers} />
+        </>
+    );
 }
+
+export default App;

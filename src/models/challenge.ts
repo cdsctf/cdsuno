@@ -1,74 +1,67 @@
-import { Flag } from "./flag";
-import { Hint } from "./hint";
 import { Env } from "./env";
 import { Submission } from "./submission";
 
 export interface Challenge {
-    id?: number;
+    id?: string;
     title?: string;
+    tags?: Array<string>;
     description?: string;
     category?: number;
     has_attachment?: boolean;
     is_public?: boolean;
     is_dynamic?: boolean;
-    duration?: number;
-    image_name?: string;
-    memory_limit?: number;
-    cpu_limit?: number;
-    ports?: Array<number>;
-    envs?: Array<Env>;
-    flags?: Array<Flag>;
-    hints?: Array<Hint>;
-    updated_at?: string;
+    env?: Env;
+    checker?: string;
+    updated_at?: number;
+    created_at?: number;
 }
 
-export interface ChallengeGetRequest {
-    id?: number;
+export interface GetChallengeRequest {
+    id?: string;
     title?: string;
     description?: string;
     category?: number;
     is_public?: boolean;
     is_dynamic?: boolean;
-    is_detailed?: boolean;
-    difficulty?: number;
     page?: number;
     size?: number;
     sorts?: string;
+
+    is_desensitized?: boolean;
 }
 
-export interface ChallengeUpdateRequest {
-    id?: number;
+export interface UpdateChallengeRequest {
+    id?: string;
     title?: string;
+    tags?: Array<string>;
     description?: string;
     category?: number;
     has_attachment?: boolean;
     is_public?: boolean;
     is_dynamic?: boolean;
-    duration?: number;
-    image_name?: string;
-    memory_limit?: number;
-    cpu_limit?: number;
-    ports?: Array<number>;
-    envs?: Array<Env>;
-    flags?: Array<Flag>;
 }
 
-export interface ChallengeCreateRequest {
+export interface UpdateChallengeCheckerRequest {
+    id?: string;
+    checker?: string;
+}
+
+export interface UpdateChallengeEnvRequest {
+    id?: string;
+    env?: Env;
+}
+
+export interface CreateChallengeRequest {
     title?: string;
     description?: string;
     category?: number;
     is_public?: boolean;
     is_dynamic?: boolean;
-    duration?: number;
-    image_name?: string;
-    memory_limit?: number;
-    cpu_limit?: number;
-    ports?: Array<number>;
-    envs?: Array<Env>;
+    env?: Env;
 }
 
-export interface ChallengeDeleteRequest {
-    id?: number;
+export interface DeleteChallengeRequest {
+    id?: string;
 }
 
 export interface ChallengeStatus {
@@ -78,8 +71,8 @@ export interface ChallengeStatus {
     bloods?: Array<Submission>;
 }
 
-export interface ChallengeStatusRequest {
-    challenge_ids: Array<number>;
+export interface GetChallengeStatusRequest {
+    challenge_ids: Array<string>;
     user_id?: number;
     team_id?: number;
     game_id?: number;

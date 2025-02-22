@@ -1,1 +1,0 @@
-export { ChallengeCreateModal } from "./ChallengeCreateModal";

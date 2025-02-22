@@ -1,8 +1,6 @@
-import { defineConfig, loadEnv } from "vite";
-import React from "@vitejs/plugin-react-swc";
-import Icons from "unplugin-icons/vite";
 import path from "path";
-import crypto from "crypto";
+import React from "@vitejs/plugin-react-swc";
+import { defineConfig, loadEnv } from "vite";
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd());
@@ -15,54 +13,32 @@ export default defineConfig(({ mode }) => {
                 "/api": {
                     target: apiUrl,
                     changeOrigin: true,
+                    configure: (proxy, _options) => {
+                        proxy.on("error", (_err, _req, res) => {
+                            if (res && !res.headersSent) {
+                                res.writeHead(502, {
+                                    "Content-Type": "application/json",
+                                });
+                                res.end(
+                                    JSON.stringify({
+                                        error: "backend offline",
+                                    })
+                                );
+                            }
+                        });
+                    },
                 },
-                "/metrics": {
-                    target: apiUrl,
-                    changeOrigin: true,
-                },
-                "/api/proxies": {
+                "^/api/pods/.+/wsrx": {
                     target: apiUrl.replace("http", "ws"),
                     ws: true,
                 },
             },
         },
-        plugins: [
-            React(),
-            Icons({
-                compiler: "jsx",
-                jsx: "react",
-                scale: 1.2,
-                defaultClass: "iconify",
-            }),
-        ],
+        plugins: [React()],
         resolve: {
             alias: {
-                "@": path.resolve(__dirname, "src"),
+                "@": path.resolve(__dirname, "./src"),
             },
-        },
-        css: {
-            modules: {
-                generateScopedName: (
-                    name: string,
-                    _filename: string,
-                    css: string
-                ) => {
-                    // const shortFilename = filename
-                    //     .replace(/\\/g, "/")
-                    //     .split("/")
-                    //     .pop()!
-                    //     .replace(/(\.\w+)+$/, "");
-                    const hash = crypto
-                        .createHash("sha256")
-                        .update(name.concat(css))
-                        .digest("hex")
-                        .substring(0, 8);
-                    return `cdsuno_${hash}`;
-                },
-            },
-        },
-        build: {
-            cssCodeSplit: true,
         },
     };
 });
