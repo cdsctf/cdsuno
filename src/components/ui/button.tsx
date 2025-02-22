@@ -1,5 +1,6 @@
 import { Slot, Slottable } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
+import { LoaderCircle } from "lucide-react";
 
 import { cn } from "@/utils";
 import React, { ButtonHTMLAttributes, Ref, useEffect, useState } from "react";
@@ -58,14 +59,14 @@ const buttonVariants = cva(
                 sm: "h-9 rounded-md px-3",
                 lg: "h-11 rounded-md px-8",
             },
-            icon: {
+            square: {
                 true: "aspect-square",
             },
         },
         defaultVariants: {
             variant: "ghost",
             size: "md",
-            icon: false,
+            square: false,
         },
     }
 );
@@ -74,6 +75,8 @@ export interface ButtonProps
     extends ButtonHTMLAttributes<HTMLButtonElement>,
         VariantProps<typeof buttonVariants> {
     asChild?: boolean;
+    icon?: React.ReactElement;
+    loading?: boolean;
     ref?: Ref<HTMLButtonElement>;
 }
 
@@ -82,8 +85,10 @@ function Button(props: ButtonProps) {
         className,
         variant,
         size,
-        icon,
+        square,
+        loading = false,
         asChild = false,
+        icon,
         children,
         onClick,
         ref,
@@ -124,7 +129,7 @@ function Button(props: ButtonProps) {
     const Comp = asChild ? Slot : "button";
     return (
         <Comp
-            className={cn(buttonVariants({ variant, size, icon, className }))}
+            className={cn(buttonVariants({ variant, size, square, className }))}
             ref={ref}
             onClick={(e) => {
                 handleClick(e);
@@ -132,6 +137,15 @@ function Button(props: ButtonProps) {
             }}
             {...rest}
         >
+            {(!!icon || loading) && (
+                <>
+                    {loading ? (
+                        <LoaderCircle className={cn(["animate-spin"])} />
+                    ) : (
+                        icon
+                    )}
+                </>
+            )}
             <Slottable>{children}</Slottable>
             <span
                 className={cn([

@@ -2,12 +2,11 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { LogIn, UserRound, Lock, UserRoundPlus } from "lucide-react";
+import { LogIn, UserRound, Lock, UserRoundPlus, Check } from "lucide-react";
 import { useConfigStore } from "@/storages/config";
 import { cn } from "@/utils";
 import { Input } from "@/components/ui/input";
@@ -27,6 +26,8 @@ import { Captcha } from "@/components/widgets/captcha";
 import { useState } from "react";
 import { login } from "@/api/user";
 import { toast } from "sonner";
+import { useAuthStore } from "@/storages/auth";
+import { useNavigate } from "react-router";
 
 export default function Index() {
     const configStore = useConfigStore();
@@ -88,8 +89,8 @@ export default function Index() {
                         className={cn("w-full")}
                         variant={"secondary"}
                         size={"lg"}
+                        icon={<UserRoundPlus />}
                     >
-                        <UserRoundPlus />
                         还没有账号？注册！
                     </Button>
                 </div>
@@ -99,6 +100,11 @@ export default function Index() {
 }
 
 function LoginForm() {
+    const authStore = useAuthStore();
+    const navigate = useNavigate();
+
+    const [loading, setLoading] = useState<boolean>(false);
+
     const formSchema = z.object({
         account: z.string({
             message: "请输入用户名",
@@ -118,16 +124,24 @@ function LoginForm() {
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
+        setLoading(true);
         login({
             captcha,
             ...values,
-        }).then((res) => {
-            if (res.code === 200) {
-                toast.success("登录成功", {
-                    description: `欢迎回来，${res.data?.nickname}！`,
-                });
-            }
-        });
+        })
+            .then((res) => {
+                if (res.code === 200) {
+                    authStore.setUser(res.data);
+                    toast.success("登录成功", {
+                        id: "login-success",
+                        description: `欢迎回来，${res.data?.nickname}！`,
+                    });
+                    navigate("/");
+                }
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }
 
     return (
@@ -188,6 +202,8 @@ function LoginForm() {
                     type={"submit"}
                     size={"lg"}
                     className={cn(["w-full"])}
+                    icon={<Check />}
+                    loading={loading}
                 >
                     登录
                 </Button>

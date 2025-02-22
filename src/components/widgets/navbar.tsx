@@ -13,11 +13,13 @@ import {
 import { Separator } from "../ui/separator";
 import { useThemeStore } from "@/storages/theme";
 import { useConfigStore } from "@/storages/config";
+import { useAuthStore } from "@/storages/auth";
 
 function Navbar() {
     const location = useLocation();
     const pathname = location.pathname;
     const configStore = useConfigStore();
+    const authStore = useAuthStore();
 
     return (
         <header
@@ -82,11 +84,9 @@ function Navbar() {
                             variant={pathname === "/" ? "secondary" : "ghost"}
                             size={"sm"}
                             className={"font-semibold"}
+                            icon={<House />}
                         >
-                            <Link to={"/"}>
-                                <House />
-                                主页
-                            </Link>
+                            <Link to={"/"}>主页</Link>
                         </Button>
                         <Button
                             asChild
@@ -97,22 +97,18 @@ function Navbar() {
                             }
                             size={"sm"}
                             className={"font-semibold"}
+                            icon={<Library />}
                         >
-                            <Link to={"/playground"}>
-                                <Library />
-                                练习场
-                            </Link>
+                            <Link to={"/playground"}>练习场</Link>
                         </Button>
                         <Button
                             variant={"ghost"}
                             size={"sm"}
                             asChild
                             className={"font-semibold"}
+                            icon={<Flag />}
                         >
-                            <Link to={"/games"}>
-                                <Flag />
-                                比赛
-                            </Link>
+                            <Link to={"/games"}>比赛</Link>
                         </Button>
                     </div>
                 </div>
@@ -120,10 +116,14 @@ function Navbar() {
                     <AppearanceDropdown />
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button icon>
+                            <Button square>
                                 <Avatar className={cn("h-8", "w-8")}>
-                                    <AvatarImage src="https://github.com/elabosak233.png" />
-                                    <AvatarFallback>Ela</AvatarFallback>
+                                    <AvatarImage
+                                        src={`/api/users/${authStore?.user?.id}/avatar`}
+                                    />
+                                    <AvatarFallback>
+                                        {authStore?.user?.username?.charAt(0)}
+                                    </AvatarFallback>
                                 </Avatar>
                             </Button>
                         </DropdownMenuTrigger>
@@ -146,21 +146,29 @@ function AppearanceDropdown() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant={"ghost"} icon size={"sm"}>
+                <Button variant={"ghost"} square size={"sm"}>
                     <Brush />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-36">
                 <div className={cn(["flex", "h-9", "justify-between"])}>
-                    <Button size={"sm"} icon onClick={() => setTheme("light")}>
+                    <Button
+                        size={"sm"}
+                        square
+                        onClick={() => setTheme("light")}
+                    >
                         <Sun />
                     </Button>
                     <Separator orientation="vertical" />
-                    <Button size={"sm"} icon onClick={() => setTheme("dark")}>
+                    <Button size={"sm"} square onClick={() => setTheme("dark")}>
                         <Moon />
                     </Button>
                     <Separator orientation="vertical" />
-                    <Button size={"sm"} icon onClick={() => setTheme("system")}>
+                    <Button
+                        size={"sm"}
+                        square
+                        onClick={() => setTheme("system")}
+                    >
                         <Eclipse />
                     </Button>
                 </div>
