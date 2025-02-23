@@ -22,7 +22,10 @@ function ChallengeCard(props: ChallengeCardProps) {
     const { challenge, status, className, ...rest } = props;
     const { getCategory } = useCategoryStore();
 
-    const CategoryIcon = getCategory(challenge?.category)?.icon!;
+    const category = React.useMemo(() => {
+        return getCategory(challenge?.category);
+    }, [challenge?.category]);
+    const CategoryIcon = category?.icon!;
 
     return (
         <Card
@@ -36,12 +39,14 @@ function ChallengeCard(props: ChallengeCardProps) {
                     "overflow-hidden",
                     "rounded-xl",
                     "hover:bg-foreground/10",
+                    "shadow-sm",
                     "transition-colors",
                     "duration-200",
                     "cursor-pointer",
                 ],
                 className
             )}
+            {...rest}
         >
             <span
                 className={cn([
@@ -54,10 +59,7 @@ function ChallengeCard(props: ChallengeCardProps) {
                     "size-36",
                 ])}
             >
-                <CategoryIcon
-                    className={cn(["size-36"])}
-                    // color={getCategory(challenge?.category).color}
-                />
+                <CategoryIcon className={cn(["size-36"])} />
             </span>
             {status?.is_solved && (
                 <TooltipProvider>
@@ -70,15 +72,26 @@ function ChallengeCard(props: ChallengeCardProps) {
                                     "right-[7%]",
                                     "size-5",
                                 ])}
-                                color={getCategory(challenge?.category).color}
+                                color={category.color}
                             />
                         </TooltipTrigger>
                         <TooltipContent sideOffset={0}>已解决</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
             )}
-            <Badge variant={"tonal"}>
-                {getCategory(challenge?.category).name?.toUpperCase()}
+            <Badge
+                variant={"tonal"}
+                className={cn([
+                    "bg-[var(--color-badge)]/10",
+                    "text-[var(--color-badge)]",
+                ])}
+                style={
+                    {
+                        "--color-badge": category.color,
+                    } as React.CSSProperties
+                }
+            >
+                {category.name?.toUpperCase()}
             </Badge>
             <h3
                 className={cn([
@@ -86,6 +99,7 @@ function ChallengeCard(props: ChallengeCardProps) {
                     "text-xl",
                     "text-ellipsis",
                     "overflow-hidden",
+                    "text-nowrap",
                     "max-w-3/4",
                 ])}
             >

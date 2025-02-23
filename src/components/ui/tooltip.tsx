@@ -1,14 +1,14 @@
 import * as React from "react";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import * as RadixTooltip from "@radix-ui/react-tooltip";
 
 import { cn } from "@/utils";
 
 function TooltipProvider({
     delayDuration = 0,
     ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
+}: React.ComponentProps<typeof RadixTooltip.Provider>) {
     return (
-        <TooltipPrimitive.Provider
+        <RadixTooltip.Provider
             data-slot="tooltip-provider"
             delayDuration={delayDuration}
             {...props}
@@ -16,20 +16,18 @@ function TooltipProvider({
     );
 }
 
-function Tooltip({
-    ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Root>) {
+function Tooltip({ ...props }: React.ComponentProps<typeof RadixTooltip.Root>) {
     return (
         <TooltipProvider>
-            <TooltipPrimitive.Root data-slot="tooltip" {...props} />
+            <RadixTooltip.Root data-slot="tooltip" {...props} />
         </TooltipProvider>
     );
 }
 
 function TooltipTrigger({
     ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
-    return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
+}: React.ComponentProps<typeof RadixTooltip.Trigger>) {
+    return <RadixTooltip.Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
 function TooltipContent({
@@ -37,10 +35,10 @@ function TooltipContent({
     sideOffset = 2,
     children,
     ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Content>) {
+}: React.ComponentProps<typeof RadixTooltip.Content>) {
     return (
-        <TooltipPrimitive.Portal>
-            <TooltipPrimitive.Content
+        <RadixTooltip.Portal>
+            <RadixTooltip.Content
                 data-slot="tooltip-content"
                 sideOffset={sideOffset}
                 className={cn(
@@ -69,7 +67,7 @@ function TooltipContent({
                 {...props}
             >
                 {children}
-                <TooltipPrimitive.Arrow
+                <RadixTooltip.Arrow
                     className={cn([
                         "bg-primary",
                         "fill-primary",
@@ -80,8 +78,8 @@ function TooltipContent({
                         "rounded-[2px]",
                     ])}
                 />
-            </TooltipPrimitive.Content>
-        </TooltipPrimitive.Portal>
+            </RadixTooltip.Content>
+        </RadixTooltip.Portal>
     );
 }
 
