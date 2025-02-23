@@ -3,7 +3,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { LoaderCircle } from "lucide-react";
 
 import { cn } from "@/utils";
-import React, { ButtonHTMLAttributes, Ref, useEffect, useState } from "react";
+import React, {
+    ButtonHTMLAttributes,
+    CSSProperties,
+    Ref,
+    useEffect,
+    useState,
+} from "react";
 
 const buttonVariants = cva(
     [
@@ -12,6 +18,7 @@ const buttonVariants = cva(
         "items-center",
         "justify-center",
         "gap-2",
+        "box-border",
         "whitespace-nowrap",
         "overflow-hidden",
         "rounded-md",
@@ -30,29 +37,32 @@ const buttonVariants = cva(
         variants: {
             variant: {
                 solid: [
-                    "bg-primary",
-                    "text-primary-foreground",
-                    "hover:bg-primary/50",
-                ],
-                destructive: [
-                    "bg-destructive",
-                    "text-destructive-foreground",
-                    "hover:bg-destructive/90",
+                    "bg-[var(--color-button)]",
+                    "text-[var(--color-button-foreground)]",
+                    "hover:bg-[var(--color-button)]/80",
                 ],
                 outline: [
                     "border",
                     "border-input",
                     "bg-transparent",
-                    "hover:bg-accent",
-                    "hover:text-accent-foreground",
+                    "text-[var(--color-button)]",
+                    "hover:bg-[var(--color-button)]/10",
                 ],
-                secondary: [
-                    "bg-secondary",
-                    "text-secondary-foreground",
-                    "hover:bg-secondary/80",
+                tonal: [
+                    "bg-[var(--color-button)]/10",
+                    "text-[var(--color-button)]",
+                    "hover:bg-[var(--color-button)]/20",
                 ],
-                ghost: ["hover:bg-accent", "hover:text-accent-foreground"],
-                link: ["text-primary", "underline-offset-4", "hover:underline"],
+                ghost: [
+                    "text-[var(--color-button)]",
+                    "hover:bg-[var(--color-button-foreground)]/10",
+                    "hover:text-[var(--color-button)]",
+                ],
+                link: [
+                    "text-[var(--color-button)]",
+                    "underline-offset-4",
+                    "hover:underline",
+                ],
             },
             size: {
                 md: "h-10 px-4 py-2",
@@ -77,11 +87,13 @@ export interface ButtonProps
     asChild?: boolean;
     icon?: React.ReactElement;
     loading?: boolean;
+    level?: "primary" | "secondary" | "info" | "success" | "warning" | "error";
     ref?: Ref<HTMLButtonElement>;
 }
 
 function Button(props: ButtonProps) {
     const {
+        level = "primary",
         className,
         variant,
         size,
@@ -135,6 +147,12 @@ function Button(props: ButtonProps) {
                 handleClick(e);
                 onClick?.(e);
             }}
+            style={
+                {
+                    "--color-button": `var(--${level})`,
+                    "--color-button-foreground": `var(--${level}-foreground)`,
+                } as CSSProperties
+            }
             {...rest}
         >
             {(!!icon || loading) && (
@@ -177,7 +195,5 @@ function Button(props: ButtonProps) {
         </Comp>
     );
 }
-
-Button.displayName = "Button";
 
 export { Button, buttonVariants };

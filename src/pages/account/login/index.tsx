@@ -87,8 +87,8 @@ export default function Index() {
                     </div>
                     <Button
                         className={cn("w-full")}
-                        variant={"secondary"}
                         size={"lg"}
+                        variant={"tonal"}
                         icon={<UserRoundPlus />}
                     >
                         还没有账号？注册！
@@ -199,6 +199,7 @@ function LoginForm() {
                 </div>
                 <Button
                     variant={"solid"}
+                    level={"primary"}
                     type={"submit"}
                     size={"lg"}
                     className={cn(["w-full"])}
