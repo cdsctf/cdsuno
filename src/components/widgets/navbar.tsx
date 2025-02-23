@@ -1,11 +1,22 @@
 import { cn } from "@/utils";
 import { Button } from "../ui/button";
-import { House, Flag, Library, Brush, Sun, Moon, Eclipse } from "lucide-react";
+import {
+    House,
+    Flag,
+    Library,
+    Brush,
+    Sun,
+    Moon,
+    Eclipse,
+    UserRound,
+    LogOut,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Link, useLocation } from "react-router";
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
@@ -81,7 +92,7 @@ function Navbar() {
                     >
                         <Button
                             asChild
-                            variant={pathname === "/" ? "secondary" : "ghost"}
+                            variant={pathname === "/" ? "tonal" : "ghost"}
                             size={"sm"}
                             className={"font-semibold"}
                             icon={<House />}
@@ -91,9 +102,7 @@ function Navbar() {
                         <Button
                             asChild
                             variant={
-                                pathname === "/playground"
-                                    ? "secondary"
-                                    : "ghost"
+                                pathname === "/playground" ? "tonal" : "ghost"
                             }
                             size={"sm"}
                             className={"font-semibold"}
@@ -102,9 +111,9 @@ function Navbar() {
                             <Link to={"/playground"}>练习场</Link>
                         </Button>
                         <Button
-                            variant={"ghost"}
                             size={"sm"}
                             asChild
+                            variant={pathname === "/games" ? "tonal" : "ghost"}
                             className={"font-semibold"}
                             icon={<Flag />}
                         >
@@ -114,31 +123,48 @@ function Navbar() {
                 </div>
                 <div className={cn(["flex", "gap-3", "items-center"])}>
                     <AppearanceDropdown />
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button square>
-                                <Avatar className={cn("h-8", "w-8")}>
-                                    <AvatarImage
-                                        src={`/api/users/${authStore?.user?.id}/avatar`}
-                                    />
-                                    <AvatarFallback>
-                                        {authStore?.user?.username?.charAt(0)}
-                                    </AvatarFallback>
-                                </Avatar>
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-56">
-                            <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <AuthArea />
                 </div>
             </div>
         </header>
     );
 }
 
-Navbar.displayName = "Navbar";
+function AuthArea() {
+    const authStore = useAuthStore();
+
+    if (authStore?.user?.id) {
+        return (
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button square>
+                        <Avatar className={cn("h-8", "w-8")}>
+                            <AvatarImage
+                                src={`/api/users/${authStore?.user?.id}/avatar`}
+                            />
+                            <AvatarFallback>
+                                {authStore?.user?.username?.charAt(0)}
+                            </AvatarFallback>
+                        </Avatar>
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                    <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem icon={<LogOut />}>
+                        Subscription
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+        );
+    }
+
+    return (
+        <Button asChild icon={<UserRound />}>
+            <Link to={"/account/login"}>登录</Link>
+        </Button>
+    );
+}
 
 function AppearanceDropdown() {
     const { setTheme } = useThemeStore();
@@ -150,7 +176,7 @@ function AppearanceDropdown() {
                     <Brush />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-36">
+            <DropdownMenuContent className={"w-36"}>
                 <div className={cn(["flex", "h-9", "justify-between"])}>
                     <Button
                         size={"sm"}

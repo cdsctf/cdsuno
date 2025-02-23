@@ -7,7 +7,7 @@ const inputVariants = cva(
     [
         "flex-1",
         "flex",
-        "h-10",
+        "h-12",
         "w-0",
         "rounded-md",
         "border",
@@ -65,7 +65,7 @@ function Input(props: InputProps) {
                         "flex",
                         "items-center",
                         "justify-center",
-                        "h-10",
+                        "h-12",
                         "aspect-square",
                         "bg-primary/20",
                     ])}
@@ -97,7 +97,7 @@ function Input(props: InputProps) {
                         "flex-row",
                         "items-center",
                         "justify-center",
-                        "h-10",
+                        "h-12",
                         "aspect-square",
                         "bg-primary/20",
                         "hover:bg-primary/30",
