@@ -12,7 +12,7 @@ import {
     LogOut,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -25,6 +25,7 @@ import { Separator } from "../ui/separator";
 import { useThemeStore } from "@/storages/theme";
 import { useConfigStore } from "@/storages/config";
 import { useAuthStore } from "@/storages/auth";
+import { logout } from "@/api/user";
 
 function Navbar() {
     const location = useLocation();
@@ -95,7 +96,7 @@ function Navbar() {
                             variant={pathname === "/" ? "tonal" : "ghost"}
                             size={"sm"}
                             className={"font-semibold"}
-                            icon={<House />}
+                            icon={House}
                         >
                             <Link to={"/"}>主页</Link>
                         </Button>
@@ -106,7 +107,7 @@ function Navbar() {
                             }
                             size={"sm"}
                             className={"font-semibold"}
-                            icon={<Library />}
+                            icon={Library}
                         >
                             <Link to={"/playground"}>练习场</Link>
                         </Button>
@@ -115,7 +116,7 @@ function Navbar() {
                             asChild
                             variant={pathname === "/games" ? "tonal" : "ghost"}
                             className={"font-semibold"}
-                            icon={<Flag />}
+                            icon={Flag}
                         >
                             <Link to={"/games"}>比赛</Link>
                         </Button>
@@ -131,7 +132,17 @@ function Navbar() {
 }
 
 function AuthArea() {
+    const navigate = useNavigate();
     const authStore = useAuthStore();
+
+    function handleLogout() {
+        logout().then((res) => {
+            if (res.code === 200) {
+                authStore.setUser(undefined);
+                navigate("/account/login");
+            }
+        });
+    }
 
     if (authStore?.user?.id) {
         return (
@@ -148,11 +159,15 @@ function AuthArea() {
                         </Avatar>
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
+                <DropdownMenuContent className="w-42">
                     <DropdownMenuLabel>Appearance</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem icon={<LogOut />}>
-                        Subscription
+                    <DropdownMenuItem
+                        icon={<LogOut />}
+                        className={cn("text-error", "hover:text-error")}
+                        onClick={handleLogout}
+                    >
+                        退出登录
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
@@ -160,7 +175,7 @@ function AuthArea() {
     }
 
     return (
-        <Button asChild icon={<UserRound />}>
+        <Button asChild icon={UserRound}>
             <Link to={"/account/login"}>登录</Link>
         </Button>
     );

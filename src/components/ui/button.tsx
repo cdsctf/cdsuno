@@ -1,6 +1,6 @@
 import { Slot, Slottable } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, LucideIcon } from "lucide-react";
 
 import { cn } from "@/utils";
 import React, {
@@ -49,13 +49,13 @@ const buttonVariants = cva(
                     "hover:bg-[var(--color-button)]/10",
                 ],
                 tonal: [
-                    "bg-[var(--color-button)]/10",
+                    "bg-[var(--color-button)]/7.5",
                     "text-[var(--color-button)]",
                     "hover:bg-[var(--color-button)]/20",
                 ],
                 ghost: [
                     "text-[var(--color-button)]",
-                    "hover:bg-[var(--color-button-foreground)]/10",
+                    "hover:bg-[var(--color-button)]/10",
                     "hover:text-[var(--color-button)]",
                 ],
                 link: [
@@ -85,7 +85,7 @@ export interface ButtonProps
     extends ButtonHTMLAttributes<HTMLButtonElement>,
         VariantProps<typeof buttonVariants> {
     asChild?: boolean;
-    icon?: React.ReactElement;
+    icon?: LucideIcon;
     loading?: boolean;
     level?: "primary" | "secondary" | "info" | "success" | "warning" | "error";
     ref?: Ref<HTMLButtonElement>;
@@ -98,6 +98,7 @@ function Button(props: ButtonProps) {
         variant,
         size,
         square,
+        disabled = false,
         loading = false,
         asChild = false,
         icon,
@@ -138,6 +139,7 @@ function Button(props: ButtonProps) {
         setRipples([...ripples, { x, y, id: Date.now() }]);
     };
 
+    const Icon = icon!;
     const Comp = asChild ? Slot : "button";
     return (
         <Comp
@@ -147,6 +149,8 @@ function Button(props: ButtonProps) {
                 handleClick(e);
                 onClick?.(e);
             }}
+            draggable={false}
+            disabled={disabled || loading}
             style={
                 {
                     "--color-button": `var(--${level})`,
@@ -160,7 +164,7 @@ function Button(props: ButtonProps) {
                     {loading ? (
                         <LoaderCircle className={cn(["animate-spin"])} />
                     ) : (
-                        icon
+                        <Icon />
                     )}
                 </>
             )}
