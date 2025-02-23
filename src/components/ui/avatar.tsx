@@ -45,7 +45,7 @@ function AvatarImage({
     return (
         <AvatarPrimitive.Image
             ref={ref}
-            className={cn("aspect-square h-full w-full", className)}
+            className={cn(["aspect-square", "h-full", "w-full"], className)}
             draggable={false}
             {...rest}
         />
@@ -62,13 +62,19 @@ function AvatarFallback({
         <AvatarPrimitive.Fallback
             ref={ref}
             className={cn(
-                "flex h-full w-full items-center justify-center bg-muted",
+                [
+                    "flex",
+                    "h-full",
+                    "w-full",
+                    "items-center",
+                    "justify-center",
+                    "bg-foreground/10",
+                ],
                 className
             )}
             {...rest}
         />
     );
 }
-AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 export { Avatar, AvatarImage, AvatarFallback };

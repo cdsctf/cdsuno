@@ -46,8 +46,8 @@ function DropdownMenuSubTrigger({
                     "py-1.5",
                     "text-sm",
                     "outline-hidden",
-                    "focus:bg-accent",
-                    "data-[state=open]:bg-accent",
+                    "focus:bg-foreground/10",
+                    "data-[state=open]:bg-foreground/10",
                     "[&_svg]:pointer-events-none",
                     "[&_svg]:size-4",
                     "[&_svg]:shrink-0",
@@ -156,8 +156,7 @@ const dropdownMenuItemVariants = cva(
         "text-sm",
         "outline-hidden",
         "transition-colors",
-        "focus:bg-accent",
-        "focus:text-accent-foreground",
+        "focus:bg-primary/5",
         "data-disabled:pointer-events-none",
         "data-disabled:opacity-50",
         "[&_svg]:pointer-events-none",
@@ -217,8 +216,8 @@ const DropdownMenuCheckboxItem = React.forwardRef<
                 "text-sm",
                 "outline-hidden",
                 "transition-colors",
-                "focus:bg-accent",
-                "focus:text-accent-foreground",
+                "focus:bg-foreground/10",
+                "focus:text-foreground",
                 "data-disabled:pointer-events-none",
                 "data-disabled:opacity-50",
             ],
@@ -268,8 +267,8 @@ const DropdownMenuRadioItem = React.forwardRef<
                 "text-sm",
                 "outline-hidden",
                 "transition-colors",
-                "focus:bg-accent",
-                "focus:text-accent-foreground",
+                "focus:bg-foreground/10",
+                "focus:text-foreground/10",
                 "data-disabled:pointer-events-none",
                 "data-disabled:opacity-50",
             ],
@@ -321,7 +320,7 @@ const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <DropdownMenuPrimitive.Separator
         ref={ref}
-        className={cn(["-mx-1", "my-1", "h-px", "bg-muted"], className)}
+        className={cn(["-mx-1", "my-1", "h-px", "bg-foreground/10"], className)}
         {...props}
     />
 ));

@@ -1,8 +1,8 @@
-import React from "react";
+import { LucideIcon } from "lucide-react";
 
 export interface Category {
     id?: number;
     name?: string;
     color?: string;
-    icon?: React.ReactElement;
+    icon?: LucideIcon;
 }

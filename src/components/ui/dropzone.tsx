@@ -465,7 +465,7 @@ const DropZoneArea = forwardRef<HTMLDivElement, DropZoneAreaProps>(
                 className={cn(
                     "flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                     context.isDragActive && "animate-pulse bg-black/5",
-                    context.isInvalid && "border-destructive",
+                    context.isInvalid && "border-error",
                     className
                 )}
             >
@@ -625,7 +625,7 @@ const DropzoneFileMessage = forwardRef<
             id={context.messageId}
             {...rest}
             className={cn(
-                "h-5 text-[0.8rem] font-medium text-destructive",
+                "h-5 text-[0.8rem] font-medium text-error",
                 rest.className
             )}
         >
@@ -654,7 +654,7 @@ const DropzoneMessage = forwardRef<HTMLParagraphElement, DropzoneMessageProps>(
                 id={context.rootMessageId}
                 {...rest}
                 className={cn(
-                    "h-5 text-[0.8rem] font-medium text-destructive",
+                    "h-5 text-[0.8rem] font-medium text-error",
                     rest.className
                 )}
             >
@@ -682,7 +682,7 @@ const DropzoneRemoveFile = forwardRef<
             ref={ref}
             onClick={context.onRemoveFile}
             type="button"
-            icon
+            square
             {...props}
             className={cn(
                 "aria-disabled:pointer-events-none aria-disabled:opacity-50",
@@ -717,7 +717,7 @@ const DropzoneRetryFile = forwardRef<HTMLButtonElement, DropzoneRetryFileProps>(
                 aria-label="retry"
                 onClick={context.onRetry}
                 type="button"
-                icon
+                square
                 {...props}
                 className={cn(
                     "aria-disabled:pointer-events-none aria-disabled:opacity-50",
@@ -811,7 +811,7 @@ const InfiniteProgress = forwardRef<HTMLDivElement, InfiniteProgressProps>(
                     className={cn(
                         "h-full w-full rounded-full bg-primary",
                         done ? "translate-x-0" : "animate-infinite-progress",
-                        error && "bg-destructive"
+                        error && "bg-error"
                     )}
                 />
             </div>

@@ -6,9 +6,10 @@ import { Turnstile } from "@marsidev/react-turnstile";
 import { useEffect, useState } from "react";
 import CryptoJS from "crypto-js";
 import { useSharedStore } from "@/storages/shared";
-import { Bot, RefreshCcw } from "lucide-react";
+import { Bot, RefreshCcw, Image } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { cn } from "@/utils";
 
 export interface CaptchaProps {
     onChange: (captcha?: { id?: string; content?: string }) => void;
@@ -102,13 +103,13 @@ function PowCaptcha(props: CaptchaProps) {
             readOnly
             disabled
             value={result}
-            icon={<Bot className="size-4" />}
+            icon={Bot}
             extraBtn={
                 <Button
                     disabled={loading}
                     onClick={() => setRefresh((prev) => prev + 1)}
                     loading={loading}
-                    icon={<RefreshCcw />}
+                    icon={RefreshCcw}
                 />
             }
         />
@@ -120,7 +121,7 @@ function ImageCaptcha(props: CaptchaProps) {
     const sharedStore = useSharedStore();
 
     const [refresh, setRefresh] = useState<number>(0);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [_loading, setLoading] = useState<boolean>(false);
 
     const [result, setResult] = useState<string>();
     const [id, setId] = useState<string>();
@@ -145,11 +146,13 @@ function ImageCaptcha(props: CaptchaProps) {
     }, [id, result]);
 
     return (
-        <div>
+        <div className={cn(["flex", "items-center", "gap-2"])}>
             <Input
+                icon={Image}
                 value={result}
                 onChange={(e) => setResult(e.target.value)}
                 placeholder={"验证码"}
+                className={cn(["flex-1"])}
             />
             <img
                 src={`data:image/svg+xml;base64,${CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(String(challenge)))}`}

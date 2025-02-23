@@ -89,7 +89,7 @@ export default function Index() {
                         className={cn("w-full")}
                         size={"lg"}
                         variant={"tonal"}
-                        icon={<UserRoundPlus />}
+                        icon={UserRoundPlus}
                     >
                         还没有账号？注册！
                     </Button>
@@ -161,8 +161,8 @@ function LoginForm() {
                                 <FormControl>
                                     <Input
                                         placeholder={"Account"}
+                                        icon={UserRound}
                                         {...field}
-                                        icon={<UserRound className="size-4" />}
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -178,7 +178,7 @@ function LoginForm() {
                                 <FormControl>
                                     <Input
                                         placeholder={"Password"}
-                                        icon={<Lock className="size-4" />}
+                                        icon={Lock}
                                         type={"password"}
                                         {...field}
                                     />
@@ -199,11 +199,11 @@ function LoginForm() {
                 </div>
                 <Button
                     variant={"solid"}
-                    level={"primary"}
+                    level={"success"}
                     type={"submit"}
                     size={"lg"}
                     className={cn(["w-full"])}
-                    icon={<Check />}
+                    icon={Check}
                     loading={loading}
                 >
                     登录
