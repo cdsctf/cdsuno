@@ -3,6 +3,7 @@ import { cn } from "@/utils";
 import { cva, VariantProps } from "class-variance-authority";
 import { Button } from "./button";
 import { LucideIcon } from "lucide-react";
+import { IconSection } from "./shared/icon-section";
 
 const inputVariants = cva(
     [
@@ -72,7 +73,7 @@ function Input(props: InputProps) {
         ...rest
     } = props;
     return (
-        <div className={cn(["flex", "flex-row", "items-center"], className)}>
+        <div className={cn(["flex", "items-center"], className)}>
             {icon && <IconSection icon={icon} size={size} />}
             <input
                 type={type}
@@ -88,44 +89,6 @@ function Input(props: InputProps) {
                 {...rest}
             />
             {extraBtn && <ExtraBtnSection extraBtn={extraBtn} size={size} />}
-        </div>
-    );
-}
-
-const iconSectionVariants = cva(
-    [
-        "rounded-l-md",
-        "flex",
-        "items-center",
-        "justify-center",
-        "aspect-square",
-        "bg-primary/20",
-    ],
-    {
-        variants: {
-            size: {
-                sm: "h-10",
-                md: "h-12",
-            },
-        },
-        defaultVariants: {
-            size: "md",
-        },
-    }
-);
-
-interface IconSectionProps extends VariantProps<typeof iconSectionVariants> {
-    icon: LucideIcon;
-}
-
-function IconSection(props: IconSectionProps) {
-    const { icon, size, ...rest } = props;
-
-    const Icon = icon;
-
-    return (
-        <div className={cn(iconSectionVariants({ size }))} {...rest}>
-            <Icon className={cn(["size-4"])} />
         </div>
     );
 }

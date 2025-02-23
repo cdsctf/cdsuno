@@ -29,11 +29,14 @@ function Pagination(props: PaginationProps) {
         <PaginationPrimitive {...rest}>
             <PaginationContent>
                 <PaginationItem>
-                    <PaginationPrevious />
+                    <PaginationPrevious
+                        disabled={value - 1 === 0}
+                        onClick={() => onChange(value - 1)}
+                    />
                 </PaginationItem>
-                {paginationNodes?.map((node) => {
-                    if (typeof node === "number") {
-                        return (
+                {paginationNodes?.map((node, index) => (
+                    <React.Fragment key={index}>
+                        {typeof node === "number" ? (
                             <PaginationItem>
                                 <PaginationLink
                                     isActive={node === value}
@@ -42,12 +45,16 @@ function Pagination(props: PaginationProps) {
                                     {node}
                                 </PaginationLink>
                             </PaginationItem>
-                        );
-                    }
-                    return <PaginationEllipsis />;
-                })}
+                        ) : (
+                            <PaginationEllipsis />
+                        )}
+                    </React.Fragment>
+                ))}
                 <PaginationItem>
-                    <PaginationNext />
+                    <PaginationNext
+                        disabled={value === total || total === 0}
+                        onClick={() => onChange(value + 1)}
+                    />
                 </PaginationItem>
             </PaginationContent>
         </PaginationPrimitive>
@@ -62,7 +69,7 @@ function generatePaginationNodes(total: number, value: number, max?: number) {
     const halfMaxPages = Math.floor(maxPages / 2);
 
     if (total <= 1) {
-        return [];
+        return [1];
     }
 
     let startPage = Math.max(1, value - halfMaxPages);
@@ -104,10 +111,7 @@ function PaginationPrimitive({
             role="navigation"
             aria-label="pagination"
             data-slot="pagination"
-            className={cn(
-                ["mx-auto", "flex", "w-full", "justify-center"],
-                className
-            )}
+            className={cn(["flex"], className)}
             {...props}
         />
     );
@@ -140,22 +144,29 @@ interface PaginationLinkProps extends React.ComponentProps<typeof Button> {
 function PaginationLink({
     className,
     isActive,
+    disabled = false,
     size = "md",
     ...props
 }: PaginationLinkProps) {
     return (
-        <Button variant={isActive ? "outline" : "ghost"} square {...props} />
+        <Button
+            disabled={disabled}
+            variant={isActive ? "outline" : "ghost"}
+            square
+            {...props}
+        />
     );
 }
 
 function PaginationPrevious({
+    disabled,
     className,
     ...props
 }: React.ComponentProps<typeof PaginationLink>) {
     return (
         <PaginationLink
-            aria-label="Go to previous page"
             size="md"
+            disabled={disabled}
             className={cn(["gap-1", "px-2.5", "sm:pl-2.5"], className)}
             icon={ChevronLeftIcon}
             {...props}
@@ -164,13 +175,14 @@ function PaginationPrevious({
 }
 
 function PaginationNext({
+    disabled,
     className,
     ...props
 }: React.ComponentProps<typeof PaginationLink>) {
     return (
         <PaginationLink
-            aria-label="Go to next page"
             size="md"
+            disabled={disabled}
             className={cn(["gap-1", "px-2.5", "sm:pr-2.5"], className)}
             icon={ChevronRightIcon}
             {...props}
