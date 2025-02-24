@@ -1,12 +1,12 @@
+import { useThemeStore } from "@/storages/theme";
 import { cn } from "@/utils";
-import { useTheme } from "next-themes";
 import { Toaster as Sonner } from "sonner";
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
 
 function Toaster(props: ToasterProps) {
     const { ...rest } = props;
-    const { theme = "system" } = useTheme();
+    const { theme } = useThemeStore();
 
     return (
         <Sonner

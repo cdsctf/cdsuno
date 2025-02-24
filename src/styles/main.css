@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
+
+@import "./article";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -62,16 +65,6 @@
             transform: scale(4);
             opacity: 0;
         }
-    }
-}
-
-@layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
     }
 }
 
@@ -140,10 +133,23 @@
 }
 
 @layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
     * {
         @apply border-border outline-ring/50 transition-colors;
     }
+
     body {
         @apply bg-background text-foreground;
+    }
+
+    .hljs {
+        @apply !bg-transparent;
     }
 }
