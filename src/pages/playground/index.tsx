@@ -11,6 +11,7 @@ import { getChallenges, getChallengeStatus } from "@/api/challenge";
 import { useAuthStore } from "@/storages/auth";
 import { Dialog } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
+import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
 
 export default function Index() {
     const authStore = useAuthStore();
@@ -142,7 +143,10 @@ export default function Index() {
                 open={challengeDialogOpen}
                 onOpenChange={setChallengeDialogOpen}
             >
-                <Card className={cn(["p-6"])}>{selectedChallenge?.title}</Card>
+                <ChallengeDialog
+                    onClose={() => setChallengeDialogOpen(false)}
+                    challenge={selectedChallenge}
+                />
             </Dialog>
         </>
     );
