@@ -18,8 +18,9 @@ export const alova = createAlova({
     responded: {
         onSuccess: async (response, _method) => {
             if (response.status === 401) {
-                globalRouter?.navigate?.("/login");
+                globalRouter?.navigate?.("/account/login");
                 toast.warning("请先登录", {
+                    id: "please-login",
                     description: "登录后才能继续操作",
                 });
                 return Promise.reject(response);
