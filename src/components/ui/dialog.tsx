@@ -5,10 +5,13 @@ import { cn } from "@/utils";
 
 interface DialogProps
     extends React.ComponentProps<typeof RadixDialog.Root>,
-        React.ComponentProps<typeof RadixDialog.Content> {}
+        React.ComponentProps<typeof RadixDialog.Content> {
+    title?: string;
+}
 
 function Dialog(props: DialogProps) {
-    const { open, onOpenChange, className, children, ref, ...rest } = props;
+    const { title, open, onOpenChange, className, children, ref, ...rest } =
+        props;
 
     return (
         <RadixDialog.Root
@@ -16,9 +19,13 @@ function Dialog(props: DialogProps) {
             open={open}
             onOpenChange={onOpenChange}
         >
+            <RadixDialog.DialogTitle className={cn(["hidden"])}>
+                {title}
+            </RadixDialog.DialogTitle>
             <DialogPortal data-slot="dialog-portal">
                 <DialogOverlay />
                 <RadixDialog.Content
+                    title={title}
                     data-slot="dialog-content"
                     className={cn(
                         [
@@ -43,6 +50,7 @@ function Dialog(props: DialogProps) {
                     ref={ref}
                     {...rest}
                 >
+                    <RadixDialog.Description />
                     {children}
                 </RadixDialog.Content>
             </DialogPortal>

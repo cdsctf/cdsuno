@@ -4,6 +4,7 @@ import { cn } from "@/utils";
 import { Challenge } from "@/models/challenge";
 import { useCategoryStore } from "@/storages/category";
 import { Separator } from "../ui/separator";
+import { MarkdownRender } from "../utils/markdown-render";
 
 interface ChallengeDialogProps extends React.ComponentProps<typeof Card> {
     onClose: () => void;
@@ -21,7 +22,17 @@ function ChallengeDialog(props: ChallengeDialogProps) {
     const CategoryIcon = category?.icon!;
 
     return (
-        <Card className={cn(["p-6", "min-h-96", "max-h-128", "w-172"])}>
+        <Card
+            className={cn([
+                "p-6",
+                "min-h-96",
+                "w-screen",
+                "md:w-2xl",
+                "flex",
+                "flex-col",
+                "gap-5",
+            ])}
+        >
             <div className={cn("flex", "flex-col", "gap-3")}>
                 <div className={cn(["flex", "gap-3", "items-center"])}>
                     <CategoryIcon
@@ -31,6 +42,9 @@ function ChallengeDialog(props: ChallengeDialogProps) {
                     <h3>{challenge?.title}</h3>
                 </div>
                 <Separator />
+            </div>
+            <div className={cn(["max-h-256", "overflow-auto"])}>
+                <MarkdownRender src={challenge?.description} />
             </div>
         </Card>
     );
