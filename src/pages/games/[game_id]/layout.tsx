@@ -2,27 +2,17 @@ import { Outlet, useParams } from "react-router";
 import { Context } from "./context";
 import { useSharedStore } from "@/storages/shared";
 import { useEffect, useState } from "react";
-import { Game } from "@/models/game";
-import { getGames, getGameTeams } from "@/api/game";
-import { GameTeam } from "@/models/game_team";
+import { getGameTeams } from "@/api/game";
 import { useAuthStore } from "@/storages/auth";
+import { useGameStore } from "@/storages/game";
 
 export default function () {
     const { game_id } = useParams<{ game_id: string }>();
+    const { setSelfGameTeam } = useGameStore();
     const sharedStore = useSharedStore();
     const authStore = useAuthStore();
 
-    const [game, setGame] = useState<Game>();
-    const [selfGameTeam, setSelfGameTeam] = useState<GameTeam>();
     const [gtLoaded, setGtLoaded] = useState<boolean>(false);
-
-    function fetchGame() {
-        getGames({
-            id: Number(game_id),
-        }).then((res) => {
-            setGame(res?.data?.[0]);
-        });
-    }
 
     function fetchSelfGameTeam() {
         getGameTeams({
@@ -41,14 +31,10 @@ export default function () {
         if (authStore?.user) {
             fetchSelfGameTeam();
         }
-    }, [sharedStore?.refresh]);
-
-    useEffect(() => {
-        fetchGame();
-    }, [sharedStore?.refresh]);
+    }, [sharedStore?.refresh, game_id]);
 
     return (
-        <Context.Provider value={{ game, selfGameTeam, gtLoaded }}>
+        <Context.Provider value={{ gtLoaded }}>
             <Outlet />
         </Context.Provider>
     );

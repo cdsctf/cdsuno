@@ -44,6 +44,16 @@ export default createBrowserRouter([
                                     ).default,
                                 }),
                             },
+                            {
+                                path: "challenges",
+                                lazy: async () => ({
+                                    Component: (
+                                        await import(
+                                            "@/pages/games/[game_id]/challenges"
+                                        )
+                                    ).default,
+                                }),
+                            },
                         ],
                     },
                 ],

@@ -11,10 +11,6 @@ const badgeVariants = cva(
         "justify-center",
         "rounded-full",
         "border",
-        "px-2",
-        "py-0.5",
-        "text-xs",
-        "font-medium",
         "w-fit",
         "whitespace-nowrap",
         "shrink-0",
@@ -38,14 +34,21 @@ const badgeVariants = cva(
                 outline:
                     "text-foreground [a&]:hover:bg-foreground/10 [a&]:hover:text-primary/30",
             },
+            size: {
+                sm: ["px-2", "py-0.5", "text-xs", "font-medium"],
+                md: ["px-4", "py-1", "text-sm", "font-medium"],
+                lg: ["px-6", "py-2", "text-md", "font-medium"],
+            },
         },
         defaultVariants: {
             variant: "solid",
+            size: "sm",
         },
     }
 );
 
 function Badge({
+    size,
     className,
     variant,
     asChild = false,
@@ -57,7 +60,7 @@ function Badge({
     return (
         <Comp
             data-slot="badge"
-            className={cn(badgeVariants({ variant }), className)}
+            className={cn(badgeVariants({ size, variant, className }))}
             {...props}
         />
     );
