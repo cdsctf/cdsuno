@@ -126,53 +126,55 @@ export default function Index() {
                         "shadow-xl",
                     ])}
                 />
-                <Card
-                    className={cn([
-                        "absolute",
-                        "top-0",
-                        "left-0",
-                        "m-6",
-                        "2xl:top-auto",
-                        "2xl:left-auto",
-                        "2xl:-right-20",
-                        "2xl:-bottom-16",
-                        "p-4",
-                        "bg-card/90",
-                        "backdrop-blur-sm",
-                        "h-24",
-                        "w-128",
-                        "max-w-3/4",
-                        "hover:bg-card/80",
-                        "cursor-pointer",
-                    ])}
-                    onClick={() => navigate(`/games/${selectedGame?.id}`)}
-                >
-                    <div className={cn(["flex", "flex-col", "gap-1"])}>
-                        <h2
-                            className={cn([
-                                "text-xl",
-                                "max-w-3/4",
-                                "text-ellipsis",
-                                "overflow-hidden",
-                                "text-nowrap",
-                            ])}
-                        >
-                            {selectedGame?.title}
-                        </h2>
-                        <p
-                            className={cn([
-                                "text-sm",
-                                "text-secondary",
-                                "max-w-full",
-                                "text-ellipsis",
-                                "overflow-hidden",
-                                "text-nowrap",
-                            ])}
-                        >
-                            {selectedGame?.sketch}
-                        </p>
-                    </div>
-                </Card>
+                {selectedGame?.id && (
+                    <Card
+                        className={cn([
+                            "absolute",
+                            "top-0",
+                            "left-0",
+                            "m-6",
+                            "2xl:top-auto",
+                            "2xl:left-auto",
+                            "2xl:-right-20",
+                            "2xl:-bottom-16",
+                            "p-4",
+                            "bg-card/90",
+                            "backdrop-blur-sm",
+                            "h-24",
+                            "w-128",
+                            "max-w-3/4",
+                            "hover:bg-card/80",
+                            "cursor-pointer",
+                        ])}
+                        onClick={() => navigate(`/games/${selectedGame?.id}`)}
+                    >
+                        <div className={cn(["flex", "flex-col", "gap-1"])}>
+                            <h2
+                                className={cn([
+                                    "text-xl",
+                                    "max-w-3/4",
+                                    "text-ellipsis",
+                                    "overflow-hidden",
+                                    "text-nowrap",
+                                ])}
+                            >
+                                {selectedGame?.title}
+                            </h2>
+                            <p
+                                className={cn([
+                                    "text-sm",
+                                    "text-secondary",
+                                    "max-w-full",
+                                    "text-ellipsis",
+                                    "overflow-hidden",
+                                    "text-nowrap",
+                                ])}
+                            >
+                                {selectedGame?.sketch}
+                            </p>
+                        </div>
+                    </Card>
+                )}
             </div>
         </div>
     );
