@@ -10,6 +10,7 @@ const iconSectionVariants = cva(
         "justify-center",
         "aspect-square",
         "bg-primary/20",
+        "text-foreground",
     ],
     {
         variants: {

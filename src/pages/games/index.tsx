@@ -9,8 +9,11 @@ import { Game } from "@/models/game";
 import { cn } from "@/utils";
 import { Flag, Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Index() {
+    const navigate = useNavigate();
+
     const [games, setGames] = useState<Array<Game>>();
     const [total, setTotal] = useState<number>(0);
     const [title, setTitle] = useState<string>("");
@@ -38,13 +41,12 @@ export default function Index() {
     return (
         <div
             className={cn([
-                "w-4/5",
-                "my-10",
-                "mx-auto",
+                "w-full",
                 "flex",
                 "flex-col-reverse",
                 "2xl:flex-row",
                 "gap-25",
+                "2xl:h-[calc(100vh-64px)]",
                 "items-center",
                 "justify-center",
             ])}
@@ -52,6 +54,8 @@ export default function Index() {
             <div
                 className={cn([
                     "flex",
+                    "h-full",
+                    "py-16",
                     "flex-col",
                     "gap-5",
                     "w-full",
@@ -78,13 +82,10 @@ export default function Index() {
                     className={cn([
                         "flex",
                         "flex-col",
-                        "flex-1",
                         "w-full",
                         "p-5",
                         "gap-3",
                         "justify-start",
-                        "2xl:min-h-[calc(100vh-17.5rem)]",
-                        "2xl:max-h-[calc(100vh-17.5rem)]",
                         "overflow-auto",
                     ])}
                 >
@@ -110,7 +111,7 @@ export default function Index() {
                     "relative",
                     "select-none",
                     "w-full",
-                    "2xl:w-3/5",
+                    "2xl:w-1/2",
                 ])}
             >
                 <Image
@@ -144,6 +145,7 @@ export default function Index() {
                         "hover:bg-card/80",
                         "cursor-pointer",
                     ])}
+                    onClick={() => navigate(`/games/${selectedGame?.id}`)}
                 >
                     <div className={cn(["flex", "flex-col", "gap-1"])}>
                         <h2

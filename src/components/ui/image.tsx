@@ -5,16 +5,20 @@ import { cn } from "@/utils";
 interface ImageProps {
     src: string;
     alt?: string;
+    delay?: number;
     fallback?: React.ReactNode;
     className?: string;
+    imgClassName?: string;
 }
 
 function Image(props: ImageProps) {
     const {
         src,
         alt,
+        delay = 500,
         fallback = <CircleOff className={cn(["w-1/5", "h-1/5"])} />,
         className,
+        imgClassName,
     } = props;
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -25,16 +29,16 @@ function Image(props: ImageProps) {
         setHasError(false);
     }, [src]);
 
-    const handleLoad = () => {
+    function handleLoad() {
         setTimeout(() => {
             setIsLoading(false);
-        }, 1000);
-    };
+        }, delay);
+    }
 
-    const handleError = () => {
+    function handleError() {
         setIsLoading(false);
         setHasError(true);
-    };
+    }
 
     return (
         <div className={cn(["relative"], className)}>
@@ -47,8 +51,8 @@ function Image(props: ImageProps) {
                         "items-center",
                         "justify-center",
                         "backdrop-blur-sm",
-                        "bg-background/10",
                         "bg-opacity-50",
+                        "text-foreground",
                     ])}
                 >
                     {isLoading ? (
@@ -74,6 +78,7 @@ function Image(props: ImageProps) {
                     "h-full",
                     "object-cover",
                     isLoading || hasError ? "hidden" : "block",
+                    imgClassName,
                 ])}
             />
         </div>
