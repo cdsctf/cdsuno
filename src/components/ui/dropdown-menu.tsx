@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { Check, ChevronRight, Circle } from "lucide-react";
+import { Check, ChevronRight, Circle, LucideIcon } from "lucide-react";
 
 import { cn } from "@/utils";
 import { cva, VariantProps } from "class-variance-authority";
@@ -178,11 +178,13 @@ const dropdownMenuItemVariants = cva(
 interface DropdownMenuItemProps
     extends React.ComponentProps<typeof DropdownMenuPrimitive.Item>,
         VariantProps<typeof dropdownMenuItemVariants> {
-    icon?: React.ReactElement;
+    icon?: LucideIcon;
 }
 
 function DropdownMenuItem(props: DropdownMenuItemProps) {
     const { icon, inset, className, ref, children, ...rest } = props;
+
+    const Icon = icon!;
 
     return (
         <DropdownMenuPrimitive.Item
@@ -190,7 +192,7 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
             className={cn(dropdownMenuItemVariants({ inset, className }))}
             {...rest}
         >
-            {icon}
+            <Icon />
             {children}
         </DropdownMenuPrimitive.Item>
     );

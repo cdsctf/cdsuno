@@ -14,7 +14,7 @@ import {
 import { LogOut, UserRound } from "lucide-react";
 import { useNavigate, Link } from "react-router";
 
-function AuthArea() {
+function AuthSection() {
     const navigate = useNavigate();
     const authStore = useAuthStore();
 
@@ -46,7 +46,7 @@ function AuthArea() {
                     <DropdownMenuLabel>Appearance</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
-                        icon={<LogOut />}
+                        icon={LogOut}
                         className={cn("text-error", "hover:text-error")}
                         onClick={handleLogout}
                     >
@@ -64,4 +64,4 @@ function AuthArea() {
     );
 }
 
-export { AuthArea };
+export { AuthSection };
