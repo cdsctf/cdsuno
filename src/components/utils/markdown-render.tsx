@@ -21,7 +21,12 @@ function MarkdownRender(props: MarkdownRenderProps) {
 
     return (
         <article
-            className={cn(["prose", "dark:prose-invert", "prose-pre:p-0"])}
+            className={cn([
+                "prose",
+                "dark:prose-invert",
+                "prose-pre:p-0",
+                "max-w-full",
+            ])}
             {...rest}
         >
             <Markdown

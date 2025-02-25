@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { getChallenges, getChallengeStatus } from "@/api/challenge";
 import { useAuthStore } from "@/storages/auth";
 import { Dialog } from "@/components/ui/dialog";
-import { Card } from "@/components/ui/card";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
 
 export default function Index() {
@@ -95,6 +94,7 @@ export default function Index() {
                     ])}
                 >
                     <Pagination
+                        size={"sm"}
                         total={Math.ceil(total / size)}
                         value={page}
                         onChange={setPage}

@@ -12,6 +12,7 @@ interface PaginationProps
     extends Partial<
         Omit<React.ComponentProps<typeof PaginationPrimitive>, "onChange">
     > {
+    size?: "sm" | "md" | "lg";
     total: number;
     value: number;
     max?: number;
@@ -19,7 +20,7 @@ interface PaginationProps
 }
 
 function Pagination(props: PaginationProps) {
-    const { total, value, max, onChange, ...rest } = props;
+    const { size = "md", total, value, max, onChange, ...rest } = props;
 
     const paginationNodes = React.useMemo(() => {
         return generatePaginationNodes(total, value, max);
@@ -30,6 +31,7 @@ function Pagination(props: PaginationProps) {
             <PaginationContent>
                 <PaginationItem>
                     <PaginationPrevious
+                        size={size}
                         disabled={value - 1 === 0}
                         onClick={() => onChange(value - 1)}
                     />
@@ -39,6 +41,7 @@ function Pagination(props: PaginationProps) {
                         {typeof node === "number" ? (
                             <PaginationItem>
                                 <PaginationLink
+                                    size={size}
                                     isActive={node === value}
                                     onClick={() => onChange(node)}
                                 >
@@ -52,6 +55,7 @@ function Pagination(props: PaginationProps) {
                 ))}
                 <PaginationItem>
                     <PaginationNext
+                        size={size}
                         disabled={value === total || total === 0}
                         onClick={() => onChange(value + 1)}
                     />
@@ -150,6 +154,7 @@ function PaginationLink({
 }: PaginationLinkProps) {
     return (
         <Button
+            size={size}
             disabled={disabled}
             variant={isActive ? "outline" : "ghost"}
             square
@@ -159,13 +164,14 @@ function PaginationLink({
 }
 
 function PaginationPrevious({
+    size,
     disabled,
     className,
     ...props
 }: React.ComponentProps<typeof PaginationLink>) {
     return (
         <PaginationLink
-            size="md"
+            size={size}
             disabled={disabled}
             className={cn(["gap-1", "px-2.5", "sm:pl-2.5"], className)}
             icon={ChevronLeftIcon}
@@ -175,13 +181,14 @@ function PaginationPrevious({
 }
 
 function PaginationNext({
+    size,
     disabled,
     className,
     ...props
 }: React.ComponentProps<typeof PaginationLink>) {
     return (
         <PaginationLink
-            size="md"
+            size={size}
             disabled={disabled}
             className={cn(["gap-1", "px-2.5", "sm:pr-2.5"], className)}
             icon={ChevronRightIcon}
