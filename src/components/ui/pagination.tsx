@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 
 import { cn } from "@/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 interface PaginationProps
     extends Partial<

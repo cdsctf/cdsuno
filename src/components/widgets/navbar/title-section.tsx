@@ -1,5 +1,4 @@
 import { cn } from "@/utils";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "react-router";
 import { useConfigStore } from "@/storages/config";
 import { useContext } from "react";
