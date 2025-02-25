@@ -1,37 +1,16 @@
 import { cn } from "@/utils";
-import { Button } from "../ui/button";
-import {
-    House,
-    Flag,
-    Library,
-    Brush,
-    Sun,
-    Moon,
-    Eclipse,
-    UserRound,
-    LogOut,
-} from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Link, useLocation, useNavigate } from "react-router";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Separator } from "../ui/separator";
-import { useThemeStore } from "@/storages/theme";
+import { Button } from "../../ui/button";
+import { House, Flag, Library } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
+import { Link, useLocation } from "react-router";
 import { useConfigStore } from "@/storages/config";
-import { useAuthStore } from "@/storages/auth";
-import { logout } from "@/api/user";
+import { AppearanceDropdown } from "./apperance-dropdown";
+import { AuthArea } from "./auth-area";
 
 function Navbar() {
     const location = useLocation();
     const pathname = location.pathname;
     const configStore = useConfigStore();
-    const authStore = useAuthStore();
 
     return (
         <header
@@ -128,93 +107,6 @@ function Navbar() {
                 </div>
             </div>
         </header>
-    );
-}
-
-function AuthArea() {
-    const navigate = useNavigate();
-    const authStore = useAuthStore();
-
-    function handleLogout() {
-        logout().then((res) => {
-            if (res.code === 200) {
-                authStore.setUser(undefined);
-                navigate("/account/login");
-            }
-        });
-    }
-
-    if (authStore?.user?.id) {
-        return (
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button square>
-                        <Avatar className={cn("h-8", "w-8")}>
-                            <AvatarImage
-                                src={`/api/users/${authStore?.user?.id}/avatar`}
-                            />
-                            <AvatarFallback>
-                                {authStore?.user?.username?.charAt(0)}
-                            </AvatarFallback>
-                        </Avatar>
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-42">
-                    <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                        icon={<LogOut />}
-                        className={cn("text-error", "hover:text-error")}
-                        onClick={handleLogout}
-                    >
-                        退出登录
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
-        );
-    }
-
-    return (
-        <Button asChild icon={UserRound}>
-            <Link to={"/account/login"}>登录</Link>
-        </Button>
-    );
-}
-
-function AppearanceDropdown() {
-    const { setTheme } = useThemeStore();
-
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant={"ghost"} square size={"sm"}>
-                    <Brush />
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className={"w-36"}>
-                <div className={cn(["flex", "h-9", "justify-between"])}>
-                    <Button
-                        size={"sm"}
-                        square
-                        onClick={() => setTheme("light")}
-                    >
-                        <Sun />
-                    </Button>
-                    <Separator orientation="vertical" />
-                    <Button size={"sm"} square onClick={() => setTheme("dark")}>
-                        <Moon />
-                    </Button>
-                    <Separator orientation="vertical" />
-                    <Button
-                        size={"sm"}
-                        square
-                        onClick={() => setTheme("system")}
-                    >
-                        <Eclipse />
-                    </Button>
-                </div>
-            </DropdownMenuContent>
-        </DropdownMenu>
     );
 }
 

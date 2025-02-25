@@ -169,7 +169,7 @@ function Button(props: ButtonProps) {
                 </>
             )}
             <Slottable>{children}</Slottable>
-            <span
+            {/* <span
                 className={cn([
                     "absolute",
                     "inset-0",
@@ -195,7 +195,7 @@ function Button(props: ButtonProps) {
                         }}
                     />
                 ))}
-            </span>
+            </span> */}
         </Comp>
     );
 }

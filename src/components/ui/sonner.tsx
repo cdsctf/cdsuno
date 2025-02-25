@@ -1,5 +1,6 @@
 import { useThemeStore } from "@/storages/theme";
 import { cn } from "@/utils";
+import { LoaderCircle } from "lucide-react";
 import { Toaster as Sonner } from "sonner";
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
@@ -12,6 +13,9 @@ function Toaster(props: ToasterProps) {
         <Sonner
             theme={theme as ToasterProps["theme"]}
             className={cn(["toaster", "group"])}
+            icons={{
+                loading: <LoaderCircle className={cn(["animate-spin"])} />,
+            }}
             toastOptions={{
                 classNames: {
                     toast: cn([

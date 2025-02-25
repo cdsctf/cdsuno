@@ -20,6 +20,17 @@ export default createBrowserRouter([
                 }),
             },
             {
+                path: "games",
+                children: [
+                    {
+                        index: true,
+                        lazy: async () => ({
+                            Component: (await import("@/pages/games")).default,
+                        }),
+                    },
+                ],
+            },
+            {
                 path: "account",
                 children: [
                     {

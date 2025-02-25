@@ -72,6 +72,7 @@ function ChallengeCard(props: ChallengeCardProps) {
                                     "right-[7%]",
                                     "size-5",
                                 ])}
+                                fill={category.color}
                                 color={category.color}
                             />
                         </TooltipTrigger>
