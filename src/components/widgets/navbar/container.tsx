@@ -46,7 +46,7 @@ function Container() {
                     <div
                         className={cn([
                             "hidden",
-                            "md:flex",
+                            "lg:flex",
                             "gap-3",
                             "items-center",
                         ])}

@@ -21,17 +21,23 @@ const avatarVariants = cva(
 
 export interface AvatarProps
     extends React.ComponentProps<typeof RadixAvatar.Root>,
-        VariantProps<typeof avatarVariants> {}
+        VariantProps<typeof avatarVariants> {
+    src: string;
+    fallback?: React.ReactNode;
+}
 
 function Avatar(props: AvatarProps) {
-    const { square, className, ref, ...rest } = props;
+    const { src, fallback, square, className, ref, ...rest } = props;
 
     return (
         <RadixAvatar.Root
             ref={ref}
             className={cn(avatarVariants({ square, className }))}
             {...rest}
-        />
+        >
+            <AvatarImage src={src} />
+            <AvatarFallback>{fallback}</AvatarFallback>
+        </RadixAvatar.Root>
     );
 }
 
@@ -74,4 +80,4 @@ function AvatarFallback({
     );
 }
 
-export { Avatar, AvatarImage, AvatarFallback };
+export { Avatar };

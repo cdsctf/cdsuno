@@ -42,6 +42,8 @@ export default function Index() {
         <div
             className={cn([
                 "w-full",
+                "p-10",
+                "2xl:p-0",
                 "flex",
                 "flex-col-reverse",
                 "2xl:flex-row",

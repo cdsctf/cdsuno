@@ -18,7 +18,7 @@ function TabSection() {
     const location = useLocation();
     const pathname = location.pathname;
     const { mode } = useContext(Context);
-    const { currentGame } = useGameStore();
+    const { currentGame, selfGameTeam } = useGameStore();
 
     const options = useMemo(() => {
         switch (mode) {
@@ -33,6 +33,7 @@ function TabSection() {
                         link: `/games/${currentGame?.id}/challenges`,
                         name: "题目",
                         icon: Star,
+                        disabled: !selfGameTeam?.is_allowed,
                     },
                     {
                         link: `/games/${currentGame?.id}/scoreboard`,
@@ -100,23 +101,28 @@ function TabSection() {
                     },
                 ];
         }
-    }, [mode, currentGame?.id]);
+    }, [mode, currentGame?.id, selfGameTeam?.is_allowed]);
 
     return (
         <>
-            {options?.map((option, index) => (
-                <Button
-                    key={index}
-                    asChild
-                    variant={pathname === option?.link ? "tonal" : "ghost"}
-                    size={"sm"}
-                    className={"font-semibold"}
-                    icon={option.icon}
-                    level={option?.warning ? "warning" : "primary"}
-                >
-                    <Link to={option.link}>{option?.name}</Link>
-                </Button>
-            ))}
+            {options?.map((option, index) => {
+                const Comp = option?.disabled ? Button : Link;
+
+                return (
+                    <Button
+                        key={index}
+                        asChild
+                        variant={pathname === option?.link ? "tonal" : "ghost"}
+                        size={"sm"}
+                        className={"font-semibold"}
+                        disabled={option?.disabled}
+                        icon={option.icon}
+                        level={option?.warning ? "warning" : "primary"}
+                    >
+                        <Comp to={option.link}>{option?.name}</Comp>
+                    </Button>
+                );
+            })}
         </>
     );
 }
