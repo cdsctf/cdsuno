@@ -33,7 +33,7 @@ function ChallengeCard(props: ChallengeCardProps) {
                 [
                     "w-full",
                     "relative",
-                    "hover:bg-card/70",
+                    // "hover:bg-card/70",
                     "select-none",
                     "p-5",
                     "overflow-hidden",

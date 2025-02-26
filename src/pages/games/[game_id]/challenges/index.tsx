@@ -9,6 +9,7 @@ import { getChallengeStatus } from "@/api/challenge";
 import { ChallengeCard } from "@/components/widgets/challenge-card";
 import { Dialog } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
+import { NoticeCard } from "./notice-card";
 
 export default function Index() {
     const { currentGame, selfGameTeam } = useGameStore();
@@ -34,7 +35,7 @@ export default function Index() {
             setTotal(total);
             setGameChallenges(res.data);
         });
-    }, [size, page]);
+    }, [currentGame?.id, size, page]);
 
     useEffect(() => {
         if (gameChallenges) {
@@ -52,13 +53,27 @@ export default function Index() {
 
     return (
         <>
-            <div className={cn(["flex", "justify-evenly", "mx-auto", "my-10"])}>
-                <div className={cn(["w-3/4"])}>
+            <div
+                className={cn([
+                    "flex",
+                    "flex-col-reverse",
+                    "lg:flex-row",
+                    "justify-evenly",
+                    "mx-10",
+                    "lg:mx-20",
+                    "xl:mx-[10vw]",
+                    "2xl:mx-[15vw]",
+                    "my-10",
+                    "gap-10",
+                ])}
+            >
+                <div className={cn(["lg:w-3/4"])}>
                     <div
                         className={cn([
-                            "w-[60vw]",
+                            "w-full",
                             "grid",
                             "sm:grid-cols-2",
+                            "lg:grid-cols-3",
                             "xl:grid-cols-4",
                             "gap-4",
                         ])}
@@ -82,8 +97,18 @@ export default function Index() {
                         ))}
                     </div>
                 </div>
-                <div className={cn(["w-1/4"])}>
-                    <TeamCard />
+                <div className={cn(["lg:sticky", "lg:w-1/4", "lg:top-16"])}>
+                    <div
+                        className={cn([
+                            "flex",
+                            "flex-col",
+                            "gap-5",
+                            "lg:h-[calc(100vh-9rem)]",
+                        ])}
+                    >
+                        <TeamCard />
+                        <NoticeCard />
+                    </div>
                 </div>
             </div>
             <Dialog

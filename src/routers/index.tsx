@@ -133,6 +133,12 @@ export default createBrowserRouter([
                     },
                 ],
             },
+            {
+                path: "*",
+                lazy: async () => ({
+                    Component: (await import("@/pages/sigtrap/e404")).default,
+                }),
+            },
         ],
     },
 ]);
