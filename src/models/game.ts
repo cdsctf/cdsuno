@@ -36,7 +36,6 @@ export interface GetGameRequest {
 }
 
 export interface GetGameScoreboardRequest {
-    id?: number;
     size?: number;
     page?: number;
 }

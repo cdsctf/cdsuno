@@ -46,12 +46,13 @@ export async function updateGame(request: UpdateGameRequest) {
     return alova.Put<Response<Game>>(`/games/${request.id}`, request);
 }
 
-export async function getScoreboard(
+export async function getGameScoreboard(
     id: number,
     request: GetGameScoreboardRequest
 ) {
     return alova.Get<Response<Array<ScoreRecord>>>(`/games/${id}/scoreboard`, {
         params: request,
+        cacheFor: 30 * 1000,
     });
 }
 
@@ -156,17 +157,4 @@ export async function deleteGameNotice(request: DeleteGameNoticeRequest) {
         `/games/${request.game_id}/notices/${request.id}`,
         request
     );
-}
-
-export async function getGameScoreboard(request: GetGameScoreboardRequest) {
-    return alova.Get<
-        Response<
-            Array<{
-                game_team?: GameTeam;
-                submissions?: Array<Submission>;
-            }>
-        >
-    >(`/games/${request.id}/scoreboard`, {
-        params: request,
-    });
 }
