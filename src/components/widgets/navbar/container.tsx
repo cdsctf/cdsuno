@@ -1,15 +1,16 @@
 import { cn } from "@/utils";
 import { Button } from "../../ui/button";
-import { House, Flag, Library } from "lucide-react";
-import { Link, useLocation } from "react-router";
 import { AppearanceDropdown } from "./apperance-dropdown";
 import { AuthSection } from "./auth-section";
 import { TitleSection } from "./title-section";
 import { TabSection } from "./tab-section";
+import { useAuthStore } from "@/storages/auth";
+import { Group } from "@/models/user";
+import { Link } from "react-router";
+import { Settings } from "lucide-react";
 
 function Container() {
-    const location = useLocation();
-    const pathname = location.pathname;
+    const authStore = useAuthStore();
 
     return (
         <header
@@ -56,6 +57,11 @@ function Container() {
                 </div>
                 <div className={cn(["flex", "gap-3", "items-center"])}>
                     <AppearanceDropdown />
+                    {authStore?.user?.group === Group.Admin && (
+                        <Button asChild icon={Settings} size={"sm"} square>
+                            <Link to={"/admin"} />
+                        </Button>
+                    )}
                     <AuthSection />
                 </div>
             </div>

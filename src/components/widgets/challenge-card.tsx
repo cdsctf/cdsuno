@@ -33,12 +33,11 @@ function ChallengeCard(props: ChallengeCardProps) {
                 [
                     "w-full",
                     "relative",
-                    // "hover:bg-card/70",
                     "select-none",
                     "p-5",
                     "overflow-hidden",
                     "rounded-xl",
-                    "hover:bg-foreground/10",
+                    "hover:bg-card-foreground/10",
                     "shadow-sm",
                     "transition-colors",
                     "duration-200",
