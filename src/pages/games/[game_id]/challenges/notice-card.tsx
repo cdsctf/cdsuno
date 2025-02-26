@@ -9,8 +9,11 @@ import { GameNotice } from "@/models/game_notice";
 import { useInterval } from "@/hooks/use-interval";
 import { Dialog } from "@/components/ui/dialog";
 import { MarkdownRender } from "@/components/utils/markdown-render";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { useThemeStore } from "@/storages/theme";
 
 function NoticeCard() {
+    const { theme } = useThemeStore();
     const { currentGame } = useGameStore();
     const [gameNotices, setGameNotices] = useState<Array<GameNotice>>();
 
@@ -52,41 +55,57 @@ function NoticeCard() {
                     <Rss className={cn(["size-4"])} />
                     <h3 className={cn(["text-sm"])}>公告栏</h3>
                 </div>
-                <div
-                    className={cn([
-                        "overflow-auto",
-                        "flex-1",
-                        "flex",
-                        "flex-col",
-                        "gap-3",
-                    ])}
+                <OverlayScrollbarsComponent
+                    options={{
+                        scrollbars: {
+                            theme: `os-theme-${theme === "dark" ? "light" : "dark"}`,
+                            autoHide: "scroll",
+                        },
+                    }}
+                    defer
                 >
-                    {gameNotices?.map((gameNotice) => (
-                        <Card
-                            className={cn([
-                                "flex",
-                                "flex-col",
-                                "gap-1",
-                                "p-3",
-                                "cursor-pointer",
-                                "hover:bg-foreground/10",
-                            ])}
-                            onClick={() => {
-                                setSelectedNotice(gameNotice);
-                                setNoticeDialogOpen(true);
-                            }}
-                        >
-                            <h4 className={cn(["text-sm"])}>
-                                {gameNotice?.title}
-                            </h4>
-                            <span className={cn(["text-secondary", "text-xs"])}>
-                                {new Date(
-                                    Number(gameNotice?.created_at) * 1000
-                                ).toLocaleString()}
-                            </span>
-                        </Card>
-                    ))}
-                </div>
+                    <div
+                        className={cn([
+                            "overflow-auto",
+                            "flex-1",
+                            "flex",
+                            "flex-col",
+                            "gap-3",
+                        ])}
+                    >
+                        {gameNotices?.map((gameNotice) => (
+                            <Card
+                                className={cn([
+                                    "flex",
+                                    "flex-col",
+                                    "gap-1",
+                                    "p-3",
+                                    "cursor-pointer",
+                                    "hover:bg-foreground/10",
+                                    "select-none",
+                                ])}
+                                onClick={() => {
+                                    setSelectedNotice(gameNotice);
+                                    setNoticeDialogOpen(true);
+                                }}
+                            >
+                                <h4 className={cn(["text-sm"])}>
+                                    {gameNotice?.title}
+                                </h4>
+                                <span
+                                    className={cn([
+                                        "text-secondary",
+                                        "text-xs",
+                                    ])}
+                                >
+                                    {new Date(
+                                        Number(gameNotice?.created_at) * 1000
+                                    ).toLocaleString()}
+                                </span>
+                            </Card>
+                        ))}
+                    </div>
+                </OverlayScrollbarsComponent>
             </Card>
             <Dialog open={noticeDialogOpen} onOpenChange={setNoticeDialogOpen}>
                 <Card

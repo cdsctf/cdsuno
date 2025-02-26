@@ -16,6 +16,26 @@ function TitleSection(props: TitleSectionProps) {
     const { currentGame } = useGameStore();
     const configStore = useConfigStore();
 
+    const modeConfig = {
+        game: {
+            to: `/games/${currentGame?.id}`,
+            src: `/api/games/${currentGame?.id}/icon`,
+            title: currentGame?.title,
+        },
+        admin: {
+            to: "/admin",
+            src: "/api/configs/icon",
+            title: configStore?.config?.meta?.title,
+        },
+        default: {
+            to: "/",
+            src: "/api/configs/icon",
+            title: configStore?.config?.meta?.title,
+        },
+    };
+
+    const { to, src, title } = modeConfig[mode] || modeConfig.default;
+
     return (
         <Link
             className={cn([
@@ -25,15 +45,11 @@ function TitleSection(props: TitleSectionProps) {
                 "text-foreground",
                 className,
             ])}
-            to={mode === "default" ? "/" : `/games/${currentGame?.id}`}
+            to={to}
             {...rest}
         >
             <Image
-                src={
-                    mode === "default"
-                        ? "/api/configs/icon"
-                        : `/api/games/${currentGame?.id}/icon`
-                }
+                src={src}
                 fallback={<Flag />}
                 className={cn([
                     "drop-shadow-md",
@@ -43,11 +59,7 @@ function TitleSection(props: TitleSectionProps) {
                     "overflow-hidden",
                 ])}
             />
-            <h1 className={cn(["text-xl", "font-semibold"])}>
-                {mode === "default"
-                    ? configStore?.config?.meta?.title
-                    : currentGame?.title}
-            </h1>
+            <h1 className={cn(["text-xl", "font-semibold"])}>{title}</h1>
         </Link>
     );
 }
