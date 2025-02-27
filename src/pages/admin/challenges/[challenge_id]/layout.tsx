@@ -18,7 +18,6 @@ export default function Layout() {
 
     return (
         <Context.Provider value={{ challenge }}>
-            {/* <Something ... /> */}
             <Outlet />
         </Context.Provider>
     );

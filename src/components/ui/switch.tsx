@@ -31,6 +31,7 @@ function Switch({
                     "focus-visible:ring-[3px]",
                     "disabled:cursor-not-allowed",
                     "disabled:opacity-50",
+                    "cursor-pointer",
                 ],
                 className
             )}

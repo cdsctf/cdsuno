@@ -16,6 +16,7 @@ import { alova } from "@/utils/alova";
 export async function getChallenges(request: GetChallengeRequest) {
     return alova.Get<Response<Array<Challenge>>>("/challenges", {
         params: request,
+        cacheFor: 3 * 1000,
     });
 }
 

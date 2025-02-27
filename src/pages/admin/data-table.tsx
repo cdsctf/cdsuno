@@ -59,11 +59,9 @@ export function DataTable<TData, TValue>({
 
     return (
         <div>
-            {/* 可以将任何内容放在这里，包括过滤器和列切换 */}
             {children && (
                 <div className="py-4">
                     {React.Children.map(children, (child) => {
-                        // 如果子元素是 React 元素，则传递 table 属性
                         if (React.isValidElement(child)) {
                             return React.cloneElement(child, { table } as any);
                         }
@@ -126,7 +124,7 @@ export function DataTable<TData, TValue>({
                 </Table>
                 <div className="flex items-center justify-end space-x-2 py-4 px-4">
                     <div className="flex-1 text-sm text-muted-foreground">
-                        {table.getFilteredRowModel().rows.length} of{" "}
+                        {table.getFilteredRowModel().rows.length} /{" "}
                         {data.length} row(s)
                     </div>
                     <Pagination
