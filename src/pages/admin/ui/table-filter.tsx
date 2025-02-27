@@ -1,38 +1,46 @@
-import * as React from "react"
-import { Table } from "@tanstack/react-table"
-import { Input } from "./input"
+import * as React from "react";
+import { Table } from "@tanstack/react-table";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/utils";
+import { LucideIcon } from "lucide-react";
 
 interface TableFilterProps<TData> {
-  table?: Table<TData>
-  columnId: string
-  placeholder?: string
-  className?: string
-  label?: string
+    table?: Table<TData>;
+    columnId: string;
+    placeholder?: string;
+    className?: string;
+    label?: string;
+    icon?: LucideIcon;
 }
 
 export function TableFilter<TData>({
-  table,
-  columnId,
-  placeholder = "Filter...",
-  className = "max-w-sm",
-  label,
+    icon,
+    table,
+    columnId,
+    placeholder = "Filter...",
+    className = "max-w-sm",
+    label,
 }: TableFilterProps<TData>) {
-  const column = table?.getColumn(columnId)
-  
-  // 如果列不存在，则不渲染任何内容
-  if (!column) {
-    return null
-  }
+    const column = table?.getColumn(columnId);
 
-  return (
-    <div className="flex flex-col gap-1">
-      {label && <label className="text-sm font-medium">{label}</label>}
-      <Input
-        placeholder={placeholder}
-        value={(column.getFilterValue() as string) ?? ""}
-        onChange={(event) => column.setFilterValue(event.target.value)}
-        className={className}
-      />
-    </div>
-  )
+    if (!column) {
+        return null;
+    }
+
+    return (
+        <div className={cn(["flex", "flex-col", "gap-1", "flex-1"])}>
+            {label && (
+                <label className={cn(["text-sm", "font-medium"])}>
+                    {label}
+                </label>
+            )}
+            <Input
+                icon={icon}
+                placeholder={placeholder}
+                value={(column.getFilterValue() as string) ?? ""}
+                onChange={(event) => column.setFilterValue(event.target.value)}
+                className={cn(["flex-1", className])}
+            />
+        </div>
+    );
 }

@@ -142,12 +142,17 @@ export default function Index() {
             <Dialog
                 open={challengeDialogOpen}
                 onOpenChange={setChallengeDialogOpen}
-            >
-                <ChallengeDialog
-                    onClose={() => setChallengeDialogOpen(false)}
-                    challenge={selectedChallenge}
-                />
-            </Dialog>
+                slotProps={{
+                    contentProps: {
+                        children: (
+                            <ChallengeDialog
+                                onClose={() => setChallengeDialogOpen(false)}
+                                challenge={selectedChallenge}
+                            />
+                        ),
+                    },
+                }}
+            />
         </>
     );
 }

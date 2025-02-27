@@ -1,19 +1,33 @@
 import * as React from "react";
 
 import { cn } from "@/utils";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { useThemeStore } from "@/storages/theme";
 
 const Table = React.forwardRef<
     HTMLTableElement,
     React.HTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => (
-    <div className="relative w-full overflow-auto">
-        <table
-            ref={ref}
-            className={cn("w-full caption-bottom text-sm", className)}
-            {...props}
-        />
-    </div>
-));
+>(({ className, ...props }, ref) => {
+    const { theme } = useThemeStore();
+
+    return (
+        <OverlayScrollbarsComponent
+            options={{
+                scrollbars: {
+                    theme: `os-theme-${theme === "dark" ? "light" : "dark"}`,
+                },
+            }}
+            defer
+            className="relative w-full overflow-auto"
+        >
+            <table
+                ref={ref}
+                className={cn("w-full caption-bottom text-sm", className)}
+                {...props}
+            />
+        </OverlayScrollbarsComponent>
+    );
+});
 Table.displayName = "Table";
 
 const TableHeader = React.forwardRef<

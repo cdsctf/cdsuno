@@ -107,57 +107,76 @@ function NoticeCard() {
                     </div>
                 </OverlayScrollbarsComponent>
             </Card>
-            <Dialog open={noticeDialogOpen} onOpenChange={setNoticeDialogOpen}>
-                <Card
-                    className={cn([
-                        "p-6",
-                        "min-h-81",
-                        "w-screen",
-                        "md:w-xl",
-                        "flex",
-                        "flex-col",
-                        "gap-5",
-                    ])}
-                >
-                    <div className={cn("flex", "flex-col", "gap-3")}>
-                        <div
-                            className={cn([
-                                "flex",
-                                "justify-between",
-                                "items-baseline",
-                            ])}
-                        >
-                            <div
+            <Dialog
+                open={noticeDialogOpen}
+                onOpenChange={setNoticeDialogOpen}
+                slotProps={{
+                    contentProps: {
+                        children: (
+                            <Card
                                 className={cn([
+                                    "p-6",
+                                    "min-h-81",
+                                    "w-screen",
+                                    "md:w-xl",
                                     "flex",
-                                    "gap-3",
-                                    "items-center",
+                                    "flex-col",
+                                    "gap-5",
                                 ])}
                             >
-                                <Rss className={cn(["size-5"])} />
-                                <h3>{selectedNotice?.title}</h3>
-                            </div>
-                            <span className={cn(["text-secondary", "text-xs"])}>
-                                {new Date(
-                                    Number(selectedNotice?.created_at) * 1000
-                                ).toLocaleString()}
-                            </span>
-                        </div>
-                        <Separator />
-                    </div>
-                    <div
-                        className={cn([
-                            "flex",
-                            "flex-1",
-                            "flex-col",
-                            "max-h-144",
-                            "overflow-auto",
-                        ])}
-                    >
-                        <MarkdownRender src={selectedNotice?.content} />
-                    </div>
-                </Card>
-            </Dialog>
+                                <div
+                                    className={cn("flex", "flex-col", "gap-3")}
+                                >
+                                    <div
+                                        className={cn([
+                                            "flex",
+                                            "justify-between",
+                                            "items-baseline",
+                                        ])}
+                                    >
+                                        <div
+                                            className={cn([
+                                                "flex",
+                                                "gap-3",
+                                                "items-center",
+                                            ])}
+                                        >
+                                            <Rss className={cn(["size-5"])} />
+                                            <h3>{selectedNotice?.title}</h3>
+                                        </div>
+                                        <span
+                                            className={cn([
+                                                "text-secondary",
+                                                "text-xs",
+                                            ])}
+                                        >
+                                            {new Date(
+                                                Number(
+                                                    selectedNotice?.created_at
+                                                ) * 1000
+                                            ).toLocaleString()}
+                                        </span>
+                                    </div>
+                                    <Separator />
+                                </div>
+                                <div
+                                    className={cn([
+                                        "flex",
+                                        "flex-1",
+                                        "flex-col",
+                                        "max-h-144",
+                                        "overflow-auto",
+                                    ])}
+                                >
+                                    <MarkdownRender
+                                        src={selectedNotice?.content}
+                                    />
+                                </div>
+                            </Card>
+                        ),
+                    },
+                }}
+            />
         </>
     );
 }
