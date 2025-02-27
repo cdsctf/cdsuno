@@ -2,6 +2,9 @@ import { Challenge } from "@/models/challenge";
 import { TableColumnToggle } from "../ui/table-column-toggle";
 import { Button } from "@/components/ui/button";
 import {
+    ArrowDown,
+    ArrowUp,
+    ArrowUpDown,
     Box,
     Check,
     ClipboardCheck,
@@ -15,7 +18,7 @@ import {
     ShipWheel,
     X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getChallenges, updateChallenge } from "@/api/challenge";
 import {
     ColumnDef,
@@ -64,7 +67,6 @@ export default function Index() {
     const [size, setSize] = useState<number>(10);
 
     const [sorting, setSorting] = useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
         {}
     );
@@ -255,7 +257,20 @@ export default function Index() {
         },
         {
             accessorKey: "updated_at",
-            header: "更新时间",
+            id: "updated_at",
+            header: ({}) => {
+                return (
+                    <div className={cn(["flex", "gap-1", "items-center"])}>
+                        更新时间
+                        <Button
+                            icon={ArrowUpDown}
+                            square
+                            size={"sm"}
+                            // onClick={() => toggleSort("updated_at")}
+                        />
+                    </div>
+                );
+            },
             cell: ({ row }) => {
                 return new Date(
                     row.getValue<number>("updated_at") * 1000
@@ -264,7 +279,32 @@ export default function Index() {
         },
         {
             accessorKey: "created_at",
-            header: "创建时间",
+            id: "created_at",
+            header: ({ column }) => {
+                const Icon = useMemo(() => {
+                    switch (column.getIsSorted()) {
+                        case "asc":
+                            return ArrowUp;
+                        case "desc":
+                            return ArrowDown;
+                        case false:
+                        default:
+                            return ArrowUpDown;
+                    }
+                }, [column.getIsSorted()]);
+
+                return (
+                    <div className={cn(["flex", "gap-1", "items-center"])}>
+                        创建时间
+                        <Button
+                            icon={Icon}
+                            square
+                            size={"sm"}
+                            onClick={() => column.toggleSorting()}
+                        />
+                    </div>
+                );
+            },
             cell: ({ row }) => {
                 return new Date(
                     row.getValue<number>("created_at") * 1000
@@ -317,31 +357,32 @@ export default function Index() {
     const table = useReactTable<Challenge>({
         data: challenges,
         columns,
+        getCoreRowModel: getCoreRowModel(),
         manualPagination: true,
         rowCount: total,
-        getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        onSortingChange: setSorting,
-        getSortedRowModel: getSortedRowModel(),
-        onColumnFiltersChange: setColumnFilters,
+        manualFiltering: true,
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
         state: {
             sorting,
-            columnFilters,
             columnVisibility,
         },
+        manualSorting: true,
+        onSortingChange: setSorting,
     });
 
     useEffect(() => {
         getChallenges({
+            sorts: sorting
+                .map((value) => (value.desc ? `-${value.id}` : `${value.id}`))
+                .join(","),
             page,
             size,
         }).then((res) => {
             setTotal(res?.total || 0);
             setChallenges(res?.data || []);
         });
-    }, [page, size]);
+    }, [page, size, sorting]);
 
     return (
         <div className="container mx-auto py-10">
@@ -356,21 +397,20 @@ export default function Index() {
                 <TableColumnToggle title="显示/隐藏列" />
             </div>
 
-            <div className="rounded-md border bg-card">
-                <Table>
+            <div className={cn(["rounded-md", "border", "bg-card"])}>
+                <Table className={cn(["text-foreground"])}>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
                                     return (
                                         <TableHead key={header.id}>
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                      header.column.columnDef
-                                                          .header,
-                                                      header.getContext()
-                                                  )}
+                                            {!header.isPlaceholder &&
+                                                flexRender(
+                                                    header.column.columnDef
+                                                        .header,
+                                                    header.getContext()
+                                                )}
                                         </TableHead>
                                     );
                                 })}
