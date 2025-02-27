@@ -100,6 +100,28 @@ export default createBrowserRouter([
                                     ).default,
                                 }),
                             },
+                            {
+                                path: ":challenge_id",
+                                lazy: async () => ({
+                                    Component: (
+                                        await import(
+                                            "@/pages/admin/challenges/[challenge_id]/layout"
+                                        )
+                                    ).default,
+                                }),
+                                children: [
+                                    {
+                                        index: true,
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/challenges/[challenge_id]"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                ],
+                            },
                         ],
                     },
                     {

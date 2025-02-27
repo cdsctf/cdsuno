@@ -11,9 +11,11 @@ import { getChallenges, getChallengeStatus } from "@/api/challenge";
 import { useAuthStore } from "@/storages/auth";
 import { Dialog } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
+import { useSearchParams } from "react-router";
 
 export default function Index() {
     const authStore = useAuthStore();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [total, setTotal] = useState<number>(0);
     const [challenges, setChallenges] = useState<Array<Challenge>>();
@@ -21,9 +23,21 @@ export default function Index() {
         useState<Record<string, ChallengeStatus>>();
 
     const [doSearch, setDoSearch] = useState<number>(0);
-    const [title, setTitle] = useState<string>();
-    const [page, setPage] = useState<number>(1);
-    const [size, setSize] = useState<number>(20);
+    const [title, setTitle] = useState<string>(searchParams.get("title") || "");
+    const [page, setPage] = useState<number>(
+        Number(searchParams.get("page")) || 1
+    );
+    const [size, setSize] = useState<number>(
+        Number(searchParams.get("size")) || 20
+    );
+
+    useEffect(() => {
+        setSearchParams({
+            title: title,
+            page: String(page),
+            size: String(size),
+        });
+    }, [title, page, size]);
 
     useEffect(() => {
         getChallenges({

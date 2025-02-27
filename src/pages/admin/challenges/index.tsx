@@ -1,88 +1,347 @@
 import { Challenge } from "@/models/challenge";
-import { columns } from "./columns";
-import { DataTable } from "../data-table";
-import { TableFilter } from "../ui/table-filter";
-import { TableFilters } from "../ui/table-filters";
 import { TableColumnToggle } from "../ui/table-column-toggle";
 import { Button } from "@/components/ui/button";
-import { Library, PlusCircle } from "lucide-react";
+import {
+    Box,
+    Check,
+    ClipboardCheck,
+    ClipboardCopy,
+    EditIcon,
+    EyeIcon,
+    File,
+    FileText,
+    Library,
+    PlusCircle,
+    ShipWheel,
+    X,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import { getChallenges, updateChallenge } from "@/api/challenge";
+import {
+    ColumnDef,
+    ColumnFiltersState,
+    flexRender,
+    getCoreRowModel,
+    getFilteredRowModel,
+    getPaginationRowModel,
+    getSortedRowModel,
+    SortingState,
+    useReactTable,
+    VisibilityState,
+} from "@tanstack/react-table";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import { Pagination } from "@/components/ui/pagination";
+import { cn } from "@/utils";
+import { useCategoryStore } from "@/storages/category";
+import { ContentDialog } from "@/components/widgets/content-dialog";
+import { Switch } from "@/components/ui/switch";
+import { Dialog } from "@/components/ui/dialog";
+import { Env } from "@/models/env";
+import { Badge } from "@/components/ui/badge";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useClipboard } from "@/hooks/use-clipboard";
+import { Link } from "react-router";
+import { toast } from "sonner";
 
-async function getData(): Promise<Challenge[]> {
-    // 获取挑战数据的示例，包含完整的 Env 数据
-    return [
+export default function Index() {
+    const { getCategory } = useCategoryStore();
+    const [total, setTotal] = useState<number>(0);
+    const [challenges, setChallenges] = useState<Array<Challenge>>([]);
+
+    const [page, setPage] = useState<number>(1);
+    const [size, setSize] = useState<number>(10);
+
+    const [sorting, setSorting] = useState<SortingState>([]);
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
+        {}
+    );
+
+    const columns: ColumnDef<Challenge>[] = [
         {
-            id: "1",
-            title: "Web 安全入门",
-            tags: ["web", "beginner", "injection"],
-            description:
-                "一个简单的 SQL 注入挑战，需要通过注入获取管理员权限。适合初学者练习基本的注入技术。",
-            category: 0,
-            has_attachment: false,
-            is_public: true,
-            is_dynamic: true,
-            env: {
-                image: "ctfd/web-sql-injection:latest",
-                cpu_limit: 1,
-                memory_limit: 512,
-                duration: 3600,
-                envs: {
-                    FLAG: "flag{sql_injection_basic_123}",
-                    ADMIN_PASSWORD: "s3cur3_p4ssw0rd!",
-                },
-                ports: [80, 443],
+            accessorKey: "is_public",
+            header: "练习",
+            cell: ({ row }) => {
+                const isPublic = row.getValue<boolean>("is_public");
+                const title = row.getValue<string>("title");
+                const id = row.getValue<string>("id");
+                const [checked, setChecked] = useState(isPublic);
+
+                function handlePublicnessChange() {
+                    const newValue = !checked;
+                    setChecked(newValue);
+
+                    updateChallenge({
+                        id,
+                        is_public: newValue,
+                    }).then((res) => {
+                        if (res.code === 200) {
+                            toast.success(
+                                `更新题目 ${title} 的公开性: ${newValue ? "公开" : "私有"}`,
+                                {
+                                    id: "publicness_change",
+                                }
+                            );
+                        }
+                    });
+                }
+
+                return (
+                    <Switch
+                        checked={checked}
+                        onCheckedChange={handlePublicnessChange}
+                        aria-label="公开性开关"
+                    />
+                );
             },
-            checker:
-                '#!/bin/bash\nflag=$(curl -s http://$IP:$PORT/get_flag)\nif [[ $flag == *"flag{"* ]]; then\n  exit 0\nelse\n  exit 1\nfi',
-            updated_at: 1675854453,
-            created_at: 1675754453,
         },
         {
-            id: "2",
-            title: "Buffer Overflow 基础",
-            tags: ["pwn", "buffer-overflow", "stack"],
-            description:
-                "学习基本的缓冲区溢出攻击技术，通过覆盖返回地址获取shell。需要具备基本的汇编和C语言知识。",
-            category: 1,
-            has_attachment: true,
-            is_public: true,
-            is_dynamic: true,
-            env: {
-                image: "ctfd/pwn-buffer-overflow:v1.2",
-                cpu_limit: 2,
-                memory_limit: 1024,
-                duration: 7200,
-                envs: {
-                    FLAG: "flag{stack_smash_detected_456}",
-                    ASLR: "0",
-                },
-                ports: [8080],
+            accessorKey: "id",
+            id: "id",
+            header: "ID",
+            cell: ({ row }) => {
+                const id = row.getValue<string>("id");
+                const { isCopied, copyToClipboard } = useClipboard();
+                return (
+                    <div className={cn(["flex", "items-center", "gap-1"])}>
+                        <Badge>{id?.split("-")?.[0]}</Badge>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Button
+                                        icon={
+                                            isCopied
+                                                ? ClipboardCheck
+                                                : ClipboardCopy
+                                        }
+                                        square
+                                        size={"sm"}
+                                        onClick={() => copyToClipboard(id)}
+                                    />
+                                </TooltipTrigger>
+                                <TooltipContent>复制到剪贴板</TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
+                );
             },
-            checker:
-                '#!/bin/bash\nexpect -c \'spawn nc $IP $PORT; send "cat /flag.txt\\n"; expect "flag{*}" { exit 0 } timeout 5 { exit 1 }\'',
-            updated_at: 1678854453,
-            created_at: 1678754453,
         },
         {
-            id: "3",
-            title: "隐写术挑战",
-            tags: ["misc", "steganography", "image-analysis"],
-            description:
-                "在图片中发现隐藏信息，需要使用多种隐写工具和分析技术。挑战者需要分析像素数据和文件元数据。",
-            category: 4,
-            has_attachment: true,
-            is_public: false,
-            is_dynamic: false,
-            checker:
-                '#!/bin/bash\nif [[ "$FLAG" == "flag{hidden_in_plain_sight_789}" ]]; then\n  exit 0\nelse\n  exit 1\nfi',
-            updated_at: 1682854453,
-            created_at: 1682754453,
+            accessorKey: "title",
+            id: "title",
+            header: "标题",
+            cell: ({ row }) => {
+                const title = row.getValue("title") as string;
+                return title || "-";
+            },
         },
-        // 更多数据...
+        {
+            accessorKey: "tags",
+            id: "tags",
+            header: "标签",
+            cell: ({ row }) => {
+                const tags = row.getValue("tags") as string[] | undefined;
+
+                if (!tags || !Array.isArray(tags) || tags.length === 0) {
+                    return "-";
+                }
+
+                return (
+                    <div className="flex flex-wrap gap-1">
+                        {tags.slice(0, 3).map((tag, index) => (
+                            <Badge key={index}>{tag}</Badge>
+                        ))}
+                        {tags.length > 3 && (
+                            <ContentDialog
+                                title="所有标签"
+                                content={tags.join(", ")}
+                                triggerText={`+${tags.length - 3}`}
+                            />
+                        )}
+                    </div>
+                );
+            },
+        },
+        {
+            accessorKey: "description",
+            header: "描述",
+            cell: ({ row }) => {
+                const description = row.getValue("description") as string;
+
+                if (!description) return "-";
+
+                return description.length > 10 ? (
+                    <ContentDialog title="详细描述" content={description} />
+                ) : (
+                    description
+                );
+            },
+        },
+        {
+            accessorKey: "category",
+            header: "分类",
+            cell: ({ row }) => {
+                const categoryId = row.getValue("category") as number;
+                const category = getCategory(categoryId);
+
+                const Icon = category.icon!;
+                return (
+                    <div className={cn(["flex", "gap-2", "items-center"])}>
+                        <Icon className={cn(["size-4"])} />
+                        {getCategory(categoryId)?.name}
+                    </div>
+                );
+            },
+        },
+        {
+            accessorKey: "has_attachment",
+            header: "附件",
+            cell: ({ row }) => {
+                const hasAttachment = row.getValue<boolean>("has_attachment");
+
+                const options = [
+                    {
+                        className: ["bg-info", "text-info-foreground"],
+                        icon: <Check />,
+                    },
+                    {
+                        className: ["bg-warning", "text-warning-foreground"],
+                        icon: <X />,
+                    },
+                ];
+
+                return (
+                    <Badge
+                        className={cn([
+                            options[Number(hasAttachment)]?.className,
+                        ])}
+                    >
+                        {options[Number(hasAttachment)]?.icon}
+                    </Badge>
+                );
+            },
+        },
+        {
+            accessorKey: "is_dynamic",
+            header: "动态性",
+            cell: ({ row }) => {
+                const isDynamic = row.getValue<boolean>("is_dynamic");
+
+                return (
+                    <Badge
+                        className={cn([
+                            isDynamic
+                                ? ["bg-info", "text-info-foreground"]
+                                : ["bg-success", "text-success-foreground"],
+                        ])}
+                    >
+                        {isDynamic ? <ShipWheel /> : <Box />}
+                        {isDynamic ? "动态" : "静态"}
+                    </Badge>
+                );
+            },
+        },
+        {
+            accessorKey: "updated_at",
+            header: "更新时间",
+            cell: ({ row }) => {
+                return new Date(
+                    row.getValue<number>("updated_at") * 1000
+                ).toLocaleString();
+            },
+        },
+        {
+            accessorKey: "created_at",
+            header: "创建时间",
+            cell: ({ row }) => {
+                return new Date(
+                    row.getValue<number>("created_at") * 1000
+                ).toLocaleString();
+            },
+        },
+        {
+            id: "actions",
+            header: "操作",
+            cell: ({ row }) => {
+                const id = row.getValue<string>("id");
+                const title = row.getValue<string>("title");
+
+                const handleDelete = () => {
+                    console.log(`删除题目: ${id}`);
+                    // 实际应用中应该调用API进行删除
+                    // 例如: deleteChallenge(id).then(() => refreshData());
+                };
+
+                return (
+                    <div
+                        className={cn([
+                            "flex",
+                            "items-center",
+                            "justify-center",
+                            "space-x-2",
+                        ])}
+                    >
+                        <Button
+                            variant={"ghost"}
+                            size={"sm"}
+                            square
+                            icon={EditIcon}
+                            asChild
+                        >
+                            <Link to={`/admin/challenges/${id}`} />
+                        </Button>
+                        {/* 删除确认对话框
+                        <DeleteConfirmDialog
+                            id={id}
+                            title={title}
+                            onConfirm={handleDelete}
+                        /> */}
+                    </div>
+                );
+            },
+        },
     ];
-}
 
-export default async function ChallengesPage() {
-    const data = await getData();
+    const table = useReactTable<Challenge>({
+        data: challenges,
+        columns,
+        manualPagination: true,
+        rowCount: total,
+        getCoreRowModel: getCoreRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        onSortingChange: setSorting,
+        getSortedRowModel: getSortedRowModel(),
+        onColumnFiltersChange: setColumnFilters,
+        getFilteredRowModel: getFilteredRowModel(),
+        onColumnVisibilityChange: setColumnVisibility,
+        state: {
+            sorting,
+            columnFilters,
+            columnVisibility,
+        },
+    });
+
+    useEffect(() => {
+        getChallenges({
+            page,
+            size,
+        }).then((res) => {
+            setTotal(res?.total || 0);
+            setChallenges(res?.data || []);
+        });
+    }, [page, size]);
 
     return (
         <div className="container mx-auto py-10">
@@ -97,31 +356,70 @@ export default async function ChallengesPage() {
                 <TableColumnToggle title="显示/隐藏列" />
             </div>
 
-            <DataTable columns={columns} data={data}>
-                <TableFilters>
-                    <TableFilter
-                        columnId="title"
-                        label="标题"
-                        placeholder="搜索标题..."
+            <div className="rounded-md border bg-card">
+                <Table>
+                    <TableHeader>
+                        {table.getHeaderGroups().map((headerGroup) => (
+                            <TableRow key={headerGroup.id}>
+                                {headerGroup.headers.map((header) => {
+                                    return (
+                                        <TableHead key={header.id}>
+                                            {header.isPlaceholder
+                                                ? null
+                                                : flexRender(
+                                                      header.column.columnDef
+                                                          .header,
+                                                      header.getContext()
+                                                  )}
+                                        </TableHead>
+                                    );
+                                })}
+                            </TableRow>
+                        ))}
+                    </TableHeader>
+                    <TableBody>
+                        {table.getRowModel().rows?.length ? (
+                            table.getRowModel().rows.map((row) => (
+                                <TableRow
+                                    key={row.id}
+                                    data-state={
+                                        row.getIsSelected() && "selected"
+                                    }
+                                >
+                                    {row.getVisibleCells().map((cell) => (
+                                        <TableCell key={cell.id}>
+                                            {flexRender(
+                                                cell.column.columnDef.cell,
+                                                cell.getContext()
+                                            )}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            ))
+                        ) : (
+                            <TableRow>
+                                <TableCell
+                                    colSpan={columns.length}
+                                    className="h-24 text-center"
+                                >
+                                    No results.
+                                </TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+                <div className="flex items-center justify-end space-x-2 py-4 px-4">
+                    <div className="flex-1 text-sm text-muted-foreground">
+                        {table.getFilteredRowModel().rows.length} / {total}
+                    </div>
+                    <Pagination
+                        size={"sm"}
+                        value={page}
+                        total={Math.ceil(Math.ceil(total / size))}
+                        onChange={setPage}
                     />
-                    <TableFilter
-                        icon={Library}
-                        columnId="category"
-                        label="分类"
-                        placeholder="筛选分类..."
-                    />
-                    <TableFilter
-                        columnId="is_public"
-                        label="公开性"
-                        placeholder="筛选公开性..."
-                    />
-                    <TableFilter
-                        columnId="tags"
-                        label="标签"
-                        placeholder="筛选标签..."
-                    />
-                </TableFilters>
-            </DataTable>
+                </div>
+            </div>
         </div>
     );
 }
