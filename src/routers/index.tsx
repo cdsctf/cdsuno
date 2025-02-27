@@ -120,6 +120,46 @@ export default createBrowserRouter([
                                             ).default,
                                         }),
                                     },
+                                    {
+                                        path: "checker",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/challenges/[challenge_id]/checker"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                    {
+                                        path: "attachments",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/challenges/[challenge_id]/attachments"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                    {
+                                        path: "env",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/challenges/[challenge_id]/env"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                    {
+                                        path: "statistics",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/challenges/[challenge_id]/statistics"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
                                 ],
                             },
                         ],

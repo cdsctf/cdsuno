@@ -215,12 +215,12 @@ export default function Index() {
 
                 const options = [
                     {
-                        className: ["bg-info", "text-info-foreground"],
-                        icon: <Check />,
-                    },
-                    {
                         className: ["bg-warning", "text-warning-foreground"],
                         icon: <X />,
+                    },
+                    {
+                        className: ["bg-info", "text-info-foreground"],
+                        icon: <Check />,
                     },
                 ];
 
