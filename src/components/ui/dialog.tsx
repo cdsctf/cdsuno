@@ -5,13 +5,28 @@ import { cn } from "@/utils";
 
 interface DialogProps
     extends React.ComponentProps<typeof RadixDialog.Root>,
-        React.ComponentProps<typeof RadixDialog.Content> {
-    title?: string;
+        React.ComponentProps<typeof RadixDialog.Trigger> {
+    slotProps?: {
+        contentProps?: React.ComponentProps<typeof RadixDialog.Content>;
+        titleProps?: React.ComponentProps<typeof RadixDialog.DialogTitle>;
+        descriptionProps?: React.ComponentProps<
+            typeof RadixDialog.DialogDescription
+        >;
+    };
 }
 
 function Dialog(props: DialogProps) {
-    const { title, open, onOpenChange, className, children, ref, ...rest } =
-        props;
+    const {
+        content,
+        title,
+        open,
+        onOpenChange,
+        className,
+        children,
+        ref,
+        slotProps,
+        ...rest
+    } = props;
 
     return (
         <RadixDialog.Root
@@ -19,39 +34,40 @@ function Dialog(props: DialogProps) {
             open={open}
             onOpenChange={onOpenChange}
         >
-            <RadixDialog.DialogTitle className={cn(["hidden"])}>
-                {title}
-            </RadixDialog.DialogTitle>
+            <RadixDialog.Trigger asChild className={cn([className])} {...rest}>
+                {children}
+            </RadixDialog.Trigger>
+            <RadixDialog.DialogTitle
+                className={cn(["hidden", slotProps?.titleProps?.className])}
+                {...slotProps?.titleProps}
+            />
             <DialogPortal data-slot="dialog-portal">
                 <DialogOverlay />
                 <RadixDialog.Content
                     title={title}
                     data-slot="dialog-content"
-                    className={cn(
-                        [
-                            "data-[state=open]:animate-in",
-                            "data-[state=closed]:animate-out",
-                            "data-[state=closed]:fade-out-0",
-                            "data-[state=open]:fade-in-0",
-                            "data-[state=closed]:zoom-out-95",
-                            "data-[state=open]:zoom-in-95",
-                            "outline-hidden",
-                            "fixed",
-                            "top-1/2",
-                            "left-1/2",
-                            "z-50",
-                            "grid",
-                            "-translate-x-1/2",
-                            "-translate-y-1/2",
-                            "duration-200",
-                        ],
-                        className
-                    )}
-                    ref={ref}
-                    {...rest}
+                    className={cn([
+                        "data-[state=open]:animate-in",
+                        "data-[state=closed]:animate-out",
+                        "data-[state=closed]:fade-out-0",
+                        "data-[state=open]:fade-in-0",
+                        "data-[state=closed]:zoom-out-95",
+                        "data-[state=open]:zoom-in-95",
+                        "outline-hidden",
+                        "fixed",
+                        "top-1/2",
+                        "left-1/2",
+                        "z-50",
+                        "grid",
+                        "-translate-x-1/2",
+                        "-translate-y-1/2",
+                        "duration-200",
+                        slotProps?.contentProps?.className,
+                    ])}
+                    {...slotProps?.contentProps}
                 >
-                    <RadixDialog.Description />
-                    {children}
+                    <RadixDialog.Description {...slotProps?.descriptionProps} />
+                    {slotProps?.contentProps?.children}
                 </RadixDialog.Content>
             </DialogPortal>
         </RadixDialog.Root>

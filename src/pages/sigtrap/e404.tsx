@@ -12,6 +12,7 @@ export default function E404() {
                 "items-center",
                 "justify-center",
                 "gap-7",
+                "text-foreground",
             ])}
         >
             <CircleOff className={cn(["size-32"])} />
