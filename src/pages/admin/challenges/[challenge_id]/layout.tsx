@@ -26,6 +26,7 @@ export default function Layout() {
     useEffect(() => {
         getChallenges({
             id: challenge_id,
+            is_desensitized: false,
         }).then((res) => {
             setChallenge(res.data?.[0]);
         });
