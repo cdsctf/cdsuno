@@ -2,7 +2,7 @@
 @plugin "tailwindcss-animate";
 @plugin "@tailwindcss/typography";
 
-@import "./components";
+@import "./overwrites";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -53,19 +53,6 @@
     --color-chart-3: var(--chart-3);
     --color-chart-4: var(--chart-4);
     --color-chart-5: var(--chart-5);
-
-    --animate-ripple: ripple 0.5s linear forwards;
-
-    @keyframes ripple {
-        0% {
-            transform: scale(0);
-            opacity: 0.5;
-        }
-        100% {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
 }
 
 @layer base {
@@ -100,6 +87,7 @@
         --chart-5: oklch(0.75 0.2 30);
         --radius: 0.5rem;
     }
+
     .dark {
         --background: oklch(0.18 0 0);
         --foreground: oklch(0.98 0 0);
@@ -147,10 +135,6 @@
 
     body {
         @apply bg-background text-foreground;
-    }
-
-    .hljs {
-        @apply !bg-transparent;
     }
 }
 
