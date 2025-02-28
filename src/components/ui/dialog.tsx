@@ -7,9 +7,9 @@ interface DialogProps
     extends React.ComponentProps<typeof RadixDialog.Root>,
         React.ComponentProps<typeof RadixDialog.Trigger> {
     slotProps?: {
-        contentProps?: React.ComponentProps<typeof RadixDialog.Content>;
-        titleProps?: React.ComponentProps<typeof RadixDialog.DialogTitle>;
-        descriptionProps?: React.ComponentProps<
+        content?: React.ComponentProps<typeof RadixDialog.Content>;
+        title?: React.ComponentProps<typeof RadixDialog.DialogTitle>;
+        description?: React.ComponentProps<
             typeof RadixDialog.DialogDescription
         >;
     };
@@ -38,8 +38,8 @@ function Dialog(props: DialogProps) {
                 {children}
             </RadixDialog.Trigger>
             <RadixDialog.DialogTitle
-                className={cn(["hidden", slotProps?.titleProps?.className])}
-                {...slotProps?.titleProps}
+                className={cn(["hidden", slotProps?.title?.className])}
+                {...slotProps?.title}
             />
             <DialogPortal data-slot="dialog-portal">
                 <DialogOverlay />
@@ -62,12 +62,12 @@ function Dialog(props: DialogProps) {
                         "-translate-x-1/2",
                         "-translate-y-1/2",
                         "duration-200",
-                        slotProps?.contentProps?.className,
+                        slotProps?.content?.className,
                     ])}
-                    {...slotProps?.contentProps}
+                    {...slotProps?.content}
                 >
-                    <RadixDialog.Description {...slotProps?.descriptionProps} />
-                    {slotProps?.contentProps?.children}
+                    <RadixDialog.Description {...slotProps?.description} />
+                    {slotProps?.content?.children}
                 </RadixDialog.Content>
             </DialogPortal>
         </RadixDialog.Root>
@@ -105,4 +105,4 @@ function DialogOverlay({
     );
 }
 
-export { Dialog, DialogOverlay, DialogPortal };
+export { Dialog };

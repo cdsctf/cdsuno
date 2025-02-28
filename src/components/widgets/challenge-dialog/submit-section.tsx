@@ -118,12 +118,16 @@ function SubmitSection() {
     return (
         <div className={cn(["flex", "gap-3", "items-center"])}>
             <Input
-                className={cn(["flex-1"])}
                 size={"sm"}
                 icon={Flag}
-                placeholder={placeholder}
-                value={flag}
-                onChange={(e) => setFlag(e.target.value)}
+                className={cn(["flex-1"])}
+                slotProps={{
+                    input: {
+                        placeholder: placeholder,
+                        value: flag,
+                        onChange: (e) => setFlag(e.target.value),
+                    },
+                }}
             />
             <Button
                 variant={"tonal"}

@@ -115,7 +115,7 @@ export default function Index() {
                 open={challengeDialogOpen}
                 onOpenChange={setChallengeDialogOpen}
                 slotProps={{
-                    contentProps: {
+                    content: {
                         children: (
                             <ChallengeDialog
                                 onClose={() => setChallengeDialogOpen(false)}

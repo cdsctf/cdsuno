@@ -111,7 +111,7 @@ function NoticeCard() {
                 open={noticeDialogOpen}
                 onOpenChange={setNoticeDialogOpen}
                 slotProps={{
-                    contentProps: {
+                    content: {
                         children: (
                             <Card
                                 className={cn([
