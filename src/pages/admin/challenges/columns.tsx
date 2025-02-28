@@ -37,7 +37,7 @@ function DeleteConfirmDialog({
             open={open}
             onOpenChange={setOpen}
             slotProps={{
-                contentProps: {
+                content: {
                     children: (
                         <Card className={cn(["sm:max-w-md"])}>
                             您确定要删除题目{" "}

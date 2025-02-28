@@ -21,7 +21,6 @@ function Card(props: React.ComponentProps<"div">) {
         />
     );
 }
-Card.displayName = "Card";
 
 function CardHeader(props: React.ComponentProps<"div">) {
     const { className, ref, ...rest } = props;
@@ -36,7 +35,6 @@ function CardHeader(props: React.ComponentProps<"div">) {
         />
     );
 }
-CardHeader.displayName = "CardHeader";
 
 function CardTitle(props: React.ComponentProps<"div">) {
     const { className, ref, ...rest } = props;
@@ -51,7 +49,6 @@ function CardTitle(props: React.ComponentProps<"div">) {
         />
     );
 }
-CardTitle.displayName = "CardTitle";
 
 function CardDescription(props: React.ComponentProps<"div">) {
     const { className, ref, ...rest } = props;
@@ -63,7 +60,6 @@ function CardDescription(props: React.ComponentProps<"div">) {
         />
     );
 }
-CardDescription.displayName = "CardDescription";
 
 function CardContent(props: React.ComponentProps<"div">) {
     const { className, ref, ...rest } = props;
@@ -71,7 +67,6 @@ function CardContent(props: React.ComponentProps<"div">) {
         <div ref={ref} className={cn(["p-6", "pt-0"], className)} {...rest} />
     );
 }
-CardContent.displayName = "CardContent";
 
 function CardFooter(props: React.ComponentProps<"div">) {
     const { className, ref, ...rest } = props;
@@ -83,7 +78,6 @@ function CardFooter(props: React.ComponentProps<"div">) {
         />
     );
 }
-CardFooter.displayName = "CardFooter";
 
 export {
     Card,

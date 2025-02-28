@@ -12,7 +12,6 @@ function Navbar() {
     const { currentGame, setCurrentGame } = useGameStore();
 
     const mode = useMemo(() => {
-        console.log(pathname, game_id);
         if (pathname.startsWith("/games") && game_id) {
             return "game";
         } else if (pathname.startsWith("/admin")) {

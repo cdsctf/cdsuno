@@ -3,6 +3,26 @@ import * as RadixTooltip from "@radix-ui/react-tooltip";
 
 import { cn } from "@/utils";
 
+interface TooltipProps extends React.ComponentProps<typeof TooltipTrigger> {
+    slotProps?: {
+        content?: Partial<React.ComponentProps<typeof TooltipContent>>;
+        provider?: Partial<React.ComponentProps<typeof TooltipProvider>>;
+    };
+}
+
+function Tooltip(props: TooltipProps) {
+    const { slotProps, ...rest } = props;
+
+    return (
+        <TooltipProvider {...slotProps?.provider}>
+            <TooltipRoot>
+                <TooltipTrigger {...rest} />
+                <TooltipContent {...slotProps?.content} />
+            </TooltipRoot>
+        </TooltipProvider>
+    );
+}
+
 function TooltipProvider({
     delayDuration = 0,
     ...props
@@ -16,12 +36,10 @@ function TooltipProvider({
     );
 }
 
-function Tooltip({ ...props }: React.ComponentProps<typeof RadixTooltip.Root>) {
-    return (
-        <TooltipProvider>
-            <RadixTooltip.Root data-slot="tooltip" {...props} />
-        </TooltipProvider>
-    );
+function TooltipRoot({
+    ...props
+}: React.ComponentProps<typeof RadixTooltip.Root>) {
+    return <RadixTooltip.Root data-slot="tooltip" {...props} />;
 }
 
 function TooltipTrigger({
@@ -83,4 +101,4 @@ function TooltipContent({
     );
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+export { Tooltip };

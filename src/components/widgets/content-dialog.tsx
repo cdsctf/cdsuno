@@ -29,7 +29,7 @@ export function ContentDialog({
     return (
         <Dialog
             slotProps={{
-                contentProps: {
+                content: {
                     children: (
                         <Card className="sm:max-w-2xl">
                             {typeof content === "string" ? (

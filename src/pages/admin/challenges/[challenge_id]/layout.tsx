@@ -14,11 +14,12 @@ import {
     Info,
     ScrollText,
 } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { useSharedStore } from "@/storages/shared";
 
 export default function Layout() {
     const location = useLocation();
     const pathname = location.pathname;
+    const sharedStore = useSharedStore();
     const { challenge_id } = useParams<{ challenge_id: string }>();
     const [challenge, setChallenge] = useState<Challenge>();
 
@@ -28,7 +29,7 @@ export default function Layout() {
         }).then((res) => {
             setChallenge(res.data?.[0]);
         });
-    }, []);
+    }, [sharedStore?.refresh]);
 
     const options = useMemo(() => {
         return [
@@ -49,7 +50,7 @@ export default function Layout() {
                 disabled: !challenge?.has_attachment,
             },
             {
-                link: `/admin/challenges/${challenge_id}/attachments`,
+                link: `/admin/challenges/${challenge_id}/env`,
                 name: "动态环境",
                 icon: Container,
                 disabled: !challenge?.is_dynamic,
@@ -125,9 +126,11 @@ export default function Layout() {
                 <Card
                     className={cn([
                         "flex-1",
-                        "p-5",
+                        "p-10",
                         "border-y-0",
                         "rounded-none",
+                        "flex",
+                        "flex-col",
                     ])}
                 >
                     <Outlet />
