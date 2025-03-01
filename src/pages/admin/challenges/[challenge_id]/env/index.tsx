@@ -17,6 +17,7 @@ import {
     MemoryStick,
     Minus,
     Plus,
+    Trash,
 } from "lucide-react";
 import {
     Form,
@@ -194,7 +195,7 @@ export default function Index() {
                                             <Input
                                                 {...field}
                                                 icon={Container}
-                                                placeholder={"nginx:latest"}
+                                                placeholder={"repository:tag"}
                                                 value={field.value || ""}
                                                 onChange={field.onChange}
                                             />
@@ -256,7 +257,7 @@ export default function Index() {
                         </div>
                         <Label>暴露端口</Label>
                         <div className={cn(["grid", "grid-cols-4", "gap-5"])}>
-                            {container.ports?.map((port, portIndex) => (
+                            {container.ports?.map((_port, portIndex) => (
                                 <FormField
                                     key={portIndex}
                                     control={form.control}
@@ -412,6 +413,7 @@ export default function Index() {
                             variant={"tonal"}
                             level={"error"}
                             size={"sm"}
+                            icon={Trash}
                             onClick={() =>
                                 handleRemoveContainer(containerIndex)
                             }
@@ -422,8 +424,9 @@ export default function Index() {
                 ))}
                 <Button
                     type={"button"}
-                    variant={"outline"}
+                    variant={"tonal"}
                     size={"sm"}
+                    icon={Plus}
                     onClick={handleAddContainer}
                 >
                     添加容器

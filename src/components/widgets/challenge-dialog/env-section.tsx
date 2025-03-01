@@ -1,8 +1,8 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Context } from "./context";
 import { cn } from "@/utils";
-import { Pod } from "@/models/pod";
-import { createPod, getPods, renewPod, stopPod } from "@/api/pods";
+import { Env } from "@/models/env";
+import { createEnv, getEnvs, renewEnv, stopEnv } from "@/api/env";
 import { useAuthStore } from "@/storages/auth";
 import { toast } from "sonner";
 import { useInterval } from "@/hooks/use-interval";
@@ -22,12 +22,12 @@ function EnvSection() {
         return "default";
     }, [gameTeam]);
 
-    const [pod, setPod] = useState<Pod>();
+    const [pod, setPod] = useState<Env>();
     const [podStopLoading, setPodStopLoading] = useState<boolean>(false);
     const [podCreateLoading, setPodCreateLoading] = useState<boolean>(false);
 
     function fetchPods() {
-        getPods({
+        getEnvs({
             challenge_id: challenge?.id,
             user_id: mode !== "game" ? authStore?.user?.id : undefined,
             game_id: mode === "game" ? Number(gameTeam?.game_id) : undefined,
@@ -60,7 +60,7 @@ function EnvSection() {
     }
 
     function handlePodRenew() {
-        renewPod({
+        renewEnv({
             id: pod?.id!,
         }).then((res) => {
             if (res.code === 200) {
@@ -76,7 +76,7 @@ function EnvSection() {
     }
 
     function handlePodStop() {
-        stopPod({
+        stopEnv({
             id: pod?.id!,
         })
             .then((_) => {
@@ -101,7 +101,7 @@ function EnvSection() {
         toast.loading("正在发送容器创建请求", {
             id: "pod",
         });
-        createPod({
+        createEnv({
             challenge_id: challenge?.id,
             game_id: mode === "game" ? Number(gameTeam?.game_id) : undefined,
             team_id: mode === "game" ? Number(gameTeam?.team_id) : undefined,
@@ -143,11 +143,15 @@ function EnvSection() {
                             .map(([src, dst]: Array<string>) => (
                                 <div className={cn(["flex"])} key={src}>
                                     <Input
-                                        readOnly
                                         size={"sm"}
                                         icon={EthernetPort}
                                         value={`${src} ~ ${pod?.public_entry}:${dst}`}
                                         className={cn(["flex-1"])}
+                                        slotProps={{
+                                            input: {
+                                                readOnly: true,
+                                            },
+                                        }}
                                         extraBtn={
                                             <Button
                                                 icon={Clipboard}

@@ -13,38 +13,3 @@ export interface GameChallenge {
     bonus_ratios?: Array<number>;
     frozen_at?: number;
 }
-
-export interface GetGameChallengeRequest {
-    game_id?: number;
-    challenge_id?: string;
-    category?: number;
-    is_enabled?: boolean;
-    page?: number;
-    size?: number;
-}
-
-export interface CreateGameChallengeRequest {
-    game_id?: number;
-    challenge_id?: string;
-    is_enabled?: boolean;
-    max_pts?: number;
-    min_pts?: number;
-    difficulty?: number;
-    bonus_ratios?: Array<number>;
-}
-
-export interface UpdateGameChallengeRequest {
-    game_id?: number;
-    challenge_id?: string;
-    is_enabled?: boolean;
-    max_pts?: number;
-    min_pts?: number;
-    difficulty?: number;
-    bonus_ratios?: Array<number>;
-    frozen_at?: number | null;
-}
-
-export interface DeleteGameChallengeRequest {
-    challenge_id?: string;
-    game_id?: number;
-}
