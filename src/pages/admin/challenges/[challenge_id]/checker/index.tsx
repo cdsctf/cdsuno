@@ -134,7 +134,14 @@ export default function Index() {
                         </FormItem>
                     )}
                 />
-                <Card className={cn(["min-h-40", "p-3", "overflow-auto"])}>
+                <Card
+                    className={cn([
+                        "min-h-40",
+                        "p-3",
+                        "overflow-auto",
+                        "bg-input",
+                    ])}
+                >
                     <pre
                         className={cn(["font-mono"])}
                         dangerouslySetInnerHTML={{

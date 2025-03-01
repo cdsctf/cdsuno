@@ -7,7 +7,7 @@ import { getGameNotice } from "@/api/game";
 import { useState } from "react";
 import { GameNotice } from "@/models/game_notice";
 import { useInterval } from "@/hooks/use-interval";
-import { Dialog } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { MarkdownRender } from "@/components/utils/markdown-render";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { useThemeStore } from "@/storages/theme";
@@ -16,9 +16,6 @@ function NoticeCard() {
     const { theme } = useThemeStore();
     const { currentGame } = useGameStore();
     const [gameNotices, setGameNotices] = useState<Array<GameNotice>>();
-
-    const [noticeDialogOpen, setNoticeDialogOpen] = useState<boolean>(false);
-    const [selectedNotice, setSelectedNotice] = useState<GameNotice>();
 
     function fetchNotices() {
         getGameNotice({
@@ -74,76 +71,22 @@ function NoticeCard() {
                         ])}
                     >
                         {gameNotices?.map((gameNotice) => (
-                            <Card
-                                className={cn([
-                                    "flex",
-                                    "flex-col",
-                                    "gap-1",
-                                    "p-3",
-                                    "cursor-pointer",
-                                    "hover:bg-foreground/10",
-                                    "select-none",
-                                ])}
-                                onClick={() => {
-                                    setSelectedNotice(gameNotice);
-                                    setNoticeDialogOpen(true);
-                                }}
-                            >
-                                <h4 className={cn(["text-sm"])}>
-                                    {gameNotice?.title}
-                                </h4>
-                                <span
-                                    className={cn([
-                                        "text-secondary",
-                                        "text-xs",
-                                    ])}
-                                >
-                                    {new Date(
-                                        Number(gameNotice?.created_at) * 1000
-                                    ).toLocaleString()}
-                                </span>
-                            </Card>
-                        ))}
-                    </div>
-                </OverlayScrollbarsComponent>
-            </Card>
-            <Dialog
-                open={noticeDialogOpen}
-                onOpenChange={setNoticeDialogOpen}
-                slotProps={{
-                    content: {
-                        children: (
-                            <Card
-                                className={cn([
-                                    "p-6",
-                                    "min-h-81",
-                                    "w-screen",
-                                    "md:w-xl",
-                                    "flex",
-                                    "flex-col",
-                                    "gap-5",
-                                ])}
-                            >
-                                <div
-                                    className={cn("flex", "flex-col", "gap-3")}
-                                >
-                                    <div
+                            <Dialog>
+                                <DialogTrigger>
+                                    <Card
                                         className={cn([
                                             "flex",
-                                            "justify-between",
-                                            "items-baseline",
+                                            "flex-col",
+                                            "gap-1",
+                                            "p-3",
+                                            "cursor-pointer",
+                                            "hover:bg-foreground/10",
+                                            "select-none",
                                         ])}
                                     >
-                                        <div
-                                            className={cn([
-                                                "flex",
-                                                "gap-3",
-                                                "items-center",
-                                            ])}
-                                        >
-                                            <Rss className={cn(["size-5"])} />
-                                            <h3>{selectedNotice?.title}</h3>
-                                        </div>
+                                        <h4 className={cn(["text-sm"])}>
+                                            {gameNotice?.title}
+                                        </h4>
                                         <span
                                             className={cn([
                                                 "text-secondary",
@@ -151,32 +94,87 @@ function NoticeCard() {
                                             ])}
                                         >
                                             {new Date(
-                                                Number(
-                                                    selectedNotice?.created_at
-                                                ) * 1000
+                                                Number(gameNotice?.created_at) *
+                                                    1000
                                             ).toLocaleString()}
                                         </span>
-                                    </div>
-                                    <Separator />
-                                </div>
-                                <div
-                                    className={cn([
-                                        "flex",
-                                        "flex-1",
-                                        "flex-col",
-                                        "max-h-144",
-                                        "overflow-auto",
-                                    ])}
-                                >
-                                    <MarkdownRender
-                                        src={selectedNotice?.content}
-                                    />
-                                </div>
-                            </Card>
-                        ),
-                    },
-                }}
-            />
+                                    </Card>
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <Card
+                                        className={cn([
+                                            "p-6",
+                                            "min-h-81",
+                                            "w-screen",
+                                            "md:w-xl",
+                                            "flex",
+                                            "flex-col",
+                                            "gap-5",
+                                        ])}
+                                    >
+                                        <div
+                                            className={cn(
+                                                "flex",
+                                                "flex-col",
+                                                "gap-3"
+                                            )}
+                                        >
+                                            <div
+                                                className={cn([
+                                                    "flex",
+                                                    "justify-between",
+                                                    "items-baseline",
+                                                ])}
+                                            >
+                                                <div
+                                                    className={cn([
+                                                        "flex",
+                                                        "gap-3",
+                                                        "items-center",
+                                                    ])}
+                                                >
+                                                    <Rss
+                                                        className={cn([
+                                                            "size-5",
+                                                        ])}
+                                                    />
+                                                    <h3>{gameNotice?.title}</h3>
+                                                </div>
+                                                <span
+                                                    className={cn([
+                                                        "text-secondary",
+                                                        "text-xs",
+                                                    ])}
+                                                >
+                                                    {new Date(
+                                                        Number(
+                                                            gameNotice?.created_at
+                                                        ) * 1000
+                                                    ).toLocaleString()}
+                                                </span>
+                                            </div>
+                                            <Separator />
+                                        </div>
+                                        <div
+                                            className={cn([
+                                                "flex",
+                                                "flex-1",
+                                                "flex-col",
+                                                "max-h-144",
+                                                "overflow-auto",
+                                            ])}
+                                        >
+                                            <MarkdownRender
+                                                src={gameNotice?.content}
+                                            />
+                                        </div>
+                                    </Card>
+                                </DialogContent>
+                            </Dialog>
+                        ))}
+                    </div>
+                </OverlayScrollbarsComponent>
+            </Card>
         </>
     );
 }

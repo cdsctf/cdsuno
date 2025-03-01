@@ -88,6 +88,16 @@ function Editor(props: EditorProps) {
     }, [lang, showLineNumbers, tabSize, placeholder, theme]);
 
     useEffect(() => {
+        const editor = editorRef.current;
+        if (editor) {
+            editor.classList.remove("ace-kuroir", "ace-github-dark");
+            editor.classList.add(
+                theme === "light" ? "ace-kuroir" : "ace-github-dark"
+            );
+        }
+    }, [theme]);
+
+    useEffect(() => {
         const editor = editorInstance.current;
         if (editor && value !== editor.getValue()) {
             editor.session.setValue(value || "");
