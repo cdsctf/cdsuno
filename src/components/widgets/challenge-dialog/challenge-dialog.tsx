@@ -13,14 +13,13 @@ import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { useThemeStore } from "@/storages/theme";
 
 interface ChallengeDialogProps extends React.ComponentProps<typeof Card> {
-    onClose: () => void;
     challenge?: Challenge;
     gameTeam?: GameTeam;
 }
 
 function ChallengeDialog(props: ChallengeDialogProps) {
     const { theme } = useThemeStore();
-    const { onClose, challenge, gameTeam, ...rest } = props;
+    const { challenge, gameTeam, ...rest } = props;
     const { getCategory } = useCategoryStore();
 
     const category = useMemo(

@@ -6,7 +6,7 @@ import { Card } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { useCategoryStore } from "@/storages/category";
 import { Badge } from "../ui/badge";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 interface ChallengeCardProps extends React.ComponentProps<"div"> {
     challenge?: Challenge;
@@ -56,31 +56,20 @@ function ChallengeCard(props: ChallengeCardProps) {
                 <CategoryIcon className={cn(["size-36"])} />
             </span>
             {status?.is_solved && (
-                <Tooltip
-                    asChild
-                    className={cn([
-                        "absolute",
-                        "top-[10%]",
-                        "right-[7%]",
-                        "size-5",
-                    ])}
-                    slotProps={{
-                        content: {
-                            children: "已解决",
-                            sideOffset: 0,
-                        },
-                    }}
-                >
-                    <Flag
-                        className={cn([
-                            "absolute",
-                            "top-[10%]",
-                            "right-[7%]",
-                            "size-5",
-                        ])}
-                        fill={category.color}
-                        color={category.color}
-                    />
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Flag
+                            className={cn([
+                                "absolute",
+                                "top-[10%]",
+                                "right-[7%]",
+                                "size-5",
+                            ])}
+                            fill={category.color}
+                            color={category.color}
+                        />
+                    </TooltipTrigger>
+                    <TooltipContent sideOffset={0}>已解决</TooltipContent>
                 </Tooltip>
             )}
             <Badge

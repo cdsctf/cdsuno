@@ -10,16 +10,20 @@ import {
     ArrowLeft,
     ChartArea,
     Container,
+    Edit,
     Folder,
     Info,
+    Library,
     ScrollText,
 } from "lucide-react";
 import { useSharedStore } from "@/storages/shared";
+import { useCategoryStore } from "@/storages/category";
 
 export default function Layout() {
     const location = useLocation();
     const pathname = location.pathname;
     const sharedStore = useSharedStore();
+    const { getCategory } = useCategoryStore();
     const { challenge_id } = useParams<{ challenge_id: string }>();
     const [challenge, setChallenge] = useState<Challenge>();
 
@@ -80,27 +84,29 @@ export default function Layout() {
             >
                 <div
                     className={cn([
-                        "lg:w-1/4",
+                        "lg:w-1/5",
                         "lg:sticky",
                         "lg:top-25",
-                        "space-y-5",
+                        "space-y-6",
                         "h-fit",
                         "my-10",
                         "mx-10",
                         "lg:mx-0",
                     ])}
                 >
-                    <Card className={cn(["p-3", "flex", "justify-center"])}>
-                        <Button
-                            level={"warning"}
-                            icon={ArrowLeft}
-                            asChild
-                            className={cn(["flex-1"])}
-                        >
-                            <Link to={"/admin/challenges"}>返回上级</Link>
-                        </Button>
-                    </Card>
-                    <Card className={cn(["flex", "flex-col", "p-5", "gap-5"])}>
+                    <div
+                        className={cn([
+                            "flex",
+                            "flex-wrap",
+                            "justify-center",
+                            "gap-3",
+                            "select-none",
+                        ])}
+                    >
+                        <Library />
+                        题目编辑
+                    </div>
+                    <Card className={cn(["flex", "flex-col", "p-5", "gap-3"])}>
                         {options?.map((option, index) => {
                             const Comp = option?.disabled ? Button : Link;
                             return (

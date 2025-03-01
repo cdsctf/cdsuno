@@ -7,7 +7,7 @@ import { useGameStore } from "@/storages/game";
 import { Challenge, ChallengeStatus } from "@/models/challenge";
 import { getChallengeStatus } from "@/api/challenge";
 import { ChallengeCard } from "@/components/widgets/challenge-card";
-import { Dialog } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
 import { NoticeCard } from "./notice-card";
 
@@ -114,18 +114,14 @@ export default function Index() {
             <Dialog
                 open={challengeDialogOpen}
                 onOpenChange={setChallengeDialogOpen}
-                slotProps={{
-                    content: {
-                        children: (
-                            <ChallengeDialog
-                                onClose={() => setChallengeDialogOpen(false)}
-                                challenge={selectedChallenge}
-                                gameTeam={selfGameTeam}
-                            />
-                        ),
-                    },
-                }}
-            />
+            >
+                <DialogContent>
+                    <ChallengeDialog
+                        challenge={selectedChallenge}
+                        gameTeam={selfGameTeam}
+                    />
+                </DialogContent>
+            </Dialog>
         </>
     );
 }

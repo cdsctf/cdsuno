@@ -9,7 +9,7 @@ import { ListOrdered } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getChallenges, getChallengeStatus } from "@/api/challenge";
 import { useAuthStore } from "@/storages/auth";
-import { Dialog } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
 import { useSearchParams } from "react-router";
 
@@ -65,10 +65,6 @@ export default function Index() {
         });
     }, [challenges]);
 
-    const [selectedChallenge, setSelectedChallenge] = useState<Challenge>();
-    const [challengeDialogOpen, setChallengeDialogOpen] =
-        useState<boolean>(false);
-
     return (
         <>
             <div
@@ -121,11 +117,15 @@ export default function Index() {
                             className={cn(["flex-1"])}
                             icon={ListOrdered}
                             placeholder={"每页题目数量"}
-                            min={1}
-                            max={50}
                             size={"sm"}
                             value={size}
                             onChange={(e) => setSize(e.target.valueAsNumber)}
+                            slotProps={{
+                                input: {
+                                    min: 0,
+                                    max: 50,
+                                },
+                            }}
                         />
                     </div>
                 </div>
@@ -140,33 +140,23 @@ export default function Index() {
                         ])}
                     >
                         {challenges?.map((challenge, index) => (
-                            <ChallengeCard
-                                key={index}
-                                challenge={challenge}
-                                status={challengeStatus?.[challenge?.id!]}
-                                onClick={() => {
-                                    setSelectedChallenge(challenge);
-                                    setChallengeDialogOpen(true);
-                                }}
-                            />
+                            <Dialog key={index}>
+                                <DialogTrigger>
+                                    <ChallengeCard
+                                        challenge={challenge}
+                                        status={
+                                            challengeStatus?.[challenge?.id!]
+                                        }
+                                    />
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <ChallengeDialog challenge={challenge} />
+                                </DialogContent>
+                            </Dialog>
                         ))}
                     </div>
                 </div>
             </div>
-            <Dialog
-                open={challengeDialogOpen}
-                onOpenChange={setChallengeDialogOpen}
-                slotProps={{
-                    content: {
-                        children: (
-                            <ChallengeDialog
-                                onClose={() => setChallengeDialogOpen(false)}
-                                challenge={selectedChallenge}
-                            />
-                        ),
-                    },
-                }}
-            />
         </>
     );
 }

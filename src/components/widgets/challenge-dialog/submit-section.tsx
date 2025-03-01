@@ -121,13 +121,9 @@ function SubmitSection() {
                 size={"sm"}
                 icon={Flag}
                 className={cn(["flex-1"])}
-                slotProps={{
-                    input: {
-                        placeholder: placeholder,
-                        value: flag,
-                        onChange: (e) => setFlag(e.target.value),
-                    },
-                }}
+                placeholder={placeholder}
+                value={flag}
+                onChange={(e) => setFlag(e.target.value)}
             />
             <Button
                 variant={"tonal"}

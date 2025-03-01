@@ -33,7 +33,10 @@ function TabSection() {
                         link: `/games/${currentGame?.id}/challenges`,
                         name: "题目",
                         icon: Star,
-                        disabled: !selfGameTeam?.is_allowed,
+                        disabled:
+                            !selfGameTeam?.is_allowed ||
+                            new Date(Number(currentGame?.created_at) * 1000) <
+                                new Date(),
                     },
                     {
                         link: `/games/${currentGame?.id}/scoreboard`,

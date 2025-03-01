@@ -39,7 +39,11 @@ import { useCategoryStore } from "@/storages/category";
 import { ContentDialog } from "@/components/widgets/content-dialog";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-import { Tooltip } from "@/components/ui/tooltip";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useClipboard } from "@/hooks/use-clipboard";
 import { Link } from "react-router";
 import { toast } from "sonner";
@@ -105,20 +109,20 @@ export default function Index() {
                 return (
                     <div className={cn(["flex", "items-center", "gap-1"])}>
                         <Badge>{id?.split("-")?.[0]}</Badge>
-                        <Tooltip
-                            asChild
-                            slotProps={{
-                                content: {
-                                    children: "复制到剪贴板",
-                                },
-                            }}
-                        >
-                            <Button
-                                icon={isCopied ? ClipboardCheck : ClipboardCopy}
-                                square
-                                size={"sm"}
-                                onClick={() => copyToClipboard(id)}
-                            />
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    icon={
+                                        isCopied
+                                            ? ClipboardCheck
+                                            : ClipboardCopy
+                                    }
+                                    square
+                                    size={"sm"}
+                                    onClick={() => copyToClipboard(id)}
+                                />
+                            </TooltipTrigger>
+                            <TooltipContent>复制到剪贴板</TooltipContent>
                         </Tooltip>
                     </div>
                 );
