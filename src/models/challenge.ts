@@ -57,7 +57,7 @@ export interface CreateChallengeRequest {
     category?: number;
     is_public?: boolean;
     is_dynamic?: boolean;
-    env?: Env;
+    // env?: Env;
 }
 
 export interface DeleteChallengeRequest {

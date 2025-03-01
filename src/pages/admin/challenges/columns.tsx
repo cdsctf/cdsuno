@@ -17,7 +17,6 @@ import {
     Trash2Icon,
 } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Env } from "@/models/env";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/utils";
 

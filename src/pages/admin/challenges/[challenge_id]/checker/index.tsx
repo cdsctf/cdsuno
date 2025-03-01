@@ -17,6 +17,7 @@ import { Select } from "@/components/ui/select";
 import simpleChecker from "./examples/simple.cdsx?raw";
 import suidChecker from "./examples/suid.cdsx?raw";
 import leetChecker from "./examples/leet.cdsx?raw";
+import { Label } from "@/components/ui/label";
 
 const checkerMap = {
     simple: simpleChecker,
@@ -130,10 +131,10 @@ export default function Index() {
                                     className={cn(["h-full", "min-h-64"])}
                                 />
                             </FormControl>
-                            {/* <FormMessage /> */}
                         </FormItem>
                     )}
                 />
+                <Label>Lint 输出</Label>
                 <Card
                     className={cn([
                         "min-h-40",

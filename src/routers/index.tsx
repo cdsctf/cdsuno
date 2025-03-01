@@ -165,6 +165,19 @@ export default createBrowserRouter([
                         ],
                     },
                     {
+                        path: "clusters",
+                        children: [
+                            {
+                                index: true,
+                                lazy: async () => ({
+                                    Component: (
+                                        await import("@/pages/admin/clusters")
+                                    ).default,
+                                }),
+                            },
+                        ],
+                    },
+                    {
                         path: "games",
                         children: [
                             {
