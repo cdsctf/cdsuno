@@ -1,4 +1,3 @@
-import { Category } from "@/models/category";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import {
@@ -22,7 +21,15 @@ import {
     Lightbulb,
     Shield,
     Brush,
+    LucideIcon,
 } from "lucide-react";
+
+export interface Category {
+    id?: number;
+    name?: string;
+    color?: string;
+    icon?: LucideIcon;
+}
 
 interface CategoryState {
     categories: Array<Category>;

@@ -7,7 +7,6 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import {
-    ArrowLeft,
     ChartArea,
     Container,
     Edit,
