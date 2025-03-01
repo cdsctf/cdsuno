@@ -30,7 +30,6 @@ const buttonVariants = cva(
         "cursor-pointer",
         "select-none",
         "[&_svg]:pointer-events-none",
-        "[&_svg]:size-4",
         "[&_svg]:shrink-0",
     ],
     {
@@ -103,52 +102,16 @@ function Button(props: ButtonProps) {
         asChild = false,
         icon,
         children,
-        onClick,
         ref,
         ...rest
     } = props;
 
-    interface Ripple {
-        x: number;
-        y: number;
-        id: number;
-    }
-
-    const [ripples, setRipples] = useState<Ripple[]>([]);
-
-    useEffect(() => {
-        const timeouts = ripples.map((ripple) =>
-            setTimeout(() => {
-                setRipples((prevRipples) =>
-                    prevRipples.filter((r) => r.id !== ripple.id)
-                );
-            }, 1000)
-        );
-
-        return () => {
-            timeouts.forEach((timeout) => clearTimeout(timeout));
-        };
-    }, [ripples]);
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const button = event.currentTarget;
-        const rect = button.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
-        setRipples([...ripples, { x, y, id: Date.now() }]);
-    };
-
-    const Icon = icon!;
+    const Icon = loading ? LoaderCircle : icon!;
     const Comp = asChild ? Slot : "button";
     return (
         <Comp
             className={cn(buttonVariants({ variant, size, square, className }))}
             ref={ref}
-            onClick={(e) => {
-                handleClick(e);
-                onClick?.(e);
-            }}
             draggable={false}
             disabled={disabled || loading}
             style={
@@ -160,42 +123,9 @@ function Button(props: ButtonProps) {
             {...rest}
         >
             {(!!icon || loading) && (
-                <>
-                    {loading ? (
-                        <LoaderCircle className={cn(["animate-spin"])} />
-                    ) : (
-                        <Icon />
-                    )}
-                </>
+                <Icon className={cn(["size-4", loading && "animate-spin"])} />
             )}
             <Slottable>{children}</Slottable>
-            {/* <span
-                className={cn([
-                    "absolute",
-                    "inset-0",
-                    "pointer-events-none",
-                    "overflow-hidden",
-                ])}
-            >
-                {ripples.map((ripple) => (
-                    <span
-                        key={ripple.id}
-                        className={cn([
-                            "absolute",
-                            "rounded-full",
-                            "pointer-events-none",
-                            "animate-ripple",
-                            "bg-foreground/30",
-                        ])}
-                        style={{
-                            left: ripple.x - 50,
-                            top: ripple.y - 50,
-                            width: 100,
-                            height: 100,
-                        }}
-                    />
-                ))}
-            </span> */}
         </Comp>
     );
 }
