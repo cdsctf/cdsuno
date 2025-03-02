@@ -40,7 +40,7 @@ function Select(props: SelectProps) {
             <SelectContent>
                 {options?.map((option, index) => (
                     <SelectItem key={index} value={option.value}>
-                        {option?.content}
+                        {option?.content ?? option?.value}
                     </SelectItem>
                 ))}
             </SelectContent>

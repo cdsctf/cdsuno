@@ -108,7 +108,7 @@ export interface CreateChallengeRequest {
     category?: number;
     is_public?: boolean;
     is_dynamic?: boolean;
-    // env?: Env;
+    has_attachment?: boolean;
 }
 
 export async function createChallenge(request: CreateChallengeRequest) {
