@@ -3,7 +3,7 @@ import { ChampionChart } from "./champion-chart";
 import { useEffect, useState } from "react";
 import { ScoreRecord } from "@/models/game";
 import { useGameStore } from "@/storages/game";
-import { getGameScoreboard } from "@/api/game";
+import { getGameScoreboard } from "@/api/games/game_id";
 import { Pagination } from "@/components/ui/pagination";
 
 export default function Index() {
@@ -14,7 +14,8 @@ export default function Index() {
     const [page, setPage] = useState<number>(1);
 
     useEffect(() => {
-        getGameScoreboard(currentGame?.id!, {
+        getGameScoreboard({
+            id: currentGame?.id!,
             size: 10,
             page,
         }).then((res) => {

@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Image } from "@/components/ui/image";
 import { MarkdownRender } from "@/components/utils/markdown-render";
+import { State } from "@/models/team";
 import { useGameStore } from "@/storages/game";
 import { cn } from "@/utils";
-import { ArrowRight, Play, Swords } from "lucide-react";
+import { ArrowRightIcon, PlayIcon, SwordsIcon } from "lucide-react";
 import { useMemo } from "react";
 import { useNavigate } from "react-router";
 
@@ -23,6 +24,17 @@ export default function Index() {
         if (endedAt < new Date()) return "ended";
         return "ongoing";
     }, [currentGame]);
+
+    const invalidMessage = useMemo(() => {
+        if (selfTeam?.state === State.Banned) {
+            return "禁赛中";
+        } else if (selfTeam?.state === State.Preparing) {
+            return "赛前准备中";
+        } else if (selfTeam?.state === State.Pending) {
+            return "审核中";
+        }
+        return undefined;
+    }, [selfTeam]);
 
     return (
         <div
@@ -109,7 +121,7 @@ export default function Index() {
                         {new Date(
                             Number(currentGame?.started_at) * 1000
                         ).toLocaleString()}
-                        <ArrowRight />
+                        <ArrowRightIcon />
                         {new Date(
                             Number(currentGame?.ended_at) * 1000
                         ).toLocaleString()}
@@ -122,17 +134,18 @@ export default function Index() {
                             variant={"solid"}
                             level={"success"}
                             size={"lg"}
-                            icon={Play}
+                            icon={PlayIcon}
                             disabled={
-                                status !== "ongoing" || !selfTeam.is_allowed
+                                status !== "ongoing" ||
+                                selfTeam.state !== State.Passed
                             }
                             onClick={() =>
                                 navigate(`/games/${currentGame?.id}/challenges`)
                             }
                         >
                             <span>作为 {selfTeam?.name} 参赛</span>
-                            {!selfTeam.is_allowed && (
-                                <span>（审核未通过）</span>
+                            {invalidMessage && (
+                                <span>（{invalidMessage}）</span>
                             )}
                         </Button>
                     ) : (
@@ -141,10 +154,10 @@ export default function Index() {
                             level={"info"}
                             size={"lg"}
                             className={cn(["w-full"])}
-                            icon={Swords}
+                            icon={SwordsIcon}
                             onClick={() => {}}
                         >
-                            申请参赛
+                            集结你的队伍
                         </Button>
                     )}
                 </div>

@@ -7,17 +7,19 @@ import {
     UserRound,
     Star,
     ChartNoAxesCombined,
+    UsersRoundIcon,
 } from "lucide-react";
 import { useContext, useMemo } from "react";
 import { Link, useLocation } from "react-router";
 import { useGameStore } from "@/storages/game";
 import { Context } from "./context";
+import { State } from "@/models/team";
 
 function TabSection() {
     const location = useLocation();
     const pathname = location.pathname;
     const { mode } = useContext(Context);
-    const { currentGame, selfTeam: selfGameTeam } = useGameStore();
+    const { currentGame, selfTeam } = useGameStore();
 
     const options = useMemo(() => {
         switch (mode) {
@@ -29,12 +31,18 @@ function TabSection() {
                         icon: House,
                     },
                     {
+                        link: `/games/${currentGame?.id}/team`,
+                        name: "团队",
+                        icon: UsersRoundIcon,
+                        disabled: !selfTeam?.id,
+                    },
+                    {
                         link: `/games/${currentGame?.id}/challenges`,
                         name: "题目",
                         icon: Star,
                         disabled:
-                            !selfGameTeam?.is_allowed ||
-                            new Date(Number(currentGame?.created_at) * 1000) <
+                            selfTeam?.state !== State.Passed ||
+                            new Date(Number(currentGame?.started_at) * 1000) >
                                 new Date(),
                     },
                     {
@@ -98,7 +106,7 @@ function TabSection() {
                     },
                 ];
         }
-    }, [mode, currentGame?.id, selfGameTeam?.is_allowed]);
+    }, [mode, currentGame?.id, selfTeam]);
 
     return (
         <>

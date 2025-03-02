@@ -2,7 +2,7 @@ import { cn } from "@/utils";
 import { TeamCard } from "./team-card";
 import { useEffect, useState } from "react";
 import { GameChallenge } from "@/models/game_challenge";
-import { getGameChallenges } from "@/api/game";
+import { getGameChallenges } from "@/api/games/game_id/challenges";
 import { useGameStore } from "@/storages/game";
 import { Challenge } from "@/models/challenge";
 import { ChallengeStatus, getChallengeStatus } from "@/api/challenge";

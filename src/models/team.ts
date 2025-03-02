@@ -7,7 +7,7 @@ export interface Team {
     email?: string;
     slogan?: string;
     description?: string;
-    is_allowed?: boolean;
+    state?: State;
 
     pts?: number;
     rank?: number;
@@ -15,4 +15,11 @@ export interface Team {
     deleted_at?: number;
 
     users?: Array<User>;
+}
+
+export enum State {
+    Banned = 0,
+    Preparing = 1,
+    Pending = 2,
+    Passed = 3,
 }

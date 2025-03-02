@@ -2,7 +2,7 @@ import { Outlet, useParams } from "react-router";
 import { Context } from "./context";
 import { useSharedStore } from "@/storages/shared";
 import { useEffect, useState } from "react";
-import { getGameTeams } from "@/api/game";
+import { getTeams } from "@/api/games/game_id/teams";
 import { useAuthStore } from "@/storages/auth";
 import { useGameStore } from "@/storages/game";
 
@@ -14,8 +14,8 @@ export default function () {
 
     const [gtLoaded, setGtLoaded] = useState<boolean>(false);
 
-    function fetchSelfGameTeam() {
-        getGameTeams({
+    function fetchSelfTeam() {
+        getTeams({
             game_id: Number(game_id),
             user_id: authStore?.user?.id,
         })
@@ -29,7 +29,7 @@ export default function () {
 
     useEffect(() => {
         if (authStore?.user) {
-            fetchSelfGameTeam();
+            fetchSelfTeam();
         }
     }, [sharedStore?.refresh, game_id]);
 

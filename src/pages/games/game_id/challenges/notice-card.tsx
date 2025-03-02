@@ -3,7 +3,7 @@ import { cn } from "@/utils";
 import { useGameStore } from "@/storages/game";
 import { Rss } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { getGameNotice } from "@/api/game";
+import { getGameNotice } from "@/api/games";
 import { useState } from "react";
 import { GameNotice } from "@/models/game_notice";
 import { useInterval } from "@/hooks/use-interval";
