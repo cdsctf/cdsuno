@@ -1,8 +1,8 @@
 import { Challenge } from "@/models/challenge";
-import { GameTeam } from "@/models/game_team";
+import { Team } from "@/models/team";
 import { createContext } from "react";
 
 export const Context = createContext<{
     challenge?: Challenge;
-    gameTeam?: GameTeam;
+    team?: Team;
 }>({});

@@ -33,10 +33,10 @@ function ChampionChart(props: ChampionChartProps) {
 
         scoreboard?.forEach((record) => {
             let total = 0;
-            const gameTeam = record?.game_team;
+            const team = record?.team;
             const submissions = record?.submissions;
 
-            if (!gameTeam) return;
+            if (!team) return;
 
             submissions?.forEach((submission) => {
                 total += Number(submission?.pts);
@@ -48,7 +48,7 @@ function ChampionChart(props: ChampionChartProps) {
                     result.push(existingEntry);
                 }
 
-                existingEntry[gameTeam?.team_id!] = total;
+                existingEntry[team?.id!] = total;
             });
         });
 
@@ -69,13 +69,13 @@ function ChampionChart(props: ChampionChartProps) {
         }> = [];
 
         scoreboard?.forEach((record) => {
-            const gameTeam = record?.game_team;
+            const team = record?.team;
 
-            if (!gameTeam) return;
+            if (!team) return;
 
             result.push({
-                id: gameTeam?.team_id!,
-                name: gameTeam?.team?.name,
+                id: team?.id!,
+                name: team?.name,
             });
         });
 

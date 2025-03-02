@@ -11,16 +11,16 @@ import { Button } from "@/components/ui/button";
 import { Clipboard, Clock, EthernetPort, Play, Trash } from "lucide-react";
 
 function EnvSection() {
-    const { challenge, gameTeam } = useContext(Context);
+    const { challenge, team } = useContext(Context);
     const authStore = useAuthStore();
 
     const mode = useMemo(() => {
-        if (!!gameTeam) {
+        if (!!team) {
             return "game";
         }
 
         return "default";
-    }, [gameTeam]);
+    }, [team]);
 
     const [pod, setPod] = useState<Env>();
     const [podStopLoading, setPodStopLoading] = useState<boolean>(false);
@@ -30,8 +30,8 @@ function EnvSection() {
         getEnvs({
             challenge_id: challenge?.id,
             user_id: mode !== "game" ? authStore?.user?.id : undefined,
-            game_id: mode === "game" ? Number(gameTeam?.game_id) : undefined,
-            team_id: mode === "game" ? Number(gameTeam?.team_id) : undefined,
+            game_id: mode === "game" ? Number(team?.game_id) : undefined,
+            team_id: mode === "game" ? Number(team?.id) : undefined,
         }).then((res) => {
             if (res.code === 200) {
                 const p = res.data?.[0];
@@ -103,8 +103,8 @@ function EnvSection() {
         });
         createEnv({
             challenge_id: challenge?.id,
-            game_id: mode === "game" ? Number(gameTeam?.game_id) : undefined,
-            team_id: mode === "game" ? Number(gameTeam?.team_id) : undefined,
+            game_id: mode === "game" ? Number(team?.game_id) : undefined,
+            team_id: mode === "game" ? Number(team?.id) : undefined,
         }).then((res) => {
             switch (res.code) {
                 case 200: {

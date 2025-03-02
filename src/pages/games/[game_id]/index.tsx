@@ -10,7 +10,7 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router";
 
 export default function Index() {
-    const { currentGame, selfGameTeam } = useGameStore();
+    const { currentGame, selfTeam } = useGameStore();
     const navigate = useNavigate();
 
     const status = useMemo(() => {
@@ -116,7 +116,7 @@ export default function Index() {
                     </Badge>
                 </div>
                 <div>
-                    {!!selfGameTeam ? (
+                    {!!selfTeam ? (
                         <Button
                             className={cn(["w-full"])}
                             variant={"solid"}
@@ -124,14 +124,14 @@ export default function Index() {
                             size={"lg"}
                             icon={Play}
                             disabled={
-                                status !== "ongoing" || !selfGameTeam.is_allowed
+                                status !== "ongoing" || !selfTeam.is_allowed
                             }
                             onClick={() =>
                                 navigate(`/games/${currentGame?.id}/challenges`)
                             }
                         >
-                            <span>作为 {selfGameTeam?.team?.name} 参赛</span>
-                            {!selfGameTeam.is_allowed && (
+                            <span>作为 {selfTeam?.name} 参赛</span>
+                            {!selfTeam.is_allowed && (
                                 <span>（审核未通过）</span>
                             )}
                         </Button>

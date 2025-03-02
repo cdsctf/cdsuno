@@ -1,5 +1,5 @@
-import { GameTeam } from "./game_team";
-import { GameSubmission, Status } from "./submission";
+import { Team } from "./team";
+import { Submission } from "./submission";
 
 export interface Game {
     id?: number;
@@ -22,6 +22,6 @@ export interface Game {
 }
 
 export interface ScoreRecord {
-    game_team?: GameTeam;
-    submissions?: Array<GameSubmission>;
+    team?: Team;
+    submissions?: Array<Submission>;
 }

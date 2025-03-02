@@ -100,7 +100,6 @@ function PowCaptcha(props: CaptchaProps) {
 
     return (
         <Input
-            readOnly
             disabled
             value={result}
             icon={Bot}
@@ -112,6 +111,11 @@ function PowCaptcha(props: CaptchaProps) {
                     icon={RefreshCcw}
                 />
             }
+            slotProps={{
+                input: {
+                    readOnly: true,
+                },
+            }}
         />
     );
 }
