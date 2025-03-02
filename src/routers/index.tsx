@@ -32,7 +32,7 @@ export default createBrowserRouter([
                         path: ":game_id",
                         lazy: async () => ({
                             Component: (
-                                await import("@/pages/games/[game_id]/layout")
+                                await import("@/pages/games/game_id/layout")
                             ).default,
                         }),
                         children: [
@@ -40,16 +40,38 @@ export default createBrowserRouter([
                                 index: true,
                                 lazy: async () => ({
                                     Component: (
-                                        await import("@/pages/games/[game_id]")
+                                        await import("@/pages/games/game_id")
                                     ).default,
                                 }),
+                            },
+                            {
+                                path: "team",
+                                lazy: async () => ({
+                                    Component: (
+                                        await import(
+                                            "@/pages/games/game_id/team/layout"
+                                        )
+                                    ).default,
+                                }),
+                                children: [
+                                    {
+                                        index: true,
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/games/game_id/team"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                ],
                             },
                             {
                                 path: "challenges",
                                 lazy: async () => ({
                                     Component: (
                                         await import(
-                                            "@/pages/games/[game_id]/challenges"
+                                            "@/pages/games/game_id/challenges"
                                         )
                                     ).default,
                                 }),
@@ -59,7 +81,7 @@ export default createBrowserRouter([
                                 lazy: async () => ({
                                     Component: (
                                         await import(
-                                            "@/pages/games/[game_id]/scoreboard"
+                                            "@/pages/games/game_id/scoreboard"
                                         )
                                     ).default,
                                 }),
@@ -105,7 +127,7 @@ export default createBrowserRouter([
                                 lazy: async () => ({
                                     Component: (
                                         await import(
-                                            "@/pages/admin/challenges/[challenge_id]/layout"
+                                            "@/pages/admin/challenges/challenge_id/layout"
                                         )
                                     ).default,
                                 }),
@@ -115,7 +137,7 @@ export default createBrowserRouter([
                                         lazy: async () => ({
                                             Component: (
                                                 await import(
-                                                    "@/pages/admin/challenges/[challenge_id]"
+                                                    "@/pages/admin/challenges/challenge_id"
                                                 )
                                             ).default,
                                         }),
@@ -125,7 +147,7 @@ export default createBrowserRouter([
                                         lazy: async () => ({
                                             Component: (
                                                 await import(
-                                                    "@/pages/admin/challenges/[challenge_id]/checker"
+                                                    "@/pages/admin/challenges/challenge_id/checker"
                                                 )
                                             ).default,
                                         }),
@@ -135,7 +157,7 @@ export default createBrowserRouter([
                                         lazy: async () => ({
                                             Component: (
                                                 await import(
-                                                    "@/pages/admin/challenges/[challenge_id]/attachments"
+                                                    "@/pages/admin/challenges/challenge_id/attachments"
                                                 )
                                             ).default,
                                         }),
@@ -145,7 +167,7 @@ export default createBrowserRouter([
                                         lazy: async () => ({
                                             Component: (
                                                 await import(
-                                                    "@/pages/admin/challenges/[challenge_id]/env"
+                                                    "@/pages/admin/challenges/challenge_id/env"
                                                 )
                                             ).default,
                                         }),
@@ -155,7 +177,7 @@ export default createBrowserRouter([
                                         lazy: async () => ({
                                             Component: (
                                                 await import(
-                                                    "@/pages/admin/challenges/[challenge_id]/statistics"
+                                                    "@/pages/admin/challenges/challenge_id/statistics"
                                                 )
                                             ).default,
                                         }),
