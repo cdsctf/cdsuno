@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import { GameChallenge } from "@/models/game_challenge";
 import { getGameChallenges } from "@/api/game";
 import { useGameStore } from "@/storages/game";
-import { Challenge, ChallengeStatus } from "@/models/challenge";
-import { getChallengeStatus } from "@/api/challenge";
+import { Challenge } from "@/models/challenge";
+import { ChallengeStatus, getChallengeStatus } from "@/api/challenge";
 import { ChallengeCard } from "@/components/widgets/challenge-card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
 import { NoticeCard } from "./notice-card";
 
 export default function Index() {
-    const { currentGame, selfGameTeam } = useGameStore();
+    const { currentGame, selfTeam: selfGameTeam } = useGameStore();
     const [gameChallenges, setGameChallenges] =
         useState<Array<GameChallenge>>();
     const [challengeStatus, setChallengeStatus] =
@@ -43,7 +43,7 @@ export default function Index() {
                 challenge_ids: gameChallenges?.map(
                     (gameChallenge) => gameChallenge?.challenge_id!
                 ),
-                team_id: selfGameTeam?.team_id,
+                team_id: selfGameTeam?.id,
                 game_id: currentGame?.id,
             }).then((res) => {
                 setChallengeStatus(res.data);

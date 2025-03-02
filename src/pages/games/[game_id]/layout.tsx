@@ -8,7 +8,7 @@ import { useGameStore } from "@/storages/game";
 
 export default function () {
     const { game_id } = useParams<{ game_id: string }>();
-    const { setSelfGameTeam } = useGameStore();
+    const { setSelfTeam } = useGameStore();
     const sharedStore = useSharedStore();
     const authStore = useAuthStore();
 
@@ -20,7 +20,7 @@ export default function () {
             user_id: authStore?.user?.id,
         })
             .then((res) => {
-                setSelfGameTeam(res.data?.[0]);
+                setSelfTeam(res.data?.[0]);
             })
             .finally(() => {
                 setGtLoaded(true);

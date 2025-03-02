@@ -2,13 +2,17 @@ import { User } from "./user";
 
 export interface Team {
     id?: number;
+    game_id?: number;
     name?: string;
+    email?: string;
     slogan?: string;
     description?: string;
-    email?: string;
-    is_locked?: boolean;
-    deleted_at?: string;
-    created_at?: string;
-    updated_at?: string;
+    is_allowed?: boolean;
+
+    pts?: number;
+    rank?: number;
+
+    deleted_at?: number;
+
     users?: Array<User>;
 }

@@ -7,14 +7,14 @@ import { Separator } from "../../ui/separator";
 import { MarkdownRender } from "../../utils/markdown-render";
 import { Context } from "./context";
 import { SubmitSection } from "./submit-section";
-import { GameTeam } from "@/models/game_team";
+import { Team } from "@/models/team";
 import { EnvSection } from "./env-section";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { useThemeStore } from "@/storages/theme";
 
 interface ChallengeDialogProps extends React.ComponentProps<typeof Card> {
     challenge?: Challenge;
-    gameTeam?: GameTeam;
+    gameTeam?: Team;
 }
 
 function ChallengeDialog(props: ChallengeDialogProps) {
@@ -29,7 +29,7 @@ function ChallengeDialog(props: ChallengeDialogProps) {
     const CategoryIcon = category?.icon!;
 
     return (
-        <Context.Provider value={{ challenge, gameTeam }}>
+        <Context.Provider value={{ challenge, team: gameTeam }}>
             <Card
                 className={cn([
                     "p-6",

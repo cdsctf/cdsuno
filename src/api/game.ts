@@ -1,7 +1,7 @@
 import { Game, ScoreRecord } from "@/models/game";
 import { GameChallenge } from "@/models/game_challenge";
 import { GameNotice } from "@/models/game_notice";
-import { GameTeam } from "@/models/game_team";
+import { Team } from "@/models/team";
 import { Metadata } from "@/models/media";
 import { Response } from "@/types";
 import { alova } from "@/utils/alova";
@@ -168,12 +168,9 @@ export interface GetGameTeamRequest {
 }
 
 export async function getGameTeams(request: GetGameTeamRequest) {
-    return alova.Get<Response<Array<GameTeam>>>(
-        `/games/${request.game_id}/teams`,
-        {
-            params: request,
-        }
-    );
+    return alova.Get<Response<Array<Team>>>(`/games/${request.game_id}/teams`, {
+        params: request,
+    });
 }
 
 export interface CreateGameTeamRequest {
@@ -182,7 +179,7 @@ export interface CreateGameTeamRequest {
 }
 
 export async function createGameTeam(request: CreateGameTeamRequest) {
-    return alova.Post<Response<GameTeam>>(
+    return alova.Post<Response<Team>>(
         `/games/${request.game_id}/teams`,
         request
     );
@@ -195,7 +192,7 @@ export interface UpdateGameTeamRequest {
 }
 
 export async function updateGameTeam(request: UpdateGameTeamRequest) {
-    return alova.Put<Response<GameTeam>>(
+    return alova.Put<Response<Team>>(
         `/games/${request.game_id}/teams/${request.team_id}`,
         request
     );

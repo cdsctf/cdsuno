@@ -4,7 +4,6 @@ import {
     Library,
     Flag,
     LogOut,
-    UsersRound,
     UserRound,
     Star,
     ChartNoAxesCombined,
@@ -18,7 +17,7 @@ function TabSection() {
     const location = useLocation();
     const pathname = location.pathname;
     const { mode } = useContext(Context);
-    const { currentGame, selfGameTeam } = useGameStore();
+    const { currentGame, selfTeam: selfGameTeam } = useGameStore();
 
     const options = useMemo(() => {
         switch (mode) {
@@ -66,11 +65,6 @@ function TabSection() {
                         link: "/admin/games",
                         name: "比赛",
                         icon: Flag,
-                    },
-                    {
-                        link: "/admin/teams",
-                        name: "团队",
-                        icon: UsersRound,
                     },
                     {
                         link: "/admin/users",

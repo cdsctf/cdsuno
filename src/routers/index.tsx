@@ -191,19 +191,6 @@ export default createBrowserRouter([
                         ],
                     },
                     {
-                        path: "teams",
-                        children: [
-                            {
-                                index: true,
-                                lazy: async () => ({
-                                    Component: (
-                                        await import("@/pages/admin/teams")
-                                    ).default,
-                                }),
-                            },
-                        ],
-                    },
-                    {
                         path: "users",
                         children: [
                             {
