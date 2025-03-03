@@ -1,4 +1,5 @@
-import { setTeamReady } from "@/api/games/game_id/teams/team_id";
+import { deleteTeam, setTeamReady } from "@/api/games/game_id/teams/team_id";
+import { leaveTeam } from "@/api/games/game_id/teams/team_id/users";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -13,15 +14,18 @@ import {
     InfoIcon,
     LockIcon,
     TriangleAlertIcon,
+    UserRoundMinusIcon,
+    UserRoundXIcon,
     UsersRound,
 } from "lucide-react";
 import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router";
+import { Link, Outlet, useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
 
 export default function Layout() {
     const sharedStore = useSharedStore();
     const { currentGame, selfTeam } = useGameStore();
+    const navigate = useNavigate();
     const location = useLocation();
     const pathname = location.pathname;
 
@@ -64,6 +68,54 @@ export default function Layout() {
             });
     }
 
+    const [disbandDialogOpen, setDisbandDialogOpen] = useState<boolean>(false);
+
+    function handleDisband() {
+        deleteTeam({
+            team_id: selfTeam?.id!,
+            game_id: currentGame?.id!,
+        })
+            .then((res) => {
+                if (res.code === 200) {
+                    toast.success("解散成功", {
+                        description: `已解散团队 ${selfTeam?.name}`,
+                    });
+                    setDisbandDialogOpen(false);
+                    navigate(`/games/${currentGame?.id}`);
+                }
+            })
+            .finally(() => {
+                sharedStore.setRefresh();
+            });
+    }
+
+    const [leaveDialogOpen, setLeaveDialogOpen] = useState<boolean>(false);
+
+    function handleLeave() {
+        leaveTeam({
+            team_id: selfTeam?.id!,
+            game_id: currentGame?.id!,
+        })
+            .then((res) => {
+                if (res.code === 200) {
+                    toast.success("离队成功", {
+                        description: `已离开团队 ${selfTeam?.name}`,
+                    });
+                    setDisbandDialogOpen(false);
+                    navigate(`/games/${currentGame?.id}`);
+                }
+
+                if (res.code === 400) {
+                    toast.success("离队失败", {
+                        description: res.msg,
+                    });
+                }
+            })
+            .finally(() => {
+                sharedStore.setRefresh();
+            });
+    }
+
     return (
         <div className={cn(["flex", "flex-1"])}>
             <div
@@ -92,6 +144,114 @@ export default function Layout() {
                     </Button>
                 ))}
                 <Separator />
+                <div className={cn(["flex", "gap-5"])}>
+                    <Button
+                        size={"md"}
+                        variant={"solid"}
+                        icon={UserRoundXIcon}
+                        className={cn(["flex-1"])}
+                        level={"error"}
+                        disabled={selfTeam?.state !== State.Preparing}
+                        onClick={() => setDisbandDialogOpen(true)}
+                    >
+                        解散团队
+                    </Button>
+                    <Dialog
+                        onOpenChange={setDisbandDialogOpen}
+                        open={disbandDialogOpen}
+                    >
+                        <DialogContent>
+                            <Card
+                                className={cn([
+                                    "flex",
+                                    "flex-col",
+                                    "w-128",
+                                    "p-5",
+                                    "gap-5",
+                                ])}
+                            >
+                                <h3
+                                    className={cn([
+                                        "flex",
+                                        "gap-3",
+                                        "text-md",
+                                        "items-center",
+                                    ])}
+                                >
+                                    <UserRoundXIcon
+                                        className={cn(["size-4"])}
+                                    />
+                                    解散团队
+                                </h3>
+                                <p className={cn(["text-sm"])}>
+                                    团队将被直接删除，所有成员都可创建或加入其他赛队。
+                                </p>
+                                <Button
+                                    icon={CheckCheckIcon}
+                                    level={"error"}
+                                    variant={"solid"}
+                                    onClick={handleDisband}
+                                >
+                                    确定
+                                </Button>
+                            </Card>
+                        </DialogContent>
+                    </Dialog>
+                    <Button
+                        size={"md"}
+                        variant={"solid"}
+                        icon={UserRoundMinusIcon}
+                        level={"warning"}
+                        disabled={
+                            selfTeam?.state !== State.Preparing ||
+                            selfTeam?.users?.length === 1
+                        }
+                        onClick={() => setLeaveDialogOpen(true)}
+                    >
+                        离队
+                    </Button>
+                    <Dialog
+                        onOpenChange={setLeaveDialogOpen}
+                        open={leaveDialogOpen}
+                    >
+                        <DialogContent>
+                            <Card
+                                className={cn([
+                                    "flex",
+                                    "flex-col",
+                                    "w-128",
+                                    "p-5",
+                                    "gap-5",
+                                ])}
+                            >
+                                <h3
+                                    className={cn([
+                                        "flex",
+                                        "gap-3",
+                                        "text-md",
+                                        "items-center",
+                                    ])}
+                                >
+                                    <UserRoundMinusIcon
+                                        className={cn(["size-4"])}
+                                    />
+                                    离开团队
+                                </h3>
+                                <p className={cn(["text-sm"])}>
+                                    你即将离开这个团队，届时你将可以创建或加入其他的团队。
+                                </p>
+                                <Button
+                                    icon={CheckCheckIcon}
+                                    level={"error"}
+                                    variant={"solid"}
+                                    onClick={handleLeave}
+                                >
+                                    确定
+                                </Button>
+                            </Card>
+                        </DialogContent>
+                    </Dialog>
+                </div>
                 <Button
                     size={"lg"}
                     className={cn(["justify-start"])}

@@ -47,7 +47,11 @@ export default function Index() {
             <div className={cn(["flex", "gap-5", "items-center"])}>
                 <Input
                     icon={KeyIcon}
-                    value={`${selfTeam?.id ?? ""}:${token || ""}`}
+                    value={
+                        token
+                            ? `${selfTeam?.id ?? ""}:${token || ""}`
+                            : "暂无邀请码"
+                    }
                     slotProps={{
                         input: {
                             readOnly: true,
@@ -63,7 +67,7 @@ export default function Index() {
                     onClick={handleCreateToken}
                     size={"lg"}
                 >
-                    生成新 Token
+                    生成新邀请码
                 </Button>
             </div>
             <div className={cn(["grid", "grid-cols-2", "gap-5"])}>

@@ -39,3 +39,15 @@ export async function joinTeam(request: JoinTeamRequest) {
         request
     );
 }
+
+export interface LeaveTeamRequest {
+    game_id?: number;
+    team_id?: number;
+}
+
+export async function leaveTeam(request: JoinTeamRequest) {
+    return alova.Delete<Response<never>>(
+        `/games/${request?.game_id}/teams/${request?.team_id}/users/leave`,
+        request
+    );
+}
