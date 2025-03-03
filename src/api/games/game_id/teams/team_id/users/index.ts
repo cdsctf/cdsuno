@@ -35,7 +35,7 @@ export interface JoinTeamRequest {
 
 export async function joinTeam(request: JoinTeamRequest) {
     return alova.Post<Response<never>>(
-        `/games/${request?.game_id}/teams/${request?.team_id}/join`,
+        `/games/${request?.game_id}/teams/${request?.team_id}/users/join`,
         request
     );
 }

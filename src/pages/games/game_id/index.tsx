@@ -1,14 +1,16 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Image } from "@/components/ui/image";
 import { MarkdownRender } from "@/components/utils/markdown-render";
 import { State } from "@/models/team";
 import { useGameStore } from "@/storages/game";
 import { cn } from "@/utils";
 import { ArrowRightIcon, PlayIcon, SwordsIcon } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
+import { TeamGatheringDialog } from "./team-gathering-dialog";
 
 export default function Index() {
     const { currentGame, selfTeam } = useGameStore();
@@ -35,6 +37,9 @@ export default function Index() {
         }
         return undefined;
     }, [selfTeam]);
+
+    const [teamGatheringDialogOpen, setTeamGatheringDialogOpen] =
+        useState<boolean>(false);
 
     return (
         <div
@@ -149,16 +154,30 @@ export default function Index() {
                             )}
                         </Button>
                     ) : (
-                        <Button
-                            variant={"solid"}
-                            level={"info"}
-                            size={"lg"}
-                            className={cn(["w-full"])}
-                            icon={SwordsIcon}
-                            onClick={() => {}}
-                        >
-                            集结你的队伍
-                        </Button>
+                        <>
+                            <Button
+                                variant={"solid"}
+                                level={"info"}
+                                size={"lg"}
+                                className={cn(["w-full"])}
+                                icon={SwordsIcon}
+                                onClick={() => setTeamGatheringDialogOpen(true)}
+                            >
+                                集结你的队伍
+                            </Button>
+                            <Dialog
+                                open={teamGatheringDialogOpen}
+                                onOpenChange={setTeamGatheringDialogOpen}
+                            >
+                                <DialogContent>
+                                    <TeamGatheringDialog
+                                        onClose={() =>
+                                            setTeamGatheringDialogOpen(false)
+                                        }
+                                    />
+                                </DialogContent>
+                            </Dialog>
+                        </>
                     )}
                 </div>
             </div>
