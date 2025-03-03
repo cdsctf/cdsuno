@@ -19,13 +19,13 @@ export async function updateTeam(request: UpdateTeamRequest) {
 }
 
 export interface DeleteTeamRequest {
-    id?: number;
+    team_id?: number;
     game_id?: number;
 }
 
 export async function deleteTeam(request: DeleteTeamRequest) {
     return alova.Delete<Response<never>>(
-        `/games/${request.game_id}/teams/${request.id}`,
+        `/games/${request.game_id}/teams/${request.team_id}`,
         request
     );
 }
