@@ -37,7 +37,7 @@ export interface TeamRegisterRequest {
     description?: string;
 }
 
-export async function team_register(request: TeamRegisterRequest) {
+export async function teamRegister(request: TeamRegisterRequest) {
     return alova.Post<Response<Team>>(
         `/games/${request.game_id}/teams/register`,
         request

@@ -3,15 +3,15 @@ import { Response } from "@/types";
 import { alova } from "@/utils/alova";
 
 export interface UpdateTeamRequest {
-    id?: number;
-    game_id?: number;
-    name?: string;
-    email?: string;
-    slogan?: string;
-    description?: string;
+    id: number;
+    game_id: number;
+    name?: string | null;
+    email?: string | null;
+    slogan?: string | null;
+    description?: string | null;
 }
 
-export async function updateGameTeam(request: UpdateTeamRequest) {
+export async function updateTeam(request: UpdateTeamRequest) {
     return alova.Put<Response<Team>>(
         `/games/${request.game_id}/teams/${request.id}`,
         request
@@ -23,7 +23,7 @@ export interface DeleteTeamRequest {
     game_id?: number;
 }
 
-export async function deleteGameTeam(request: DeleteTeamRequest) {
+export async function deleteTeam(request: DeleteTeamRequest) {
     return alova.Delete<Response<never>>(
         `/games/${request.game_id}/teams/${request.id}`,
         request

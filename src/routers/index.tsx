@@ -64,6 +64,16 @@ export default createBrowserRouter([
                                             ).default,
                                         }),
                                     },
+                                    {
+                                        path: "members",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/games/game_id/team/members"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
                                 ],
                             },
                             {
@@ -187,13 +197,13 @@ export default createBrowserRouter([
                         ],
                     },
                     {
-                        path: "clusters",
+                        path: "envs",
                         children: [
                             {
                                 index: true,
                                 lazy: async () => ({
                                     Component: (
-                                        await import("@/pages/admin/clusters")
+                                        await import("@/pages/admin/envs")
                                     ).default,
                                 }),
                             },

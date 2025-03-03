@@ -11,6 +11,7 @@ import {
     CheckCheckIcon,
     CheckIcon,
     InfoIcon,
+    LockIcon,
     TriangleAlertIcon,
     UsersRound,
 } from "lucide-react";
@@ -31,7 +32,7 @@ export default function Layout() {
             icon: InfoIcon,
         },
         {
-            link: `/games/${currentGame?.id}/teams/members`,
+            link: `/games/${currentGame?.id}/team/members`,
             name: "团队成员",
             icon: UsersRound,
         },
@@ -69,16 +70,18 @@ export default function Layout() {
                 className={cn([
                     "hidden",
                     "lg:w-1/5",
-                    "bg-card/50",
+                    "bg-card/30",
                     "backdrop-blur-sm",
                     "p-5",
                     "lg:flex",
                     "flex-col",
                     "gap-3",
+                    "border-r-1",
                 ])}
             >
-                {options?.map((option) => (
+                {options?.map((option, index) => (
                     <Button
+                        key={index}
                         size={"lg"}
                         className={cn(["justify-start"])}
                         icon={option.icon}
@@ -92,7 +95,11 @@ export default function Layout() {
                 <Button
                     size={"lg"}
                     className={cn(["justify-start"])}
-                    icon={CheckIcon}
+                    icon={
+                        selfTeam?.state === State.Preparing
+                            ? CheckIcon
+                            : LockIcon
+                    }
                     level={
                         selfTeam?.state === State.Preparing
                             ? "success"
@@ -158,7 +165,7 @@ export default function Layout() {
                     </DialogContent>
                 </Dialog>
             </div>
-            <div>
+            <div className={cn(["flex-1", "flex", "flex-col"])}>
                 <Outlet />
             </div>
         </div>

@@ -1,3 +1,3 @@
 export default function Index() {
-    return <div>clusters</div>;
+    return <div>challenges</div>;
 }

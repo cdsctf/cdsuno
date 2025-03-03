@@ -1,5 +1,4 @@
 import { Challenge } from "@/models/challenge";
-import { TableColumnToggle } from "../ui/table-column-toggle";
 import { Button } from "@/components/ui/button";
 import {
     HashIcon,
@@ -234,10 +233,6 @@ export default function Index() {
                         </DialogContent>
                     </Dialog>
                 </div>
-            </div>
-
-            <div className="flex justify-end mb-4">
-                <TableColumnToggle title="显示/隐藏列" />
             </div>
 
             <div className={cn(["rounded-md", "border", "bg-card"])}>
