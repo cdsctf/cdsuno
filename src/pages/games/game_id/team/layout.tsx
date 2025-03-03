@@ -144,13 +144,12 @@ export default function Layout() {
                     </Button>
                 ))}
                 <Separator />
-                <div className={cn(["flex", "gap-5"])}>
+                <div className={cn(["flex", "gap-5", "justify-center"])}>
                     <Button
                         size={"md"}
-                        variant={"solid"}
                         icon={UserRoundXIcon}
-                        className={cn(["flex-1"])}
                         level={"error"}
+                        className={cn(["w-1/2"])}
                         disabled={selfTeam?.state !== State.Preparing}
                         onClick={() => setDisbandDialogOpen(true)}
                     >
@@ -199,9 +198,9 @@ export default function Layout() {
                     </Dialog>
                     <Button
                         size={"md"}
-                        variant={"solid"}
                         icon={UserRoundMinusIcon}
                         level={"warning"}
+                        className={cn(["w-1/2"])}
                         disabled={
                             selfTeam?.state !== State.Preparing ||
                             selfTeam?.users?.length === 1
