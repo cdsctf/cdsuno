@@ -40,25 +40,27 @@ function App() {
     }, []);
 
     return (
-        <OverlayScrollbarsComponent
-            className={cn([
-                "relative",
-                "w-screen",
-                "h-screen",
-                "m-0",
-                "overflow-auto",
-            ])}
-            options={{
-                scrollbars: {
-                    theme: `os-theme-${theme === "dark" ? "light" : "dark"}`,
-                    autoHide: "scroll",
-                },
-            }}
-            defer
-        >
+        <>
             <Toaster />
-            <RouterProvider router={routers} />
-        </OverlayScrollbarsComponent>
+            <OverlayScrollbarsComponent
+                className={cn([
+                    "relative",
+                    "w-screen",
+                    "h-screen",
+                    "m-0",
+                    "overflow-auto",
+                ])}
+                options={{
+                    scrollbars: {
+                        theme: `os-theme-${theme === "dark" ? "light" : "dark"}`,
+                        autoHide: "scroll",
+                    },
+                }}
+                defer
+            >
+                <RouterProvider router={routers} />
+            </OverlayScrollbarsComponent>
+        </>
     );
 }
 

@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { useDecryptedText } from "@/hooks/use-decrypted-text";
 import { useConfigStore } from "@/storages/config";
 import { cn } from "@/utils";
-import { CodeXmlIcon, StarIcon } from "lucide-react";
+import { CodeXmlIcon, HandshakeIcon, HeartIcon, StarIcon } from "lucide-react";
 
 export default function Index() {
     const configStore = useConfigStore();
@@ -57,7 +57,10 @@ export default function Index() {
                     </div>
                 </div>
                 <Separator className={cn(["w-full"])} />
-                <h3>Developers</h3>
+                <h3 className={cn(["flex", "gap-2", "items-center"])}>
+                    <CodeXmlIcon className={cn(["size-5"])} />
+                    Developers
+                </h3>
                 <div
                     className={cn([
                         "flex",
@@ -69,29 +72,110 @@ export default function Index() {
                     <Button
                         className={cn(["rounded-full"])}
                         icon={StarIcon}
-                        size={"sm"}
                         variant={"tonal"}
+                        size={"sm"}
+                        asChild
                     >
-                        ElaBosak233
+                        <a
+                            href={"https://github.com/ElaBosak233"}
+                            target={"_blank"}
+                        >
+                            ElaBosak233
+                        </a>
                     </Button>
                     <Button
                         className={cn(["rounded-full"])}
                         icon={StarIcon}
-                        size={"sm"}
                         variant={"tonal"}
+                        size={"sm"}
+                        asChild
                     >
-                        Ec3o
+                        <a href={"https://github.com/Ec3o"} target={"_blank"}>
+                            Ec3o
+                        </a>
                     </Button>
                 </div>
-                <h3>Additional Supports</h3>
-                <Button
-                    className={cn(["rounded-full"])}
-                    icon={StarIcon}
-                    size={"sm"}
-                    variant={"tonal"}
+                <h3 className={cn(["flex", "gap-2", "items-center"])}>
+                    <HandshakeIcon className={cn(["size-5"])} />
+                    Additional Supports
+                </h3>
+                <div
+                    className={cn([
+                        "flex",
+                        "flex-wrap",
+                        "justify-center",
+                        "gap-3",
+                    ])}
                 >
-                    AlbertKnight
-                </Button>
+                    <Button
+                        className={cn(["rounded-full"])}
+                        icon={StarIcon}
+                        variant={"tonal"}
+                        size={"sm"}
+                        asChild
+                    >
+                        <a
+                            href={"https://github.com/Albertknight2023"}
+                            target={"_blank"}
+                        >
+                            AlbertKnight - Art
+                        </a>
+                    </Button>
+                    <Button
+                        className={cn(["rounded-full"])}
+                        icon={StarIcon}
+                        variant={"tonal"}
+                        asChild
+                    >
+                        <a
+                            href={"https://github.com/skyhaibara"}
+                            target={"_blank"}
+                        >
+                            Skyhaibara - Paper works
+                        </a>
+                    </Button>
+                </div>
+                <h3 className={cn(["flex", "gap-2", "items-center"])}>
+                    <HeartIcon className={cn(["size-5"])} />
+                    Special Thanks
+                </h3>
+                <div
+                    className={cn([
+                        "flex",
+                        "flex-wrap",
+                        "justify-center",
+                        "gap-3",
+                    ])}
+                >
+                    <Button
+                        className={cn(["rounded-full"])}
+                        icon={StarIcon}
+                        variant={"tonal"}
+                        size={"sm"}
+                        asChild
+                    >
+                        <a
+                            href={"https://github.com/Reverier-Xu"}
+                            target={"_blank"}
+                        >
+                            Reverier-Xu & Ret 2 Shell
+                        </a>
+                    </Button>
+                    <Button
+                        className={cn(["rounded-full"])}
+                        icon={StarIcon}
+                        variant={"tonal"}
+                        size={"sm"}
+                        asChild
+                    >
+                        <a
+                            href={"https://github.com/GZTimeWalker"}
+                            target={"_blank"}
+                        >
+                            GZTimeWalker & GZCTF
+                        </a>
+                    </Button>
+                </div>
             </div>
         </div>
     );

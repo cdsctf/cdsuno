@@ -3,6 +3,7 @@ import ReactHook from "alova/react";
 import globalRouter from "./global-router";
 import { toast } from "sonner";
 import adapterFetch from "alova/fetch";
+import { useAuthStore } from "@/storages/auth";
 
 export const alova = createAlova({
     baseURL: "/api",
@@ -23,6 +24,7 @@ export const alova = createAlova({
                     id: "please-login",
                     description: "登录后才能继续操作",
                 });
+                useAuthStore?.getState()?.clear();
                 return Promise.reject(response);
             }
 
