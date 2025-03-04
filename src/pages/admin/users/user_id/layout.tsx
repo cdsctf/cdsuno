@@ -8,11 +8,7 @@ import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import {
     User as UserIcon,
-    Settings,
-    Lock,
-    Mail,
-    UserCircle,
-    Shield,
+    LockIcon,
 } from "lucide-react";
 import { useSharedStore } from "@/storages/shared";
 
@@ -26,13 +22,12 @@ export default function UserLayout() {
     useEffect(() => {
         if (user_id) {
             getUsers({
-                id: Number(user_id), // Convert string ID to number
+                id: Number(user_id), 
             }).then((res: any) => {
-                // Handle the case where res.data is an array
                 if (Array.isArray(res.data) && res.data.length > 0) {
-                    setUser(res.data[0]); // Set the first user from the array
+                    setUser(res.data[0]);
                 } else if (res.data) {
-                    setUser(res.data); // Set the user object directly
+                    setUser(res.data);
                 }
             }).catch(error => {
                 console.error("Failed to fetch user:", error);
@@ -43,29 +38,14 @@ export default function UserLayout() {
     const options = useMemo(() => {
         return [
             {
-                link: `/user/profile/${user_id}`,
+                link: `/admin/users/${user_id}/profile`,
                 name: "基本信息变更",
                 icon: UserIcon,
             },
             {
-                link: `/user/profile/${user_id}`,
-                name: "基本信息变更",
-                icon: UserIcon,
-            },
-            {
-                link: `/user/profile/${user_id}`,
-                name: "基本信息变更",
-                icon: UserIcon,
-            },
-            {
-                link: `/user/profile/${user_id}`,
-                name: "基本信息变更",
-                icon: UserIcon,
-            },
-            {
-                link: `/user/profile/${user_id}`,
-                name: "基本信息变更",
-                icon: UserIcon,
+                link: `/admin/users/${user_id}/password`,
+                name: "修改密码",
+                icon: LockIcon,
             },
         ];
     }, [user]);
@@ -105,11 +85,10 @@ export default function UserLayout() {
                         ])}
                     >
                         <UserIcon />
-                        个人设置
+                        用户设置
                     </div>
                     <Card className={cn(["flex", "flex-col", "p-5", "gap-3"])}>
                         {options?.map((option, index) => {
-                            const Comp = option?.disabled ? Button : Link;
                             return (
                                 <Button
                                     key={index}
@@ -121,11 +100,10 @@ export default function UserLayout() {
                                     }
                                     className={cn(["justify-start"])}
                                     asChild
-                                    disabled={option?.disabled}
                                 >
-                                    <Comp to={option?.link}>
+                                    <Link to={option?.link}>
                                         {option?.name}
-                                    </Comp>
+                                    </Link>
                                 </Button>
                             );
                         })}

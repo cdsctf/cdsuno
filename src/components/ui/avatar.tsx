@@ -41,7 +41,7 @@ function Avatar(props: AvatarProps) {
     );
 }
 
-function AvatarImage({
+export function AvatarImage({
     className,
     ref,
     ...rest
@@ -56,7 +56,7 @@ function AvatarImage({
     );
 }
 
-function AvatarFallback({
+export function AvatarFallback({
     className,
     ref,
     ...rest

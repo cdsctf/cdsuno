@@ -4,24 +4,17 @@ import {
     ArrowDown,
     ArrowUp,
     ArrowUpDown,
-    Box,
-    Check,
     ClipboardCheck,
     ClipboardCopy,
     EditIcon,
-    ShipWheel,
     TrashIcon,
-    X,
 } from "lucide-react";
 import { UserIcon, ShieldIcon, UserXIcon, UserCheckIcon } from "lucide-react";
 import { useMemo, useState } from "react";
-import { deleteChallenge, updateChallenge } from "@/api/challenge";
-import { deleteUser, updateUser } from "@/api/user";
+import { deleteUser } from "@/api/user";
 import { ColumnDef } from "@tanstack/react-table";
 import { cn } from "@/utils";
-import { useCategoryStore } from "@/storages/category";
 import { ContentDialog } from "@/components/widgets/content-dialog";
-import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import {
     Tooltip,

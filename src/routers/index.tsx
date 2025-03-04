@@ -253,6 +253,25 @@ export default createBrowserRouter([
                                             ).default,
                                         }),
                                     },
+                                    {
+                                        path: "profile",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/users/user_id/profile"
+                                                )
+                                            ).default,
+                                        }),
+                                    },{
+                                        path: "password",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/users/user_id/password"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
                                 ],
                             },
                         ],
