@@ -5,14 +5,28 @@ import { useEffect, useState } from "react";
 import { getTeams } from "@/api/games/game_id/teams";
 import { useAuthStore } from "@/storages/auth";
 import { useGameStore } from "@/storages/game";
+import { getGames } from "@/api/games";
 
 export default function () {
     const { game_id } = useParams<{ game_id: string }>();
-    const { setSelfTeam } = useGameStore();
+    const { currentGame, setCurrentGame, setSelfTeam } = useGameStore();
     const sharedStore = useSharedStore();
     const authStore = useAuthStore();
 
     const [gtLoaded, setGtLoaded] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (game_id !== currentGame?.id) {
+            setCurrentGame(undefined);
+        }
+
+        getGames({
+            id: Number(game_id),
+            is_enabled: true,
+        }).then((res) => {
+            setCurrentGame(res.data?.[0]);
+        });
+    }, [game_id]);
 
     function fetchSelfTeam() {
         getTeams({

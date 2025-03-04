@@ -284,6 +284,12 @@ export default createBrowserRouter([
                 ],
             },
             {
+                path: "about",
+                lazy: async () => ({
+                    Component: (await import("@/pages/about")).default,
+                }),
+            },
+            {
                 path: "*",
                 lazy: async () => ({
                     Component: (await import("@/pages/sigtrap/e404")).default,
