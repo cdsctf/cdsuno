@@ -1,12 +1,19 @@
 import { createGame } from "@/api/games";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckIcon, PlusCircle, TypeIcon } from "lucide-react";
+import { CheckIcon, FlagIcon, PlusCircle, TypeIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -24,14 +31,11 @@ function CreateDialog(props: CreateDialogProps) {
         title: z.string({
             message: "请输入标题",
         }),
-        
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-        
-        },
+        defaultValues: {},
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
@@ -39,9 +43,8 @@ function CreateDialog(props: CreateDialogProps) {
         createGame({
             ...values,
             description: "",
-            is_need_write_up:false,
+            is_need_write_up: false,
             is_public: false,
-            
         })
             .then((res) => {
                 if (res.code === 200) {
@@ -64,11 +67,10 @@ function CreateDialog(props: CreateDialogProps) {
                 "flex-col",
                 "gap-5",
             ])}
-            
         >
             <h3 className={cn(["flex", "gap-3", "items-center", "text-md"])}>
-                <PlusCircle className={cn(["size-4"])} />
-                创建题目
+                <FlagIcon className={cn(["size-4"])} />
+                创建比赛
             </h3>
             <Form {...form}>
                 <form
@@ -76,7 +78,7 @@ function CreateDialog(props: CreateDialogProps) {
                     autoComplete={"off"}
                     className={cn(["flex", "flex-col", "flex-1", "gap-5"])}
                 >
-                <FormField
+                    <FormField
                         control={form.control}
                         name={"title"}
                         render={({ field }) => (
@@ -98,15 +100,15 @@ function CreateDialog(props: CreateDialogProps) {
                     />
                 </form>
                 <Button
-                        variant={"solid"}
-                        icon={CheckIcon}
-                        level={"success"}
-                        loading={loading}
-                    >
-                        确定
-                    </Button>
+                    variant={"solid"}
+                    icon={CheckIcon}
+                    level={"success"}
+                    loading={loading}
+                >
+                    确定
+                </Button>
             </Form>
         </Card>
-    )
+    );
 }
 export { CreateDialog };

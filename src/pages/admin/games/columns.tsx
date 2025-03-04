@@ -19,10 +19,12 @@ import {
     ArrowDown,
     ArrowUp,
     ArrowUpDown,
+    CheckIcon,
     ClipboardCheck,
     ClipboardCopy,
     EditIcon,
     TrashIcon,
+    XIcon,
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link } from "react-router";
@@ -30,9 +32,47 @@ import { toast } from "sonner";
 
 const columns: ColumnDef<Game>[] = [
     {
+        accessorKey: "is_enabled",
+        id: "is_enabled",
+        header: "启用",
+        cell: ({ row }) => {
+            const isEnabled = row.getValue<boolean>("is_enabled");
+            const title = row.getValue<string>("title");
+            const id = row.getValue<number>("id");
+            const [checked, setChecked] = useState(isEnabled);
+
+            function handlePublicnessChange() {
+                const newValue = !checked;
+                setChecked(newValue);
+
+                updateGame({
+                    id,
+                    is_public: newValue,
+                }).then((res) => {
+                    if (res.code === 200) {
+                        toast.success(
+                            `更新比赛 ${title} 的可见性: ${newValue ? "可见" : "不可见"}`,
+                            {
+                                id: "enablement_change",
+                            }
+                        );
+                    }
+                });
+            }
+
+            return (
+                <Switch
+                    checked={checked}
+                    onCheckedChange={handlePublicnessChange}
+                    aria-label="启用性开关"
+                />
+            );
+        },
+    },
+    {
         accessorKey: "id",
         id: "id",
-        header: "ID", //number
+        header: "ID",
         cell: ({ row }) => {
             const id = row.getValue<number>("id");
             const { isCopied, copyToClipboard } = useClipboard();
@@ -66,133 +106,106 @@ const columns: ColumnDef<Game>[] = [
     {
         accessorKey: "is_public",
         id: "is_public",
-        header: "XX",
+        header: "公开赛",
         cell: ({ row }) => {
             const isPublic = row.getValue<boolean>("is_public");
-            const title = row.getValue<string>("title");
-            const id = row.getValue<number>("id");
-            const [checked, setChecked] = useState(isPublic);
-
-            function handlePublicnessChange() {
-                const newValue = !checked;
-                setChecked(newValue);
-
-                updateGame({
-                    id,
-                    is_public: newValue,
-                }).then((res) => {
-                    if (res.code === 200) {
-                        toast.success(
-                            `更新题目 ${title} 的XX性: ${newValue ? "XX" : "YY"}`,
-                            {
-                                id: "publicness_change",
-                            }
-                        );
-                    }
-                });
-            }
 
             return (
-                <Switch
-                    checked={checked}
-                    onCheckedChange={handlePublicnessChange}
-                    aria-label="公共性开关"
-                />
-            );
-        },
-    },
-
-    /* 可见/不可见 */
-    {
-        accessorKey: "is_enabled",
-        id: "is_enabled",
-        header: "启用",
-        cell: ({ row }) => {
-            const isEnabled = row.getValue<boolean>("is_enabled");
-            const title = row.getValue<string>("title");
-            const id = row.getValue<number>("id");
-            const [checked, setChecked] = useState(isEnabled);
-            function handlePublicnessChange() {
-                const newValue = !checked;
-                setChecked(newValue);
-
-                updateGame({
-                    id,
-                    is_public: newValue,
-                }).then((res) => {
-                    if (res.code === 200) {
-                        toast.success(
-                            `更新比赛 ${title} 的公开性: ${newValue ? "公开" : "不公开"}`,
-                            {
-                                id: "enablement_change",
-                            }
-                        );
-                    }
-                });
-            }
-            return (
-                <Switch
-                    checked={checked}
-                    onCheckedChange={handlePublicnessChange}
-                    aria-label="启用性开关"
-                />
+                <Badge
+                    className={cn([
+                        isPublic
+                            ? ["bg-info", "text-info-foreground"]
+                            : ["bg-success", "text-success-foreground"],
+                    ])}
+                >
+                    {isPublic ? <CheckIcon /> : <XIcon />}
+                </Badge>
             );
         },
     },
     {
-        accessorKey: "description",
-        header: "描述",
+        accessorKey: "sketch",
+        header: "简述",
         cell: ({ row }) => {
-            const description = row.getValue("description") as string;
+            const sketch = row.getValue("sketch") as string;
 
-            if (!description) return "-";
+            if (!sketch) return "-";
 
-            return description.length > 10 ? (
-                <ContentDialog title="详细描述" content={description} />
+            return sketch.length > 10 ? (
+                <ContentDialog title="详细描述" content={sketch} />
             ) : (
-                description
+                sketch
             );
         },
     },
     {
-        accessorKey: "is_need_write_up",
-        id: "is_need_write_up",
-        header: "题解",
-        cell: ({ row }) => {
-            const isPublic = row.getValue<boolean>("is_need_write_up");
-            const title = row.getValue<string>("title");
-            const id = row.getValue<number>("id");
-            const [checked, setChecked] = useState(isPublic);
-
-            function handlePublicnessChange() {
-                const newValue = !checked;
-                setChecked(newValue);
-
-                updateGame({
-                    id,
-                    is_public: newValue,
-                }).then((res) => {
-                    if (res.code === 200) {
-                        toast.success(
-                            `更新题目 ${title} : ${newValue ? "要" : "不要"} 有题解`,
-                            {
-                                id: "publicness_change",
-                            }
-                        );
-                    }
-                });
-            }
+        accessorKey: "started_at",
+        id: "started_at",
+        header: ({ column }) => {
+            const Icon = useMemo(() => {
+                switch (column.getIsSorted()) {
+                    case "asc":
+                        return ArrowUp;
+                    case "desc":
+                        return ArrowDown;
+                    case false:
+                    default:
+                        return ArrowUpDown;
+                }
+            }, [column.getIsSorted()]);
 
             return (
-                <Switch
-                    checked={checked}
-                    onCheckedChange={handlePublicnessChange}
-                    aria-label="题解开关"
-                />
+                <div className={cn(["flex", "gap-1", "items-center"])}>
+                    开始于
+                    <Button
+                        icon={Icon}
+                        square
+                        size={"sm"}
+                        onClick={() => column.toggleSorting()}
+                    />
+                </div>
             );
         },
+        cell: ({ row }) => {
+            return new Date(
+                row.getValue<number>("started_at") * 1000
+            ).toLocaleString();
+        },
     },
+    {
+        accessorKey: "ended_at",
+        id: "ended_at",
+        header: ({ column }) => {
+            const Icon = useMemo(() => {
+                switch (column.getIsSorted()) {
+                    case "asc":
+                        return ArrowUp;
+                    case "desc":
+                        return ArrowDown;
+                    case false:
+                    default:
+                        return ArrowUpDown;
+                }
+            }, [column.getIsSorted()]);
 
+            return (
+                <div className={cn(["flex", "gap-1", "items-center"])}>
+                    结束于
+                    <Button
+                        icon={Icon}
+                        square
+                        size={"sm"}
+                        onClick={() => column.toggleSorting()}
+                    />
+                </div>
+            );
+        },
+        cell: ({ row }) => {
+            return new Date(
+                row.getValue<number>("ended_at") * 1000
+            ).toLocaleString();
+        },
+    },
     {
         accessorKey: "updated_at",
         id: "updated_at",
@@ -227,41 +240,6 @@ const columns: ColumnDef<Game>[] = [
             ).toLocaleString();
         },
     },
-    {
-        accessorKey: "created_at",
-        id: "created_at",
-        header: ({ column }) => {
-            const Icon = useMemo(() => {
-                switch (column.getIsSorted()) {
-                    case "asc":
-                        return ArrowUp;
-                    case "desc":
-                        return ArrowDown;
-                    case false:
-                    default:
-                        return ArrowUpDown;
-                }
-            }, [column.getIsSorted()]);
-
-            return (
-                <div className={cn(["flex", "gap-1", "items-center"])}>
-                    创建时间
-                    <Button
-                        icon={Icon}
-                        square
-                        size={"sm"}
-                        onClick={() => column.toggleSorting()}
-                    />
-                </div>
-            );
-        },
-        cell: ({ row }) => {
-            return new Date(
-                row.getValue<number>("created_at") * 1000
-            ).toLocaleString();
-        },
-    },
-
     {
         id: "actions",
         header: () => <div className={cn(["justify-self-center"])}>操作</div>,

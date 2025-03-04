@@ -33,7 +33,7 @@ import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Select } from "@/components/ui/select";
 import { useCategoryStore } from "@/storages/category";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { CreateDialog } from "./create-dialog";
 import { useSharedStore } from "@/storages/shared";
 
@@ -47,7 +47,7 @@ export default function Index() {
     const [challenges, setChallenges] = useState<Array<Challenge>>([]);
 
     const [page, setPage] = useState<number>(1);
-    const [size, setSize] = useState<number>(20);
+    const [size, setSize] = useState<number>(10);
 
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
@@ -297,6 +297,7 @@ export default function Index() {
                             icon={ListOrderedIcon}
                             className={cn(["w-48"])}
                             options={[
+                                { value: "10" },
                                 { value: "20" },
                                 { value: "40" },
                                 { value: "60" },
