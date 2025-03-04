@@ -15,12 +15,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Captcha } from "@/components/widgets/captcha";
 import { useState } from "react";
-import { login } from "@/api/user";
+import { login } from "@/api/users";
 import { toast } from "sonner";
 import { useAuthStore } from "@/storages/auth";
 import { useNavigate } from "react-router";
+import { useConfigStore } from "@/storages/config";
 
 function LoginForm() {
+    const configStore = useConfigStore();
     const authStore = useAuthStore();
     const navigate = useNavigate();
 
@@ -58,6 +60,13 @@ function LoginForm() {
                         description: `欢迎回来，${res.data?.nickname}！`,
                     });
                     navigate("/");
+                }
+
+                if (res.code === 400) {
+                    toast.success("登陆失败", {
+                        id: "login-error",
+                        description: res.msg,
+                    });
                 }
             })
             .finally(() => {
@@ -108,15 +117,17 @@ function LoginForm() {
                             </FormItem>
                         )}
                     />
-                    <FormField
-                        name={"captcha"}
-                        render={() => (
-                            <FormItem>
-                                <FormLabel>验证码</FormLabel>
-                                <Captcha onChange={setCaptcha} />
-                            </FormItem>
-                        )}
-                    />
+                    {configStore?.config?.captcha?.provider !== "none" && (
+                        <FormField
+                            name={"captcha"}
+                            render={() => (
+                                <FormItem>
+                                    <FormLabel>验证码</FormLabel>
+                                    <Captcha onChange={setCaptcha} />
+                                </FormItem>
+                            )}
+                        />
+                    )}
                 </div>
                 <Button
                     variant={"solid"}

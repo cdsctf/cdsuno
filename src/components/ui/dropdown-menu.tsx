@@ -4,6 +4,7 @@ import { Check, ChevronRight, Circle, LucideIcon } from "lucide-react";
 
 import { cn } from "@/utils";
 import { cva, VariantProps } from "class-variance-authority";
+import { Slottable } from "@radix-ui/react-slot";
 
 const DropdownMenu = RadixDropdownMenu.Root;
 
@@ -190,8 +191,8 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
             className={cn(dropdownMenuItemVariants({ inset, className }))}
             {...rest}
         >
-            <Icon />
-            {children}
+            {!!icon && <Icon />}
+            <Slottable>{children}</Slottable>
         </RadixDropdownMenu.Item>
     );
 }

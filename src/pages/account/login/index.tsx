@@ -1,16 +1,11 @@
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { LogIn, UserRoundPlus } from "lucide-react";
 import { useConfigStore } from "@/storages/config";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { LoginForm } from "./login-form";
+import { Link } from "react-router";
 
 export default function Index() {
     const configStore = useConfigStore();
@@ -23,20 +18,40 @@ export default function Index() {
                 className={cn(["p-2", "w-[50rem]", "flex", "justify-between"])}
             >
                 <div className={cn(["flex-1/2", "flex", "flex-col"])}>
-                    <CardHeader>
-                        <CardTitle
-                            className={cn(["flex", "gap-2", "items-center"])}
+                    <div
+                        className={cn([
+                            "flex",
+                            "flex-col",
+                            "space-y-1.5",
+                            "p-6",
+                        ])}
+                    >
+                        <div
+                            className={cn([
+                                "text-2xl",
+                                "font-semibold",
+                                "leading-none",
+                                "tracking-tight",
+                                "flex",
+                                "gap-2",
+                                "items-center",
+                            ])}
                         >
                             <LogIn />
                             登录
-                        </CardTitle>
-                        <CardDescription>
+                        </div>
+                        <div
+                            className={cn([
+                                "text-sm",
+                                "text-secondary-foreground",
+                            ])}
+                        >
                             登录以继续浏览 {configStore?.config?.meta?.title}
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className={cn(["flex-1"])}>
-                        <LoginForm />
-                    </CardContent>
+                        </div>
+                        <div className={cn(["pt-6"])}>
+                            <LoginForm />
+                        </div>
+                    </div>
                 </div>
                 <Separator
                     orientation={"vertical"}
@@ -69,12 +84,13 @@ export default function Index() {
                         </span>
                     </div>
                     <Button
+                        asChild
                         className={cn("w-full")}
                         size={"lg"}
                         variant={"tonal"}
                         icon={UserRoundPlus}
                     >
-                        还没有账号？注册！
+                        <Link to={"/account/register"}>还没有账号？注册！</Link>
                     </Button>
                 </div>
             </Card>

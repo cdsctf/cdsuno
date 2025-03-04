@@ -1,5 +1,5 @@
-import { updateTeam } from "@/api/games/game_id/teams/team_id";
-import { deleteTeamAvatar } from "@/api/games/game_id/teams/team_id/avatar";
+import { updateUserProfile } from "@/api/users/profile";
+import { deleteUserAvatar } from "@/api/users/user_id/avatar";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,62 +19,55 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useGameStore } from "@/storages/game";
+import { useAuthStore } from "@/storages/auth";
 import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     CheckIcon,
     MailIcon,
-    MessageCircleIcon,
     TrashIcon,
     TypeIcon,
+    UserRoundIcon,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 export default function Index() {
+    const authStore = useAuthStore();
     const sharedStore = useSharedStore();
-    const { currentGame, selfTeam } = useGameStore();
-
     const [loading, setLoading] = useState<boolean>(false);
 
     const formSchema = z.object({
-        name: z.string({
-            message: "请输入队名",
+        username: z.string().nullish(),
+        nickname: z.string({
+            message: "请输入昵称",
         }),
-        email: z.string().nullish(),
+        email: z.string().email({
+            message: "请输入合法的邮箱",
+        }),
         description: z.string().nullish(),
-        slogan: z.string().nullish(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: selfTeam,
+        defaultValues: authStore?.user,
     });
-
-    useEffect(() => {
-        form.reset(selfTeam, {
-            keepDefaultValues: false,
-        });
-    }, [selfTeam, form.reset]);
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setLoading(true);
-        updateTeam({
-            id: selfTeam?.id!,
-            game_id: currentGame?.id!,
+        updateUserProfile({
             ...values,
         })
             .then((res) => {
                 if (res.code === 200) {
-                    toast.success(`团队 ${res?.data?.name} 更新成功`);
+                    authStore?.setUser(res.data);
+                    toast.success("个人资料更新成功");
                 }
             })
             .finally(() => {
-                sharedStore.setRefresh();
                 setLoading(false);
             });
     }
@@ -91,28 +84,24 @@ export default function Index() {
             const formData = new FormData();
             formData.append("file", file);
             const xhr = new XMLHttpRequest();
-            xhr.open(
-                "POST",
-                `/api/games/${currentGame?.id}/teams/${selfTeam?.id}/avatar`,
-                true
-            );
+            xhr.open("POST", `/api/users/${authStore?.user?.id}/avatar`, true);
             xhr.upload.onprogress = (event) => {
                 if (event.lengthComputable) {
                     const percentComplete = (event.loaded / event.total) * 100;
                     toast.loading(`上传进度 ${percentComplete}%`, {
-                        id: "team-avatar-upload",
+                        id: "user-avatar-upload",
                     });
                 }
             };
             xhr.onload = () => {
                 if (xhr.status === 200) {
                     toast.success("头像上传成功", {
-                        id: "team-avatar-upload",
+                        id: "user-avatar-upload",
                     });
                     sharedStore?.setRefresh();
                 } else {
                     toast.error("头像上传失败", {
-                        id: "team-avatar-upload",
+                        id: "user-avatar-upload",
                         description: xhr.responseText,
                     });
                 }
@@ -133,13 +122,12 @@ export default function Index() {
     });
 
     function handleAvatarDelete() {
-        deleteTeamAvatar({
-            game_id: currentGame?.id!,
-            team_id: selfTeam?.id!,
+        deleteUserAvatar({
+            user_id: authStore?.user?.id!,
         })
             .then((res) => {
                 if (res.code === 200) {
-                    toast.success(`团队 ${selfTeam?.name} 头像删除成功`);
+                    toast.success(`头像删除成功`);
                 }
             })
             .finally(() => {
@@ -175,15 +163,16 @@ export default function Index() {
                         >
                             <FormField
                                 control={form.control}
-                                name={"name"}
+                                name={"username"}
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>团队名</FormLabel>
+                                        <FormLabel>用户名</FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
-                                                icon={TypeIcon}
-                                                placeholder={"团队名"}
+                                                disabled
+                                                icon={UserRoundIcon}
+                                                placeholder={"用户名"}
                                                 value={field.value || ""}
                                                 onChange={field.onChange}
                                             />
@@ -194,15 +183,15 @@ export default function Index() {
                             />
                             <FormField
                                 control={form.control}
-                                name={"email"}
+                                name={"nickname"}
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>电子邮箱</FormLabel>
+                                        <FormLabel>昵称</FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
-                                                icon={MailIcon}
-                                                placeholder={"电子邮箱"}
+                                                icon={TypeIcon}
+                                                placeholder={"昵称"}
                                                 value={field.value || ""}
                                                 onChange={field.onChange}
                                             />
@@ -252,8 +241,10 @@ export default function Index() {
                                     >
                                         <Avatar
                                             className={cn(["h-30", "w-30"])}
-                                            src={`/api/games/${currentGame?.id}/teams/${selfTeam?.id}/avatar?refresh=${sharedStore?.refresh}`}
-                                            fallback={selfTeam?.name?.charAt(0)}
+                                            src={`/api/users/${authStore?.user?.id}/avatar?refresh=${sharedStore?.refresh}`}
+                                            fallback={authStore?.user?.username?.charAt(
+                                                0
+                                            )}
                                         />
                                     </DropzoneTrigger>
                                 </DropZoneArea>
@@ -262,15 +253,15 @@ export default function Index() {
                     </div>
                     <FormField
                         control={form.control}
-                        name={"slogan"}
+                        name={"email"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>口号</FormLabel>
+                                <FormLabel>电子邮箱</FormLabel>
                                 <FormControl>
                                     <Input
                                         {...field}
-                                        icon={MessageCircleIcon}
-                                        placeholder={"口号"}
+                                        icon={MailIcon}
+                                        placeholder={"电子邮箱"}
                                         value={field.value || ""}
                                         onChange={field.onChange}
                                     />
