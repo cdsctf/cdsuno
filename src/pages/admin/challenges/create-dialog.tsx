@@ -82,7 +82,7 @@ function CreateDialog(props: CreateDialogProps) {
             ])}
         >
             <h3 className={cn(["flex", "gap-3", "items-center", "text-md"])}>
-                <PlusCircle className={cn(["size-4"])} />
+                <LibraryIcon className={cn(["size-4"])} />
                 创建题目
             </h3>
             <Form {...form}>

@@ -33,12 +33,12 @@ import {
 } from "@/components/ui/table";
 import { Select } from "@/components/ui/select";
 import { Pagination } from "@/components/ui/pagination";
-import { CreateDialog } from "./create_dialog";
+import { CreateDialog } from "./create-dialog";
 export default function Index() {
     const [createDialogOpen, setCreateDialogOpen] = useState<boolean>(false);
 
     const [page, setPage] = useState<number>(1);
-    const [size, setSize] = useState<number>(20);
+    const [size, setSize] = useState<number>(10);
     const [total, setTotal] = useState<number>(0);
     const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -88,7 +88,7 @@ export default function Index() {
         });
     }, [page, size, sorting, debouncedColumnFilters]);
     return (
-        <div className="container mx-auto py-10">
+        <div className={cn(["container", "mx-auto", "py-10"])}>
             <div
                 className={cn([
                     "flex",
@@ -232,6 +232,7 @@ export default function Index() {
                             icon={ListOrderedIcon}
                             className={cn(["w-48"])}
                             options={[
+                                { value: "10" },
                                 { value: "20" },
                                 { value: "40" },
                                 { value: "60" },
