@@ -1,8 +1,17 @@
+import { useDecryptedText } from "@/hooks/use-decrypted-text";
 import { useConfigStore } from "@/storages/config";
 import { cn } from "@/utils";
 
 export default function () {
     const configStore = useConfigStore();
+    const title = useDecryptedText({
+        text: configStore?.config?.meta?.title || "",
+        speed: 100,
+    });
+    const description = useDecryptedText({
+        text: configStore?.config?.meta?.description || "",
+        speed: 25,
+    });
 
     return (
         <div
@@ -23,9 +32,9 @@ export default function () {
                 className={cn(["drop-shadow-md", "aspect-square", "h-[15rem]"])}
             />
             <h1 className={cn(["text-3xl", "lg:text-4xl", "font-extrabold"])}>
-                {configStore?.config?.meta?.title}
+                {title}
             </h1>
-            <span>{configStore?.config?.meta?.description}</span>
+            <span>{description}</span>
         </div>
     );
 }

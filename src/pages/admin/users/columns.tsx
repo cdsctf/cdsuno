@@ -35,64 +35,16 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
 import { useSharedStore } from "@/storages/shared";
 
-// export interface User {
-//     id?: number;
-//     username?: string;
-//     nickname?: string;
-//     email?: string;
-//     group?: Group;
-//     description?: string;
-//     teams?: Array<Team>;
-//     created_at?: string;
-
 const columns: ColumnDef<User>[] = [
-    // {
-    //     accessorKey: "is_public",
-    //     header: "练习",
-    //     cell: ({ row }) => {
-    //         const isPublic = row.getValue<boolean>("is_public");
-    //         const title = row.getValue<string>("title");
-    //         const id = row.getValue<string>("id");
-    //         const [checked, setChecked] = useState(isPublic);
-
-    //         function handlePublicnessChange() {
-    //             const newValue = !checked;
-    //             setChecked(newValue);
-
-    //             updateChallenge({
-    //                 id,
-    //                 is_public: newValue,
-    //             }).then((res) => {
-    //                 if (res.code === 200) {
-    //                     toast.success(
-    //                         `更新题目 ${title} 的公开性: ${newValue ? "公开" : "私有"}`,
-    //                         {
-    //                             id: "publicness_change",
-    //                         }
-    //                     );
-    //                 }
-    //             });
-    //         }
-
-    //         return (
-    //             <Switch
-    //                 checked={checked}
-    //                 onCheckedChange={handlePublicnessChange}
-    //                 aria-label="公开性开关"
-    //             />
-    //         );
-    //     },
-    // },
     {
         accessorKey: "id",
         id: "id",
         header: "UID",
         cell: ({ row }) => {
             const id = row.getValue("id");
-            const idString = String(id); // Convert to string regardless of type
+            const idString = String(id);
             const { isCopied, copyToClipboard } = useClipboard();
-            
-            // Check if the ID contains a hyphen before trying to split
+        
             const displayId = idString.includes("-") ? idString.split("-")[0] : idString;
             
             return (
@@ -140,33 +92,6 @@ const columns: ColumnDef<User>[] = [
             return email || "-";
         },
     },
-    // {
-    //     accessorKey: "groups",
-    //     id: "groups",
-    //     header: "用户组",
-    //     cell: ({ row }) => {
-    //         const tags = row.getValue("tags") as string[] | undefined;
-
-    //         if (!tags || !Array.isArray(tags) || tags.length === 0) {
-    //             return "-";
-    //         }
-
-    //         return (
-    //             <div className="flex flex-wrap gap-1">
-    //                 {tags.slice(0, 3).map((tag, index) => (
-    //                     <Badge key={index}>{tag}</Badge>
-    //                 ))}
-    //                 {tags.length > 3 && (
-    //                     <ContentDialog
-    //                         title="所有标签"
-    //                         content={tags.join(", ")}
-    //                         triggerText={`+${tags.length - 3}`}
-    //                     />
-    //                 )}
-    //             </div>
-    //         );
-    //     },
-    // },
     {
         accessorKey: "description",
         header: "描述",
@@ -210,86 +135,6 @@ const columns: ColumnDef<User>[] = [
             );
         },
     },
-    // {
-    //     accessorKey: "has_attachment",
-    //     header: "附件",
-    //     cell: ({ row }) => {
-    //         const hasAttachment = row.getValue<boolean>("has_attachment");
-
-    //         const options = [
-    //             {
-    //                 className: ["bg-warning", "text-warning-foreground"],
-    //                 icon: <X />,
-    //             },
-    //             {
-    //                 className: ["bg-info", "text-info-foreground"],
-    //                 icon: <Check />,
-    //             },
-    //         ];
-
-    //         return (
-    //             <Badge
-    //                 className={cn([options[Number(hasAttachment)]?.className])}
-    //             >
-    //                 {options[Number(hasAttachment)]?.icon}
-    //             </Badge>
-    //         );
-    //     },
-    // },
-    // {
-    //     accessorKey: "is_dynamic",
-    //     header: "动态性",
-    //     cell: ({ row }) => {
-    //         const isDynamic = row.getValue<boolean>("is_dynamic");
-
-    //         return (
-    //             <Badge
-    //                 className={cn([
-    //                     isDynamic
-    //                         ? ["bg-info", "text-info-foreground"]
-    //                         : ["bg-success", "text-success-foreground"],
-    //                 ])}
-    //             >
-    //                 {isDynamic ? <ShipWheel /> : <Box />}
-    //                 {isDynamic ? "动态" : "静态"}
-    //             </Badge>
-    //         );
-    //     },
-    // },
-    // {
-    //     accessorKey: "updated_at",
-    //     id: "updated_at",
-    //     header: ({ column }) => {
-    //         const Icon = useMemo(() => {
-    //             switch (column.getIsSorted()) {
-    //                 case "asc":
-    //                     return ArrowUp;
-    //                 case "desc":
-    //                     return ArrowDown;
-    //                 case false:
-    //                 default:
-    //                     return ArrowUpDown;
-    //             }
-    //         }, [column.getIsSorted()]);
-
-    //         return (
-    //             <div className={cn(["flex", "gap-1", "items-center"])}>
-    //                 更新时间
-    //                 <Button
-    //                     icon={Icon}
-    //                     square
-    //                     size={"sm"}
-    //                     onClick={() => column.toggleSorting()}
-    //                 />
-    //             </div>
-    //         );
-    //     },
-    //     cell: ({ row }) => {
-    //         return new Date(
-    //             row.getValue<number>("updated_at") * 1000
-    //         ).toLocaleString();
-    //     },
-    // },
     {
         accessorKey: "created_at",
         id: "created_at",

@@ -1,4 +1,4 @@
-import { getGames } from "@/api/game";
+import { getGames } from "@/api/games";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Image } from "@/components/ui/image";

@@ -9,11 +9,13 @@ import { ListOrdered } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getChallenges, getChallengeStatus } from "@/api/challenge";
 import { useAuthStore } from "@/storages/auth";
-import { Dialog } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
+import { useSearchParams } from "react-router";
 
 export default function Index() {
     const authStore = useAuthStore();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [total, setTotal] = useState<number>(0);
     const [challenges, setChallenges] = useState<Array<Challenge>>();
@@ -21,9 +23,21 @@ export default function Index() {
         useState<Record<string, ChallengeStatus>>();
 
     const [doSearch, setDoSearch] = useState<number>(0);
-    const [title, setTitle] = useState<string>();
-    const [page, setPage] = useState<number>(1);
-    const [size, setSize] = useState<number>(20);
+    const [title, setTitle] = useState<string>(searchParams.get("title") || "");
+    const [page, setPage] = useState<number>(
+        Number(searchParams.get("page")) || 1
+    );
+    const [size, setSize] = useState<number>(
+        Number(searchParams.get("size")) || 20
+    );
+
+    useEffect(() => {
+        setSearchParams({
+            title: title,
+            page: String(page),
+            size: String(size),
+        });
+    }, [title, page, size]);
 
     useEffect(() => {
         getChallenges({
@@ -50,10 +64,6 @@ export default function Index() {
             setChallengeStatus(res.data);
         });
     }, [challenges]);
-
-    const [selectedChallenge, setSelectedChallenge] = useState<Challenge>();
-    const [challengeDialogOpen, setChallengeDialogOpen] =
-        useState<boolean>(false);
 
     return (
         <>
@@ -107,11 +117,15 @@ export default function Index() {
                             className={cn(["flex-1"])}
                             icon={ListOrdered}
                             placeholder={"每页题目数量"}
-                            min={1}
-                            max={50}
                             size={"sm"}
                             value={size}
                             onChange={(e) => setSize(e.target.valueAsNumber)}
+                            slotProps={{
+                                input: {
+                                    min: 0,
+                                    max: 50,
+                                },
+                            }}
                         />
                     </div>
                 </div>
@@ -126,28 +140,23 @@ export default function Index() {
                         ])}
                     >
                         {challenges?.map((challenge, index) => (
-                            <ChallengeCard
-                                key={index}
-                                challenge={challenge}
-                                status={challengeStatus?.[challenge?.id!]}
-                                onClick={() => {
-                                    setSelectedChallenge(challenge);
-                                    setChallengeDialogOpen(true);
-                                }}
-                            />
+                            <Dialog key={index}>
+                                <DialogTrigger>
+                                    <ChallengeCard
+                                        challenge={challenge}
+                                        status={
+                                            challengeStatus?.[challenge?.id!]
+                                        }
+                                    />
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <ChallengeDialog challenge={challenge} />
+                                </DialogContent>
+                            </Dialog>
                         ))}
                     </div>
                 </div>
             </div>
-            <Dialog
-                open={challengeDialogOpen}
-                onOpenChange={setChallengeDialogOpen}
-            >
-                <ChallengeDialog
-                    onClose={() => setChallengeDialogOpen(false)}
-                    challenge={selectedChallenge}
-                />
-            </Dialog>
         </>
     );
 }

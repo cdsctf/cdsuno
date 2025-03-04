@@ -53,12 +53,20 @@ const inputVariants = cva(
     }
 );
 
-export interface InputProps
-    extends Partial<Omit<React.ComponentProps<"input">, "size">> {
+export interface InputProps extends React.ComponentProps<"div"> {
     size?: "sm" | "md";
     icon?: LucideIcon;
     extraBtn?: React.ReactElement;
-    inputClassName?: string;
+    slotProps?: {
+        input?: React.ComponentProps<"input">;
+    };
+    disabled?: React.ComponentProps<"input">["disabled"];
+    type?: React.ComponentProps<"input">["type"];
+    value?: React.ComponentProps<"input">["value"];
+    placeholder?: React.ComponentProps<"input">["placeholder"];
+    onChange?: React.ComponentProps<"input">["onChange"];
+    onFocus?: React.ComponentProps<"input">["onFocus"];
+    onBlur?: React.ComponentProps<"input">["onBlur"];
 }
 
 function Input(props: InputProps) {
@@ -67,26 +75,37 @@ function Input(props: InputProps) {
         icon,
         extraBtn,
         className,
-        inputClassName,
+        disabled,
         type,
+        onChange,
+        value,
+        placeholder,
+        onFocus,
+        onBlur,
+        slotProps,
         ref,
         ...rest
     } = props;
     return (
-        <div className={cn(["flex", "items-center"], className)}>
+        <div className={cn(["flex", "items-center", className])} {...rest}>
             {icon && <IconSection icon={icon} size={size} />}
             <input
+                {...slotProps?.input}
+                disabled={disabled}
                 type={type}
+                value={value}
+                placeholder={placeholder}
+                onChange={onChange}
+                onFocus={onFocus}
+                onBlur={onBlur}
                 className={cn(
                     inputVariants({
                         size,
                         icon: !!icon,
                         extraBtn: !!extraBtn,
-                        className: inputClassName,
+                        className: slotProps?.input?.className,
                     })
                 )}
-                ref={ref}
-                {...rest}
             />
             {extraBtn && <ExtraBtnSection extraBtn={extraBtn} size={size} />}
         </div>

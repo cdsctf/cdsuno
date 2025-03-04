@@ -10,17 +10,17 @@ import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
 
 function SubmitSection() {
-    const { challenge, gameTeam } = useContext(Context);
+    const { challenge, team } = useContext(Context);
     const [placeholder, setPlaceholder] = useState<string>("flag");
     const sharedStore = useSharedStore();
 
     const mode = useMemo(() => {
-        if (!!gameTeam) {
+        if (!!team) {
             return "game";
         }
 
         return "default";
-    }, [gameTeam]);
+    }, [team]);
 
     useInterval(
         () => {
@@ -44,8 +44,8 @@ function SubmitSection() {
         postSubmission({
             challenge_id: challenge?.id,
             content: flag?.trim(),
-            game_id: mode === "game" ? Number(gameTeam?.game_id) : undefined,
-            team_id: mode === "game" ? Number(gameTeam?.team_id) : undefined,
+            game_id: mode === "game" ? Number(team?.game_id) : undefined,
+            team_id: mode === "game" ? Number(team?.id) : undefined,
         }).then((res) => {
             if (res.code === 200) {
                 setSubmissionId(res?.data?.id);
@@ -118,9 +118,9 @@ function SubmitSection() {
     return (
         <div className={cn(["flex", "gap-3", "items-center"])}>
             <Input
-                className={cn(["flex-1"])}
                 size={"sm"}
                 icon={Flag}
+                className={cn(["flex-1"])}
                 placeholder={placeholder}
                 value={flag}
                 onChange={(e) => setFlag(e.target.value)}

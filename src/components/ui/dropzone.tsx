@@ -463,8 +463,23 @@ const DropZoneArea = forwardRef<HTMLDivElement, DropZoneAreaProps>(
                 {...props}
                 aria-label="dropzone"
                 className={cn(
-                    "flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                    context.isDragActive && "animate-pulse bg-black/5",
+                    [
+                        "flex",
+                        "items-center",
+                        "justify-center",
+                        "rounded-md",
+                        "border",
+                        "border-input",
+                        "bg-input",
+                        "px-4",
+                        "py-2",
+                        "ring-offset-input",
+                        "focus-visible:outline-hidden",
+                        "focus-visible:ring-2",
+                        "focus-visible:ring-ring",
+                        "focus-visible:ring-offset-2",
+                    ],
+                    context.isDragActive && "animate-pulse bg-input/50",
                     context.isInvalid && "border-error",
                     className
                 )}
@@ -753,7 +768,7 @@ function DropzoneTrigger(props: DropzoneTriggerProps) {
     );
 
     return (
-        <Button asChild ref={ref} {...rest}>
+        <Button asChild ref={ref} {...rest} className={className}>
             <label>
                 {children}
                 <input

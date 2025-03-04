@@ -1,6 +1,7 @@
 import path from "path";
 import React from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";
+import viteCompression from "vite-plugin-compression";
 import { defineConfig, loadEnv } from "vite";
 
 export default defineConfig(({ mode }) => {
@@ -35,11 +36,12 @@ export default defineConfig(({ mode }) => {
                 },
             },
         },
-        plugins: [React(), tailwindcss()],
+        plugins: [React(), tailwindcss(), viteCompression()],
         resolve: {
             alias: {
                 "@": path.resolve(__dirname, "./src"),
             },
         },
+        assetsInclude: ["**/*.cdsx"],
     };
 });

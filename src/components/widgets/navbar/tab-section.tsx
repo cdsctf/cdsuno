@@ -4,21 +4,22 @@ import {
     Library,
     Flag,
     LogOut,
-    UsersRound,
     UserRound,
     Star,
     ChartNoAxesCombined,
+    UsersRoundIcon,
 } from "lucide-react";
 import { useContext, useMemo } from "react";
 import { Link, useLocation } from "react-router";
 import { useGameStore } from "@/storages/game";
 import { Context } from "./context";
+import { State } from "@/models/team";
 
 function TabSection() {
     const location = useLocation();
     const pathname = location.pathname;
     const { mode } = useContext(Context);
-    const { currentGame, selfGameTeam } = useGameStore();
+    const { currentGame, selfTeam } = useGameStore();
 
     const options = useMemo(() => {
         switch (mode) {
@@ -30,10 +31,19 @@ function TabSection() {
                         icon: House,
                     },
                     {
+                        link: `/games/${currentGame?.id}/team`,
+                        name: "团队",
+                        icon: UsersRoundIcon,
+                        disabled: !selfTeam?.id,
+                    },
+                    {
                         link: `/games/${currentGame?.id}/challenges`,
                         name: "题目",
                         icon: Star,
-                        disabled: !selfGameTeam?.is_allowed,
+                        disabled:
+                            selfTeam?.state !== State.Passed ||
+                            new Date(Number(currentGame?.started_at) * 1000) >
+                                new Date(),
                     },
                     {
                         link: `/games/${currentGame?.id}/scoreboard`,
@@ -63,11 +73,6 @@ function TabSection() {
                         link: "/admin/games",
                         name: "比赛",
                         icon: Flag,
-                    },
-                    {
-                        link: "/admin/teams",
-                        name: "团队",
-                        icon: UsersRound,
                     },
                     {
                         link: "/admin/users",
@@ -101,7 +106,7 @@ function TabSection() {
                     },
                 ];
         }
-    }, [mode, currentGame?.id, selfGameTeam?.is_allowed]);
+    }, [mode, currentGame?.id, selfTeam]);
 
     return (
         <>

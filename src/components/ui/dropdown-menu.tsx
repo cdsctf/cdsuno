@@ -1,26 +1,26 @@
 import * as React from "react";
-import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
+import * as RadixDropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Check, ChevronRight, Circle, LucideIcon } from "lucide-react";
 
 import { cn } from "@/utils";
 import { cva, VariantProps } from "class-variance-authority";
 
-const DropdownMenu = DropdownMenuPrimitive.Root;
+const DropdownMenu = RadixDropdownMenu.Root;
 
 function DropdownMenuTrigger(
-    props: DropdownMenuPrimitive.DropdownMenuTriggerProps
+    props: RadixDropdownMenu.DropdownMenuTriggerProps
 ) {
     const { ...rest } = props;
-    return <DropdownMenuPrimitive.Trigger {...rest} />;
+    return <RadixDropdownMenu.Trigger {...rest} />;
 }
 
-const DropdownMenuGroup = DropdownMenuPrimitive.Group;
+const DropdownMenuGroup = RadixDropdownMenu.Group;
 
-const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
+const DropdownMenuPortal = RadixDropdownMenu.Portal;
 
-const DropdownMenuSub = DropdownMenuPrimitive.Sub;
+const DropdownMenuSub = RadixDropdownMenu.Sub;
 
-const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
+const DropdownMenuRadioGroup = RadixDropdownMenu.RadioGroup;
 
 function DropdownMenuSubTrigger({
     className,
@@ -28,11 +28,11 @@ function DropdownMenuSubTrigger({
     children,
     ref,
     ...rest
-}: React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
+}: React.ComponentProps<typeof RadixDropdownMenu.SubTrigger> & {
     inset?: boolean;
 }) {
     return (
-        <DropdownMenuPrimitive.SubTrigger
+        <RadixDropdownMenu.SubTrigger
             ref={ref}
             className={cn(
                 [
@@ -59,18 +59,17 @@ function DropdownMenuSubTrigger({
         >
             {children}
             <ChevronRight className="ml-auto" />
-        </DropdownMenuPrimitive.SubTrigger>
+        </RadixDropdownMenu.SubTrigger>
     );
 }
-DropdownMenuSubTrigger.displayName =
-    DropdownMenuPrimitive.SubTrigger.displayName;
+DropdownMenuSubTrigger.displayName = RadixDropdownMenu.SubTrigger.displayName;
 
 function DropdownMenuSubContent(
-    props: React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>
+    props: React.ComponentProps<typeof RadixDropdownMenu.SubContent>
 ) {
     const { className, ref, ...rest } = props;
     return (
-        <DropdownMenuPrimitive.SubContent
+        <RadixDropdownMenu.SubContent
             ref={ref}
             className={cn(
                 [
@@ -101,15 +100,14 @@ function DropdownMenuSubContent(
     );
 }
 
-DropdownMenuSubContent.displayName =
-    DropdownMenuPrimitive.SubContent.displayName;
+DropdownMenuSubContent.displayName = RadixDropdownMenu.SubContent.displayName;
 
 const DropdownMenuContent = React.forwardRef<
-    React.ElementRef<typeof DropdownMenuPrimitive.Content>,
-    React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
+    React.ElementRef<typeof RadixDropdownMenu.Content>,
+    React.ComponentPropsWithoutRef<typeof RadixDropdownMenu.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => (
-    <DropdownMenuPrimitive.Portal>
-        <DropdownMenuPrimitive.Content
+    <RadixDropdownMenu.Portal>
+        <RadixDropdownMenu.Content
             ref={ref}
             sideOffset={sideOffset}
             className={cn(
@@ -138,9 +136,9 @@ const DropdownMenuContent = React.forwardRef<
             )}
             {...props}
         />
-    </DropdownMenuPrimitive.Portal>
+    </RadixDropdownMenu.Portal>
 ));
-DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName;
+DropdownMenuContent.displayName = RadixDropdownMenu.Content.displayName;
 
 const dropdownMenuItemVariants = cva(
     [
@@ -176,7 +174,7 @@ const dropdownMenuItemVariants = cva(
 );
 
 interface DropdownMenuItemProps
-    extends React.ComponentProps<typeof DropdownMenuPrimitive.Item>,
+    extends React.ComponentProps<typeof RadixDropdownMenu.Item>,
         VariantProps<typeof dropdownMenuItemVariants> {
     icon?: LucideIcon;
 }
@@ -187,22 +185,22 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
     const Icon = icon!;
 
     return (
-        <DropdownMenuPrimitive.Item
+        <RadixDropdownMenu.Item
             ref={ref}
             className={cn(dropdownMenuItemVariants({ inset, className }))}
             {...rest}
         >
             <Icon />
             {children}
-        </DropdownMenuPrimitive.Item>
+        </RadixDropdownMenu.Item>
     );
 }
 
 const DropdownMenuCheckboxItem = React.forwardRef<
-    React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
-    React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
+    React.ElementRef<typeof RadixDropdownMenu.CheckboxItem>,
+    React.ComponentPropsWithoutRef<typeof RadixDropdownMenu.CheckboxItem>
 >(({ className, children, checked, ...props }, ref) => (
-    <DropdownMenuPrimitive.CheckboxItem
+    <RadixDropdownMenu.CheckboxItem
         ref={ref}
         className={cn(
             [
@@ -239,21 +237,21 @@ const DropdownMenuCheckboxItem = React.forwardRef<
                 "justify-center",
             ])}
         >
-            <DropdownMenuPrimitive.ItemIndicator>
+            <RadixDropdownMenu.ItemIndicator>
                 <Check className="h-4 w-4" />
-            </DropdownMenuPrimitive.ItemIndicator>
+            </RadixDropdownMenu.ItemIndicator>
         </span>
         {children}
-    </DropdownMenuPrimitive.CheckboxItem>
+    </RadixDropdownMenu.CheckboxItem>
 ));
 DropdownMenuCheckboxItem.displayName =
-    DropdownMenuPrimitive.CheckboxItem.displayName;
+    RadixDropdownMenu.CheckboxItem.displayName;
 
 const DropdownMenuRadioItem = React.forwardRef<
-    React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
-    React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
+    React.ElementRef<typeof RadixDropdownMenu.RadioItem>,
+    React.ComponentPropsWithoutRef<typeof RadixDropdownMenu.RadioItem>
 >(({ className, children, ...props }, ref) => (
-    <DropdownMenuPrimitive.RadioItem
+    <RadixDropdownMenu.RadioItem
         ref={ref}
         className={cn(
             [
@@ -289,22 +287,22 @@ const DropdownMenuRadioItem = React.forwardRef<
                 "justify-center",
             ])}
         >
-            <DropdownMenuPrimitive.ItemIndicator>
+            <RadixDropdownMenu.ItemIndicator>
                 <Circle className={cn(["h-2", "w-2", "fill-current"])} />
-            </DropdownMenuPrimitive.ItemIndicator>
+            </RadixDropdownMenu.ItemIndicator>
         </span>
         {children}
-    </DropdownMenuPrimitive.RadioItem>
+    </RadixDropdownMenu.RadioItem>
 ));
-DropdownMenuRadioItem.displayName = DropdownMenuPrimitive.RadioItem.displayName;
+DropdownMenuRadioItem.displayName = RadixDropdownMenu.RadioItem.displayName;
 
 const DropdownMenuLabel = React.forwardRef<
-    React.ElementRef<typeof DropdownMenuPrimitive.Label>,
-    React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label> & {
+    React.ElementRef<typeof RadixDropdownMenu.Label>,
+    React.ComponentPropsWithoutRef<typeof RadixDropdownMenu.Label> & {
         inset?: boolean;
     }
 >(({ className, inset, ...props }, ref) => (
-    <DropdownMenuPrimitive.Label
+    <RadixDropdownMenu.Label
         ref={ref}
         className={cn(
             "px-2 py-1.5 text-sm font-semibold",
@@ -314,19 +312,19 @@ const DropdownMenuLabel = React.forwardRef<
         {...props}
     />
 ));
-DropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName;
+DropdownMenuLabel.displayName = RadixDropdownMenu.Label.displayName;
 
 const DropdownMenuSeparator = React.forwardRef<
-    React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
-    React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
+    React.ElementRef<typeof RadixDropdownMenu.Separator>,
+    React.ComponentPropsWithoutRef<typeof RadixDropdownMenu.Separator>
 >(({ className, ...props }, ref) => (
-    <DropdownMenuPrimitive.Separator
+    <RadixDropdownMenu.Separator
         ref={ref}
         className={cn(["-mx-1", "my-1", "h-px", "bg-border"], className)}
         {...props}
     />
 ));
-DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;
+DropdownMenuSeparator.displayName = RadixDropdownMenu.Separator.displayName;
 
 const DropdownMenuShortcut = ({
     className,

@@ -2,6 +2,8 @@
 @plugin "tailwindcss-animate";
 @plugin "@tailwindcss/typography";
 
+@import "./overwrites";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
@@ -51,19 +53,6 @@
     --color-chart-3: var(--chart-3);
     --color-chart-4: var(--chart-4);
     --color-chart-5: var(--chart-5);
-
-    --animate-ripple: ripple 0.5s linear forwards;
-
-    @keyframes ripple {
-        0% {
-            transform: scale(0);
-            opacity: 0.5;
-        }
-        100% {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
 }
 
 @layer base {
@@ -85,7 +74,7 @@
         --success: oklch(0.6 0.2 140);
         --success-foreground: oklch(0.98 0 0);
         --warning: oklch(0.75 0.2 50);
-        --warning-foreground: oklch(0.15 0.02 270);
+        --warning-foreground: oklch(0.98 0 0);
         --error: oklch(0.64 0.17 24);
         --error-foreground: oklch(0.98 0 0);
         --border: oklch(0.9 0.01 270);
@@ -98,6 +87,7 @@
         --chart-5: oklch(0.75 0.2 30);
         --radius: 0.5rem;
     }
+
     .dark {
         --background: oklch(0.18 0 0);
         --foreground: oklch(0.98 0 0);
@@ -140,23 +130,19 @@
     }
 
     * {
-        @apply border-border outline-ring/50 transition-colors;
+        @apply border-border outline-ring/50;
     }
 
     body {
         @apply bg-background text-foreground;
     }
-
-    .hljs {
-        @apply !bg-transparent;
-    }
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
+    body {
+        @apply bg-background text-foreground;
     }
 }

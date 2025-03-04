@@ -1,121 +1,318 @@
-import { Challenge } from "@/models/challenge"
-import { columns } from "./columns"
-import { DataTable } from "../data-table"
-import { TableFilter } from "../ui/table-filter"
-import { TableFilters } from "../ui/table-filters"
-import { TableColumnToggle } from "../ui/table-column-toggle"
-import { Button } from "../ui/button"
-import { PlusCircle } from "lucide-react"
+import { Challenge } from "@/models/challenge";
+import { Button } from "@/components/ui/button";
+import {
+    HashIcon,
+    Library,
+    ListOrderedIcon,
+    PlusCircle,
+    TypeIcon,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import { getChallenges } from "@/api/challenge";
+import {
+    ColumnFiltersState,
+    flexRender,
+    getCoreRowModel,
+    getFilteredRowModel,
+    SortingState,
+    useReactTable,
+    VisibilityState,
+} from "@tanstack/react-table";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import { Pagination } from "@/components/ui/pagination";
+import { cn } from "@/utils";
+import { columns } from "./columns";
+import { Input } from "@/components/ui/input";
+import { useDebounce } from "@/hooks/use-debounce";
+import { Select } from "@/components/ui/select";
+import { useCategoryStore } from "@/storages/category";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { CreateDialog } from "./create-dialog";
+import { useSharedStore } from "@/storages/shared";
 
-async function getData(): Promise<Challenge[]> {
-  // 获取挑战数据的示例，包含完整的 Env 数据
-  return [
-    {
-      id: "1",
-      title: "Web 安全入门",
-      tags: ["web", "beginner", "injection"],
-      description: "一个简单的 SQL 注入挑战，需要通过注入获取管理员权限。适合初学者练习基本的注入技术。",
-      category: 0,
-      has_attachment: false,
-      is_public: true,
-      is_dynamic: true,
-      env: {
-        image: "ctfd/web-sql-injection:latest",
-        cpu_limit: 1,
-        memory_limit: 512,
-        duration: 3600,
-        envs: {
-          "FLAG": "flag{sql_injection_basic_123}",
-          "ADMIN_PASSWORD": "s3cur3_p4ssw0rd!"
-        },
-        ports: [80, 443]
-      },
-      checker: "#!/bin/bash\nflag=$(curl -s http://$IP:$PORT/get_flag)\nif [[ $flag == *\"flag{\"* ]]; then\n  exit 0\nelse\n  exit 1\nfi",
-      updated_at: 1675854453,
-      created_at: 1675754453,
-    },
-    {
-      id: "2",
-      title: "Buffer Overflow 基础",
-      tags: ["pwn", "buffer-overflow", "stack"],
-      description: "学习基本的缓冲区溢出攻击技术，通过覆盖返回地址获取shell。需要具备基本的汇编和C语言知识。",
-      category: 1,
-      has_attachment: true,
-      is_public: true,
-      is_dynamic: true,
-      env: {
-        image: "ctfd/pwn-buffer-overflow:v1.2",
-        cpu_limit: 2,
-        memory_limit: 1024,
-        duration: 7200,
-        envs: {
-          "FLAG": "flag{stack_smash_detected_456}",
-          "ASLR": "0"
-        },
-        ports: [8080]
-      },
-      checker: "#!/bin/bash\nexpect -c 'spawn nc $IP $PORT; send \"cat /flag.txt\\n\"; expect \"flag{*}\" { exit 0 } timeout 5 { exit 1 }'",
-      updated_at: 1678854453,
-      created_at: 1678754453,
-    },
-    {
-      id: "3",
-      title: "隐写术挑战",
-      tags: ["misc", "steganography", "image-analysis"],
-      description: "在图片中发现隐藏信息，需要使用多种隐写工具和分析技术。挑战者需要分析像素数据和文件元数据。",
-      category: 4,
-      has_attachment: true,
-      is_public: false,
-      is_dynamic: false,
-      checker: "#!/bin/bash\nif [[ \"$FLAG\" == \"flag{hidden_in_plain_sight_789}\" ]]; then\n  exit 0\nelse\n  exit 1\nfi",
-      updated_at: 1682854453,
-      created_at: 1682754453,
-    },
-    // 更多数据...
-  ]
-}
+export default function Index() {
+    const categoryStore = useCategoryStore();
+    const sharedStore = useSharedStore();
 
-export default async function ChallengesPage() {
-  const data = await getData()
-  
-  return (
-    <div className="container mx-auto py-10">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">题库管理</h1>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          添加题目
-        </Button>
-      </div>
-      
-      <div className="flex justify-end mb-4">
-        <TableColumnToggle title="显示/隐藏列" />
-      </div>
-      
-      <DataTable columns={columns} data={data}>
-        <TableFilters>
-          <TableFilter 
-            columnId="title" 
-            label="标题" 
-            placeholder="搜索标题..."
-          />
-          <TableFilter 
-            columnId="category" 
-            label="分类" 
-            placeholder="筛选分类..."
-          />
-          <TableFilter 
-            columnId="is_public" 
-            label="公开性" 
-            placeholder="筛选公开性..."
-          />
-          <TableFilter 
-            columnId="tags" 
-            label="标签" 
-            placeholder="筛选标签..."
-          />
-        </TableFilters>
-      </DataTable>
-    </div>
-  )
+    const [createDialogOpen, setCreateDialogOpen] = useState<boolean>(false);
+
+    const [total, setTotal] = useState<number>(0);
+    const [challenges, setChallenges] = useState<Array<Challenge>>([]);
+
+    const [page, setPage] = useState<number>(1);
+    const [size, setSize] = useState<number>(20);
+
+    const [sorting, setSorting] = useState<SortingState>([]);
+    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
+        {}
+    );
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([
+        {
+            id: "category",
+            value: "all",
+        },
+    ]);
+    const debouncedColumnFilters = useDebounce(columnFilters, 100);
+
+    const table = useReactTable<Challenge>({
+        data: challenges,
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+        manualPagination: true,
+        rowCount: total,
+        manualFiltering: true,
+        getFilteredRowModel: getFilteredRowModel(),
+        onColumnFiltersChange: setColumnFilters,
+        onColumnVisibilityChange: setColumnVisibility,
+        manualSorting: true,
+        onSortingChange: setSorting,
+        state: {
+            sorting,
+            columnVisibility,
+            columnFilters,
+        },
+    });
+
+    useEffect(() => {
+        getChallenges({
+            id: debouncedColumnFilters.find((c) => c.id === "id")
+                ?.value as string,
+            title: debouncedColumnFilters.find((c) => c.id === "title")
+                ?.value as string,
+            category:
+                (debouncedColumnFilters.find((c) => c.id === "category")
+                    ?.value as string) !== "all"
+                    ? (debouncedColumnFilters.find((c) => c.id === "category")
+                          ?.value as number)
+                    : undefined,
+            sorts: sorting
+                .map((value) => (value.desc ? `-${value.id}` : `${value.id}`))
+                .join(","),
+            page,
+            size,
+        }).then((res) => {
+            setTotal(res?.total || 0);
+            setChallenges(res?.data || []);
+        });
+    }, [page, size, sorting, debouncedColumnFilters, sharedStore.refresh]);
+
+    return (
+        <div className={cn(["container", "mx-auto", "py-10"])}>
+            <div
+                className={cn([
+                    "flex",
+                    "justify-between",
+                    "items-center",
+                    "mb-6",
+                    "gap-10",
+                ])}
+            >
+                <h1
+                    className={cn([
+                        "text-2xl",
+                        "font-bold",
+                        "flex",
+                        "gap-2",
+                        "items-center",
+                    ])}
+                >
+                    <Library />
+                    题库管理
+                </h1>
+                <div
+                    className={cn([
+                        "flex",
+                        "flex-1",
+                        "justify-center",
+                        "items-center",
+                        "gap-3",
+                    ])}
+                >
+                    <Input
+                        size={"sm"}
+                        placeholder="ID"
+                        icon={HashIcon}
+                        value={
+                            (table
+                                .getColumn("id")
+                                ?.getFilterValue() as string) ?? ""
+                        }
+                        onChange={(e) =>
+                            table
+                                .getColumn("id")
+                                ?.setFilterValue(e.target.value)
+                        }
+                        className={cn(["flex-1"])}
+                    />
+                    <Input
+                        size={"sm"}
+                        placeholder={"题目名"}
+                        icon={TypeIcon}
+                        value={
+                            (table
+                                .getColumn("title")
+                                ?.getFilterValue() as string) ?? ""
+                        }
+                        onChange={(e) =>
+                            table
+                                .getColumn("title")
+                                ?.setFilterValue(e.target.value)
+                        }
+                        className={cn(["flex-1/2"])}
+                    />
+                    <Select
+                        size={"sm"}
+                        icon={Library}
+                        className={cn(["flex-1"])}
+                        options={[
+                            {
+                                value: "all",
+                                content: (
+                                    <div
+                                        className={cn([
+                                            "flex",
+                                            "gap-2",
+                                            "items-center",
+                                        ])}
+                                    >
+                                        全部
+                                    </div>
+                                ),
+                            },
+                            ...categoryStore.categories?.map((category) => {
+                                const Icon = category?.icon!;
+
+                                return {
+                                    value: String(category?.id),
+                                    content: (
+                                        <div
+                                            className={cn([
+                                                "flex",
+                                                "gap-2",
+                                                "items-center",
+                                            ])}
+                                        >
+                                            <Icon />
+                                            {category?.name?.toUpperCase()}
+                                        </div>
+                                    ),
+                                };
+                            }),
+                        ]}
+                        onValueChange={(value) =>
+                            table.getColumn("category")?.setFilterValue(value)
+                        }
+                        value={
+                            (table
+                                .getColumn("category")
+                                ?.getFilterValue() as string) ?? ""
+                        }
+                    />
+                    <Button
+                        icon={PlusCircle}
+                        variant={"tonal"}
+                        onClick={() => setCreateDialogOpen(true)}
+                    >
+                        添加题目
+                    </Button>
+                    <Dialog
+                        open={createDialogOpen}
+                        onOpenChange={setCreateDialogOpen}
+                    >
+                        <DialogContent>
+                            <CreateDialog
+                                onClose={() => setCreateDialogOpen(false)}
+                            />
+                        </DialogContent>
+                    </Dialog>
+                </div>
+            </div>
+
+            <div className={cn(["rounded-md", "border", "bg-card"])}>
+                <Table className={cn(["text-foreground"])}>
+                    <TableHeader>
+                        {table.getHeaderGroups().map((headerGroup) => (
+                            <TableRow key={headerGroup.id}>
+                                {headerGroup.headers.map((header) => {
+                                    return (
+                                        <TableHead key={header.id}>
+                                            {!header.isPlaceholder &&
+                                                flexRender(
+                                                    header.column.columnDef
+                                                        .header,
+                                                    header.getContext()
+                                                )}
+                                        </TableHead>
+                                    );
+                                })}
+                            </TableRow>
+                        ))}
+                    </TableHeader>
+                    <TableBody>
+                        {table.getRowModel().rows?.length ? (
+                            table.getRowModel().rows.map((row) => (
+                                <TableRow
+                                    key={row.getValue("id")}
+                                    data-state={
+                                        row.getIsSelected() && "selected"
+                                    }
+                                >
+                                    {row.getVisibleCells().map((cell) => (
+                                        <TableCell key={cell.id}>
+                                            {flexRender(
+                                                cell.column.columnDef.cell,
+                                                cell.getContext()
+                                            )}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            ))
+                        ) : (
+                            <TableRow>
+                                <TableCell
+                                    colSpan={columns.length}
+                                    className="h-24 text-center"
+                                >
+                                    哎呀，好像还没有题目呢。
+                                </TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+                <div className="flex items-center justify-between space-x-2 py-4 px-4">
+                    <div className="flex-1 text-sm text-muted-foreground">
+                        {table.getFilteredRowModel().rows.length} / {total}
+                    </div>
+                    <div className={cn(["flex", "items-center", "gap-5"])}>
+                        <Select
+                            size={"sm"}
+                            placeholder={"每页显示"}
+                            icon={ListOrderedIcon}
+                            className={cn(["w-48"])}
+                            options={[
+                                { value: "20" },
+                                { value: "40" },
+                                { value: "60" },
+                            ]}
+                            value={String(size)}
+                            onValueChange={(value) => setSize(Number(value))}
+                        />
+                        <Pagination
+                            size={"sm"}
+                            value={page}
+                            total={Math.ceil(Math.ceil(total / size))}
+                            onChange={setPage}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }

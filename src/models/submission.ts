@@ -15,13 +15,10 @@ export interface Submission {
     team?: Team;
     game_id?: number;
     game?: Game;
-    created_at?: number;
-    updated_at?: number;
-}
-
-export interface GameSubmission extends Submission {
     pts?: number;
     rank?: number;
+    created_at?: number;
+    updated_at?: number;
 }
 
 export enum Status {
@@ -30,30 +27,4 @@ export enum Status {
     Incorrect = 2,
     Cheat = 3,
     Invalid = 4,
-}
-
-export interface CreateSubmissionRequest {
-    content?: string;
-    challenge_id?: string;
-    team_id?: number;
-    game_id?: number;
-}
-
-export interface GetSubmissionRequest {
-    id?: number;
-    content?: string;
-    status?: number;
-    user_id?: number;
-    is_detailed?: boolean;
-    challenge_id?: string;
-    team_id?: number;
-    game_id?: number;
-    size?: number;
-    page?: number;
-
-    is_desensitized?: boolean;
-}
-
-export interface DeleteSubmissionRequest {
-    id?: number;
 }
