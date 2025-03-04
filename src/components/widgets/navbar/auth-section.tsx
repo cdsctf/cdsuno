@@ -1,4 +1,4 @@
-import { logout } from "@/api/user";
+import { logout } from "@/api/users";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/storages/auth";
 import { cn } from "@/utils";
@@ -11,7 +11,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, UserRound } from "lucide-react";
+import { LogOut, SettingsIcon, UserRound } from "lucide-react";
 import { useNavigate, Link } from "react-router";
 
 function AuthSection() {
@@ -40,8 +40,32 @@ function AuthSection() {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-42">
-                    <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+                    <DropdownMenuItem
+                        className={cn(["flex", "items-center", "gap-2"])}
+                    >
+                        <Avatar
+                            className={cn("h-8", "w-8")}
+                            src={`/api/users/${authStore?.user?.id}/avatar`}
+                            fallback={authStore?.user?.username?.charAt(0)}
+                        />
+                        <div className={cn(["flex", "flex-col"])}>
+                            <p className={cn(["text-sm"])}>
+                                {authStore?.user?.nickname}
+                            </p>
+                            <p
+                                className={cn([
+                                    "text-xs",
+                                    "text-muted-foreground",
+                                ])}
+                            >
+                                {authStore?.user?.username}
+                            </p>
+                        </div>
+                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
+                    <DropdownMenuItem icon={SettingsIcon} asChild>
+                        <Link to={"/account/settings"}>个人设置</Link>
+                    </DropdownMenuItem>
                     <DropdownMenuItem
                         icon={LogOut}
                         className={cn("text-error", "hover:text-error")}

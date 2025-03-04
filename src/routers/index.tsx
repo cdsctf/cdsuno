@@ -110,6 +110,52 @@ export default createBrowserRouter([
                                 .default,
                         }),
                     },
+                    {
+                        path: "register",
+                        lazy: async () => ({
+                            Component: (
+                                await import("@/pages/account/register")
+                            ).default,
+                        }),
+                    },
+                    {
+                        path: "settings",
+                        lazy: async () => ({
+                            Component: (
+                                await import("@/pages/account/settings/layout")
+                            ).default,
+                        }),
+                        children: [
+                            {
+                                index: true,
+                                lazy: async () => ({
+                                    Component: (
+                                        await import("@/pages/account/settings")
+                                    ).default,
+                                }),
+                            },
+                            {
+                                path: "password",
+                                lazy: async () => ({
+                                    Component: (
+                                        await import(
+                                            "@/pages/account/settings/password"
+                                        )
+                                    ).default,
+                                }),
+                            },
+                            {
+                                path: "delete",
+                                lazy: async () => ({
+                                    Component: (
+                                        await import(
+                                            "@/pages/account/settings/delete"
+                                        )
+                                    ).default,
+                                }),
+                            },
+                        ],
+                    },
                 ],
             },
             {
