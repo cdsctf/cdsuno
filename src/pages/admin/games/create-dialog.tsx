@@ -1,6 +1,7 @@
 import { createGame } from "@/api/games";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { DateTimePicker } from "@/components/ui/datetime-picker";
 import {
     Form,
     FormControl,
@@ -72,6 +73,7 @@ function CreateDialog(props: CreateDialogProps) {
                 <FlagIcon className={cn(["size-4"])} />
                 创建比赛
             </h3>
+            <DateTimePicker value={new Date()} onChange={() => {}} />
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}

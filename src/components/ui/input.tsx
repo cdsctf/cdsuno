@@ -157,4 +157,4 @@ function ExtraBtnSection(props: ExtraBtnSectionProps) {
     );
 }
 
-export { Input };
+export { Input, inputVariants };
