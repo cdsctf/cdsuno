@@ -15,6 +15,7 @@ import {
     useDropzone as rootUseDropzone,
 } from "react-dropzone";
 import { Button, ButtonProps } from "./button";
+import { nanoid } from "nanoid";
 
 type DropzoneResult<TUploadRes, TUploadError> =
     | {
@@ -353,7 +354,7 @@ const useDropzone = <TUploadRes, TUploadError = string>(
                         await onRemoveFile(fileStatuses[index].id);
                     }
 
-                    const id = crypto.randomUUID();
+                    const id = nanoid();
                     dispatch({ type: "add", fileName: file.name, file, id });
                     await _uploadFile(file, id);
                 }

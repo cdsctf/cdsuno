@@ -19,12 +19,15 @@ function AuthSection() {
     const authStore = useAuthStore();
 
     function handleLogout() {
-        logout().then((res) => {
-            if (res.code === 200) {
+        logout()
+            .then((res) => {
+                if (res.code === 200) {
+                    navigate("/account/login");
+                }
+            })
+            .finally(() => {
                 authStore.setUser(undefined);
-                navigate("/account/login");
-            }
-        });
+            });
     }
 
     if (authStore?.user?.id) {

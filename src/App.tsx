@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { useThemeStore } from "@/storages/theme";
 import { useConfigStore } from "@/storages/config";
 import { getConfigs } from "@/api/config";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { cn } from "./utils";
 
 function App() {
     const { theme } = useThemeStore();
@@ -38,10 +40,25 @@ function App() {
     }, []);
 
     return (
-        <>
+        <OverlayScrollbarsComponent
+            className={cn([
+                "relative",
+                "w-screen",
+                "h-screen",
+                "m-0",
+                "overflow-auto",
+            ])}
+            options={{
+                scrollbars: {
+                    theme: `os-theme-${theme === "dark" ? "light" : "dark"}`,
+                    autoHide: "scroll",
+                },
+            }}
+            defer
+        >
             <Toaster />
             <RouterProvider router={routers} />
-        </>
+        </OverlayScrollbarsComponent>
     );
 }
 

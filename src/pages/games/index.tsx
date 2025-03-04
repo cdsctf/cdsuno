@@ -28,6 +28,7 @@ export default function Index() {
             title: debouncedTitle,
             page,
             size,
+            is_enabled: true,
         }).then((res) => {
             setTotal(res.total || 0);
             setGames(res.data);
