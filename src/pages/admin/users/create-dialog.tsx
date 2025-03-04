@@ -46,14 +46,13 @@ function CreateUserDialog(props: CreateUserDialogProps) {
 
     const [loading, setLoading] = useState<boolean>(false);
 
-    // Update the form schema for user creation
     const formSchema = z.object({
-        username: z.string().min(3, { message: "用户名至少3个字符" }),
-        nickname: z.string().min(2, { message: "昵称至少2个字符" }),
-        email: z.string().email({ message: "请输入有效的邮箱地址" }),
-        password: z.string().min(6, { message: "密码至少6个字符" }),
+        username: z.string().min(3, { message: "用户名至少3个字符!" }),
+        nickname: z.string().min(2, { message: "昵称至少2个字符!" }),
+        email: z.string().email({ message: "请输入有效的邮箱地址!" }),
+        password: z.string().min(6, { message: "密码至少6个字符!" }),
         group: z.number({
-            message: "请选择用户组",
+            message: "请选择用户组!",
         }),
     });
 
@@ -88,7 +87,7 @@ function CreateUserDialog(props: CreateUserDialogProps) {
     // Group options for the select field
     const groupOptions = [
         { id: Group.Guest, name: "访客", icon: UserIcon },
-        { id: Group.Banned, name: "禁用", icon: UserIcon },
+        { id: Group.Banned, name: "封禁", icon: UserIcon },
         { id: Group.User, name: "用户", icon: UserCheckIcon },
         { id: Group.Admin, name: "管理员", icon: UserCheckIcon },
     ];

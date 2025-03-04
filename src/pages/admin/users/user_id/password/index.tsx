@@ -44,14 +44,12 @@ export default function Index() {
 
         setLoading(true);
         try {
-            // 使用updateUserProfile更新密码
             const res = await updateUserProfile({
                 password: passwordData.new_password
             });
 
             if (res.code === 200) {
                 toast.success("密码修改成功");
-                // 清空表单
                 setPasswordData({
                     new_password: "",
                     confirmPassword: ""

@@ -92,7 +92,6 @@ export default function ProfileEdit() {
     const handleSaveProfile = async () => {
         if (!profile) return;
         
-        // 准备请求数据，根据API的UpdateUserProfileRequest
         const requestData = {
             nickname: profile.nickname,
             email: profile.email, 
