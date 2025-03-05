@@ -156,7 +156,7 @@ function PaginationLink({
         <Button
             size={size}
             disabled={disabled}
-            variant={isActive ? "outline" : "ghost"}
+            variant={isActive ? "tonal" : "ghost"}
             square
             {...props}
         />

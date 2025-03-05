@@ -118,11 +118,11 @@ export interface DateTimePickerProps
     /**
      * The datetime value to display and control.
      */
-    value: Date | undefined;
+    value: Date | undefined | null;
     /**
      * Callback function to handle datetime changes.
      */
-    onChange: (date: Date | undefined) => void;
+    onChange: (date: Date | undefined | null) => void;
     /**
      * The minimum datetime value allowed.
      * @default undefined

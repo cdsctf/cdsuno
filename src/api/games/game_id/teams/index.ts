@@ -1,4 +1,4 @@
-import { Team } from "@/models/team";
+import { State, Team } from "@/models/team";
 import { Response } from "@/types";
 import { alova } from "@/utils/alova";
 
@@ -6,6 +6,11 @@ export interface GetTeamRequest {
     id?: number;
     game_id?: number;
     user_id?: number;
+    name?: string;
+    state?: State;
+    page?: number;
+    size?: number;
+    sorts?: string;
 }
 
 export async function getTeams(request: GetTeamRequest) {
