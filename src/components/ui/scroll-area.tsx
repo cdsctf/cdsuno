@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
+import * as RadixScrollArea from "@radix-ui/react-scroll-area";
 
 import { cn } from "@/utils";
 
@@ -7,14 +7,14 @@ function ScrollArea({
     className,
     children,
     ...props
-}: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {
+}: React.ComponentProps<typeof RadixScrollArea.Root>) {
     return (
-        <ScrollAreaPrimitive.Root
+        <RadixScrollArea.Root
             data-slot="scroll-area"
             className={cn("relative", className)}
             {...props}
         >
-            <ScrollAreaPrimitive.Viewport
+            <RadixScrollArea.Viewport
                 data-slot="scroll-area-viewport"
                 className={cn([
                     "ring-ring/10",
@@ -29,10 +29,10 @@ function ScrollArea({
                 ])}
             >
                 {children}
-            </ScrollAreaPrimitive.Viewport>
+            </RadixScrollArea.Viewport>
             <ScrollBar />
-            <ScrollAreaPrimitive.Corner />
-        </ScrollAreaPrimitive.Root>
+            <RadixScrollArea.Corner />
+        </RadixScrollArea.Root>
     );
 }
 
@@ -40,9 +40,9 @@ function ScrollBar({
     className,
     orientation = "vertical",
     ...props
-}: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) {
+}: React.ComponentProps<typeof RadixScrollArea.ScrollAreaScrollbar>) {
     return (
-        <ScrollAreaPrimitive.ScrollAreaScrollbar
+        <RadixScrollArea.ScrollAreaScrollbar
             data-slot="scroll-area-scrollbar"
             orientation={orientation}
             className={cn(
@@ -55,11 +55,11 @@ function ScrollBar({
             )}
             {...props}
         >
-            <ScrollAreaPrimitive.ScrollAreaThumb
+            <RadixScrollArea.ScrollAreaThumb
                 data-slot="scroll-area-thumb"
                 className="bg-foreground/30 relative flex-1 rounded-full hover:bg-foreground/40 active:bg-foreground/50 transition-colors"
             />
-        </ScrollAreaPrimitive.ScrollAreaScrollbar>
+        </RadixScrollArea.ScrollAreaScrollbar>
     );
 }
 
