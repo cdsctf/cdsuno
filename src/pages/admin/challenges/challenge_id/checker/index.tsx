@@ -106,7 +106,12 @@ export default function Index() {
                             form.setValue("checker", checkerMap[value]);
                         }}
                     />
-                    <Button variant={"solid"} size={"sm"} icon={SaveIcon}>
+                    <Button
+                        type={"submit"}
+                        variant={"solid"}
+                        size={"sm"}
+                        icon={SaveIcon}
+                    >
                         保存
                     </Button>
                 </div>
