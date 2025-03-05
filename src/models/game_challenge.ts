@@ -12,4 +12,5 @@ export interface GameChallenge {
     min_pts?: number;
     bonus_ratios?: Array<number>;
     frozen_at?: number;
+    pts?: number;
 }

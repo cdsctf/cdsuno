@@ -26,12 +26,13 @@ export function ContentDialog({
             : contentString;
 
     return (
-        <Dialog>
-            <DialogTrigger>
-                <div className="flex items-center">
-                    {showPreview && (
-                        <span className="truncate max-w-xs">{preview}</span>
-                    )}
+        <div className="flex items-center">
+            {showPreview && (
+                <span className="truncate max-w-xs">{preview}</span>
+            )}
+
+            <Dialog>
+                <DialogTrigger>
                     <Button
                         variant="ghost"
                         size="sm"
@@ -41,15 +42,20 @@ export function ContentDialog({
                     >
                         <EyeIcon className="h-4 w-4" />
                     </Button>
-                </div>
-            </DialogTrigger>
-            <DialogContent>
-                <Card
-                    className={cn(["sm:max-w-2xl", "p-5", "w-128", "min-h-64"])}
-                >
-                    <MarkdownRender src={content} />
-                </Card>
-            </DialogContent>
-        </Dialog>
+                </DialogTrigger>
+                <DialogContent>
+                    <Card
+                        className={cn([
+                            "sm:max-w-2xl",
+                            "p-5",
+                            "w-128",
+                            "min-h-64",
+                        ])}
+                    >
+                        <MarkdownRender src={content} />
+                    </Card>
+                </DialogContent>
+            </Dialog>
+        </div>
     );
 }
