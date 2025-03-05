@@ -2,17 +2,14 @@ import { Link, Outlet, useLocation, useParams } from "react-router";
 import { Context } from "./context";
 import { useEffect, useMemo, useState } from "react";
 import { User } from "@/models/user";
-import { getUsers } from "@/api/user";
+import { getUsers } from "@/api/users";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
-import {
-    User as UserIcon,
-    LockIcon,
-} from "lucide-react";
+import { UserRoundIcon, LockIcon } from "lucide-react";
 import { useSharedStore } from "@/storages/shared";
 
-export default function UserLayout() {
+export default function Layout() {
     const location = useLocation();
     const pathname = location.pathname;
     const sharedStore = useSharedStore();
@@ -22,15 +19,11 @@ export default function UserLayout() {
     useEffect(() => {
         if (user_id) {
             getUsers({
-                id: Number(user_id), 
-            }).then((res: any) => {
-                if (Array.isArray(res.data) && res.data.length > 0) {
-                    setUser(res.data[0]);
-                } else if (res.data) {
-                    setUser(res.data);
+                id: Number(user_id),
+            }).then((res) => {
+                if (res.code === 200) {
+                    setUser(res?.data?.[0]);
                 }
-            }).catch(error => {
-                console.error("Failed to fetch user:", error);
             });
         }
     }, [user_id, sharedStore?.refresh]);
@@ -38,9 +31,9 @@ export default function UserLayout() {
     const options = useMemo(() => {
         return [
             {
-                link: `/admin/users/${user_id}/profile`,
-                name: "基本信息变更",
-                icon: UserIcon,
+                link: `/admin/users/${user_id}`,
+                name: "基本信息",
+                icon: UserRoundIcon,
             },
             {
                 link: `/admin/users/${user_id}/password`,
@@ -84,8 +77,8 @@ export default function UserLayout() {
                             "select-none",
                         ])}
                     >
-                        <UserIcon />
-                        用户设置
+                        <UserRoundIcon />
+                        用户编辑
                     </div>
                     <Card className={cn(["flex", "flex-col", "p-5", "gap-3"])}>
                         {options?.map((option, index) => {

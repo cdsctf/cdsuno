@@ -92,6 +92,7 @@ export interface ButtonProps
 
 function Button(props: ButtonProps) {
     const {
+        type = "button",
         level = "primary",
         className,
         variant,
@@ -110,6 +111,7 @@ function Button(props: ButtonProps) {
     const Comp = asChild ? Slot : "button";
     return (
         <Comp
+            type={type}
             className={cn(buttonVariants({ variant, size, square, className }))}
             ref={ref}
             draggable={false}

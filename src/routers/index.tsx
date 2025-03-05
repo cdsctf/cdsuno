@@ -279,6 +279,38 @@ export default createBrowserRouter([
                                     ).default,
                                 }),
                             },
+                            {
+                                path: ":user_id",
+                                lazy: async () => ({
+                                    Component: (
+                                        await import(
+                                            "@/pages/admin/users/user_id/layout"
+                                        )
+                                    ).default,
+                                }),
+                                children: [
+                                    {
+                                        index: true,
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/users/user_id"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                    {
+                                        path: "password",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/users/user_id/password"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                ],
+                            },
                         ],
                     },
                 ],

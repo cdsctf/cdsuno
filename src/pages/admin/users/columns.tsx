@@ -1,4 +1,4 @@
-import { Group,User } from "@/models/user";
+import { Group, User } from "@/models/user";
 import { Button } from "@/components/ui/button";
 import {
     ArrowDown,
@@ -9,9 +9,14 @@ import {
     EditIcon,
     TrashIcon,
 } from "lucide-react";
-import { UserIcon, ShieldIcon, UserXIcon, UserCheckIcon } from "lucide-react";
+import {
+    UserRoundIcon,
+    ShieldIcon,
+    UserRoundXIcon,
+    UserRoundCheckIcon,
+} from "lucide-react";
 import { useMemo, useState } from "react";
-import { deleteUser } from "@/api/user";
+import { deleteUser } from "@/api/users/user_id";
 import { ColumnDef } from "@tanstack/react-table";
 import { cn } from "@/utils";
 import { ContentDialog } from "@/components/widgets/content-dialog";
@@ -27,19 +32,22 @@ import { toast } from "sonner";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
 import { useSharedStore } from "@/storages/shared";
+import { Avatar } from "@/components/ui/avatar";
 
 const columns: ColumnDef<User>[] = [
     {
         accessorKey: "id",
         id: "id",
-        header: "UID",
+        header: "ID",
         cell: ({ row }) => {
             const id = row.getValue("id");
             const idString = String(id);
             const { isCopied, copyToClipboard } = useClipboard();
-        
-            const displayId = idString.includes("-") ? idString.split("-")[0] : idString;
-            
+
+            const displayId = idString.includes("-")
+                ? idString.split("-")[0]
+                : idString;
+
             return (
                 <div className={cn(["flex", "items-center", "gap-1"])}>
                     <Badge>{displayId}</Badge>
@@ -63,8 +71,17 @@ const columns: ColumnDef<User>[] = [
         id: "username",
         header: "用户名",
         cell: ({ row }) => {
+            const id = row.getValue("id") as number;
             const username = row.getValue("username") as string;
-            return username || "-";
+
+            return (
+                <div className={cn(["flex", "items-center", "gap-3"])}>
+                    <Avatar
+                        src={`/api/users/${id}/avatar`}
+                        fallback={username?.charAt(0)}
+                    />
+                </div>
+            );
         },
     },
     {
@@ -105,17 +122,34 @@ const columns: ColumnDef<User>[] = [
         header: "用户组",
         cell: ({ row }) => {
             const groupId = row.getValue("group") as number;
-            
+
             const groupConfig = {
-                [Group.Guest]: { name: "GUEST", icon: UserIcon, className: "bg-secondary text-secondary-foreground" },
-                [Group.Banned]: { name: "BANNED", icon: UserXIcon, className: "bg-destructive text-destructive-foreground" },
-                [Group.User]: { name: "USER", icon: UserCheckIcon, className: "bg-primary text-primary-foreground" },
-                [Group.Admin]: { name: "ADMIN", icon: ShieldIcon, className: "bg-info text-info-foreground" },
+                [Group.Guest]: {
+                    name: "GUEST",
+                    icon: UserRoundIcon,
+                    className: "bg-secondary text-secondary-foreground",
+                },
+                [Group.Banned]: {
+                    name: "BANNED",
+                    icon: UserRoundXIcon,
+                    className: "bg-destructive text-destructive-foreground",
+                },
+                [Group.User]: {
+                    name: "USER",
+                    icon: UserRoundCheckIcon,
+                    className: "bg-primary text-primary-foreground",
+                },
+                [Group.Admin]: {
+                    name: "ADMIN",
+                    icon: ShieldIcon,
+                    className: "bg-info text-info-foreground",
+                },
             };
-            
-            const config = groupConfig[groupId as Group] || groupConfig[Group.Guest];
+
+            const config =
+                groupConfig[groupId as Group] || groupConfig[Group.Guest];
             const Icon = config.icon;
-            
+
             return (
                 <div className={cn(["flex", "gap-2", "items-center"])}>
                     <Badge className={config.className}>

@@ -41,8 +41,8 @@ import {
     ChevronLeftIcon,
     ChevronRightIcon,
     ChevronUpIcon,
+    CircleXIcon,
     Clock,
-    XCircle,
 } from "lucide-react";
 import { DayPicker, type Matcher, TZDate } from "react-day-picker";
 
@@ -54,9 +54,8 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import { inputVariants } from "@/components/ui/input";
 import { IconSection } from "@/components/ui/shared/icon-section";
-// import { ExtraBtnSection } from "@/components/ui/input";
+import { cva, VariantProps } from "class-variance-authority";
 
 export type CalendarProps = Omit<
     React.ComponentProps<typeof DayPicker>,
@@ -66,7 +65,50 @@ export type CalendarProps = Omit<
 const AM_VALUE = 0;
 const PM_VALUE = 1;
 
-export type DateTimePickerProps = {
+const dateTimePickerVariants = cva(
+    [
+        "flex-1",
+        "flex",
+        "w-0",
+        "rounded-md",
+        "border",
+        "border-input",
+        "bg-input",
+        "px-3",
+        "py-2",
+        "text-base",
+        "ring-offset-input",
+        "focus-visible:outline-hidden",
+        "focus-visible:ring-2",
+        "focus-visible:ring-ring",
+        "focus-visible:ring-offset-2",
+        "disabled:cursor-not-allowed",
+        "disabled:opacity-50",
+        "md:text-sm",
+    ],
+    {
+        variants: {
+            size: {
+                sm: "h-10",
+                md: "h-12",
+            },
+            icon: {
+                true: "rounded-l-none",
+            },
+            extraBtn: {
+                true: "rounded-r-none",
+            },
+        },
+        defaultVariants: {
+            size: "md",
+            icon: false,
+            extraBtn: false,
+        },
+    }
+);
+
+export interface DateTimePickerProps
+    extends VariantProps<typeof dateTimePickerVariants> {
     /**
      * The modality of the popover. When set to true, interaction with outside elements will be disabled and only popover content will be visible to screen readers.
      * If you want to use the datetime picker inside a dialog, you should set this to true.
@@ -131,25 +173,20 @@ export type DateTimePickerProps = {
         minute?: boolean;
         second?: boolean;
     };
-    /**
-     * Custom render function for the trigger.
-     */
-    renderTrigger?: (props: DateTimeRenderTriggerProps) => React.ReactNode;
-};
+}
 
-export type DateTimeRenderTriggerProps = {
+export interface DateTimeRenderTriggerProps {
     value: Date | undefined;
     open: boolean;
     timezone?: string;
     disabled?: boolean;
     use12HourFormat?: boolean;
     setOpen: (open: boolean) => void;
-};
+}
 
 export function DateTimePicker({
     value,
     onChange,
-    renderTrigger,
     min,
     max,
     timezone,
@@ -160,6 +197,7 @@ export function DateTimePicker({
     classNames,
     timePicker,
     modal = false,
+    size = "sm",
     ...props
 }: DateTimePickerProps & CalendarProps) {
     const [open, setOpen] = useState(false);
@@ -246,61 +284,52 @@ export function DateTimePicker({
     return (
         <Popover open={open} onOpenChange={setOpen} modal={modal}>
             <PopoverTrigger asChild>
-                {renderTrigger ? (
-                    renderTrigger({
-                        value: displayValue,
-                        open,
-                        timezone,
-                        disabled,
-                        use12HourFormat,
-                        setOpen,
-                    })
-                ) : (
-                    <div
-                        className={cn([
-                            "flex",
-                            "items-center",
-                            classNames?.trigger,
-                        ])}
-                        tabIndex={0}
+                <div
+                    className={cn([
+                        "relative",
+                        "flex",
+                        "items-center",
+                        classNames?.trigger,
+                    ])}
+                    tabIndex={0}
+                >
+                    <IconSection icon={CalendarIcon} size={size} />
+                    <Button
+                        type={"button"}
+                        disabled={disabled}
+                        className={cn(
+                            dateTimePickerVariants({
+                                size,
+                                icon: true,
+                            }),
+                            "justify-start"
+                        )}
                     >
-                        <IconSection
-                            icon={CalendarIcon}
-                            size={hideTime ? "sm" : "md"}
+                        {dislayFormat}
+                    </Button>
+                    {clearable && value && (
+                        <Button
+                            size={"sm"}
+                            square
+                            icon={CircleXIcon}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                onChange(undefined);
+                                setOpen(false);
+                            }}
+                            className={cn([
+                                "absolute",
+                                "right-0",
+                                "top-50%",
+                                "opacity-70",
+                                "hover:opacity-100",
+                                "hover:bg-transparent",
+                                "transition-opacity",
+                            ])}
                         />
-                        <input
-                            readOnly
-                            disabled={disabled}
-                            value={dislayFormat}
-                            className={cn(
-                                inputVariants({
-                                    size: hideTime ? "sm" : "md",
-                                    icon: true,
-                                    extraBtn: clearable && !!value,
-                                    className: !displayValue
-                                        ? "text-primary/80"
-                                        : "",
-                                })
-                            )}
-                        />
-                        {/* {clearable && value && (
-                            <ExtraBtnSection
-                                size={hideTime ? "sm" : "md"}
-                                extraBtn={
-                                    <XCircle
-                                        className="size-4"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            e.preventDefault();
-                                            onChange(undefined);
-                                            setOpen(false);
-                                        }}
-                                    />
-                                }
-                            />
-                        )} */}
-                    </div>
-                )}
+                    )}
+                </div>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-2">
                 <div className="flex items-center justify-between">

@@ -34,23 +34,25 @@ import {
 import { Select } from "@/components/ui/select";
 import { Pagination } from "@/components/ui/pagination";
 import { CreateDialog } from "./create-dialog";
+import { useSharedStore } from "@/storages/shared";
 export default function Index() {
     const [createDialogOpen, setCreateDialogOpen] = useState<boolean>(false);
+    const sharedStore = useSharedStore();
 
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(10);
     const [total, setTotal] = useState<number>(0);
-    const [sorting, setSorting] = useState<SortingState>([]);
+    const [sorting, setSorting] = useState<SortingState>([
+        {
+            id: "started_at",
+            desc: true,
+        },
+    ]);
 
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
         {}
     );
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([
-        {
-            id: "id",
-            value: "all",
-        },
-    ]);
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const debouncedColumnFilters = useDebounce(columnFilters, 100);
     const [games, setGames] = useState<Array<Game>>([]);
     const table = useReactTable<Game>({
@@ -86,7 +88,8 @@ export default function Index() {
             setTotal(res?.total || 0);
             setGames(res?.data || []);
         });
-    }, [page, size, sorting, debouncedColumnFilters]);
+    }, [page, size, sorting, debouncedColumnFilters, sharedStore?.refresh]);
+
     return (
         <div className={cn(["container", "mx-auto", "py-10"])}>
             <div

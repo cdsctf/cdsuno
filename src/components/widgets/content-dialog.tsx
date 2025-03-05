@@ -1,23 +1,22 @@
-import * as React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { MarkdownRender } from "../utils/markdown-render";
+import { cn } from "@/utils";
 
 interface ContentDialogProps {
     title: string;
-    content: React.ReactNode | string;
+    content: string;
     triggerText?: string;
     maxPreviewLength?: number;
-    showPreview?: boolean; // 新增属性
+    showPreview?: boolean;
 }
 
 export function ContentDialog({
-    title,
     content,
-    triggerText = "查看",
     maxPreviewLength = 10,
-    showPreview = true, // 默认显示预览
+    showPreview = true,
 }: ContentDialogProps) {
     const contentString =
         typeof content === "string" ? content : JSON.stringify(content);
@@ -45,16 +44,10 @@ export function ContentDialog({
                 </div>
             </DialogTrigger>
             <DialogContent>
-                <Card className="sm:max-w-2xl">
-                    {typeof content === "string" ? (
-                        <pre className="bg-muted p-4 rounded-md overflow-auto max-h-96 whitespace-pre-wrap">
-                            {content}
-                        </pre>
-                    ) : (
-                        <pre className="bg-muted p-4 rounded-md overflow-auto max-h-96 whitespace-pre-wrap">
-                            {JSON.stringify(content, null, 2)}
-                        </pre>
-                    )}
+                <Card
+                    className={cn(["sm:max-w-2xl", "p-5", "w-128", "min-h-64"])}
+                >
+                    <MarkdownRender src={content} />
                 </Card>
             </DialogContent>
         </Dialog>

@@ -1,19 +1,18 @@
-import { User,Group } from "@/models/user";
+import { User, Group } from "@/models/user";
 import { Button } from "@/components/ui/button";
 import {
     HashIcon,
-    Library,
     ListOrderedIcon,
     PlusCircle,
     TypeIcon,
-    UserIcon,
     ShieldIcon,
-    UserXIcon,
-    UserCheckIcon,
     MailIcon,
+    UserRoundIcon,
+    UserRoundXIcon,
+    UserRoundCheckIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { getUsers } from "@/api/user";
+import { getUsers } from "@/api/users";
 import {
     ColumnFiltersState,
     flexRender,
@@ -50,9 +49,14 @@ export default function Index() {
     const [users, setUsers] = useState<Array<User>>([]);
 
     const [page, setPage] = useState<number>(1);
-    const [size, setSize] = useState<number>(20);
+    const [size, setSize] = useState<number>(10);
 
-    const [sorting, setSorting] = useState<SortingState>([]);
+    const [sorting, setSorting] = useState<SortingState>([
+        {
+            id: "created_at",
+            desc: false,
+        },
+    ]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
         {}
     );
@@ -65,10 +69,9 @@ export default function Index() {
     const debouncedColumnFilters = useDebounce(columnFilters, 100);
 
     const groupOptions = [
-        { id: "all", name: "全部", icon: UserIcon },
-        { id: Group.Guest.toString(), name: "访客", icon: UserIcon },
-        { id: Group.Banned.toString(), name: "封禁", icon: UserXIcon },
-        { id: Group.User.toString(), name: "用户", icon: UserCheckIcon },
+        { id: "all", name: "全部", icon: UserRoundIcon },
+        { id: Group.Banned.toString(), name: "封禁", icon: UserRoundXIcon },
+        { id: Group.User.toString(), name: "用户", icon: UserRoundCheckIcon },
         { id: Group.Admin.toString(), name: "管理员", icon: ShieldIcon },
     ];
 
@@ -92,13 +95,20 @@ export default function Index() {
     });
     useEffect(() => {
         getUsers({
-            id: debouncedColumnFilters.find((c) => c.id === "id")?.value as number,
-            username: debouncedColumnFilters.find((c) => c.id === "username")?.value as string,
-            name: debouncedColumnFilters.find((c) => c.id === "nickname")?.value as string, 
-            email: debouncedColumnFilters.find((c) => c.id === "email")?.value as string,
-            group: debouncedColumnFilters.find((c) => c.id === "group")?.value !== "all" 
-                ? Number(debouncedColumnFilters.find((c) => c.id === "group")?.value) 
-                : undefined,
+            id: debouncedColumnFilters.find((c) => c.id === "id")
+                ?.value as number,
+            name: debouncedColumnFilters.find((c) => c.id === "username")
+                ?.value as string,
+            email: debouncedColumnFilters.find((c) => c.id === "email")
+                ?.value as string,
+            group:
+                debouncedColumnFilters.find((c) => c.id === "group")?.value !==
+                "all"
+                    ? Number(
+                          debouncedColumnFilters.find((c) => c.id === "group")
+                              ?.value
+                      )
+                    : undefined,
             sorts: sorting
                 .map((value) => (value.desc ? `-${value.id}` : `${value.id}`))
                 .join(","),
@@ -130,7 +140,7 @@ export default function Index() {
                         "items-center",
                     ])}
                 >
-                    <Library />
+                    <UserRoundIcon />
                     用户管理
                 </h1>
                 <div
@@ -144,7 +154,7 @@ export default function Index() {
                 >
                     <Input
                         size={"sm"}
-                        placeholder="UID"
+                        placeholder="ID"
                         icon={HashIcon}
                         value={
                             (table
@@ -192,9 +202,9 @@ export default function Index() {
                     />
                     <Select
                         size={"sm"}
-                        icon={UserIcon}
+                        icon={UserRoundIcon}
                         className={cn(["flex-1"])}
-                        options={groupOptions.map(group => ({
+                        options={groupOptions.map((group) => ({
                             value: group.id,
                             content: (
                                 <div
@@ -283,7 +293,8 @@ export default function Index() {
                                     colSpan={columns.length}
                                     className="h-24 text-center"
                                 >
-                                    用户列表空空如也呢...要不要加我一个? 天天给你干活，也有点无聊呢=v=
+                                    用户列表空空如也呢...要不要加我一个?
+                                    天天给你干活，也有点无聊呢=v=
                                 </TableCell>
                             </TableRow>
                         )}
@@ -300,6 +311,7 @@ export default function Index() {
                             icon={ListOrderedIcon}
                             className={cn(["w-48"])}
                             options={[
+                                { value: "10" },
                                 { value: "20" },
                                 { value: "40" },
                                 { value: "60" },
