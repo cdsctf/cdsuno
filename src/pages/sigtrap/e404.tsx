@@ -21,7 +21,7 @@ export default function E404() {
                 <Separator orientation={"vertical"} />
                 <span>Not Found</span>
             </div>
-            <span className={cn(["text-secondary"])}>
+            <span className={cn(["text-secondary-foreground"])}>
                 哎呀，好像走错地方了呢
             </span>
         </div>

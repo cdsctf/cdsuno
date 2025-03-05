@@ -3,13 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { LoaderCircle, LucideIcon } from "lucide-react";
 
 import { cn } from "@/utils";
-import React, {
-    ButtonHTMLAttributes,
-    CSSProperties,
-    Ref,
-    useEffect,
-    useState,
-} from "react";
+import { ButtonHTMLAttributes, CSSProperties, Ref } from "react";
 
 const buttonVariants = cva(
     [
