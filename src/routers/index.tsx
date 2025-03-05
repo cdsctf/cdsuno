@@ -266,6 +266,58 @@ export default createBrowserRouter([
                                     ).default,
                                 }),
                             },
+                            {
+                                path: ":game_id",
+                                lazy: async () => ({
+                                    Component: (
+                                        await import(
+                                            "@/pages/admin/games/game_id/layout"
+                                        )
+                                    ).default,
+                                }),
+                                children: [
+                                    {
+                                        index: true,
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/games/game_id"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                    {
+                                        path: "challenges",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/games/game_id/challenges"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                    {
+                                        path: "teams",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/games/game_id/teams"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                    {
+                                        path: "notices",
+                                        lazy: async () => ({
+                                            Component: (
+                                                await import(
+                                                    "@/pages/admin/games/game_id/notices"
+                                                )
+                                            ).default,
+                                        }),
+                                    },
+                                ],
+                            },
                         ],
                     },
                     {

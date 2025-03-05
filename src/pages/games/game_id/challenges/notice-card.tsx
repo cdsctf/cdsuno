@@ -9,11 +9,9 @@ import { GameNotice } from "@/models/game_notice";
 import { useInterval } from "@/hooks/use-interval";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { MarkdownRender } from "@/components/utils/markdown-render";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import { useThemeStore } from "@/storages/theme";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 function NoticeCard() {
-    const { theme } = useThemeStore();
     const { currentGame } = useGameStore();
     const [gameNotices, setGameNotices] = useState<Array<GameNotice>>();
 
@@ -52,15 +50,7 @@ function NoticeCard() {
                     <Rss className={cn(["size-4"])} />
                     <h3 className={cn(["text-sm"])}>公告栏</h3>
                 </div>
-                <OverlayScrollbarsComponent
-                    options={{
-                        scrollbars: {
-                            theme: `os-theme-${theme === "dark" ? "light" : "dark"}`,
-                            autoHide: "scroll",
-                        },
-                    }}
-                    defer
-                >
+                <ScrollArea>
                     <div
                         className={cn([
                             "overflow-auto",
@@ -173,7 +163,7 @@ function NoticeCard() {
                             </Dialog>
                         ))}
                     </div>
-                </OverlayScrollbarsComponent>
+                </ScrollArea>
             </Card>
         </>
     );

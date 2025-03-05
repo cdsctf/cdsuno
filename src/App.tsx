@@ -5,8 +5,8 @@ import { useEffect } from "react";
 import { useThemeStore } from "@/storages/theme";
 import { useConfigStore } from "@/storages/config";
 import { getConfigs } from "@/api/config";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { cn } from "./utils";
+import { ScrollArea } from "./components/ui/scroll-area";
 
 function App() {
     const { theme } = useThemeStore();
@@ -42,7 +42,7 @@ function App() {
     return (
         <>
             <Toaster />
-            <OverlayScrollbarsComponent
+            <ScrollArea
                 className={cn([
                     "relative",
                     "w-screen",
@@ -50,16 +50,9 @@ function App() {
                     "m-0",
                     "overflow-auto",
                 ])}
-                options={{
-                    scrollbars: {
-                        theme: `os-theme-${theme === "dark" ? "light" : "dark"}`,
-                        autoHide: "scroll",
-                    },
-                }}
-                defer
             >
                 <RouterProvider router={routers} />
-            </OverlayScrollbarsComponent>
+            </ScrollArea>
         </>
     );
 }

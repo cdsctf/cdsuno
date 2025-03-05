@@ -9,8 +9,8 @@ import { Context } from "./context";
 import { SubmitSection } from "./submit-section";
 import { Team } from "@/models/team";
 import { EnvSection } from "./env-section";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { useThemeStore } from "@/storages/theme";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ChallengeDialogProps extends React.ComponentProps<typeof Card> {
     challenge?: Challenge;
@@ -52,14 +52,7 @@ function ChallengeDialog(props: ChallengeDialogProps) {
                     </div>
                     <Separator />
                 </div>
-                <OverlayScrollbarsComponent
-                    options={{
-                        scrollbars: {
-                            theme: `os-theme-${theme === "dark" ? "light" : "dark"}`,
-                            autoHide: "scroll",
-                        },
-                    }}
-                    defer
+                <ScrollArea
                     className={cn([
                         "flex",
                         "flex-1",
@@ -68,7 +61,7 @@ function ChallengeDialog(props: ChallengeDialogProps) {
                     ])}
                 >
                     <MarkdownRender src={challenge?.description} />
-                </OverlayScrollbarsComponent>
+                </ScrollArea>
                 {challenge?.is_dynamic && <EnvSection />}
                 <div className={cn("flex", "flex-col", "gap-3")}>
                     <Separator />

@@ -22,8 +22,8 @@ export async function getGameScoreboard(request: GetGameScoreboardRequest) {
 export interface UpdateGameRequest {
     id?: number;
     title?: string;
-    sketch?: string;
-    description?: string;
+    sketch?: string | null;
+    description?: string | null;
     is_enabled?: boolean;
     is_public?: boolean;
     is_need_write_up?: boolean;
@@ -50,14 +50,22 @@ export async function getGamePosterMetadata(id: number) {
     return alova.Get<Response<Metadata>>(`/games/${id}/poster/metadata`);
 }
 
-export async function deleteGamePoster(id: number) {
-    return alova.Delete<Response<never>>(`/games/${id}/poster`);
+interface DeleteGamePosterRequest {
+    game_id: number;
+}
+
+export async function deleteGamePoster(request: DeleteGamePosterRequest) {
+    return alova.Delete<Response<never>>(`/games/${request.game_id}/poster`);
 }
 
 export async function getGameIconMetadata(id: number) {
     return alova.Get<Response<Metadata>>(`/games/${id}/icon/metadata`);
 }
 
-export async function deleteGameIcon(id: number) {
-    return alova.Delete<Response<never>>(`/games/${id}/icon`);
+interface DeleteGameIconRequest {
+    game_id: number;
+}
+
+export async function deleteGameIcon(request: DeleteGameIconRequest) {
+    return alova.Delete<Response<never>>(`/games/${request.game_id}/icon`);
 }

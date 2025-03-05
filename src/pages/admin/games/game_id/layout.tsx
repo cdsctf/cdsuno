@@ -1,50 +1,66 @@
 import { Link, Outlet, useLocation, useParams } from "react-router";
 import { Context } from "./context";
 import { useEffect, useMemo, useState } from "react";
-import { User } from "@/models/user";
-import { getUsers } from "@/api/users";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
-import { UserRoundIcon, LockIcon } from "lucide-react";
+import {
+    LibraryIcon,
+    InfoIcon,
+    FlagIcon,
+    UsersRoundIcon,
+    MessageCircleIcon,
+} from "lucide-react";
 import { useSharedStore } from "@/storages/shared";
+import { getGames } from "@/api/games";
+import { Game } from "@/models/game";
 
 export default function Layout() {
     const location = useLocation();
     const pathname = location.pathname;
     const sharedStore = useSharedStore();
-    const { user_id } = useParams<{ user_id: string }>();
-    const [user, setUser] = useState<User>();
+    const { game_id } = useParams<{ game_id: string }>();
+    const [game, setGame] = useState<Game>();
 
     useEffect(() => {
-        if (user_id) {
-            getUsers({
-                id: Number(user_id),
+        if (game_id) {
+            getGames({
+                id: Number(game_id),
             }).then((res) => {
                 if (res.code === 200) {
-                    setUser(res?.data?.[0]);
+                    setGame(res?.data?.[0]);
                 }
             });
         }
-    }, [user_id, sharedStore?.refresh]);
+    }, [game_id, sharedStore?.refresh]);
 
     const options = useMemo(() => {
         return [
             {
-                link: `/admin/users/${user_id}`,
+                link: `/admin/games/${game_id}`,
                 name: "基本信息",
-                icon: UserRoundIcon,
+                icon: InfoIcon,
             },
             {
-                link: `/admin/users/${user_id}/password`,
-                name: "修改密码",
-                icon: LockIcon,
+                link: `/admin/games/${game_id}/challenges`,
+                name: "题目",
+                icon: LibraryIcon,
+            },
+            {
+                link: `/admin/games/${game_id}/teams`,
+                name: "团队",
+                icon: UsersRoundIcon,
+            },
+            {
+                link: `/admin/games/${game_id}/notices`,
+                name: "通知",
+                icon: MessageCircleIcon,
             },
         ];
-    }, [user]);
+    }, [game]);
 
     return (
-        <Context.Provider value={{ user }}>
+        <Context.Provider value={{ game }}>
             <div
                 className={cn([
                     "flex",
@@ -53,7 +69,6 @@ export default function Layout() {
                     "flex-1",
                     "gap-10",
                     "lg:mx-30",
-                    "2xl:mx-[17.5vw]",
                 ])}
             >
                 <div
@@ -77,8 +92,8 @@ export default function Layout() {
                             "select-none",
                         ])}
                     >
-                        <UserRoundIcon />
-                        用户编辑
+                        <FlagIcon />
+                        比赛编辑
                     </div>
                     <Card className={cn(["flex", "flex-col", "p-5", "gap-3"])}>
                         {options?.map((option, index) => {

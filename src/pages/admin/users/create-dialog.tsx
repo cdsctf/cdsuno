@@ -22,6 +22,7 @@ import {
     UserRoundCheckIcon,
     KeyIcon,
     UserRoundPlusIcon,
+    ShieldIcon,
 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -70,6 +71,12 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                     toast.success(`用户 ${values.username} 创建成功`);
                     onClose();
                 }
+
+                if (res.code === 409) {
+                    toast.error("发生错误", {
+                        description: res.msg,
+                    });
+                }
             })
             .finally(() => {
                 sharedStore.setRefresh();
@@ -78,10 +85,8 @@ function CreateUserDialog(props: CreateUserDialogProps) {
     }
 
     const groupOptions = [
-        { id: Group.Guest, name: "访客", icon: UserRoundIcon },
-        { id: Group.Banned, name: "封禁", icon: UserRoundIcon },
         { id: Group.User, name: "用户", icon: UserRoundCheckIcon },
-        { id: Group.Admin, name: "管理员", icon: UserRoundCheckIcon },
+        { id: Group.Admin, name: "管理员", icon: ShieldIcon },
     ];
 
     return (
@@ -231,6 +236,7 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                         )}
                     />
                     <Button
+                        type={"submit"}
                         variant={"solid"}
                         icon={CheckIcon}
                         level={"success"}
