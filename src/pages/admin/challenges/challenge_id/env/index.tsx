@@ -434,7 +434,6 @@ export default function Index() {
                 </Button>
                 <Button
                     variant={"solid"}
-                    level={"info"}
                     type={"submit"}
                     size={"lg"}
                     className={cn(["w-full"])}
