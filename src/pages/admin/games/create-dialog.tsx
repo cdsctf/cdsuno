@@ -32,6 +32,12 @@ function CreateDialog(props: CreateDialogProps) {
         title: z.string({
             message: "请输入标题",
         }),
+        started_at: z.date({
+            message: "请选择开始时间",
+        }),
+        ended_at: z.date({
+            message: "请选择结束时间",
+        }),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -46,6 +52,8 @@ function CreateDialog(props: CreateDialogProps) {
             description: "",
             is_need_write_up: false,
             is_public: false,
+            started_at: values.started_at.getTime() / 1000,
+            ended_at: values.ended_at.getTime() / 1000,
         })
             .then((res) => {
                 if (res.code === 200) {
@@ -73,7 +81,6 @@ function CreateDialog(props: CreateDialogProps) {
                 <FlagIcon className={cn(["size-4"])} />
                 创建比赛
             </h3>
-            <DateTimePicker value={new Date()} onChange={() => {}} />
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
@@ -100,15 +107,42 @@ function CreateDialog(props: CreateDialogProps) {
                             </FormItem>
                         )}
                     />
+                    <FormField
+                        control={form.control}
+                        name={"started_at"}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>开始时间</FormLabel>
+                                <FormControl>
+                                    <DateTimePicker {...field} clearable />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name={"ended_at"}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>结束时间</FormLabel>
+                                <FormControl>
+                                    <DateTimePicker {...field} clearable />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button
+                        type={"submit"}
+                        variant={"solid"}
+                        icon={CheckIcon}
+                        level={"success"}
+                        loading={loading}
+                    >
+                        确定
+                    </Button>
                 </form>
-                <Button
-                    variant={"solid"}
-                    icon={CheckIcon}
-                    level={"success"}
-                    loading={loading}
-                >
-                    确定
-                </Button>
             </Form>
         </Card>
     );

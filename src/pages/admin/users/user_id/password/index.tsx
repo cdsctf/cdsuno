@@ -1,154 +1,137 @@
-import { useContext, useState } from "react";
-import { Context } from "../context";
-import { updateUserProfile } from "@/api/user";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/utils";
+import { updateUserProfilePassword } from "@/api/users/profile";
+import { updateUser } from "@/api/users/user_id";
 import { Button } from "@/components/ui/button";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useAuthStore } from "@/storages/auth";
+import { useSharedStore } from "@/storages/shared";
+import { cn } from "@/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckIcon, LockIcon, LockOpenIcon, SaveIcon } from "lucide-react";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-    LockIcon,
-    EyeIcon,
-    EyeOffIcon,
-    SaveIcon
-} from "lucide-react";
+import { z } from "zod";
+import { Context } from "../context";
 
 export default function Index() {
     const { user } = useContext(Context);
-    const [passwordData, setPasswordData] = useState({
-        new_password: "",
-        confirmPassword: ""
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const formSchema = z
+        .object({
+            new_password: z
+                .string({
+                    message: "请输入新密码",
+                })
+                .min(6, "密码最少需要 6 个字符"),
+            confirm_password: z.string({
+                message: "请重新输入新密码",
+            }),
+        })
+        .refine((data) => data.new_password === data.confirm_password, {
+            message: "新密码与确认密码不一致",
+            path: ["confirm_password"],
+        });
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            new_password: "",
+            confirm_password: "",
+        },
     });
-    const [loading, setLoading] = useState(false);
-    const [showNewPassword, setShowNewPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const handlePasswordChange = (field: string, value: string) => {
-        setPasswordData(prev => ({
-            ...prev,
-            [field]: value
-        }));
-    };
-
-    const handleUpdatePassword = async () => {
-        // 验证新密码和确认密码是否一致
-        if (passwordData.new_password !== passwordData.confirmPassword) {
-            toast.error("新密码与确认密码不一致");
-            return;
-        }
-
-        if (passwordData.new_password.length < 8) {
-            toast.error("新密码长度不能少于8位");
-            return;
-        }
-
+    function onSubmit(values: z.infer<typeof formSchema>) {
         setLoading(true);
-        try {
-            const res = await updateUserProfile({
-                password: passwordData.new_password
-            });
+        updateUser({
+            id: user?.id!,
+            password: values.new_password,
+        })
+            .then((res) => {
+                if (res.code === 200) {
+                    toast.success(`用户 ${user?.username} 密码更新成功`);
+                    form.reset();
+                }
 
-            if (res.code === 200) {
-                toast.success("密码修改成功");
-                setPasswordData({
-                    new_password: "",
-                    confirmPassword: ""
-                });
-            } else {
-                toast.error("密码修改失败", {
-                    description: res.message
-                });
-            }
-        } catch (error) {
-            toast.error("密码修改失败", {
-                description: "请检查网络连接"
+                if (res.code === 400) {
+                    toast.error("更新失败", {
+                        description: res.msg,
+                    });
+                }
+            })
+            .finally(() => {
+                setLoading(false);
             });
-        } finally {
-            setLoading(false);
-        }
-    };
+    }
 
     return (
-        <div className="container mx-auto py-6">
-            <Card className="w-full">
-                <CardHeader>
-                    <CardTitle>修改密码</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className={cn(["flex", "flex-col", "gap-6", "w-full"])}>
-                        {/* 新密码 */}
-                        <div className="relative w-full">
-                            <div className="flex w-full relative">
-                                <Input
-                                    icon={LockIcon}
-                                    type={showNewPassword ? "text" : "password"}
-                                    placeholder="Enter Your Brand New Password..."
-                                    value={passwordData.new_password}
-                                    onChange={(e) => handlePasswordChange("new_password", e.target.value)}
-                                    disabled={loading}
-                                    className="w-full pr-12"
-                                />
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    onClick={() => setShowNewPassword(!showNewPassword)}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 p-0"
-                                >
-                                    <span className="sr-only">
-                                        {showNewPassword ? "隐藏密码" : "显示密码"}
-                                    </span>
-                                    {showNewPassword ? (
-                                        <EyeOffIcon className="h-4 w-4" />
-                                    ) : (
-                                        <EyeIcon className="h-4 w-4" />
-                                    )}
-                                </Button>
-                            </div>
-                        </div>
-                        
-                        <div className="relative w-full">
-                            <div className="flex w-full relative">
-                                <Input
-                                    icon={LockIcon}
-                                    type={showConfirmPassword ? "text" : "password"}
-                                    placeholder="Enter Password Again:)"
-                                    value={passwordData.confirmPassword}
-                                    onChange={(e) => handlePasswordChange("confirmPassword", e.target.value)}
-                                    disabled={loading}
-                                    className="w-full pr-12" 
-                                />
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 p-0"
-                                >
-                                    <span className="sr-only">
-                                        {showConfirmPassword ? "隐藏密码" : "显示密码"}
-                                    </span>
-                                    {showConfirmPassword ? (
-                                        <EyeOffIcon className="h-4 w-4" />
-                                    ) : (
-                                        <EyeIcon className="h-4 w-4" />
-                                    )}
-                                </Button>
-                            </div>
-                        </div>
-                        
-                        <div className="flex justify-end">
-                            <Button
-                                variant="solid"
-                                level="primary"
-                                icon={SaveIcon}
-                                onClick={handleUpdatePassword}
-                                loading={loading}
-                            >
-                                更新密码
-                            </Button>
-                        </div>
-                    </div>
-                </CardContent>
-            </Card>
+        <div className={cn(["flex", "flex-col", "flex-1"])}>
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    autoComplete={"off"}
+                    className={cn(["flex", "flex-col", "flex-1", "gap-8"])}
+                >
+                    <FormField
+                        control={form.control}
+                        name={"new_password"}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>新密码</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        type={"password"}
+                                        icon={LockIcon}
+                                        placeholder={"新密码"}
+                                        value={field.value || ""}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name={"confirm_password"}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>确认密码</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        type={"password"}
+                                        icon={LockIcon}
+                                        placeholder={"确认密码"}
+                                        value={field.value || ""}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <Button
+                        size={"lg"}
+                        type={"submit"}
+                        variant={"solid"}
+                        icon={SaveIcon}
+                        loading={loading}
+                    >
+                        保存
+                    </Button>
+                </form>
+            </Form>
         </div>
     );
 }

@@ -47,7 +47,7 @@ const columns: ColumnDef<Game>[] = [
 
                 updateGame({
                     id,
-                    is_public: newValue,
+                    is_enabled: newValue,
                 }).then((res) => {
                     if (res.code === 200) {
                         toast.success(

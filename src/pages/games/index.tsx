@@ -29,6 +29,7 @@ export default function Index() {
             page,
             size,
             is_enabled: true,
+            sorts: "-started_at",
         }).then((res) => {
             setTotal(res.total || 0);
             setGames(res.data);

@@ -1,4 +1,4 @@
-import { createUser } from "@/api/user";
+import { createUser } from "@/api/users";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -11,29 +11,22 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
+import { Group } from "@/models/user";
 import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { 
-    CheckIcon, 
-    PlusCircle, 
-    UserIcon, 
-    MailIcon, 
-    UserCheckIcon, 
-    KeyIcon 
+import {
+    CheckIcon,
+    UserRoundIcon,
+    MailIcon,
+    UserRoundCheckIcon,
+    KeyIcon,
+    UserRoundPlusIcon,
 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-
-// Define the Group enum
-export enum Group {
-    Guest = 0,
-    Banned = 1,
-    User = 2,
-    Admin = 3,
-}
 
 interface CreateUserDialogProps {
     onClose: () => void;
@@ -84,12 +77,11 @@ function CreateUserDialog(props: CreateUserDialogProps) {
             });
     }
 
-    // Group options for the select field
     const groupOptions = [
-        { id: Group.Guest, name: "访客", icon: UserIcon },
-        { id: Group.Banned, name: "封禁", icon: UserIcon },
-        { id: Group.User, name: "用户", icon: UserCheckIcon },
-        { id: Group.Admin, name: "管理员", icon: UserCheckIcon },
+        { id: Group.Guest, name: "访客", icon: UserRoundIcon },
+        { id: Group.Banned, name: "封禁", icon: UserRoundIcon },
+        { id: Group.User, name: "用户", icon: UserRoundCheckIcon },
+        { id: Group.Admin, name: "管理员", icon: UserRoundCheckIcon },
     ];
 
     return (
@@ -104,7 +96,7 @@ function CreateUserDialog(props: CreateUserDialogProps) {
             ])}
         >
             <h3 className={cn(["flex", "gap-3", "items-center", "text-md"])}>
-                <PlusCircle className={cn(["size-4"])} />
+                <UserRoundPlusIcon className={cn(["size-4"])} />
                 创建用户
             </h3>
             <Form {...form}>
@@ -122,7 +114,7 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                 <FormControl>
                                     <Input
                                         {...field}
-                                        icon={UserIcon}
+                                        icon={UserRoundIcon}
                                         size={"sm"}
                                         placeholder={"请输入用户名"}
                                         value={field.value || ""}
@@ -143,7 +135,7 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                 <FormControl>
                                     <Input
                                         {...field}
-                                        icon={UserCheckIcon}
+                                        icon={UserRoundCheckIcon}
                                         size={"sm"}
                                         placeholder={"请输入昵称"}
                                         value={field.value || ""}
@@ -208,7 +200,7 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                 <FormControl>
                                     <Select
                                         {...field}
-                                        icon={UserCheckIcon}
+                                        icon={UserRoundCheckIcon}
                                         size={"sm"}
                                         options={groupOptions.map((group) => {
                                             const Icon = group.icon;
