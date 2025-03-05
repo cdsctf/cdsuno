@@ -51,7 +51,7 @@ function TeamCard() {
                             "text-nowrap",
                             "overflow-hidden",
                             "text-xs",
-                            "text-secondary",
+                            "text-secondary-foreground",
                         ])}
                     >
                         {`# ${selfTeam?.id?.toString(16).padStart(6, "0")}`}

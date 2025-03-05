@@ -167,7 +167,7 @@ export default function Index() {
                             <p
                                 className={cn([
                                     "text-sm",
-                                    "text-secondary",
+                                    "text-secondary-foreground",
                                     "max-w-full",
                                     "text-ellipsis",
                                     "overflow-hidden",

@@ -96,7 +96,7 @@ export default function Index() {
                         className={cn([
                             "max-w-3/4",
                             "text-sm",
-                            "text-secondary",
+                            "text-secondary-foreground",
                             "text-ellipsis",
                             "text-nowrap",
                             "whitespace-nowrap",

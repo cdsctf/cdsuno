@@ -89,7 +89,7 @@ function NoticeCard() {
                                         </h4>
                                         <span
                                             className={cn([
-                                                "text-secondary",
+                                                "text-secondary-foreground",
                                                 "text-xs",
                                             ])}
                                         >
@@ -142,7 +142,7 @@ function NoticeCard() {
                                                 </div>
                                                 <span
                                                     className={cn([
-                                                        "text-secondary",
+                                                        "text-secondary-foreground",
                                                         "text-xs",
                                                     ])}
                                                 >
