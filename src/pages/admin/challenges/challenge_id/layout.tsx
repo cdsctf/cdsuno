@@ -83,7 +83,7 @@ export default function Layout() {
             >
                 <div
                     className={cn([
-                        "lg:w-1/5",
+                        "lg:w-64",
                         "lg:sticky",
                         "lg:top-25",
                         "space-y-6",

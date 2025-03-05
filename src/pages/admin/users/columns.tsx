@@ -80,6 +80,7 @@ const columns: ColumnDef<User>[] = [
                         src={`/api/users/${id}/avatar`}
                         fallback={username?.charAt(0)}
                     />
+                    {username}
                 </div>
             );
         },

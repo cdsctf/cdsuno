@@ -273,6 +273,10 @@ const useDropzone = <TUploadRes, TUploadError = string>(
                 id,
                 ...result,
             });
+
+            setTimeout(() => {
+                onRemoveFile(id);
+            }, 0);
         },
         [
             autoRetry,
