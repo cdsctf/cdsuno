@@ -17,6 +17,7 @@ import {
     MemoryStick,
     Minus,
     Plus,
+    SaveIcon,
     Trash,
 } from "lucide-react";
 import {
@@ -437,7 +438,7 @@ export default function Index() {
                     type={"submit"}
                     size={"lg"}
                     className={cn(["w-full"])}
-                    icon={Check}
+                    icon={SaveIcon}
                     loading={loading}
                 >
                     保存

@@ -12,7 +12,7 @@ import { Editor } from "@/components/ui/editor";
 import { Card } from "@/components/ui/card";
 import { AnsiUp } from "ansi_up";
 import { Button } from "@/components/ui/button";
-import { Check, LayoutTemplate } from "lucide-react";
+import { Check, LayoutTemplate, SaveIcon } from "lucide-react";
 import { Select } from "@/components/ui/select";
 import simpleChecker from "./examples/simple.cdsx?raw";
 import suidChecker from "./examples/suid.cdsx?raw";
@@ -106,12 +106,7 @@ export default function Index() {
                             form.setValue("checker", checkerMap[value]);
                         }}
                     />
-                    <Button
-                        variant={"solid"}
-                        size={"sm"}
-                        level={"info"}
-                        icon={Check}
-                    >
+                    <Button variant={"solid"} size={"sm"} icon={SaveIcon}>
                         保存
                     </Button>
                 </div>

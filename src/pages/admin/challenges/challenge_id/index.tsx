@@ -15,6 +15,7 @@ import {
     Container,
     Folder,
     Library,
+    SaveIcon,
     ShipWheel,
     Type,
 } from "lucide-react";
@@ -254,11 +255,10 @@ export default function Index() {
                 />
                 <Button
                     variant={"solid"}
-                    level={"info"}
                     type={"submit"}
                     size={"lg"}
                     className={cn(["w-full"])}
-                    icon={Check}
+                    icon={SaveIcon}
                     loading={loading}
                 >
                     保存
