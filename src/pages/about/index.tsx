@@ -3,7 +3,14 @@ import { Separator } from "@/components/ui/separator";
 import { useDecryptedText } from "@/hooks/use-decrypted-text";
 import { useConfigStore } from "@/storages/config";
 import { cn } from "@/utils";
-import { CodeXmlIcon, HandshakeIcon, HeartIcon, StarIcon } from "lucide-react";
+import {
+    CodeXmlIcon,
+    GitBranchIcon,
+    GitMergeIcon,
+    HandshakeIcon,
+    HeartIcon,
+    StarIcon,
+} from "lucide-react";
 
 export default function Index() {
     const configStore = useConfigStore();
@@ -31,7 +38,7 @@ export default function Index() {
                     "gap-5",
                 ])}
             >
-                <div className={cn(["flex", "gap-5", "items-center"])}>
+                <div className={cn(["flex", "gap-3", "items-center"])}>
                     <img
                         alt="logo"
                         decoding={"async"}
@@ -53,7 +60,15 @@ export default function Index() {
                         >
                             CdsCTF
                         </h1>
-                        <p className={cn(["font-mono"])}>123</p>
+                        <div
+                            className={cn([
+                                "font-mono",
+                                "text-secondary-foreground",
+                                "text-md",
+                            ])}
+                        >
+                            v0.0.1
+                        </div>
                     </div>
                 </div>
                 <Separator className={cn(["w-full"])} />
