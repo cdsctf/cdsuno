@@ -49,7 +49,10 @@ function AvatarImage({
     return (
         <RadixAvatar.Image
             ref={ref}
-            className={cn(["aspect-square", "h-full", "w-full"], className)}
+            className={cn(
+                ["aspect-square", "h-full", "w-full", "object-cover"],
+                className
+            )}
             draggable={false}
             {...rest}
         />
