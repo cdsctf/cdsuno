@@ -9,6 +9,7 @@ RUN npm run build
 
 FROM busybox:uclibc
 
-COPY --from=builder /app/dist /app
+COPY --from=builder /app/dist /app/dist
+COPY ./entrypoint.sh /app/entrypoint.sh
 
-CMD [ "sh", "-c", "trap 'exit 0' SIGTERM; while true; do sleep 1; done" ]
+CMD [ "sh", "/app/entrypoint.sh" ]
