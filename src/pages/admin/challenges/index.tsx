@@ -49,7 +49,12 @@ export default function Index() {
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(10);
 
-    const [sorting, setSorting] = useState<SortingState>([]);
+    const [sorting, setSorting] = useState<SortingState>([
+        {
+            id: "created_at",
+            desc: true,
+        },
+    ]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
         {}
     );

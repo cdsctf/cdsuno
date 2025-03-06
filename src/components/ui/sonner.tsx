@@ -1,6 +1,12 @@
 import { useThemeStore } from "@/storages/theme";
 import { cn } from "@/utils";
-import { LoaderCircle } from "lucide-react";
+import {
+    CircleAlertIcon,
+    CircleCheckIcon,
+    InfoIcon,
+    LoaderCircleIcon,
+    TriangleAlertIcon,
+} from "lucide-react";
 import { Toaster as Sonner } from "sonner";
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
@@ -11,29 +17,39 @@ function Toaster(props: ToasterProps) {
 
     return (
         <Sonner
+            richColors
             theme={theme as ToasterProps["theme"]}
             className={cn(["toaster", "group"])}
             icons={{
-                loading: <LoaderCircle className={cn(["animate-spin"])} />,
+                info: <InfoIcon />,
+                loading: <LoaderCircleIcon className={cn(["animate-spin"])} />,
+                error: <CircleAlertIcon />,
+                warning: <TriangleAlertIcon />,
+                success: <CircleCheckIcon />,
             }}
             toastOptions={{
                 classNames: {
                     toast: cn([
                         "group",
                         "toast",
+                        "group-[.toaster]:!px-5",
                         "group-[.toaster]:!bg-card",
                         "group-[.toaster]:!text-foreground",
                         "group-[.toaster]:!border-border",
+                        "group-[.toaster]:!rounded-lg",
                         "group-[.toaster]:!shadow-lg",
                     ]),
-                    description: cn(["group-[.toast]:!text-muted-foreground"]),
+                    icon: cn(["group-[.toast]:!size-5", "[&_svg]:size-5"]),
+                    description: cn([
+                        "group-[.toast]:!text-secondary-foreground",
+                    ]),
                     actionButton: cn([
                         "group-[.toast]:!bg-primary",
                         "group-[.toast]:!text-primary-foreground",
                     ]),
                     cancelButton: cn([
-                        "group-[.toast]:!bg-muted",
-                        "group-[.toast]:!text-muted-foreground",
+                        "group-[.toast]:!bg-secondary",
+                        "group-[.toast]:!text-secondary-foreground",
                     ]),
                 },
             }}

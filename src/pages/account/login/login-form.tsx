@@ -63,7 +63,7 @@ function LoginForm() {
                 }
 
                 if (res.code === 400) {
-                    toast.success("登陆失败", {
+                    toast.error("登陆失败", {
                         id: "login-error",
                         description: res.msg,
                     });
