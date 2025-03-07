@@ -1,5 +1,5 @@
-//! * leet.cdsx
-//! Dynamic flag check with template and steganographic data.
+//! * suid.cdsx
+//! Dynamic uuid-like flag check with seed and steganographic data.
 
 use audit::{Flag, Status};
 
@@ -22,7 +22,7 @@ pub async fn check(operator_id, content) {
     }
 
     // extract peer operator_id
-    let res = leet::decode(SEED, flag.content(), KEY);
+    let res = suid::decode(SEED, flag.content(), KEY);
     let dec_id = match res {
         Ok(id) => id,
         Err(_) => return Ok(Status::Incorrect)

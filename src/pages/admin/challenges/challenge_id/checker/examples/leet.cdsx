@@ -39,7 +39,7 @@ pub async fn check(operator_id, content) {
         return Ok(Status::Cheat(dec_id));
     }
 
-    Ok(Status::InCorrect)
+    Ok(Status::Incorrect)
 }
 
 /// Generate flag when user starts the challenge env.
