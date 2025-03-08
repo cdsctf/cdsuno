@@ -2,13 +2,20 @@
 @plugin "tailwindcss-animate";
 @plugin "@tailwindcss/typography";
 
+@import "@fontsource-variable/ubuntu-sans-mono";
+@import "@fontsource-variable/ubuntu-sans-mono/wght";
+@import "@fontsource-variable/ubuntu-sans-mono/wght-italic";
+@import "@fontsource-variable/ubuntu-sans";
+@import "@fontsource-variable/ubuntu-sans/wght";
+@import "@fontsource-variable/ubuntu-sans/wght-italic";
+
 @import "./overwrites";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-    --font-sans: Ubuntu;
-    --font-mono: Ubuntu Mono;
+    --font-sans: "Ubuntu Sans Variable", sans-serif;
+    --font-mono: "Ubuntu Sans Mono Variable", monospace;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
