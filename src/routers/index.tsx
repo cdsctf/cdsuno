@@ -1,7 +1,9 @@
+import { HydrateFallback } from "@/components/utils/hydrate-fallback";
 import { createBrowserRouter } from "react-router";
 
 export default createBrowserRouter([
     {
+        hydrateFallbackElement: <HydrateFallback />,
         path: "/",
         lazy: async () => ({
             Component: (await import("@/pages/layout")).default,
