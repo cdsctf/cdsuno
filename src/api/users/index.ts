@@ -37,7 +37,7 @@ export interface UserLoginRequest {
     captcha?: {
         id?: string;
         content?: string;
-    };
+    } | null;
 }
 
 export async function login(request: UserLoginRequest) {

@@ -1,17 +1,26 @@
 import { Input } from "@/components/ui/input";
 import { ChallengeCard } from "@/components/widgets/challenge-card";
 import { Challenge } from "@/models/challenge";
-import { Search, Library } from "lucide-react";
+import {
+    SearchIcon,
+    LibraryIcon,
+    PackageOpenIcon,
+    ListOrderedIcon,
+} from "lucide-react";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Pagination } from "@/components/ui/pagination";
-import { ListOrdered } from "lucide-react";
 import { useEffect, useState } from "react";
-import { ChallengeStatus, getChallenges, getChallengeStatus } from "@/api/challenge";
+import {
+    ChallengeStatus,
+    getChallenges,
+    getChallengeStatus,
+} from "@/api/challenge";
 import { useAuthStore } from "@/storages/auth";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
 import { useSearchParams } from "react-router";
+import { Select } from "@/components/ui/select";
 
 export default function Index() {
     const authStore = useAuthStore();
@@ -79,7 +88,7 @@ export default function Index() {
             >
                 <div className={cn(["flex", "items-center", "gap-3"])}>
                     <Input
-                        icon={Library}
+                        icon={LibraryIcon}
                         className={cn(["flex-1"])}
                         placeholder={"题目名"}
                         value={title}
@@ -88,7 +97,7 @@ export default function Index() {
                     <Button
                         size={"lg"}
                         className={cn(["h-12"])}
-                        icon={Search}
+                        icon={SearchIcon}
                         variant={"solid"}
                         onClick={() => setDoSearch((prev) => prev + 1)}
                     >
@@ -109,23 +118,20 @@ export default function Index() {
                         value={page}
                         onChange={setPage}
                     />
-                    <div
-                        className={cn(["hidden", "md:flex", "w-1/5", "gap-5"])}
-                    >
-                        <Input
-                            type={"number"}
-                            className={cn(["flex-1"])}
-                            icon={ListOrdered}
-                            placeholder={"每页题目数量"}
+                    <div className={cn(["hidden", "md:flex", "gap-5"])}>
+                        <Select
                             size={"sm"}
-                            value={size}
-                            onChange={(e) => setSize(e.target.valueAsNumber)}
-                            slotProps={{
-                                input: {
-                                    min: 0,
-                                    max: 50,
-                                },
-                            }}
+                            placeholder={"每页显示"}
+                            icon={ListOrderedIcon}
+                            className={cn(["w-48"])}
+                            options={[
+                                { value: "10" },
+                                { value: "20" },
+                                { value: "40" },
+                                { value: "60" },
+                            ]}
+                            value={String(size)}
+                            onValueChange={(value) => setSize(Number(value))}
                         />
                     </div>
                 </div>
@@ -155,6 +161,20 @@ export default function Index() {
                             </Dialog>
                         ))}
                     </div>
+                    {!challenges?.length && (
+                        <div
+                            className={cn([
+                                "text-secondary-foreground",
+                                "flex",
+                                "justify-center",
+                                "gap-3",
+                                "select-none",
+                            ])}
+                        >
+                            <PackageOpenIcon />
+                            好像还没有题目哦。
+                        </div>
+                    )}
                 </div>
             </div>
         </>

@@ -11,8 +11,9 @@ import "katex/dist/katex.min.css";
 import "highlight.js/styles/atom-one-dark.min.css";
 import { cn } from "@/utils";
 import React from "react";
+import { Typography } from "../ui/typography";
 
-interface MarkdownRenderProps extends React.ComponentProps<"article"> {
+interface MarkdownRenderProps extends React.ComponentProps<typeof Typography> {
     src?: string;
 }
 
@@ -20,15 +21,7 @@ function MarkdownRender(props: MarkdownRenderProps) {
     const { src, ...rest } = props;
 
     return (
-        <article
-            className={cn([
-                "prose",
-                "dark:prose-invert",
-                "prose-pre:p-0",
-                "max-w-full",
-            ])}
-            {...rest}
-        >
+        <Typography {...rest}>
             <Markdown
                 remarkPlugins={[
                     remarkGfm,
@@ -59,7 +52,7 @@ function MarkdownRender(props: MarkdownRenderProps) {
             >
                 {src}
             </Markdown>
-        </article>
+        </Typography>
     );
 }
 

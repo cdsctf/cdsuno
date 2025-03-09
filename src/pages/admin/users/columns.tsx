@@ -248,6 +248,7 @@ const columns: ColumnDef<User>[] = [
                         size={"sm"}
                         square
                         icon={TrashIcon}
+                        disabled={row.original.group === Group.Admin}
                         onClick={() => setDeleteDialogOpen(true)}
                     />
                     <Dialog
