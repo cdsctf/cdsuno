@@ -67,7 +67,7 @@ export default function Index() {
                                 "text-md",
                             ])}
                         >
-                            v0.0.1
+                            {`v${configStore?.config?.version?.tag} / ${configStore?.config?.version?.commit?.slice(0, 7)}`}
                         </div>
                     </div>
                 </div>
@@ -174,20 +174,6 @@ export default function Index() {
                             target={"_blank"}
                         >
                             Reverier-Xu & Ret 2 Shell
-                        </a>
-                    </Button>
-                    <Button
-                        className={cn(["rounded-full"])}
-                        icon={StarIcon}
-                        variant={"tonal"}
-                        size={"sm"}
-                        asChild
-                    >
-                        <a
-                            href={"https://github.com/GZTimeWalker"}
-                            target={"_blank"}
-                        >
-                            GZTimeWalker & GZCTF
                         </a>
                     </Button>
                 </div>

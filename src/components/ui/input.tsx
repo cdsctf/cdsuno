@@ -23,7 +23,7 @@ const inputVariants = cva(
         "file:text-sm",
         "file:font-medium",
         "file:text-foreground",
-        "placeholder:text-primary/80",
+        "placeholder:text-secondary-foreground/80",
         "focus-visible:outline-hidden",
         "focus-visible:ring-2",
         "focus-visible:ring-ring",

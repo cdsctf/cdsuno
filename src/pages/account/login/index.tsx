@@ -83,15 +83,19 @@ export default function Index() {
                             {configStore?.config?.meta?.title}
                         </span>
                     </div>
-                    <Button
-                        asChild
-                        className={cn("w-full")}
-                        size={"lg"}
-                        variant={"tonal"}
-                        icon={UserRoundPlus}
-                    >
-                        <Link to={"/account/register"}>还没有账号？注册！</Link>
-                    </Button>
+                    {configStore?.config?.auth?.is_registration_enabled && (
+                        <Button
+                            asChild
+                            className={cn("w-full")}
+                            size={"lg"}
+                            variant={"tonal"}
+                            icon={UserRoundPlus}
+                        >
+                            <Link to={"/account/register"}>
+                                还没有账号？注册！
+                            </Link>
+                        </Button>
+                    )}
                 </div>
             </Card>
         </div>

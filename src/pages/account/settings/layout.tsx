@@ -1,13 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { InfoIcon, LockIcon, UserRoundXIcon } from "lucide-react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 
 export default function Layout() {
-    const sharedStore = useSharedStore();
-    const navigate = useNavigate();
     const location = useLocation();
     const pathname = location.pathname;
 
@@ -32,11 +29,14 @@ export default function Layout() {
                     "lg:w-1/5",
                     "bg-card/30",
                     "backdrop-blur-sm",
-                    "p-5",
                     "lg:flex",
                     "flex-col",
                     "gap-3",
+                    "p-5",
                     "border-r-1",
+                    "lg:sticky",
+                    "top-16",
+                    "h-[calc(100vh-64px)]",
                 ])}
             >
                 {options?.map((option, index) => (

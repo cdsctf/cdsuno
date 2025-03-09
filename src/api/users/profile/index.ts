@@ -23,3 +23,15 @@ export async function updateUserProfilePassword(
 ) {
     return alova.Put<Response<never>>("/users/profile/password", request);
 }
+
+export interface DeleteUserProfileRequest {
+    password: string;
+    captcha?: {
+        id?: string;
+        content?: string;
+    } | null;
+}
+
+export async function deleteUserProfile(request: DeleteUserProfileRequest) {
+    return alova.Delete<Response<never>>("/users/profile", request);
+}

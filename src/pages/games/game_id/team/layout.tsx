@@ -124,11 +124,14 @@ export default function Layout() {
                     "lg:w-1/5",
                     "bg-card/30",
                     "backdrop-blur-sm",
-                    "p-5",
                     "lg:flex",
                     "flex-col",
                     "gap-3",
+                    "p-5",
                     "border-r-1",
+                    "lg:sticky",
+                    "top-16",
+                    "h-[calc(100vh-64px)]",
                 ])}
             >
                 {options?.map((option, index) => (

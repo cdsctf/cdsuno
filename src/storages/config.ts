@@ -8,6 +8,9 @@ export interface ConfigState {
             description?: string;
             keywords?: string;
         };
+        auth?: {
+            is_registration_enabled?: boolean;
+        };
         captcha?: {
             provider?: "none" | "pow" | "image" | "turnstile" | "hcaptcha";
             turnstile?: {
@@ -16,6 +19,10 @@ export interface ConfigState {
             hcaptcha?: {
                 site_key?: string;
             };
+        };
+        version?: {
+            tag?: string;
+            commit?: string;
         };
     };
     setConfig: (config: ConfigState["config"]) => void;

@@ -35,12 +35,13 @@ function LoginForm() {
         password: z.string({
             message: "请输入密码",
         }),
+        captcha: z
+            .object({
+                id: z.string(),
+                content: z.string(),
+            })
+            .nullish(),
     });
-
-    const [captcha, setCaptcha] = useState<{
-        id?: string;
-        content?: string;
-    }>();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -49,7 +50,6 @@ function LoginForm() {
     function onSubmit(values: z.infer<typeof formSchema>) {
         setLoading(true);
         login({
-            captcha,
             ...values,
         })
             .then((res) => {
@@ -120,10 +120,10 @@ function LoginForm() {
                     {configStore?.config?.captcha?.provider !== "none" && (
                         <FormField
                             name={"captcha"}
-                            render={() => (
+                            render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>验证码</FormLabel>
-                                    <Captcha onChange={setCaptcha} />
+                                    <Captcha onChange={field.onChange} />
                                 </FormItem>
                             )}
                         />
