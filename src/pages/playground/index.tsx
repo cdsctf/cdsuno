@@ -1,13 +1,13 @@
 import { Input } from "@/components/ui/input";
 import { ChallengeCard } from "@/components/widgets/challenge-card";
-import { Challenge, ChallengeStatus } from "@/models/challenge";
+import { Challenge } from "@/models/challenge";
 import { Search, Library } from "lucide-react";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Pagination } from "@/components/ui/pagination";
 import { ListOrdered } from "lucide-react";
 import { useEffect, useState } from "react";
-import { getChallenges, getChallengeStatus } from "@/api/challenge";
+import { ChallengeStatus, getChallenges, getChallengeStatus } from "@/api/challenge";
 import { useAuthStore } from "@/storages/auth";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
@@ -89,7 +89,7 @@ export default function Index() {
                         size={"lg"}
                         className={cn(["h-12"])}
                         icon={Search}
-                        variant={"tonal"}
+                        variant={"solid"}
                         onClick={() => setDoSearch((prev) => prev + 1)}
                     >
                         搜索

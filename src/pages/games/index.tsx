@@ -7,7 +7,7 @@ import { Pagination } from "@/components/ui/pagination";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Game } from "@/models/game";
 import { cn } from "@/utils";
-import { Flag, Search } from "lucide-react";
+import { Flag, PackageOpenIcon, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -68,7 +68,6 @@ export default function Index() {
                 ])}
             >
                 <Input
-                    size={"sm"}
                     icon={Search}
                     className={cn(["w-full"])}
                     placeholder={"比赛名"}
@@ -91,6 +90,7 @@ export default function Index() {
                         "gap-3",
                         "justify-start",
                         "overflow-auto",
+                        "select-none",
                     ])}
                 >
                     {games?.map((game) => (
@@ -108,6 +108,18 @@ export default function Index() {
                             {game?.title}
                         </Button>
                     ))}
+                    {!games?.length && (
+                        <div
+                            className={cn([
+                                "text-secondary-foreground",
+                                "flex",
+                                "gap-3",
+                            ])}
+                        >
+                            <PackageOpenIcon />
+                            好像还没有比赛哦。
+                        </div>
+                    )}
                 </Card>
             </div>
             <div

@@ -9,11 +9,9 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAuthStore } from "@/storages/auth";
-import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckIcon, LockIcon, LockOpenIcon } from "lucide-react";
+import { LockIcon, LockOpenIcon, SaveIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -153,9 +151,9 @@ export default function Index() {
                     <Button
                         size={"lg"}
                         type={"submit"}
-                        level={"info"}
+                        level={"primary"}
                         variant={"solid"}
-                        icon={CheckIcon}
+                        icon={SaveIcon}
                         loading={loading}
                     >
                         保存

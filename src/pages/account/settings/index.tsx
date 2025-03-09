@@ -26,6 +26,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
     CheckIcon,
     MailIcon,
+    SaveIcon,
     TrashIcon,
     TypeIcon,
     UserRoundIcon,
@@ -295,9 +296,9 @@ export default function Index() {
                     <Button
                         size={"lg"}
                         type={"submit"}
-                        level={"info"}
+                        level={"primary"}
                         variant={"solid"}
-                        icon={CheckIcon}
+                        icon={SaveIcon}
                         loading={loading}
                     >
                         保存
