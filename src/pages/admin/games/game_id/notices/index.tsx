@@ -21,7 +21,6 @@ import {
 import { cn } from "@/utils";
 import { columns } from "./columns";
 import { useDebounce } from "@/hooks/use-debounce";
-import { useCategoryStore } from "@/storages/category";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useSharedStore } from "@/storages/shared";
 import { Context } from "../context";
@@ -120,7 +119,7 @@ export default function Index() {
                 >
                     <Button
                         icon={PlusCircleIcon}
-                        variant={"tonal"}
+                        variant={"solid"}
                         onClick={() => setCreateDialogOpen(true)}
                     >
                         添加通知

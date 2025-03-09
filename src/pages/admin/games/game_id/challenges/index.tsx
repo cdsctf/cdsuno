@@ -214,7 +214,7 @@ export default function Index() {
                     />
                     <Button
                         icon={PlusCircle}
-                        variant={"tonal"}
+                        variant={"solid"}
                         onClick={() => setCreateDialogOpen(true)}
                     >
                         添加题目
