@@ -164,9 +164,10 @@ export default createBrowserRouter([
                 path: "admin",
                 children: [
                     {
-                        index: true,
+                        path: "platform",
                         lazy: async () => ({
-                            Component: (await import("@/pages/admin")).default,
+                            Component: (await import("@/pages/admin/platform"))
+                                .default,
                         }),
                     },
                     {

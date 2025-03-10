@@ -4,13 +4,13 @@ import { Toaster } from "@/components/ui/sonner";
 import { useEffect } from "react";
 import { useThemeStore } from "@/storages/theme";
 import { useConfigStore } from "@/storages/config";
-import { getConfigs } from "@/api/config";
 import { cn } from "./utils";
 import { ScrollArea } from "./components/ui/scroll-area";
+import { getConfigs } from "./api/configs";
 
 function App() {
     const { theme } = useThemeStore();
-    const configStore = useConfigStore();
+    const { setConfig } = useConfigStore();
 
     useEffect(() => {
         const root = window.document.documentElement;
@@ -29,14 +29,12 @@ function App() {
         root.classList.add(theme);
     }, [theme]);
 
-    function fetchConfigs() {
-        getConfigs().then((res) => {
-            configStore.setConfig(res.data);
-        });
-    }
-
     useEffect(() => {
-        fetchConfigs();
+        getConfigs({
+            is_desensitized: true,
+        }).then((res) => {
+            setConfig(res.data);
+        });
     }, []);
 
     return (

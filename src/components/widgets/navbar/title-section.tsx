@@ -24,12 +24,12 @@ function TitleSection(props: TitleSectionProps) {
         },
         admin: {
             to: "/admin",
-            src: "/api/configs/icon",
+            src: "/api/configs/logo",
             title: configStore?.config?.meta?.title,
         },
         default: {
             to: "/",
-            src: "/api/configs/icon",
+            src: "/api/configs/logo",
             title: configStore?.config?.meta?.title,
         },
     };

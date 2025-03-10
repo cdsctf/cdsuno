@@ -62,8 +62,8 @@ function TabSection() {
             case "admin":
                 return [
                     {
-                        link: "/admin",
-                        name: "主页",
+                        link: "/admin/platform",
+                        name: "平台",
                         icon: House,
                     },
                     {

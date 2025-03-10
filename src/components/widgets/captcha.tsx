@@ -1,4 +1,3 @@
-import { getCaptcha } from "@/api/config";
 import { useConfigStore } from "@/storages/config";
 import { useThemeStore } from "@/storages/theme";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
@@ -10,6 +9,7 @@ import { Bot, RefreshCcw, Image } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { cn } from "@/utils";
+import { generateCaptcha } from "@/api/configs/captcha";
 
 export interface CaptchaProps {
     onChange: (captcha?: { id?: string; content?: string }) => void;
@@ -76,7 +76,7 @@ function PowCaptcha(props: CaptchaProps) {
 
         async function fetchCaptchaData() {
             setLoading(true);
-            const res = await getCaptcha();
+            const res = await generateCaptcha();
             const d = Number(res.data?.challenge?.split("#")[0]);
             const c = res.data?.challenge?.split("#")[1];
             setId(res.data?.id);
@@ -133,7 +133,7 @@ function ImageCaptcha(props: CaptchaProps) {
 
     async function fetchCaptchaData() {
         setLoading(true);
-        const res = await getCaptcha();
+        const res = await generateCaptcha();
         setId(res.data?.id);
         setChallenge(res.data?.challenge);
     }
