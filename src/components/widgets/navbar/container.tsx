@@ -59,7 +59,7 @@ function Container() {
                     <AppearanceDropdown />
                     {authStore?.user?.group === Group.Admin && (
                         <Button asChild icon={Settings} size={"sm"} square>
-                            <Link to={"/admin"} />
+                            <Link to={"/admin/platform"} />
                         </Button>
                     )}
                     <AuthSection />

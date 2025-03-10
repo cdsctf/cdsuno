@@ -39,7 +39,6 @@ import {
     DropzoneTrigger,
     useDropzone,
 } from "@/components/ui/dropzone";
-import { Avatar } from "@radix-ui/react-avatar";
 import { Label } from "@/components/ui/label";
 
 export default function Index() {
@@ -495,9 +494,9 @@ export default function Index() {
                                                 content: "否",
                                             },
                                         ]}
-                                        onValueChange={(value) => {
-                                            field.onChange(value === "true");
-                                        }}
+                                        onValueChange={(value) =>
+                                            field.onChange(value === "true")
+                                        }
                                         value={String(field.value)}
                                     />
                                 </FormControl>

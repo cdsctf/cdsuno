@@ -71,7 +71,7 @@ export default function Index() {
                         <img
                             alt="logo"
                             decoding={"async"}
-                            src={"/api/configs/icon"}
+                            src={"/api/configs/logo"}
                             draggable={false}
                             className={cn([
                                 "drop-shadow-md",
