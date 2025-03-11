@@ -33,8 +33,9 @@ export interface Config {
             score?: number;
         };
     };
-    version?: {
-        tag?: string;
-        commit?: string;
-    };
+}
+
+export interface Version {
+    tag?: string;
+    commit?: string;
 }

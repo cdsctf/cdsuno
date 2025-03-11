@@ -6,11 +6,11 @@ import { useThemeStore } from "@/storages/theme";
 import { useConfigStore } from "@/storages/config";
 import { cn } from "./utils";
 import { ScrollArea } from "./components/ui/scroll-area";
-import { getConfigs } from "./api/configs";
+import { getConfigs, getVersion } from "./api/configs";
 
 function App() {
     const { theme } = useThemeStore();
-    const { setConfig } = useConfigStore();
+    const { setConfig, setVersion } = useConfigStore();
 
     useEffect(() => {
         const root = window.document.documentElement;
@@ -33,7 +33,11 @@ function App() {
         getConfigs({
             is_desensitized: true,
         }).then((res) => {
-            setConfig(res.data);
+            setConfig(res.data!);
+        });
+
+        getVersion().then((res) => {
+            setVersion(res.data!);
         });
     }, []);
 

@@ -23,7 +23,7 @@ function TitleSection(props: TitleSectionProps) {
             title: currentGame?.title,
         },
         admin: {
-            to: "/admin",
+            to: "/admin/platform",
             src: "/api/configs/logo",
             title: configStore?.config?.meta?.title,
         },
