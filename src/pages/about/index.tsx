@@ -1,19 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useDecryptedText } from "@/hooks/use-decrypted-text";
 import { useConfigStore } from "@/storages/config";
 import { cn } from "@/utils";
-import {
-    CodeXmlIcon,
-    GitBranchIcon,
-    GitMergeIcon,
-    HandshakeIcon,
-    HeartIcon,
-    StarIcon,
-} from "lucide-react";
+import { CodeXmlIcon, HandshakeIcon, HeartIcon, StarIcon } from "lucide-react";
 
 export default function Index() {
-    const configStore = useConfigStore();
+    const { version } = useConfigStore();
 
     return (
         <div
@@ -67,7 +59,7 @@ export default function Index() {
                                 "text-md",
                             ])}
                         >
-                            {`v${configStore?.config?.version?.tag} / ${configStore?.config?.version?.commit?.slice(0, 7)}`}
+                            {`v${version?.tag} / ${version?.commit?.slice(0, 7)}`}
                         </div>
                     </div>
                 </div>
