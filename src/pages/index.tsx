@@ -51,7 +51,7 @@ export default function () {
                     {description}
                 </span>
             </div>
-            <div
+            {/* <div
                 className={cn([
                     "absolute",
                     "bottom-4",
@@ -69,7 +69,7 @@ export default function () {
                 <Button icon={InfoIcon} square asChild>
                     <Link to={"/about"} />
                 </Button>
-            </div>
+            </div> */}
         </>
     );
 }
