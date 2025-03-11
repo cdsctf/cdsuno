@@ -5,8 +5,6 @@ export interface Config {
         keywords?: string;
     };
     auth?: {
-        secret?: string;
-        expiration?: number;
         is_registration_enabled?: boolean;
     };
     email?: {
