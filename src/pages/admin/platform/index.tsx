@@ -67,8 +67,6 @@ export default function Index() {
             description: z.string().default(""),
         }),
         auth: z.object({
-            secret: z.string(),
-            expiration: z.number(),
             is_registration_enabled: z.boolean(),
         }),
         email: z.object({
@@ -201,30 +199,18 @@ export default function Index() {
                     "lg:mx-30",
                 ])}
             >
-                <div
+                <h2
                     className={cn([
                         "flex",
                         "gap-2",
                         "items-center",
-                        "justify-between",
                         "text-xl",
+                        "mt-2",
                     ])}
                 >
-                    <h2
-                        className={cn([
-                            "flex",
-                            "gap-2",
-                            "items-center",
-                            "text-xl",
-                        ])}
-                    >
-                        <InfoIcon />
-                        元信息
-                    </h2>
-                    <Button type={"submit"} variant={"solid"} icon={SaveIcon}>
-                        保存
-                    </Button>
-                </div>
+                    <InfoIcon />
+                    元信息
+                </h2>
                 <Separator />
                 <div className={cn(["flex", "gap-3"])}>
                     <div
@@ -321,84 +307,19 @@ export default function Index() {
                         </Dropzone>
                     </div>
                 </div>
-                <div
+                <h2
                     className={cn([
                         "flex",
                         "gap-2",
                         "items-center",
-                        "justify-between",
                         "text-xl",
                         "mt-2",
                     ])}
                 >
-                    <h2
-                        className={cn([
-                            "flex",
-                            "gap-2",
-                            "items-center",
-                            "text-xl",
-                        ])}
-                    >
-                        <BadgeCheckIcon />
-                        用户策略
-                    </h2>
-                    <Button type={"submit"} variant={"solid"} icon={SaveIcon}>
-                        保存
-                    </Button>
-                </div>
+                    <BadgeCheckIcon />
+                    用户策略
+                </h2>
                 <Separator />
-                <div className={cn(["flex", "gap-3"])}>
-                    <FormField
-                        control={form.control}
-                        name={"auth.secret"}
-                        render={({ field }) => (
-                            <FormItem className={cn(["w-full"])}>
-                                <FormLabel>JWT 密钥</FormLabel>
-                                <FormDescription>
-                                    若更改 JWT 密钥，则会自动废除所有已生成的
-                                    Token。
-                                </FormDescription>
-                                <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={KeyIcon}
-                                        placeholder="请输入JWT 密钥"
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name={"auth.expiration"}
-                        render={({ field }) => (
-                            <FormItem className={cn(["w-full"])}>
-                                <FormLabel>JWT 过期时间（分）</FormLabel>
-                                <FormDescription>
-                                    Token 到期即需重新登录。
-                                </FormDescription>
-                                <FormControl>
-                                    <Input
-                                        {...field}
-                                        type={"number"}
-                                        icon={KeyIcon}
-                                        placeholder="请输入过期时间"
-                                        value={field.value || ""}
-                                        onChange={(e) =>
-                                            field.onChange(
-                                                e.target.valueAsNumber
-                                            )
-                                        }
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
                 <FormField
                     control={form.control}
                     name={"auth.is_registration_enabled"}
@@ -429,31 +350,18 @@ export default function Index() {
                         </FormItem>
                     )}
                 />
-                <div
+                <h2
                     className={cn([
                         "flex",
                         "gap-2",
                         "items-center",
-                        "justify-between",
                         "text-xl",
                         "mt-2",
                     ])}
                 >
-                    <h2
-                        className={cn([
-                            "flex",
-                            "gap-2",
-                            "items-center",
-                            "text-xl",
-                        ])}
-                    >
-                        <MailIcon />
-                        邮箱
-                    </h2>
-                    <Button type={"submit"} variant={"solid"} icon={SaveIcon}>
-                        保存
-                    </Button>
-                </div>
+                    <MailIcon />
+                    邮箱
+                </h2>
                 <Separator />
                 <FormField
                     control={form.control}
@@ -488,151 +396,142 @@ export default function Index() {
                         </FormItem>
                     )}
                 />
-                <div className={cn(["flex", "gap-3"])}>
-                    <FormField
-                        control={form.control}
-                        name={"email.host"}
-                        render={({ field }) => (
-                            <FormItem className={cn(["w-full"])}>
-                                <FormLabel>SMTP 服务器地址</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={MailboxIcon}
-                                        placeholder="请输入 SMTP 服务器地址"
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name={"email.port"}
-                        render={({ field }) => (
-                            <FormItem className={cn(["w-full"])}>
-                                <FormLabel>SMTP 服务器端口</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        {...field}
-                                        type={"number"}
-                                        icon={KeyIcon}
-                                        placeholder="请输入 SMTP 服务器端口"
-                                        value={field.value || ""}
-                                        onChange={(e) =>
-                                            field.onChange(
-                                                e.target.valueAsNumber
-                                            )
-                                        }
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name={"email.tls"}
-                        render={({ field }) => (
-                            <FormItem className={cn(["w-full"])}>
-                                <FormLabel>TLS</FormLabel>
-                                <FormControl>
-                                    <Select
-                                        {...field}
-                                        icon={LockIcon}
-                                        options={[
-                                            {
-                                                value: "tls",
-                                                content: "TLS",
-                                            },
-                                            {
-                                                value: "starttls",
-                                                content: "StartTLS",
-                                            },
-                                            {
-                                                value: "none",
-                                                content: "无",
-                                            },
-                                        ]}
-                                        onValueChange={(value) =>
-                                            field.onChange(value)
-                                        }
-                                        value={String(field.value)}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <div className={cn(["flex", "gap-3"])}>
-                    <FormField
-                        control={form.control}
-                        name={"email.username"}
-                        render={({ field }) => (
-                            <FormItem className={cn(["w-full"])}>
-                                <FormLabel>用户名</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={SendIcon}
-                                        placeholder="请输入用户名"
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name={"email.password"}
-                        render={({ field }) => (
-                            <FormItem className={cn(["w-full"])}>
-                                <FormLabel>授权码</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        {...field}
-                                        type={"password"}
-                                        icon={LockIcon}
-                                        placeholder="请输入授权码"
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <div
+                {form.watch("email.is_enabled") && (
+                    <>
+                        <div className={cn(["flex", "gap-3"])}>
+                            <FormField
+                                control={form.control}
+                                name={"email.host"}
+                                render={({ field }) => (
+                                    <FormItem className={cn(["w-full"])}>
+                                        <FormLabel>SMTP 服务器地址</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                icon={MailboxIcon}
+                                                placeholder="请输入 SMTP 服务器地址"
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name={"email.port"}
+                                render={({ field }) => (
+                                    <FormItem className={cn(["w-full"])}>
+                                        <FormLabel>SMTP 服务器端口</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                type={"number"}
+                                                icon={KeyIcon}
+                                                placeholder="请输入 SMTP 服务器端口"
+                                                value={field.value || ""}
+                                                onChange={(e) =>
+                                                    field.onChange(
+                                                        e.target.valueAsNumber
+                                                    )
+                                                }
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name={"email.tls"}
+                                render={({ field }) => (
+                                    <FormItem className={cn(["w-full"])}>
+                                        <FormLabel>TLS</FormLabel>
+                                        <FormControl>
+                                            <Select
+                                                {...field}
+                                                icon={LockIcon}
+                                                options={[
+                                                    {
+                                                        value: "tls",
+                                                        content: "TLS",
+                                                    },
+                                                    {
+                                                        value: "starttls",
+                                                        content: "StartTLS",
+                                                    },
+                                                    {
+                                                        value: "none",
+                                                        content: "无",
+                                                    },
+                                                ]}
+                                                onValueChange={(value) =>
+                                                    field.onChange(value)
+                                                }
+                                                value={String(field.value)}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+                        <div className={cn(["flex", "gap-3"])}>
+                            <FormField
+                                control={form.control}
+                                name={"email.username"}
+                                render={({ field }) => (
+                                    <FormItem className={cn(["w-full"])}>
+                                        <FormLabel>用户名</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                icon={SendIcon}
+                                                placeholder="请输入用户名"
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name={"email.password"}
+                                render={({ field }) => (
+                                    <FormItem className={cn(["w-full"])}>
+                                        <FormLabel>授权码</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                type={"password"}
+                                                icon={LockIcon}
+                                                placeholder="请输入授权码"
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+                    </>
+                )}
+                <h2
                     className={cn([
                         "flex",
                         "gap-2",
                         "items-center",
-                        "justify-between",
                         "text-xl",
                         "mt-2",
                     ])}
                 >
-                    <h2
-                        className={cn([
-                            "flex",
-                            "gap-2",
-                            "items-center",
-                            "text-xl",
-                        ])}
-                    >
-                        <BotIcon />
-                        人机验证
-                    </h2>
-                    <Button type={"submit"} variant={"solid"} icon={SaveIcon}>
-                        保存
-                    </Button>
-                </div>
+                    <BotIcon />
+                    人机验证
+                </h2>
                 <Separator />
                 <div className={cn(["flex", "gap-3"])}>
                     <FormField
@@ -860,6 +759,15 @@ export default function Index() {
                         </div>
                     </>
                 )}
+                <Button
+                    type={"submit"}
+                    variant={"solid"}
+                    size={"lg"}
+                    icon={SaveIcon}
+                    className={cn(["mt-2"])}
+                >
+                    保存
+                </Button>
             </form>
         </Form>
     );
