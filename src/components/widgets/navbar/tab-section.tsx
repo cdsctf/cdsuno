@@ -42,9 +42,9 @@ function TabSection() {
                         icon: Star,
                         disabled:
                             selfTeam?.state !== State.Passed ||
-                            new Date(Number(currentGame?.ended_at) * 1000) >
+                            new Date(Number(currentGame?.ended_at) * 1000) <
                                 new Date() ||
-                            new Date(Number(currentGame?.started_at) * 1000) <
+                            new Date(Number(currentGame?.started_at) * 1000) >
                                 new Date(),
                     },
                     {
