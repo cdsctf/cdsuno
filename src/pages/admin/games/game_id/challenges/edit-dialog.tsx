@@ -125,7 +125,7 @@ function EditDialog(props: EditDialogProps) {
             challenge_id: gameChallenge?.challenge_id,
             ...values,
             frozen_at: values.frozen_at
-                ? values.frozen_at.getTime() / 1000
+                ? Math.floor(values.frozen_at.getTime() / 1000)
                 : null,
         }).then((res) => {
             if (res.code === 200) {

@@ -52,8 +52,8 @@ function CreateDialog(props: CreateDialogProps) {
             description: "",
             is_need_write_up: false,
             is_public: false,
-            started_at: values.started_at.getTime() / 1000,
-            ended_at: values.ended_at.getTime() / 1000,
+            started_at: Math.floor(values.started_at.getTime() / 1000),
+            ended_at: Math.floor(values.ended_at.getTime() / 1000),
         })
             .then((res) => {
                 if (res.code === 200) {
