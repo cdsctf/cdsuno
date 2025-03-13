@@ -114,9 +114,9 @@ export default function Index() {
         updateGame({
             ...values,
             id: game?.id,
-            started_at: values.started_at?.getTime() / 1000,
-            frozen_at: values.started_at?.getTime() / 1000,
-            ended_at: values.ended_at?.getTime() / 1000,
+            started_at: Math.floor(values.started_at?.getTime() / 1000),
+            frozen_at: Math.floor(values.started_at?.getTime() / 1000),
+            ended_at: Math.floor(values.ended_at?.getTime() / 1000),
         })
             .then((res) => {
                 if (res.code === 200) {
