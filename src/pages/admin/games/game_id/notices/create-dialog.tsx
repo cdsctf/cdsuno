@@ -18,7 +18,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { createGameNotice } from "@/api/games";
+import { createGameNotice } from "@/api/admin/games/game_id/notices";
 import { Editor } from "@/components/ui/editor";
 
 interface CreateDialogProps {

@@ -15,7 +15,7 @@ export interface GetTeamRequest {
 
 export async function getTeams(request: GetTeamRequest) {
     return alova.Get<WebResponse<Array<Team>>>(
-        `/games/${request.game_id}/teams`,
+        `/admin/games/${request.game_id}/teams`,
         {
             params: request,
         }

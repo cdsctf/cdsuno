@@ -133,7 +133,7 @@ export default function Index() {
             formData.append("file", file);
 
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", `/api/games/${game?.id}/poster`, true);
+            xhr.open("POST", `/api/admin/games/${game?.id}/poster`, true);
 
             xhr.upload.onprogress = (event) => {
                 if (event.lengthComputable) {
@@ -204,7 +204,7 @@ export default function Index() {
             formData.append("file", file);
 
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", `/api/games/${game?.id}/icon`, true);
+            xhr.open("POST", `/api/admin/games/${game?.id}/icon`, true);
 
             xhr.upload.onprogress = (event) => {
                 if (event.lengthComputable) {

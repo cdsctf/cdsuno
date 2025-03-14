@@ -26,7 +26,7 @@ import { useSharedStore } from "@/storages/shared";
 import { Context } from "../context";
 import { CreateDialog } from "./create-dialog";
 import { GameNotice } from "@/models/game_notice";
-import { getGameNotice } from "@/api/games";
+import { getGameNotice } from "@/api/games/game_id/notices";
 
 export default function Index() {
     const sharedStore = useSharedStore();

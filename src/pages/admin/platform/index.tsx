@@ -120,7 +120,7 @@ export default function Index() {
             formData.append("file", file);
 
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/api/configs/logo", true);
+            xhr.open("POST", "/api/admin/configs/logo", true);
 
             xhr.upload.onprogress = (event) => {
                 if (event.lengthComputable) {
