@@ -29,7 +29,6 @@ import { columns } from "./columns";
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Select } from "@/components/ui/select";
-import { useCategoryStore } from "@/storages/category";
 import { useSharedStore } from "@/storages/shared";
 import { Context } from "../context";
 import { State, Team } from "@/models/team";
