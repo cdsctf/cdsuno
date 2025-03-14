@@ -1,5 +1,4 @@
-import { updateUserProfilePassword } from "@/api/users/profile";
-import { updateUser } from "@/api/users/user_id";
+import { updateUser } from "@/api/admin/users/user_id";
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -10,11 +9,9 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAuthStore } from "@/storages/auth";
-import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckIcon, LockIcon, LockOpenIcon, SaveIcon } from "lucide-react";
+import { LockIcon, SaveIcon } from "lucide-react";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";

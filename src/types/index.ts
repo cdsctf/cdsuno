@@ -1,4 +1,4 @@
-export interface Response<T> {
+export interface WebResponse<T> {
     code: number;
     data?: T;
     msg?: string;

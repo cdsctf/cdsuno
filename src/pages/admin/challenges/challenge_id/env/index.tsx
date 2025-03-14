@@ -5,11 +5,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/utils";
 import { Input } from "@/components/ui/input";
-import { updateChallengeEnv } from "@/api/challenge";
+import { updateChallengeEnv } from "@/api/admin/challenges/challenge_id/env";
 import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
 import {
-    Check,
     Clock,
     Container,
     Cpu,

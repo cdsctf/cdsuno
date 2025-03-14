@@ -9,7 +9,6 @@ import { Context } from "./context";
 import { SubmitSection } from "./submit-section";
 import { Team } from "@/models/team";
 import { EnvSection } from "./env-section";
-import { useThemeStore } from "@/storages/theme";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ChallengeDialogProps extends React.ComponentProps<typeof Card> {
@@ -18,7 +17,6 @@ interface ChallengeDialogProps extends React.ComponentProps<typeof Card> {
 }
 
 function ChallengeDialog(props: ChallengeDialogProps) {
-    const { theme } = useThemeStore();
     const { challenge, gameTeam, ...rest } = props;
     const { getCategory } = useCategoryStore();
 

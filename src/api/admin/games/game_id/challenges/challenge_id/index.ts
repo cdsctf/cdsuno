@@ -1,5 +1,5 @@
 import { GameChallenge } from "@/models/game_challenge";
-import { Response } from "@/types";
+import { WebResponse } from "@/types";
 import { alova } from "@/utils/alova";
 
 export interface UpdateGameChallengeRequest {
@@ -14,7 +14,7 @@ export interface UpdateGameChallengeRequest {
 }
 
 export async function updateGameChallenge(request: UpdateGameChallengeRequest) {
-    return alova.Put<Response<GameChallenge>>(
+    return alova.Put<WebResponse<GameChallenge>>(
         `/games/${request.game_id}/challenges/${request.challenge_id}`,
         request
     );
@@ -26,7 +26,7 @@ export interface DeleteGameChallengeRequest {
 }
 
 export async function deleteGameChallenge(request: DeleteGameChallengeRequest) {
-    return alova.Delete<Response<never>>(
+    return alova.Delete<WebResponse<never>>(
         `/games/${request.game_id}/challenges/${request.challenge_id}`,
         request
     );

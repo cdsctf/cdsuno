@@ -4,20 +4,18 @@ import {
     DropzoneTrigger,
     useDropzone,
 } from "@/components/ui/dropzone";
-import { User, Group } from "@/models/user";
+import { Group } from "@/models/user";
 import {
-    KeyIcon,
     UserRoundIcon,
     MailIcon,
     SaveIcon,
     UserRoundCheckIcon,
     ShieldIcon,
     UserRoundXIcon,
-    Type,
 } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./context";
-import { updateUser } from "@/api/users/user_id";
+import { updateUser } from "@/api/admin/users/user_id";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";

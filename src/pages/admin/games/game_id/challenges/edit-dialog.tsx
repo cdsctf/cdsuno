@@ -37,7 +37,7 @@ import {
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { curve } from "@/utils/math";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { updateGameChallenge } from "@/api/games/game_id/challenges/challenge_id";
+import { updateGameChallenge } from "@/api/admin/games/game_id/challenges/challenge_id";
 import { toast } from "sonner";
 
 interface EditDialogProps {
@@ -49,7 +49,6 @@ function EditDialog(props: EditDialogProps) {
     const { onClose, gameChallenge } = props;
 
     const { game } = useContext(Context);
-    const categoryStore = useCategoryStore();
     const sharedStore = useSharedStore();
 
     const formSchema = z.object({

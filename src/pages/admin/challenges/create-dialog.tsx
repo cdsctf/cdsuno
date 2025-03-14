@@ -1,4 +1,4 @@
-import { createChallenge } from "@/api/challenge";
+import { createChallenge } from "@/api/admin/challenges";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -15,7 +15,7 @@ import { useCategoryStore } from "@/storages/category";
 import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckIcon, LibraryIcon, PlusCircle, TypeIcon } from "lucide-react";
+import { CheckIcon, LibraryIcon, TypeIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";

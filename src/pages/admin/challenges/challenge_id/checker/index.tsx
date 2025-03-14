@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context";
-import { updateChallengeChecker } from "@/api/challenge";
+import { updateChallengeChecker } from "@/api/admin/challenges/challenge_id/checker";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

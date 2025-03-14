@@ -16,7 +16,7 @@ import {
     UserRoundCheckIcon,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { deleteUser } from "@/api/users/user_id";
+import { deleteUser } from "@/api/admin/users/user_id";
 import { ColumnDef } from "@tanstack/react-table";
 import { cn } from "@/utils";
 import { ContentDialog } from "@/components/widgets/content-dialog";

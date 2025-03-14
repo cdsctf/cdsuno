@@ -1,5 +1,5 @@
 import { updateUserProfile } from "@/api/users/profile";
-import { deleteUserAvatar } from "@/api/users/user_id/avatar";
+import { deleteUserAvatar } from "@/api/users/profile/avatar";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -85,7 +85,7 @@ export default function Index() {
             const formData = new FormData();
             formData.append("file", file);
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", `/api/users/${authStore?.user?.id}/avatar`, true);
+            xhr.open("POST", `/api/users/profile/avatar`, true);
             xhr.upload.onprogress = (event) => {
                 if (event.lengthComputable) {
                     const percentComplete = (event.loaded / event.total) * 100;

@@ -1,10 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { Image } from "@/components/ui/image";
 import { useDecryptedText } from "@/hooks/use-decrypted-text";
 import { useConfigStore } from "@/storages/config";
 import { cn } from "@/utils";
-import { InfoIcon } from "lucide-react";
-import { Link } from "react-router";
 
 export default function () {
     const configStore = useConfigStore();

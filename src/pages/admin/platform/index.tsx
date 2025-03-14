@@ -1,5 +1,5 @@
-import { getConfigs, updateConfig } from "@/api/configs";
-import { deleteLogo } from "@/api/configs/logo";
+import { getConfigs, updateConfig } from "@/api/admin/configs";
+import { deleteLogo } from "@/api/admin/configs/logo";
 import { Button } from "@/components/ui/button";
 import {
     Dropzone,
@@ -50,9 +50,7 @@ export default function Index() {
     const [config, setConfig] = useState<Config>();
 
     useEffect(() => {
-        getConfigs({
-            is_desensitized: false,
-        }).then((res) => {
+        getConfigs().then((res) => {
             setConfig(res.data);
         });
     }, []);

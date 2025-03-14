@@ -1,4 +1,4 @@
-import { Response } from "@/types";
+import { WebResponse } from "@/types";
 import { alova } from "@/utils/alova";
 
 export interface CreateTokenRequest {
@@ -7,8 +7,8 @@ export interface CreateTokenRequest {
 }
 
 export async function createToken(request: CreateTokenRequest) {
-    return alova.Post<Response<string>>(
-        `/games/${request.game_id}/teams/${request.team_id}/token`,
+    return alova.Post<WebResponse<string>>(
+        `/games/${request.game_id}/teams/profile/token`,
         request
     );
 }
@@ -19,8 +19,8 @@ export interface GetTokenRequest {
 }
 
 export async function getToken(request: GetTokenRequest) {
-    return alova.Get<Response<string>>(
-        `/games/${request.game_id}/teams/${request.team_id}/token`,
+    return alova.Get<WebResponse<string>>(
+        `/games/${request.game_id}/teams/profile/token`,
         {
             params: request,
         }
@@ -33,8 +33,8 @@ export interface DeleteTokenRequest {
 }
 
 export async function deleteToken(request: DeleteTokenRequest) {
-    return alova.Post<Response<string>>(
-        `/games/${request.game_id}/teams/${request.team_id}/token`,
+    return alova.Post<WebResponse<string>>(
+        `/games/${request.game_id}/teams/profile/token`,
         request
     );
 }

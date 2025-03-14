@@ -35,6 +35,7 @@ import { Select } from "@/components/ui/select";
 import { Pagination } from "@/components/ui/pagination";
 import { CreateDialog } from "./create-dialog";
 import { useSharedStore } from "@/storages/shared";
+
 export default function Index() {
     const [createDialogOpen, setCreateDialogOpen] = useState<boolean>(false);
     const sharedStore = useSharedStore();

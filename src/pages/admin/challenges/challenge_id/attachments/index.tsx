@@ -8,14 +8,12 @@ import { Metadata } from "@/models/media";
 import { CloudUploadIcon, HardDrive, TextIcon, TrashIcon } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context";
-import {
-    deleteChallengeAttachment,
-    getChallengeAttachmentMetadata,
-} from "@/api/challenge";
+import { deleteChallengeAttachment } from "@/api/admin/challenges/challenge_id/attachment";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { getChallengeAttachmentMetadata } from "@/api/challenges/challenge_id/attachment";
 
 export default function Index() {
     const { challenge } = useContext(Context);
@@ -36,7 +34,7 @@ export default function Index() {
             const xhr = new XMLHttpRequest();
             xhr.open(
                 "POST",
-                `/api/challenges/${challenge?.id}/attachment`,
+                `/api/admin/challenges/${challenge?.id}/attachment`,
                 true
             );
             xhr.upload.onprogress = (event) => {
