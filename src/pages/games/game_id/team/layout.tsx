@@ -1,5 +1,5 @@
-import { deleteTeam, setTeamReady } from "@/api/games/game_id/teams/team_id";
-import { leaveTeam } from "@/api/games/game_id/teams/team_id/users";
+import { deleteTeam, setTeamReady } from "@/api/games/game_id/teams/profile";
+import { leaveTeam } from "@/api/games/game_id/teams/profile/users";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";

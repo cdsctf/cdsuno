@@ -1,5 +1,5 @@
 import { Submission } from "@/models/submission";
-import { Response } from "@/types";
+import { WebResponse } from "@/types";
 import { alova } from "@/utils/alova";
 
 export interface CreateSubmissionRequest {
@@ -9,8 +9,8 @@ export interface CreateSubmissionRequest {
     game_id?: number;
 }
 
-export async function postSubmission(request: CreateSubmissionRequest) {
-    return alova.Post<Response<Submission>>("/submissions", request);
+export async function createSubmission(request: CreateSubmissionRequest) {
+    return alova.Post<WebResponse<Submission>>("/submissions", request);
 }
 
 export interface GetSubmissionRequest {
@@ -29,12 +29,8 @@ export interface GetSubmissionRequest {
 }
 
 export async function getSubmission(request: GetSubmissionRequest) {
-    return alova.Get<Response<Array<Submission>>>(`/submissions`, {
+    return alova.Get<WebResponse<Array<Submission>>>("/submissions", {
         params: request,
         cacheFor: 0,
     });
-}
-
-export interface DeleteSubmissionRequest {
-    id?: number;
 }

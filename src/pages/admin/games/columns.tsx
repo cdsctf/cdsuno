@@ -1,4 +1,4 @@
-import { deleteGame, updateGame } from "@/api/games/game_id";
+import { deleteGame, updateGame } from "@/api/admin/games/game_id";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

@@ -1,4 +1,4 @@
-import { createGame } from "@/api/games";
+import { createGame } from "@/api/admin/games";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { DateTimePicker } from "@/components/ui/datetime-picker";
@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckIcon, FlagIcon, PlusCircle, TypeIcon } from "lucide-react";
+import { CheckIcon, FlagIcon, TypeIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";

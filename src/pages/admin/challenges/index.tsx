@@ -8,7 +8,7 @@ import {
     TypeIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { getChallenges } from "@/api/challenge";
+import { getChallenges } from "@/api/admin/challenges";
 import {
     ColumnFiltersState,
     flexRender,

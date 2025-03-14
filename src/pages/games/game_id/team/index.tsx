@@ -1,5 +1,5 @@
-import { updateTeam } from "@/api/games/game_id/teams/team_id";
-import { deleteTeamAvatar } from "@/api/games/game_id/teams/team_id/avatar";
+import { updateTeam } from "@/api/games/game_id/teams/profile";
+import { deleteTeamAvatar } from "@/api/games/game_id/teams/profile/avatar";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -93,7 +93,7 @@ export default function Index() {
             const xhr = new XMLHttpRequest();
             xhr.open(
                 "POST",
-                `/api/games/${currentGame?.id}/teams/${selfTeam?.id}/avatar`,
+                `/api/games/${currentGame?.id}/teams/profile/avatar`,
                 true
             );
             xhr.upload.onprogress = (event) => {

@@ -9,7 +9,6 @@ import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { cn } from "@/utils";
 import { useCategoryStore } from "@/storages/category";
-import { ContentDialog } from "@/components/widgets/content-dialog";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -26,7 +25,7 @@ import { GameChallenge } from "@/models/game_challenge";
 import {
     deleteGameChallenge,
     updateGameChallenge,
-} from "@/api/games/game_id/challenges/challenge_id";
+} from "@/api/admin/games/game_id/challenges/challenge_id";
 import { EditDialog } from "./edit-dialog";
 
 const columns: ColumnDef<GameChallenge>[] = [

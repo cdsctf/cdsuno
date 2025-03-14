@@ -28,7 +28,6 @@ export default function Index() {
             title: debouncedTitle,
             page,
             size,
-            is_enabled: true,
             sorts: "-started_at",
         }).then((res) => {
             setTotal(res.total || 0);

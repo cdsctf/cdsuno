@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Flag, Send } from "lucide-react";
 import { cn } from "@/utils";
 import { useInterval } from "@/hooks/use-interval";
-import { getSubmission, postSubmission } from "@/api/submission";
+import { getSubmission, createSubmission } from "@/api/submissions";
 import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
 
@@ -41,7 +41,7 @@ function SubmitSection() {
 
     function handleFlagSubmit() {
         setLoading(true);
-        postSubmission({
+        createSubmission({
             challenge_id: challenge?.id,
             content: flag?.trim(),
             game_id: mode === "game" ? Number(team?.game_id) : undefined,

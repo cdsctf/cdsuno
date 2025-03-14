@@ -27,11 +27,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Image } from "@/components/ui/image";
 import { Select } from "@/components/ui/select";
-import {
-    deleteGameIcon,
-    deleteGamePoster,
-    updateGame,
-} from "@/api/games/game_id";
+import { updateGame } from "@/api/admin/games/game_id";
 import { DateTimePicker } from "@/components/ui/datetime-picker";
 import {
     Dropzone,
@@ -40,6 +36,8 @@ import {
     useDropzone,
 } from "@/components/ui/dropzone";
 import { Label } from "@/components/ui/label";
+import { deleteGamePoster } from "@/api/admin/games/game_id/poster";
+import { deleteGameIcon } from "@/api/admin/games/game_id/icon";
 
 export default function Index() {
     const { game } = useContext(Context);

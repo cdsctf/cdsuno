@@ -5,7 +5,7 @@ import { GameChallenge } from "@/models/game_challenge";
 import { getGameChallenges } from "@/api/games/game_id/challenges";
 import { useGameStore } from "@/storages/game";
 import { Challenge } from "@/models/challenge";
-import { ChallengeStatus, getChallengeStatus } from "@/api/challenge";
+import { ChallengeStatus, getChallengeStatus } from "@/api/challenges";
 import { ChallengeCard } from "@/components/widgets/challenge-card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";

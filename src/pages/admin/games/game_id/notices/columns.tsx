@@ -15,7 +15,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
 import { useSharedStore } from "@/storages/shared";
 import { GameNotice } from "@/models/game_notice";
-import { deleteGameNotice } from "@/api/games";
+import { deleteGameNotice } from "@/api/admin/games/game_id/notices";
 import { ContentDialog } from "@/components/widgets/content-dialog";
 
 const columns: ColumnDef<GameNotice>[] = [

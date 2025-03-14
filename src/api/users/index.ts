@@ -1,5 +1,5 @@
 import { Group, User } from "@/models/user";
-import { Response } from "@/types";
+import { WebResponse } from "@/types";
 import { alova } from "@/utils/alova";
 
 export interface GetUserRequest {
@@ -14,21 +14,9 @@ export interface GetUserRequest {
 }
 
 export async function getUsers(request: GetUserRequest) {
-    return alova.Get<Response<Array<User>>>("/users", {
+    return alova.Get<WebResponse<Array<User>>>("/users", {
         params: request,
     });
-}
-
-export interface CreateUserRequest {
-    username?: string;
-    nickname?: string;
-    email?: string;
-    group?: Group;
-    password?: string;
-}
-
-export async function createUser(request: CreateUserRequest) {
-    return alova.Post<Response<User>>("/users", request);
 }
 
 export interface UserLoginRequest {
@@ -41,11 +29,11 @@ export interface UserLoginRequest {
 }
 
 export async function login(request: UserLoginRequest) {
-    return alova.Post<Response<User>>("/users/login", request);
+    return alova.Post<WebResponse<User>>("/users/login", request);
 }
 
 export async function logout() {
-    return alova.Post<Response<never>>("/users/logout");
+    return alova.Post<WebResponse<never>>("/users/logout");
 }
 
 export interface UserRegisterRequest {
@@ -60,5 +48,5 @@ export interface UserRegisterRequest {
 }
 
 export async function register(request: UserRegisterRequest) {
-    return alova.Post<Response<User>>("/users/register", request);
+    return alova.Post<WebResponse<User>>("/users/register", request);
 }

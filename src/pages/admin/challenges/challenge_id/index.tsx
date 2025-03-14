@@ -6,12 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@/components/ui/editor";
 import { cn } from "@/utils";
 import { Input } from "@/components/ui/input";
-import { updateChallenge } from "@/api/challenge";
+import { updateChallenge } from "@/api/admin/challenges/challenge_id";
 import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
 import {
     Box,
-    Check,
     Container,
     Folder,
     Library,

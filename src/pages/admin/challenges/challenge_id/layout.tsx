@@ -2,34 +2,30 @@ import { Link, Outlet, useLocation, useParams } from "react-router";
 import { Context } from "./context";
 import { useEffect, useMemo, useState } from "react";
 import { Challenge } from "@/models/challenge";
-import { getChallenges } from "@/api/challenge";
+import { getChallenges } from "@/api/admin/challenges";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import {
     ChartArea,
     Container,
-    Edit,
     Folder,
     Info,
     Library,
     ScrollText,
 } from "lucide-react";
 import { useSharedStore } from "@/storages/shared";
-import { useCategoryStore } from "@/storages/category";
 
 export default function Layout() {
     const location = useLocation();
     const pathname = location.pathname;
     const sharedStore = useSharedStore();
-    const { getCategory } = useCategoryStore();
     const { challenge_id } = useParams<{ challenge_id: string }>();
     const [challenge, setChallenge] = useState<Challenge>();
 
     useEffect(() => {
         getChallenges({
             id: challenge_id,
-            is_desensitized: false,
         }).then((res) => {
             setChallenge(res.data?.[0]);
         });

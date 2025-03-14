@@ -1,11 +1,11 @@
-import { createToken, getToken } from "@/api/games/game_id/teams/team_id/token";
+import { createToken, getToken } from "@/api/games/game_id/teams/profile/token";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useGameStore } from "@/storages/game";
 import { cn } from "@/utils";
-import { KeyIcon, RefreshCcw, RefreshCcwIcon } from "lucide-react";
+import { KeyIcon, RefreshCcwIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Index() {

@@ -7,7 +7,7 @@ import { Separator } from "../ui/separator";
 import { useCategoryStore } from "@/storages/category";
 import { Badge } from "../ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { ChallengeStatus } from "@/api/challenge";
+import { ChallengeStatus } from "@/api/challenges";
 
 interface ChallengeCardProps extends React.ComponentProps<"div"> {
     challenge?: Challenge;

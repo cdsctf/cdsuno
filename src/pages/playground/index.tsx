@@ -13,9 +13,9 @@ import { Pagination } from "@/components/ui/pagination";
 import { useEffect, useState } from "react";
 import {
     ChallengeStatus,
-    getChallenges,
     getChallengeStatus,
-} from "@/api/challenge";
+    getPlaygroundChallenges,
+} from "@/api/challenges";
 import { useAuthStore } from "@/storages/auth";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
@@ -49,12 +49,10 @@ export default function Index() {
     }, [title, page, size]);
 
     useEffect(() => {
-        getChallenges({
+        getPlaygroundChallenges({
             title,
             page,
             size,
-            is_public: true,
-            is_desensitized: true,
         }).then((res) => {
             if (res.code === 200) {
                 setTotal(res.total || 0);

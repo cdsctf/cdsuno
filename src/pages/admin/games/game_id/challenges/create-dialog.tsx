@@ -1,5 +1,5 @@
-import { getChallenges } from "@/api/challenge";
-import { createGameChallenge } from "@/api/games/game_id/challenges";
+import { getChallenges } from "@/api/admin/challenges";
+import { createGameChallenge } from "@/api/admin/games/game_id/challenges";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

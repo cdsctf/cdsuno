@@ -1,9 +1,6 @@
-import { Button } from "@/components/ui/button";
 import {
     HashIcon,
-    Library,
     ListOrderedIcon,
-    PlusCircle,
     SatelliteIcon,
     TypeIcon,
     UsersRoundIcon,
@@ -33,16 +30,12 @@ import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Select } from "@/components/ui/select";
 import { useCategoryStore } from "@/storages/category";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useSharedStore } from "@/storages/shared";
-import { GameChallenge } from "@/models/game_challenge";
-import { getGameChallenges } from "@/api/games/game_id/challenges";
 import { Context } from "../context";
 import { State, Team } from "@/models/team";
-import { getTeams } from "@/api/games/game_id/teams";
+import { getTeams } from "@/api/admin/games/game_id/teams";
 
 export default function Index() {
-    const categoryStore = useCategoryStore();
     const sharedStore = useSharedStore();
 
     const { game } = useContext(Context);

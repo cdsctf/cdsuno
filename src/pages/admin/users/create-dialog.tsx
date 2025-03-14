@@ -1,4 +1,4 @@
-import { createUser } from "@/api/users";
+import { createUser } from "@/api/admin/users";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {

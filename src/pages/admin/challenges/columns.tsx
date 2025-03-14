@@ -14,7 +14,10 @@ import {
     X,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { deleteChallenge, updateChallenge } from "@/api/challenge";
+import {
+    deleteChallenge,
+    updateChallenge,
+} from "@/api/admin/challenges/challenge_id";
 import { ColumnDef } from "@tanstack/react-table";
 import { cn } from "@/utils";
 import { useCategoryStore } from "@/storages/category";

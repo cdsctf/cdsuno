@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-    HashIcon,
-    Library,
-    ListOrderedIcon,
-    PlusCircle,
-    TypeIcon,
-} from "lucide-react";
+import { HashIcon, Library, ListOrderedIcon, PlusCircle } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import {
     ColumnFiltersState,
@@ -34,7 +28,7 @@ import { useCategoryStore } from "@/storages/category";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useSharedStore } from "@/storages/shared";
 import { GameChallenge } from "@/models/game_challenge";
-import { getGameChallenges } from "@/api/games/game_id/challenges";
+import { getGameChallenges } from "@/api/admin/games/game_id/challenges";
 import { Context } from "../context";
 import { CreateDialog } from "./create-dialog";
 

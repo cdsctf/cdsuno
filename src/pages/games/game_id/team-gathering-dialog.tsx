@@ -1,5 +1,5 @@
 import { teamRegister } from "@/api/games/game_id/teams";
-import { joinTeam } from "@/api/games/game_id/teams/team_id/users";
+import { joinTeam } from "@/api/games/game_id/teams/team_id";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {

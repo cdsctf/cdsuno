@@ -4,14 +4,10 @@ import {
     CheckCheckIcon,
     ClipboardCheck,
     ClipboardCopy,
-    EditIcon,
-    TrashIcon,
     Undo2,
 } from "lucide-react";
-import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { cn } from "@/utils";
-import { useCategoryStore } from "@/storages/category";
 import { Badge } from "@/components/ui/badge";
 import {
     Tooltip,
@@ -20,12 +16,9 @@ import {
 } from "@/components/ui/tooltip";
 import { useClipboard } from "@/hooks/use-clipboard";
 import { toast } from "sonner";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Card } from "@/components/ui/card";
 import { useSharedStore } from "@/storages/shared";
-import { deleteGameChallenge } from "@/api/games/game_id/challenges/challenge_id";
 import { State, Team } from "@/models/team";
-import { updateTeamStateRequest } from "@/api/games/game_id/teams/team_id";
+import { updateTeam } from "@/api/admin/games/game_id/teams/team_id";
 import { Avatar } from "@/components/ui/avatar";
 
 const columns: ColumnDef<Team>[] = [
@@ -163,8 +156,8 @@ const columns: ColumnDef<Team>[] = [
             const sharedStore = useSharedStore();
 
             function handleStateChange(state: State) {
-                updateTeamStateRequest({
-                    id: id!,
+                updateTeam({
+                    team_id: id!,
                     game_id: game_id!,
                     state,
                 })

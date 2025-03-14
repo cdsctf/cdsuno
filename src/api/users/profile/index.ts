@@ -1,6 +1,5 @@
-import { Metadata } from "@/models/media";
-import { Group, User } from "@/models/user";
-import { Response } from "@/types";
+import { User } from "@/models/user";
+import { WebResponse } from "@/types";
 import { alova } from "@/utils/alova";
 
 export interface UpdateUserProfileRequest {
@@ -10,7 +9,7 @@ export interface UpdateUserProfileRequest {
 }
 
 export async function updateUserProfile(request: UpdateUserProfileRequest) {
-    return alova.Put<Response<User>>("/users/profile", request);
+    return alova.Put<WebResponse<User>>("/users/profile", request);
 }
 
 export interface UpdateUserProfilePasswordRequest {
@@ -21,7 +20,7 @@ export interface UpdateUserProfilePasswordRequest {
 export async function updateUserProfilePassword(
     request: UpdateUserProfilePasswordRequest
 ) {
-    return alova.Put<Response<never>>("/users/profile/password", request);
+    return alova.Put<WebResponse<never>>("/users/profile/password", request);
 }
 
 export interface DeleteUserProfileRequest {
@@ -33,5 +32,5 @@ export interface DeleteUserProfileRequest {
 }
 
 export async function deleteUserProfile(request: DeleteUserProfileRequest) {
-    return alova.Delete<Response<never>>("/users/profile", request);
+    return alova.Delete<WebResponse<never>>("/users/profile", request);
 }

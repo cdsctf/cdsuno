@@ -1,9 +1,9 @@
 import { alova } from "@/utils/alova";
-import { Response } from "@/types";
+import { WebResponse } from "@/types";
 
 export async function generateCaptcha() {
     return alova.Get<
-        Response<{
+        WebResponse<{
             id?: string;
             challenge?: string;
         }>
