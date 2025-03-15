@@ -10,6 +10,7 @@ import { useInterval } from "@/hooks/use-interval";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Clipboard, Clock, EthernetPort, Play, Trash } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 function EnvSection() {
     const { challenge, team } = useContext(Context);
@@ -138,34 +139,66 @@ function EnvSection() {
                     <div
                         className={cn(["flex-1", "flex", "flex-col", "gap-3"])}
                     >
-                        {pod?.nats
-                            ?.split(",")
-                            .map((pair) => pair.split("="))
-                            .map(([src, dst]: Array<string>) => (
-                                <div className={cn(["flex"])} key={src}>
-                                    <Input
-                                        size={"sm"}
-                                        icon={EthernetPort}
-                                        value={`${src} ~ ${pod?.public_entry}:${dst}`}
-                                        className={cn(["flex-1"])}
-                                        slotProps={{
-                                            input: {
-                                                readOnly: true,
-                                            },
-                                        }}
-                                        extraBtn={
-                                            <Button
-                                                icon={Clipboard}
-                                                onClick={() => {
-                                                    toast.success(
-                                                        "已复制到剪贴板"
-                                                    );
+                        {pod?.nats ? (
+                            <>
+                                {pod?.nats
+                                    ?.split(",")
+                                    .map((pair) => pair.split("="))
+                                    .map(([src, dst]: Array<string>) => (
+                                        <div className={cn(["flex"])} key={src}>
+                                            <Input
+                                                size={"sm"}
+                                                icon={EthernetPort}
+                                                value={`${src} - ${pod?.public_entry}:${dst}`}
+                                                className={cn(["flex-1"])}
+                                                slotProps={{
+                                                    input: {
+                                                        readOnly: true,
+                                                    },
                                                 }}
+                                                extraBtn={
+                                                    <Button
+                                                        icon={Clipboard}
+                                                        onClick={() => {
+                                                            toast.success(
+                                                                "已复制到剪贴板"
+                                                            );
+                                                        }}
+                                                    />
+                                                }
                                             />
-                                        }
-                                    />
-                                </div>
-                            ))}
+                                        </div>
+                                    ))}
+                            </>
+                        ) : (
+                            <>
+                                {pod?.ports?.map((port) => (
+                                    <div className={cn(["flex"])} key={port}>
+                                        <Input
+                                            size={"sm"}
+                                            icon={EthernetPort}
+                                            value={`${port} - ${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${pod?.id}/wsrx?port=${port}`}
+                                            className={cn(["flex-1"])}
+                                            slotProps={{
+                                                input: {
+                                                    readOnly: true,
+                                                },
+                                            }}
+                                            extraBtn={
+                                                <Button
+                                                    icon={Clipboard}
+                                                    onClick={() => {
+                                                        toast.success(
+                                                            "已复制到剪贴板"
+                                                        );
+                                                    }}
+                                                />
+                                            }
+                                        />
+                                    </div>
+                                ))}
+                            </>
+                        )}
                     </div>
                     <div className={cn(["flex", "gap-3"])}>
                         <Button
