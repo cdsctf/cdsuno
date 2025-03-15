@@ -15,7 +15,7 @@ export interface UpdateGameChallengeRequest {
 
 export async function updateGameChallenge(request: UpdateGameChallengeRequest) {
     return alova.Put<WebResponse<GameChallenge>>(
-        `/games/${request.game_id}/challenges/${request.challenge_id}`,
+        `/admin/games/${request.game_id}/challenges/${request.challenge_id}`,
         request
     );
 }
@@ -27,7 +27,7 @@ export interface DeleteGameChallengeRequest {
 
 export async function deleteGameChallenge(request: DeleteGameChallengeRequest) {
     return alova.Delete<WebResponse<never>>(
-        `/games/${request.game_id}/challenges/${request.challenge_id}`,
+        `/admin/games/${request.game_id}/challenges/${request.challenge_id}`,
         request
     );
 }

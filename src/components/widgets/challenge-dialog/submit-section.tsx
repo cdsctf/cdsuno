@@ -126,7 +126,7 @@ function SubmitSection() {
                 onChange={(e) => setFlag(e.target.value)}
             />
             <Button
-                variant={"tonal"}
+                variant={"solid"}
                 icon={Send}
                 onClick={handleFlagSubmit}
                 loading={loading}

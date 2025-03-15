@@ -44,12 +44,13 @@ export default function Index() {
             className={cn([
                 "w-full",
                 "p-10",
-                "2xl:p-0",
+                "xl:p-0",
                 "flex",
-                "flex-col-reverse",
-                "2xl:flex-row",
-                "gap-25",
-                "2xl:h-[calc(100vh-64px)]",
+                "flex-col",
+                "xl:flex-row",
+                "xl:gap-25",
+                "gap-10",
+                "xl:h-[calc(100vh-64px)]",
                 "items-center",
                 "justify-center",
             ])}
@@ -58,11 +59,11 @@ export default function Index() {
                 className={cn([
                     "flex",
                     "h-full",
-                    "py-16",
+                    "xl:py-16",
                     "flex-col",
                     "gap-5",
                     "w-full",
-                    "2xl:w-90",
+                    "xl:w-90",
                     "items-center",
                 ])}
             >
@@ -126,7 +127,7 @@ export default function Index() {
                     "relative",
                     "select-none",
                     "w-full",
-                    "2xl:w-1/2",
+                    "xl:w-1/2",
                 ])}
             >
                 <Image

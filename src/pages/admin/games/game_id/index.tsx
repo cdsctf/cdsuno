@@ -113,7 +113,7 @@ export default function Index() {
             ...values,
             id: game?.id,
             started_at: Math.floor(values.started_at?.getTime() / 1000),
-            frozen_at: Math.floor(values.started_at?.getTime() / 1000),
+            frozen_at: Math.floor(values.frozen_at?.getTime() / 1000),
             ended_at: Math.floor(values.ended_at?.getTime() / 1000),
         })
             .then((res) => {

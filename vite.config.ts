@@ -33,7 +33,7 @@ export default defineConfig(({ mode }) => {
                         });
                     },
                 },
-                "^/api/pods/.+/wsrx": {
+                "^/api/envs/.+/wsrx": {
                     target: apiUrl.replace("http", "ws"),
                     ws: true,
                 },
