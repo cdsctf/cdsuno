@@ -11,6 +11,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { useGameStore } from "@/storages/game";
 import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
@@ -115,7 +116,7 @@ function TeamGatheringDialog(props: TeamGatheringDialogProps) {
         >
             <h3 className={cn(["flex", "gap-3", "items-center", "text-md"])}>
                 <SwordsIcon className={cn(["size-4"])} />
-                创建或加入团队
+                创建团队
             </h3>
             <Form {...createForm}>
                 <form
@@ -147,7 +148,11 @@ function TeamGatheringDialog(props: TeamGatheringDialogProps) {
                     </Button>
                 </form>
             </Form>
-
+            <Separator />
+            <h3 className={cn(["flex", "gap-3", "items-center", "text-md"])}>
+                <SwordsIcon className={cn(["size-4"])} />
+                加入团队
+            </h3>
             <Form {...joinForm}>
                 <form
                     onSubmit={joinForm.handleSubmit(onJoinFormSubmit)}
