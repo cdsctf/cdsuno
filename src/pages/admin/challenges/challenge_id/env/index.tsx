@@ -15,6 +15,7 @@ import {
     Key,
     MemoryStick,
     Minus,
+    NetworkIcon,
     Plus,
     SaveIcon,
     Trash,
@@ -29,6 +30,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Select } from "@/components/ui/select";
 
 export default function Index() {
     const { challenge } = useContext(Context);
@@ -39,6 +41,9 @@ export default function Index() {
     const formSchema = z.object({
         duration: z.number({
             message: "请输入持续时长",
+        }),
+        internet: z.boolean({
+            message: "请选择是否允许出网",
         }),
         containers: z.array(
             z.object({
@@ -61,15 +66,13 @@ export default function Index() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             duration: challenge?.env?.duration || 1800,
+            internet: challenge?.env?.internet || true,
             containers: challenge?.env?.containers || [],
         },
     });
 
     useEffect(() => {
-        form.reset({
-            duration: challenge?.env?.duration || 1800,
-            containers: challenge?.env?.containers || [],
-        });
+        form.reset(challenge?.env);
     }, [challenge?.env, form]);
 
     const handleAddContainer = () => {
@@ -150,28 +153,62 @@ export default function Index() {
                 autoComplete={"off"}
                 className={cn(["flex", "flex-col", "flex-1", "gap-8"])}
             >
-                <FormField
-                    control={form.control}
-                    name={"duration"}
-                    render={({ field }) => (
-                        <FormItem className={cn(["w-full"])}>
-                            <FormLabel>持续时间（秒）</FormLabel>
-                            <FormControl>
-                                <Input
-                                    {...field}
-                                    type={"number"}
-                                    icon={Clock}
-                                    placeholder={"1800"}
-                                    value={field.value || ""}
-                                    onChange={(e) =>
-                                        field.onChange(Number(e.target.value))
-                                    }
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                <div className={cn(["grid", "grid-cols-2", "gap-5"])}>
+                    <FormField
+                        control={form.control}
+                        name={"duration"}
+                        render={({ field }) => (
+                            <FormItem className={cn(["w-full"])}>
+                                <FormLabel>持续时间（秒）</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        type={"number"}
+                                        icon={Clock}
+                                        placeholder={"1800"}
+                                        value={field.value || ""}
+                                        onChange={(e) =>
+                                            field.onChange(
+                                                Number(e.target.value)
+                                            )
+                                        }
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name={"internet"}
+                        render={({ field }) => (
+                            <FormItem className={cn(["w-full"])}>
+                                <FormLabel>是否允许出网</FormLabel>
+                                <FormControl>
+                                    <Select
+                                        {...field}
+                                        icon={NetworkIcon}
+                                        options={[
+                                            {
+                                                value: String(true),
+                                                content: "是",
+                                            },
+                                            {
+                                                value: String(false),
+                                                content: "否",
+                                            },
+                                        ]}
+                                        onValueChange={(value) => {
+                                            field.onChange(value === "true");
+                                        }}
+                                        value={String(field.value)}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div>
                 {form.watch("containers")?.map((container, containerIndex) => (
                     <div
                         key={containerIndex}
