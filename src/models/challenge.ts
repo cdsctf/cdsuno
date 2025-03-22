@@ -15,6 +15,7 @@ export interface Challenge {
 
 export interface Env {
     duration?: number;
+    internet?: boolean;
     containers?: Array<Container>;
 }
 
