@@ -1,6 +1,6 @@
 import { useThemeStore } from "@/storages/theme";
 import { cn } from "@/utils";
-import ace from "ace-builds";
+import ace, { edit } from "ace-builds";
 import "ace-builds/esm-resolver";
 import { useEffect, useRef, useState } from "react";
 
@@ -43,7 +43,6 @@ function Editor(props: EditorProps) {
 
         const editor = ace.edit(editorRef.current, {
             mode: `ace/mode/${lang || "text"}`,
-            theme: `ace/theme/${theme === "light" ? "kuroir" : "github_dark"}`,
             showPrintMargin: false,
             highlightActiveLine: false,
             highlightGutterLine: false,
@@ -85,14 +84,13 @@ function Editor(props: EditorProps) {
         return () => {
             editor.destroy();
         };
-    }, [lang, showLineNumbers, tabSize, placeholder, theme]);
+    }, [lang, showLineNumbers, tabSize, placeholder]);
 
     useEffect(() => {
-        const editor = editorRef.current;
+        const editor = editorInstance.current;
         if (editor) {
-            editor.classList.remove("ace-kuroir", "ace-github-dark");
-            editor.classList.add(
-                theme === "light" ? "ace-kuroir" : "ace-github-dark"
+            editor.setTheme(
+                `ace/theme/${theme === "light" ? "kuroir" : "github_dark"}`
             );
         }
     }, [theme]);
