@@ -7,15 +7,6 @@ export interface Config {
     auth?: {
         is_registration_enabled?: boolean;
     };
-    email?: {
-        is_enabled?: boolean;
-        host?: string;
-        port?: number;
-        tls?: "starttls" | "tls" | "none";
-        username?: string;
-        password?: string;
-        whitelist?: Array<string>;
-    };
     captcha?: {
         provider?: "none" | "pow" | "image" | "turnstile" | "hcaptcha";
         difficulty?: number;
