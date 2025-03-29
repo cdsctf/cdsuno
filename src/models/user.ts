@@ -5,6 +5,7 @@ export interface User {
     username?: string;
     nickname?: string;
     email?: string;
+    is_verified?: boolean;
     group?: Group;
     description?: string;
     teams?: Array<Team>;

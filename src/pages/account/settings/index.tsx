@@ -1,7 +1,9 @@
 import { updateUserProfile } from "@/api/users/profile";
 import { deleteUserAvatar } from "@/api/users/profile/avatar";
+import { Alert } from "@/components/ui/alert";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
     Dropzone,
     DropZoneArea,
@@ -24,7 +26,6 @@ import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-    CheckIcon,
     MailIcon,
     SaveIcon,
     TrashIcon,
@@ -35,11 +36,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { EmailVerifyDialog } from "./email-verify-dialog";
 
 export default function Index() {
     const authStore = useAuthStore();
     const sharedStore = useSharedStore();
     const [loading, setLoading] = useState<boolean>(false);
+
+    const [emailVerifyDialogOpen, setEmailVerifyDialogOpen] =
+        useState<boolean>(false);
 
     const formSchema = z.object({
         username: z.string().nullish(),
@@ -271,6 +276,37 @@ export default function Index() {
                             </FormItem>
                         )}
                     />
+                    {!authStore?.user?.is_verified && (
+                        <Alert
+                            className={cn([
+                                "flex",
+                                "items-center",
+                                "justify-between",
+                            ])}
+                        >
+                            <p>你的邮箱 {authStore?.user?.email} 尚未验证！</p>
+                            <Button
+                                variant={"solid"}
+                                size={"sm"}
+                                className={cn(["h-8"])}
+                                onClick={() => setEmailVerifyDialogOpen(true)}
+                            >
+                                去验证
+                            </Button>
+                            <Dialog
+                                open={emailVerifyDialogOpen}
+                                onOpenChange={setEmailVerifyDialogOpen}
+                            >
+                                <DialogContent>
+                                    <EmailVerifyDialog
+                                        onClose={() =>
+                                            setEmailVerifyDialogOpen(false)
+                                        }
+                                    />
+                                </DialogContent>
+                            </Dialog>
+                        </Alert>
+                    )}
                     <FormField
                         control={form.control}
                         name={"description"}
