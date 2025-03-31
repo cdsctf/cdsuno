@@ -97,6 +97,7 @@ export default function Index() {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         updateConfig({
+            ...config,
             ...values,
         }).then((res) => {
             if (res.code === 200) {
