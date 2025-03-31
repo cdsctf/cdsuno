@@ -22,6 +22,15 @@ export interface Config {
             score?: number;
         };
     };
+    email?: {
+        is_enabled?: boolean;
+        host?: string;
+        port?: number;
+        tls?: "starttls" | "tls" | "none";
+        username?: string;
+        password?: string;
+        whitelist?: Array<string>;
+    };
 }
 
 export interface Version {

@@ -4,7 +4,6 @@ import {
     Library,
     Flag,
     LogOut,
-    UserRound,
     Star,
     ChartNoAxesCombined,
     UsersRoundIcon,
@@ -54,35 +53,6 @@ function TabSection() {
                     },
                     {
                         link: `/games`,
-                        name: "退出",
-                        icon: LogOut,
-                        warning: true,
-                    },
-                ];
-            case "admin":
-                return [
-                    {
-                        link: "/admin/platform",
-                        name: "平台",
-                        icon: House,
-                    },
-                    {
-                        link: "/admin/challenges",
-                        name: "题库",
-                        icon: Library,
-                    },
-                    {
-                        link: "/admin/games",
-                        name: "比赛",
-                        icon: Flag,
-                    },
-                    {
-                        link: "/admin/users",
-                        name: "用户",
-                        icon: UserRound,
-                    },
-                    {
-                        link: "/",
                         name: "退出",
                         icon: LogOut,
                         warning: true,
