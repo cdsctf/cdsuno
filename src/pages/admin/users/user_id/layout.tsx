@@ -49,11 +49,10 @@ export default function Layout() {
                 className={cn([
                     "flex",
                     "flex-col",
-                    "lg:flex-row",
+                    "xl:flex-row",
                     "flex-1",
                     "gap-10",
-                    "lg:mx-30",
-                    "2xl:mx-[17.5vw]",
+                    "xl:mx-30",
                 ])}
             >
                 <div

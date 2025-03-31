@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { columns } from "./columns";
-import { getGames } from "@/api/games";
+import { getGames } from "@/api/admin/games";
 import { useDebounce } from "@/hooks/use-debounce";
 import {
     Flag,
