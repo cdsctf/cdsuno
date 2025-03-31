@@ -30,9 +30,7 @@ function App() {
     }, [theme]);
 
     useEffect(() => {
-        getConfigs({
-            is_desensitized: true,
-        }).then((res) => {
+        getConfigs().then((res) => {
             setConfig(res.data!);
         });
 

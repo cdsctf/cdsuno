@@ -121,6 +121,13 @@ export default createBrowserRouter([
                         }),
                     },
                     {
+                        path: "forget",
+                        lazy: async () => ({
+                            Component: (await import("@/pages/account/forget"))
+                                .default,
+                        }),
+                    },
+                    {
                         path: "settings",
                         lazy: async () => ({
                             Component: (
@@ -162,6 +169,9 @@ export default createBrowserRouter([
             },
             {
                 path: "admin",
+                lazy: async () => ({
+                    Component: (await import("@/pages/admin/layout")).default,
+                }),
                 children: [
                     {
                         path: "platform",

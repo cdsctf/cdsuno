@@ -186,6 +186,7 @@ export default function Index() {
                     "p-10",
                     "xl:mx-60",
                     "lg:mx-30",
+                    "min-h-[calc(100vh-64px)]",
                 ])}
             >
                 <h2
@@ -578,6 +579,7 @@ export default function Index() {
                         </div>
                     </>
                 )}
+                <div className={cn(["flex-1"])} />
                 <Button
                     type={"submit"}
                     variant={"solid"}

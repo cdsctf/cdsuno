@@ -11,8 +11,6 @@ function Navbar() {
     const mode = useMemo(() => {
         if (pathname.startsWith("/games") && game_id) {
             return "game";
-        } else if (pathname.startsWith("/admin")) {
-            return "admin";
         }
         return "default";
     }, [pathname, game_id]);

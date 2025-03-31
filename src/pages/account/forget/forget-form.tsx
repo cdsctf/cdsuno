@@ -1,4 +1,4 @@
-import { UserRound, Lock, Check, CircleHelpIcon } from "lucide-react";
+import { UserRound, Lock, Check, MailIcon, SendIcon } from "lucide-react";
 import { cn } from "@/utils";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
@@ -18,10 +18,11 @@ import { useState } from "react";
 import { login } from "@/api/users";
 import { toast } from "sonner";
 import { useAuthStore } from "@/storages/auth";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useConfigStore } from "@/storages/config";
+import { forget, sendForgetEmail } from "@/api/users/forget";
 
-function LoginForm() {
+function ForgetForm() {
     const configStore = useConfigStore();
     const authStore = useAuthStore();
     const navigate = useNavigate();
@@ -29,11 +30,16 @@ function LoginForm() {
     const [loading, setLoading] = useState<boolean>(false);
 
     const formSchema = z.object({
-        account: z.string({
-            message: "请输入用户名",
+        email: z
+            .string({
+                message: "请输入邮箱",
+            })
+            .email(),
+        code: z.string({
+            message: "请输入验证码",
         }),
         password: z.string({
-            message: "请输入密码",
+            message: "请输入新密码",
         }),
         captcha: z
             .object({
@@ -49,22 +55,20 @@ function LoginForm() {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setLoading(true);
-        login({
+        forget({
             ...values,
         })
             .then((res) => {
                 if (res.code === 200) {
                     authStore.setUser(res.data);
-                    toast.success("登录成功", {
-                        id: "login-success",
-                        description: `欢迎回来，${res.data?.nickname}！`,
+                    toast.success("密码重置成功", {
+                        description: "请登录",
                     });
-                    navigate("/");
+                    navigate("/account/login");
                 }
 
                 if (res.code === 400) {
-                    toast.error("登陆失败", {
-                        id: "login-error",
+                    toast.error("发生错误", {
                         description: res.msg,
                     });
                 }
@@ -72,6 +76,26 @@ function LoginForm() {
             .finally(() => {
                 setLoading(false);
             });
+    }
+
+    function handleSendForgetEmail() {
+        sendForgetEmail({
+            email: form.getValues().email,
+        }).then((res) => {
+            if (res.code === 200) {
+                toast.success("验证码已发送，请查收");
+            }
+
+            if (res.code === 400) {
+                toast.error("发生错误", {
+                    description: res.msg,
+                });
+            }
+
+            if (res.code === 404) {
+                toast.error("邮箱不存在");
+            }
+        });
     }
 
     return (
@@ -84,14 +108,14 @@ function LoginForm() {
                 <div className={cn("space-y-3", "flex-1")}>
                     <FormField
                         control={form.control}
-                        name={"account"}
+                        name={"email"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>用户名/邮箱</FormLabel>
+                                <FormLabel>邮箱</FormLabel>
                                 <FormControl>
                                     <Input
-                                        placeholder={"Account"}
-                                        icon={UserRound}
+                                        placeholder={"Email"}
+                                        icon={MailIcon}
                                         {...field}
                                     />
                                 </FormControl>
@@ -99,6 +123,33 @@ function LoginForm() {
                             </FormItem>
                         )}
                     />
+                    <div className={cn(["flex", "gap-2", "items-center"])}>
+                        <FormField
+                            control={form.control}
+                            name={"code"}
+                            render={({ field }) => (
+                                <FormItem className={cn(["flex-1"])}>
+                                    <FormLabel>验证码</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder={"Code"}
+                                            icon={MailIcon}
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <Button
+                            variant={"solid"}
+                            icon={SendIcon}
+                            className={cn(["mt-6"])}
+                            onClick={handleSendForgetEmail}
+                        >
+                            请求
+                        </Button>
+                    </div>
                     <FormField
                         control={form.control}
                         name={"password"}
@@ -117,24 +168,6 @@ function LoginForm() {
                             </FormItem>
                         )}
                     />
-                    {configStore?.config?.email?.is_enabled && (
-                        <div className={cn(["flex", "justify-end"])}>
-                            <Link
-                                to={"/account/forget"}
-                                className={cn([
-                                    "hover:underline",
-                                    "underline-offset-3",
-                                    "items-center",
-                                    "text-sm",
-                                    "flex",
-                                    "gap-1",
-                                ])}
-                            >
-                                <CircleHelpIcon className={cn(["size-4"])} />
-                                忘记密码
-                            </Link>
-                        </div>
-                    )}
                     {configStore?.config?.captcha?.provider !== "none" && (
                         <FormField
                             name={"captcha"}
@@ -149,18 +182,18 @@ function LoginForm() {
                 </div>
                 <Button
                     variant={"solid"}
-                    level={"success"}
+                    level={"info"}
                     type={"submit"}
                     size={"lg"}
                     className={cn(["w-full"])}
                     icon={Check}
                     loading={loading}
                 >
-                    登录
+                    重置密码
                 </Button>
             </form>
         </Form>
     );
 }
 
-export { LoginForm };
+export { ForgetForm };
