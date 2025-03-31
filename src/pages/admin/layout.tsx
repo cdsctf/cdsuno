@@ -40,9 +40,9 @@ export default function Layout() {
             <div
                 className={cn([
                     "w-16",
-                    "min-h-[calc(100vh-64px)]",
+                    "h-[calc(100vh-64px)]",
                     "sticky",
-                    "top-64",
+                    "top-16",
                     "bg-sidebar",
                     "border-r-1",
                     "p-4",
@@ -74,7 +74,7 @@ export default function Layout() {
                     </Tooltip>
                 ))}
             </div>
-            <div className={cn(["flex-1"])}>
+            <div className={cn(["flex-1", "flex", "flex-col"])}>
                 <Outlet />
             </div>
         </div>
