@@ -10,7 +10,7 @@ import { Link, Outlet, useLocation } from "react-router";
 
 export default function Layout() {
     const location = useLocation();
-    let pathname = location.pathname;
+    const pathname = location.pathname;
 
     const options = [
         {

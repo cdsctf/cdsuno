@@ -23,7 +23,7 @@ function useInterval(
         if (options?.immediate) {
             tick();
         }
-        let id = setInterval(tick, delay);
+        const id = setInterval(tick, delay);
         return () => clearInterval(id);
     }, [delay, ...deps]);
 }

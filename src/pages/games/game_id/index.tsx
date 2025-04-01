@@ -133,7 +133,7 @@ export default function Index() {
                     </Badge>
                 </div>
                 <div>
-                    {!!selfTeam ? (
+                    {selfTeam ? (
                         <Button
                             className={cn(["w-full"])}
                             variant={"solid"}

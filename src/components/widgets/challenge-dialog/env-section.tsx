@@ -17,7 +17,7 @@ function EnvSection() {
     const authStore = useAuthStore();
 
     const mode = useMemo(() => {
-        if (!!team) {
+        if (team) {
             return "game";
         }
 
