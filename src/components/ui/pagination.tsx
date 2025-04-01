@@ -76,8 +76,8 @@ function generatePaginationNodes(total: number, value: number, max?: number) {
         return [1];
     }
 
-    let startPage = Math.max(1, value - halfMaxPages);
-    let endPage = Math.min(total, value + halfMaxPages);
+    const startPage = Math.max(1, value - halfMaxPages);
+    const endPage = Math.min(total, value + halfMaxPages);
 
     if (total > maxPages) {
         if (startPage > 1) {

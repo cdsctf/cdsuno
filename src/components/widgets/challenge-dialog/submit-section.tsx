@@ -15,7 +15,7 @@ function SubmitSection() {
     const sharedStore = useSharedStore();
 
     const mode = useMemo(() => {
-        if (!!team) {
+        if (team) {
             return "game";
         }
 

@@ -26,7 +26,7 @@ function ChampionChart(props: ChampionChartProps) {
     const { scoreboard } = props;
 
     const data = useMemo(() => {
-        let result: Array<{
+        const result: Array<{
             ts: number;
             [key: number]: number | undefined;
         }> = [];
@@ -63,7 +63,7 @@ function ChampionChart(props: ChampionChartProps) {
     >();
 
     useEffect(() => {
-        let result: Array<{
+        const result: Array<{
             id: number;
             name?: string;
         }> = [];

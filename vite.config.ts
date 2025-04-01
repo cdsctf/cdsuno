@@ -8,32 +8,13 @@ import { defineConfig } from "vite";
 const commitHash = execSync("git rev-parse --short HEAD").toString().trim();
 
 export default defineConfig(({}) => {
-    const apiUrl = "/api";
-
     return {
         server: {
             host: "0.0.0.0",
             proxy: {
                 "/api": {
-                    target: apiUrl,
+                    target: process.env.VITE_DEV_API || "http://127.0.0.1:8888",
                     changeOrigin: true,
-                    configure: (proxy, _options) => {
-                        proxy.on("error", (_err, _req, res) => {
-                            if (res && !res.headersSent) {
-                                res.writeHead(502, {
-                                    "Content-Type": "application/json",
-                                });
-                                res.end(
-                                    JSON.stringify({
-                                        error: "backend offline",
-                                    })
-                                );
-                            }
-                        });
-                    },
-                },
-                "^/api/envs/.+/wsrx": {
-                    target: apiUrl.replace("http", "ws"),
                     ws: true,
                 },
             },
