@@ -53,8 +53,8 @@ function TitleSection(props: TitleSectionProps) {
                 fallback={<Flag />}
                 className={cn([
                     "drop-shadow-md",
-                    "h-10",
-                    "w-10",
+                    "h-8",
+                    "w-8",
                     "rounded-lg",
                     "overflow-hidden",
                 ])}

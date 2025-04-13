@@ -76,7 +76,7 @@ export default function Index() {
                             className={cn([
                                 "drop-shadow-md",
                                 "aspect-square",
-                                "h-[10rem]",
+                                "h-[8rem]",
                             ])}
                         />
                         <span className={cn(["text-2xl", "font-semibold"])}>

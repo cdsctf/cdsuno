@@ -31,7 +31,7 @@ export default function () {
                     className={cn([
                         "drop-shadow-md",
                         "aspect-square",
-                        "h-[15rem]",
+                        "h-[8rem]",
                     ])}
                     alt={"logo"}
                 />
@@ -40,6 +40,7 @@ export default function () {
                         "text-3xl",
                         "lg:text-4xl",
                         "font-extrabold",
+                        "mt-5",
                     ])}
                 >
                     {title}
