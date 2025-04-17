@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import CryptoJS from "crypto-js";
 import { useSharedStore } from "@/storages/shared";
 import { Bot, RefreshCcw, Image } from "lucide-react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input, InputExtraButton, TextField, InputIcon } from "../ui/input";
 import { cn } from "@/utils";
 import { generateCaptcha } from "@/api/configs/captcha";
 
@@ -99,24 +98,16 @@ function PowCaptcha(props: CaptchaProps) {
     }, [id, result]);
 
     return (
-        <Input
-            disabled
-            value={result}
-            icon={Bot}
-            extraBtn={
-                <Button
-                    disabled={loading}
-                    onClick={() => setRefresh((prev) => prev + 1)}
-                    loading={loading}
-                    icon={RefreshCcw}
-                />
-            }
-            slotProps={{
-                input: {
-                    readOnly: true,
-                },
-            }}
-        />
+        <Input>
+            <InputIcon icon={Bot} />
+            <TextField readOnly disabled value={result} />
+            <InputExtraButton
+                disabled={loading}
+                onClick={() => setRefresh((prev) => prev + 1)}
+                loading={loading}
+                icon={RefreshCcw}
+            />
+        </Input>
     );
 }
 
@@ -151,13 +142,14 @@ function ImageCaptcha(props: CaptchaProps) {
 
     return (
         <div className={cn(["flex", "items-center", "gap-2"])}>
-            <Input
-                icon={Image}
-                value={result}
-                onChange={(e) => setResult(e.target.value)}
-                placeholder={"验证码"}
-                className={cn(["flex-1"])}
-            />
+            <Input className={cn(["flex-1"])}>
+                <InputIcon icon={Image} />
+                <TextField
+                    value={result}
+                    onChange={(e) => setResult(e.target.value)}
+                    placeholder={"验证码"}
+                />
+            </Input>
             <img
                 src={`data:image/svg+xml;base64,${CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(String(challenge)))}`}
                 onClick={() => setRefresh((prev) => prev + 1)}

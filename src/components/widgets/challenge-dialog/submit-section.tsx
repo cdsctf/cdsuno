@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Context } from "./context";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Flag, Send } from "lucide-react";
 import { cn } from "@/utils";
@@ -117,14 +117,14 @@ function SubmitSection() {
 
     return (
         <div className={cn(["flex", "gap-3", "items-center"])}>
-            <Input
-                size={"sm"}
-                icon={Flag}
-                className={cn(["flex-1"])}
-                placeholder={placeholder}
-                value={flag}
-                onChange={(e) => setFlag(e.target.value)}
-            />
+            <Input size={"sm"} className={cn(["flex-1"])}>
+                <InputIcon icon={Flag} />
+                <TextField
+                    placeholder={placeholder}
+                    value={flag}
+                    onChange={(e) => setFlag(e.target.value)}
+                />
+            </Input>
             <Button
                 variant={"solid"}
                 icon={Send}

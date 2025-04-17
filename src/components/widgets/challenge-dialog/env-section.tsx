@@ -7,10 +7,16 @@ import { renewEnv, stopEnv } from "@/api/envs/env_id";
 import { useAuthStore } from "@/storages/auth";
 import { toast } from "sonner";
 import { useInterval } from "@/hooks/use-interval";
-import { Input } from "@/components/ui/input";
+import {
+    Input,
+    InputExtraButton,
+    TextField,
+    InputIcon,
+} from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Clipboard, Clock, EthernetPort, Play, Trash } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { copyToClipboard } from "@/utils/clipboard";
 
 function EnvSection() {
     const { challenge, team } = useContext(Context);
@@ -148,25 +154,27 @@ function EnvSection() {
                                         <div className={cn(["flex"])} key={src}>
                                             <Input
                                                 size={"sm"}
-                                                icon={EthernetPort}
-                                                value={`${src} - ${pod?.public_entry}:${dst}`}
                                                 className={cn(["flex-1"])}
-                                                slotProps={{
-                                                    input: {
-                                                        readOnly: true,
-                                                    },
-                                                }}
-                                                extraBtn={
-                                                    <Button
-                                                        icon={Clipboard}
-                                                        onClick={() => {
-                                                            toast.success(
-                                                                "已复制到剪贴板"
-                                                            );
-                                                        }}
-                                                    />
-                                                }
-                                            />
+                                            >
+                                                <InputIcon
+                                                    icon={EthernetPort}
+                                                />
+                                                <TextField
+                                                    readOnly
+                                                    value={`${src} - ${pod?.public_entry}:${dst}`}
+                                                />
+                                                <InputExtraButton
+                                                    icon={Clipboard}
+                                                    onClick={() => {
+                                                        copyToClipboard(
+                                                            `${pod?.public_entry}:${dst}`
+                                                        );
+                                                        toast.success(
+                                                            "已复制到剪贴板"
+                                                        );
+                                                    }}
+                                                />
+                                            </Input>
                                         </div>
                                     ))}
                             </>
@@ -176,25 +184,25 @@ function EnvSection() {
                                     <div className={cn(["flex"])} key={port}>
                                         <Input
                                             size={"sm"}
-                                            icon={EthernetPort}
-                                            value={`${port} - ${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${pod?.id}/wsrx?port=${port}`}
                                             className={cn(["flex-1"])}
-                                            slotProps={{
-                                                input: {
-                                                    readOnly: true,
-                                                },
-                                            }}
-                                            extraBtn={
-                                                <Button
-                                                    icon={Clipboard}
-                                                    onClick={() => {
-                                                        toast.success(
-                                                            "已复制到剪贴板"
-                                                        );
-                                                    }}
-                                                />
-                                            }
-                                        />
+                                        >
+                                            <InputIcon icon={EthernetPort} />
+                                            <TextField
+                                                readOnly
+                                                value={`${port} - ${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${pod?.id}/wsrx?port=${port}`}
+                                            />
+                                            <InputExtraButton
+                                                icon={Clipboard}
+                                                onClick={() => {
+                                                    copyToClipboard(
+                                                        `${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${pod?.id}/wsrx?port=${port}`
+                                                    );
+                                                    toast.success(
+                                                        "已复制到剪贴板"
+                                                    );
+                                                }}
+                                            />
+                                        </Input>
                                     </div>
                                 ))}
                             </>

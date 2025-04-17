@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { cn } from "@/utils";
 import { MessageCircleIcon, SaveIcon, TypeIcon } from "lucide-react";
 import { useContext } from "react";
@@ -85,13 +85,14 @@ function CreateDialog(props: CreateDialogProps) {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>标题</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        size={"sm"}
-                                        icon={TypeIcon}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={TypeIcon} />
+                                        <TextField
+                                            {...field}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

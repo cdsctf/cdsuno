@@ -1,6 +1,6 @@
 import { UserRound, Lock, Check, MailIcon, SendIcon } from "lucide-react";
 import { cn } from "@/utils";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -113,11 +113,13 @@ function ForgetForm() {
                             <FormItem>
                                 <FormLabel>邮箱</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder={"Email"}
-                                        icon={MailIcon}
-                                        {...field}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={MailIcon} />
+                                        <TextField
+                                            placeholder={"Email"}
+                                            {...field}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -131,11 +133,13 @@ function ForgetForm() {
                                 <FormItem className={cn(["flex-1"])}>
                                     <FormLabel>验证码</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            placeholder={"Code"}
-                                            icon={MailIcon}
-                                            {...field}
-                                        />
+                                        <Input>
+                                            <InputIcon icon={MailIcon} />
+                                            <TextField
+                                                placeholder={"Code"}
+                                                {...field}
+                                            />
+                                        </Input>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -157,12 +161,14 @@ function ForgetForm() {
                             <FormItem>
                                 <FormLabel>密码</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder={"Password"}
-                                        icon={Lock}
-                                        type={"password"}
-                                        {...field}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={Lock} />
+                                        <TextField
+                                            placeholder={"Password"}
+                                            type={"password"}
+                                            {...field}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

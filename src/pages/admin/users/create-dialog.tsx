@@ -9,7 +9,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Group } from "@/models/user";
 import { useSharedStore } from "@/storages/shared";
@@ -117,14 +117,15 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                             <FormItem>
                                 <FormLabel>用户名</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={UserRoundIcon}
-                                        size={"sm"}
-                                        placeholder={"请输入用户名"}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={UserRoundIcon} />
+                                        <TextField
+                                            {...field}
+                                            placeholder={"请输入用户名"}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -138,14 +139,15 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                             <FormItem>
                                 <FormLabel>昵称</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={UserRoundCheckIcon}
-                                        size={"sm"}
-                                        placeholder={"请输入昵称"}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={UserRoundCheckIcon} />
+                                        <TextField
+                                            {...field}
+                                            placeholder={"请输入昵称"}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -159,15 +161,16 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                             <FormItem>
                                 <FormLabel>邮箱</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={MailIcon}
-                                        size={"sm"}
-                                        type="email"
-                                        placeholder={"请输入邮箱地址"}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={MailIcon} />
+                                        <TextField
+                                            {...field}
+                                            type="email"
+                                            placeholder={"请输入邮箱地址"}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -181,15 +184,16 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                             <FormItem>
                                 <FormLabel>密码</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={KeyIcon}
-                                        size={"sm"}
-                                        type="password"
-                                        placeholder={"请输入密码"}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={KeyIcon} />
+                                        <TextField
+                                            {...field}
+                                            type="password"
+                                            placeholder={"请输入密码"}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

@@ -21,7 +21,7 @@ import {
 import { Pagination } from "@/components/ui/pagination";
 import { cn } from "@/utils";
 import { columns } from "./columns";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Select } from "@/components/ui/select";
 import { useCategoryStore } from "@/storages/category";
@@ -140,22 +140,22 @@ export default function Index() {
                         "gap-3",
                     ])}
                 >
-                    <Input
-                        size={"sm"}
-                        placeholder="ID"
-                        icon={HashIcon}
-                        value={
-                            (table
-                                .getColumn("challenge_id")
-                                ?.getFilterValue() as string) ?? ""
-                        }
-                        onChange={(e) =>
-                            table
-                                .getColumn("challenge_id")
-                                ?.setFilterValue(e.target.value)
-                        }
-                        className={cn(["flex-1"])}
-                    />
+                    <Input size={"sm"} className={cn(["flex-1"])}>
+                        <InputIcon icon={HashIcon} />
+                        <TextField
+                            placeholder={"ID"}
+                            value={
+                                (table
+                                    .getColumn("challenge_id")
+                                    ?.getFilterValue() as string) ?? ""
+                            }
+                            onChange={(e) =>
+                                table
+                                    .getColumn("challenge_id")
+                                    ?.setFilterValue(e.target.value)
+                            }
+                        />
+                    </Input>
                     <Select
                         size={"sm"}
                         icon={Library}

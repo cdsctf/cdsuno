@@ -1,4 +1,4 @@
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { ChallengeCard } from "@/components/widgets/challenge-card";
 import { Challenge } from "@/models/challenge";
 import {
@@ -85,13 +85,14 @@ export default function Index() {
                 ])}
             >
                 <div className={cn(["flex", "items-center", "gap-3"])}>
-                    <Input
-                        icon={LibraryIcon}
-                        className={cn(["flex-1"])}
-                        placeholder={"题目名"}
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
+                    <Input className={cn(["flex-1"])}>
+                        <InputIcon icon={LibraryIcon} />
+                        <TextField
+                            placeholder={"题目名"}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </Input>
                     <Button
                         size={"lg"}
                         className={cn(["h-12"])}

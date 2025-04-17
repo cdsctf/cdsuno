@@ -1,7 +1,7 @@
 import { sendVerifyEmail, verify } from "@/api/users/profile/verify";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Input, TextField } from "@/components/ui/input";
 import { useAuthStore } from "@/storages/auth";
 import { cn } from "@/utils";
 import { CheckIcon, MailCheckIcon, SendIcon } from "lucide-react";
@@ -61,13 +61,13 @@ function EmailVerifyDialog(props: EmailVerifyDialogProps) {
             </h3>
             <p>你正在验证邮箱 {authStore?.user?.email}，请接收验证码</p>
             <div className={cn(["flex", "gap-2", "items-center"])}>
-                <Input
-                    placeholder={"验证码"}
-                    size={"sm"}
-                    className={cn(["flex-1"])}
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                />
+                <Input size={"sm"} className={cn(["flex-1"])}>
+                    <TextField
+                        placeholder={"验证码"}
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                    />
+                </Input>
                 <Button
                     variant={"solid"}
                     icon={SendIcon}

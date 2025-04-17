@@ -33,7 +33,7 @@ import {
 import { Pagination } from "@/components/ui/pagination";
 import { cn } from "@/utils";
 import { columns } from "./columns";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Select } from "@/components/ui/select";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -152,54 +152,54 @@ export default function Index() {
                         "gap-3",
                     ])}
                 >
-                    <Input
-                        size={"sm"}
-                        placeholder="ID"
-                        icon={HashIcon}
-                        value={
-                            (table
-                                .getColumn("id")
-                                ?.getFilterValue() as string) ?? ""
-                        }
-                        onChange={(e) =>
-                            table
-                                .getColumn("id")
-                                ?.setFilterValue(e.target.value)
-                        }
-                        className={cn(["flex-1"])}
-                    />
-                    <Input
-                        size={"sm"}
-                        placeholder={"用户名"}
-                        icon={TypeIcon}
-                        value={
-                            (table
-                                .getColumn("username")
-                                ?.getFilterValue() as string) ?? ""
-                        }
-                        onChange={(e) =>
-                            table
-                                .getColumn("username")
-                                ?.setFilterValue(e.target.value)
-                        }
-                        className={cn(["flex-1"])}
-                    />
-                    <Input
-                        size={"sm"}
-                        placeholder={"邮箱"}
-                        icon={MailIcon}
-                        value={
-                            (table
-                                .getColumn("email")
-                                ?.getFilterValue() as string) ?? ""
-                        }
-                        onChange={(e) =>
-                            table
-                                .getColumn("email")
-                                ?.setFilterValue(e.target.value)
-                        }
-                        className={cn(["flex-1"])}
-                    />
+                    <Input size={"sm"} className={cn(["flex-1"])}>
+                        <InputIcon icon={HashIcon} />
+                        <TextField
+                            placeholder="ID"
+                            value={
+                                (table
+                                    .getColumn("id")
+                                    ?.getFilterValue() as string) ?? ""
+                            }
+                            onChange={(e) =>
+                                table
+                                    .getColumn("id")
+                                    ?.setFilterValue(e.target.value)
+                            }
+                        />
+                    </Input>
+                    <Input size={"sm"} className={cn(["flex-1"])}>
+                        <InputIcon icon={TypeIcon} />
+                        <TextField
+                            placeholder={"用户名"}
+                            value={
+                                (table
+                                    .getColumn("username")
+                                    ?.getFilterValue() as string) ?? ""
+                            }
+                            onChange={(e) =>
+                                table
+                                    .getColumn("username")
+                                    ?.setFilterValue(e.target.value)
+                            }
+                        />
+                    </Input>
+                    <Input size={"sm"} className={cn(["flex-1"])}>
+                        <InputIcon icon={MailIcon} />
+                        <TextField
+                            placeholder={"邮箱"}
+                            value={
+                                (table
+                                    .getColumn("email")
+                                    ?.getFilterValue() as string) ?? ""
+                            }
+                            onChange={(e) =>
+                                table
+                                    .getColumn("email")
+                                    ?.setFilterValue(e.target.value)
+                            }
+                        />
+                    </Input>
                     <Select
                         size={"sm"}
                         icon={UserRoundIcon}

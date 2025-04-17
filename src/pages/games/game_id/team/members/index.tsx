@@ -2,7 +2,7 @@ import { createToken, getToken } from "@/api/games/game_id/teams/profile/token";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { useGameStore } from "@/storages/game";
 import { cn } from "@/utils";
 import { KeyIcon, RefreshCcwIcon } from "lucide-react";
@@ -45,21 +45,18 @@ export default function Index() {
             ])}
         >
             <div className={cn(["flex", "gap-5", "items-center"])}>
-                <Input
-                    icon={KeyIcon}
-                    value={
-                        token
-                            ? `${selfTeam?.id ?? ""}:${token || ""}`
-                            : "暂无邀请码"
-                    }
-                    slotProps={{
-                        input: {
-                            readOnly: true,
-                        },
-                    }}
-                    className={cn(["flex-1"])}
-                    onChange={() => {}}
-                />
+                <Input>
+                    <InputIcon icon={KeyIcon} />
+                    <TextField
+                        readOnly
+                        value={
+                            token
+                                ? `${selfTeam?.id ?? ""}:${token || ""}`
+                                : "暂无邀请码"
+                        }
+                        onChange={() => {}}
+                    />
+                </Input>
 
                 <Button
                     icon={RefreshCcwIcon}

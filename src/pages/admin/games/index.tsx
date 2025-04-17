@@ -19,7 +19,7 @@ import {
     PlusCircle,
     TypeIcon,
 } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -123,38 +123,38 @@ export default function Index() {
                         "gap-3",
                     ])}
                 >
-                    <Input
-                        size={"sm"}
-                        placeholder="ID"
-                        icon={HashIcon}
-                        value={
-                            (table
-                                .getColumn("id")
-                                ?.getFilterValue() as number) ?? ""
-                        }
-                        onChange={(e) =>
-                            table
-                                .getColumn("id")
-                                ?.setFilterValue(e.target.value)
-                        }
-                        className={cn(["flex-1"])}
-                    />
-                    <Input
-                        size={"sm"}
-                        placeholder={"比赛名"}
-                        icon={TypeIcon}
-                        value={
-                            (table
-                                .getColumn("title")
-                                ?.getFilterValue() as string) ?? ""
-                        }
-                        onChange={(e) =>
-                            table
-                                .getColumn("title")
-                                ?.setFilterValue(e.target.value)
-                        }
-                        className={cn(["flex-1"])}
-                    />
+                    <Input size={"sm"} className={cn(["flex-1"])}>
+                        <InputIcon icon={HashIcon} />
+                        <TextField
+                            placeholder="ID"
+                            value={
+                                (table
+                                    .getColumn("id")
+                                    ?.getFilterValue() as number) ?? ""
+                            }
+                            onChange={(e) =>
+                                table
+                                    .getColumn("id")
+                                    ?.setFilterValue(e.target.value)
+                            }
+                        />
+                    </Input>
+                    <Input size={"sm"} className={cn(["flex-1"])}>
+                        <InputIcon icon={TypeIcon} />
+                        <TextField
+                            placeholder={"比赛名"}
+                            value={
+                                (table
+                                    .getColumn("title")
+                                    ?.getFilterValue() as string) ?? ""
+                            }
+                            onChange={(e) =>
+                                table
+                                    .getColumn("title")
+                                    ?.setFilterValue(e.target.value)
+                            }
+                        />
+                    </Input>
                     <Button
                         icon={PlusCircle}
                         variant={"solid"}

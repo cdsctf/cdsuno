@@ -3,7 +3,7 @@ import { createGameChallenge } from "@/api/admin/games/game_id/challenges";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Challenge } from "@/models/challenge";
 import { useCategoryStore } from "@/storages/category";
@@ -86,22 +86,22 @@ function CreateDialog(props: CreateDialogProps) {
                 条结果。点击题目即可添加赛题。
             </span>
             <div className={cn(["flex", "gap-3"])}>
-                <Input
-                    size={"sm"}
-                    icon={HashIcon}
-                    value={id || ""}
-                    onChange={(e) => setId(e.target.value)}
-                    placeholder={"ID"}
-                    className={cn(["w-full"])}
-                />
-                <Input
-                    size={"sm"}
-                    icon={TypeIcon}
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder={"题目名"}
-                    className={cn(["w-full"])}
-                />
+                <Input size={"sm"} className={cn(["w-full"])}>
+                    <InputIcon icon={HashIcon} />
+                    <TextField
+                        value={id || ""}
+                        onChange={(e) => setId(e.target.value)}
+                        placeholder={"ID"}
+                    />
+                </Input>
+                <Input size={"sm"} className={cn(["w-full"])}>
+                    <InputIcon icon={TypeIcon} />
+                    <TextField
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder={"题目名"}
+                    />
+                </Input>
             </div>
             <div className={cn(["grid", "grid-cols-2", "gap-3"])}>
                 {challenges?.map((challenge) => {

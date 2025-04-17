@@ -4,7 +4,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/utils";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { updateChallengeEnv } from "@/api/admin/challenges/challenge_id/env";
 import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
@@ -161,18 +161,20 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>持续时间（秒）</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        type={"number"}
-                                        icon={Clock}
-                                        placeholder={"1800"}
-                                        value={field.value || ""}
-                                        onChange={(e) =>
-                                            field.onChange(
-                                                Number(e.target.value)
-                                            )
-                                        }
-                                    />
+                                    <Input>
+                                        <InputIcon icon={Clock} />
+                                        <TextField
+                                            {...field}
+                                            type={"number"}
+                                            placeholder={"1800"}
+                                            value={field.value || ""}
+                                            onChange={(e) =>
+                                                field.onChange(
+                                                    Number(e.target.value)
+                                                )
+                                            }
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -229,13 +231,17 @@ export default function Index() {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>镜像名</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                {...field}
-                                                icon={Container}
-                                                placeholder={"repository:tag"}
-                                                value={field.value || ""}
-                                                onChange={field.onChange}
-                                            />
+                                            <Input>
+                                                <InputIcon icon={Container} />
+                                                <TextField
+                                                    {...field}
+                                                    placeholder={
+                                                        "repository:tag"
+                                                    }
+                                                    value={field.value || ""}
+                                                    onChange={field.onChange}
+                                                />
+                                            </Input>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -250,18 +256,22 @@ export default function Index() {
                                     <FormItem className={cn(["w-1/2"])}>
                                         <FormLabel>CPU 限制</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                {...field}
-                                                type={"number"}
-                                                icon={Cpu}
-                                                placeholder={"2"}
-                                                value={field.value || ""}
-                                                onChange={(e) =>
-                                                    field.onChange(
-                                                        Number(e.target.value)
-                                                    )
-                                                }
-                                            />
+                                            <Input>
+                                                <InputIcon icon={Cpu} />
+                                                <TextField
+                                                    {...field}
+                                                    type={"number"}
+                                                    placeholder={"2"}
+                                                    value={field.value || ""}
+                                                    onChange={(e) =>
+                                                        field.onChange(
+                                                            Number(
+                                                                e.target.value
+                                                            )
+                                                        )
+                                                    }
+                                                />
+                                            </Input>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -274,18 +284,22 @@ export default function Index() {
                                     <FormItem className={cn(["w-1/2"])}>
                                         <FormLabel>内存限制（MB）</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                {...field}
-                                                type={"number"}
-                                                icon={MemoryStick}
-                                                placeholder={"2"}
-                                                value={field.value || ""}
-                                                onChange={(e) =>
-                                                    field.onChange(
-                                                        Number(e.target.value)
-                                                    )
-                                                }
-                                            />
+                                            <Input>
+                                                <InputIcon icon={MemoryStick} />
+                                                <TextField
+                                                    {...field}
+                                                    type={"number"}
+                                                    placeholder={"2"}
+                                                    value={field.value || ""}
+                                                    onChange={(e) =>
+                                                        field.onChange(
+                                                            Number(
+                                                                e.target.value
+                                                            )
+                                                        )
+                                                    }
+                                                />
+                                            </Input>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -316,26 +330,32 @@ export default function Index() {
                                                     ])}
                                                 >
                                                     <Input
-                                                        {...field}
-                                                        type={"number"}
-                                                        icon={MemoryStick}
                                                         size={"sm"}
-                                                        placeholder={"2"}
-                                                        value={
-                                                            field.value || ""
-                                                        }
-                                                        onChange={(e) =>
-                                                            field.onChange(
-                                                                Number(
-                                                                    e.target
-                                                                        .value
-                                                                )
-                                                            )
-                                                        }
                                                         className={cn([
                                                             "flex-1",
                                                         ])}
-                                                    />
+                                                    >
+                                                        <InputIcon
+                                                            icon={MemoryStick}
+                                                        />
+                                                        <TextField
+                                                            {...field}
+                                                            type={"number"}
+                                                            placeholder={"2"}
+                                                            value={
+                                                                field.value ||
+                                                                ""
+                                                            }
+                                                            onChange={(e) =>
+                                                                field.onChange(
+                                                                    Number(
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                )
+                                                            }
+                                                        />
+                                                    </Input>
                                                     <Button
                                                         type={"button"}
                                                         icon={Minus}
@@ -378,49 +398,57 @@ export default function Index() {
                                             ])}
                                         >
                                             <Input
-                                                value={key}
-                                                placeholder="键"
-                                                icon={Key}
                                                 size={"sm"}
-                                                onChange={(e) => {
-                                                    const newKey =
-                                                        e.target.value;
-                                                    const envs =
-                                                        form.getValues(
-                                                            `containers.${containerIndex}.envs`
-                                                        ) || {};
-                                                    const value = envs[key];
-                                                    const newEnvs = { ...envs };
-                                                    delete newEnvs[key];
-                                                    newEnvs[newKey] = value;
-                                                    form.setValue(
-                                                        `containers.${containerIndex}.envs`,
-                                                        newEnvs
-                                                    );
-                                                }}
                                                 className={cn(["flex-1/2"])}
-                                            />
-                                            <Input
-                                                value={container.envs[key]}
-                                                placeholder="值"
-                                                size={"sm"}
-                                                onChange={(e) => {
-                                                    const newValue =
-                                                        e.target.value;
-                                                    const envs =
-                                                        form.getValues(
-                                                            `containers.${containerIndex}.envs`
-                                                        ) || {};
-                                                    form.setValue(
-                                                        `containers.${containerIndex}.envs`,
-                                                        {
+                                            >
+                                                <InputIcon icon={Key} />
+                                                <TextField
+                                                    placeholder="键"
+                                                    value={key}
+                                                    onChange={(e) => {
+                                                        const newKey =
+                                                            e.target.value;
+                                                        const envs =
+                                                            form.getValues(
+                                                                `containers.${containerIndex}.envs`
+                                                            ) || {};
+                                                        const value = envs[key];
+                                                        const newEnvs = {
                                                             ...envs,
-                                                            [key]: newValue,
-                                                        }
-                                                    );
-                                                }}
+                                                        };
+                                                        delete newEnvs[key];
+                                                        newEnvs[newKey] = value;
+                                                        form.setValue(
+                                                            `containers.${containerIndex}.envs`,
+                                                            newEnvs
+                                                        );
+                                                    }}
+                                                />
+                                            </Input>
+                                            <Input
+                                                size={"sm"}
                                                 className={cn(["flex-1/2"])}
-                                            />
+                                            >
+                                                <TextField
+                                                    placeholder="值"
+                                                    value={container.envs[key]}
+                                                    onChange={(e) => {
+                                                        const newValue =
+                                                            e.target.value;
+                                                        const envs =
+                                                            form.getValues(
+                                                                `containers.${containerIndex}.envs`
+                                                            ) || {};
+                                                        form.setValue(
+                                                            `containers.${containerIndex}.envs`,
+                                                            {
+                                                                ...envs,
+                                                                [key]: newValue,
+                                                            }
+                                                        );
+                                                    }}
+                                                />
+                                            </Input>
                                             <Button
                                                 type={"button"}
                                                 icon={Minus}

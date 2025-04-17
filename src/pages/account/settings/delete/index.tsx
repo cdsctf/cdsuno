@@ -7,7 +7,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Typography } from "@/components/ui/typography";
 import { Captcha } from "@/components/widgets/captcha";
@@ -134,11 +134,15 @@ export default function Index() {
                             render={({ field }) => (
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>用户名</FormLabel>
-                                    <Input
-                                        {...field}
-                                        icon={UserRoundIcon}
-                                        placeholder={authStore?.user?.username}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={UserRoundIcon} />
+                                        <TextField
+                                            {...field}
+                                            placeholder={
+                                                authStore?.user?.username
+                                            }
+                                        />
+                                    </Input>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -148,11 +152,13 @@ export default function Index() {
                             render={({ field }) => (
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>密码</FormLabel>
-                                    <Input
-                                        {...field}
-                                        type={"password"}
-                                        icon={LockIcon}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={LockIcon} />
+                                        <TextField
+                                            {...field}
+                                            type={"password"}
+                                        />
+                                    </Input>
                                     <FormMessage />
                                 </FormItem>
                             )}

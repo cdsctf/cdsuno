@@ -10,7 +10,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -94,14 +94,15 @@ function CreateDialog(props: CreateDialogProps) {
                             <FormItem>
                                 <FormLabel>标题</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={TypeIcon}
-                                        size={"sm"}
-                                        placeholder={"比赛名称"}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={TypeIcon} />
+                                        <TextField
+                                            {...field}
+                                            placeholder={"比赛名称"}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

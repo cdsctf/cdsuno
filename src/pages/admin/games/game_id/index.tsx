@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@/components/ui/editor";
 import { cn } from "@/utils";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
 import {
@@ -301,13 +301,15 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>标题</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            {...field}
-                                            icon={Type}
-                                            placeholder={"标题"}
-                                            value={field.value || ""}
-                                            onChange={field.onChange}
-                                        />
+                                        <Input>
+                                            <InputIcon icon={Type} />
+                                            <TextField
+                                                {...field}
+                                                placeholder={"标题"}
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        </Input>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -509,19 +511,20 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>团队所需最小人数</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        size={"sm"}
-                                        type={"number"}
-                                        icon={UsersRoundIcon}
-                                        placeholder={"3"}
-                                        value={field.value || ""}
-                                        onChange={(e) =>
-                                            field.onChange(
-                                                Number(e.target.value)
-                                            )
-                                        }
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={UsersRoundIcon} />
+                                        <TextField
+                                            {...field}
+                                            type={"number"}
+                                            placeholder={"3"}
+                                            value={field.value || ""}
+                                            onChange={(e) =>
+                                                field.onChange(
+                                                    Number(e.target.value)
+                                                )
+                                            }
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -534,19 +537,20 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>团队所需最大人数</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        size={"sm"}
-                                        type={"number"}
-                                        icon={UsersRoundIcon}
-                                        placeholder={"3"}
-                                        value={field.value || ""}
-                                        onChange={(e) =>
-                                            field.onChange(
-                                                Number(e.target.value)
-                                            )
-                                        }
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={UsersRoundIcon} />
+                                        <TextField
+                                            {...field}
+                                            type={"number"}
+                                            placeholder={"3"}
+                                            value={field.value || ""}
+                                            onChange={(e) =>
+                                                field.onChange(
+                                                    Number(e.target.value)
+                                                )
+                                            }
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

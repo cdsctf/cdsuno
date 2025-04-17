@@ -1,6 +1,6 @@
 import { UserRound, Lock, Check, TypeIcon, MailIcon } from "lucide-react";
 import { cn } from "@/utils";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,15 +15,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Captcha } from "@/components/widgets/captcha";
 import { useState } from "react";
-import { login, register } from "@/api/users";
+import { register } from "@/api/users";
 import { toast } from "sonner";
-import { useAuthStore } from "@/storages/auth";
 import { useNavigate } from "react-router";
 import { useConfigStore } from "@/storages/config";
 
 function RegisterForm() {
     const configStore = useConfigStore();
-    const authStore = useAuthStore();
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -117,7 +115,10 @@ function RegisterForm() {
                                 <FormItem className={cn(["flex-1"])}>
                                     <FormLabel>用户名</FormLabel>
                                     <FormControl>
-                                        <Input icon={UserRound} {...field} />
+                                        <Input>
+                                            <InputIcon icon={UserRound} />
+                                            <TextField {...field} />
+                                        </Input>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -130,7 +131,10 @@ function RegisterForm() {
                                 <FormItem className={cn(["flex-1"])}>
                                     <FormLabel>昵称</FormLabel>
                                     <FormControl>
-                                        <Input icon={TypeIcon} {...field} />
+                                        <Input>
+                                            <InputIcon icon={TypeIcon} />
+                                            <TextField {...field} />
+                                        </Input>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -144,7 +148,10 @@ function RegisterForm() {
                             <FormItem>
                                 <FormLabel>邮箱</FormLabel>
                                 <FormControl>
-                                    <Input icon={MailIcon} {...field} />
+                                    <Input>
+                                        <InputIcon icon={MailIcon} />
+                                        <TextField {...field} />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -157,11 +164,13 @@ function RegisterForm() {
                             <FormItem>
                                 <FormLabel>密码</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        icon={Lock}
-                                        type={"password"}
-                                        {...field}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={Lock} />
+                                        <TextField
+                                            type={"password"}
+                                            {...field}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -174,11 +183,13 @@ function RegisterForm() {
                             <FormItem>
                                 <FormLabel>确认密码</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        icon={Lock}
-                                        type={"password"}
-                                        {...field}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={Lock} />
+                                        <TextField
+                                            type={"password"}
+                                            {...field}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

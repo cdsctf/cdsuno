@@ -16,7 +16,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./context";
 import { updateUser } from "@/api/admin/users/user_id";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -208,13 +208,15 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>用户名</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            {...field}
-                                            icon={UserRoundIcon}
-                                            placeholder="请输入用户名"
-                                            value={field.value || ""}
-                                            onChange={field.onChange}
-                                        />
+                                        <Input>
+                                            <InputIcon icon={UserRoundIcon} />
+                                            <TextField
+                                                {...field}
+                                                placeholder="请输入用户名"
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        </Input>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -228,13 +230,15 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>昵称</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            {...field}
-                                            icon={UserRoundIcon}
-                                            placeholder="请输入昵称"
-                                            value={field.value || ""}
-                                            onChange={field.onChange}
-                                        />
+                                        <Input>
+                                            <InputIcon icon={UserRoundIcon} />
+                                            <TextField
+                                                {...field}
+                                                placeholder="请输入昵称"
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        </Input>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -287,14 +291,16 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>邮箱</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={MailIcon}
-                                        type="email"
-                                        placeholder="请输入邮箱"
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={MailIcon} />
+                                        <TextField
+                                            {...field}
+                                            type={"email"}
+                                            placeholder="请输入邮箱"
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

@@ -43,11 +43,12 @@ export default function Layout() {
                     "h-[calc(100vh-64px)]",
                     "sticky",
                     "top-16",
-                    "bg-sidebar",
+                    "bg-card",
                     "border-r-1",
                     "p-4",
                     "flex",
                     "flex-col",
+                    "items-center",
                     "gap-4",
                 ])}
             >

@@ -1,6 +1,6 @@
 import { UserRound, Lock, Check, CircleHelpIcon } from "lucide-react";
 import { cn } from "@/utils";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -89,11 +89,13 @@ function LoginForm() {
                             <FormItem>
                                 <FormLabel>用户名/邮箱</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder={"Account"}
-                                        icon={UserRound}
-                                        {...field}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={UserRound} />
+                                        <TextField
+                                            placeholder={"Account"}
+                                            {...field}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -106,12 +108,14 @@ function LoginForm() {
                             <FormItem>
                                 <FormLabel>密码</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder={"Password"}
-                                        icon={Lock}
-                                        type={"password"}
-                                        {...field}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={Lock} />
+                                        <TextField
+                                            placeholder={"Password"}
+                                            type={"password"}
+                                            {...field}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

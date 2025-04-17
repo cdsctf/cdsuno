@@ -2,7 +2,7 @@ import { getGames } from "@/api/games";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Image } from "@/components/ui/image";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { Pagination } from "@/components/ui/pagination";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Game } from "@/models/game";
@@ -67,13 +67,14 @@ export default function Index() {
                     "items-center",
                 ])}
             >
-                <Input
-                    icon={Search}
-                    className={cn(["w-full"])}
-                    placeholder={"比赛名"}
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+                <Input className={cn(["w-full"])}>
+                    <InputIcon icon={Search} />
+                    <TextField
+                        placeholder={"比赛名"}
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </Input>
                 <Pagination
                     size={"sm"}
                     total={Math.ceil(total / size)}

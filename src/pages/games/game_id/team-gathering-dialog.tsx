@@ -10,7 +10,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useGameStore } from "@/storages/game";
 import { useSharedStore } from "@/storages/shared";
@@ -131,13 +131,14 @@ function TeamGatheringDialog(props: TeamGatheringDialogProps) {
                             <FormItem className={cn(["flex-1"])}>
                                 <FormLabel>团队名</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={TypeIcon}
-                                        size={"sm"}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={TypeIcon} />
+                                        <TextField
+                                            {...field}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -166,13 +167,14 @@ function TeamGatheringDialog(props: TeamGatheringDialogProps) {
                             <FormItem className={cn(["flex-1"])}>
                                 <FormLabel>邀请码</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        icon={KeyIcon}
-                                        size={"sm"}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input size={"sm"}>
+                                        <InputIcon icon={KeyIcon} />
+                                        <TextField
+                                            {...field}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

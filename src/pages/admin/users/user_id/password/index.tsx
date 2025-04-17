@@ -8,7 +8,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LockIcon, SaveIcon } from "lucide-react";
@@ -84,14 +84,16 @@ export default function Index() {
                             <FormItem>
                                 <FormLabel>新密码</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        type={"password"}
-                                        icon={LockIcon}
-                                        placeholder={"新密码"}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={LockIcon} />
+                                        <TextField
+                                            {...field}
+                                            type={"password"}
+                                            placeholder={"新密码"}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -104,14 +106,16 @@ export default function Index() {
                             <FormItem>
                                 <FormLabel>确认密码</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        type={"password"}
-                                        icon={LockIcon}
-                                        placeholder={"确认密码"}
-                                        value={field.value || ""}
-                                        onChange={field.onChange}
-                                    />
+                                    <Input>
+                                        <InputIcon icon={LockIcon} />
+                                        <TextField
+                                            {...field}
+                                            type={"password"}
+                                            placeholder={"确认密码"}
+                                            value={field.value || ""}
+                                            onChange={field.onChange}
+                                        />
+                                    </Input>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

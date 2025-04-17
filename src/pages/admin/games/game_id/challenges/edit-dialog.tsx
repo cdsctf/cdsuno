@@ -1,6 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { useCategoryStore } from "@/storages/category";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { cn } from "@/utils";
 import {
     HashIcon,
@@ -167,19 +166,22 @@ function EditDialog(props: EditDialogProps) {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>最大分值</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                {...field}
-                                                size={"sm"}
-                                                icon={HashIcon}
-                                                type={"number"}
-                                                placeholder={"最大分值"}
-                                                value={field.value || ""}
-                                                onChange={(e) =>
-                                                    field.onChange(
-                                                        Number(e.target.value)
-                                                    )
-                                                }
-                                            />
+                                            <Input size={"sm"}>
+                                                <InputIcon icon={HashIcon} />
+                                                <TextField
+                                                    {...field}
+                                                    type={"number"}
+                                                    placeholder={"最大分值"}
+                                                    value={field.value || ""}
+                                                    onChange={(e) =>
+                                                        field.onChange(
+                                                            Number(
+                                                                e.target.value
+                                                            )
+                                                        )
+                                                    }
+                                                />
+                                            </Input>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -192,19 +194,22 @@ function EditDialog(props: EditDialogProps) {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>最小分值</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                {...field}
-                                                size={"sm"}
-                                                icon={HashIcon}
-                                                type={"number"}
-                                                placeholder={"最小分值"}
-                                                value={field.value || ""}
-                                                onChange={(e) =>
-                                                    field.onChange(
-                                                        Number(e.target.value)
-                                                    )
-                                                }
-                                            />
+                                            <Input size={"sm"}>
+                                                <InputIcon icon={HashIcon} />
+                                                <TextField
+                                                    {...field}
+                                                    type={"number"}
+                                                    placeholder={"最小分值"}
+                                                    value={field.value || ""}
+                                                    onChange={(e) =>
+                                                        field.onChange(
+                                                            Number(
+                                                                e.target.value
+                                                            )
+                                                        )
+                                                    }
+                                                />
+                                            </Input>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -217,19 +222,22 @@ function EditDialog(props: EditDialogProps) {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>难度系数</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                {...field}
-                                                size={"sm"}
-                                                icon={HashIcon}
-                                                type={"number"}
-                                                placeholder={"难度系数"}
-                                                value={field.value || ""}
-                                                onChange={(e) =>
-                                                    field.onChange(
-                                                        Number(e.target.value)
-                                                    )
-                                                }
-                                            />
+                                            <Input size={"sm"}>
+                                                <InputIcon icon={HashIcon} />
+                                                <TextField
+                                                    {...field}
+                                                    type={"number"}
+                                                    placeholder={"难度系数"}
+                                                    value={field.value || ""}
+                                                    onChange={(e) =>
+                                                        field.onChange(
+                                                            Number(
+                                                                e.target.value
+                                                            )
+                                                        )
+                                                    }
+                                                />
+                                            </Input>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -278,28 +286,39 @@ function EditDialog(props: EditDialogProps) {
                                                             ])}
                                                         >
                                                             <Input
-                                                                {...field}
-                                                                type={"number"}
-                                                                icon={StarIcon}
                                                                 size={"sm"}
-                                                                placeholder={`No. ${ratioIndex + 1}`}
-                                                                value={
-                                                                    field.value ||
-                                                                    ""
-                                                                }
-                                                                onChange={(e) =>
-                                                                    field.onChange(
-                                                                        Number(
-                                                                            e
-                                                                                .target
-                                                                                .value
-                                                                        )
-                                                                    )
-                                                                }
                                                                 className={cn([
                                                                     "flex-1",
                                                                 ])}
-                                                            />
+                                                            >
+                                                                <InputIcon
+                                                                    icon={
+                                                                        StarIcon
+                                                                    }
+                                                                />
+                                                                <TextField
+                                                                    {...field}
+                                                                    type={
+                                                                        "number"
+                                                                    }
+                                                                    placeholder={`No. ${ratioIndex + 1}`}
+                                                                    value={
+                                                                        field.value ||
+                                                                        ""
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) =>
+                                                                        field.onChange(
+                                                                            Number(
+                                                                                e
+                                                                                    .target
+                                                                                    .value
+                                                                            )
+                                                                        )
+                                                                    }
+                                                                />
+                                                            </Input>
                                                             <Button
                                                                 type={"button"}
                                                                 icon={MinusIcon}

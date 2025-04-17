@@ -9,7 +9,7 @@ import { CloudUploadIcon, HardDrive, TextIcon, TrashIcon } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context";
 import { deleteChallengeAttachment } from "@/api/admin/challenges/challenge_id/attachment";
-import { Input } from "@/components/ui/input";
+import { Input, TextField, InputIcon } from "@/components/ui/input";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -101,22 +101,24 @@ export default function Index() {
             <div className={cn(["flex", "gap-3", "items-center"])}>
                 {metadata && (
                     <>
-                        <Input
-                            icon={TextIcon}
-                            disabled
-                            placeholder={"文件名"}
-                            className={cn(["w-1/2"])}
-                            value={metadata?.filename}
-                            onChange={() => {}}
-                        />
-                        <Input
-                            icon={HardDrive}
-                            disabled
-                            placeholder={"文件大小"}
-                            className={cn(["flex-1"])}
-                            value={`${metadata?.size} Bytes`}
-                            onChange={() => {}}
-                        />
+                        <Input className={cn(["w-1/2"])}>
+                            <InputIcon icon={TextIcon} />
+                            <TextField
+                                disabled
+                                placeholder={"文件名"}
+                                value={metadata?.filename}
+                                onChange={() => {}}
+                            />
+                        </Input>
+                        <Input className={cn(["flex-1"])}>
+                            <InputIcon icon={HardDrive} />
+                            <TextField
+                                disabled
+                                placeholder={"文件大小"}
+                                value={`${metadata?.size} Bytes`}
+                                onChange={() => {}}
+                            />
+                        </Input>
                         <Button
                             variant={"solid"}
                             level={"error"}
