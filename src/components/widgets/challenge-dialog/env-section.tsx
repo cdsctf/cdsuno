@@ -7,15 +7,10 @@ import { renewEnv, stopEnv } from "@/api/envs/env_id";
 import { useAuthStore } from "@/storages/auth";
 import { toast } from "sonner";
 import { useInterval } from "@/hooks/use-interval";
-import {
-    Input,
-    InputExtraButton,
-    TextField,
-    InputIcon,
-} from "@/components/ui/input";
+import { Input, InputExtraButton, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { Button } from "@/components/ui/button";
 import { Clipboard, Clock, EthernetPort, Play, Trash } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { copyToClipboard } from "@/utils/clipboard";
 
 function EnvSection() {

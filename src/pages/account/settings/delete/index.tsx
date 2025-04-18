@@ -7,7 +7,8 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, TextField, InputIcon } from "@/components/ui/input";
+import { Input, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { Separator } from "@/components/ui/separator";
 import { Typography } from "@/components/ui/typography";
 import { Captcha } from "@/components/widgets/captcha";

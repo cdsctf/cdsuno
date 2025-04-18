@@ -16,7 +16,8 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./context";
 import { updateUser } from "@/api/admin/users/user_id";
-import { Input, TextField, InputIcon } from "@/components/ui/input";
+import { Input, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";

@@ -1,4 +1,5 @@
-import { Input, TextField, InputIcon } from "@/components/ui/input";
+import { Input, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { ChallengeCard } from "@/components/widgets/challenge-card";
 import { Challenge } from "@/models/challenge";
 import {

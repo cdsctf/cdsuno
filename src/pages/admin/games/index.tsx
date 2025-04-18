@@ -19,7 +19,8 @@ import {
     PlusCircle,
     TypeIcon,
 } from "lucide-react";
-import { Input, TextField, InputIcon } from "@/components/ui/input";
+import { Input, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";

@@ -19,7 +19,8 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, TextField, InputIcon } from "@/components/ui/input";
+import { Input, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { Label } from "@/components/ui/label";
 import { useAuthStore } from "@/storages/auth";
 import { useSharedStore } from "@/storages/shared";

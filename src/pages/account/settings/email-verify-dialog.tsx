@@ -1,7 +1,8 @@
 import { sendVerifyEmail, verify } from "@/api/users/profile/verify";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input, TextField } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { useAuthStore } from "@/storages/auth";
 import { cn } from "@/utils";
 import { CheckIcon, MailCheckIcon, SendIcon } from "lucide-react";

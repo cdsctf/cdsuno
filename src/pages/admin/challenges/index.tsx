@@ -29,7 +29,8 @@ import {
 import { Pagination } from "@/components/ui/pagination";
 import { cn } from "@/utils";
 import { columns } from "./columns";
-import { Input, TextField, InputIcon } from "@/components/ui/input";
+import { Input, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Select } from "@/components/ui/select";
 import { useCategoryStore } from "@/storages/category";

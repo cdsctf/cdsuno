@@ -17,7 +17,8 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, TextField, InputIcon } from "@/components/ui/input";
+import { Input, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,10 +27,7 @@ import {
     BotIcon,
     ClockIcon,
     InfoIcon,
-    KeyIcon,
     LockIcon,
-    MailboxIcon,
-    MailIcon,
     SaveIcon,
     SendIcon,
     TextIcon,
@@ -56,32 +54,54 @@ export default function Index() {
     }, []);
 
     const formSchema = z.object({
-        meta: z.object({
-            title: z
-                .string({
-                    message: "请填写站点标题",
-                })
-                .default(""),
-            description: z.string().default(""),
-        }),
-        auth: z.object({
-            is_registration_enabled: z.boolean(),
-        }),
-        captcha: z.object({
-            provider: z.enum(["none", "pow", "image", "turnstile", "hcaptcha"]),
-            difficulty: z.number(),
-            turnstile: z.object({
-                url: z.string().default(""),
-                site_key: z.string().default(""),
-                secret_key: z.string().default(""),
-            }),
-            hcaptcha: z.object({
-                url: z.string().default(""),
-                site_key: z.string().default(""),
-                secret_key: z.string().default(""),
-                score: z.number().default(0),
-            }),
-        }),
+        meta: z
+            .object({
+                title: z.string().optional(),
+                description: z.string().optional(),
+                keywords: z.string().optional(),
+            })
+            .optional(),
+        auth: z
+            .object({
+                is_registration_enabled: z.boolean().optional(),
+            })
+            .optional(),
+        captcha: z
+            .object({
+                provider: z
+                    .enum(["none", "pow", "image", "turnstile", "hcaptcha"])
+                    .optional(),
+                difficulty: z.number().default(1).optional(),
+                turnstile: z
+                    .object({
+                        url: z.string().default("").optional(),
+                        site_key: z.string().default("").optional(),
+                        secret_key: z.string().default("").optional(),
+                    })
+
+                    .optional(),
+                hcaptcha: z
+                    .object({
+                        url: z.string().default("").optional(),
+                        site_key: z.string().default("").optional(),
+                        secret_key: z.string().default("").optional(),
+                        score: z.number().default(0).optional(),
+                    })
+                    .optional(),
+            })
+            .optional(),
+        email: z
+            .object({
+                is_enabled: z.boolean().default(false).optional(),
+                host: z.string().default("").optional(),
+                port: z.number().default(587).optional(),
+                tls: z.enum(["starttls", "tls", "none"]).optional(),
+                username: z.string().default("").optional(),
+                password: z.string().default("").optional(),
+                whitelist: z.array(z.string()).default([]).optional(),
+            })
+            .default({})
+            .optional(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({

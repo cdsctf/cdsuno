@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Context } from "./context";
-import { Input, TextField, InputIcon } from "@/components/ui/input";
+import { Input, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { Button } from "@/components/ui/button";
 import { Flag, Send } from "lucide-react";
 import { cn } from "@/utils";

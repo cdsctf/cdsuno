@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import CryptoJS from "crypto-js";
 import { useSharedStore } from "@/storages/shared";
 import { Bot, RefreshCcw, Image } from "lucide-react";
-import { Input, InputExtraButton, TextField, InputIcon } from "../ui/input";
+import { Input, InputExtraButton, InputIcon } from "@/components/ui/input";
+import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import { generateCaptcha } from "@/api/configs/captcha";
 
