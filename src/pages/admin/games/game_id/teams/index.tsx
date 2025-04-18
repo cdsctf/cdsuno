@@ -181,10 +181,9 @@ export default function Index() {
                             }
                         />
                     </Field>
-                    <Field size={"sm"}>
+                    <Field size={"sm"} className={cn(["flex-1"])}>
                         <FieldIcon icon={SatelliteIcon} />
                         <Select
-                            className={cn(["flex-1"])}
                             options={[
                                 {
                                     value: "all",
