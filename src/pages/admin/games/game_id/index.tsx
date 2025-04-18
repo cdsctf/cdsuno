@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@/components/ui/editor";
 import { cn } from "@/utils";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
@@ -302,15 +302,15 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>标题</FormLabel>
                                     <FormControl>
-                                        <Input>
-                                            <InputIcon icon={Type} />
+                                        <Field>
+                                            <FieldIcon icon={Type} />
                                             <TextField
                                                 {...field}
                                                 placeholder={"标题"}
                                                 value={field.value || ""}
                                                 onChange={field.onChange}
                                             />
-                                        </Input>
+                                        </Field>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -450,25 +450,28 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>是否为公开赛（免审核）</FormLabel>
                                 <FormControl>
-                                    <Select
-                                        {...field}
-                                        size={"sm"}
-                                        icon={LockOpenIcon}
-                                        options={[
-                                            {
-                                                value: String(true),
-                                                content: "是",
-                                            },
-                                            {
-                                                value: String(false),
-                                                content: "否",
-                                            },
-                                        ]}
-                                        onValueChange={(value) => {
-                                            field.onChange(value === "true");
-                                        }}
-                                        value={String(field.value)}
-                                    />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={LockOpenIcon} />
+                                        <Select
+                                            {...field}
+                                            options={[
+                                                {
+                                                    value: String(true),
+                                                    content: "是",
+                                                },
+                                                {
+                                                    value: String(false),
+                                                    content: "否",
+                                                },
+                                            ]}
+                                            onValueChange={(value) => {
+                                                field.onChange(
+                                                    value === "true"
+                                                );
+                                            }}
+                                            value={String(field.value)}
+                                        />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -481,25 +484,26 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>是否需要提交 Write-up</FormLabel>
                                 <FormControl>
-                                    <Select
-                                        {...field}
-                                        size={"sm"}
-                                        icon={FileCheck2Icon}
-                                        options={[
-                                            {
-                                                value: String(true),
-                                                content: "是",
-                                            },
-                                            {
-                                                value: String(false),
-                                                content: "否",
-                                            },
-                                        ]}
-                                        onValueChange={(value) =>
-                                            field.onChange(value === "true")
-                                        }
-                                        value={String(field.value)}
-                                    />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={FileCheck2Icon} />
+                                        <Select
+                                            {...field}
+                                            options={[
+                                                {
+                                                    value: String(true),
+                                                    content: "是",
+                                                },
+                                                {
+                                                    value: String(false),
+                                                    content: "否",
+                                                },
+                                            ]}
+                                            onValueChange={(value) =>
+                                                field.onChange(value === "true")
+                                            }
+                                            value={String(field.value)}
+                                        />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -512,8 +516,8 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>团队所需最小人数</FormLabel>
                                 <FormControl>
-                                    <Input size={"sm"}>
-                                        <InputIcon icon={UsersRoundIcon} />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={UsersRoundIcon} />
                                         <TextField
                                             {...field}
                                             type={"number"}
@@ -525,7 +529,7 @@ export default function Index() {
                                                 )
                                             }
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -538,8 +542,8 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>团队所需最大人数</FormLabel>
                                 <FormControl>
-                                    <Input size={"sm"}>
-                                        <InputIcon icon={UsersRoundIcon} />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={UsersRoundIcon} />
                                         <TextField
                                             {...field}
                                             type={"number"}
@@ -551,7 +555,7 @@ export default function Index() {
                                                 )
                                             }
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

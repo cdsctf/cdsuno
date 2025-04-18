@@ -12,11 +12,12 @@ import {
     UserRoundCheckIcon,
     ShieldIcon,
     UserRoundXIcon,
+    MailCheckIcon,
 } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./context";
 import { updateUser } from "@/api/admin/users/user_id";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
@@ -68,6 +69,7 @@ export default function Index() {
             .email({
                 message: "邮箱不合法",
             }),
+        is_verified: z.boolean(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -209,15 +211,15 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>用户名</FormLabel>
                                     <FormControl>
-                                        <Input>
-                                            <InputIcon icon={UserRoundIcon} />
+                                        <Field>
+                                            <FieldIcon icon={UserRoundIcon} />
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入用户名"
                                                 value={field.value || ""}
                                                 onChange={field.onChange}
                                             />
-                                        </Input>
+                                        </Field>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -231,15 +233,15 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>昵称</FormLabel>
                                     <FormControl>
-                                        <Input>
-                                            <InputIcon icon={UserRoundIcon} />
+                                        <Field>
+                                            <FieldIcon icon={UserRoundIcon} />
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入昵称"
                                                 value={field.value || ""}
                                                 onChange={field.onChange}
                                             />
-                                        </Input>
+                                        </Field>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -253,31 +255,35 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>用户组</FormLabel>
                                     <FormControl>
-                                        <Select
-                                            {...field}
-                                            icon={ShieldIcon}
-                                            options={groupOptions.map(
-                                                (group) => ({
-                                                    value: group.id,
-                                                    content: (
-                                                        <div
-                                                            className={cn([
-                                                                "flex",
-                                                                "gap-2",
-                                                                "items-center",
-                                                            ])}
-                                                        >
-                                                            <group.icon className="size-4" />
-                                                            {group.name}
-                                                        </div>
-                                                    ),
-                                                })
-                                            )}
-                                            onValueChange={(value) => {
-                                                field.onChange(Number(value));
-                                            }}
-                                            value={String(field.value)}
-                                        />
+                                        <Field>
+                                            <FieldIcon icon={ShieldIcon} />
+                                            <Select
+                                                {...field}
+                                                options={groupOptions.map(
+                                                    (group) => ({
+                                                        value: group.id,
+                                                        content: (
+                                                            <div
+                                                                className={cn([
+                                                                    "flex",
+                                                                    "gap-2",
+                                                                    "items-center",
+                                                                ])}
+                                                            >
+                                                                <group.icon className="size-4" />
+                                                                {group.name}
+                                                            </div>
+                                                        ),
+                                                    })
+                                                )}
+                                                onValueChange={(value) => {
+                                                    field.onChange(
+                                                        Number(value)
+                                                    );
+                                                }}
+                                                value={String(field.value)}
+                                            />
+                                        </Field>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -285,28 +291,64 @@ export default function Index() {
                         />
                     </div>
 
-                    <FormField
-                        control={form.control}
-                        name={"email"}
-                        render={({ field }) => (
-                            <FormItem className={cn(["w-full"])}>
-                                <FormLabel>邮箱</FormLabel>
-                                <FormControl>
-                                    <Input>
-                                        <InputIcon icon={MailIcon} />
-                                        <TextField
-                                            {...field}
-                                            type={"email"}
-                                            placeholder="请输入邮箱"
-                                            value={field.value || ""}
-                                            onChange={field.onChange}
-                                        />
-                                    </Input>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <div className={cn(["flex", "gap-3"])}>
+                        <FormField
+                            control={form.control}
+                            name={"email"}
+                            render={({ field }) => (
+                                <FormItem className={cn(["basis-3/4"])}>
+                                    <FormLabel>邮箱</FormLabel>
+                                    <FormControl>
+                                        <Field>
+                                            <FieldIcon icon={MailIcon} />
+                                            <TextField
+                                                {...field}
+                                                type={"email"}
+                                                placeholder="请输入邮箱"
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        </Field>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name={"is_verified"}
+                            render={({ field }) => (
+                                <FormItem className={cn(["basis-1/4"])}>
+                                    <FormLabel>是否已验证</FormLabel>
+                                    <FormControl>
+                                        <Field>
+                                            <FieldIcon icon={MailCheckIcon} />
+                                            <Select
+                                                {...field}
+                                                options={[
+                                                    {
+                                                        value: String(true),
+                                                        content: "是",
+                                                    },
+                                                    {
+                                                        value: String(false),
+                                                        content: "否",
+                                                    },
+                                                ]}
+                                                onValueChange={(value) => {
+                                                    field.onChange(
+                                                        value === "true"
+                                                    );
+                                                }}
+                                                value={String(field.value)}
+                                            />
+                                        </Field>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
 
                     <FormField
                         control={form.control}

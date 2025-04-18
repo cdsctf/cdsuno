@@ -7,7 +7,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Separator } from "@/components/ui/separator";
 import { Typography } from "@/components/ui/typography";
@@ -135,15 +135,15 @@ export default function Index() {
                             render={({ field }) => (
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>用户名</FormLabel>
-                                    <Input>
-                                        <InputIcon icon={UserRoundIcon} />
+                                    <Field>
+                                        <FieldIcon icon={UserRoundIcon} />
                                         <TextField
                                             {...field}
                                             placeholder={
                                                 authStore?.user?.username
                                             }
                                         />
-                                    </Input>
+                                    </Field>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -153,13 +153,13 @@ export default function Index() {
                             render={({ field }) => (
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>密码</FormLabel>
-                                    <Input>
-                                        <InputIcon icon={LockIcon} />
+                                    <Field>
+                                        <FieldIcon icon={LockIcon} />
                                         <TextField
                                             {...field}
                                             type={"password"}
                                         />
-                                    </Input>
+                                    </Field>
                                     <FormMessage />
                                 </FormItem>
                             )}

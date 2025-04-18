@@ -1,21 +1,14 @@
 import * as React from "react";
 import * as RadixSelect from "@radix-ui/react-select";
-import {
-    CheckIcon,
-    ChevronDownIcon,
-    ChevronUpIcon,
-    LucideIcon,
-} from "lucide-react";
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
 import { cn } from "@/utils";
 import { cva } from "class-variance-authority";
-import { IconSection } from "./shared/icon-section";
+import { FieldContext } from "./field";
 
 interface SelectProps extends React.ComponentProps<typeof RadixSelect.Root> {
-    size?: "sm" | "md";
     className?: string;
     placeholder?: string;
-    icon?: LucideIcon;
     options?: Array<{
         value: string;
         content?: React.ReactNode;
@@ -23,12 +16,11 @@ interface SelectProps extends React.ComponentProps<typeof RadixSelect.Root> {
 }
 
 function Select(props: SelectProps) {
-    const { icon, size, placeholder, options, className, children, ...rest } =
-        props;
+    const { placeholder, options, className, children, ...rest } = props;
 
     return (
         <RadixSelect.Root data-slot="select" {...rest}>
-            <SelectTrigger className={className} size={size} icon={icon}>
+            <SelectTrigger className={className}>
                 <SelectValue
                     placeholder={
                         <span className={cn(["text-primary/80"])}>
@@ -109,28 +101,24 @@ const selectTriggerVariants = cva(
 );
 
 interface SelectTrigger
-    extends React.ComponentProps<typeof RadixSelect.Trigger> {
-    size?: "sm" | "md";
-    icon?: LucideIcon;
-}
+    extends React.ComponentProps<typeof RadixSelect.Trigger> {}
 
 function SelectTrigger(props: SelectTrigger) {
-    const { icon, size, className, children, ...rest } = props;
+    const context = React.useContext(FieldContext);
+    const { className, children, ...rest } = props;
+    const { size, hasIcon } = context;
 
     return (
-        <div className={cn(["flex", "flex-row", "items-center"], className)}>
-            {icon && <IconSection icon={icon} size={size} />}
-            <RadixSelect.Trigger
-                data-slot="select-trigger"
-                className={cn(selectTriggerVariants({ icon: !!icon, size }))}
-                {...rest}
-            >
-                {children}
-                <RadixSelect.Icon asChild>
-                    <ChevronDownIcon className={cn(["size-4", "opacity-50"])} />
-                </RadixSelect.Icon>
-            </RadixSelect.Trigger>
-        </div>
+        <RadixSelect.Trigger
+            data-slot="select-trigger"
+            className={cn(selectTriggerVariants({ icon: hasIcon, size }))}
+            {...rest}
+        >
+            {children}
+            <RadixSelect.Icon asChild>
+                <ChevronDownIcon className={cn(["size-4", "opacity-50"])} />
+            </RadixSelect.Icon>
+        </RadixSelect.Trigger>
     );
 }
 

@@ -3,7 +3,7 @@ import { createGameChallenge } from "@/api/admin/games/game_id/challenges";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Challenge } from "@/models/challenge";
@@ -87,22 +87,22 @@ function CreateDialog(props: CreateDialogProps) {
                 条结果。点击题目即可添加赛题。
             </span>
             <div className={cn(["flex", "gap-3"])}>
-                <Input size={"sm"} className={cn(["w-full"])}>
-                    <InputIcon icon={HashIcon} />
+                <Field size={"sm"} className={cn(["w-full"])}>
+                    <FieldIcon icon={HashIcon} />
                     <TextField
                         value={id || ""}
                         onChange={(e) => setId(e.target.value)}
                         placeholder={"ID"}
                     />
-                </Input>
-                <Input size={"sm"} className={cn(["w-full"])}>
-                    <InputIcon icon={TypeIcon} />
+                </Field>
+                <Field size={"sm"} className={cn(["w-full"])}>
+                    <FieldIcon icon={TypeIcon} />
                     <TextField
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder={"题目名"}
                     />
-                </Input>
+                </Field>
             </div>
             <div className={cn(["grid", "grid-cols-2", "gap-3"])}>
                 {challenges?.map((challenge) => {

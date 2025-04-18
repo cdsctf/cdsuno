@@ -20,6 +20,7 @@ export interface UpdateUserRequest {
     email?: string;
     group?: Group;
     password?: string;
+    is_verified?: boolean;
     description?: string;
 }
 

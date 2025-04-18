@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import {
@@ -167,8 +167,8 @@ function EditDialog(props: EditDialogProps) {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>最大分值</FormLabel>
                                         <FormControl>
-                                            <Input size={"sm"}>
-                                                <InputIcon icon={HashIcon} />
+                                            <Field size={"sm"}>
+                                                <FieldIcon icon={HashIcon} />
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -182,7 +182,7 @@ function EditDialog(props: EditDialogProps) {
                                                         )
                                                     }
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -195,8 +195,8 @@ function EditDialog(props: EditDialogProps) {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>最小分值</FormLabel>
                                         <FormControl>
-                                            <Input size={"sm"}>
-                                                <InputIcon icon={HashIcon} />
+                                            <Field size={"sm"}>
+                                                <FieldIcon icon={HashIcon} />
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -210,7 +210,7 @@ function EditDialog(props: EditDialogProps) {
                                                         )
                                                     }
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -223,8 +223,8 @@ function EditDialog(props: EditDialogProps) {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>难度系数</FormLabel>
                                         <FormControl>
-                                            <Input size={"sm"}>
-                                                <InputIcon icon={HashIcon} />
+                                            <Field size={"sm"}>
+                                                <FieldIcon icon={HashIcon} />
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -238,7 +238,7 @@ function EditDialog(props: EditDialogProps) {
                                                         )
                                                     }
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -286,13 +286,13 @@ function EditDialog(props: EditDialogProps) {
                                                                 "gap-3",
                                                             ])}
                                                         >
-                                                            <Input
+                                                            <Field
                                                                 size={"sm"}
                                                                 className={cn([
                                                                     "flex-1",
                                                                 ])}
                                                             >
-                                                                <InputIcon
+                                                                <FieldIcon
                                                                     icon={
                                                                         StarIcon
                                                                     }
@@ -319,7 +319,7 @@ function EditDialog(props: EditDialogProps) {
                                                                         )
                                                                     }
                                                                 />
-                                                            </Input>
+                                                            </Field>
                                                             <Button
                                                                 type={"button"}
                                                                 icon={MinusIcon}

@@ -1,5 +1,5 @@
 import React from "react";
-import { InputContext } from "./input";
+import { FieldContext } from "./field";
 import { cn } from "@/utils";
 import { cva } from "class-variance-authority";
 
@@ -7,8 +7,13 @@ interface TextFieldProps extends React.ComponentProps<"input"> {}
 
 function TextField(props: TextFieldProps) {
     const { className, ref, ...rest } = props;
-    const { size, disabled, hasIcon, hasExtraButton } =
-        React.useContext(InputContext);
+    const context = React.useContext(FieldContext);
+
+    if (!context) {
+        throw new Error("TextField must be used with in an Input");
+    }
+
+    const { size, disabled, hasIcon, hasExtraButton } = context;
 
     return (
         <input

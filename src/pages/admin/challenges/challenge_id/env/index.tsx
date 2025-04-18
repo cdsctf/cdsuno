@@ -4,7 +4,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/utils";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { updateChallengeEnv } from "@/api/admin/challenges/challenge_id/env";
 import { toast } from "sonner";
@@ -162,8 +162,8 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>持续时间（秒）</FormLabel>
                                 <FormControl>
-                                    <Input>
-                                        <InputIcon icon={Clock} />
+                                    <Field>
+                                        <FieldIcon icon={Clock} />
                                         <TextField
                                             {...field}
                                             type={"number"}
@@ -175,7 +175,7 @@ export default function Index() {
                                                 )
                                             }
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -188,24 +188,28 @@ export default function Index() {
                             <FormItem className={cn(["w-full"])}>
                                 <FormLabel>是否允许出网</FormLabel>
                                 <FormControl>
-                                    <Select
-                                        {...field}
-                                        icon={NetworkIcon}
-                                        options={[
-                                            {
-                                                value: String(true),
-                                                content: "是",
-                                            },
-                                            {
-                                                value: String(false),
-                                                content: "否",
-                                            },
-                                        ]}
-                                        onValueChange={(value) => {
-                                            field.onChange(value === "true");
-                                        }}
-                                        value={String(field.value)}
-                                    />
+                                    <Field>
+                                        <FieldIcon icon={NetworkIcon} />
+                                        <Select
+                                            {...field}
+                                            options={[
+                                                {
+                                                    value: String(true),
+                                                    content: "是",
+                                                },
+                                                {
+                                                    value: String(false),
+                                                    content: "否",
+                                                },
+                                            ]}
+                                            onValueChange={(value) => {
+                                                field.onChange(
+                                                    value === "true"
+                                                );
+                                            }}
+                                            value={String(field.value)}
+                                        />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -232,8 +236,8 @@ export default function Index() {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>镜像名</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={Container} />
+                                            <Field>
+                                                <FieldIcon icon={Container} />
                                                 <TextField
                                                     {...field}
                                                     placeholder={
@@ -242,7 +246,7 @@ export default function Index() {
                                                     value={field.value || ""}
                                                     onChange={field.onChange}
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -257,8 +261,8 @@ export default function Index() {
                                     <FormItem className={cn(["w-1/2"])}>
                                         <FormLabel>CPU 限制</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={Cpu} />
+                                            <Field>
+                                                <FieldIcon icon={Cpu} />
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -272,7 +276,7 @@ export default function Index() {
                                                         )
                                                     }
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -285,8 +289,8 @@ export default function Index() {
                                     <FormItem className={cn(["w-1/2"])}>
                                         <FormLabel>内存限制（MB）</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={MemoryStick} />
+                                            <Field>
+                                                <FieldIcon icon={MemoryStick} />
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -300,7 +304,7 @@ export default function Index() {
                                                         )
                                                     }
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -330,13 +334,13 @@ export default function Index() {
                                                         "gap-3",
                                                     ])}
                                                 >
-                                                    <Input
+                                                    <Field
                                                         size={"sm"}
                                                         className={cn([
                                                             "flex-1",
                                                         ])}
                                                     >
-                                                        <InputIcon
+                                                        <FieldIcon
                                                             icon={MemoryStick}
                                                         />
                                                         <TextField
@@ -356,7 +360,7 @@ export default function Index() {
                                                                 )
                                                             }
                                                         />
-                                                    </Input>
+                                                    </Field>
                                                     <Button
                                                         type={"button"}
                                                         icon={Minus}
@@ -398,11 +402,11 @@ export default function Index() {
                                                 "gap-3",
                                             ])}
                                         >
-                                            <Input
+                                            <Field
                                                 size={"sm"}
                                                 className={cn(["flex-1/2"])}
                                             >
-                                                <InputIcon icon={Key} />
+                                                <FieldIcon icon={Key} />
                                                 <TextField
                                                     placeholder="键"
                                                     value={key}
@@ -425,8 +429,8 @@ export default function Index() {
                                                         );
                                                     }}
                                                 />
-                                            </Input>
-                                            <Input
+                                            </Field>
+                                            <Field
                                                 size={"sm"}
                                                 className={cn(["flex-1/2"])}
                                             >
@@ -449,7 +453,7 @@ export default function Index() {
                                                         );
                                                     }}
                                                 />
-                                            </Input>
+                                            </Field>
                                             <Button
                                                 type={"button"}
                                                 icon={Minus}

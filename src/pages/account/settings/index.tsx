@@ -19,7 +19,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Label } from "@/components/ui/label";
 import { useAuthStore } from "@/storages/auth";
@@ -175,8 +175,8 @@ export default function Index() {
                                     <FormItem>
                                         <FormLabel>用户名</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon
+                                            <Field>
+                                                <FieldIcon
                                                     icon={UserRoundIcon}
                                                 />
                                                 <TextField
@@ -186,7 +186,7 @@ export default function Index() {
                                                     value={field.value || ""}
                                                     onChange={field.onChange}
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -199,15 +199,15 @@ export default function Index() {
                                     <FormItem>
                                         <FormLabel>昵称</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={TypeIcon} />
+                                            <Field>
+                                                <FieldIcon icon={TypeIcon} />
                                                 <TextField
                                                     {...field}
                                                     placeholder={"昵称"}
                                                     value={field.value || ""}
                                                     onChange={field.onChange}
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -271,15 +271,15 @@ export default function Index() {
                             <FormItem>
                                 <FormLabel>电子邮箱</FormLabel>
                                 <FormControl>
-                                    <Input>
-                                        <InputIcon icon={MailIcon} />
+                                    <Field>
+                                        <FieldIcon icon={MailIcon} />
                                         <TextField
                                             {...field}
                                             placeholder={"电子邮箱"}
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

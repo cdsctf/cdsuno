@@ -17,7 +17,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/utils";
@@ -234,15 +234,15 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>标题</FormLabel>
                                     <FormControl>
-                                        <Input>
-                                            <InputIcon icon={TypeIcon} />
+                                        <Field>
+                                            <FieldIcon icon={TypeIcon} />
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入标题"
                                                 value={field.value || ""}
                                                 onChange={field.onChange}
                                             />
-                                        </Input>
+                                        </Field>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -255,15 +255,15 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>描述</FormLabel>
                                     <FormControl>
-                                        <Input>
-                                            <InputIcon icon={TextIcon} />
+                                        <Field>
+                                            <FieldIcon icon={TextIcon} />
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入描述"
                                                 value={field.value || ""}
                                                 onChange={field.onChange}
                                             />
-                                        </Input>
+                                        </Field>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -342,24 +342,26 @@ export default function Index() {
                         <FormItem className={cn(["w-full"])}>
                             <FormLabel>是否允许新用户注册</FormLabel>
                             <FormControl>
-                                <Select
-                                    {...field}
-                                    icon={UserRoundCheckIcon}
-                                    options={[
-                                        {
-                                            value: String(true),
-                                            content: "允许",
-                                        },
-                                        {
-                                            value: String(false),
-                                            content: "不允许",
-                                        },
-                                    ]}
-                                    onValueChange={(value) =>
-                                        field.onChange(value === "true")
-                                    }
-                                    value={String(field.value)}
-                                />
+                                <Field>
+                                    <FieldIcon icon={UserRoundCheckIcon} />
+                                    <Select
+                                        {...field}
+                                        options={[
+                                            {
+                                                value: String(true),
+                                                content: "允许",
+                                            },
+                                            {
+                                                value: String(false),
+                                                content: "不允许",
+                                            },
+                                        ]}
+                                        onValueChange={(value) =>
+                                            field.onChange(value === "true")
+                                        }
+                                        value={String(field.value)}
+                                    />
+                                </Field>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -389,36 +391,39 @@ export default function Index() {
                                     若启用，则在必要的界面中启用人机验证。
                                 </FormDescription>
                                 <FormControl>
-                                    <Select
-                                        {...field}
-                                        icon={LockIcon}
-                                        options={[
-                                            {
-                                                value: "none",
-                                                content: "不启用",
-                                            },
-                                            {
-                                                value: "pow",
-                                                content: "工作量验证",
-                                            },
-                                            {
-                                                value: "image",
-                                                content: "图形验证",
-                                            },
-                                            {
-                                                value: "turnstile",
-                                                content: "Cloudflare Trunstile",
-                                            },
-                                            {
-                                                value: "hcaptcha",
-                                                content: "HCaptcha",
-                                            },
-                                        ]}
-                                        onValueChange={(value) =>
-                                            field.onChange(value)
-                                        }
-                                        value={String(field.value)}
-                                    />
+                                    <Field>
+                                        <FieldIcon icon={LockIcon} />
+                                        <Select
+                                            {...field}
+                                            options={[
+                                                {
+                                                    value: "none",
+                                                    content: "不启用",
+                                                },
+                                                {
+                                                    value: "pow",
+                                                    content: "工作量验证",
+                                                },
+                                                {
+                                                    value: "image",
+                                                    content: "图形验证",
+                                                },
+                                                {
+                                                    value: "turnstile",
+                                                    content:
+                                                        "Cloudflare Trunstile",
+                                                },
+                                                {
+                                                    value: "hcaptcha",
+                                                    content: "HCaptcha",
+                                                },
+                                            ]}
+                                            onValueChange={(value) =>
+                                                field.onChange(value)
+                                            }
+                                            value={String(field.value)}
+                                        />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -434,8 +439,8 @@ export default function Index() {
                                     适用于图形验证和工作量验证。
                                 </FormDescription>
                                 <FormControl>
-                                    <Input>
-                                        <InputIcon icon={ClockIcon} />
+                                    <Field>
+                                        <FieldIcon icon={ClockIcon} />
                                         <TextField
                                             {...field}
                                             type={"number"}
@@ -447,7 +452,7 @@ export default function Index() {
                                                 )
                                             }
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -463,15 +468,15 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>API URL</FormLabel>
                                     <FormControl>
-                                        <Input>
-                                            <InputIcon icon={SendIcon} />
+                                        <Field>
+                                            <FieldIcon icon={SendIcon} />
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入 API URL"
                                                 value={field.value || ""}
                                                 onChange={field.onChange}
                                             />
-                                        </Input>
+                                        </Field>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -485,15 +490,15 @@ export default function Index() {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>SITE_KEY</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={SendIcon} />
+                                            <Field>
+                                                <FieldIcon icon={SendIcon} />
                                                 <TextField
                                                     {...field}
                                                     placeholder="请输入 SITE_KEY"
                                                     value={field.value || ""}
                                                     onChange={field.onChange}
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -506,15 +511,15 @@ export default function Index() {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>SECRET_KEY</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={SendIcon} />
+                                            <Field>
+                                                <FieldIcon icon={SendIcon} />
                                                 <TextField
                                                     {...field}
                                                     placeholder="请输入 SECRET_KEY"
                                                     value={field.value || ""}
                                                     onChange={field.onChange}
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -533,15 +538,15 @@ export default function Index() {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>API URL</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={SendIcon} />
+                                            <Field>
+                                                <FieldIcon icon={SendIcon} />
                                                 <TextField
                                                     {...field}
                                                     placeholder="请输入 API URL"
                                                     value={field.value || ""}
                                                     onChange={field.onChange}
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -554,8 +559,8 @@ export default function Index() {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>分数要求</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={ClockIcon} />
+                                            <Field>
+                                                <FieldIcon icon={ClockIcon} />
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -568,7 +573,7 @@ export default function Index() {
                                                         )
                                                     }
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -583,15 +588,15 @@ export default function Index() {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>SITE_KEY</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={SendIcon} />
+                                            <Field>
+                                                <FieldIcon icon={SendIcon} />
                                                 <TextField
                                                     {...field}
                                                     placeholder="请输入 SITE_KEY"
                                                     value={field.value || ""}
                                                     onChange={field.onChange}
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -604,8 +609,8 @@ export default function Index() {
                                     <FormItem className={cn(["w-full"])}>
                                         <FormLabel>SECRET_KEY</FormLabel>
                                         <FormControl>
-                                            <Input>
-                                                <InputIcon icon={SendIcon} />
+                                            <Field>
+                                                <FieldIcon icon={SendIcon} />
                                                 <TextField
                                                     {...field}
                                                     placeholder={
@@ -614,7 +619,7 @@ export default function Index() {
                                                     value={field.value || ""}
                                                     onChange={field.onChange}
                                                 />
-                                            </Input>
+                                            </Field>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

@@ -2,7 +2,7 @@ import { createToken, getToken } from "@/api/games/game_id/teams/profile/token";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { useGameStore } from "@/storages/game";
 import { cn } from "@/utils";
@@ -46,8 +46,8 @@ export default function Index() {
             ])}
         >
             <div className={cn(["flex", "gap-5", "items-center"])}>
-                <Input>
-                    <InputIcon icon={KeyIcon} />
+                <Field>
+                    <FieldIcon icon={KeyIcon} />
                     <TextField
                         readOnly
                         value={
@@ -57,7 +57,7 @@ export default function Index() {
                         }
                         onChange={() => {}}
                     />
-                </Input>
+                </Field>
 
                 <Button
                     icon={RefreshCcwIcon}

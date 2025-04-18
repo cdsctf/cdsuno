@@ -9,7 +9,7 @@ import { CloudUploadIcon, HardDrive, TextIcon, TrashIcon } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context";
 import { deleteChallengeAttachment } from "@/api/admin/challenges/challenge_id/attachment";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
@@ -102,24 +102,24 @@ export default function Index() {
             <div className={cn(["flex", "gap-3", "items-center"])}>
                 {metadata && (
                     <>
-                        <Input className={cn(["w-1/2"])}>
-                            <InputIcon icon={TextIcon} />
+                        <Field className={cn(["w-1/2"])}>
+                            <FieldIcon icon={TextIcon} />
                             <TextField
                                 disabled
                                 placeholder={"文件名"}
                                 value={metadata?.filename}
                                 onChange={() => {}}
                             />
-                        </Input>
-                        <Input className={cn(["flex-1"])}>
-                            <InputIcon icon={HardDrive} />
+                        </Field>
+                        <Field className={cn(["flex-1"])}>
+                            <FieldIcon icon={HardDrive} />
                             <TextField
                                 disabled
                                 placeholder={"文件大小"}
                                 value={`${metadata?.size} Bytes`}
                                 onChange={() => {}}
                             />
-                        </Input>
+                        </Field>
                         <Button
                             variant={"solid"}
                             level={"error"}

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@/components/ui/editor";
 import { cn } from "@/utils";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { updateChallenge } from "@/api/admin/challenges/challenge_id";
 import { toast } from "sonner";
@@ -95,15 +95,15 @@ export default function Index() {
                             <FormItem className={cn(["w-3/4"])}>
                                 <FormLabel>标题</FormLabel>
                                 <FormControl>
-                                    <Input>
-                                        <InputIcon icon={Type} />
+                                    <Field>
+                                        <FieldIcon icon={Type} />
                                         <TextField
                                             {...field}
                                             placeholder={"标题"}
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -116,35 +116,40 @@ export default function Index() {
                             <FormItem className={cn(["w-1/4"])}>
                                 <FormLabel>分类</FormLabel>
                                 <FormControl>
-                                    <Select
-                                        {...field}
-                                        icon={Library}
-                                        options={categoryStore.categories?.map(
-                                            (category) => {
-                                                const Icon = category?.icon!;
+                                    <Field>
+                                        <FieldIcon icon={Library} />
+                                        <Select
+                                            {...field}
+                                            options={categoryStore.categories?.map(
+                                                (category) => {
+                                                    const Icon =
+                                                        category?.icon!;
 
-                                                return {
-                                                    value: String(category?.id),
-                                                    content: (
-                                                        <div
-                                                            className={cn([
-                                                                "flex",
-                                                                "gap-2",
-                                                                "items-center",
-                                                            ])}
-                                                        >
-                                                            <Icon />
-                                                            {category?.name?.toUpperCase()}
-                                                        </div>
-                                                    ),
-                                                };
-                                            }
-                                        )}
-                                        onValueChange={(value) => {
-                                            field.onChange(Number(value));
-                                        }}
-                                        value={String(field.value)}
-                                    />
+                                                    return {
+                                                        value: String(
+                                                            category?.id
+                                                        ),
+                                                        content: (
+                                                            <div
+                                                                className={cn([
+                                                                    "flex",
+                                                                    "gap-2",
+                                                                    "items-center",
+                                                                ])}
+                                                            >
+                                                                <Icon />
+                                                                {category?.name?.toUpperCase()}
+                                                            </div>
+                                                        ),
+                                                    };
+                                                }
+                                            )}
+                                            onValueChange={(value) => {
+                                                field.onChange(Number(value));
+                                            }}
+                                            value={String(field.value)}
+                                        />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -159,24 +164,28 @@ export default function Index() {
                             <FormItem className={cn(["w-1/2"])}>
                                 <FormLabel>是否启用附件</FormLabel>
                                 <FormControl>
-                                    <Select
-                                        {...field}
-                                        icon={Folder}
-                                        options={[
-                                            {
-                                                value: String(true),
-                                                content: "启用",
-                                            },
-                                            {
-                                                value: String(false),
-                                                content: "禁用",
-                                            },
-                                        ]}
-                                        onValueChange={(value) => {
-                                            field.onChange(value === "true");
-                                        }}
-                                        value={String(field.value)}
-                                    />
+                                    <Field>
+                                        <FieldIcon icon={Folder} />
+                                        <Select
+                                            {...field}
+                                            options={[
+                                                {
+                                                    value: String(true),
+                                                    content: "启用",
+                                                },
+                                                {
+                                                    value: String(false),
+                                                    content: "禁用",
+                                                },
+                                            ]}
+                                            onValueChange={(value) => {
+                                                field.onChange(
+                                                    value === "true"
+                                                );
+                                            }}
+                                            value={String(field.value)}
+                                        />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -189,46 +198,50 @@ export default function Index() {
                             <FormItem className={cn(["w-1/2"])}>
                                 <FormLabel>动态性</FormLabel>
                                 <FormControl>
-                                    <Select
-                                        {...field}
-                                        icon={Container}
-                                        options={[
-                                            {
-                                                value: String(true),
-                                                content: (
-                                                    <div
-                                                        className={cn([
-                                                            "flex",
-                                                            "gap-2",
-                                                            "items-center",
-                                                        ])}
-                                                    >
-                                                        <ShipWheel />
-                                                        动态环境
-                                                    </div>
-                                                ),
-                                            },
-                                            {
-                                                value: String(false),
-                                                content: (
-                                                    <div
-                                                        className={cn([
-                                                            "flex",
-                                                            "gap-2",
-                                                            "items-center",
-                                                        ])}
-                                                    >
-                                                        <Box />
-                                                        静态环境
-                                                    </div>
-                                                ),
-                                            },
-                                        ]}
-                                        onValueChange={(value) => {
-                                            field.onChange(value === "true");
-                                        }}
-                                        value={String(field.value)}
-                                    />
+                                    <Field>
+                                        <FieldIcon icon={Container} />
+                                        <Select
+                                            {...field}
+                                            options={[
+                                                {
+                                                    value: String(true),
+                                                    content: (
+                                                        <div
+                                                            className={cn([
+                                                                "flex",
+                                                                "gap-2",
+                                                                "items-center",
+                                                            ])}
+                                                        >
+                                                            <ShipWheel />
+                                                            动态环境
+                                                        </div>
+                                                    ),
+                                                },
+                                                {
+                                                    value: String(false),
+                                                    content: (
+                                                        <div
+                                                            className={cn([
+                                                                "flex",
+                                                                "gap-2",
+                                                                "items-center",
+                                                            ])}
+                                                        >
+                                                            <Box />
+                                                            静态环境
+                                                        </div>
+                                                    ),
+                                                },
+                                            ]}
+                                            onValueChange={(value) => {
+                                                field.onChange(
+                                                    value === "true"
+                                                );
+                                            }}
+                                            value={String(field.value)}
+                                        />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

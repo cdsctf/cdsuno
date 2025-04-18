@@ -5,18 +5,18 @@ import { Button } from "./button";
 import { LucideIcon } from "lucide-react";
 import { IconSection } from "./shared/icon-section";
 
-const InputContext = React.createContext<{
+const FieldContext = React.createContext<{
     size?: "sm" | "md";
     disabled?: boolean;
     hasIcon?: boolean;
     hasExtraButton?: boolean;
 }>({});
 
-interface InputRootProps extends React.ComponentProps<"div"> {
+interface FieldRootProps extends React.ComponentProps<"div"> {
     size?: "sm" | "md";
     disabled?: boolean;
 }
-function InputRoot(props: InputRootProps) {
+function FieldRoot(props: FieldRootProps) {
     const { className, size, disabled, children, ref, ...rest } = props;
 
     let hasIcon = false;
@@ -27,39 +27,41 @@ function InputRoot(props: InputRootProps) {
 
         const type = child.type;
 
-        if (type === InputIcon) hasIcon = true;
-        if (type === InputExtraButton) hasExtraButton = true;
+        if (type === FieldIcon) hasIcon = true;
+        if (type === FieldButton) hasExtraButton = true;
     });
 
     return (
-        <InputContext.Provider
+        <FieldContext.Provider
             value={{ size, disabled, hasIcon, hasExtraButton }}
         >
             <div className={cn(["flex", "items-center"], className)} {...rest}>
                 {children}
             </div>
-        </InputContext.Provider>
+        </FieldContext.Provider>
     );
 }
 
-interface InputIconProps {
+interface FieldIconProps {
     icon: LucideIcon;
 }
 
-const InputIcon = ({ icon }: InputIconProps) => {
-    const { size } = React.useContext(InputContext);
+function FieldIcon(props: FieldIconProps) {
+    const { icon } = props;
+    const { size } = React.useContext(FieldContext);
+
     return <IconSection icon={icon} size={size} />;
-};
+}
 
-interface InputExtraButtonProps extends React.ComponentProps<typeof Button> {}
+interface FieldButtonProps extends React.ComponentProps<typeof Button> {}
 
-function InputExtraButton(props: InputExtraButtonProps) {
-    const { className, children, ...rest } = props;
-    const { size } = React.useContext(InputContext);
+function FieldButton(props: FieldButtonProps) {
+    const { className, children, ref, ...rest } = props;
+    const { size } = React.useContext(FieldContext);
 
     return (
         <Button
-            // ref={ref}
+            ref={ref}
             size={size}
             type={"button"}
             className={cn(extraBtnSection({ size }), className)}
@@ -95,4 +97,4 @@ const extraBtnSection = cva(
     }
 );
 
-export { InputRoot as Input, InputIcon, InputExtraButton, InputContext };
+export { FieldRoot as Field, FieldIcon, FieldButton, FieldContext };

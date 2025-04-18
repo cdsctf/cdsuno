@@ -33,7 +33,7 @@ import {
 import { Pagination } from "@/components/ui/pagination";
 import { cn } from "@/utils";
 import { columns } from "./columns";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Select } from "@/components/ui/select";
@@ -153,8 +153,8 @@ export default function Index() {
                         "gap-3",
                     ])}
                 >
-                    <Input size={"sm"} className={cn(["flex-1"])}>
-                        <InputIcon icon={HashIcon} />
+                    <Field size={"sm"} className={cn(["flex-1"])}>
+                        <FieldIcon icon={HashIcon} />
                         <TextField
                             placeholder="ID"
                             value={
@@ -168,9 +168,9 @@ export default function Index() {
                                     ?.setFilterValue(e.target.value)
                             }
                         />
-                    </Input>
-                    <Input size={"sm"} className={cn(["flex-1"])}>
-                        <InputIcon icon={TypeIcon} />
+                    </Field>
+                    <Field size={"sm"} className={cn(["flex-1"])}>
+                        <FieldIcon icon={TypeIcon} />
                         <TextField
                             placeholder={"用户名"}
                             value={
@@ -184,9 +184,9 @@ export default function Index() {
                                     ?.setFilterValue(e.target.value)
                             }
                         />
-                    </Input>
-                    <Input size={"sm"} className={cn(["flex-1"])}>
-                        <InputIcon icon={MailIcon} />
+                    </Field>
+                    <Field size={"sm"} className={cn(["flex-1"])}>
+                        <FieldIcon icon={MailIcon} />
                         <TextField
                             placeholder={"邮箱"}
                             value={
@@ -200,35 +200,36 @@ export default function Index() {
                                     ?.setFilterValue(e.target.value)
                             }
                         />
-                    </Input>
-                    <Select
-                        size={"sm"}
-                        icon={UserRoundIcon}
-                        className={cn(["flex-1"])}
-                        options={groupOptions.map((group) => ({
-                            value: group.id,
-                            content: (
-                                <div
-                                    className={cn([
-                                        "flex",
-                                        "gap-2",
-                                        "items-center",
-                                    ])}
-                                >
-                                    <group.icon className="size-4" />
-                                    {group.name}
-                                </div>
-                            ),
-                        }))}
-                        onValueChange={(value) =>
-                            table.getColumn("group")?.setFilterValue(value)
-                        }
-                        value={
-                            (table
-                                .getColumn("group")
-                                ?.getFilterValue() as string) ?? "all"
-                        }
-                    />
+                    </Field>
+                    <Field size={"sm"} className={cn(["flex-1"])}>
+                        <FieldIcon icon={UserRoundIcon} />
+                        <Select
+                            options={groupOptions.map((group) => ({
+                                value: group.id,
+                                content: (
+                                    <div
+                                        className={cn([
+                                            "flex",
+                                            "gap-2",
+                                            "items-center",
+                                        ])}
+                                    >
+                                        <group.icon className="size-4" />
+                                        {group.name}
+                                    </div>
+                                ),
+                            }))}
+                            onValueChange={(value) =>
+                                table.getColumn("group")?.setFilterValue(value)
+                            }
+                            value={
+                                (table
+                                    .getColumn("group")
+                                    ?.getFilterValue() as string) ?? "all"
+                            }
+                        />
+                    </Field>
+
                     <Button
                         icon={PlusCircle}
                         variant={"solid"}
@@ -306,20 +307,24 @@ export default function Index() {
                         {table.getFilteredRowModel().rows.length} / {total}
                     </div>
                     <div className={cn(["flex", "items-center", "gap-5"])}>
-                        <Select
-                            size={"sm"}
-                            placeholder={"每页显示"}
-                            icon={ListOrderedIcon}
-                            className={cn(["w-48"])}
-                            options={[
-                                { value: "10" },
-                                { value: "20" },
-                                { value: "40" },
-                                { value: "60" },
-                            ]}
-                            value={String(size)}
-                            onValueChange={(value) => setSize(Number(value))}
-                        />
+                        <Field size={"sm"}>
+                            <FieldIcon icon={ListOrderedIcon} />
+                            <Select
+                                placeholder={"每页显示"}
+                                className={cn(["w-48"])}
+                                options={[
+                                    { value: "10" },
+                                    { value: "20" },
+                                    { value: "40" },
+                                    { value: "60" },
+                                ]}
+                                value={String(size)}
+                                onValueChange={(value) =>
+                                    setSize(Number(value))
+                                }
+                            />
+                        </Field>
+
                         <Pagination
                             size={"sm"}
                             value={page}

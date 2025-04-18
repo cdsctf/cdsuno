@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import CryptoJS from "crypto-js";
 import { useSharedStore } from "@/storages/shared";
 import { Bot, RefreshCcw, Image } from "lucide-react";
-import { Input, InputExtraButton, InputIcon } from "@/components/ui/input";
+import { Field, FieldButton, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import { generateCaptcha } from "@/api/configs/captcha";
@@ -99,16 +99,16 @@ function PowCaptcha(props: CaptchaProps) {
     }, [id, result]);
 
     return (
-        <Input>
-            <InputIcon icon={Bot} />
+        <Field>
+            <FieldIcon icon={Bot} />
             <TextField readOnly disabled value={result} />
-            <InputExtraButton
+            <FieldButton
                 disabled={loading}
                 onClick={() => setRefresh((prev) => prev + 1)}
                 loading={loading}
                 icon={RefreshCcw}
             />
-        </Input>
+        </Field>
     );
 }
 
@@ -143,14 +143,14 @@ function ImageCaptcha(props: CaptchaProps) {
 
     return (
         <div className={cn(["flex", "items-center", "gap-2"])}>
-            <Input className={cn(["flex-1"])}>
-                <InputIcon icon={Image} />
+            <Field className={cn(["flex-1"])}>
+                <FieldIcon icon={Image} />
                 <TextField
                     value={result}
                     onChange={(e) => setResult(e.target.value)}
                     placeholder={"验证码"}
                 />
-            </Input>
+            </Field>
             <img
                 src={`data:image/svg+xml;base64,${CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(String(challenge)))}`}
                 onClick={() => setRefresh((prev) => prev + 1)}

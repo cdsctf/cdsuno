@@ -8,7 +8,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -85,8 +85,8 @@ export default function Index() {
                             <FormItem>
                                 <FormLabel>新密码</FormLabel>
                                 <FormControl>
-                                    <Input>
-                                        <InputIcon icon={LockIcon} />
+                                    <Field>
+                                        <FieldIcon icon={LockIcon} />
                                         <TextField
                                             {...field}
                                             type={"password"}
@@ -94,7 +94,7 @@ export default function Index() {
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -107,8 +107,8 @@ export default function Index() {
                             <FormItem>
                                 <FormLabel>确认密码</FormLabel>
                                 <FormControl>
-                                    <Input>
-                                        <InputIcon icon={LockIcon} />
+                                    <Field>
+                                        <FieldIcon icon={LockIcon} />
                                         <TextField
                                             {...field}
                                             type={"password"}
@@ -116,7 +116,7 @@ export default function Index() {
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

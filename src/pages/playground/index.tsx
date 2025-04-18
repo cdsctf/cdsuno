@@ -1,4 +1,4 @@
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { ChallengeCard } from "@/components/widgets/challenge-card";
 import { Challenge } from "@/models/challenge";
@@ -86,14 +86,14 @@ export default function Index() {
                 ])}
             >
                 <div className={cn(["flex", "items-center", "gap-3"])}>
-                    <Input className={cn(["flex-1"])}>
-                        <InputIcon icon={LibraryIcon} />
+                    <Field className={cn(["flex-1"])}>
+                        <FieldIcon icon={LibraryIcon} />
                         <TextField
                             placeholder={"题目名"}
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
-                    </Input>
+                    </Field>
                     <Button
                         size={"lg"}
                         className={cn(["h-12"])}
@@ -119,20 +119,22 @@ export default function Index() {
                         onChange={setPage}
                     />
                     <div className={cn(["hidden", "md:flex", "gap-5"])}>
-                        <Select
-                            size={"sm"}
-                            placeholder={"每页显示"}
-                            icon={ListOrderedIcon}
-                            className={cn(["w-48"])}
-                            options={[
-                                { value: "10" },
-                                { value: "20" },
-                                { value: "40" },
-                                { value: "60" },
-                            ]}
-                            value={String(size)}
-                            onValueChange={(value) => setSize(Number(value))}
-                        />
+                        <Field size={"sm"} className={cn(["w-48"])}>
+                            <FieldIcon icon={ListOrderedIcon} />
+                            <Select
+                                placeholder={"每页显示"}
+                                options={[
+                                    { value: "10" },
+                                    { value: "20" },
+                                    { value: "40" },
+                                    { value: "60" },
+                                ]}
+                                value={String(size)}
+                                onValueChange={(value) =>
+                                    setSize(Number(value))
+                                }
+                            />
+                        </Field>
                     </div>
                 </div>
                 <div className={cn(["flex-1"])}>

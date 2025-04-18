@@ -7,7 +7,7 @@ import { renewEnv, stopEnv } from "@/api/envs/env_id";
 import { useAuthStore } from "@/storages/auth";
 import { toast } from "sonner";
 import { useInterval } from "@/hooks/use-interval";
-import { Input, InputExtraButton, InputIcon } from "@/components/ui/input";
+import { Field, FieldButton, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Button } from "@/components/ui/button";
 import { Clipboard, Clock, EthernetPort, Play, Trash } from "lucide-react";
@@ -147,18 +147,18 @@ function EnvSection() {
                                     .map((pair) => pair.split("="))
                                     .map(([src, dst]: Array<string>) => (
                                         <div className={cn(["flex"])} key={src}>
-                                            <Input
+                                            <Field
                                                 size={"sm"}
                                                 className={cn(["flex-1"])}
                                             >
-                                                <InputIcon
+                                                <FieldIcon
                                                     icon={EthernetPort}
                                                 />
                                                 <TextField
                                                     readOnly
                                                     value={`${src} - ${pod?.public_entry}:${dst}`}
                                                 />
-                                                <InputExtraButton
+                                                <FieldButton
                                                     icon={Clipboard}
                                                     onClick={() => {
                                                         copyToClipboard(
@@ -169,7 +169,7 @@ function EnvSection() {
                                                         );
                                                     }}
                                                 />
-                                            </Input>
+                                            </Field>
                                         </div>
                                     ))}
                             </>
@@ -177,16 +177,16 @@ function EnvSection() {
                             <>
                                 {pod?.ports?.map((port) => (
                                     <div className={cn(["flex"])} key={port}>
-                                        <Input
+                                        <Field
                                             size={"sm"}
                                             className={cn(["flex-1"])}
                                         >
-                                            <InputIcon icon={EthernetPort} />
+                                            <FieldIcon icon={EthernetPort} />
                                             <TextField
                                                 readOnly
                                                 value={`${port} - ${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${pod?.id}/wsrx?port=${port}`}
                                             />
-                                            <InputExtraButton
+                                            <FieldButton
                                                 icon={Clipboard}
                                                 onClick={() => {
                                                     copyToClipboard(
@@ -197,7 +197,7 @@ function EnvSection() {
                                                     );
                                                 }}
                                             />
-                                        </Input>
+                                        </Field>
                                     </div>
                                 ))}
                             </>

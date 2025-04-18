@@ -18,6 +18,7 @@ import simpleChecker from "./examples/simple.cdsx?raw";
 import suidChecker from "./examples/suid.cdsx?raw";
 import leetChecker from "./examples/leet.cdsx?raw";
 import { Label } from "@/components/ui/label";
+import { Field, FieldIcon } from "@/components/ui/field";
 
 const checkerMap = {
     simple: simpleChecker,
@@ -83,29 +84,32 @@ export default function Index() {
                         "items-center",
                     ])}
                 >
-                    <Select
-                        size={"sm"}
-                        icon={LayoutTemplate}
-                        placeholder={"使用预设模板"}
-                        className={cn(["flex-1"])}
-                        options={[
-                            {
-                                value: "simple",
-                                content: "简易固定字符串评判",
-                            },
-                            {
-                                value: "suid",
-                                content: "动态伪 UUID 评判",
-                            },
-                            {
-                                value: "leet",
-                                content: "动态 LEET 字符串评判",
-                            },
-                        ]}
-                        onValueChange={(value: "simple" | "suid" | "leet") => {
-                            form.setValue("checker", checkerMap[value]);
-                        }}
-                    />
+                    <Field size={"sm"} className={cn(["flex-1"])}>
+                        <FieldIcon icon={LayoutTemplate} />
+                        <Select
+                            placeholder={"使用预设模板"}
+                            options={[
+                                {
+                                    value: "simple",
+                                    content: "简易固定字符串评判",
+                                },
+                                {
+                                    value: "suid",
+                                    content: "动态伪 UUID 评判",
+                                },
+                                {
+                                    value: "leet",
+                                    content: "动态 LEET 字符串评判",
+                                },
+                            ]}
+                            onValueChange={(
+                                value: "simple" | "suid" | "leet"
+                            ) => {
+                                form.setValue("checker", checkerMap[value]);
+                            }}
+                        />
+                    </Field>
+
                     <Button
                         type={"submit"}
                         variant={"solid"}

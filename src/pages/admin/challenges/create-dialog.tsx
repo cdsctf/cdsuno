@@ -9,7 +9,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Select } from "@/components/ui/select";
 import { useCategoryStore } from "@/storages/category";
@@ -99,15 +99,15 @@ function CreateDialog(props: CreateDialogProps) {
                             <FormItem>
                                 <FormLabel>标题</FormLabel>
                                 <FormControl>
-                                    <Input size={"sm"}>
-                                        <InputIcon icon={TypeIcon} />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={TypeIcon} />
                                         <TextField
                                             {...field}
                                             placeholder={"Try hack me..."}
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -120,36 +120,40 @@ function CreateDialog(props: CreateDialogProps) {
                             <FormItem>
                                 <FormLabel>分类</FormLabel>
                                 <FormControl>
-                                    <Select
-                                        {...field}
-                                        icon={LibraryIcon}
-                                        size={"sm"}
-                                        options={categoryStore.categories?.map(
-                                            (category) => {
-                                                const Icon = category?.icon!;
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={LibraryIcon} />
+                                        <Select
+                                            {...field}
+                                            options={categoryStore.categories?.map(
+                                                (category) => {
+                                                    const Icon =
+                                                        category?.icon!;
 
-                                                return {
-                                                    value: String(category?.id),
-                                                    content: (
-                                                        <div
-                                                            className={cn([
-                                                                "flex",
-                                                                "gap-2",
-                                                                "items-center",
-                                                            ])}
-                                                        >
-                                                            <Icon />
-                                                            {category?.name?.toUpperCase()}
-                                                        </div>
-                                                    ),
-                                                };
-                                            }
-                                        )}
-                                        onValueChange={(value) => {
-                                            field.onChange(Number(value));
-                                        }}
-                                        value={String(field.value)}
-                                    />
+                                                    return {
+                                                        value: String(
+                                                            category?.id
+                                                        ),
+                                                        content: (
+                                                            <div
+                                                                className={cn([
+                                                                    "flex",
+                                                                    "gap-2",
+                                                                    "items-center",
+                                                                ])}
+                                                            >
+                                                                <Icon />
+                                                                {category?.name?.toUpperCase()}
+                                                            </div>
+                                                        ),
+                                                    };
+                                                }
+                                            )}
+                                            onValueChange={(value) => {
+                                                field.onChange(Number(value));
+                                            }}
+                                            value={String(field.value)}
+                                        />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

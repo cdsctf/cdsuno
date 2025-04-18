@@ -21,7 +21,7 @@ import {
 import { Pagination } from "@/components/ui/pagination";
 import { cn } from "@/utils";
 import { columns } from "./columns";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Select } from "@/components/ui/select";
@@ -141,8 +141,8 @@ export default function Index() {
                         "gap-3",
                     ])}
                 >
-                    <Input size={"sm"} className={cn(["flex-1"])}>
-                        <InputIcon icon={HashIcon} />
+                    <Field size={"sm"} className={cn(["flex-1"])}>
+                        <FieldIcon icon={HashIcon} />
                         <TextField
                             placeholder={"ID"}
                             value={
@@ -156,31 +156,14 @@ export default function Index() {
                                     ?.setFilterValue(e.target.value)
                             }
                         />
-                    </Input>
-                    <Select
-                        size={"sm"}
-                        icon={Library}
-                        className={cn(["flex-1"])}
-                        options={[
-                            {
-                                value: "all",
-                                content: (
-                                    <div
-                                        className={cn([
-                                            "flex",
-                                            "gap-2",
-                                            "items-center",
-                                        ])}
-                                    >
-                                        全部
-                                    </div>
-                                ),
-                            },
-                            ...categoryStore.categories?.map((category) => {
-                                const Icon = category?.icon!;
-
-                                return {
-                                    value: String(category?.id),
+                    </Field>
+                    <Field size={"sm"}>
+                        <FieldIcon icon={Library} />
+                        <Select
+                            className={cn(["flex-1"])}
+                            options={[
+                                {
+                                    value: "all",
                                     content: (
                                         <div
                                             className={cn([
@@ -189,24 +172,43 @@ export default function Index() {
                                                 "items-center",
                                             ])}
                                         >
-                                            <Icon />
-                                            {category?.name?.toUpperCase()}
+                                            全部
                                         </div>
                                     ),
-                                };
-                            }),
-                        ]}
-                        onValueChange={(value) =>
-                            table
-                                .getColumn("challenge.category")
-                                ?.setFilterValue(value)
-                        }
-                        value={
-                            (table
-                                .getColumn("challenge.category")
-                                ?.getFilterValue() as string) ?? ""
-                        }
-                    />
+                                },
+                                ...categoryStore.categories?.map((category) => {
+                                    const Icon = category?.icon!;
+
+                                    return {
+                                        value: String(category?.id),
+                                        content: (
+                                            <div
+                                                className={cn([
+                                                    "flex",
+                                                    "gap-2",
+                                                    "items-center",
+                                                ])}
+                                            >
+                                                <Icon />
+                                                {category?.name?.toUpperCase()}
+                                            </div>
+                                        ),
+                                    };
+                                }),
+                            ]}
+                            onValueChange={(value) =>
+                                table
+                                    .getColumn("challenge.category")
+                                    ?.setFilterValue(value)
+                            }
+                            value={
+                                (table
+                                    .getColumn("challenge.category")
+                                    ?.getFilterValue() as string) ?? ""
+                            }
+                        />
+                    </Field>
+
                     <Button
                         icon={PlusCircle}
                         variant={"solid"}
@@ -283,20 +285,23 @@ export default function Index() {
                         {table.getFilteredRowModel().rows.length} / {total}
                     </div>
                     <div className={cn(["flex", "items-center", "gap-5"])}>
-                        <Select
-                            size={"sm"}
-                            placeholder={"每页显示"}
-                            icon={ListOrderedIcon}
-                            className={cn(["w-48"])}
-                            options={[
-                                { value: "10" },
-                                { value: "20" },
-                                { value: "40" },
-                                { value: "60" },
-                            ]}
-                            value={String(size)}
-                            onValueChange={(value) => setSize(Number(value))}
-                        />
+                        <Field size={"sm"}>
+                            <FieldIcon icon={ListOrderedIcon} />
+                            <Select
+                                placeholder={"每页显示"}
+                                className={cn(["w-48"])}
+                                options={[
+                                    { value: "10" },
+                                    { value: "20" },
+                                    { value: "40" },
+                                    { value: "60" },
+                                ]}
+                                value={String(size)}
+                                onValueChange={(value) =>
+                                    setSize(Number(value))
+                                }
+                            />
+                        </Field>
                         <Pagination
                             size={"sm"}
                             value={page}

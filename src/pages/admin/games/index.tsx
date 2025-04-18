@@ -19,7 +19,7 @@ import {
     PlusCircle,
     TypeIcon,
 } from "lucide-react";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
@@ -124,8 +124,8 @@ export default function Index() {
                         "gap-3",
                     ])}
                 >
-                    <Input size={"sm"} className={cn(["flex-1"])}>
-                        <InputIcon icon={HashIcon} />
+                    <Field size={"sm"} className={cn(["flex-1"])}>
+                        <FieldIcon icon={HashIcon} />
                         <TextField
                             placeholder="ID"
                             value={
@@ -139,9 +139,9 @@ export default function Index() {
                                     ?.setFilterValue(e.target.value)
                             }
                         />
-                    </Input>
-                    <Input size={"sm"} className={cn(["flex-1"])}>
-                        <InputIcon icon={TypeIcon} />
+                    </Field>
+                    <Field size={"sm"} className={cn(["flex-1"])}>
+                        <FieldIcon icon={TypeIcon} />
                         <TextField
                             placeholder={"比赛名"}
                             value={
@@ -155,7 +155,7 @@ export default function Index() {
                                     ?.setFilterValue(e.target.value)
                             }
                         />
-                    </Input>
+                    </Field>
                     <Button
                         icon={PlusCircle}
                         variant={"solid"}
@@ -231,20 +231,24 @@ export default function Index() {
                         {table.getFilteredRowModel().rows.length} / {total}
                     </div>
                     <div className={cn(["flex", "items-center", "gap-5"])}>
-                        <Select
-                            size={"sm"}
-                            placeholder={"每页显示"}
-                            icon={ListOrderedIcon}
-                            className={cn(["w-48"])}
-                            options={[
-                                { value: "10" },
-                                { value: "20" },
-                                { value: "40" },
-                                { value: "60" },
-                            ]}
-                            value={String(size)}
-                            onValueChange={(value) => setSize(Number(value))}
-                        />
+                        <Field size={"sm"}>
+                            <FieldIcon icon={ListOrderedIcon} />
+                            <Select
+                                placeholder={"每页显示"}
+                                className={cn(["w-48"])}
+                                options={[
+                                    { value: "10" },
+                                    { value: "20" },
+                                    { value: "40" },
+                                    { value: "60" },
+                                ]}
+                                value={String(size)}
+                                onValueChange={(value) =>
+                                    setSize(Number(value))
+                                }
+                            />
+                        </Field>
+
                         <Pagination
                             size={"sm"}
                             value={page}

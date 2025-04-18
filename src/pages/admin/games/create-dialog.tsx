@@ -10,7 +10,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
@@ -95,15 +95,15 @@ function CreateDialog(props: CreateDialogProps) {
                             <FormItem>
                                 <FormLabel>标题</FormLabel>
                                 <FormControl>
-                                    <Input size={"sm"}>
-                                        <InputIcon icon={TypeIcon} />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={TypeIcon} />
                                         <TextField
                                             {...field}
                                             placeholder={"比赛名称"}
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

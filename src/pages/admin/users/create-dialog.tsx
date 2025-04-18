@@ -9,7 +9,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input, InputIcon } from "@/components/ui/input";
+import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Select } from "@/components/ui/select";
 import { Group } from "@/models/user";
@@ -118,15 +118,15 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                             <FormItem>
                                 <FormLabel>用户名</FormLabel>
                                 <FormControl>
-                                    <Input size={"sm"}>
-                                        <InputIcon icon={UserRoundIcon} />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={UserRoundIcon} />
                                         <TextField
                                             {...field}
                                             placeholder={"请输入用户名"}
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -140,15 +140,15 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                             <FormItem>
                                 <FormLabel>昵称</FormLabel>
                                 <FormControl>
-                                    <Input size={"sm"}>
-                                        <InputIcon icon={UserRoundCheckIcon} />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={UserRoundCheckIcon} />
                                         <TextField
                                             {...field}
                                             placeholder={"请输入昵称"}
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -162,8 +162,8 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                             <FormItem>
                                 <FormLabel>邮箱</FormLabel>
                                 <FormControl>
-                                    <Input size={"sm"}>
-                                        <InputIcon icon={MailIcon} />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={MailIcon} />
                                         <TextField
                                             {...field}
                                             type="email"
@@ -171,7 +171,7 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -185,8 +185,8 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                             <FormItem>
                                 <FormLabel>密码</FormLabel>
                                 <FormControl>
-                                    <Input size={"sm"}>
-                                        <InputIcon icon={KeyIcon} />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={KeyIcon} />
                                         <TextField
                                             {...field}
                                             type="password"
@@ -194,7 +194,7 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                             value={field.value || ""}
                                             onChange={field.onChange}
                                         />
-                                    </Input>
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -208,33 +208,36 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                             <FormItem>
                                 <FormLabel>用户组</FormLabel>
                                 <FormControl>
-                                    <Select
-                                        {...field}
-                                        icon={UserRoundCheckIcon}
-                                        size={"sm"}
-                                        options={groupOptions.map((group) => {
-                                            const Icon = group.icon;
-                                            return {
-                                                value: String(group.id),
-                                                content: (
-                                                    <div
-                                                        className={cn([
-                                                            "flex",
-                                                            "gap-2",
-                                                            "items-center",
-                                                        ])}
-                                                    >
-                                                        <Icon className="size-4" />
-                                                        {group.name}
-                                                    </div>
-                                                ),
-                                            };
-                                        })}
-                                        onValueChange={(value) => {
-                                            field.onChange(Number(value));
-                                        }}
-                                        value={String(field.value)}
-                                    />
+                                    <Field size={"sm"}>
+                                        <FieldIcon icon={UserRoundCheckIcon} />
+                                        <Select
+                                            {...field}
+                                            options={groupOptions.map(
+                                                (group) => {
+                                                    const Icon = group.icon;
+                                                    return {
+                                                        value: String(group.id),
+                                                        content: (
+                                                            <div
+                                                                className={cn([
+                                                                    "flex",
+                                                                    "gap-2",
+                                                                    "items-center",
+                                                                ])}
+                                                            >
+                                                                <Icon className="size-4" />
+                                                                {group.name}
+                                                            </div>
+                                                        ),
+                                                    };
+                                                }
+                                            )}
+                                            onValueChange={(value) => {
+                                                field.onChange(Number(value));
+                                            }}
+                                            value={String(field.value)}
+                                        />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
