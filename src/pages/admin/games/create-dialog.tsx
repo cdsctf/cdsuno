@@ -15,7 +15,7 @@ import { TextField } from "@/components/ui/text-field";
 import { useSharedStore } from "@/storages/shared";
 import { cn } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckIcon, FlagIcon, TypeIcon } from "lucide-react";
+import { CalendarIcon, CheckIcon, FlagIcon, TypeIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -116,7 +116,10 @@ function CreateDialog(props: CreateDialogProps) {
                             <FormItem>
                                 <FormLabel>开始时间</FormLabel>
                                 <FormControl>
-                                    <DateTimePicker {...field} clearable />
+                                    <Field>
+                                        <FieldIcon icon={CalendarIcon} />
+                                        <DateTimePicker {...field} clearable />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -129,7 +132,10 @@ function CreateDialog(props: CreateDialogProps) {
                             <FormItem>
                                 <FormLabel>结束时间</FormLabel>
                                 <FormControl>
-                                    <DateTimePicker {...field} clearable />
+                                    <Field>
+                                        <FieldIcon icon={CalendarIcon} />
+                                        <DateTimePicker {...field} clearable />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

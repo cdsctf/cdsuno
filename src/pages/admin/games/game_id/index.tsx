@@ -10,6 +10,10 @@ import { TextField } from "@/components/ui/text-field";
 import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
 import {
+    CalendarIcon,
+    ClockAlertIcon,
+    ClockFadingIcon,
+    ClockIcon,
     FileCheck2Icon,
     LockOpenIcon,
     SaveIcon,
@@ -570,7 +574,10 @@ export default function Index() {
                             <FormItem>
                                 <FormLabel>开始时间</FormLabel>
                                 <FormControl>
-                                    <DateTimePicker {...field} />
+                                    <Field>
+                                        <FieldIcon icon={ClockIcon} />
+                                        <DateTimePicker {...field} />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -583,7 +590,10 @@ export default function Index() {
                             <FormItem>
                                 <FormLabel>冻结时间</FormLabel>
                                 <FormControl>
-                                    <DateTimePicker {...field} />
+                                    <Field>
+                                        <FieldIcon icon={ClockFadingIcon} />
+                                        <DateTimePicker {...field} />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -596,7 +606,10 @@ export default function Index() {
                             <FormItem>
                                 <FormLabel>结束时间</FormLabel>
                                 <FormControl>
-                                    <DateTimePicker {...field} />
+                                    <Field>
+                                        <FieldIcon icon={ClockAlertIcon} />
+                                        <DateTimePicker {...field} />
+                                    </Field>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

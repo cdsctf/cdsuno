@@ -307,11 +307,10 @@ export default function Index() {
                         {table.getFilteredRowModel().rows.length} / {total}
                     </div>
                     <div className={cn(["flex", "items-center", "gap-5"])}>
-                        <Field size={"sm"}>
+                        <Field size={"sm"} className={cn(["w-48"])}>
                             <FieldIcon icon={ListOrderedIcon} />
                             <Select
                                 placeholder={"每页显示"}
-                                className={cn(["w-48"])}
                                 options={[
                                     { value: "10" },
                                     { value: "20" },

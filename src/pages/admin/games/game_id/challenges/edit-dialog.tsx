@@ -3,6 +3,7 @@ import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { cn } from "@/utils";
 import {
+    ClockFadingIcon,
     HashIcon,
     LibraryIcon,
     MinusIcon,
@@ -252,7 +253,13 @@ function EditDialog(props: EditDialogProps) {
                                 <FormItem>
                                     <FormLabel>冻结时间</FormLabel>
                                     <FormControl>
-                                        <DateTimePicker {...field} clearable />
+                                        <Field>
+                                            <FieldIcon icon={ClockFadingIcon} />
+                                            <DateTimePicker
+                                                {...field}
+                                                clearable
+                                            />
+                                        </Field>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

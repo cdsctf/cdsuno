@@ -1,12 +1,10 @@
-"use client";
-
 /**
  * Shadcn Datetime Picker with support for timezone, date and time selection, minimum and maximum date limits, and 12-hour format...
  * Check out the live demo at https://shadcn-datetime-picker-pro.vercel.app/
  * Find the latest source code at https://github.com/huybuidac/shadcn-datetime-picker
  */
 
-import type * as React from "react";
+import * as React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
     endOfHour,
@@ -29,10 +27,6 @@ import {
     addMonths,
     subMonths,
     setMilliseconds,
-    addHours,
-    subHours,
-    startOfDay,
-    endOfDay,
 } from "date-fns";
 import {
     CalendarIcon,
@@ -56,6 +50,7 @@ import {
 import { IconSection } from "@/components/ui/shared/icon-section";
 import { cva, VariantProps } from "class-variance-authority";
 import { ScrollArea } from "./scroll-area";
+import { FieldContext } from "./field";
 
 export type CalendarProps = Omit<
     React.ComponentProps<typeof DayPicker>,
@@ -197,9 +192,11 @@ export function DateTimePicker({
     classNames,
     timePicker,
     modal = false,
-    size = "sm",
     ...props
 }: DateTimePickerProps & CalendarProps) {
+    const context = React.useContext(FieldContext);
+    const { size } = context;
+
     const [open, setOpen] = useState(false);
     const [monthYearPicker, setMonthYearPicker] = useState<
         "month" | "year" | false
@@ -288,12 +285,13 @@ export function DateTimePicker({
                     className={cn([
                         "relative",
                         "flex",
+                        "flex-1",
+                        "w-0",
                         "items-center",
                         classNames?.trigger,
                     ])}
                     tabIndex={0}
                 >
-                    <IconSection icon={CalendarIcon} size={size} />
                     <Button
                         type={"button"}
                         disabled={disabled}

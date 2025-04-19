@@ -42,6 +42,7 @@ import { z } from "zod";
 import { Label } from "@/components/ui/label";
 import { Config } from "@/models/config";
 import { Select } from "@/components/ui/select";
+import { NumberField } from "@/components/ui/number-field";
 
 export default function Index() {
     const [refresh, setRefresh] = useState<number>(0);
@@ -441,15 +442,12 @@ export default function Index() {
                                 <FormControl>
                                     <Field>
                                         <FieldIcon icon={ClockIcon} />
-                                        <TextField
+                                        <NumberField
                                             {...field}
-                                            type={"number"}
                                             placeholder="请输入难度"
-                                            value={field.value || ""}
-                                            onChange={(e) =>
-                                                field.onChange(
-                                                    e.target.valueAsNumber
-                                                )
+                                            value={field.value}
+                                            onValueChange={(value) =>
+                                                field.onChange(value)
                                             }
                                         />
                                     </Field>
