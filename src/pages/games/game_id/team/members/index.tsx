@@ -46,7 +46,7 @@ export default function Index() {
             ])}
         >
             <div className={cn(["flex", "gap-5", "items-center"])}>
-                <Field>
+                <Field className={cn(["flex-1"])}>
                     <FieldIcon icon={KeyIcon} />
                     <TextField
                         readOnly

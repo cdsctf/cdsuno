@@ -8,6 +8,7 @@ import { useCategoryStore } from "@/storages/category";
 import { Badge } from "../ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { ChallengeStatus } from "@/api/challenges";
+import { useLocation } from "react-router";
 
 interface ChallengeCardProps extends React.ComponentProps<"div"> {
     challenge?: Challenge;
@@ -17,6 +18,8 @@ interface ChallengeCardProps extends React.ComponentProps<"div"> {
 function ChallengeCard(props: ChallengeCardProps) {
     const { challenge, status, className, ...rest } = props;
     const { getCategory } = useCategoryStore();
+    const location = useLocation();
+    const pathname = location.pathname;
 
     const category = React.useMemo(() => {
         return getCategory(challenge?.category);
@@ -101,10 +104,36 @@ function ChallengeCard(props: ChallengeCardProps) {
             </h3>
             <Separator className={"my-3"} />
             <div className={cn(["flex", "justify-between", "items-center"])}>
-                <span className={cn(["text-sm"])}>
-                    {status?.solved_times || 0} 次解出
-                </span>
-                <span></span>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <span className={cn(["text-sm"])}>
+                            {status?.solved_times || 0} 次解出
+                        </span>
+                    </TooltipTrigger>
+                    <TooltipContent
+                        side={"bottom"}
+                        className={cn(["flex", "flex-col", "gap-3"])}
+                    >
+                        {status?.bloods?.map((blood, index) => (
+                            <div
+                                className={cn([
+                                    "flex",
+                                    "items-center",
+                                    "gap-3",
+                                ])}
+                            >
+                                <span>{index + 1}</span>
+                                <span>
+                                    {blood?.team
+                                        ? blood?.team?.name
+                                        : blood?.user?.nickname}
+                                </span>
+                            </div>
+                        ))}
+                    </TooltipContent>
+                </Tooltip>
+
+                <span>{pathname.startsWith("/games") && status?.pts}</span>
             </div>
         </Card>
     );

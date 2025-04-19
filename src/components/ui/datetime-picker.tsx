@@ -29,7 +29,6 @@ import {
     setMilliseconds,
 } from "date-fns";
 import {
-    CalendarIcon,
     CheckIcon,
     ChevronDownIcon,
     ChevronLeftIcon,
@@ -47,7 +46,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { IconSection } from "@/components/ui/shared/icon-section";
 import { cva, VariantProps } from "class-variance-authority";
 import { ScrollArea } from "./scroll-area";
 import { FieldContext } from "./field";

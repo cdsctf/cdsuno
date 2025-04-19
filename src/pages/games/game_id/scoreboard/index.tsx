@@ -5,10 +5,28 @@ import { ScoreRecord } from "@/models/game";
 import { useGameStore } from "@/storages/game";
 import { getGameScoreboard } from "@/api/games/game_id";
 import { Pagination } from "@/components/ui/pagination";
+import {
+    flexRender,
+    getCoreRowModel,
+    getFilteredRowModel,
+    useReactTable,
+} from "@tanstack/react-table";
+import { columns } from "./columns";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import { Field, FieldIcon } from "@/components/ui/field";
+import { ListOrderedIcon } from "lucide-react";
+import { Select } from "@/components/ui/select";
 
 export default function Index() {
     const { currentGame } = useGameStore();
-    const [scoreboard, setScoreboard] = useState<Array<ScoreRecord>>();
+    const [scoreboard, setScoreboard] = useState<Array<ScoreRecord>>([]);
     const [total, setTotal] = useState<number>(0);
     const [size, setSize] = useState<number>(10);
     const [page, setPage] = useState<number>(1);
@@ -20,9 +38,20 @@ export default function Index() {
             page,
         }).then((res) => {
             setTotal(res.total || 0);
-            setScoreboard(res.data);
+            setScoreboard(res.data || []);
         });
     }, [currentGame?.id, page, size]);
+
+    const table = useReactTable<ScoreRecord>({
+        data: scoreboard,
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+        manualPagination: true,
+        rowCount: total,
+        manualFiltering: true,
+        getFilteredRowModel: getFilteredRowModel(),
+        manualSorting: true,
+    });
 
     return (
         <div
@@ -36,7 +65,73 @@ export default function Index() {
             ])}
         >
             <ChampionChart scoreboard={scoreboard} />
-            <Pagination value={page} onChange={setPage} total={total} />
+            <div className={cn(["flex", "items-center", "gap-10"])}>
+                <div className="flex-1 text-sm text-muted-foreground">
+                    {table.getFilteredRowModel().rows.length} / {total}
+                </div>
+                <Field size={"sm"} className={cn(["w-48"])}>
+                    <FieldIcon icon={ListOrderedIcon} />
+                    <Select
+                        placeholder={"每页显示"}
+                        options={[
+                            { value: "10" },
+                            { value: "20" },
+                            { value: "40" },
+                            { value: "60" },
+                        ]}
+                        value={String(size)}
+                        onValueChange={(value) => setSize(Number(value))}
+                    />
+                </Field>
+                <Pagination value={page} onChange={setPage} total={total} />
+            </div>
+            <Table className={cn(["text-foreground"])}>
+                <TableHeader>
+                    {table.getHeaderGroups().map((headerGroup) => (
+                        <TableRow key={headerGroup.id}>
+                            {headerGroup.headers.map((header) => {
+                                return (
+                                    <TableHead key={header.id}>
+                                        {!header.isPlaceholder &&
+                                            flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext()
+                                            )}
+                                    </TableHead>
+                                );
+                            })}
+                        </TableRow>
+                    ))}
+                </TableHeader>
+                <TableBody>
+                    {table.getRowModel().rows?.length ? (
+                        table.getRowModel().rows.map((row) => (
+                            <TableRow
+                                key={row.getValue("id")}
+                                data-state={row.getIsSelected() && "selected"}
+                            >
+                                {row.getVisibleCells().map((cell) => (
+                                    <TableCell key={cell.id}>
+                                        {flexRender(
+                                            cell.column.columnDef.cell,
+                                            cell.getContext()
+                                        )}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        ))
+                    ) : (
+                        <TableRow>
+                            <TableCell
+                                colSpan={columns.length}
+                                className={cn(["h-24", "text-center"])}
+                            >
+                                积分榜空空如也呢
+                            </TableCell>
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
         </div>
     );
 }
