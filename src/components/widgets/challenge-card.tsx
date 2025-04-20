@@ -161,9 +161,11 @@ function ChallengeCard(props: ChallengeCardProps) {
                     )}
                 </Tooltip>
 
-                <span className={cn(["font-mono"])}>
-                    {pathname.startsWith("/games") && status?.pts} pts
-                </span>
+                {!!status?.pts && (
+                    <span className={cn(["font-mono"])}>
+                        {pathname.startsWith("/games") && status?.pts} pts
+                    </span>
+                )}
             </div>
         </Card>
     );
