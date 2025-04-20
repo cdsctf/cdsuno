@@ -72,12 +72,7 @@ function ChallengeDialog(props: ChallengeDialogProps) {
                     <Separator />
                 </div>
                 <ScrollArea
-                    className={cn([
-                        "flex",
-                        "flex-1",
-                        "max-h-144",
-                        "overflow-auto",
-                    ])}
+                    className={cn(["flex-1", "max-h-144", "overflow-auto"])}
                 >
                     <MarkdownRender src={challenge?.description} />
                 </ScrollArea>

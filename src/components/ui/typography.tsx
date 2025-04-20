@@ -11,7 +11,7 @@ function Typography(props: TypographyProps) {
                 "prose",
                 "dark:prose-invert",
                 "prose-pre:p-0",
-                "max-w-full",
+                "max-w-none",
                 className,
             ])}
             {...rest}
