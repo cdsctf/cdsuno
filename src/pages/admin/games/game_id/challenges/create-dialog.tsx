@@ -38,6 +38,7 @@ function CreateDialog(props: CreateDialogProps) {
             title,
             size: 10,
             page: 1,
+            sorts: "-created_at",
         }).then((res) => {
             if (res.code === 200) {
                 setChallenges(res.data);
