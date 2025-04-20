@@ -229,7 +229,7 @@ function EnvSection() {
                         className={cn([
                             "flex",
                             "flex-col",
-                            "text-secondary",
+                            "text-secondary-foreground",
                             "text-sm",
                             "select-none",
                         ])}

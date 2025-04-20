@@ -7,14 +7,19 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import {
+    ActivityIcon,
     ChartArea,
     Container,
     Folder,
     Info,
     Library,
+    PlayIcon,
     ScrollText,
 } from "lucide-react";
 import { useSharedStore } from "@/storages/shared";
+import { ChallengeCard } from "@/components/widgets/challenge-card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
 
 export default function Layout() {
     const location = useLocation();
@@ -123,6 +128,27 @@ export default function Layout() {
                             );
                         })}
                     </Card>
+                    <div
+                        className={cn([
+                            "flex",
+                            "flex-wrap",
+                            "justify-center",
+                            "gap-3",
+                            "select-none",
+                        ])}
+                    >
+                        <PlayIcon />
+                        题目预览
+                    </div>
+
+                    <Dialog>
+                        <DialogTrigger>
+                            <ChallengeCard challenge={challenge} debug />
+                        </DialogTrigger>
+                        <DialogContent>
+                            <ChallengeDialog challenge={challenge} debug />
+                        </DialogContent>
+                    </Dialog>
                 </div>
                 <Card
                     className={cn([

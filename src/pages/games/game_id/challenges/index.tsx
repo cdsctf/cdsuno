@@ -21,7 +21,7 @@ export default function Index() {
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(20);
 
-    const [selectedChallenge, setSelectedChallenge] = useState<Challenge>();
+    const [selectedChallenge, setSelectedChallenge] = useState<GameChallenge>();
     const [challengeDialogOpen, setChallengeDialogOpen] =
         useState<boolean>(false);
 
@@ -88,9 +88,7 @@ export default function Index() {
                                     ]
                                 }
                                 onClick={() => {
-                                    setSelectedChallenge(
-                                        gameChallenge?.challenge
-                                    );
+                                    setSelectedChallenge(gameChallenge);
                                     setChallengeDialogOpen(true);
                                 }}
                             />
@@ -117,8 +115,9 @@ export default function Index() {
             >
                 <DialogContent>
                     <ChallengeDialog
-                        challenge={selectedChallenge}
+                        challenge={selectedChallenge?.challenge}
                         gameTeam={selfGameTeam}
+                        frozenAt={selectedChallenge?.frozen_at}
                     />
                 </DialogContent>
             </Dialog>

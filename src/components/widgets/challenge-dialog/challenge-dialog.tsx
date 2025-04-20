@@ -11,15 +11,18 @@ import { Team } from "@/models/team";
 import { EnvSection } from "./env-section";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { DownloadIcon } from "lucide-react";
+import { DownloadIcon, SnowflakeIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface ChallengeDialogProps extends React.ComponentProps<typeof Card> {
     challenge?: Challenge;
     gameTeam?: Team;
+    frozenAt?: number;
+    debug?: boolean;
 }
 
 function ChallengeDialog(props: ChallengeDialogProps) {
-    const { challenge, gameTeam, ...rest } = props;
+    const { challenge, gameTeam, frozenAt, debug = false, ...rest } = props;
     const { getCategory } = useCategoryStore();
 
     const category = useMemo(
@@ -57,15 +60,13 @@ function ChallengeDialog(props: ChallengeDialogProps) {
                             />
                             <h3>{challenge?.title}</h3>
                         </div>
-                        {challenge?.has_attachment && (
-                            <Button asChild icon={DownloadIcon} size={"sm"}>
-                                <a
-                                    target={"_blank"}
-                                    href={`/api/challenges/${challenge?.id}/attachment`}
-                                >
-                                    下载附件
-                                </a>
-                            </Button>
+                        {frozenAt && (
+                            <Badge className={cn(["flex"])}>
+                                <SnowflakeIcon />
+                                <span>
+                                    {`冻结 ${new Date(frozenAt * 1000).toLocaleString()}`}
+                                </span>
+                            </Badge>
                         )}
                     </div>
                     <Separator />
@@ -80,11 +81,25 @@ function ChallengeDialog(props: ChallengeDialogProps) {
                 >
                     <MarkdownRender src={challenge?.description} />
                 </ScrollArea>
+                {challenge?.has_attachment && (
+                    <div className={cn(["flex"])}>
+                        <Button asChild icon={DownloadIcon} size={"sm"}>
+                            <a
+                                target={"_blank"}
+                                href={`/api/challenges/${challenge?.id}/attachment`}
+                            >
+                                附件
+                            </a>
+                        </Button>
+                    </div>
+                )}
                 {challenge?.is_dynamic && <EnvSection />}
-                <div className={cn("flex", "flex-col", "gap-3")}>
-                    <Separator />
-                    <SubmitSection />
-                </div>
+                {!debug && (
+                    <div className={cn("flex", "flex-col", "gap-3")}>
+                        <Separator />
+                        <SubmitSection />
+                    </div>
+                )}
             </Card>
         </Context.Provider>
     );

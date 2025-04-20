@@ -9,14 +9,16 @@ import { Badge } from "../ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { ChallengeStatus } from "@/api/challenges";
 import { useLocation } from "react-router";
+import { getOrdinal } from "@/utils/math";
 
 interface ChallengeCardProps extends React.ComponentProps<"div"> {
     challenge?: Challenge;
     status?: ChallengeStatus;
+    debug?: boolean;
 }
 
 function ChallengeCard(props: ChallengeCardProps) {
-    const { challenge, status, className, ...rest } = props;
+    const { challenge, status, debug = false, className, ...rest } = props;
     const { getCategory } = useCategoryStore();
     const location = useLocation();
     const pathname = location.pathname;
@@ -59,7 +61,7 @@ function ChallengeCard(props: ChallengeCardProps) {
             >
                 <CategoryIcon className={cn(["size-36"])} />
             </span>
-            {status?.is_solved && (
+            {!debug && status?.is_solved && (
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <Flag
@@ -103,37 +105,65 @@ function ChallengeCard(props: ChallengeCardProps) {
                 {challenge?.title}
             </h3>
             <Separator className={"my-3"} />
-            <div className={cn(["flex", "justify-between", "items-center"])}>
+            <div
+                className={cn([
+                    "flex",
+                    "justify-between",
+                    "items-center",
+                    "h-5",
+                ])}
+            >
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <span className={cn(["text-sm"])}>
-                            {status?.solved_times || 0} 次解出
+                            {debug ? "N" : status?.solved_times || 0} 次解出
                         </span>
                     </TooltipTrigger>
-                    <TooltipContent
-                        side={"bottom"}
-                        className={cn(["flex", "flex-col", "gap-3"])}
-                    >
-                        {status?.bloods?.map((blood, index) => (
-                            <div
-                                className={cn([
-                                    "flex",
-                                    "items-center",
-                                    "gap-3",
-                                ])}
-                            >
-                                <span>{index + 1}</span>
-                                <span>
-                                    {blood?.team
-                                        ? blood?.team?.name
-                                        : blood?.user?.nickname}
-                                </span>
-                            </div>
-                        ))}
-                    </TooltipContent>
+                    {!!status?.solved_times && (
+                        <TooltipContent
+                            side={"bottom"}
+                            className={cn([
+                                "flex",
+                                "flex-col",
+                                "gap-1",
+                                "py-3",
+                                "px-5",
+                            ])}
+                        >
+                            {status?.bloods?.map((blood, index) => (
+                                <div
+                                    className={cn([
+                                        "flex",
+                                        "items-center",
+                                        "gap-3",
+                                    ])}
+                                >
+                                    <span className={cn(["font-semibold"])}>
+                                        {getOrdinal(index + 1)}
+                                    </span>
+                                    <div className={cn(["flex", "flex-col"])}>
+                                        <span className={cn(["text-sm"])}>
+                                            {blood?.team
+                                                ? blood?.team?.name
+                                                : blood?.user?.nickname}
+                                        </span>
+                                        <span
+                                            className={cn(["text-secondary"])}
+                                        >
+                                            {new Date(
+                                                Number(blood?.created_at) * 1000
+                                            ).toLocaleString()}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </TooltipContent>
+                    )}
                 </Tooltip>
 
-                <span>{pathname.startsWith("/games") && status?.pts}</span>
+                <span className={cn(["font-mono"])}>
+                    {pathname.startsWith("/games") && status?.pts} pts
+                </span>
             </div>
         </Card>
     );
