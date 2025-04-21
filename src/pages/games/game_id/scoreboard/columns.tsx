@@ -9,7 +9,7 @@ const columns: ColumnDef<ScoreRecord>[] = [
     {
         accessorKey: "team.rank",
         id: "team.rank",
-        header: "ID",
+        header: "排名",
         cell: ({ row }) => {
             const rank = row.getValue<number>("team.rank");
 
@@ -21,8 +21,8 @@ const columns: ColumnDef<ScoreRecord>[] = [
         id: "team.name",
         header: "团队名",
         cell: ({ row }) => {
-            const id = row.getValue<number>("team.id");
-            const name = row.getValue<string>("team.name");
+            const id = row.original?.team?.id;
+            const name = row.original?.team?.name;
             const { currentGame } = useGameStore();
 
             return (
