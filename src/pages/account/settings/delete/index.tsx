@@ -136,7 +136,9 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>用户名</FormLabel>
                                     <Field>
-                                        <FieldIcon icon={UserRoundIcon} />
+                                        <FieldIcon>
+                                            <UserRoundIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             placeholder={
@@ -154,7 +156,9 @@ export default function Index() {
                                 <FormItem className={cn(["w-full"])}>
                                     <FormLabel>密码</FormLabel>
                                     <Field>
-                                        <FieldIcon icon={LockIcon} />
+                                        <FieldIcon>
+                                            <LockIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             type={"password"}

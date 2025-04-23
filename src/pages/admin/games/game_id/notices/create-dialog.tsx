@@ -87,7 +87,9 @@ function CreateDialog(props: CreateDialogProps) {
                                 <FormLabel>标题</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={TypeIcon} />
+                                        <FieldIcon>
+                                            <TypeIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             value={field.value || ""}

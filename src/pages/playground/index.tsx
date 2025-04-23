@@ -87,7 +87,9 @@ export default function Index() {
             >
                 <div className={cn(["flex", "items-center", "gap-3"])}>
                     <Field className={cn(["flex-1"])}>
-                        <FieldIcon icon={LibraryIcon} />
+                        <FieldIcon>
+                            <LibraryIcon />
+                        </FieldIcon>
                         <TextField
                             placeholder={"题目名"}
                             value={title}
@@ -120,7 +122,9 @@ export default function Index() {
                     />
                     <div className={cn(["hidden", "md:flex", "gap-5"])}>
                         <Field size={"sm"} className={cn(["w-48"])}>
-                            <FieldIcon icon={ListOrderedIcon} />
+                            <FieldIcon>
+                                <ListOrderedIcon />
+                            </FieldIcon>
                             <Select
                                 placeholder={"每页显示"}
                                 options={[

@@ -89,7 +89,9 @@ function CreateDialog(props: CreateDialogProps) {
             </span>
             <div className={cn(["flex", "gap-3"])}>
                 <Field size={"sm"} className={cn(["w-full"])}>
-                    <FieldIcon icon={HashIcon} />
+                    <FieldIcon>
+                        <HashIcon />
+                    </FieldIcon>
                     <TextField
                         value={id || ""}
                         onChange={(e) => setId(e.target.value)}
@@ -97,7 +99,9 @@ function CreateDialog(props: CreateDialogProps) {
                     />
                 </Field>
                 <Field size={"sm"} className={cn(["w-full"])}>
-                    <FieldIcon icon={TypeIcon} />
+                    <FieldIcon>
+                        <TypeIcon />
+                    </FieldIcon>
                     <TextField
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}

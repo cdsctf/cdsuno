@@ -182,7 +182,9 @@ export default function Index() {
                                         <FormLabel>团队名</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={TypeIcon} />
+                                                <FieldIcon>
+                                                    <TypeIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     placeholder={"团队名"}
                                                     {...field}
@@ -203,7 +205,9 @@ export default function Index() {
                                         <FormLabel>电子邮箱</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={MailIcon} />
+                                                <FieldIcon>
+                                                    <MailIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     placeholder={"电子邮箱"}
                                                     {...field}
@@ -273,7 +277,9 @@ export default function Index() {
                                 <FormLabel>口号</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={MessageCircleIcon} />
+                                        <FieldIcon>
+                                            <MessageCircleIcon />
+                                        </FieldIcon>
                                         <TextField
                                             placeholder={"口号"}
                                             {...field}

@@ -96,7 +96,9 @@ export default function Index() {
                                 <FormLabel>原始密码</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={LockOpenIcon} />
+                                        <FieldIcon>
+                                            <LockOpenIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             type={"password"}
@@ -118,7 +120,9 @@ export default function Index() {
                                 <FormLabel>新密码</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={LockIcon} />
+                                        <FieldIcon>
+                                            <LockIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             type={"password"}
@@ -140,7 +144,9 @@ export default function Index() {
                                 <FormLabel>确认密码</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={LockIcon} />
+                                        <FieldIcon>
+                                            <LockIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             type={"password"}

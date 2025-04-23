@@ -10,7 +10,14 @@ import { useInterval } from "@/hooks/use-interval";
 import { Field, FieldButton, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Button } from "@/components/ui/button";
-import { Clipboard, Clock, EthernetPort, Play, Trash } from "lucide-react";
+import {
+    Clipboard,
+    Clock,
+    EthernetPort,
+    EthernetPortIcon,
+    Play,
+    Trash,
+} from "lucide-react";
 import { copyToClipboard } from "@/utils/clipboard";
 
 function EnvSection() {
@@ -152,11 +159,17 @@ function EnvSection() {
                                                 className={cn(["flex-1"])}
                                             >
                                                 <FieldIcon
-                                                    icon={EthernetPort}
-                                                />
+                                                    className={cn([
+                                                        "w-fit",
+                                                        "px-4",
+                                                    ])}
+                                                >
+                                                    <EthernetPortIcon />
+                                                    <span>{src}</span>
+                                                </FieldIcon>
                                                 <TextField
                                                     readOnly
-                                                    value={`${src} - ${pod?.public_entry}:${dst}`}
+                                                    value={`${pod?.public_entry}:${dst}`}
                                                 />
                                                 <FieldButton
                                                     icon={Clipboard}
@@ -181,10 +194,18 @@ function EnvSection() {
                                             size={"sm"}
                                             className={cn(["flex-1"])}
                                         >
-                                            <FieldIcon icon={EthernetPort} />
+                                            <FieldIcon
+                                                className={cn([
+                                                    "w-fit",
+                                                    "px-4",
+                                                ])}
+                                            >
+                                                <EthernetPortIcon />
+                                                <span>{port}</span>
+                                            </FieldIcon>
                                             <TextField
                                                 readOnly
-                                                value={`${port} - ${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${pod?.id}/wsrx?port=${port}`}
+                                                value={`${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${pod?.id}/wsrx?port=${port}`}
                                             />
                                             <FieldButton
                                                 icon={Clipboard}

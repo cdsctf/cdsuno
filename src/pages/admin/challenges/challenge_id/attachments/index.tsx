@@ -5,7 +5,13 @@ import {
     useDropzone,
 } from "@/components/ui/dropzone";
 import { Metadata } from "@/models/media";
-import { CloudUploadIcon, HardDrive, TextIcon, TrashIcon } from "lucide-react";
+import {
+    CloudUploadIcon,
+    HardDrive,
+    HardDriveIcon,
+    TextIcon,
+    TrashIcon,
+} from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context";
 import { deleteChallengeAttachment } from "@/api/admin/challenges/challenge_id/attachment";
@@ -103,7 +109,9 @@ export default function Index() {
                 {metadata && (
                     <>
                         <Field className={cn(["w-1/2"])}>
-                            <FieldIcon icon={TextIcon} />
+                            <FieldIcon>
+                                <TextIcon />
+                            </FieldIcon>
                             <TextField
                                 disabled
                                 placeholder={"文件名"}
@@ -112,7 +120,9 @@ export default function Index() {
                             />
                         </Field>
                         <Field className={cn(["flex-1"])}>
-                            <FieldIcon icon={HardDrive} />
+                            <FieldIcon>
+                                <HardDriveIcon />
+                            </FieldIcon>
                             <TextField
                                 disabled
                                 placeholder={"文件大小"}

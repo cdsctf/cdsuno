@@ -150,7 +150,9 @@ export default function Index() {
                     ])}
                 >
                     <Field size={"sm"} className={cn(["flex-1"])}>
-                        <FieldIcon icon={HashIcon} />
+                        <FieldIcon>
+                            <HashIcon />
+                        </FieldIcon>
                         <TextField
                             placeholder="ID"
                             value={
@@ -166,7 +168,9 @@ export default function Index() {
                         />
                     </Field>
                     <Field size={"sm"} className={cn(["flex-1"])}>
-                        <FieldIcon icon={TypeIcon} />
+                        <FieldIcon>
+                            <TypeIcon />
+                        </FieldIcon>
                         <TextField
                             placeholder={"团队名"}
                             value={
@@ -182,7 +186,9 @@ export default function Index() {
                         />
                     </Field>
                     <Field size={"sm"} className={cn(["flex-1"])}>
-                        <FieldIcon icon={SatelliteIcon} />
+                        <FieldIcon>
+                            <SatelliteIcon />
+                        </FieldIcon>
                         <Select
                             options={[
                                 {
@@ -286,7 +292,9 @@ export default function Index() {
                     </div>
                     <div className={cn(["flex", "items-center", "gap-5"])}>
                         <Field size={"sm"} className={cn(["w-48"])}>
-                            <FieldIcon icon={ListOrderedIcon} />
+                            <FieldIcon>
+                                <ListOrderedIcon />
+                            </FieldIcon>
                             <Select
                                 placeholder={"每页显示"}
                                 options={[

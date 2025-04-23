@@ -119,7 +119,9 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                 <FormLabel>用户名</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={UserRoundIcon} />
+                                        <FieldIcon>
+                                            <UserRoundIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             placeholder={"请输入用户名"}
@@ -141,7 +143,9 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                 <FormLabel>昵称</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={UserRoundCheckIcon} />
+                                        <FieldIcon>
+                                            <UserRoundCheckIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             placeholder={"请输入昵称"}
@@ -163,7 +167,9 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                 <FormLabel>邮箱</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={MailIcon} />
+                                        <FieldIcon>
+                                            <MailIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             type="email"
@@ -186,7 +192,9 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                 <FormLabel>密码</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={KeyIcon} />
+                                        <FieldIcon>
+                                            <KeyIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             type="password"
@@ -209,7 +217,9 @@ function CreateUserDialog(props: CreateUserDialogProps) {
                                 <FormLabel>用户组</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={UserRoundCheckIcon} />
+                                        <FieldIcon>
+                                            <UserRoundCheckIcon />
+                                        </FieldIcon>
                                         <Select
                                             {...field}
                                             options={groupOptions.map(

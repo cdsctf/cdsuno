@@ -70,7 +70,9 @@ export default function Index() {
                     {table.getFilteredRowModel().rows.length} / {total}
                 </div>
                 <Field size={"sm"} className={cn(["w-48"])}>
-                    <FieldIcon icon={ListOrderedIcon} />
+                    <FieldIcon>
+                        <ListOrderedIcon />
+                    </FieldIcon>
                     <Select
                         placeholder={"每页显示"}
                         options={[

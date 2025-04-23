@@ -169,7 +169,9 @@ function EditDialog(props: EditDialogProps) {
                                         <FormLabel>最大分值</FormLabel>
                                         <FormControl>
                                             <Field size={"sm"}>
-                                                <FieldIcon icon={HashIcon} />
+                                                <FieldIcon>
+                                                    <HashIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -197,7 +199,9 @@ function EditDialog(props: EditDialogProps) {
                                         <FormLabel>最小分值</FormLabel>
                                         <FormControl>
                                             <Field size={"sm"}>
-                                                <FieldIcon icon={HashIcon} />
+                                                <FieldIcon>
+                                                    <HashIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -225,7 +229,9 @@ function EditDialog(props: EditDialogProps) {
                                         <FormLabel>难度系数</FormLabel>
                                         <FormControl>
                                             <Field size={"sm"}>
-                                                <FieldIcon icon={HashIcon} />
+                                                <FieldIcon>
+                                                    <HashIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -254,7 +260,9 @@ function EditDialog(props: EditDialogProps) {
                                     <FormLabel>冻结时间</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={ClockFadingIcon} />
+                                            <FieldIcon>
+                                                <ClockFadingIcon />
+                                            </FieldIcon>
                                             <DateTimePicker
                                                 {...field}
                                                 clearable
@@ -299,11 +307,9 @@ function EditDialog(props: EditDialogProps) {
                                                                     "flex-1",
                                                                 ])}
                                                             >
-                                                                <FieldIcon
-                                                                    icon={
-                                                                        StarIcon
-                                                                    }
-                                                                />
+                                                                <FieldIcon>
+                                                                    <StarIcon />
+                                                                </FieldIcon>
                                                                 <TextField
                                                                     {...field}
                                                                     type={

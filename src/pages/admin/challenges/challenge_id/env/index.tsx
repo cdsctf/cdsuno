@@ -10,17 +10,16 @@ import { updateChallengeEnv } from "@/api/admin/challenges/challenge_id/env";
 import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
 import {
-    Clock,
-    Container,
-    Cpu,
-    Key,
+    ClockIcon,
+    ContainerIcon,
+    CpuIcon,
     KeyIcon,
-    MemoryStick,
-    Minus,
+    MemoryStickIcon,
+    MinusIcon,
     NetworkIcon,
-    Plus,
+    PlusIcon,
     SaveIcon,
-    Trash,
+    TrashIcon,
 } from "lucide-react";
 import {
     Form,
@@ -165,7 +164,9 @@ export default function Index() {
                                 <FormLabel>持续时间（秒）</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={Clock} />
+                                        <FieldIcon>
+                                            <ClockIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             type={"number"}
@@ -191,7 +192,9 @@ export default function Index() {
                                 <FormLabel>是否允许出网</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={NetworkIcon} />
+                                        <FieldIcon>
+                                            <NetworkIcon />
+                                        </FieldIcon>
                                         <Select
                                             {...field}
                                             options={[
@@ -239,7 +242,9 @@ export default function Index() {
                                         <FormLabel>镜像名</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={Container} />
+                                                <FieldIcon>
+                                                    <ContainerIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     placeholder={
@@ -262,7 +267,9 @@ export default function Index() {
                                         <FormLabel>镜像拉取密钥</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={KeyIcon} />
+                                                <FieldIcon>
+                                                    <KeyIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     value={field.value || ""}
@@ -284,7 +291,9 @@ export default function Index() {
                                         <FormLabel>CPU 限制</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={Cpu} />
+                                                <FieldIcon>
+                                                    <CpuIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -312,7 +321,9 @@ export default function Index() {
                                         <FormLabel>内存限制（MB）</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={MemoryStick} />
+                                                <FieldIcon>
+                                                    <MemoryStickIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -362,9 +373,9 @@ export default function Index() {
                                                             "flex-1",
                                                         ])}
                                                     >
-                                                        <FieldIcon
-                                                            icon={MemoryStick}
-                                                        />
+                                                        <FieldIcon>
+                                                            <MemoryStickIcon />
+                                                        </FieldIcon>
                                                         <TextField
                                                             {...field}
                                                             type={"number"}
@@ -385,7 +396,7 @@ export default function Index() {
                                                     </Field>
                                                     <Button
                                                         type={"button"}
-                                                        icon={Minus}
+                                                        icon={MinusIcon}
                                                         size={"sm"}
                                                         square
                                                         onClick={() =>
@@ -405,7 +416,7 @@ export default function Index() {
                             <Button
                                 type={"button"}
                                 size={"sm"}
-                                icon={Plus}
+                                icon={PlusIcon}
                                 className={cn(["self-center"])}
                                 square
                                 onClick={() => handleAddPort(containerIndex)}
@@ -428,7 +439,9 @@ export default function Index() {
                                                 size={"sm"}
                                                 className={cn(["flex-1/2"])}
                                             >
-                                                <FieldIcon icon={Key} />
+                                                <FieldIcon>
+                                                    <KeyIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     placeholder="键"
                                                     value={key}
@@ -478,7 +491,7 @@ export default function Index() {
                                             </Field>
                                             <Button
                                                 type={"button"}
-                                                icon={Minus}
+                                                icon={MinusIcon}
                                                 size={"sm"}
                                                 square
                                                 onClick={() =>
@@ -494,7 +507,7 @@ export default function Index() {
                             <Button
                                 type={"button"}
                                 size={"sm"}
-                                icon={Plus}
+                                icon={PlusIcon}
                                 className={cn(["self-center"])}
                                 square
                                 onClick={() => handleAddEnv(containerIndex)}
@@ -505,7 +518,7 @@ export default function Index() {
                             variant={"tonal"}
                             level={"error"}
                             size={"sm"}
-                            icon={Trash}
+                            icon={TrashIcon}
                             onClick={() =>
                                 handleRemoveContainer(containerIndex)
                             }
@@ -518,7 +531,7 @@ export default function Index() {
                     type={"button"}
                     variant={"tonal"}
                     size={"sm"}
-                    icon={Plus}
+                    icon={PlusIcon}
                     onClick={handleAddContainer}
                 >
                     添加容器

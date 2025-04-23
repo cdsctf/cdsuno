@@ -12,7 +12,12 @@ import { Editor } from "@/components/ui/editor";
 import { Card } from "@/components/ui/card";
 import { AnsiUp } from "ansi_up";
 import { Button } from "@/components/ui/button";
-import { Check, LayoutTemplate, SaveIcon } from "lucide-react";
+import {
+    Check,
+    LayoutTemplate,
+    LayoutTemplateIcon,
+    SaveIcon,
+} from "lucide-react";
 import { Select } from "@/components/ui/select";
 import simpleChecker from "./examples/simple.cdsx?raw";
 import suidChecker from "./examples/suid.cdsx?raw";
@@ -85,7 +90,9 @@ export default function Index() {
                     ])}
                 >
                     <Field size={"sm"} className={cn(["flex-1"])}>
-                        <FieldIcon icon={LayoutTemplate} />
+                        <FieldIcon>
+                            <LayoutTemplateIcon />
+                        </FieldIcon>
                         <Select
                             placeholder={"使用预设模板"}
                             options={[

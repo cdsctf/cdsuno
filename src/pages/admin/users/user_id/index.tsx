@@ -212,7 +212,9 @@ export default function Index() {
                                     <FormLabel>用户名</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={UserRoundIcon} />
+                                            <FieldIcon>
+                                                <UserRoundIcon />
+                                            </FieldIcon>
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入用户名"
@@ -234,7 +236,9 @@ export default function Index() {
                                     <FormLabel>昵称</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={UserRoundIcon} />
+                                            <FieldIcon>
+                                                <UserRoundIcon />
+                                            </FieldIcon>
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入昵称"
@@ -256,7 +260,9 @@ export default function Index() {
                                     <FormLabel>用户组</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={ShieldIcon} />
+                                            <FieldIcon>
+                                                <ShieldIcon />
+                                            </FieldIcon>
                                             <Select
                                                 {...field}
                                                 options={groupOptions.map(
@@ -300,7 +306,9 @@ export default function Index() {
                                     <FormLabel>邮箱</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={MailIcon} />
+                                            <FieldIcon>
+                                                <MailIcon />
+                                            </FieldIcon>
                                             <TextField
                                                 {...field}
                                                 type={"email"}
@@ -322,7 +330,9 @@ export default function Index() {
                                     <FormLabel>是否已验证</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={MailCheckIcon} />
+                                            <FieldIcon>
+                                                <MailCheckIcon />
+                                            </FieldIcon>
                                             <Select
                                                 {...field}
                                                 options={[

@@ -1,4 +1,11 @@
-import { UserRound, Lock, Check, CircleHelpIcon } from "lucide-react";
+import {
+    UserRound,
+    Lock,
+    Check,
+    CircleHelpIcon,
+    UserRoundIcon,
+    LockIcon,
+} from "lucide-react";
 import { cn } from "@/utils";
 import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
@@ -91,7 +98,9 @@ function LoginForm() {
                                 <FormLabel>用户名/邮箱</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={UserRound} />
+                                        <FieldIcon>
+                                            <UserRoundIcon />
+                                        </FieldIcon>
                                         <TextField
                                             placeholder={"Account"}
                                             {...field}
@@ -110,7 +119,9 @@ function LoginForm() {
                                 <FormLabel>密码</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={Lock} />
+                                        <FieldIcon>
+                                            <LockIcon />
+                                        </FieldIcon>
                                         <TextField
                                             placeholder={"Password"}
                                             type={"password"}

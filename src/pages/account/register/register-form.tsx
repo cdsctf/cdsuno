@@ -1,4 +1,12 @@
-import { UserRound, Lock, Check, TypeIcon, MailIcon } from "lucide-react";
+import {
+    UserRound,
+    Lock,
+    Check,
+    TypeIcon,
+    MailIcon,
+    UserRoundIcon,
+    LockIcon,
+} from "lucide-react";
 import { cn } from "@/utils";
 import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
@@ -117,7 +125,9 @@ function RegisterForm() {
                                     <FormLabel>用户名</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={UserRound} />
+                                            <FieldIcon>
+                                                <UserRoundIcon />
+                                            </FieldIcon>
                                             <TextField {...field} />
                                         </Field>
                                     </FormControl>
@@ -133,7 +143,9 @@ function RegisterForm() {
                                     <FormLabel>昵称</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={TypeIcon} />
+                                            <FieldIcon>
+                                                <TypeIcon />
+                                            </FieldIcon>
                                             <TextField {...field} />
                                         </Field>
                                     </FormControl>
@@ -150,7 +162,9 @@ function RegisterForm() {
                                 <FormLabel>邮箱</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={MailIcon} />
+                                        <FieldIcon>
+                                            <MailIcon />
+                                        </FieldIcon>
                                         <TextField {...field} />
                                     </Field>
                                 </FormControl>
@@ -166,7 +180,9 @@ function RegisterForm() {
                                 <FormLabel>密码</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={Lock} />
+                                        <FieldIcon>
+                                            <LockIcon />
+                                        </FieldIcon>
                                         <TextField
                                             type={"password"}
                                             {...field}
@@ -185,7 +201,9 @@ function RegisterForm() {
                                 <FormLabel>确认密码</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={Lock} />
+                                        <FieldIcon>
+                                            <LockIcon />
+                                        </FieldIcon>
                                         <TextField
                                             type={"password"}
                                             {...field}

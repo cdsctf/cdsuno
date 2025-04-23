@@ -3,7 +3,7 @@ import { Context } from "./context";
 import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Button } from "@/components/ui/button";
-import { Flag, Send } from "lucide-react";
+import { Flag, FlagIcon, Send } from "lucide-react";
 import { cn } from "@/utils";
 import { useInterval } from "@/hooks/use-interval";
 import { getSubmission, createSubmission } from "@/api/submissions";
@@ -119,7 +119,9 @@ function SubmitSection() {
     return (
         <div className={cn(["flex", "gap-3", "items-center"])}>
             <Field size={"sm"} className={cn(["flex-1"])}>
-                <FieldIcon icon={Flag} />
+                <FieldIcon>
+                    <FlagIcon />
+                </FieldIcon>
                 <TextField
                     placeholder={placeholder}
                     value={flag}

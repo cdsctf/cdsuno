@@ -13,11 +13,16 @@ import { useSharedStore } from "@/storages/shared";
 import {
     Box,
     Container,
+    ContainerIcon,
     Folder,
+    FolderIcon,
     Library,
+    LibraryIcon,
     SaveIcon,
     ShipWheel,
+    TagIcon,
     Type,
+    TypeIcon,
 } from "lucide-react";
 import {
     Form,
@@ -30,6 +35,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { useCategoryStore } from "@/storages/category";
+import { TagsField } from "@/components/ui/tags-field";
 
 export default function Index() {
     const { challenge } = useContext(Context);
@@ -45,6 +51,7 @@ export default function Index() {
         category: z.number({
             message: "请选择分类",
         }),
+        tags: z.array(z.string()).nullish(),
         description: z.string({
             message: "请输入描述",
         }),
@@ -96,7 +103,9 @@ export default function Index() {
                                 <FormLabel>标题</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={Type} />
+                                        <FieldIcon>
+                                            <TypeIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             placeholder={"标题"}
@@ -117,7 +126,9 @@ export default function Index() {
                                 <FormLabel>分类</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={Library} />
+                                        <FieldIcon>
+                                            <LibraryIcon />
+                                        </FieldIcon>
                                         <Select
                                             {...field}
                                             options={categoryStore.categories?.map(
@@ -156,6 +167,29 @@ export default function Index() {
                         )}
                     />
                 </div>
+                <FormField
+                    control={form.control}
+                    name={"tags"}
+                    render={({ field }) => (
+                        <FormItem className={cn(["w-full"])}>
+                            <FormLabel>标签</FormLabel>
+                            <FormControl>
+                                <Field>
+                                    <FieldIcon>
+                                        <TagIcon />
+                                    </FieldIcon>
+                                    <TagsField
+                                        value={field.value || []}
+                                        onValueChange={(value) =>
+                                            field.onChange(value)
+                                        }
+                                    />
+                                </Field>
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
                 <div className={cn(["flex", "gap-5"])}>
                     <FormField
                         control={form.control}
@@ -165,7 +199,9 @@ export default function Index() {
                                 <FormLabel>是否启用附件</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={Folder} />
+                                        <FieldIcon>
+                                            <FolderIcon />
+                                        </FieldIcon>
                                         <Select
                                             {...field}
                                             options={[
@@ -199,7 +235,9 @@ export default function Index() {
                                 <FormLabel>动态性</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={Container} />
+                                        <FieldIcon>
+                                            <ContainerIcon />
+                                        </FieldIcon>
                                         <Select
                                             {...field}
                                             options={[

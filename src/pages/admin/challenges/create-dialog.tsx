@@ -100,7 +100,9 @@ function CreateDialog(props: CreateDialogProps) {
                                 <FormLabel>标题</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={TypeIcon} />
+                                        <FieldIcon>
+                                            <TypeIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             placeholder={"Try hack me..."}
@@ -121,7 +123,9 @@ function CreateDialog(props: CreateDialogProps) {
                                 <FormLabel>分类</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={LibraryIcon} />
+                                        <FieldIcon>
+                                            <LibraryIcon />
+                                        </FieldIcon>
                                         <Select
                                             {...field}
                                             options={categoryStore.categories?.map(

@@ -236,7 +236,9 @@ export default function Index() {
                                     <FormLabel>标题</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={TypeIcon} />
+                                            <FieldIcon>
+                                                <TypeIcon />
+                                            </FieldIcon>
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入标题"
@@ -257,7 +259,9 @@ export default function Index() {
                                     <FormLabel>描述</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={TextIcon} />
+                                            <FieldIcon>
+                                                <TextIcon />
+                                            </FieldIcon>
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入描述"
@@ -344,7 +348,9 @@ export default function Index() {
                             <FormLabel>是否允许新用户注册</FormLabel>
                             <FormControl>
                                 <Field>
-                                    <FieldIcon icon={UserRoundCheckIcon} />
+                                    <FieldIcon>
+                                        <UserRoundCheckIcon />
+                                    </FieldIcon>
                                     <Select
                                         {...field}
                                         options={[
@@ -393,7 +399,9 @@ export default function Index() {
                                 </FormDescription>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={LockIcon} />
+                                        <FieldIcon>
+                                            <LockIcon />
+                                        </FieldIcon>
                                         <Select
                                             {...field}
                                             options={[
@@ -441,7 +449,9 @@ export default function Index() {
                                 </FormDescription>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={ClockIcon} />
+                                        <FieldIcon>
+                                            <ClockIcon />
+                                        </FieldIcon>
                                         <NumberField
                                             {...field}
                                             placeholder="请输入难度"
@@ -467,7 +477,9 @@ export default function Index() {
                                     <FormLabel>API URL</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={SendIcon} />
+                                            <FieldIcon>
+                                                <SendIcon />
+                                            </FieldIcon>
                                             <TextField
                                                 {...field}
                                                 placeholder="请输入 API URL"
@@ -489,7 +501,9 @@ export default function Index() {
                                         <FormLabel>SITE_KEY</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={SendIcon} />
+                                                <FieldIcon>
+                                                    <SendIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     placeholder="请输入 SITE_KEY"
@@ -510,7 +524,9 @@ export default function Index() {
                                         <FormLabel>SECRET_KEY</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={SendIcon} />
+                                                <FieldIcon>
+                                                    <SendIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     placeholder="请输入 SECRET_KEY"
@@ -537,7 +553,9 @@ export default function Index() {
                                         <FormLabel>API URL</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={SendIcon} />
+                                                <FieldIcon>
+                                                    <SendIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     placeholder="请输入 API URL"
@@ -558,7 +576,9 @@ export default function Index() {
                                         <FormLabel>分数要求</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={ClockIcon} />
+                                                <FieldIcon>
+                                                    <ClockIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     type={"number"}
@@ -587,7 +607,9 @@ export default function Index() {
                                         <FormLabel>SITE_KEY</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={SendIcon} />
+                                                <FieldIcon>
+                                                    <SendIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     placeholder="请输入 SITE_KEY"
@@ -608,7 +630,9 @@ export default function Index() {
                                         <FormLabel>SECRET_KEY</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={SendIcon} />
+                                                <FieldIcon>
+                                                    <SendIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     placeholder={

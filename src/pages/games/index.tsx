@@ -8,7 +8,7 @@ import { Pagination } from "@/components/ui/pagination";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Game } from "@/models/game";
 import { cn } from "@/utils";
-import { Flag, PackageOpenIcon, Search } from "lucide-react";
+import { Flag, PackageOpenIcon, Search, SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -69,7 +69,9 @@ export default function Index() {
                 ])}
             >
                 <Field className={cn(["w-full"])}>
-                    <FieldIcon icon={Search} />
+                    <FieldIcon>
+                        <SearchIcon />
+                    </FieldIcon>
                     <TextField
                         placeholder={"比赛名"}
                         value={title}

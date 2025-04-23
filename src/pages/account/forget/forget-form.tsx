@@ -1,4 +1,4 @@
-import { Lock, Check, MailIcon, SendIcon } from "lucide-react";
+import { Lock, Check, MailIcon, SendIcon, LockIcon } from "lucide-react";
 import { cn } from "@/utils";
 import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
@@ -114,7 +114,9 @@ function ForgetForm() {
                                 <FormLabel>邮箱</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={MailIcon} />
+                                        <FieldIcon>
+                                            <MailIcon />
+                                        </FieldIcon>
                                         <TextField
                                             placeholder={"Email"}
                                             {...field}
@@ -134,7 +136,9 @@ function ForgetForm() {
                                     <FormLabel>验证码</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={MailIcon} />
+                                            <FieldIcon>
+                                                <MailIcon />
+                                            </FieldIcon>
                                             <TextField
                                                 placeholder={"Code"}
                                                 {...field}
@@ -162,7 +166,9 @@ function ForgetForm() {
                                 <FormLabel>密码</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={Lock} />
+                                        <FieldIcon>
+                                            <LockIcon />
+                                        </FieldIcon>
                                         <TextField
                                             placeholder={"Password"}
                                             type={"password"}

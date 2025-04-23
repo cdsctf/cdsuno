@@ -133,7 +133,9 @@ function TeamGatheringDialog(props: TeamGatheringDialogProps) {
                                 <FormLabel>团队名</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={TypeIcon} />
+                                        <FieldIcon>
+                                            <TypeIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             value={field.value || ""}
@@ -169,7 +171,9 @@ function TeamGatheringDialog(props: TeamGatheringDialogProps) {
                                 <FormLabel>邀请码</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={KeyIcon} />
+                                        <FieldIcon>
+                                            <KeyIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             value={field.value || ""}

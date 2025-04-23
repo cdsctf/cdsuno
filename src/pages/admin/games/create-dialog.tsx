@@ -96,7 +96,9 @@ function CreateDialog(props: CreateDialogProps) {
                                 <FormLabel>标题</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={TypeIcon} />
+                                        <FieldIcon>
+                                            <TypeIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             placeholder={"比赛名称"}
@@ -117,7 +119,9 @@ function CreateDialog(props: CreateDialogProps) {
                                 <FormLabel>开始时间</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={CalendarIcon} />
+                                        <FieldIcon>
+                                            <CalendarIcon />
+                                        </FieldIcon>
                                         <DateTimePicker {...field} clearable />
                                     </Field>
                                 </FormControl>
@@ -133,7 +137,9 @@ function CreateDialog(props: CreateDialogProps) {
                                 <FormLabel>结束时间</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={CalendarIcon} />
+                                        <FieldIcon>
+                                            <CalendarIcon />
+                                        </FieldIcon>
                                         <DateTimePicker {...field} clearable />
                                     </Field>
                                 </FormControl>

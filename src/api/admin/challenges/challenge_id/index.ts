@@ -3,14 +3,14 @@ import { WebResponse } from "@/types";
 import { alova } from "@/utils/alova";
 
 export interface UpdateChallengeRequest {
-    id?: string;
-    title?: string;
-    tags?: Array<string>;
-    description?: string;
-    category?: number;
-    has_attachment?: boolean;
-    is_public?: boolean;
-    is_dynamic?: boolean;
+    id?: string | null;
+    title?: string | null;
+    tags?: Array<string> | null;
+    description?: string | null;
+    category?: number | null;
+    has_attachment?: boolean | null;
+    is_public?: boolean | null;
+    is_dynamic?: boolean | null;
 }
 
 export async function updateChallenge(request: UpdateChallengeRequest) {

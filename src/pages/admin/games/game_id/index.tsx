@@ -19,6 +19,7 @@ import {
     SaveIcon,
     TrashIcon,
     Type,
+    TypeIcon,
     UsersRoundIcon,
 } from "lucide-react";
 import {
@@ -307,7 +308,9 @@ export default function Index() {
                                     <FormLabel>标题</FormLabel>
                                     <FormControl>
                                         <Field>
-                                            <FieldIcon icon={Type} />
+                                            <FieldIcon>
+                                                <TypeIcon />
+                                            </FieldIcon>
                                             <TextField
                                                 {...field}
                                                 placeholder={"标题"}
@@ -455,7 +458,9 @@ export default function Index() {
                                 <FormLabel>是否为公开赛（免审核）</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={LockOpenIcon} />
+                                        <FieldIcon>
+                                            <LockOpenIcon />
+                                        </FieldIcon>
                                         <Select
                                             {...field}
                                             options={[
@@ -489,7 +494,9 @@ export default function Index() {
                                 <FormLabel>是否需要提交 Write-up</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={FileCheck2Icon} />
+                                        <FieldIcon>
+                                            <FileCheck2Icon />
+                                        </FieldIcon>
                                         <Select
                                             {...field}
                                             options={[
@@ -521,7 +528,9 @@ export default function Index() {
                                 <FormLabel>团队所需最小人数</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={UsersRoundIcon} />
+                                        <FieldIcon>
+                                            <UsersRoundIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             type={"number"}
@@ -547,7 +556,9 @@ export default function Index() {
                                 <FormLabel>团队所需最大人数</FormLabel>
                                 <FormControl>
                                     <Field size={"sm"}>
-                                        <FieldIcon icon={UsersRoundIcon} />
+                                        <FieldIcon>
+                                            <UsersRoundIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             type={"number"}
@@ -575,7 +586,9 @@ export default function Index() {
                                 <FormLabel>开始时间</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={ClockIcon} />
+                                        <FieldIcon>
+                                            <ClockIcon />
+                                        </FieldIcon>
                                         <DateTimePicker {...field} />
                                     </Field>
                                 </FormControl>
@@ -591,7 +604,9 @@ export default function Index() {
                                 <FormLabel>冻结时间</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={ClockFadingIcon} />
+                                        <FieldIcon>
+                                            <ClockFadingIcon />
+                                        </FieldIcon>
                                         <DateTimePicker {...field} />
                                     </Field>
                                 </FormControl>
@@ -607,7 +622,9 @@ export default function Index() {
                                 <FormLabel>结束时间</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={ClockAlertIcon} />
+                                        <FieldIcon>
+                                            <ClockAlertIcon />
+                                        </FieldIcon>
                                         <DateTimePicker {...field} />
                                     </Field>
                                 </FormControl>

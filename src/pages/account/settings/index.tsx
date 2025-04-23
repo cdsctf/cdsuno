@@ -176,9 +176,9 @@ export default function Index() {
                                         <FormLabel>用户名</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon
-                                                    icon={UserRoundIcon}
-                                                />
+                                                <FieldIcon>
+                                                    <UserRoundIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     disabled
@@ -200,7 +200,9 @@ export default function Index() {
                                         <FormLabel>昵称</FormLabel>
                                         <FormControl>
                                             <Field>
-                                                <FieldIcon icon={TypeIcon} />
+                                                <FieldIcon>
+                                                    <TypeIcon />
+                                                </FieldIcon>
                                                 <TextField
                                                     {...field}
                                                     placeholder={"昵称"}
@@ -272,7 +274,9 @@ export default function Index() {
                                 <FormLabel>电子邮箱</FormLabel>
                                 <FormControl>
                                     <Field>
-                                        <FieldIcon icon={MailIcon} />
+                                        <FieldIcon>
+                                            <MailIcon />
+                                        </FieldIcon>
                                         <TextField
                                             {...field}
                                             placeholder={"电子邮箱"}

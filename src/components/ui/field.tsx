@@ -2,14 +2,14 @@ import * as React from "react";
 import { cn } from "@/utils";
 import { cva } from "class-variance-authority";
 import { Button } from "./button";
-import { LucideIcon } from "lucide-react";
-import { IconSection } from "./shared/icon-section";
+import { TagsField } from "./tags-field";
 
 const FieldContext = React.createContext<{
     size?: "sm" | "md";
     disabled?: boolean;
     hasIcon?: boolean;
     hasExtraButton?: boolean;
+    autoHeight?: boolean;
 }>({});
 
 interface FieldRootProps extends React.ComponentProps<"div"> {
@@ -21,6 +21,7 @@ function FieldRoot(props: FieldRootProps) {
 
     let hasIcon = false;
     let hasExtraButton = false;
+    let autoHeight = false;
 
     React.Children.forEach(children, (child) => {
         if (!React.isValidElement(child)) return;
@@ -29,11 +30,12 @@ function FieldRoot(props: FieldRootProps) {
 
         if (type === FieldIcon) hasIcon = true;
         if (type === FieldButton) hasExtraButton = true;
+        if (type === TagsField) autoHeight = true;
     });
 
     return (
         <FieldContext.Provider
-            value={{ size, disabled, hasIcon, hasExtraButton }}
+            value={{ size, disabled, hasIcon, hasExtraButton, autoHeight }}
         >
             <div className={cn(["flex", "items-center"], className)} {...rest}>
                 {children}
@@ -43,15 +45,54 @@ function FieldRoot(props: FieldRootProps) {
 }
 
 interface FieldIconProps {
-    icon: LucideIcon;
+    className?: string;
+    children?: React.ReactNode;
 }
 
 function FieldIcon(props: FieldIconProps) {
-    const { icon } = props;
-    const { size } = React.useContext(FieldContext);
+    const { className, children, ...rest } = props;
+    const { size, autoHeight } = React.useContext(FieldContext);
 
-    return <IconSection icon={icon} size={size} />;
+    return (
+        <div
+            className={cn(iconVariants({ size, autoHeight, className }))}
+            {...rest}
+        >
+            {children}
+        </div>
+    );
 }
+
+const iconVariants = cva(
+    [
+        "select-none",
+        "rounded-l-md",
+        "flex",
+        "items-center",
+        "justify-center",
+        "gap-2",
+        "bg-primary/20",
+        "text-foreground",
+        "[&_svg]:pointer-events-none",
+        "[&_svg]:shrink-0",
+        "[&_svg]:size-4",
+    ],
+    {
+        variants: {
+            size: {
+                sm: ["h-10", "min-w-10"],
+                md: ["h-12", "min-w-12"],
+            },
+            autoHeight: {
+                true: "h-full",
+            },
+        },
+        defaultVariants: {
+            size: "md",
+            autoHeight: false,
+        },
+    }
+);
 
 interface FieldButtonProps extends React.ComponentProps<typeof Button> {}
 
