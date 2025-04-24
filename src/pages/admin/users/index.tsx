@@ -337,7 +337,7 @@ export default function Index() {
                         <Pagination
                             size={"sm"}
                             value={page}
-                            total={Math.ceil(Math.ceil(total / size))}
+                            total={Math.ceil(total / size)}
                             onChange={setPage}
                         />
                     </div>

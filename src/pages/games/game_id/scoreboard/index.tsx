@@ -85,7 +85,11 @@ export default function Index() {
                         onValueChange={(value) => setSize(Number(value))}
                     />
                 </Field>
-                <Pagination value={page} onChange={setPage} total={total} />
+                <Pagination
+                    value={page}
+                    onChange={setPage}
+                    total={Math.ceil(total / size)}
+                />
             </div>
             <Table className={cn(["text-foreground"])}>
                 <TableHeader>

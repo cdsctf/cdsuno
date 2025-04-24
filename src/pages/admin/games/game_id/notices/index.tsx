@@ -38,8 +38,8 @@ export default function Index() {
     const [total, setTotal] = useState<number>(0);
     const [notices, setNotices] = useState<Array<GameNotice>>([]);
 
-    const [page, setPage] = useState<number>(1);
-    const [size, setSize] = useState<number>(10);
+    const [page, _setPage] = useState<number>(1);
+    const [size, _setSize] = useState<number>(10);
 
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
@@ -188,33 +188,6 @@ export default function Index() {
                         )}
                     </TableBody>
                 </Table>
-                {/* <div className="flex items-center justify-between space-x-2 py-4 px-4">
-                    <div className="flex-1 text-sm text-muted-foreground">
-                        {table.getFilteredRowModel().rows.length} / {total}
-                    </div>
-                    <div className={cn(["flex", "items-center", "gap-5"])}>
-                        <Select
-                            size={"sm"}
-                            placeholder={"每页显示"}
-                            icon={ListOrderedIcon}
-                            className={cn(["w-48"])}
-                            options={[
-                                { value: "10" },
-                                { value: "20" },
-                                { value: "40" },
-                                { value: "60" },
-                            ]}
-                            value={String(size)}
-                            onValueChange={(value) => setSize(Number(value))}
-                        />
-                        <Pagination
-                            size={"sm"}
-                            value={page}
-                            total={Math.ceil(Math.ceil(total / size))}
-                            onChange={setPage}
-                        />
-                    </div>
-                </div> */}
             </div>
         </div>
     );
