@@ -18,6 +18,15 @@ import {
     YAxis,
 } from "recharts";
 
+const COLORS = [
+    "#ff4d4f", // 红
+    "#1890ff", // 蓝
+    "#52c41a", // 绿
+    "#faad14", // 金黄
+    "#722ed1", // 紫
+    "#13c2c2", // 青
+];
+
 interface ChampionChartProps {
     scoreboard?: Array<ScoreRecord>;
 }
@@ -26,29 +35,41 @@ function ChampionChart(props: ChampionChartProps) {
     const { scoreboard } = props;
 
     const data = useMemo(() => {
-        const result: Array<{
+        if (!scoreboard) return [];
+
+        const allSubmissions: Array<{
             ts: number;
-            [key: number]: number | undefined;
+            teamId: number;
+            pts: number;
         }> = [];
 
-        scoreboard?.forEach((record) => {
-            let total = 0;
+        // 收集所有 submission
+        scoreboard.forEach((record) => {
             const team = record?.team;
             const submissions = record?.submissions;
-
             if (!team) return;
 
             submissions?.forEach((submission) => {
-                total += Number(submission?.pts);
-                const ts = Number(submission?.created_at);
+                allSubmissions.push({
+                    ts: Number(submission?.created_at),
+                    teamId: team.id!,
+                    pts: Number(submission?.pts),
+                });
+            });
+        });
 
-                let existingEntry = result.find((entry) => entry.ts === ts);
-                if (!existingEntry) {
-                    existingEntry = { ts: ts };
-                    result.push(existingEntry);
-                }
+        // 时间排序
+        allSubmissions.sort((a, b) => a.ts - b.ts);
 
-                existingEntry[team?.id!] = total;
+        const cumulativeScores: Record<number, number> = {};
+        const result: Array<{ ts: number; [key: number]: number }> = [];
+
+        allSubmissions.forEach(({ ts, teamId, pts }) => {
+            cumulativeScores[teamId] = (cumulativeScores[teamId] || 0) + pts;
+
+            result.push({
+                ts,
+                [teamId]: cumulativeScores[teamId], // 只更新当前队伍的累计值
             });
         });
 
@@ -134,12 +155,13 @@ function ChampionChart(props: ChampionChartProps) {
                         }
                     />
 
-                    {lines?.map((line) => (
+                    {lines?.map((line, index) => (
                         <Line
                             key={line?.id}
-                            type="linear"
+                            type="stepAfter"
                             dataKey={line.id}
                             name={line.name}
+                            stroke={COLORS[index % COLORS.length]}
                             connectNulls
                         />
                     ))}
