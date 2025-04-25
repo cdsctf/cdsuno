@@ -18,7 +18,6 @@ export interface Submission {
     pts?: number;
     rank?: number;
     created_at?: number;
-    updated_at?: number;
 }
 
 export enum Status {
@@ -26,5 +25,6 @@ export enum Status {
     Correct = 1,
     Incorrect = 2,
     Cheat = 3,
-    Invalid = 4,
+    Expired = 4,
+    Duplicate = 5,
 }

@@ -8,7 +8,7 @@ import { Pagination } from "@/components/ui/pagination";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Game } from "@/models/game";
 import { cn } from "@/utils";
-import { Flag, PackageOpenIcon, Search, SearchIcon } from "lucide-react";
+import { FlagIcon, PackageOpenIcon, SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -39,6 +39,12 @@ export default function Index() {
     useEffect(() => {
         fetchGames();
     }, [page, size, debouncedTitle]);
+
+    useEffect(() => {
+        if (games) {
+            setSelectedGame(games?.[0]);
+        }
+    }, [games]);
 
     return (
         <div
@@ -100,7 +106,7 @@ export default function Index() {
                     {games?.map((game) => (
                         <Button
                             key={game?.id}
-                            icon={Flag}
+                            icon={FlagIcon}
                             className={cn(["justify-start"])}
                             variant={
                                 selectedGame?.id === game?.id
@@ -145,6 +151,12 @@ export default function Index() {
                         "w-full",
                         "shadow-xl",
                     ])}
+                    fallback={
+                        <FlagIcon
+                            className={cn(["size-25", "rotate-15"])}
+                            strokeWidth={1}
+                        />
+                    }
                 />
                 {selectedGame?.id && (
                     <Card

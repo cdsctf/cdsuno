@@ -8,7 +8,6 @@ import {
     DropzoneTrigger,
     useDropzone,
 } from "@/components/ui/dropzone";
-import { Editor } from "@/components/ui/editor";
 import {
     Form,
     FormControl,
@@ -41,6 +40,7 @@ export default function Index() {
     const { currentGame, selfTeam } = useGameStore();
 
     const [loading, setLoading] = useState<boolean>(false);
+    const disabled = Date.now() / 1000 > currentGame?.ended_at!;
 
     const formSchema = z.object({
         name: z.string({
@@ -186,6 +186,7 @@ export default function Index() {
                                                     <TypeIcon />
                                                 </FieldIcon>
                                                 <TextField
+                                                    disabled={disabled}
                                                     placeholder={"团队名"}
                                                     {...field}
                                                     value={field.value || ""}
@@ -209,6 +210,7 @@ export default function Index() {
                                                     <MailIcon />
                                                 </FieldIcon>
                                                 <TextField
+                                                    disabled={disabled}
                                                     placeholder={"电子邮箱"}
                                                     {...field}
                                                     value={field.value || ""}
@@ -238,6 +240,7 @@ export default function Index() {
                                     level={"error"}
                                     square
                                     onClick={handleAvatarDelete}
+                                    disabled={disabled}
                                 />
                             </div>
                             <Dropzone {...dropzone}>
@@ -281,6 +284,7 @@ export default function Index() {
                                             <MessageCircleIcon />
                                         </FieldIcon>
                                         <TextField
+                                            disabled={disabled}
                                             placeholder={"口号"}
                                             {...field}
                                             value={field.value || ""}
@@ -292,28 +296,7 @@ export default function Index() {
                             </FormItem>
                         )}
                     />
-                    <FormField
-                        control={form.control}
-                        name={"description"}
-                        render={({ field }) => (
-                            <FormItem
-                                className={cn(["flex-1", "flex", "flex-col"])}
-                            >
-                                <FormLabel>简介</FormLabel>
-                                <FormControl>
-                                    <Editor
-                                        {...field}
-                                        lang={"markdown"}
-                                        tabSize={4}
-                                        showLineNumbers
-                                        className={cn(["h-full", "min-h-64"])}
-                                        value={field.value || ""}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <div className={cn(["flex-1"])} />
                     <Button
                         size={"lg"}
                         type={"submit"}
@@ -321,6 +304,7 @@ export default function Index() {
                         variant={"solid"}
                         icon={CheckIcon}
                         loading={loading}
+                        disabled={disabled}
                     >
                         保存
                     </Button>

@@ -3,12 +3,13 @@ import { Context } from "./context";
 import { Field, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Button } from "@/components/ui/button";
-import { Flag, FlagIcon, Send } from "lucide-react";
+import { FlagIcon, Send } from "lucide-react";
 import { cn } from "@/utils";
 import { useInterval } from "@/hooks/use-interval";
 import { getSubmission, createSubmission } from "@/api/submissions";
 import { toast } from "sonner";
 import { useSharedStore } from "@/storages/shared";
+import { Status } from "@/models/submission";
 
 function SubmitSection() {
     const { challenge, team } = useContext(Context);
@@ -76,31 +77,37 @@ function SubmitSection() {
                 const submission = res.data?.[0];
                 if (submission?.status !== 0) {
                     switch (submission?.status) {
-                        case 1:
+                        case Status.Correct:
                             toast.success("正确", {
                                 id: `submission-${submissionId}`,
                                 description: "恭喜你，提交成功！",
                             });
                             sharedStore?.setRefresh();
                             break;
-                        case 2:
+                        case Status.Incorrect:
                             toast?.error("错误", {
                                 id: `submission-${submissionId}`,
                                 description: "再检查一下？",
                             });
                             break;
-                        case 3:
+                        case Status.Cheat:
                             toast.error("作弊", {
                                 id: `submission-${submissionId}`,
                                 description: "你存在作弊的可能，已记录。",
                             });
                             break;
-                        case 4:
-                            toast.info("无效", {
+                        case Status.Expired:
+                            toast.info("超时", {
                                 id: `submission-${res?.data?.[0]?.id}`,
-                                description: "提交无效。",
+                                description: "提交超时。",
                             });
                             sharedStore?.setRefresh();
+                            break;
+                        case Status.Duplicate:
+                            toast.info("重复", {
+                                id: `submission-${res?.data?.[0]?.id}`,
+                                description: "提交重复。",
+                            });
                             break;
                     }
                     clearInterval(intervalId);

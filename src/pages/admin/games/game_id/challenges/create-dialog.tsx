@@ -36,6 +36,7 @@ function CreateDialog(props: CreateDialogProps) {
         getChallenges({
             id: id || undefined,
             title,
+            is_public: false,
             size: 10,
             page: 1,
             sorts: "-created_at",

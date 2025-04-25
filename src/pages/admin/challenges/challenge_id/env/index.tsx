@@ -51,7 +51,6 @@ export default function Index() {
                 image: z.string({
                     message: "请输入镜像名",
                 }),
-                secret: z.string().nullish(),
                 cpu_limit: z.number({
                     message: "请输入 CPU 限制参数",
                 }),
@@ -233,55 +232,29 @@ export default function Index() {
                             "rounded",
                         ])}
                     >
-                        <div className={cn(["flex", "gap-5"])}>
-                            <FormField
-                                control={form.control}
-                                name={`containers.${containerIndex}.image`}
-                                render={({ field }) => (
-                                    <FormItem className={cn(["basis-2/3"])}>
-                                        <FormLabel>镜像名</FormLabel>
-                                        <FormControl>
-                                            <Field>
-                                                <FieldIcon>
-                                                    <ContainerIcon />
-                                                </FieldIcon>
-                                                <TextField
-                                                    {...field}
-                                                    placeholder={
-                                                        "repository:tag"
-                                                    }
-                                                    value={field.value || ""}
-                                                    onChange={field.onChange}
-                                                />
-                                            </Field>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name={`containers.${containerIndex}.secret`}
-                                render={({ field }) => (
-                                    <FormItem className={cn(["basis-1/3"])}>
-                                        <FormLabel>镜像拉取密钥</FormLabel>
-                                        <FormControl>
-                                            <Field>
-                                                <FieldIcon>
-                                                    <KeyIcon />
-                                                </FieldIcon>
-                                                <TextField
-                                                    {...field}
-                                                    value={field.value || ""}
-                                                    onChange={field.onChange}
-                                                />
-                                            </Field>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
+                        <FormField
+                            control={form.control}
+                            name={`containers.${containerIndex}.image`}
+                            render={({ field }) => (
+                                <FormItem className={cn(["w-full"])}>
+                                    <FormLabel>镜像名</FormLabel>
+                                    <FormControl>
+                                        <Field>
+                                            <FieldIcon>
+                                                <ContainerIcon />
+                                            </FieldIcon>
+                                            <TextField
+                                                {...field}
+                                                placeholder={"repository:tag"}
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        </Field>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                         <div className={cn(["flex", "gap-5"])}>
                             <FormField
                                 control={form.control}

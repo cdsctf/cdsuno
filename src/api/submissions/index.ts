@@ -24,6 +24,7 @@ export interface GetSubmissionRequest {
     game_id?: number;
     size?: number;
     page?: number;
+    sorts?: string;
 
     is_desensitized?: boolean;
 }

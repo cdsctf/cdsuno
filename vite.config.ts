@@ -13,7 +13,7 @@ export default defineConfig(({}) => {
             host: "0.0.0.0",
             proxy: {
                 "/api": {
-                    target: process.env.VITE_DEV_API || "http://127.0.0.1:8888",
+                    target: process.env.VITE_DEV_API || "https://ctf.tzusec.club",
                     changeOrigin: true,
                     ws: true,
                 },

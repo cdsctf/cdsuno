@@ -28,6 +28,7 @@ export default function Layout() {
     const navigate = useNavigate();
     const location = useLocation();
     const pathname = location.pathname;
+    const disabled = Date.now() / 1000 > currentGame?.ended_at!;
 
     const options = [
         {
@@ -153,7 +154,9 @@ export default function Layout() {
                         icon={UserRoundXIcon}
                         level={"error"}
                         className={cn(["w-1/2"])}
-                        disabled={selfTeam?.state !== State.Preparing}
+                        disabled={
+                            selfTeam?.state !== State.Preparing || disabled
+                        }
                         onClick={() => setDisbandDialogOpen(true)}
                     >
                         解散团队
@@ -206,7 +209,8 @@ export default function Layout() {
                         className={cn(["w-1/2"])}
                         disabled={
                             selfTeam?.state !== State.Preparing ||
-                            selfTeam?.users?.length === 1
+                            selfTeam?.users?.length === 1 ||
+                            disabled
                         }
                         onClick={() => setLeaveDialogOpen(true)}
                     >
@@ -268,7 +272,7 @@ export default function Layout() {
                             : "error"
                     }
                     variant={"solid"}
-                    disabled={selfTeam?.state !== State.Preparing}
+                    disabled={selfTeam?.state !== State.Preparing || disabled}
                     onClick={() => setConfirmDialogOpen(true)}
                 >
                     {selfTeam?.state === State.Preparing

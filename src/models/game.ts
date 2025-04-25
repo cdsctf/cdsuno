@@ -18,7 +18,6 @@ export interface Game {
     ended_at?: number;
 
     created_at?: number;
-    updated_at?: number;
 }
 
 export interface ScoreRecord {

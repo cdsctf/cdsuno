@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 export default function Index() {
     const { currentGame, selfTeam } = useGameStore();
     const [token, setToken] = useState<string>();
+    const disabled = Date.now() / 1000 > currentGame?.ended_at!;
 
     useEffect(() => {
         if (currentGame?.id && selfTeam?.id) {
@@ -52,6 +53,7 @@ export default function Index() {
                     </FieldIcon>
                     <TextField
                         readOnly
+                        disabled={disabled}
                         value={
                             token
                                 ? `${selfTeam?.id ?? ""}:${token || ""}`
@@ -66,6 +68,7 @@ export default function Index() {
                     variant={"solid"}
                     onClick={handleCreateToken}
                     size={"lg"}
+                    disabled={disabled}
                 >
                     生成新邀请码
                 </Button>

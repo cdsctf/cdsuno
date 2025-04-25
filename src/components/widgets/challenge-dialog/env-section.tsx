@@ -11,12 +11,11 @@ import { Field, FieldButton, FieldIcon } from "@/components/ui/field";
 import { TextField } from "@/components/ui/text-field";
 import { Button } from "@/components/ui/button";
 import {
-    Clipboard,
-    Clock,
-    EthernetPort,
+    ClipboardIcon,
+    ClockIcon,
     EthernetPortIcon,
-    Play,
-    Trash,
+    PlayIcon,
+    TrashIcon,
 } from "lucide-react";
 import { copyToClipboard } from "@/utils/clipboard";
 
@@ -32,9 +31,20 @@ function EnvSection() {
         return "default";
     }, [team]);
 
-    const [pod, setPod] = useState<Env>();
-    const [podStopLoading, setPodStopLoading] = useState<boolean>(false);
-    const [podCreateLoading, setPodCreateLoading] = useState<boolean>(false);
+    const [env, setEnv] = useState<Env>();
+    const [envStopLoading, envPodStopLoading] = useState<boolean>(false);
+    const [envCreateLoading, envPodCreateLoading] = useState<boolean>(false);
+    const [timeLeft, setTimeLeft] = useState(0);
+
+    useEffect(() => {
+        if (timeLeft <= 0) return;
+
+        const timer = setInterval(() => {
+            setTimeLeft((prev) => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [timeLeft]);
 
     function fetchPods() {
         getEnvs({
@@ -45,10 +55,17 @@ function EnvSection() {
         }).then((res) => {
             if (res.code === 200) {
                 const p = res.data?.[0];
-                setPod(p);
+                setEnv(p);
+                setTimeLeft(
+                    Math.ceil(
+                        Number(p?.started_at) +
+                            (Number(p?.renew) + 1) * Number(p?.duration) -
+                            Date.now() / 1000
+                    )
+                );
 
                 if (p?.status !== "waiting") {
-                    setPodCreateLoading(false);
+                    envPodCreateLoading(false);
                 }
 
                 if (p?.status === "running") {
@@ -63,7 +80,7 @@ function EnvSection() {
                         id: "pod",
                         description: p?.reason,
                     });
-                    setPodStopLoading(true);
+                    envPodStopLoading(true);
                 }
             }
         });
@@ -71,7 +88,7 @@ function EnvSection() {
 
     function handlePodRenew() {
         renewEnv({
-            id: pod?.id!,
+            id: env?.id!,
         }).then((res) => {
             if (res.code === 200) {
                 toast.success("续期成功");
@@ -87,27 +104,27 @@ function EnvSection() {
 
     function handlePodStop() {
         stopEnv({
-            id: pod?.id!,
+            id: env?.id!,
         })
             .then((_) => {
                 toast.info("已下发容器停止命令", {
                     id: "pod-stop",
                 });
-                setPod(undefined);
+                setEnv(undefined);
             })
             .finally(() => {
-                setPodStopLoading(false);
+                envPodStopLoading(false);
             });
     }
 
     useEffect(() => {
-        if (podStopLoading) {
+        if (envStopLoading) {
             handlePodStop();
         }
-    }, [podStopLoading]);
+    }, [envStopLoading]);
 
     function handlePodCreate() {
-        setPodCreateLoading(true);
+        envPodCreateLoading(true);
         toast.loading("正在发送容器创建请求", {
             id: "pod",
         });
@@ -118,7 +135,7 @@ function EnvSection() {
         }).then((res) => {
             switch (res.code) {
                 case 200: {
-                    setPod(res.data);
+                    setEnv(res.data);
                     toast.loading("已下发容器启动命令", {
                         id: "pod",
                         description: "这可能需要一些时间",
@@ -139,17 +156,15 @@ function EnvSection() {
     useInterval(fetchPods, 2000, [], { immediate: true });
 
     return (
-        <div
-            className={cn(["flex", "gap-5", "justify-between", "items-center"])}
-        >
-            {pod?.id ? (
+        <div className={cn(["flex", "gap-5", "justify-between", "items-end"])}>
+            {env?.id ? (
                 <>
                     <div
                         className={cn(["flex-1", "flex", "flex-col", "gap-3"])}
                     >
-                        {pod?.nats ? (
+                        {env?.nats ? (
                             <>
-                                {pod?.nats
+                                {env?.nats
                                     ?.split(",")
                                     .map((pair) => pair.split("="))
                                     .map(([src, dst]: Array<string>) => (
@@ -169,13 +184,13 @@ function EnvSection() {
                                                 </FieldIcon>
                                                 <TextField
                                                     readOnly
-                                                    value={`${pod?.public_entry}:${dst}`}
+                                                    value={`${env?.public_entry}:${dst}`}
                                                 />
                                                 <FieldButton
-                                                    icon={Clipboard}
+                                                    icon={ClipboardIcon}
                                                     onClick={() => {
                                                         copyToClipboard(
-                                                            `${pod?.public_entry}:${dst}`
+                                                            `${env?.public_entry}:${dst}`
                                                         );
                                                         toast.success(
                                                             "已复制到剪贴板"
@@ -188,7 +203,7 @@ function EnvSection() {
                             </>
                         ) : (
                             <>
-                                {pod?.ports?.map((port) => (
+                                {env?.ports?.map((port) => (
                                     <div className={cn(["flex"])} key={port}>
                                         <Field
                                             size={"sm"}
@@ -205,13 +220,13 @@ function EnvSection() {
                                             </FieldIcon>
                                             <TextField
                                                 readOnly
-                                                value={`${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${pod?.id}/wsrx?port=${port}`}
+                                                value={`${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${env?.id}/wsrx?port=${port}`}
                                             />
                                             <FieldButton
-                                                icon={Clipboard}
+                                                icon={ClipboardIcon}
                                                 onClick={() => {
                                                     copyToClipboard(
-                                                        `${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${pod?.id}/wsrx?port=${port}`
+                                                        `${window.location.protocol.replace("http", "ws")}//${window.location.host}/api/envs/${env?.id}/wsrx?port=${port}`
                                                     );
                                                     toast.success(
                                                         "已复制到剪贴板"
@@ -224,24 +239,44 @@ function EnvSection() {
                             </>
                         )}
                     </div>
-                    <div className={cn(["flex", "gap-3"])}>
-                        <Button
-                            icon={Clock}
-                            level={"info"}
-                            variant={"solid"}
-                            onClick={() => handlePodRenew()}
+                    <div
+                        className={cn([
+                            "flex",
+                            "flex-col",
+                            "gap-2",
+                            "items-center",
+                        ])}
+                    >
+                        <span
+                            className={cn([
+                                "text-secondary-foreground",
+                                "text-sm",
+                                "select-none",
+                            ])}
                         >
-                            续期
-                        </Button>
-                        <Button
-                            icon={Trash}
-                            variant={"solid"}
-                            level={"error"}
-                            onClick={() => handlePodStop()}
-                            loading={podStopLoading}
-                        >
-                            停止
-                        </Button>
+                            {`剩余时间 ${String(Math.floor(timeLeft / 3600)).padStart(2, "0")}:${String(Math.floor((timeLeft % 3600) / 60)).padStart(2, "0")}:${String(timeLeft % 60).padStart(2, "0")}`}
+                        </span>
+                        <div className={cn(["flex", "gap-3"])}>
+                            <Button
+                                icon={ClockIcon}
+                                level={"info"}
+                                variant={"solid"}
+                                onClick={() => handlePodRenew()}
+                                disabled={Number(env.renew) === 3}
+                                className={cn(["items-center"])}
+                            >
+                                续期
+                            </Button>
+                            <Button
+                                icon={TrashIcon}
+                                variant={"solid"}
+                                level={"error"}
+                                onClick={() => handlePodStop()}
+                                loading={envStopLoading}
+                            >
+                                停止
+                            </Button>
+                        </div>
                     </div>
                 </>
             ) : (
@@ -259,11 +294,11 @@ function EnvSection() {
                         <span>点击“启动”进行容器下发。</span>
                     </div>
                     <Button
-                        icon={Play}
+                        icon={PlayIcon}
                         variant={"solid"}
                         level={"success"}
                         onClick={() => handlePodCreate()}
-                        loading={podCreateLoading}
+                        loading={envCreateLoading}
                     >
                         启动
                     </Button>

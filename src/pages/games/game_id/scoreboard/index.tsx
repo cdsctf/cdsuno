@@ -23,6 +23,8 @@ import {
 import { Field, FieldIcon } from "@/components/ui/field";
 import { ListOrderedIcon } from "lucide-react";
 import { Select } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { TeamDetailsDialog } from "./team-details-dialog";
 
 export default function Index() {
     const { currentGame } = useGameStore();
@@ -112,19 +114,30 @@ export default function Index() {
                 <TableBody>
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
-                            <TableRow
-                                key={row.getValue("id")}
-                                data-state={row.getIsSelected() && "selected"}
-                            >
-                                {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext()
-                                        )}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
+                            <Dialog key={row.getValue("id")}>
+                                <DialogTrigger>
+                                    <TableRow
+                                        data-state={
+                                            row.getIsSelected() && "selected"
+                                        }
+                                        className={cn(["cursor-pointer"])}
+                                    >
+                                        {row.getVisibleCells().map((cell) => (
+                                            <TableCell key={cell.id}>
+                                                {flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext()
+                                                )}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <TeamDetailsDialog
+                                        team={row.original.team!}
+                                    />
+                                </DialogContent>
+                            </Dialog>
                         ))
                     ) : (
                         <TableRow>

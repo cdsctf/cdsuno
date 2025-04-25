@@ -6,7 +6,6 @@ export interface Team {
     name?: string;
     email?: string;
     slogan?: string;
-    description?: string;
     state?: State;
 
     pts?: number;

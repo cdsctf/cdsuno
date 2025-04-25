@@ -143,7 +143,7 @@ function ChallengeCard(props: ChallengeCardProps) {
                                     </span>
                                     <div className={cn(["flex", "flex-col"])}>
                                         <span className={cn(["text-sm"])}>
-                                            {blood?.team
+                                            {pathname.startsWith("/games")
                                                 ? blood?.team?.name
                                                 : blood?.user?.nickname}
                                         </span>
