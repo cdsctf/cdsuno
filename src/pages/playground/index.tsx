@@ -22,9 +22,11 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ChallengeDialog } from "@/components/widgets/challenge-dialog";
 import { useSearchParams } from "react-router";
 import { Select } from "@/components/ui/select";
+import { useCategoryStore } from "@/storages/category";
 
 export default function Index() {
     const authStore = useAuthStore();
+    const categoryStore = useCategoryStore();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [total, setTotal] = useState<number>(0);
@@ -34,6 +36,7 @@ export default function Index() {
 
     const [doSearch, setDoSearch] = useState<number>(0);
     const [title, setTitle] = useState<string>(searchParams.get("title") || "");
+    const [category, setCategory] = useState<string | "all">("all");
     const [page, setPage] = useState<number>(
         Number(searchParams.get("page")) || 1
     );
@@ -46,21 +49,23 @@ export default function Index() {
             title: title,
             page: String(page),
             size: String(size),
+            category: category,
         });
-    }, [title, page, size]);
+    }, [title, page, size, category]);
 
     useEffect(() => {
         getPlaygroundChallenges({
             title,
             page,
             size,
+            category: category !== "all" ? Number(category) : undefined,
         }).then((res) => {
             if (res.code === 200) {
                 setTotal(res.total || 0);
                 setChallenges(res.data);
             }
         });
-    }, [doSearch, page]);
+    }, [doSearch, page, category]);
 
     useEffect(() => {
         if (!challenges?.length) return;
@@ -120,7 +125,61 @@ export default function Index() {
                         value={page}
                         onChange={setPage}
                     />
-                    <div className={cn(["hidden", "md:flex", "gap-5"])}>
+                    <div
+                        className={cn([
+                            "hidden",
+                            "md:flex",
+                            "gap-5",
+                            "flex-1",
+                            "justify-end",
+                        ])}
+                    >
+                        <Field size={"sm"} className={cn(["w-48"])}>
+                            <FieldIcon>
+                                <LibraryIcon />
+                            </FieldIcon>
+                            <Select
+                                options={[
+                                    {
+                                        value: "all",
+                                        content: (
+                                            <div
+                                                className={cn([
+                                                    "flex",
+                                                    "gap-2",
+                                                    "items-center",
+                                                ])}
+                                            >
+                                                全部
+                                            </div>
+                                        ),
+                                    },
+                                    ...categoryStore.categories?.map(
+                                        (category) => {
+                                            const Icon = category?.icon!;
+
+                                            return {
+                                                value: String(category?.id),
+                                                content: (
+                                                    <div
+                                                        className={cn([
+                                                            "flex",
+                                                            "gap-2",
+                                                            "items-center",
+                                                        ])}
+                                                    >
+                                                        <Icon />
+                                                        {category?.name?.toUpperCase()}
+                                                    </div>
+                                                ),
+                                            };
+                                        }
+                                    ),
+                                ]}
+                                onValueChange={(value) => setCategory(value)}
+                                value={category}
+                            />
+                        </Field>
                         <Field size={"sm"} className={cn(["w-48"])}>
                             <FieldIcon>
                                 <ListOrderedIcon />

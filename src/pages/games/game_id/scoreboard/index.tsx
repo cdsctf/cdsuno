@@ -94,7 +94,9 @@ export default function Index() {
                 />
             </div>
             <Table className={cn(["text-foreground"])}>
-                <TableHeader>
+                <TableHeader
+                    className={cn(["bg-muted/70", "backdrop-blur-md"])}
+                >
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {

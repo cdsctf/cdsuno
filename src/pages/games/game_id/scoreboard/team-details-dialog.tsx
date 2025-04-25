@@ -58,14 +58,6 @@ function TeamDetailsDialog(props: TeamDetailsDialogProps) {
 
     const columns: ColumnDef<Submission>[] = [
         {
-            accessorKey: "id",
-            id: "id",
-            header: "#",
-            cell: ({ row }) => (
-                <Badge className={cn(["font-mono"])}>{row.original.id}</Badge>
-            ),
-        },
-        {
             accessorKey: "user_id",
             id: "user_id",
             header: "用户",
@@ -96,7 +88,9 @@ function TeamDetailsDialog(props: TeamDetailsDialogProps) {
             accessorKey: "pts",
             id: "pts",
             header: "分数",
-            cell: ({ row }) => row.original.pts,
+            cell: ({ row }) => (
+                <span className={cn(["font-mono"])}>{row.original.pts}</span>
+            ),
         },
         {
             accessorKey: "created_at",
